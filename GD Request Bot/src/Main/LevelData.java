@@ -1,0 +1,207 @@
+package Main;
+
+import java.util.ArrayList;
+
+public class LevelData {
+
+	String getRequester() {
+		return requester;
+	}
+
+	String getAuthor() {
+		return author;
+	}
+
+	String getName() {
+		return name;
+	}
+
+	String getDifficulty() {
+		return difficulty;
+	}
+
+	String getDescription() {
+		return description;
+	}
+
+	String getLikes() {
+		return likes;
+	}
+
+	String getDownloads() {
+		return downloads;
+	}
+
+	String getLength() {
+		return length;
+	}
+
+	String getLevelID() {
+		return levelID;
+	}
+
+	int getCoins() {
+		return coins;
+	}
+
+	boolean getVerifiedCoins() {
+		return verifiedCoins;
+	}
+
+	boolean getFeatured() {
+		return featured;
+	}
+
+	boolean getEpic() {
+		return epic;
+	}
+
+	String getSongName() {
+		return songName;
+	}
+
+	String getSongAuthor() {
+		return songAuthor;
+	}
+
+	String getSongID() {
+		return songID;
+	}
+
+	String getSongSize() {
+		return songSize;
+	}
+	
+	ArrayList<GDObject> getLevelData(){
+		return levelData;
+	}
+	
+	boolean getContainsVulgar() {
+		return containsVulgar;
+	}
+	
+	boolean getContainsImage() {
+		return containsImage;
+	}
+	
+	boolean getAnalyzed() {
+		return analyzed;
+	}
+	
+	int getStars() {
+		return stars;
+	}
+
+	private String requester;
+	private String author;
+	private String name;
+	private String difficulty;
+	private String description;
+	private String likes;
+	private String downloads;
+	private String length;
+	private String levelID;
+	private int coins;
+	private boolean verifiedCoins;
+	private boolean featured;
+	private boolean epic;
+
+
+	private String songName;
+	private String songAuthor;
+	private String songID;
+	private String songSize;
+	private ArrayList<GDObject> levelData;
+	private boolean containsVulgar;
+	private boolean containsImage;
+	private boolean analyzed = false;
+	private int stars;
+	
+	void setStars(int stars) {
+		this.stars = stars;
+	}
+	
+	void setAnalyzed(boolean analyzed) {
+		this.analyzed = analyzed;
+	}
+	
+	void setContainsVulgar(boolean containsVulgar) {
+		this.containsVulgar = containsVulgar;
+	}
+	
+	void setContainsImage(boolean containsImage) {
+		this.containsImage = containsImage;
+	}
+
+	void setLevelData(ArrayList<GDObject> levelData) {
+		this.levelData = levelData;
+	}
+	
+	void setRequester(String requester) {
+		this.requester = requester;
+	}
+
+	void setAuthor(String author) {
+		this.author = author;
+	}
+
+	void setName(String name) {
+		this.name = name;
+	}
+
+	void setDifficulty(String difficulty) {
+		this.difficulty = difficulty;
+	}
+
+	void setDescription(String description) {
+		this.description = description;
+	}
+
+	void setLikes(String likes) {
+		this.likes = likes;
+	}
+
+	void setDownloads(String downloads) {
+		this.downloads = downloads;
+	}
+
+	void setLength(String length) {
+		this.length = length;
+	}
+
+	void setLevelID(String levelID) {
+		this.levelID = levelID;
+	}
+
+	void setCoins(String coins) {
+		this.coins = Integer.parseInt(coins);
+	}
+
+	void setVerifiedCoins(boolean verifiedCoins) {
+		this.verifiedCoins = verifiedCoins;
+	}
+
+	void setFeatured(boolean featured) {
+		this.featured = featured;
+	}
+
+	void setEpic(boolean epic) {
+		this.epic = epic;
+	}
+
+	void setSongName(String songName) {
+		this.songName = songName;
+	}
+
+	void setSongAuthor(String songAuthor) {
+		this.songAuthor = songAuthor;
+	}
+
+	void setSongID(String songID) {
+		this.songID = songID;
+	}
+
+	void setSongSize(String songSize) {
+		this.songSize = songSize;
+	}
+}
