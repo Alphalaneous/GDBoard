@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class CommentsWindow {
+class CommentsWindow {
 	private static ArrayList<JPanel> commentPanels = new ArrayList<>();
 	private static ArrayList<JTextPane> commentContent = new ArrayList<>();
 	private static ArrayList<JLabel> commenterContent = new ArrayList<>();
@@ -19,7 +19,7 @@ public class CommentsWindow {
 			"src/resources/Icons/Comments.png").createPanel();
 	private static JButtonUI newUI = new JButtonUI();
 
-	static void createPanel() throws IOException, InterruptedException {
+	static void createPanel() {
 
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		panel.setBounds(1, 31, width, height);

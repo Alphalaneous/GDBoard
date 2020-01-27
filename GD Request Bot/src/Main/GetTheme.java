@@ -3,15 +3,13 @@ import com.registry.RegDWORDValue;
 import com.registry.RegistryKey;
 
 public class GetTheme extends Thread {
-	
-	private int prevTheme;
-	
+
 	public void run() {
 		
 		RegistryKey personalizeStart = new RegistryKey(
 				"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
 
-		prevTheme = ((RegDWORDValue) personalizeStart.getValue("AppsUseLightTheme")).getIntValue();
+		int prevTheme = ((RegDWORDValue) personalizeStart.getValue("AppsUseLightTheme")).getIntValue();
 		
 		if(prevTheme == 0) {
 			Defaults.setDark();

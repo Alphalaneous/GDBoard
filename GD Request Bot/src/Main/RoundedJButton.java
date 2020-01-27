@@ -15,7 +15,7 @@ public class RoundedJButton extends JButton {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public RoundedJButton(String label) {
+	RoundedJButton(String label) {
 		super(label);
 		Dimension size = getPreferredSize();
 		size.width = size.height = Math.max(size.width, size.height);
@@ -24,7 +24,7 @@ public class RoundedJButton extends JButton {
 		setContentAreaFilled(false);
 	}
 
-	public RoundedJButton(ImageIcon img) {
+	RoundedJButton(ImageIcon img) {
 		super(img);
 		Dimension size = getPreferredSize();
 		size.width = size.height = Math.max(size.width, size.height);
@@ -49,7 +49,7 @@ public class RoundedJButton extends JButton {
 	 * g.drawOval(0, 0, getSize().width-1, getSize().height-1); }
 	 */
 
-	Shape shape;
+	private Shape shape;
 
 	public boolean contains(int x, int y) {
 		if (shape == null || !shape.getBounds().equals(getBounds())) {

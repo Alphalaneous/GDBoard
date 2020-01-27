@@ -10,7 +10,7 @@ import lc.kra.system.keyboard.GlobalKeyboardHook;
 import lc.kra.system.keyboard.event.GlobalKeyAdapter;
 import lc.kra.system.keyboard.event.GlobalKeyEvent;
 
-public class KeyListener {
+class KeyListener {
 
 	// TODO: Switch to https://github.com/kwhat/jnativehook
 
@@ -32,42 +32,40 @@ public class KeyListener {
 			}
 		});
 		Robot r = new Robot();
-		Thread thread = new Thread() {
-			public void run() {
-				ControllerManager controllers = new ControllerManager();
-				controllers.initSDLGamepad();
-				
-				while(true) {
-					  ControllerState currState = controllers.getState(0);
-					  if(currState.leftStickClick) {
-						  if (Overlay.isVisible) {
-								Overlay.setWindowsInvisible();
-								
-							} else {
-								Overlay.setWindowsVisible();
-								Overlay.frame.toFront();
-							}
-					  }
-					  if(currState.rightStickClick) {
-						  r.keyPress(KeyEvent.VK_CONTROL);
-						  r.keyPress(KeyEvent.VK_V); 
-						  try {
-							Thread.sleep(200);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} 
-						  r.keyRelease(KeyEvent.VK_V); 
-						  r.keyRelease(KeyEvent.VK_CONTROL); 
-					  }
+		Thread thread = new Thread(() -> {
+			ControllerManager controllers = new ControllerManager();
+			controllers.initSDLGamepad();
+
+			while(true) {
+				  ControllerState currState = controllers.getState(0);
+				  if(currState.leftStickClick) {
+					  if (Overlay.isVisible) {
+							Overlay.setWindowsInvisible();
+
+						} else {
+							Overlay.setWindowsVisible();
+							Overlay.frame.toFront();
+						}
+				  }
+				  if(currState.rightStickClick) {
+					  r.keyPress(KeyEvent.VK_CONTROL);
+					  r.keyPress(KeyEvent.VK_V);
 					  try {
-						Thread.sleep(100);
+						Thread.sleep(200);
 					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					}
-			}
-		};
+					  r.keyRelease(KeyEvent.VK_V);
+					  r.keyRelease(KeyEvent.VK_CONTROL);
+				  }
+				  try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				}
+		});
 		thread.start();
 	}
 }

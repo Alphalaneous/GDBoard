@@ -2,15 +2,15 @@ package Main;
 import java.awt.*;
 
 public class Defaults {
-	public static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	public static Color MAIN;
-	public static Color BUTTON;
-	public static Color HOVER;
+	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	static Color MAIN;
+	static Color BUTTON;
+	static Color HOVER;
 	public static Color SUB_MAIN;
-	public static Color SELECT;
-	public static Color TOP;
+	static Color SELECT;
+	static Color TOP;
 	public static Color FOREGROUND;
-	public static Color BUTTON_HOVER;
+	static Color BUTTON_HOVER;
 	
 	
 	static void setDark() {

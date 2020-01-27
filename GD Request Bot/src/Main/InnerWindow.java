@@ -31,13 +31,13 @@ class InnerWindow extends JPanel {
 
 	private boolean isPinPressed = false;
 	private boolean toggleState = true;
-	JButton pinButton;
-	JPanel topBar = new JPanel(null);
+	private JButton pinButton;
+	private JPanel topBar = new JPanel(null);
 	
 	// --------------------
 	// JButtonUI Changes
 
-	JButtonUI defaultUI = new JButtonUI();
+	private JButtonUI defaultUI = new JButtonUI();
 
 	InnerWindow(final String title, final int x, final int y, final int width, final int height, final String iconLocation) {
 		this.title = title;
@@ -149,6 +149,7 @@ class InnerWindow extends JPanel {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		assert iconImage != null;
 		Image iconImageScaled = iconImage.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		ImageIcon iconImageFinal = new ImageIcon(iconImageScaled);
 		JLabel windowIcon = new JLabel(iconImageFinal);
@@ -176,6 +177,7 @@ class InnerWindow extends JPanel {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		assert xImage != null;
 		Image xIconScaled = xImage.getScaledInstance(17, 17, Image.SCALE_SMOOTH);
 		ImageIcon xIcon = new ImageIcon(xIconScaled);
 
@@ -208,6 +210,7 @@ class InnerWindow extends JPanel {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		assert pinImage != null;
 		Image pinScaled = pinImage.getScaledInstance(14, 14, Image.SCALE_SMOOTH);
 		ImageIcon pinIcon = new ImageIcon(pinScaled);
 
@@ -221,6 +224,7 @@ class InnerWindow extends JPanel {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		assert origPinPressed != null;
 		Image pinPressed = origPinPressed.getScaledInstance(14, 14, Image.SCALE_SMOOTH);
 		ImageIcon pinIconPressed = new ImageIcon(pinPressed);
 
@@ -264,7 +268,7 @@ class InnerWindow extends JPanel {
 		add(topBar);
 		return this;
 	}
-	public void refreshListener() {
+	void refreshListener() {
 		Component[] components = getComponents();
         for (Component component : components)
         {
@@ -314,18 +318,18 @@ class InnerWindow extends JPanel {
 			setVisible(false);
 			toggleState = false;
 		}
-		else if(!toggleState) {
+		else {
 			setVisible(true);
 			toggleState = true;
 		}
 	}
-	boolean getPinState() {
-		return isPinPressed;
-	}
+	//boolean getPinState() {
+	//	return isPinPressed;
+	//}
 	void moveToFront() {
 		Overlay.moveToFront(this);
 	}
-	void setPinVisible(boolean option) {
-		pinButton.setVisible(option);
+	void setPinVisible() {
+		pinButton.setVisible(false);
 	}
 }

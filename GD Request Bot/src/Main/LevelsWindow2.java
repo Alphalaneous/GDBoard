@@ -2,9 +2,6 @@ package Main;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableModel;
 
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
@@ -18,6 +15,7 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.Objects;
 
 public class LevelsWindow2 {
 
@@ -25,18 +23,18 @@ public class LevelsWindow2 {
 	private static int height = 400;
 	private static JPanel window = new InnerWindow("Requests", Settings.getRequestsWLoc().x, Settings.getRequestsWLoc().y, width, height, "src/resources/Icons/Queue.png")
 			.createPanel();
-	static JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-	static int selectedID = 0;
-	static JButtonUI defaultUI = new JButtonUI();
-	static JButtonUI selectUI = new JButtonUI();
-	static JButtonUI warningUI = new JButtonUI();
-	static JButtonUI noticeUI = new JButtonUI();
-	static JButtonUI warningSelectUI = new JButtonUI();
-	static JButtonUI noticeSelectUI = new JButtonUI();
-	static int panelHeight = 0;
-	static JScrollPane scrollPane;
+	private static JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+	private static int selectedID = 0;
+	private static JButtonUI defaultUI = new JButtonUI();
+	private static JButtonUI selectUI = new JButtonUI();
+	private static JButtonUI warningUI = new JButtonUI();
+	private static JButtonUI noticeUI = new JButtonUI();
+	private static JButtonUI warningSelectUI = new JButtonUI();
+	private static JButtonUI noticeSelectUI = new JButtonUI();
+	private static int panelHeight = 0;
+	private static JScrollPane scrollPane;
 
-	static void createPanel() throws IOException, InterruptedException {
+	static void createPanel(){
 		mainPanel.setBackground(Defaults.MAIN);
 		mainPanel.setBounds(0, 0, width, panelHeight);
 		mainPanel.setPreferredSize(new Dimension(400, panelHeight));
@@ -54,8 +52,8 @@ public class LevelsWindow2 {
 		Overlay.addToFrame(window);
 	}
 
-	static void createButton(String name, String author, String ID, String difficulty, boolean vulgar, boolean image,
-			boolean epic, boolean featured, boolean analyzed) throws IOException {
+	static void createButton(String name, String author, String ID, String difficulty,
+							 boolean epic, boolean featured) throws IOException {
 		defaultUI.setBackground(Defaults.MAIN);
 
 		defaultUI.setHover(Defaults.HOVER);
@@ -90,19 +88,19 @@ public class LevelsWindow2 {
 		for (String difficultyA : difficulties) {
 			if (difficulty.equalsIgnoreCase(difficultyA)) {
 				if (epic) {
-					reqDifficulty.setIcon(new ImageIcon((Image) ImageIO
-							.read(LevelsWindow.class.getClassLoader()
-									.getResource("DifficultyIcons/Epic/" + difficultyA + ".png"))
+					reqDifficulty.setIcon(new ImageIcon(ImageIO
+							.read(Objects.requireNonNull(LevelsWindow2.class.getClassLoader()
+									.getResource("DifficultyIcons/Epic/" + difficultyA + ".png")))
 							.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
 				} else if (featured) {
-					reqDifficulty.setIcon(new ImageIcon((Image) ImageIO
-							.read(LevelsWindow.class.getClassLoader()
-									.getResource("DifficultyIcons/Featured/" + difficultyA + ".png"))
+					reqDifficulty.setIcon(new ImageIcon(ImageIO
+							.read(Objects.requireNonNull(LevelsWindow2.class.getClassLoader()
+									.getResource("DifficultyIcons/Featured/" + difficultyA + ".png")))
 							.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
 				} else {
-					reqDifficulty.setIcon(new ImageIcon((Image) ImageIO
-							.read(LevelsWindow.class.getClassLoader()
-									.getResource("DifficultyIcons/Normal/" + difficultyA + ".png"))
+					reqDifficulty.setIcon(new ImageIcon(ImageIO
+							.read(Objects.requireNonNull(LevelsWindow2.class.getClassLoader()
+									.getResource("DifficultyIcons/Normal/" + difficultyA + ".png")))
 							.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
 				}
 			}
@@ -235,32 +233,32 @@ public class LevelsWindow2 {
 						if (((JLabel) component2).getText().equals(ID)) {
 							if (image) {
 								((JLabel) ((JButton) component).getComponent(3)).setText("Analyzed");
-								((JLabel) ((JButton) component).getComponent(3)).setBounds(
-										(int) (400 - ((JLabel) ((JButton) component).getComponent(3)).getPreferredSize()
+								((JButton) component).getComponent(3).setBounds(
+										(int) (400 - ((JButton) component).getComponent(3).getPreferredSize()
 												.getWidth()) - 10,
 										26,
-										(int) ((JLabel) ((JButton) component).getComponent(3)).getPreferredSize().getWidth(),
+										(int) ((JButton) component).getComponent(3).getPreferredSize().getWidth(),
 										20);
-								((JButton) component).setBackground(new Color(150, 0, 0));
+								component.setBackground(new Color(150, 0, 0));
 								((JButton) component).setUI(warningUI);
 
 							} else if (vulgar) {
 								((JLabel) ((JButton) component).getComponent(3)).setText("Analyzed");
-								((JLabel) ((JButton) component).getComponent(3)).setBounds(
-										(int) (400 - ((JLabel) ((JButton) component).getComponent(3)).getPreferredSize()
+								((JButton) component).getComponent(3).setBounds(
+										(int) (400 - ((JButton) component).getComponent(3).getPreferredSize()
 												.getWidth()) - 10,
 										26,
-										(int) ((JLabel) ((JButton) component).getComponent(3)).getPreferredSize().getWidth(),
+										(int) ((JButton) component).getComponent(3).getPreferredSize().getWidth(),
 										20);
-								((JButton) component).setBackground(new Color(150, 150, 0));
+								component.setBackground(new Color(150, 150, 0));
 								((JButton) component).setUI(noticeUI);
 							} else if (analyzed) {
 								((JLabel) ((JButton) component).getComponent(3)).setText("Analyzed");
-								((JLabel) ((JButton) component).getComponent(3)).setBounds(
-										(int) (400 - ((JLabel) ((JButton) component).getComponent(3)).getPreferredSize()
+								((JButton) component).getComponent(3).setBounds(
+										(int) (400 - ((JButton) component).getComponent(3).getPreferredSize()
 												.getWidth()) - 10,
 										26,
-										(int) ((JLabel) ((JButton) component).getComponent(3)).getPreferredSize().getWidth(),
+										(int) ((JButton) component).getComponent(3).getPreferredSize().getWidth(),
 										20);
 							}
 						}
@@ -269,12 +267,12 @@ public class LevelsWindow2 {
 			}
 		}
 	}
-	public static void removeButton(int i) {
+	static void removeButton(int i) {
 		mainPanel.remove(i);
 		selectedID = 0;
 		mainPanel.updateUI();
 	}
-	public static void removeButton() {
+	static void removeButton() {
 		mainPanel.remove(selectedID);
 		selectedID = 0;
 		mainPanel.updateUI();

@@ -11,17 +11,17 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class SettingsWindow {
-	static int width = 622;
-	static int height = 622;
+class SettingsWindow {
+	private static int width = 622;
+	private static int height = 622;
 	private static JPanel window = new InnerWindow("Settings", 1920 / 2 - 250, 1080 / 2 - 300, width, height,
 			"src/resources/Icons/Actions.png").createPanel();
-	static JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-	static JPanel content = new JPanel();
-	static JPanel blankSpace = new JPanel();
+	private static JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+	private static JPanel content = new JPanel();
+	private static JPanel blankSpace = new JPanel();
 
-	static JButtonUI defaultUI = new JButtonUI();
-	static JButtonUI selectUI = new JButtonUI();
+	private static JButtonUI defaultUI = new JButtonUI();
+	private static JButtonUI selectUI = new JButtonUI();
 
 	static void createPanel() {
 
@@ -53,7 +53,7 @@ public class SettingsWindow {
 		window.add(blankSpace);
 		window.add(buttons);
 		window.add(content);
-		((InnerWindow) window).setPinVisible(false);
+		((InnerWindow) window).setPinVisible();
 		((InnerWindow) window).refreshListener();
 		Overlay.addToFrame(window);
 	}
@@ -80,9 +80,9 @@ public class SettingsWindow {
 		}
 	}
 
-	static void toggleVisible() {
+	/*static void toggleVisible() {
 		((InnerWindow) window).toggle();
-	}
+	}*/
 
 	static void setInvisible() {
 		((InnerWindow) window).setInvisible();
@@ -92,7 +92,7 @@ public class SettingsWindow {
 		((InnerWindow) window).setVisible();
 	}
 
-	static JButton createButton(String text) {
+	private static JButton createButton(String text) {
 
 		defaultUI.setBackground(Defaults.MAIN);
 		selectUI.setBackground(Defaults.SELECT);
@@ -124,35 +124,37 @@ public class SettingsWindow {
 					if (component2 instanceof JLabel) {
 						System.out.println(((JLabel) component2).getText());
 
-						if (((JLabel) component2).getText().equals("General")) {
-							content.remove(0);
-							content.add(SettingsPanels.GeneralSetttings.createPanel());
-							content.updateUI();
-						}
-						else if (((JLabel) component2).getText().equals("Overlays")) {
-							content.remove(0);
-							content.add(SettingsPanels.OverlaySettings.createPanel());
-							content.updateUI();
-						}
-						else if (((JLabel) component2).getText().equals("Accounts")) {
-							content.remove(0);
-							content.add(SettingsPanels.AccountSettings.createPanel());
-							content.updateUI();
-						}
-						else if (((JLabel) component2).getText().equals("Shortcuts")) {
-							content.remove(0);
-							content.add(SettingsPanels.ShortcutSettings.createPanel());
-							content.updateUI();
-						}
-						else if (((JLabel) component2).getText().equals("Personalization")) {
-							content.remove(0);
-							content.add(SettingsPanels.PersonalizationSettings.createPanel());
-							content.updateUI();
-						}
-						else if (((JLabel) component2).getText().equals("Blocked IDs")) {
-							content.remove(0);
-							content.add(SettingsPanels.BlockedIDsSettings.createPanel());
-							content.updateUI();
+						switch (((JLabel) component2).getText()) {
+							case "General":
+								content.remove(0);
+								content.add(SettingsPanels.GeneralSetttings.createPanel());
+								content.updateUI();
+								break;
+							case "Overlays":
+								content.remove(0);
+								content.add(SettingsPanels.OverlaySettings.createPanel());
+								content.updateUI();
+								break;
+							case "Accounts":
+								content.remove(0);
+								content.add(SettingsPanels.AccountSettings.createPanel());
+								content.updateUI();
+								break;
+							case "Shortcuts":
+								content.remove(0);
+								content.add(SettingsPanels.ShortcutSettings.createPanel());
+								content.updateUI();
+								break;
+							case "Personalization":
+								content.remove(0);
+								content.add(SettingsPanels.PersonalizationSettings.createPanel());
+								content.updateUI();
+								break;
+							case "Blocked IDs":
+								content.remove(0);
+								content.add(SettingsPanels.BlockedIDsSettings.createPanel());
+								content.updateUI();
+								break;
 						}
 						break;
 					}

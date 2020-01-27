@@ -5,19 +5,14 @@ import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
 
 import java.awt.AWTException;
-import java.awt.FileDialog;
-import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.prefs.BackingStoreException;
 
 public class Main {
-	static ChatBot bot;
+	private static ChatBot bot;
 
-	public static void main(String[] args) throws IOException, InterruptedException, IllegalArgumentException,
-			IllegalAccessException, InvocationTargetException, BackingStoreException, URISyntaxException, AWTException {
+	public static void main(String[] args) throws IOException, IllegalArgumentException, URISyntaxException, AWTException {
 
 		if (!Settings.hasOauth()) {
 
@@ -37,7 +32,7 @@ public class Main {
 			if (authSuccess) {
 				String accessToken = twitch.auth().getAccessToken();
 				System.out.println("Access Token: " + accessToken);
-				Settings.setOAuth(accessToken);
+				//Settings.setOAuth(accessToken);
 			} else {
 				System.out.println(twitch.auth().getAuthenticationError());
 			}
@@ -50,15 +45,14 @@ public class Main {
 		/*
 		 * FileDialog fd = new FileDialog(new JFrame()); fd.setVisible(true); File[] f =
 		 * fd.getFiles(); if(f.length > 0){
-		 * System.out.println(fd.getFiles()[0].getAbsolutePath()); }
+		 * System.out.println(fd.getFiles()[0].getAbsolutePath()); } 
 		 */
 
 		Overlay.setFrame();
 		KeyListener.hook();
 		MainBar.createBar();
 
-		if (Settings.isRequests()) {
-			//LevelsWindow.createPanel();
+		//if (Settings.isRequests()) {
 			LevelsWindow2.createPanel();
 			ActionsWindow.createPanel();
 			InfoWindow.createWindow();
@@ -67,19 +61,19 @@ public class Main {
 			SongWindow.createPanel();
 			SettingsWindow.createPanel();
 			SongWindow.refreshInfo();
-		}
+		//}
 
 		Time time = new Time();
 		time.start();
-		Overlay.setVisible(true);
+		Overlay.setVisible();
 
-		if (Settings.isRequests()) {
+		//if (Settings.isRequests()) {
 			bot.connect("irc.chat.twitch.tv", 80);
 			Channel channel = bot.joinChannel("#alphalaneous");
 			bot.sendMessage("Thank you for using RequestBot by Alphalaneous! Type !help for list of commands!",
 					channel);
 			bot.start();
-		}
+		//}
 
 		/*
 		 * SUGGESTIONS Report Button Discord Bot to send reports r/place in GD Custom

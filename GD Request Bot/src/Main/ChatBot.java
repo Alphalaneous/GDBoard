@@ -9,10 +9,8 @@ import com.github.alex1304.jdash.entity.GDLevel;
 import com.github.alex1304.jdash.exception.MissingAccessException;
 import com.github.alex1304.jdash.util.LevelSearchFilters;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.InputEvent;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -105,8 +103,8 @@ public class ChatBot extends TwitchBot {
 				if (command.equalsIgnoreCase("remove")) {
 					for (int i = 0; i < Requests.levels.size(); i++) {
 						try {
-						if (Requests.levels.get(i).getLevelID() == Requests.levels
-								.get((Integer.parseInt(arguments[1])) - 1).getLevelID()
+						if (Requests.levels.get(i).getLevelID().equals(Requests.levels
+								.get((Integer.parseInt(arguments[1])) - 1).getLevelID())
 								&& user.toString().equalsIgnoreCase(Requests.levels.get(i).getRequester())) {
 							LevelsWindow2.removeButton(i);
 							Requests.levels.remove(i);
@@ -126,8 +124,7 @@ public class ChatBot extends TwitchBot {
 					if(user.isMod(channel) || ("#" + user.toString()).equalsIgnoreCase(channel.toString())){
 					StringBuilder message = new StringBuilder();
 					for (int i = 0; i < Requests.levels.size(); i++) {
-						message.append(i + 1 + ": " + Requests.levels.get(i).getName() + " ("
-								+ Requests.levels.get(i).getLevelID() + "), ");
+						message.append(i).append(1).append(": ").append(Requests.levels.get(i).getName()).append(" (").append(Requests.levels.get(i).getLevelID()).append("), ");
 					}
 					sendMessage(message, channel);
 					}
@@ -159,14 +156,13 @@ public class ChatBot extends TwitchBot {
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
-						return;
 					} else {
 						StringBuilder message = new StringBuilder();
 						for (int i = 1; i < arguments.length; i++) {
 							if (arguments.length - 1 == i) {
 								message.append(arguments[i]);
 							} else {
-								message.append(arguments[i] + " ");
+								message.append(arguments[i]).append(" ");
 							}
 						}
 						System.out.println(message);
@@ -178,8 +174,8 @@ public class ChatBot extends TwitchBot {
 							AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
 							try {
 								outerloop: for (int j = 0; j < 10; j++) {
-									Object[] levelPage = client.getLevelsByUser(client.searchUser(username).block(), j)
-											.block().asList().toArray();
+									Object[] levelPage = Objects.requireNonNull(client.getLevelsByUser(Objects.requireNonNull(client.searchUser(username).block()), j)
+											.block()).asList().toArray();
 									for (int i = 0; i < 10; i++) {
 										if (((GDLevel) levelPage[i]).getName().toUpperCase()
 												.startsWith(level.substring(0, level.length() - 1))) {
@@ -201,8 +197,8 @@ public class ChatBot extends TwitchBot {
 							AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
 							try {
 								Requests.addRequest(String
-										.valueOf(client.searchLevels(message.toString(), LevelSearchFilters.create(), 0)
-												.block().asList().get(0).getId()),
+										.valueOf(Objects.requireNonNull(client.searchLevels(message.toString(), LevelSearchFilters.create(), 0)
+												.block()).asList().get(0).getId()),
 										user.toString());
 							} catch (MissingAccessException | IOException e) {
 								sendMessage("@" + user.toString() + " That level doesn't exist!", channel);

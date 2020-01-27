@@ -12,7 +12,7 @@ class Overlay {
 	// Create JFrame Object
 	
 	static JFrame frame = new JFrame();
-	static JLayeredPane mainFrame = new JLayeredPane();
+	private static JLayeredPane mainFrame = new JLayeredPane();
 	static boolean isVisible = true;
 
 	// --------------------
@@ -68,9 +68,9 @@ class Overlay {
 		mainFrame.setLayer(component, 2);
 	}
 
-	static void setVisible(boolean visible) {
+	static void setVisible() {
 
-		frame.setVisible(visible);
+		frame.setVisible(true);
 	}
 
 	static void refreshUI() {

@@ -1,14 +1,12 @@
 package Main;
+
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-
-
 import java.awt.*;
-import java.io.IOException;
 
-public class InfoWindow {
+class InfoWindow {
 
 	private static int height = 110;
 	private static int width = 400;
@@ -18,7 +16,7 @@ public class InfoWindow {
 	private static JTextPane description = new JTextPane();
 	private static JPanel window = new InnerWindow("Information", 1920 - width - 10, 10, width, height, "src/resources/Icons/Info.png").createPanel();
 
-	static void createWindow() throws IOException, InterruptedException {
+	static void createWindow() {
 
 		
 

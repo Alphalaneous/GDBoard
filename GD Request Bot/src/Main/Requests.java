@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class Requests {
+class Requests {
 
 	static ArrayList<LevelData> levels = new ArrayList<>();
-	static AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
+	private static AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
 
 	static void addRequest(String ID, String requester) throws IOException {
 
@@ -31,13 +31,14 @@ public class Requests {
 
 		try {
 			levelData.setRequester(requester);
+			assert level != null;
 			levelData.setAuthor(level.getCreatorName());
 			levelData.setName(level.getName());
 			levelData.setDifficulty(level.getDifficulty().toString());
 			levelData.setDescription(level.getDescription());
 			levelData.setLikes(String.valueOf(level.getLikes()));
 			levelData.setDownloads(String.valueOf(level.getDownloads()));
-			levelData.setLength(level.getLength().toString());
+			//levelData.setLength(level.getLength().toString());
 			if (level.isDemon()) {
 				if (level.getDifficulty().toString().equalsIgnoreCase("EASY")) {
 					levelData.setDifficulty("easy demon");
@@ -52,79 +53,76 @@ public class Requests {
 				}
 			}
 			levelData.setLevelID(ID);
-			levelData.setCoins(String.valueOf(level.getCoinCount()));
-			levelData.setVerifiedCoins(level.hasCoinsVerified());
+			//levelData.setCoins(String.valueOf(level.getCoinCount()));
+			//levelData.setVerifiedCoins(level.hasCoinsVerified());
 			if (level.getFeaturedScore() > 0) {
-				levelData.setFeatured(true);
+				levelData.setFeatured();
 			}
 			levelData.setEpic(level.isEpic());
-			levelData.setSongName(level.getSong().block().getSongTitle());
-			levelData.setSongAuthor(level.getSong().block().getSongAuthorName());
-			levelData.setSongID(String.valueOf(level.getSong().block().getId()));
-			levelData.setSongSize(String.valueOf(level.getSong().block().getSongSize()));
+			levelData.setSongName(Objects.requireNonNull(level.getSong().block()).getSongTitle());
+			levelData.setSongAuthor(Objects.requireNonNull(level.getSong().block()).getSongAuthorName());
+			levelData.setSongID(String.valueOf(Objects.requireNonNull(level.getSong().block()).getId()));
+			//levelData.setSongSize(String.valueOf(level.getSong().block().getSongSize()));
 			levelData.setStars(level.getStars());
-			Runnable parse = new Thread() {
-				public void run() {
-					try {
-						if (!(level.getStars() > 0)) {
-							ParseLevel.parse(Objects.requireNonNull(Objects
-									.requireNonNull(client.getLevelById(Long.parseLong(ID)).block()).download().block())
-									.getData(), ID);
-							levelData.setAnalyzed(true);
-							System.out.println(levelData.getLevelID() + " " + levelData.getAnalyzed());
-							LevelsWindow2.updateUI(levelData.getLevelID(), levelData.getContainsVulgar(), levelData.getContainsImage(), levelData.getAnalyzed());
-							/*int ID1110count = 0;
+			Thread parse = new Thread(() -> {
+				try {
+					if (!(level.getStars() > 0)) {
+						ParseLevel.parse(Objects.requireNonNull(Objects
+								.requireNonNull(client.getLevelById(Long.parseLong(ID)).block()).download().block())
+								.getData(), ID);
+						levelData.setAnalyzed();
+						System.out.println(levelData.getLevelID() + " " + levelData.getAnalyzed());
+						LevelsWindow2.updateUI(levelData.getLevelID(), levelData.getContainsVulgar(), levelData.getContainsImage(), levelData.getAnalyzed());
+						/*int ID1110count = 0;
 
-							for (int i = 0; i < levelData.getLevelData().size(); i++) {
+						for (int i = 0; i < levelData.getLevelData().size(); i++) {
 
-								File file = new File("blockedWords.txt");
-								Scanner sc = new Scanner(file);
+							File file = new File("blockedWords.txt");
+							Scanner sc = new Scanner(file);
 
-								while (sc.hasNextLine()) {
-									if (levelData.getLevelData().get(i).getObjectText().toUpperCase()
-											.contains(sc.nextLine().toUpperCase())) {
-										// Main.sendMessage("@" + levelData.getRequester() + " That Level is Blocked!");
-										System.out.println("Contains Vulgar");
-										levelData.setContainsVulgar(true);
-										break;
-									}
+							while (sc.hasNextLine()) {
+								if (levelData.getLevelData().get(i).getObjectText().toUpperCase()
+										.contains(sc.nextLine().toUpperCase())) {
+									// Main.sendMessage("@" + levelData.getRequester() + " That Level is Blocked!");
+									System.out.println("Contains Vulgar");
+									levelData.setContainsVulgar(true);
+									break;
 								}
-								if (levelData.getLevelData().get(i).getID() == 1110
-										|| levelData.getLevelData().get(i).getID() == 211
-												&& levelData.getLevelData().get(i).getScaling() <= 0.1
-												&& levelData.getLevelData().get(i).getScaling() != 0.0 && levelData.getLevelData().get(i).getColor1HSVEnabled() == 1) {
-									double color = levelData.getLevelData().get(i).getColor1();
-									if (levelData.getLevelData().get(i).getColor1() == color) {
-										ID1110count++;
-									}
+							}
+							if (levelData.getLevelData().get(i).getID() == 1110
+									|| levelData.getLevelData().get(i).getID() == 211
+											&& levelData.getLevelData().get(i).getScaling() <= 0.1
+											&& levelData.getLevelData().get(i).getScaling() != 0.0 && levelData.getLevelData().get(i).getColor1HSVEnabled() == 1) {
+								double color = levelData.getLevelData().get(i).getColor1();
+								if (levelData.getLevelData().get(i).getColor1() == color) {
+									ID1110count++;
 								}
-								/*System.out.println("ID: " + levelData.getLevelData().get(i).getID() + "; Color 1:"
-										+ levelData.getLevelData().get(i).getColor1() + "; X: "
-										+ levelData.getLevelData().get(i).getX() + "; Y: "
-										+ levelData.getLevelData().get(i).getY() + "; Scale: "
-										+ levelData.getLevelData().get(i).getScaling());
-								sc.close();
-								
 							}
-							if (ID1110count >= 1000) {
-								System.out.println("Contains Image Hack");
-								
-								levelData.setContainsImage(true);
-							}
-							*/
-							// clear up memory
-							
-							//LevelsWindow.refreshRequests();
+							/*System.out.println("ID: " + levelData.getLevelData().get(i).getID() + "; Color 1:"
+									+ levelData.getLevelData().get(i).getColor1() + "; X: "
+									+ levelData.getLevelData().get(i).getX() + "; Y: "
+									+ levelData.getLevelData().get(i).getY() + "; Scale: "
+									+ levelData.getLevelData().get(i).getScaling());
+							sc.close();
+
 						}
-					} catch (IllegalArgumentException | IOException e) {
-						e.printStackTrace();
-						System.out.println("Couldn't Analyze Level");
+						if (ID1110count >= 1000) {
+							System.out.println("Contains Image Hack");
+
+							levelData.setContainsImage(true);
+						}
+						*/
+						// clear up memory
+
+						//LevelsWindow.refreshRequests();
 					}
-					
+				} catch (IllegalArgumentException | IOException e) {
+					e.printStackTrace();
+					System.out.println("Couldn't Analyze Level");
 				}
-				
-			};
-			((Thread) parse).start();
+
+			});
+			parse.start();
 			
 
 		} catch (Exception e) {
@@ -183,7 +181,7 @@ public class Requests {
 							+ Requests.levels.get(0).getLevelID() + "). Requested by "
 							+ Requests.levels.get(0).getRequester());
 				}
-				LevelsWindow2.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getContainsVulgar(), levelData.getContainsImage(), levelData.getEpic(), levelData.getFeatured(), levelData.getAnalyzed());
+				LevelsWindow2.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured());
 			}
 		}
 	}

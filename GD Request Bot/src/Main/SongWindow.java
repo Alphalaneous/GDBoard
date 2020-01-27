@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class SongWindow {
+class SongWindow {
 	private static int height = 85;
 	private static int width = 300;
 	private static JPanel window = new InnerWindow("Music - Newgrounds Audio", 1920 - width - 10, 600, width, height, "src/resources/Icons/note.png").createPanel();

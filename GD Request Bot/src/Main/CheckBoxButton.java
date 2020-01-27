@@ -12,9 +12,9 @@ public class CheckBoxButton extends JButton {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	final String buttonText;
-	final int width;
-	final int height;
+	private final String buttonText;
+	private final int width;
+	private final int height;
 	
 	
 	public CheckBoxButton(String buttonText, int width, int height){

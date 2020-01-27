@@ -21,13 +21,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class MainBar {
+class MainBar {
 
-	static JButtonUI defaultUI = new JButtonUI();
-	static JLabel time = new JLabel();
-	static JPanel barPanel = new JPanel();
-	static JPanel mainPanel = new JPanel();
-	static JPanel buttonPanel = new JPanel();
+	private static JButtonUI defaultUI = new JButtonUI();
+	private static JLabel time = new JLabel();
+	private static JPanel barPanel = new JPanel();
+	private static JPanel mainPanel = new JPanel();
+	private static JPanel buttonPanel = new JPanel();
 
 	static void createBar() {
 
@@ -37,6 +37,7 @@ public class MainBar {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		assert img != null;
 		Image imgScaled = img.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
 		ImageIcon imgNew = new ImageIcon(imgScaled);
 
@@ -67,7 +68,7 @@ public class MainBar {
 		buttonPanel.setBackground(Defaults.MAIN);
 		buttonPanel.setLayout(new GridLayout(1, 2, 0, 0));
 
-		if (Settings.isRequests()) {
+		//if (Settings.isRequests()) {
 			JButton toggleSong = createButton("src/resources/Icons/note.png");
 			toggleSong.addMouseListener(new MouseAdapter() {
 				@Override
@@ -100,7 +101,7 @@ public class MainBar {
 				@Override
 				public void mousePressed(MouseEvent e) {
 					super.mousePressed(e);
-					LevelsWindow.toggleVisible();
+					LevelsWindow2.toggleVisible();
 				}
 			});
 
@@ -117,8 +118,8 @@ public class MainBar {
 			buttonPanel.add(toggleLevels);
 			buttonPanel.add(toggleInfo);
 			buttonPanel.add(toggleActions);
-		}
-		Map<TextAttribute, Object> attributes = new HashMap<TextAttribute, Object>();
+		//}
+		Map<TextAttribute, Object> attributes = new HashMap<>();
 		attributes.put(TextAttribute.TRACKING, 0.02);
 		Font font = new Font("bahnschrift", Font.BOLD, 23).deriveFont(attributes);
 
@@ -133,13 +134,14 @@ public class MainBar {
 		Overlay.addToFrame(barPanel);
 	}
 
-	static JButton createButton(String location) {
+	private static JButton createButton(String location) {
 		BufferedImage origImg = null;
 		try {
 			origImg = ImageIO.read(new File(location));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		assert origImg != null;
 		Image scaledImg = origImg.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 		ImageIcon imgNew = new ImageIcon(scaledImg);
 

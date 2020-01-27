@@ -13,7 +13,7 @@ import java.util.zip.GZIPInputStream;
 
 class ParseLevel {
 
-	static ArrayList<GDObject> parse(byte[] level, String levelID) throws IOException {
+	static void parse(byte[] level, String levelID) throws IOException {
 
 		ArrayList<GDObject> lvlObject = new ArrayList<>();
 		String decompressed = decompress(level);
@@ -417,12 +417,12 @@ class ParseLevel {
 						out: while (sc.hasNextLine()) {
 							String[] text = lvlObject.get(i).getObjectText().toUpperCase().split(" ");
 							String word = sc.nextLine();
-							
-							for(int m = 0; m < text.length; m++) {
-								
-								if (text[m].equalsIgnoreCase(word)) {
+
+							for (String s : text) {
+
+								if (s.equalsIgnoreCase(word)) {
 									System.out.println("Contains Vulgar");
-									Requests.getLevelData().get(k).setContainsVulgar(true);
+									Requests.getLevelData().get(k).setContainsVulgar();
 									break out;
 								}
 							}
@@ -439,7 +439,7 @@ class ParseLevel {
 						if (IDImageCount >= 3000) {
 							System.out.println("Contains Image Hack");
 
-							Requests.getLevelData().get(k).setContainsImage(true);
+							Requests.getLevelData().get(k).setContainsImage();
 							break outer;
 						}
 						sc.close();
@@ -450,7 +450,6 @@ class ParseLevel {
 		}
 		// }
 
-		return lvlObject;
 	}
 
 	private static String decompress(byte[] compressed) throws IOException {

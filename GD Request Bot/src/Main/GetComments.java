@@ -11,7 +11,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
-public class GetComments {
+class GetComments {
 	private ArrayList<ArrayList<String>> Comments = new ArrayList<>();
 	private ArrayList<String> commentContent = new ArrayList<>();
 	private ArrayList<String> commenters = new ArrayList<>();

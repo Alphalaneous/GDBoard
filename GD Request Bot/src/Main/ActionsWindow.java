@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class ActionsWindow {
+class ActionsWindow {
 
 	private static int height = 60;
 	private static int width = 200;
@@ -22,7 +22,7 @@ public class ActionsWindow {
 	private static JPanel panel = new JPanel();
 	private static JButtonUI defaultUI = new JButtonUI();
 
-	static void createPanel() throws IOException, InterruptedException {
+	static void createPanel() {
 
 		mainPanel.setBounds(1, 31, width, height);
 		mainPanel.setBackground(Defaults.MAIN);
@@ -46,6 +46,7 @@ public class ActionsWindow {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		assert origNext != null;
 		Image nextImg = origNext.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 		ImageIcon nextNew = new ImageIcon(nextImg);
 
@@ -82,12 +83,6 @@ public class ActionsWindow {
 						LevelsWindow2.removeButton();
 						
 						CommentsWindow.unloadComments();
-					}
-					try {
-						LevelsWindow.refreshRequests();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					}
 					SongWindow.refreshInfo();
 					InfoWindow.refreshInfo();
@@ -154,6 +149,7 @@ public class ActionsWindow {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		assert origCopy != null;
 		Image copyImg = origCopy.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 		ImageIcon copyNew = new ImageIcon(copyImg);
 
