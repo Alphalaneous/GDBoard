@@ -298,9 +298,9 @@ class InnerWindow extends JPanel {
 	}
 	
 	public void setVisible() {
-		topBar.setVisible(true);
-		setBorder(BorderFactory.createLineBorder(new Color(255,255,255,50)));
-		if(toggleState) {
+			topBar.setVisible(true);
+			setBorder(BorderFactory.createLineBorder(new Color(255,255,255,50)));
+			if(toggleState) {
 			setVisible(true);
 		}
 	}

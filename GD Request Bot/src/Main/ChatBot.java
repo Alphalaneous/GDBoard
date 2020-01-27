@@ -19,7 +19,6 @@ public class ChatBot extends TwitchBot {
 	ChatBot() {
 
 		this.setUsername("chatbot");
-		System.out.println(Settings.getOAuth());
 		this.setOauth_Key("oauth:" + Settings.getOAuth());
 	}
 

@@ -463,5 +463,12 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="twitch-api-wrapper-0.3-jar-with-dependencies" level="project" />
+    <orderEntry type="library" name="jlayer-1.0.1" level="project" />
+    <orderEntry type="library" name="reactor-netty-0.8.8.RELEASE" level="project" />
+    <orderEntry type="library" name="Jamepad" level="project" />
+    <orderEntry type="library" name="commons-io-2.6" level="project" />
+    <orderEntry type="library" name="json-20140107" level="project" />
+    <orderEntry type="library" name="bin" level="project" />
   </component>
 </module>

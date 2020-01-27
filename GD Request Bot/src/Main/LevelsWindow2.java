@@ -205,7 +205,17 @@ public class LevelsWindow2 {
 		selectUI.setBackground(Defaults.SELECT);
 		defaultUI.setHover(Defaults.HOVER);
 		selectUI.setHover(Defaults.BUTTON_HOVER);
-
+		mainPanel.setBackground(Defaults.MAIN);
+		for(Component component : mainPanel.getComponents()){
+			if(component instanceof JButton){
+				component.setBackground(Defaults.MAIN);
+				for(Component component2 : ((JButton) component).getComponents()){
+					if(component2 instanceof JLabel){
+						component2.setForeground(Defaults.FOREGROUND);
+					}
+				}
+			}
+		}
 	}
 
 	static void toggleVisible() {
