@@ -187,6 +187,7 @@ class ActionsWindow {
 		((InnerWindow) window).refreshUI();
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
+		defaultUI.setSelect(Defaults.SELECT);
 		mainPanel.setBackground(Defaults.MAIN);
 		panel.setBackground(Defaults.MAIN);
 		for (Component component : panel.getComponents()) {

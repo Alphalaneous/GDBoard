@@ -204,6 +204,7 @@ public class LevelsWindow2 {
 		defaultUI.setBackground(Defaults.MAIN);
 		selectUI.setBackground(Defaults.SELECT);
 		defaultUI.setHover(Defaults.HOVER);
+		defaultUI.setSelect(Defaults.SELECT);
 		selectUI.setHover(Defaults.BUTTON_HOVER);
 		mainPanel.setBackground(Defaults.MAIN);
 		for(Component component : mainPanel.getComponents()){

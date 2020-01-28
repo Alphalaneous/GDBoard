@@ -124,6 +124,7 @@ class SongWindow {
 		((InnerWindow) window).refreshUI();
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
+		defaultUI.setSelect(Defaults.SELECT);
 		panel.setBackground(Defaults.MAIN);
 		songName.setForeground(Defaults.FOREGROUND);
 		songAuthor.setForeground(Defaults.FOREGROUND);

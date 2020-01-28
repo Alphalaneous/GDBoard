@@ -285,6 +285,7 @@ class InnerWindow extends JPanel {
 	public void refreshUI() {
 		defaultUI.setBackground(Defaults.TOP);
 		defaultUI.setHover(Defaults.HOVER);
+		defaultUI.setSelect(Defaults.SELECT);
 		topBar.setBackground(Defaults.TOP);
 		for (Component component : topBar.getComponents()) {
 			if (component instanceof JButton) {

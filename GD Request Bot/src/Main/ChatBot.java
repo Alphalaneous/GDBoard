@@ -22,7 +22,7 @@ public class ChatBot extends TwitchBot {
 		this.setOauth_Key("oauth:" + Settings.getOAuth());
 	}
 
-	@SuppressWarnings("deprecation")
+
 	@Override
 	public void onMessage(User user, Channel channel, String msg) {
 
@@ -44,7 +44,7 @@ public class ChatBot extends TwitchBot {
 				Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(msg);
 				if (m.find()) {
 					try {
-						Requests.addRequest(m.group(1), user.toString());
+						Requests.addRequest(m.group(1), String.valueOf(user));
 
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -104,12 +104,12 @@ public class ChatBot extends TwitchBot {
 						try {
 						if (Requests.levels.get(i).getLevelID().equals(Requests.levels
 								.get((Integer.parseInt(arguments[1])) - 1).getLevelID())
-								&& user.toString().equalsIgnoreCase(Requests.levels.get(i).getRequester())) {
+								&& String.valueOf(user).equalsIgnoreCase(Requests.levels.get(i).getRequester())) {
 							LevelsWindow2.removeButton(i);
 							Requests.levels.remove(i);
 							SongWindow.refreshInfo();
 							InfoWindow.refreshInfo();
-							Main.sendMessage("@" + user.toString() + ", your level has been removed!");
+							Main.sendMessage("@" + user + ", your level has been removed!");
 						}
 						}
 						catch(NumberFormatException e) {
@@ -119,16 +119,16 @@ public class ChatBot extends TwitchBot {
 				}
 
 				if (command.equalsIgnoreCase("q") || command.equalsIgnoreCase("queue") || command.equalsIgnoreCase("levellist")
-						|| command.equalsIgnoreCase("list") || command.equals("requests")) {
-					if(user.isMod(channel) || ("#" + user.toString()).equalsIgnoreCase(channel.toString())){
+						|| command.equalsIgnoreCase("list") || command.equalsIgnoreCase("requests")) {
+					if(user.isMod(channel) || ("#" + user).equalsIgnoreCase(String.valueOf(channel))){
 					StringBuilder message = new StringBuilder();
 					for (int i = 0; i < Requests.levels.size(); i++) {
-						message.append(i).append(1).append(": ").append(Requests.levels.get(i).getName()).append(" (").append(Requests.levels.get(i).getLevelID()).append("), ");
+						message.append(i + 1).append(": ").append(Requests.levels.get(i).getName()).append(" (").append(Requests.levels.get(i).getLevelID()).append("), ");
 					}
 					sendMessage(message, channel);
 					}
 					else {
-						System.out.println(user.toString() + " " + channel.toString());
+						System.out.println(user + " " + channel);
 						sendMessage("This command is for mods, use !where or !position to find your position in the queue!", channel);
 					}
 				}
@@ -138,10 +138,10 @@ public class ChatBot extends TwitchBot {
 				// TODO: Level Name Requesting
 				if (command.equalsIgnoreCase("p") || command.equalsIgnoreCase("where") || command.equalsIgnoreCase("position")) {
 					for (int i = 0; i < Requests.levels.size(); i++) {
-						if (Requests.levels.get(i).getRequester().equalsIgnoreCase(user.toString())) {
+						if (Requests.levels.get(i).getRequester().equalsIgnoreCase(String.valueOf(user))) {
 							int j = i + 1;
 
-							Main.sendMessage("@" + user.toString() + ", " + Requests.levels.get(i).getName()
+							Main.sendMessage("@" + user + ", " + Requests.levels.get(i).getName()
 									+ " is at position " + j + " in the queue!");
 							break;
 						}
@@ -151,7 +151,7 @@ public class ChatBot extends TwitchBot {
 					Matcher m = Pattern.compile("(\\d+)").matcher(arguments[1]);
 					if (m.matches() && arguments.length <= 2) {
 						try {
-							Requests.addRequest(m.group(1), user.toString());
+							Requests.addRequest(m.group(1), String.valueOf(user));
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -179,7 +179,7 @@ public class ChatBot extends TwitchBot {
 										if (((GDLevel) levelPage[i]).getName().toUpperCase()
 												.startsWith(level.substring(0, level.length() - 1))) {
 											Requests.addRequest(String.valueOf(((GDLevel) levelPage[i]).getId()),
-													user.toString());
+													String.valueOf(user));
 											break outerloop;
 										}
 									}
@@ -187,7 +187,7 @@ public class ChatBot extends TwitchBot {
 
 							} catch (IndexOutOfBoundsException ignored) {
 							} catch (MissingAccessException | IOException e) {
-								sendMessage("@" + user.toString() + " That level or user doesn't exist!", channel);
+								sendMessage("@" + user + " That level or user doesn't exist!", channel);
 								e.printStackTrace();
 							}
 
@@ -198,9 +198,9 @@ public class ChatBot extends TwitchBot {
 								Requests.addRequest(String
 										.valueOf(Objects.requireNonNull(client.searchLevels(message.toString(), LevelSearchFilters.create(), 0)
 												.block()).asList().get(0).getId()),
-										user.toString());
+										String.valueOf(user));
 							} catch (MissingAccessException | IOException e) {
-								sendMessage("@" + user.toString() + " That level doesn't exist!", channel);
+								sendMessage("@" + user + " That level doesn't exist!", channel);
 								e.printStackTrace();
 							}
 						}

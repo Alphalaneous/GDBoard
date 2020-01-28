@@ -17,7 +17,7 @@ class GetComments {
 	private ArrayList<String> commenters = new ArrayList<>();
 
 	ArrayList<ArrayList<String>> getComments(String levelID) throws IOException {
-
+		System.out.println("Here");
 		URL gdAPI = new URL("https://gdbrowser.com/api/comments/" + levelID + "?top");
 		URLConnection con = gdAPI.openConnection();
 		InputStream is = con.getInputStream();

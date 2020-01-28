@@ -63,6 +63,7 @@ class SettingsWindow {
 		blankSpace.setBackground(Defaults.MAIN);
 		defaultUI.setBackground(Defaults.MAIN);
 		defaultUI.setHover(Defaults.HOVER);
+		defaultUI.setSelect(Defaults.SELECT);
 		selectUI.setBackground(Defaults.SELECT);
 		selectUI.setHover(Defaults.BUTTON_HOVER);
 		buttons.setBackground(Defaults.MAIN);

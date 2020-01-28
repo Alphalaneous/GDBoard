@@ -167,6 +167,7 @@ class MainBar {
 		buttonPanel.setBackground(Defaults.TOP);
 		defaultUI.setBackground(Defaults.MAIN);
 		defaultUI.setHover(Defaults.HOVER);
+		defaultUI.setSelect(Defaults.SELECT);
 		time.setForeground(Defaults.FOREGROUND);
 		for (Component component : buttonPanel.getComponents()) {
 			if (component instanceof JButton) {
