@@ -33,11 +33,16 @@ class GetComments {
 		JSONObject obj = new JSONObject(message);
 		JSONArray arr = obj.getJSONArray("Comments");
 		for (int i = 0; i < 10; i++) {
-			commentContent.add(arr.getJSONObject(i).getString("content"));
-			System.out.println(commentContent.get(i));
-			Comments.add(commentContent);
-			commenters.add(arr.getJSONObject(i).getString("username"));
-			Comments.add(commenters);
+			try {
+				commentContent.add(arr.getJSONObject(i).getString("content"));
+				System.out.println(commentContent.get(i));
+				Comments.add(commentContent);
+				commenters.add(arr.getJSONObject(i).getString("username"));
+				Comments.add(commenters);
+			}
+			catch (Exception e){
+				break;
+			}
 		}
 		return Comments;
 	}

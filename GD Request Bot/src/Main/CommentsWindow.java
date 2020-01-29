@@ -232,20 +232,15 @@ class CommentsWindow {
 	private static void loadComments(int page, boolean top) throws IOException {
 		panel.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
 		GetComments getComments = new GetComments();
-		ArrayList<String> commentText;
-		ArrayList<String> commenterText;
-
-			commentText = getComments.getComments(Requests.levels.get(LevelsWindow2.getSelectedID()).getLevelID(), page, top)
-					.get(0);
-
-			commenterText = getComments
-					.getComments(Requests.levels.get(LevelsWindow2.getSelectedID()).getLevelID(), page, top).get(1);
-
+		ArrayList<String> commentText = getComments.getComments(Requests.levels.get(LevelsWindow2.getSelectedID()).getLevelID(), page, top)
+				.get(0);
+		ArrayList<String> commenterText = getComments
+				.getComments(Requests.levels.get(LevelsWindow2.getSelectedID()).getLevelID(), page, top).get(1);;
 
 		int panelHeight = 0;
 		assert commentText != null;
-		for (int i = 0; i < 10; i++) {
-			//System.out.println(commentText.get(i));
+		for (int i = 0; i < commentText.size()/2; i++) {
+			System.out.println(commenterText.get(i));
 			JPanel cmtPanel = new JPanel(null);
 			cmtPanel.setBackground(Defaults.MAIN);
 			cmtPanel.setPreferredSize(new Dimension(width, 64));
@@ -262,7 +257,6 @@ class CommentsWindow {
 			comment.setEditable(false);
 			comment.setForeground(Defaults.FOREGROUND);
 			comment.setText(commentText.get(i));
-			assert commenterText != null;
 			commenter.setText(commenterText.get(i));
 			panel.add(cmtPanel);
 			panelHeight = panelHeight + 64;
