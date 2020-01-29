@@ -163,7 +163,7 @@ class InnerWindow extends JPanel {
 
 		JLabel titleText = new JLabel(title);
 		titleText.setFont(new Font("bahnschrift", Font.PLAIN, 14));
-		titleText.setBounds(35, 0, width - 60, 30);
+		titleText.setBounds(35, 2, width - 60, 30);
 		titleText.setForeground(Defaults.FOREGROUND);
 		topBar.add(titleText);
 

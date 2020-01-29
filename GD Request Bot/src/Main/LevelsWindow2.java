@@ -2,16 +2,11 @@ package Main;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -34,7 +29,7 @@ public class LevelsWindow2 {
 	private static int panelHeight = 0;
 	private static JScrollPane scrollPane;
 
-	static void createPanel(){
+	static void createPanel() {
 		mainPanel.setBackground(Defaults.MAIN);
 		mainPanel.setBounds(0, 0, width, panelHeight);
 		mainPanel.setPreferredSize(new Dimension(400, panelHeight));
@@ -46,7 +41,53 @@ public class LevelsWindow2 {
 		scrollPane.setPreferredSize(new Dimension(400, height));
 		scrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(30);
-		scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+		scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(1, height));
+		scrollPane.getVerticalScrollBar().setOpaque(false);
+		scrollPane.setOpaque(false);
+		scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+
+			private final Dimension d = new Dimension();
+			@Override protected JButton createDecreaseButton(int orientation) {
+				return new JButton() {
+					@Override public Dimension getPreferredSize() {
+						return d;
+					}
+				};
+			}
+			@Override protected JButton createIncreaseButton(int orientation) {
+				return new JButton() {
+					@Override public Dimension getPreferredSize() {
+						return d;
+					}
+				};
+			}
+
+			@Override
+			protected void paintTrack(Graphics g, JComponent c, Rectangle r) {
+				Graphics2D g2 = (Graphics2D) g.create();
+				Color color = new Color(0,0,0,0);
+
+				g2.setPaint(color);
+				g2.fillRect(r.x, r.y, r.width, r.height);
+				g2.dispose();
+			}
+
+			@Override
+			protected void paintThumb(Graphics g, JComponent c, Rectangle r) {
+				Graphics2D g2 = (Graphics2D) g.create();
+				Color color = new Color(0,0,0,0);
+
+
+				g2.setPaint(color);
+				g2.fillRect(r.x, r.y, r.width, r.height);
+				g2.dispose();
+			}
+			@Override
+			protected void setThumbBounds(int x, int y, int width, int height) {
+				super.setThumbBounds(x, y, width, height);
+				scrollbar.repaint();
+			}
+		});
 		window.add(scrollPane);
 		((InnerWindow) window).refreshListener();
 		Overlay.addToFrame(window);
@@ -165,7 +206,7 @@ public class LevelsWindow2 {
 					}
 				}
 				if (!lID.getText().equals(Requests.levels.get(selectedID).getLevelID())) {
-					CommentsWindow.unloadComments();
+					CommentsWindow.unloadComments(true);
 				}
 				for (int j = 0; j < Requests.levels.size(); j++) {
 

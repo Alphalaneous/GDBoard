@@ -158,7 +158,7 @@ class MainBar {
 
 	static void setTime(String timeValue) {
 		time.setText(timeValue);
-		time.setBounds(148 - time.getPreferredSize().width, -1, (int) time.getPreferredSize().getWidth(), 64);
+		time.setBounds(148 - time.getPreferredSize().width, 3, (int) time.getPreferredSize().getWidth(), 64);
 		time.updateUI();
 	}
 

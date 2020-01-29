@@ -4,7 +4,6 @@ import com.cavariux.twitchirc.Chat.Channel;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
 
-import javax.swing.*;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.net.URI;
@@ -59,7 +58,7 @@ public class Main {
 			InfoWindow.refreshInfo();
 			CommentsWindow.createPanel();
 			SongWindow.createPanel();
-			SettingsWindow.createPanel();
+			//SettingsWindow.createPanel();
 			SongWindow.refreshInfo();
 		//}
 

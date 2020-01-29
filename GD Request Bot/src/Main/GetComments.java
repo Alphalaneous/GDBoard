@@ -16,23 +16,29 @@ class GetComments {
 	private ArrayList<String> commentContent = new ArrayList<>();
 	private ArrayList<String> commenters = new ArrayList<>();
 
-	ArrayList<ArrayList<String>> getComments(String levelID) throws IOException {
+	ArrayList<ArrayList<String>> getComments(String levelID, int page, boolean top) throws IOException {
 		System.out.println("Here");
-		URL gdAPI = new URL("https://gdbrowser.com/api/comments/" + levelID + "?top");
+		URL gdAPI = null;
+		if(top) {
+			gdAPI = new URL("https://gdbrowser.com/api/comments/" + levelID + "?page=" + page + "&top");
+			System.out.println("top");
+		}else{
+			gdAPI = new URL("https://gdbrowser.com/api/comments/" + levelID + "?page=" + page);
+		}
+		System.out.println("Page: " + page);
 		URLConnection con = gdAPI.openConnection();
 		InputStream is = con.getInputStream();
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		String message = "{\"Comments\" : " + IOUtils.toString(br) + "}";
 		JSONObject obj = new JSONObject(message);
 		JSONArray arr = obj.getJSONArray("Comments");
-		for (int i = 0; i < arr.length(); i++) {
+		for (int i = 0; i < 10; i++) {
 			commentContent.add(arr.getJSONObject(i).getString("content"));
+			System.out.println(commentContent.get(i));
 			Comments.add(commentContent);
 			commenters.add(arr.getJSONObject(i).getString("username"));
 			Comments.add(commenters);
-
 		}
 		return Comments;
-
 	}
 }

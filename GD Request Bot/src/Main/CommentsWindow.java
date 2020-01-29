@@ -1,5 +1,6 @@
 package Main;
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -10,19 +11,123 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
 class CommentsWindow {
 	private static JButton loadCommentsButton = new JButton("Load Comments");
+	private static JButton top = new JButton("Top");
+	private static JButton new1 = new JButton("New");
+	private static JButton next = new JButton(">");
+	private static JButton prev = new JButton("<");
 	private static JPanel panel = new JPanel();
-
+	private static JButtonUI defaultUI = new JButtonUI();
 	private static int height = 350;
 	private static int width = 300;
-	private static JPanel window = new InnerWindow("Top Comments", 10, 500, width, height,
+	private static JPanel window = new InnerWindow("Comments", 10, 500, width, height,
 			"src/resources/Icons/Comments.png").createPanel();
 	private static JButtonUI newUI = new JButtonUI();
-
+	private static JScrollPane scrollPane = new JScrollPane(panel);
+	private static JPanel buttons = new JPanel();
+	private static boolean topC = false;
+	private static int page = 0;
 	static void createPanel() {
 
 		panel.setLayout(null);
 		panel.setBounds(0, 0, width, height);
-		
+		buttons.setLayout(null);
+		buttons.setBounds(1, height + 1 , width, 30);
+		buttons.setBackground(Defaults.SUB_MAIN);
+		buttons.add(top);
+		top.setMargin(new Insets(0, 0, 0, 0));
+		top.setBorder(BorderFactory.createEmptyBorder());
+		top.setForeground(Defaults.FOREGROUND);
+		top.setBackground(Defaults.TOP);
+		top.setUI(defaultUI);
+		top.setBounds(90,0,30,30);
+		top.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				((InnerWindow) window).moveToFront();
+				super.mousePressed(e);
+				topC = true;
+				page = 0;
+				try {
+					unloadComments(false);
+					loadComments(0, true);
+				} catch (Exception ignored) {
+				}
+
+			}
+		});
+		buttons.add(new1);
+		new1.setMargin(new Insets(0, 0, 0, 0));
+		new1.setBorder(BorderFactory.createEmptyBorder());
+		new1.setForeground(Defaults.FOREGROUND);
+		new1.setBackground(Defaults.TOP);
+		new1.setUI(defaultUI);
+		new1.setBounds(120,0,30,30);
+		new1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				((InnerWindow) window).moveToFront();
+				super.mousePressed(e);
+				topC = false;
+				page = 0;
+				try {
+					unloadComments(false);
+					loadComments(0, false);
+				} catch (Exception ignored) {
+				}
+
+			}
+		});
+		buttons.add(prev);
+		prev.setMargin(new Insets(0, 0, 0, 0));
+		prev.setBorder(BorderFactory.createEmptyBorder());
+		prev.setForeground(Defaults.FOREGROUND);
+		prev.setBackground(Defaults.TOP);
+		prev.setUI(defaultUI);
+		prev.setBounds(0,0,30,30);
+		prev.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				((InnerWindow) window).moveToFront();
+				super.mousePressed(e);
+				if(page != 0){
+					page--;
+					System.out.println(page);
+					try {
+						unloadComments(false);
+						loadComments(page, topC);
+					} catch (Exception ignored) {
+					}
+				}
+			}
+		});
+		buttons.add(next);
+		next.setMargin(new Insets(0, 0, 0, 0));
+		next.setBorder(BorderFactory.createEmptyBorder());
+		next.setForeground(Defaults.FOREGROUND);
+		next.setBackground(Defaults.TOP);
+		next.setUI(defaultUI);
+		next.setBounds(30,0,30,30);
+		next.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				((InnerWindow) window).moveToFront();
+				super.mousePressed(e);
+				page++;
+				System.out.println(page);
+				try {
+					unloadComments(false);
+					loadComments(page, topC);
+				} catch (Exception ignored) {
+					page--;
+					try {
+						loadComments(page, topC);
+					} catch (Exception f) {
+						f.printStackTrace();
+					}
+				}
+
+			}
+		});
 		newUI.setBackground(Defaults.MAIN);
 		newUI.setHover(Defaults.HOVER);
 		loadCommentsButton.setBackground(Defaults.MAIN);
@@ -34,30 +139,84 @@ class CommentsWindow {
 		loadCommentsButton.setBounds(0,0,width, height-30);
 		panel.setBackground(Defaults.MAIN);
 		panel.add(loadCommentsButton);
-		JScrollPane scrollPane = new JScrollPane(panel);
+
 		loadCommentsButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				((InnerWindow) window).moveToFront();
 				super.mousePressed(e);
+
 				try {
-					loadComments();
-				} catch (IOException ex) {
-					ex.printStackTrace();
+					loadComments(0, false);
+				} catch (Exception ignored) {
 				}
+
 			}
 		});
 		panel.setPreferredSize(new Dimension(width, height-30));
+		scrollPane.getVerticalScrollBar().setOpaque(false);
+		scrollPane.setOpaque(false);
 		scrollPane.setBounds(1,31,width, height-30);
+		scrollPane.setBorder(BorderFactory.createEmptyBorder());
 		scrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(10);
 		scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(1, height));
+		scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+
+			private final Dimension d = new Dimension();
+			@Override protected JButton createDecreaseButton(int orientation) {
+				return new JButton() {
+					@Override public Dimension getPreferredSize() {
+						return d;
+					}
+				};
+			}
+			@Override protected JButton createIncreaseButton(int orientation) {
+				return new JButton() {
+					@Override public Dimension getPreferredSize() {
+						return d;
+					}
+				};
+			}
+
+			@Override
+			protected void paintTrack(Graphics g, JComponent c, Rectangle r) {
+				Graphics2D g2 = (Graphics2D) g.create();
+				Color color = new Color(0,0,0,0);
+
+				g2.setPaint(color);
+				g2.fillRect(r.x, r.y, r.width, r.height);
+				g2.dispose();
+			}
+
+			@Override
+			protected void paintThumb(Graphics g, JComponent c, Rectangle r) {
+				Graphics2D g2 = (Graphics2D) g.create();
+				Color color = new Color(0,0,0,0);
+
+
+				g2.setPaint(color);
+				g2.fillRect(r.x, r.y, r.width, r.height);
+				g2.dispose();
+			}
+			@Override
+			protected void setThumbBounds(int x, int y, int width, int height) {
+				super.setThumbBounds(x, y, width, height);
+				scrollbar.repaint();
+			}
+		});
 		window.add(scrollPane);
+		window.add(buttons);
 		((InnerWindow) window).refreshListener();
 		Overlay.addToFrame(window);
 	}
 
-	static void unloadComments() {
+
+	static void unloadComments(boolean reset) {
+		if(reset){
+			topC = false;
+			page = 0;
+		}
 		panel.setLayout(null);
 		panel.setPreferredSize(new Dimension(width, height-30));
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
@@ -70,19 +229,25 @@ class CommentsWindow {
 		panel.updateUI();
 	}
 
-	private static void loadComments() throws IOException {
+	private static void loadComments(int page, boolean top) throws IOException {
 		panel.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
 		GetComments getComments = new GetComments();
-		ArrayList<String> commentText = getComments.getComments(Requests.levels.get(LevelsWindow2.getSelectedID()).getLevelID())
-				.get(0);
-		System.out.println(Requests.levels.get(LevelsWindow2.getSelectedID()).getLevelID());
-		ArrayList<String> commenterText = getComments
-				.getComments(Requests.levels.get(LevelsWindow2.getSelectedID()).getLevelID()).get(1);
+		ArrayList<String> commentText;
+		ArrayList<String> commenterText;
+
+			commentText = getComments.getComments(Requests.levels.get(LevelsWindow2.getSelectedID()).getLevelID(), page, top)
+					.get(0);
+
+			commenterText = getComments
+					.getComments(Requests.levels.get(LevelsWindow2.getSelectedID()).getLevelID(), page, top).get(1);
+
+
 		int panelHeight = 0;
-		for (int i = 0; i < commentText.size(); i++) {
-			System.out.println(commentText.get(i));
+		assert commentText != null;
+		for (int i = 0; i < 10; i++) {
+			//System.out.println(commentText.get(i));
 			JPanel cmtPanel = new JPanel(null);
-			cmtPanel.setBackground(Defaults.SUB_MAIN);
+			cmtPanel.setBackground(Defaults.MAIN);
 			cmtPanel.setPreferredSize(new Dimension(width, 64));
 			JLabel commenter = new JLabel();
 			commenter.setFont(new Font("bahnschrift", Font.BOLD, 14));
@@ -97,13 +262,17 @@ class CommentsWindow {
 			comment.setEditable(false);
 			comment.setForeground(Defaults.FOREGROUND);
 			comment.setText(commentText.get(i));
+			assert commenterText != null;
 			commenter.setText(commenterText.get(i));
 			panel.add(cmtPanel);
 			panelHeight = panelHeight + 64;
 		}
+
 		panel.setPreferredSize(new Dimension(width, panelHeight));
 		panel.updateUI();
 		loadCommentsButton.setVisible(false);
+		scrollPane.getVerticalScrollBar().setValue(0);
+		SwingUtilities.invokeLater(() -> scrollPane.getVerticalScrollBar().setValue(0));
 	}
 
 	static void refreshUI() {

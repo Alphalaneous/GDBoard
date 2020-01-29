@@ -82,7 +82,7 @@ class ActionsWindow {
 						Requests.levels.remove(LevelsWindow2.getSelectedID());
 						LevelsWindow2.removeButton();
 						
-						CommentsWindow.unloadComments();
+						CommentsWindow.unloadComments(true);
 					}
 					SongWindow.refreshInfo();
 					InfoWindow.refreshInfo();
@@ -113,7 +113,7 @@ class ActionsWindow {
 				((InnerWindow) window).moveToFront();
 				super.mousePressed(e);
 				if (Requests.levels.size() != 0) {
-					CommentsWindow.unloadComments();
+					CommentsWindow.unloadComments(true);
 					
 					if (!(Requests.levels.size() <= 1)) {
 						StringSelection selection = new StringSelection(
