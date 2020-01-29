@@ -81,12 +81,14 @@ class ActionsWindow {
 						}
 						Requests.levels.remove(LevelsWindow2.getSelectedID());
 						LevelsWindow2.removeButton();
-						
+
 						CommentsWindow.unloadComments(true);
+						CommentsWindow.loadComments(0, false);
 					}
 					SongWindow.refreshInfo();
 					InfoWindow.refreshInfo();
 				}
+				LevelsWindow2.setOneSelect();
 			}
 		});
 
@@ -113,11 +115,11 @@ class ActionsWindow {
 				((InnerWindow) window).moveToFront();
 				super.mousePressed(e);
 				if (Requests.levels.size() != 0) {
-					CommentsWindow.unloadComments(true);
-					
+
+
 					if (!(Requests.levels.size() <= 1)) {
 						StringSelection selection = new StringSelection(
-								Requests.levels.get(LevelsWindow2.getSelectedID()+1).getLevelID());
+								Requests.levels.get(LevelsWindow2.getSelectedID()).getLevelID());
 						Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 						clipboard.setContents(selection, selection);
 					}
@@ -135,6 +137,9 @@ class ActionsWindow {
 					}
 
 				}
+				LevelsWindow2.setOneSelect();
+				CommentsWindow.unloadComments(true);
+				CommentsWindow.loadComments(0, false);
 				SongWindow.refreshInfo();
 				InfoWindow.refreshInfo();
 			}

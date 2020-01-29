@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/GDBoard_Dependencies.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/META-INF/GD Request Bot.kotlin_module" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Jamepad.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/bin.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/commons_io_2_6.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/jlayer_1_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/json_20140107.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/reactor_netty_0_8_8_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/twitch_api_wrapper_0_3_jar_with_dependencies.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GD Request Bot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GD Request Bot.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/ActionsWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ActionsWindow$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/ActionsWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ActionsWindow$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/ActionsWindow$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ActionsWindow$3.class" afterDir="false" />
@@ -22,9 +10,15 @@
       <change beforePath="$PROJECT_DIR$/bin/Main/ChatBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ChatBot.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/CheckBoxButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CheckBoxButton.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$6$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$6$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$6.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/Defaults.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Defaults.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/Example.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/GDObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/GDObject.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/GetComments.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/GetComments.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/GetTheme.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/GetTheme.class" afterDir="false" />
@@ -39,7 +33,10 @@
       <change beforePath="$PROJECT_DIR$/bin/Main/KeyListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/KeyListener$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/KeyListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/KeyListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/LevelData.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/LevelsWindow2$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelsWindow2$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/LevelsWindow2$1$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelsWindow2$1$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/LevelsWindow2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelsWindow2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/LevelsWindow2$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelsWindow2$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/LevelsWindow2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelsWindow2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/MainBar$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/MainBar$1.class" afterDir="false" />
@@ -69,17 +66,13 @@
       <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/PersonalizationSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/PersonalizationSettings.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/ShortcutSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/ShortcutSettings.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/ActionsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/ActionsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/ChatBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/ChatBot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/CommentsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/CommentsWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/GetComments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/GetComments.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/InnerWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/InnerWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/LevelsWindow2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/LevelsWindow2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/MainBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/MainBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/SettingsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/SongWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SongWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/Requests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Requests.java" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -103,23 +96,11 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../GDBoard Dependencies/twitch-api-wrapper-0.3-jar-with-dependencies.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../GDBoard Dependencies/commons-lang3-3.9.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.14648438" />
     <property name="project.structure.side.proportion" value="0.18710493" />
     <property name="settings.editor.selected.configurable" value="project.propDebugger" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration default="true" type="Applet">
@@ -179,6 +160,18 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -190,6 +183,7 @@
       <option name="presentableId" value="Default" />
       <updated>1580230199917</updated>
       <workItem from="1580230209206" duration="8618000" />
+      <workItem from="1580315745558" duration="8583000" />
     </task>
     <servers />
   </component>
@@ -201,7 +195,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -220,29 +216,34 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="808" y="409" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580230235292" />
-    <state x="666" y="262" key="FileChooserDialogImpl" timestamp="1580230266371">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="-1164" y="425" width="408" height="238" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1580316154883">
+      <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
+    <state x="-1164" y="425" width="408" height="238" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580316154883" />
+    <state x="-1254" y="272" key="FileChooserDialogImpl" timestamp="1580322217295">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="-1254" y="272" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580322217295" />
     <state x="666" y="262" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580230266371" />
-    <state width="1877" height="348" key="GridCell.Tab.0.bottom" timestamp="1580238833537">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1580324778164">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580238833537" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580324778164" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580235515401" />
-    <state width="1877" height="348" key="GridCell.Tab.0.center" timestamp="1580238833537">
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1580324778164">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580238833537" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580324778164" />
     <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580235515400" />
-    <state width="1877" height="348" key="GridCell.Tab.0.left" timestamp="1580238833537">
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1580324778164">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580238833537" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580324778164" />
     <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580235515400" />
-    <state width="1877" height="348" key="GridCell.Tab.0.right" timestamp="1580238833537">
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1580324778164">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580238833537" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580324778164" />
     <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580235515401" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1580238833537">
       <screen x="-1920" y="0" width="1920" height="1080" />
@@ -264,9 +265,10 @@
     </state>
     <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580238833537" />
     <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580233831683" />
-    <state x="440" y="95" key="SettingsEditor" timestamp="1580230269974">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="-1480" y="99" key="SettingsEditor" timestamp="1580322315025">
+      <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
+    <state x="-1480" y="99" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580322315025" />
     <state x="440" y="95" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580230269974" />
   </component>
 </project>

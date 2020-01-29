@@ -1,7 +1,9 @@
 package Main;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,7 +36,7 @@ class GetComments {
 		JSONArray arr = obj.getJSONArray("Comments");
 		for (int i = 0; i < 10; i++) {
 			try {
-				commentContent.add(arr.getJSONObject(i).getString("content"));
+				commentContent.add(StringEscapeUtils.unescapeHtml4(arr.getJSONObject(i).getString("content")));
 				System.out.println(commentContent.get(i));
 				Comments.add(commentContent);
 				commenters.add(arr.getJSONObject(i).getString("username"));

@@ -187,6 +187,7 @@ public class LevelsWindow2 {
 		request.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
+
 				((InnerWindow) window).moveToFront();
 				super.mousePressed(e);
 				Component[] comp = mainPanel.getComponents();
@@ -205,9 +206,7 @@ public class LevelsWindow2 {
 						}
 					}
 				}
-				if (!lID.getText().equals(Requests.levels.get(selectedID).getLevelID())) {
-					CommentsWindow.unloadComments(true);
-				}
+
 				for (int j = 0; j < Requests.levels.size(); j++) {
 
 					if (lID.getText().equals(Requests.levels.get(j).getLevelID())) {
@@ -223,11 +222,22 @@ public class LevelsWindow2 {
 						System.out.println(j);
 					}
 				}
+
+						CommentsWindow.unloadComments(true);
+				CommentsWindow.loadComments(0, false);
+
+
 				SongWindow.refreshInfo();
 				InfoWindow.refreshInfo();
 
 			}
 		});
+		if(Requests.levels.size() == 1){
+			request.setBackground(Defaults.SELECT);
+			request.setUI(selectUI);
+			CommentsWindow.unloadComments(true);
+			CommentsWindow.loadComments(0,false);
+		}
 		SongWindow.refreshInfo();
 		InfoWindow.refreshInfo();
 		panelHeight = panelHeight + 50;
@@ -259,7 +269,15 @@ public class LevelsWindow2 {
 			}
 		}
 	}
-
+	static void setOneSelect(){
+		for(Component component : mainPanel.getComponents()){
+			if(component instanceof JButton){
+				component.setBackground(Defaults.SELECT);
+				((JButton) component).setUI(selectUI);
+				break;
+			}
+		}
+	}
 	static void toggleVisible() {
 		((InnerWindow) window).toggle();
 	}
