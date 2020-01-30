@@ -464,5 +464,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="GDBoard Dependencies" level="project" />
+    <orderEntry type="library" name="jide-common" level="project" />
   </component>
 </module>

@@ -1,5 +1,8 @@
 package Main;
 
+import com.jidesoft.swing.Resizable;
+import com.jidesoft.swing.ResizablePanel;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
@@ -17,8 +20,19 @@ public class LevelsWindow2 {
 
 	private static int width = 400;
 	private static int height = 400;
-	private static JPanel window = new InnerWindow("Requests", Settings.getRequestsWLoc().x, Settings.getRequestsWLoc().y, width, height, "src/resources/Icons/Queue.png")
-			.createPanel();
+	private static ResizablePanel window = new InnerWindow("Requests", Settings.getRequestsWLoc().x, Settings.getRequestsWLoc().y, width, height, "src/resources/Icons/Queue.png"){
+		@Override
+		protected Resizable createResizable() {
+			return new Resizable(this) {
+				@Override
+				public void resizing(int resizeCorner, int newX, int newY, int newW, int newH) {
+					setBounds(getX(), newY, getWidth(), newH);
+					scrollPane.setBounds(1, 31, width + 1, newH-32);
+					scrollPane.updateUI();
+				}
+			};
+		}
+	}.createPanel();
 	private static JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
 	private static int selectedID = 0;
 	private static JButtonUI defaultUI = new JButtonUI();
@@ -30,7 +44,10 @@ public class LevelsWindow2 {
 	private static int panelHeight = 0;
 	private static JScrollPane scrollPane;
 
+
+
 	static void createPanel() {
+		window.setDoubleBuffered(true);
 		mainPanel.setBackground(Defaults.MAIN);
 		mainPanel.setBounds(0, 0, width, panelHeight);
 		mainPanel.setPreferredSize(new Dimension(400, panelHeight));
@@ -221,16 +238,11 @@ public class LevelsWindow2 {
 							request.setUI(selectUI);
 						}
 						selectedID = j;
-						System.out.println(j);
 					}
 				}
 				Thread thread = new Thread(() -> {
 					CommentsWindow.unloadComments(true);
-					try {
-						CommentsWindow.loadComments(0, false);
-					} catch (InterruptedException ex) {
-						ex.printStackTrace();
-					}
+					CommentsWindow.loadComments(0, false);
 				});
 				thread.start();
 				SongWindow.refreshInfo();
@@ -243,11 +255,7 @@ public class LevelsWindow2 {
 			request.setUI(selectUI);
 			Thread thread = new Thread(() -> {
 				CommentsWindow.unloadComments(true);
-				try {
-					CommentsWindow.loadComments(0, false);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				CommentsWindow.loadComments(0, false);
 			});
 			thread.start();
 		}
@@ -258,7 +266,6 @@ public class LevelsWindow2 {
 		mainPanel.setPreferredSize(new Dimension(width, panelHeight));
 		// mainPanel.revalidate();
 		scrollPane.updateUI();
-		System.out.println(mainPanel.getHeight());
 		mainPanel.add(request);
 		mainPanel.updateUI();
 	}

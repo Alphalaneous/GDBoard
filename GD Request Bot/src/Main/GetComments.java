@@ -19,15 +19,12 @@ class GetComments {
 	private ArrayList<String> commenters = new ArrayList<>();
 
 	ArrayList<ArrayList<String>> getComments(String levelID, int page, boolean top) throws IOException {
-		System.out.println("Here");
-		URL gdAPI = null;
+		URL gdAPI;
 		if(top) {
 			gdAPI = new URL("https://gdbrowser.com/api/comments/" + levelID + "?page=" + page + "&top");
-			System.out.println("top");
 		}else{
 			gdAPI = new URL("https://gdbrowser.com/api/comments/" + levelID + "?page=" + page);
 		}
-		System.out.println("Page: " + page);
 		URLConnection con = gdAPI.openConnection();
 		InputStream is = con.getInputStream();
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));

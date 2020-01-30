@@ -17,7 +17,6 @@ import java.util.regex.Pattern;
 public class ChatBot extends TwitchBot {
 
 	ChatBot() {
-
 		this.setUsername("chatbot");
 		this.setOauth_Key("oauth:" + Settings.getOAuth());
 	}
@@ -111,11 +110,7 @@ public class ChatBot extends TwitchBot {
 							InfoWindow.refreshInfo();
 							Thread thread = new Thread(() -> {
 								CommentsWindow.unloadComments(true);
-								try {
-									CommentsWindow.loadComments(0, false);
-								} catch (InterruptedException e) {
-									e.printStackTrace();
-								}
+								CommentsWindow.loadComments(0, false);
 							});
 							LevelsWindow2.setOneSelect();
 							thread.start();
@@ -138,7 +133,6 @@ public class ChatBot extends TwitchBot {
 					sendMessage(message, channel);
 					}
 					else {
-						System.out.println(user + " " + channel);
 						sendMessage("This command is for mods, use !where or !position to find your position in the queue!", channel);
 					}
 				}
@@ -174,12 +168,9 @@ public class ChatBot extends TwitchBot {
 								message.append(arguments[i]).append(" ");
 							}
 						}
-						System.out.println(message);
 						if (message.toString().contains("by")) {
 							String level = message.toString().split("by ")[0].toUpperCase();
 							String username = message.toString().split("by ")[1];
-							System.out.println(username);
-							System.out.println(level);
 							AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
 							try {
 								outerloop: for (int j = 0; j < 10; j++) {

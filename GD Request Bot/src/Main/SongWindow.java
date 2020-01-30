@@ -1,5 +1,7 @@
 package Main;
 
+import com.jidesoft.swing.ResizablePanel;
+
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -15,7 +17,7 @@ import javax.swing.JPanel;
 class SongWindow {
 	private static int height = 85;
 	private static int width = 300;
-	private static JPanel window = new InnerWindow("Music - Newgrounds Audio", 1920 - width - 10, 600, width, height, "src/resources/Icons/note.png").createPanel();
+	private static ResizablePanel window = new InnerWindow("Music - Newgrounds Audio", 1920 - width - 10, 600, width, height, "src/resources/Icons/note.png").createPanel();
 	private static JPanel panel = new JPanel();
 	private static JLabel songName = new JLabel();
 	private static JLabel songAuthor = new JLabel();

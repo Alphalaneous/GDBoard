@@ -71,7 +71,6 @@ class Requests {
 								.requireNonNull(client.getLevelById(Long.parseLong(ID)).block()).download().block())
 								.getData(), ID);
 						levelData.setAnalyzed();
-						System.out.println(levelData.getLevelID() + " " + levelData.getAnalyzed());
 
 						LevelsWindow2.updateUI(levelData.getLevelID(), levelData.getContainsVulgar(), levelData.getContainsImage(), levelData.getAnalyzed());
 					}

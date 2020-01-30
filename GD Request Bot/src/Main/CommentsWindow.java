@@ -1,4 +1,7 @@
 package Main;
+import com.jidesoft.swing.Resizable;
+import com.jidesoft.swing.ResizablePanel;
+
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
@@ -11,7 +14,6 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 class CommentsWindow {
-	//private static JButton loadCommentsButton = new JButton("Load Comments");
 	private static JButton top = new JButton("Top");
 	private static JButton new1 = new JButton("New");
 	private static JButton next = new JButton(">");
@@ -20,8 +22,23 @@ class CommentsWindow {
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static int height = 350;
 	private static int width = 300;
-	private static JPanel window = new InnerWindow("Comments", 10, 500, width, height,
-			"src/resources/Icons/Comments.png").createPanel();
+	private static ResizablePanel window = new InnerWindow("Comments", 10, 500, width, height,
+			"src/resources/Icons/Comments.png"){
+		@Override
+		protected Resizable createResizable() {
+			return new Resizable(this) {
+				@Override
+				public void resizing(int resizeCorner, int newX, int newY, int newW, int newH) {
+					setBounds(getX(), newY, getWidth(), newH);
+					height = newH;
+					width = newW;
+					scrollPane.setBounds(1, 31, width + 1, newH-62);
+					buttons.setBounds(1, newH - 31, width, 30);
+					scrollPane.updateUI();
+				}
+			};
+		}
+	}.createPanel();
 	private static JButtonUI newUI = new JButtonUI();
 	private static JScrollPane scrollPane = new JScrollPane(panel);
 	private static JPanel buttons = new JPanel();
@@ -92,7 +109,6 @@ class CommentsWindow {
 				super.mousePressed(e);
 				if(page != 0){
 					page--;
-					System.out.println(page);
 					try {
 						unloadComments(false);
 						loadComments(page, topC);
@@ -114,7 +130,6 @@ class CommentsWindow {
 				((InnerWindow) window).moveToFront();
 				super.mousePressed(e);
 				page++;
-				System.out.println(page);
 				try {
 					unloadComments(false);
 					loadComments(page, topC);
@@ -131,29 +146,7 @@ class CommentsWindow {
 		});
 		newUI.setBackground(Defaults.MAIN);
 		newUI.setHover(Defaults.HOVER);
-		/*loadCommentsButton.setBackground(Defaults.MAIN);
-		loadCommentsButton.setUI(newUI);
-		loadCommentsButton.setBorder(BorderFactory.createEmptyBorder());
-		loadCommentsButton.setForeground(Defaults.FOREGROUND);
-		loadCommentsButton.setPreferredSize(new Dimension(width-1, height-30));
-		loadCommentsButton.setFont(new Font("bahnschrift", Font.PLAIN, 20));
-		loadCommentsButton.setBounds(0,0,width, height-30);*/
 		panel.setBackground(Defaults.SUB_MAIN);
-		//panel.add(loadCommentsButton);
-
-		/*loadCommentsButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				((InnerWindow) window).moveToFront();
-				super.mousePressed(e);
-
-				try {
-					loadComments(0, false);
-				} catch (Exception ignored) {
-				}
-
-			}
-		});*/
 		panel.setPreferredSize(new Dimension(width, height-30));
 		scrollPane.getVerticalScrollBar().setOpaque(false);
 		scrollPane.setOpaque(false);
@@ -219,11 +212,9 @@ class CommentsWindow {
 			topC = false;
 			page = 0;
 		}
-		//scrollPane.setBounds(1,31,width, height-30);
 		panel.setLayout(null);
 		panel.setPreferredSize(new Dimension(width, height-30));
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-		//loadCommentsButton.setVisible(true);
 		for(Component component : panel.getComponents()) {
 			if(component instanceof JPanel){
 				panel.remove(component);
@@ -232,10 +223,10 @@ class CommentsWindow {
 		panel.updateUI();
 	}
 
-	static void loadComments(int page, boolean top) throws InterruptedException {
-			Thread.sleep(100);
+	static void loadComments(int page, boolean top) {
+
 			panel.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 4));
-			scrollPane.setBounds(1, 31, width + 1 , height - 30);
+			scrollPane.setBounds(1, 31, width + 1 , height - 60);
 			GetComments getComments = new GetComments();
 			ArrayList<String> commentText = null;
 			try {
@@ -251,13 +242,14 @@ class CommentsWindow {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			;
+		ArrayList<String> finalCommentText = commentText;
+		ArrayList<String> finalCommenterText = commenterText;
 
-			int panelHeight = 0;
-			assert commentText != null;
-			for (int i = 0; i < commentText.size() / 2; i++) {
-				assert commenterText != null;
-				//System.out.println(commenterText.get(i));
+
+		int panelHeight = 0;
+			assert finalCommentText != null;
+			for (int i = 0; i < finalCommentText.size() / 2; i++) {
+				assert finalCommenterText != null;
 				JPanel cmtPanel = new JPanel(null);
 				cmtPanel.setBackground(Defaults.MAIN);
 
@@ -273,19 +265,21 @@ class CommentsWindow {
 				comment.setOpaque(false);
 				comment.setEditable(false);
 				comment.setForeground(Defaults.FOREGROUND);
-				comment.setText(commentText.get(i));
-				commenter.setText(commenterText.get(i));
+				comment.setText(finalCommentText.get(i));
+				commenter.setText(finalCommenterText.get(i));
 				panel.add(cmtPanel);
 				panelHeight = panelHeight + 32 + comment.getPreferredSize().height;
 				cmtPanel.setPreferredSize(new Dimension(width, 28 + comment.getPreferredSize().height));
 			}
-
-			panel.setPreferredSize(new Dimension(width, panelHeight));
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		panel.setPreferredSize(new Dimension(width, panelHeight));
 			panel.updateUI();
-			//loadCommentsButton.setVisible(false);
 			scrollPane.getVerticalScrollBar().setValue(0);
 			SwingUtilities.invokeLater(() -> scrollPane.getVerticalScrollBar().setValue(0));
-
 	}
 
 	static void refreshUI() {
@@ -293,8 +287,6 @@ class CommentsWindow {
 		newUI.setBackground(Defaults.MAIN);
 		newUI.setHover(Defaults.HOVER);
 		newUI.setSelect(Defaults.SELECT);
-		//loadCommentsButton.setBackground(Defaults.MAIN);
-		//loadCommentsButton.setForeground(Defaults.FOREGROUND);
 		for(Component component : panel.getComponents()) {
 			if(component instanceof JPanel){
 				component.setBackground(Defaults.MAIN);
@@ -308,14 +300,6 @@ class CommentsWindow {
 				}
 			}
 		}
-		/*if (commentPanels.size() != 0) {
-			for (int i = 0; i < 5; i++) {
-				commentPanels.get(i).setBackground(Defaults.SUB_MAIN);
-				for (Component components : commentPanels.get(i).getComponents()) {
-					components.setForeground(Defaults.FOREGROUND);
-				}
-			}
-		}*/
 		panel.setBackground(Defaults.MAIN);
 	}
 	

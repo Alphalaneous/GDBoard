@@ -1,5 +1,7 @@
 package Main;
 
+import com.jidesoft.swing.ResizablePanel;
+
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -14,7 +16,7 @@ import javax.swing.JPanel;
 class SettingsWindow {
 	private static int width = 622;
 	private static int height = 622;
-	private static JPanel window = new InnerWindow("Settings", 1920 / 2 - 250, 1080 / 2 - 300, width, height,
+	private static ResizablePanel window = new InnerWindow("Settings", 1920 / 2 - 250, 1080 / 2 - 300, width, height,
 			"src/resources/Icons/Actions.png").createPanel();
 	private static JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
 	private static JPanel content = new JPanel();

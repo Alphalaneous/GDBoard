@@ -1,19 +1,24 @@
 package Main;
 
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
 import com.cavariux.twitchirc.Chat.Channel;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
+import org.slf4j.LoggerFactory;
 
 import java.awt.AWTException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+
 public class Main {
 	private static ChatBot bot;
 
 	public static void main(String[] args) throws IOException, IllegalArgumentException, URISyntaxException, AWTException, InterruptedException {
-
+		Logger root = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+		root.setLevel(Level.INFO);
 		if (!Settings.hasOauth()) {
 
 			Twitch twitch = new Twitch();

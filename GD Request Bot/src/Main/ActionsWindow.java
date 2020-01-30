@@ -1,5 +1,7 @@
 package Main;
 
+import com.jidesoft.swing.ResizablePanel;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -84,11 +86,7 @@ class ActionsWindow {
 
 						Thread thread = new Thread(() -> {
 							CommentsWindow.unloadComments(true);
-							try {
-								CommentsWindow.loadComments(0, false);
-							} catch (InterruptedException ex) {
-								ex.printStackTrace();
-							}
+							CommentsWindow.loadComments(0, false);
 						});
 						thread.start();
 					}
@@ -147,11 +145,7 @@ class ActionsWindow {
 				LevelsWindow2.setOneSelect();
 				Thread thread = new Thread(() -> {
 					CommentsWindow.unloadComments(true);
-					try {
-						CommentsWindow.loadComments(0, false);
-					} catch (InterruptedException ex) {
-						ex.printStackTrace();
-					}
+					CommentsWindow.loadComments(0, false);
 				});
 				thread.start();
 				SongWindow.refreshInfo();

@@ -1,4 +1,7 @@
 package Main;
+import com.jidesoft.swing.Resizable;
+import com.jidesoft.swing.ResizablePanel;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
@@ -10,7 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-class InnerWindow extends JPanel {
+class InnerWindow extends ResizablePanel {
 
 	// --------------------
 	// Constructor
@@ -33,7 +36,7 @@ class InnerWindow extends JPanel {
 	private boolean toggleState = true;
 	private JButton pinButton;
 	private JPanel topBar = new JPanel(null);
-	
+
 	// --------------------
 	// JButtonUI Changes
 
@@ -50,8 +53,10 @@ class InnerWindow extends JPanel {
 
 	// --------------------
 
-	JPanel createPanel() {
-		
+	ResizablePanel createPanel() {
+
+
+
 		// --------------------
 		// Mouse Listener to stop allowing clicking through the panel to close the
 		// window
