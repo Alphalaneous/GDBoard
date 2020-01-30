@@ -109,6 +109,16 @@ public class ChatBot extends TwitchBot {
 							Requests.levels.remove(i);
 							SongWindow.refreshInfo();
 							InfoWindow.refreshInfo();
+							Thread thread = new Thread(() -> {
+								CommentsWindow.unloadComments(true);
+								try {
+									CommentsWindow.loadComments(0, false);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+							});
+							LevelsWindow2.setOneSelect();
+							thread.start();
 							Main.sendMessage("@" + user + ", your level has been removed!");
 						}
 						}

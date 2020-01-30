@@ -82,8 +82,15 @@ class ActionsWindow {
 						Requests.levels.remove(LevelsWindow2.getSelectedID());
 						LevelsWindow2.removeButton();
 
-						CommentsWindow.unloadComments(true);
-						CommentsWindow.loadComments(0, false);
+						Thread thread = new Thread(() -> {
+							CommentsWindow.unloadComments(true);
+							try {
+								CommentsWindow.loadComments(0, false);
+							} catch (InterruptedException ex) {
+								ex.printStackTrace();
+							}
+						});
+						thread.start();
 					}
 					SongWindow.refreshInfo();
 					InfoWindow.refreshInfo();
@@ -117,9 +124,9 @@ class ActionsWindow {
 				if (Requests.levels.size() != 0) {
 
 
-					if (!(Requests.levels.size() <= 1)) {
+					if (!(Requests.levels.size() <= 1) && LevelsWindow2.getSelectedID() == 0) {
 						StringSelection selection = new StringSelection(
-								Requests.levels.get(LevelsWindow2.getSelectedID()).getLevelID());
+								Requests.levels.get(LevelsWindow2.getSelectedID()+1).getLevelID());
 						Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 						clipboard.setContents(selection, selection);
 					}
@@ -138,8 +145,15 @@ class ActionsWindow {
 
 				}
 				LevelsWindow2.setOneSelect();
-				CommentsWindow.unloadComments(true);
-				CommentsWindow.loadComments(0, false);
+				Thread thread = new Thread(() -> {
+					CommentsWindow.unloadComments(true);
+					try {
+						CommentsWindow.loadComments(0, false);
+					} catch (InterruptedException ex) {
+						ex.printStackTrace();
+					}
+				});
+				thread.start();
 				SongWindow.refreshInfo();
 				InfoWindow.refreshInfo();
 			}

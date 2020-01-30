@@ -37,7 +37,7 @@ class GetComments {
 		for (int i = 0; i < 10; i++) {
 			try {
 				commentContent.add(StringEscapeUtils.unescapeHtml4(arr.getJSONObject(i).getString("content")));
-				System.out.println(commentContent.get(i));
+				//System.out.println(commentContent.get(i));
 				Comments.add(commentContent);
 				commenters.add(arr.getJSONObject(i).getString("username"));
 				Comments.add(commenters);

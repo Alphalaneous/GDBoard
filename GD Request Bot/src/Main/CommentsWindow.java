@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
+import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 class CommentsWindow {
 	//private static JButton loadCommentsButton = new JButton("Load Comments");
@@ -161,6 +162,7 @@ class CommentsWindow {
 		scrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(10);
 		scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(1, height));
+		scrollPane.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
 
 			private final Dimension d = new Dimension();
@@ -217,7 +219,7 @@ class CommentsWindow {
 			topC = false;
 			page = 0;
 		}
-		scrollPane.setBounds(1,31,width, height-30);
+		//scrollPane.setBounds(1,31,width, height-30);
 		panel.setLayout(null);
 		panel.setPreferredSize(new Dimension(width, height-30));
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
@@ -230,8 +232,8 @@ class CommentsWindow {
 		panel.updateUI();
 	}
 
-	static void loadComments(int page, boolean top) {
-		Thread thread = new Thread(() -> {
+	static void loadComments(int page, boolean top) throws InterruptedException {
+			Thread.sleep(100);
 			panel.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 4));
 			scrollPane.setBounds(1, 31, width + 1 , height - 30);
 			GetComments getComments = new GetComments();
@@ -255,7 +257,7 @@ class CommentsWindow {
 			assert commentText != null;
 			for (int i = 0; i < commentText.size() / 2; i++) {
 				assert commenterText != null;
-				System.out.println(commenterText.get(i));
+				//System.out.println(commenterText.get(i));
 				JPanel cmtPanel = new JPanel(null);
 				cmtPanel.setBackground(Defaults.MAIN);
 
@@ -283,8 +285,7 @@ class CommentsWindow {
 			//loadCommentsButton.setVisible(false);
 			scrollPane.getVerticalScrollBar().setValue(0);
 			SwingUtilities.invokeLater(() -> scrollPane.getVerticalScrollBar().setValue(0));
-		});
-		thread.start();
+
 	}
 
 	static void refreshUI() {

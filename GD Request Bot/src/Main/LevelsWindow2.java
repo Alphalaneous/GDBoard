@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
+import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -37,13 +38,14 @@ public class LevelsWindow2 {
 		scrollPane = new JScrollPane(mainPanel);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
 		scrollPane.getViewport().setBackground(Defaults.MAIN);
-		scrollPane.setBounds(1, 31, width, height);
+		scrollPane.setBounds(1, 31, width + 1, height);
 		scrollPane.setPreferredSize(new Dimension(400, height));
 		scrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(30);
 		scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(1, height));
 		scrollPane.getVerticalScrollBar().setOpaque(false);
 		scrollPane.setOpaque(false);
+        scrollPane.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
 
 			private final Dimension d = new Dimension();
@@ -222,11 +224,15 @@ public class LevelsWindow2 {
 						System.out.println(j);
 					}
 				}
-
-						CommentsWindow.unloadComments(true);
-				CommentsWindow.loadComments(0, false);
-
-
+				Thread thread = new Thread(() -> {
+					CommentsWindow.unloadComments(true);
+					try {
+						CommentsWindow.loadComments(0, false);
+					} catch (InterruptedException ex) {
+						ex.printStackTrace();
+					}
+				});
+				thread.start();
 				SongWindow.refreshInfo();
 				InfoWindow.refreshInfo();
 
@@ -235,8 +241,15 @@ public class LevelsWindow2 {
 		if(Requests.levels.size() == 1){
 			request.setBackground(Defaults.SELECT);
 			request.setUI(selectUI);
-			CommentsWindow.unloadComments(true);
-			CommentsWindow.loadComments(0,false);
+			Thread thread = new Thread(() -> {
+				CommentsWindow.unloadComments(true);
+				try {
+					CommentsWindow.loadComments(0, false);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			});
+			thread.start();
 		}
 		SongWindow.refreshInfo();
 		InfoWindow.refreshInfo();
@@ -340,11 +353,17 @@ public class LevelsWindow2 {
 	static void removeButton(int i) {
 		mainPanel.remove(i);
 		selectedID = 0;
+		panelHeight = panelHeight - 50;
+        mainPanel.setBounds(0, 0, width, panelHeight);
+        mainPanel.setPreferredSize(new Dimension(width, panelHeight));
 		mainPanel.updateUI();
 	}
 	static void removeButton() {
 		mainPanel.remove(selectedID);
 		selectedID = 0;
+        panelHeight = panelHeight - 50;
+        mainPanel.setBounds(0, 0, width, panelHeight);
+        mainPanel.setPreferredSize(new Dimension(width, panelHeight));
 		mainPanel.updateUI();
 	}
 	static Point getLocationValue() {

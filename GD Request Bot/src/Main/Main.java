@@ -12,7 +12,8 @@ import java.net.URISyntaxException;
 public class Main {
 	private static ChatBot bot;
 
-	public static void main(String[] args) throws IOException, IllegalArgumentException, URISyntaxException, AWTException {
+	public static void main(String[] args) throws IOException, IllegalArgumentException, URISyntaxException, AWTException, InterruptedException {
+
 		if (!Settings.hasOauth()) {
 
 			Twitch twitch = new Twitch();
