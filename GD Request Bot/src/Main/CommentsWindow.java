@@ -26,15 +26,20 @@ class CommentsWindow {
 			"src/resources/Icons/Comments.png"){
 		@Override
 		protected Resizable createResizable() {
+
 			return new Resizable(this) {
 				@Override
 				public void resizing(int resizeCorner, int newX, int newY, int newW, int newH) {
+
+					if(!(newH < 100 || newH > 800)) {
 					setBounds(getX(), newY, getWidth(), newH);
 					height = newH;
-					width = newW;
-					scrollPane.setBounds(1, 31, width + 1, newH-62);
-					buttons.setBounds(1, newH - 31, width, 30);
-					scrollPane.updateUI();
+					//width = newW;
+					resetDimensions(width, newH-32);
+						scrollPane.setBounds(1, 31, width + 1, newH - 62);
+						buttons.setBounds(1, newH - 31, width, 30);
+						scrollPane.updateUI();
+					}
 				}
 			};
 		}
@@ -45,7 +50,6 @@ class CommentsWindow {
 	private static boolean topC = false;
 	private static int page = 0;
 	static void createPanel() {
-
 		panel.setLayout(null);
 		panel.setBounds(0, 0, width, height);
 		buttons.setLayout(null);
@@ -226,7 +230,7 @@ class CommentsWindow {
 	static void loadComments(int page, boolean top) {
 
 			panel.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 4));
-			scrollPane.setBounds(1, 31, width + 1 , height - 60);
+
 			GetComments getComments = new GetComments();
 			ArrayList<String> commentText = null;
 			try {

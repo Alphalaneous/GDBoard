@@ -26,9 +26,12 @@ public class LevelsWindow2 {
 			return new Resizable(this) {
 				@Override
 				public void resizing(int resizeCorner, int newX, int newY, int newW, int newH) {
-					setBounds(getX(), newY, getWidth(), newH);
-					scrollPane.setBounds(1, 31, width + 1, newH-32);
-					scrollPane.updateUI();
+					if(!(newH < 80 || newH > 800)) {
+						setBounds(getX(), newY, getWidth(), newH);
+						resetDimensions(width, newH - 32);
+						scrollPane.setBounds(1, 31, width + 1, newH - 32);
+						scrollPane.updateUI();
+					}
 				}
 			};
 		}

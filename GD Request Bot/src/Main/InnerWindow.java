@@ -25,8 +25,8 @@ class InnerWindow extends ResizablePanel {
 	private final String title;
 	private final int x;
 	private final int y;
-	private final int width;
-	private final int height;
+	private int width;
+	private int height;
 	private final String iconLocation;
 
 	// --------------------
@@ -302,7 +302,11 @@ class InnerWindow extends ResizablePanel {
 		}
 		
 	}
-	
+	public void resetDimensions(int width, int height){
+		this.height = height;
+		this.width = width;
+
+	}
 	public void setVisible() {
 			topBar.setVisible(true);
 			setBorder(BorderFactory.createLineBorder(new Color(255,255,255,50)));
