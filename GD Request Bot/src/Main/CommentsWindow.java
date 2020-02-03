@@ -32,6 +32,9 @@ class CommentsWindow {
 				public void resizing(int resizeCorner, int newX, int newY, int newW, int newH) {
 
 					if(!(newH < 100 || newH > 800)) {
+						if(newY <= 93){
+							newY = 93;
+						}
 					setBounds(getX(), newY, getWidth(), newH);
 					height = newH;
 					//width = newW;
@@ -154,7 +157,7 @@ class CommentsWindow {
 		panel.setPreferredSize(new Dimension(width, height-30));
 		scrollPane.getVerticalScrollBar().setOpaque(false);
 		scrollPane.setOpaque(false);
-		scrollPane.setBounds(1,31,width -1, height-30);
+		scrollPane.setBounds(1,31,width + 1, height-30);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
 		scrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(10);

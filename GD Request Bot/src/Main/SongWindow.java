@@ -23,6 +23,8 @@ class SongWindow {
 	private static JLabel songAuthor = new JLabel();
 	private static JLabel songID = new JLabel();
 	private static JButtonUI defaultUI = new JButtonUI();
+	private static JButton play = new RoundedJButton("Play");
+	private static JButton stop = new RoundedJButton("Stop");
 
 	static void createPanel() {
 		ArrayList<PlaySong> songs = new ArrayList<PlaySong>();
@@ -35,7 +37,7 @@ class SongWindow {
 		
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
-		JButton play = new RoundedJButton("Play");
+
 		play.setPreferredSize(new Dimension(50, 50));
 		play.setUI(defaultUI);
 		play.setBounds(width - 110, height - 55, 50,50);
@@ -60,7 +62,7 @@ class SongWindow {
 				}
 			}
 		});
-		JButton stop = new RoundedJButton("Stop");
+
 		stop.setPreferredSize(new Dimension(50, 50));
 		stop.setUI(defaultUI);
 		stop.setBounds(width - 55, height - 55, 50,50);
@@ -111,15 +113,25 @@ class SongWindow {
 			songAuthor.setText("N/A");
 			songAuthor.setBounds(width - songAuthor.getPreferredSize().width - 10, 5, width, 20);
 			songID.setText("N/A");
+			stop.setVisible(false);
+			play.setVisible(false);
 			
 		} else {
 			songName.setText(Requests.levels.get(LevelsWindow2.getSelectedID()).getSongName());
 			songAuthor.setText(Requests.levels.get(LevelsWindow2.getSelectedID()).getSongAuthor());
 			songAuthor.setBounds(width - songAuthor.getPreferredSize().width - 10, 5, width, 20);
-			songID.setText(Requests.levels.get(LevelsWindow2.getSelectedID()).getSongID());
-			
-		}
 
+			if(songName.getText().equalsIgnoreCase("Custom") && songAuthor.getText().equalsIgnoreCase("")){
+				songID.setText("");
+				stop.setVisible(false);
+				play.setVisible(false);
+			}
+			else{
+				songID.setText(Requests.levels.get(LevelsWindow2.getSelectedID()).getSongID());
+				play.setVisible(true);
+				stop.setVisible(true);
+			}
+		}
 	}
 	
 	static void refreshUI() {

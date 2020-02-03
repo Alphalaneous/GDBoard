@@ -27,6 +27,9 @@ public class LevelsWindow2 {
 				@Override
 				public void resizing(int resizeCorner, int newX, int newY, int newW, int newH) {
 					if(!(newH < 80 || newH > 800)) {
+						if(newY <= 93){
+							newY = 93;
+						}
 						setBounds(getX(), newY, getWidth(), newH);
 						resetDimensions(width, newH - 32);
 						scrollPane.setBounds(1, 31, width + 1, newH - 32);
