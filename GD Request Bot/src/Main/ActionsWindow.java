@@ -1,7 +1,5 @@
 package Main;
 
-import com.jidesoft.swing.ResizablePanel;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;

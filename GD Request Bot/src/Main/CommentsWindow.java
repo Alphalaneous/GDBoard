@@ -7,7 +7,6 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
@@ -37,7 +36,6 @@ class CommentsWindow {
 						}
 					setBounds(getX(), newY, getWidth(), newH);
 					height = newH;
-					//width = newW;
 					resetDimensions(width, newH-32);
 						scrollPane.setBounds(1, 31, width + 1, newH - 62);
 						buttons.setBounds(1, newH - 31, width, 30);
@@ -239,15 +237,14 @@ class CommentsWindow {
 			try {
 				commentText = getComments.getComments(Requests.levels.get(LevelsWindow2.getSelectedID()).getLevelID(), page, top)
 						.get(0);
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (Exception ignored) {
+
 			}
 			ArrayList<String> commenterText = null;
 			try {
 				commenterText = getComments
 						.getComments(Requests.levels.get(LevelsWindow2.getSelectedID()).getLevelID(), page, top).get(1);
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (Exception ignored) {
 			}
 		ArrayList<String> finalCommentText = commentText;
 		ArrayList<String> finalCommenterText = commenterText;
@@ -255,28 +252,33 @@ class CommentsWindow {
 
 		int panelHeight = 0;
 			assert finalCommentText != null;
-			for (int i = 0; i < finalCommentText.size() / 2; i++) {
-				assert finalCommenterText != null;
-				JPanel cmtPanel = new JPanel(null);
-				cmtPanel.setBackground(Defaults.MAIN);
+			try {
+				for (int i = 0; i < finalCommentText.size() / 2; i++) {
+					assert finalCommenterText != null;
+					JPanel cmtPanel = new JPanel(null);
+					cmtPanel.setBackground(Defaults.MAIN);
 
-				JLabel commenter = new JLabel();
-				commenter.setFont(new Font("bahnschrift", Font.BOLD, 14));
-				commenter.setBounds(9, 4, (int) (width * 0.5), 18);
-				JTextPane comment = new JTextPane();
-				comment.setFont(new Font("bahnschrift", Font.PLAIN, 12));
-				comment.setBounds(6, 24, width - 6, 60);
-				cmtPanel.add(commenter);
-				cmtPanel.add(comment);
-				commenter.setForeground(Defaults.FOREGROUND);
-				comment.setOpaque(false);
-				comment.setEditable(false);
-				comment.setForeground(Defaults.FOREGROUND);
-				comment.setText(finalCommentText.get(i));
-				commenter.setText(finalCommenterText.get(i));
-				panel.add(cmtPanel);
-				panelHeight = panelHeight + 32 + comment.getPreferredSize().height;
-				cmtPanel.setPreferredSize(new Dimension(width, 28 + comment.getPreferredSize().height));
+					JLabel commenter = new JLabel();
+					commenter.setFont(new Font("bahnschrift", Font.BOLD, 14));
+					commenter.setBounds(9, 4, (int) (width * 0.5), 18);
+					JTextPane comment = new JTextPane();
+					comment.setFont(new Font("bahnschrift", Font.PLAIN, 12));
+					comment.setBounds(6, 24, width - 6, 60);
+					cmtPanel.add(commenter);
+					cmtPanel.add(comment);
+					commenter.setForeground(Defaults.FOREGROUND);
+					comment.setOpaque(false);
+					comment.setEditable(false);
+					comment.setForeground(Defaults.FOREGROUND);
+					comment.setText(finalCommentText.get(i));
+					commenter.setText(finalCommenterText.get(i));
+					panel.add(cmtPanel);
+					panelHeight = panelHeight + 32 + comment.getPreferredSize().height;
+					cmtPanel.setPreferredSize(new Dimension(width, 28 + comment.getPreferredSize().height));
+				}
+			}
+			catch (Exception ignored){
+
 			}
 		try {
 			Thread.sleep(100);

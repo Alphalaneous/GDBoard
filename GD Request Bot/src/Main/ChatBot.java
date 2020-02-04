@@ -11,6 +11,7 @@ import com.github.alex1304.jdash.util.LevelSearchFilters;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,7 +35,6 @@ public class ChatBot extends TwitchBot {
 
             // --------------------
             // If message does not start with "!"
-            // TODO: Clean up code, remove redundancy
 
             if (!msg.startsWith("!")) {
 
@@ -132,8 +132,8 @@ public class ChatBot extends TwitchBot {
                 // Queue Command
 
                 boolean isBroadcaster = ("#" + user).equalsIgnoreCase(String.valueOf(channel));
-                if(command.equalsIgnoreCase("clear") && (user.isMod(channel) || isBroadcaster)){
-                    for(int i = 0; i < Requests.levels.size(); i++){
+                if (command.equalsIgnoreCase("clear") && (user.isMod(channel) || isBroadcaster)) {
+                    for (int i = 0; i < Requests.levels.size(); i++) {
                         LevelsWindow2.removeButton();
                     }
                     Requests.levels.clear();
@@ -155,7 +155,7 @@ public class ChatBot extends TwitchBot {
                         int pages = (Requests.levels.size() - 1) / 10;
                         message.append("Page ").append(page).append(" of ").append(pages + 1).append(" of the queue | ");
                         for (int i = (page - 1) * 10; i < page * 10; i++) {
-                            if(i == Requests.levels.size() - 1 && message.length() >= 2){
+                            if (i == Requests.levels.size() - 1 && message.length() >= 2) {
                                 message.append(i + 1).append(": ").append(Requests.levels.get(i).getName()).append(" (").append(Requests.levels.get(i).getLevelID()).append("), ");
                                 message.delete(message.length() - 2, message.length());
                                 break;
@@ -163,8 +163,7 @@ public class ChatBot extends TwitchBot {
 
                             try {
                                 message.append(i + 1).append(": ").append(Requests.levels.get(i).getName()).append(" (").append(Requests.levels.get(i).getLevelID()).append("), ");
-                            }
-                            catch (IndexOutOfBoundsException e){
+                            } catch (IndexOutOfBoundsException e) {
                                 e.printStackTrace();
                                 message.delete(0, message.length());
                                 sendMessage("@" + user + " No levels on page " + page, channel);
@@ -179,82 +178,87 @@ public class ChatBot extends TwitchBot {
 
 
                 if (command.equalsIgnoreCase("p") || command.equalsIgnoreCase("where") || command.equalsIgnoreCase("position")) {
-                    for (int i = 0; i < Requests.levels.size(); i++) {
-                        if (Requests.levels.get(i).getRequester().equalsIgnoreCase(String.valueOf(user))) {
-                            int j = i + 1;
 
-                            Main.sendMessage("@" + user + ", " + Requests.levels.get(i).getName()
-                                    + " is at position " + j + " in the queue!");
-                            break;
+                    int level;
+
+                    try {
+                        level = Integer.parseInt(arguments[1]);
+                    } catch (Exception e) {
+                        level = 1;
+                    }
+                    ArrayList<LevelData> userLevels = new ArrayList<>();
+                    ArrayList<Integer> userPosition = new ArrayList<>();
+
+
+                    for (int i = 0; i < Requests.levels.size(); i++) {
+                        int j = i + 1;
+                        if (Requests.levels.get(i).getRequester().equalsIgnoreCase(String.valueOf(user))) {
+                            userLevels.add(Requests.levels.get(i));
+                            userPosition.add(j);
                         }
+                    }
+                    String ordinal;
+                    String[] suffixes = new String[]{"th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"};
+                    switch (level % 100) {
+                        case 11:
+                        case 12:
+                        case 13:
+                        default:
+                            ordinal = (level) + suffixes[(level) % 10];
+                    }
+                    try {
+                        sendMessage("@" + user + ", " + userLevels.get(level - 1).getName()
+                                + " is at position " + userPosition.get(level - 1) + " in the queue!", channel);
+                    } catch (IndexOutOfBoundsException e) {
+
+                        sendMessage("@" + user + " You don't have a " + ordinal + " level in the queue!", channel);
                     }
                 }
                 //TODO Info commands (!ID, !song, etc.) Specifications for position in queue
                 if (command.equalsIgnoreCase("help")) {
                     if (user.isMod(channel) || isBroadcaster) {
-                        if(arguments.length == 1){
+                        if (arguments.length == 1) {
                             sendMessage("@" + user + " List of Commands | Type !help <command> for more help. | !request | !position | !ID | !difficulty | !song | !likes | !downloads | !remove | !queue | !block | !blockuser", channel);
-                        }
-                        else if (arguments[1].contains("request")) {
+                        } else if (arguments[1].contains("request")) {
                             sendMessage("@" + user + " Used to send requests | Usage: \"!request <Level ID>\" to send via level ID | \"!request <Level Name>\" to send via level name | \"!request <Level Name> by <User>\" to send via level name by a user.", channel);
-                        }
-                        else if (arguments[1].contains("position")) {
-                            sendMessage("@" + user + " Used to find your position in the queue | Usage: \"!position <Number>\"", channel);
-                            //TODO user position choices
-                        }
-                        else if (arguments[1].contains("ID")) {
+                        } else if (arguments[1].contains("position")) {
+                            sendMessage("@" + user + " Used to find your position in the queue | Usage: \"!position\" to get closest in the queue | \"!position <Number>\" to get a specific position", channel);
+                        } else if (arguments[1].contains("ID")) {
                             sendMessage("@" + user + " Used to find the current level's ID | Usage: \"!ID\"", channel);
-                        }
-                        else if (arguments[1].contains("difficulty")) {
+                        } else if (arguments[1].contains("difficulty")) {
                             sendMessage("@" + user + " Used to find the current level's difficulty Usage: \"!difficulty\"", channel);
-                        }
-                        else if (arguments[1].contains("song")) {
+                        } else if (arguments[1].contains("song")) {
                             sendMessage("@" + user + " Used to find the current level's song information | Usage: \"!song\"", channel);
-                        }
-                        else if (arguments[1].contains("likes")) {
+                        } else if (arguments[1].contains("likes")) {
                             sendMessage("@" + user + " Used to find the current level's like count | Usage: \"!likes\"", channel);
-                        }
-                        else if (arguments[1].contains("downloads")) {
+                        } else if (arguments[1].contains("downloads")) {
                             sendMessage("@" + user + " Used to find the current level's download count | Usage: \"!count\"", channel);
-                        }
-                        else if (arguments[1].contains("remove")) {
+                        } else if (arguments[1].contains("remove")) {
                             sendMessage("@" + user + " Used to remove a level from the queue | Usage: \"!remove <Position>\"", channel);
-                        }
-                        else if (arguments[1].contains("block")) {
+                        } else if (arguments[1].contains("block")) {
                             sendMessage("@" + user + " Used to block a level ID | Usage: \"!block\" to block the current ID | \"!block <Level ID>\" to block a specific ID", channel);
-                        }
-                        else if (arguments[1].contains("blockuser")) {
+                        } else if (arguments[1].contains("blockuser")) {
                             sendMessage("@" + user + " Used to block a user | Usage: \"!blockuser\" to block the current user | \"!blockuser <Username>\" to block a specific user", channel);
                         }
-                    }
-                    else{
-                        if(arguments.length == 1){
+                    } else {
+                        if (arguments.length == 1) {
                             sendMessage("@" + user + " List of Commands | Type !help <command> for more help. | !request | !position | !ID | !difficulty | !song | !likes | !downloads | !remove", channel);
-                        }
-                        else if (arguments[1].contains("request")) {
+                        } else if (arguments[1].contains("request")) {
                             sendMessage("@" + user + " Used to send requests | Usage: \"!request <Level ID>\" to send via level ID | \"!request <Level Name>\" to send via level name | \"!request <Level Name> by <User>\" to send via level name by a user.", channel);
-                        }
-                        else if (arguments[1].contains("position")) {
+                        } else if (arguments[1].contains("position")) {
                             sendMessage("@" + user + " Used to find your position in the queue | Usage: \"!position <Number>\"", channel);
-                            //TODO user position choices
-                        }
-                        else if (arguments[1].contains("ID")) {
+                        } else if (arguments[1].contains("ID")) {
                             sendMessage("@" + user + " Used to find the current level's ID | Usage: \"!ID\"", channel);
-                        }
-                        else if (arguments[1].contains("difficulty")) {
+                        } else if (arguments[1].contains("difficulty")) {
                             sendMessage("@" + user + " Used to find the current level's difficulty Usage: \"!difficulty\"", channel);
-                        }
-                        else if (arguments[1].contains("song")) {
+                        } else if (arguments[1].contains("song")) {
                             sendMessage("@" + user + " Used to find the current level's song information | Usage: \"!song\"", channel);
-                        }
-                        else if (arguments[1].contains("likes")) {
+                        } else if (arguments[1].contains("likes")) {
                             sendMessage("@" + user + " Used to find the current level's like count | Usage: \"!likes\"", channel);
-                        }
-                        else if (arguments[1].contains("downloads")) {
+                        } else if (arguments[1].contains("downloads")) {
                             sendMessage("@" + user + " Used to find the current level's download count | Usage: \"!count\"", channel);
-                        }
-                        else if (arguments[1].contains("remove")) {
-                            sendMessage("@" + user + " Used to remove a level from the queue | Usage: \"!remove <Position>\"", channel);
+                        } else if (arguments[1].contains("remove")) {
+                            sendMessage("@" + user + " Used to remove your own levels from the queue | Usage: \"!remove <Position>\" (To find position, use \"!position\"", channel);
                         }
                     }
                 }
@@ -342,7 +346,6 @@ public class ChatBot extends TwitchBot {
                                 e.printStackTrace();
                             }
                         }
-
                     }
                 }
             }

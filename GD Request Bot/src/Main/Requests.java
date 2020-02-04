@@ -3,6 +3,7 @@ package Main;
 import com.github.alex1304.jdash.client.AnonymousGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.entity.GDLevel;
+import com.github.alex1304.jdash.exception.MissingAccessException;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -18,7 +19,7 @@ class Requests {
 	static ArrayList<LevelData> levels = new ArrayList<>();
 	private static AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
 
-	static void addRequest(String ID, String requester, boolean isCustomSong) throws IOException {
+	/*static void addRequest(String ID, String requester, boolean isCustomSong) throws IOException {
 
 		GDLevel level = client.getLevelById(Integer.parseInt(ID)).block();
 
@@ -150,7 +151,7 @@ class Requests {
 				parse.start();
 			}
 		}
-	}
+	}*/
 	static ArrayList<LevelData> getLevelData(){
 		return levels;
 	}
@@ -158,9 +159,13 @@ class Requests {
 	public static void addRequest(String ID, String requester) throws IOException {
 
 		//TODO Automatic song downloads
-
-		GDLevel level = client.getLevelById(Integer.parseInt(ID)).block();
-
+		GDLevel level = null;
+		try {
+			level = client.getLevelById(Integer.parseInt(ID)).block();
+		}
+		catch (MissingAccessException e){
+			Main.sendMessage("@" + requester + " That ID doesn't exist!");
+		}
 		LevelData levelData = new LevelData();
 
 		boolean goThrough = true;
@@ -203,9 +208,10 @@ class Requests {
 				levelData.setSongID(String.valueOf(Objects.requireNonNull(level.getSong().block()).getId()));
 			//levelData.setSongSize(String.valueOf(level.getSong().block().getSongSize()));
 			levelData.setStars(level.getStars());
+			GDLevel finalLevel = level;
 			parse = new Thread(() -> {
 				try {
-					if (!(level.getStars() > 0)) {
+					if (!(finalLevel.getStars() > 0)) {
 						ParseLevel.parse(Objects.requireNonNull(Objects
 								.requireNonNull(client.getLevelById(Long.parseLong(ID)).block()).download().block())
 								.getData(), ID);
@@ -223,7 +229,6 @@ class Requests {
 
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			// --------------------
 			// If it fails, level doesn't exist, don't go through
 

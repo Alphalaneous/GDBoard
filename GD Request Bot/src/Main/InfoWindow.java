@@ -1,7 +1,5 @@
 package Main;
 
-import com.jidesoft.swing.ResizablePanel;
-
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;

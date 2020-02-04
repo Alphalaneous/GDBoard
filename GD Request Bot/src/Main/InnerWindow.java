@@ -1,5 +1,5 @@
 package Main;
-import com.jidesoft.swing.Resizable;
+
 import com.jidesoft.swing.ResizablePanel;
 
 import javax.imageio.ImageIO;
@@ -73,7 +73,7 @@ class InnerWindow extends ResizablePanel {
 
 		
 
-		// TODO: Make dimension values relate to screen size
+		// TODO: Make position values relate to screen size
 		// --------------------
 		// Panel that holds everything
 
