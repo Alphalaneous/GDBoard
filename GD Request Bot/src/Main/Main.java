@@ -11,15 +11,14 @@ import java.awt.AWTException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Objects;
 
 
 public class Main {
 	private static ChatBot bot;
 
-	public static void main(String[] args) throws IOException, IllegalArgumentException, URISyntaxException, AWTException, InterruptedException {
+	public static void main(String[] args) throws IOException, IllegalArgumentException, URISyntaxException, AWTException {
 
-
+		//TODO, deregister resize on pin
 
 
 		Logger root = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);

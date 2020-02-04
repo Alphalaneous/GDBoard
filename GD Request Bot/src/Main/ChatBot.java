@@ -120,9 +120,9 @@ public class ChatBot extends TwitchBot {
                                 });
                                 LevelsWindow2.setOneSelect();
                                 thread.start();
-                                Main.sendMessage("@" + user + ", your level has been removed!");
+                                sendMessage("@" + user + ", your level has been removed!", channel);
                             }
-                        } catch (NumberFormatException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -130,11 +130,20 @@ public class ChatBot extends TwitchBot {
 
                 // --------------------
                 // Queue Command
-                // TODO: Queue pages
 
                 boolean isBroadcaster = ("#" + user).equalsIgnoreCase(String.valueOf(channel));
+                if(command.equalsIgnoreCase("clear") && (user.isMod(channel) || isBroadcaster)){
+                    for(int i = 0; i < Requests.levels.size(); i++){
+                        LevelsWindow2.removeButton();
+                    }
+                    Requests.levels.clear();
+                    SongWindow.refreshInfo();
+                    InfoWindow.refreshInfo();
+                    CommentsWindow.unloadComments(true);
+                    sendMessage("@" + user + " Successfully cleared the queue!", channel);
+                }
                 if (command.equalsIgnoreCase("q") || command.equalsIgnoreCase("queue") || command.equalsIgnoreCase("levellist")
-                        || command.equalsIgnoreCase("list") || command.equalsIgnoreCase("requests")) {
+                        || command.equalsIgnoreCase("list") || command.equalsIgnoreCase("requests") || command.equalsIgnoreCase("page")) {
                     if (user.isMod(channel) || isBroadcaster) {
                         StringBuilder message = new StringBuilder();
                         int page = 1;
@@ -143,12 +152,15 @@ public class ChatBot extends TwitchBot {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        message.append("Page ").append(page).append(" of ").append( (Requests.levels.size() * 10)/10 ).append(" of the queue | ");
+                        int pages = (Requests.levels.size() - 1) / 10;
+                        message.append("Page ").append(page).append(" of ").append(pages + 1).append(" of the queue | ");
                         for (int i = (page - 1) * 10; i < page * 10; i++) {
-                            if(i == Requests.levels.size() && message.length() >= 2){
+                            if(i == Requests.levels.size() - 1 && message.length() >= 2){
+                                message.append(i + 1).append(": ").append(Requests.levels.get(i).getName()).append(" (").append(Requests.levels.get(i).getLevelID()).append("), ");
                                 message.delete(message.length() - 2, message.length());
                                 break;
                             }
+
                             try {
                                 message.append(i + 1).append(": ").append(Requests.levels.get(i).getName()).append(" (").append(Requests.levels.get(i).getLevelID()).append("), ");
                             }
@@ -180,48 +192,77 @@ public class ChatBot extends TwitchBot {
                 //TODO Info commands (!ID, !song, etc.) Specifications for position in queue
                 if (command.equalsIgnoreCase("help")) {
                     if (user.isMod(channel) || isBroadcaster) {
-                        if (arguments[1].contains("request")) {
+                        if(arguments.length == 1){
+                            sendMessage("@" + user + " List of Commands | Type !help <command> for more help. | !request | !position | !ID | !difficulty | !song | !likes | !downloads | !remove | !queue | !block | !blockuser", channel);
+                        }
+                        else if (arguments[1].contains("request")) {
                             sendMessage("@" + user + " Used to send requests | Usage: \"!request <Level ID>\" to send via level ID | \"!request <Level Name>\" to send via level name | \"!request <Level Name> by <User>\" to send via level name by a user.", channel);
                         }
-                        if (arguments[1].contains("position")) {
+                        else if (arguments[1].contains("position")) {
                             sendMessage("@" + user + " Used to find your position in the queue | Usage: \"!position <Number>\"", channel);
                             //TODO user position choices
                         }
-                        if (arguments[1].contains("ID")) {
+                        else if (arguments[1].contains("ID")) {
                             sendMessage("@" + user + " Used to find the current level's ID | Usage: \"!ID\"", channel);
                         }
-                        if (arguments[1].contains("difficulty")) {
+                        else if (arguments[1].contains("difficulty")) {
                             sendMessage("@" + user + " Used to find the current level's difficulty Usage: \"!difficulty\"", channel);
                         }
-                        if (arguments[1].contains("song")) {
+                        else if (arguments[1].contains("song")) {
                             sendMessage("@" + user + " Used to find the current level's song information | Usage: \"!song\"", channel);
                         }
-                        if (arguments[1].contains("likes")) {
+                        else if (arguments[1].contains("likes")) {
                             sendMessage("@" + user + " Used to find the current level's like count | Usage: \"!likes\"", channel);
                         }
-                        if (arguments[1].contains("downloads")) {
+                        else if (arguments[1].contains("downloads")) {
                             sendMessage("@" + user + " Used to find the current level's download count | Usage: \"!count\"", channel);
                         }
-                        if (arguments[1].contains("remove")) {
+                        else if (arguments[1].contains("remove")) {
                             sendMessage("@" + user + " Used to remove a level from the queue | Usage: \"!remove <Position>\"", channel);
                         }
-                        if (arguments[1].contains("block")) {
+                        else if (arguments[1].contains("block")) {
                             sendMessage("@" + user + " Used to block a level ID | Usage: \"!block\" to block the current ID | \"!block <Level ID>\" to block a specific ID", channel);
                         }
-                        if (arguments[1].contains("blockuser")) {
+                        else if (arguments[1].contains("blockuser")) {
                             sendMessage("@" + user + " Used to block a user | Usage: \"!blockuser\" to block the current user | \"!blockuser <Username>\" to block a specific user", channel);
-                        } else {
-                            sendMessage("@" + user + " List of Commands | Type !help <command> for more help. | !request | !position | !ID | !difficulty | !song | !likes | !downloads | !remove | !queue | !block | !blockuser", channel);
                         }
-                    } else {
-                        sendMessage("@" + user + " List of Commands | Type !help <command> for more help. | !request | !position | !ID | !difficulty | !song | !likes | !downloads | !remove", channel);
+                    }
+                    else{
+                        if(arguments.length == 1){
+                            sendMessage("@" + user + " List of Commands | Type !help <command> for more help. | !request | !position | !ID | !difficulty | !song | !likes | !downloads | !remove", channel);
+                        }
+                        else if (arguments[1].contains("request")) {
+                            sendMessage("@" + user + " Used to send requests | Usage: \"!request <Level ID>\" to send via level ID | \"!request <Level Name>\" to send via level name | \"!request <Level Name> by <User>\" to send via level name by a user.", channel);
+                        }
+                        else if (arguments[1].contains("position")) {
+                            sendMessage("@" + user + " Used to find your position in the queue | Usage: \"!position <Number>\"", channel);
+                            //TODO user position choices
+                        }
+                        else if (arguments[1].contains("ID")) {
+                            sendMessage("@" + user + " Used to find the current level's ID | Usage: \"!ID\"", channel);
+                        }
+                        else if (arguments[1].contains("difficulty")) {
+                            sendMessage("@" + user + " Used to find the current level's difficulty Usage: \"!difficulty\"", channel);
+                        }
+                        else if (arguments[1].contains("song")) {
+                            sendMessage("@" + user + " Used to find the current level's song information | Usage: \"!song\"", channel);
+                        }
+                        else if (arguments[1].contains("likes")) {
+                            sendMessage("@" + user + " Used to find the current level's like count | Usage: \"!likes\"", channel);
+                        }
+                        else if (arguments[1].contains("downloads")) {
+                            sendMessage("@" + user + " Used to find the current level's download count | Usage: \"!count\"", channel);
+                        }
+                        else if (arguments[1].contains("remove")) {
+                            sendMessage("@" + user + " Used to remove a level from the queue | Usage: \"!remove <Position>\"", channel);
+                        }
                     }
                 }
                 if (command.equalsIgnoreCase("block") && (user.isMod(channel) || isBroadcaster)) {
-                    sendMessage("Soon..", channel); //TODO Blocking IDs
+                    sendMessage("Soon...", channel); //TODO Blocking IDs
                 }
                 if (command.equalsIgnoreCase("blockuser") && (user.isMod(channel) || isBroadcaster)) {
-                    sendMessage("Soon..", channel); //TODO Blocking User
+                    sendMessage("Soon...", channel); //TODO Blocking User
                 }
 
                 // --------------------
@@ -304,73 +345,6 @@ public class ChatBot extends TwitchBot {
 
                     }
                 }
-
-                // --------------------
-                // TODO: Add rest of commands
-
-                /*
-                 * if (command.equals("info")) { return; String msgtosend = "Version " +
-                 * BotHandler.getVersion() +
-                 * " - Made by TreeHouseFalcon. A bot with a wide variety of tools and commands to help make streaming Geometry Dash easier!"
-                 * ; if (BotHandler.isOp(this.bot.getUserBot())) { msgtosend = msgtosend +
-                 * "(Download it here for free: http://adf.ly/1aufUr)"; }
-                 *
-                 * this.bot.sendMessage(msgtosend); break; }
-                 *
-                 * if (command.equals("unblockreqsfromuser")) { if (!arguments[1].equals("")) {
-                 * //BotHandler.unblockUserFromRequesting(arguments[1].toLowerCase()); }
-                 *
-                 * //this.bot.sendMessage(event.getUser().getNick() + " -> " +
-                 * arguments[1].toLowerCase() + " has been unblocked from requesting levels.");
-                 * }
-                 *
-                 * if (command.equals("blockreqsfromuser")) { //if (!arguments[1].equals("") &&
-                 * BotHandler.isOp(event.getUser())) {
-                 * //BotHandler.blockUserFromRequesting(arguments[1].toLowerCase()); //}
-                 *
-                 * //if (BotHandler.getBlockedUsers().contains(arguments[1].toLowerCase())) {
-                 * //this.bot.sendMessage(event.getUser().getNick() + " -> " +
-                 * arguments[1].toLowerCase() + " has been blocked from requesting levels.");
-                 * return; //} } if (command.equals("streamerstats")) { if
-                 * (BotHandler.getSetting(15).equals("")) { this.bot.sendMessage("/w " +
-                 * event.getUser().getNick() + " -> An error has occured. (Username not set)");
-                 * return; }
-                 *
-                 * HttpURLConnection con = (HttpURLConnection) (new
-                 * URL("http://www.boomlings.com/database/getGJUsers20.php")).openConnection();
-                 * con.setRequestMethod("POST"); con.setDoOutput(true); String urlParams =
-                 * "gameVersion=21&binaryVersion=33&str=" + BotHandler.getSetting(15) +
-                 * "&page=0" + "&total=0" + "&secret=" + "Wmfd2893gb7"; DataOutputStream wr =
-                 * new DataOutputStream(con.getOutputStream()); wr.writeBytes(urlParams);
-                 * wr.flush(); wr.close(); BufferedReader in = new BufferedReader(new
-                 * InputStreamReader(con.getInputStream())); StringBuffer response = new
-                 * StringBuffer();
-                 *
-                 * String thisLine; while ((thisLine = in.readLine()) != null) {
-                 * response.append(thisLine); }
-                 *
-                 * if (response.toString().equals("-1")) { return; }
-                 *
-                 * in.close(); String[] parsedData = response.toString().split("[:]"); String[]
-                 * parsedScoreData = this.getUserScoreData(parsedData[21]);
-                 *
-                 * for (int i = 0; i < parsedData.length; ++i) { System.out.println(i + ": " +
-                 * parsedData[i]); }
-                 *
-                 * this.bot.sendMessage("/w " + parsedData[1] + "'s stats | Global Rank: " +
-                 * parsedScoreData[39] + " | Stars: " + parsedData[23] + " | Secret Coins: " +
-                 * parsedData[5] + " | User Coins: " + parsedData[7] + " | Demons: " +
-                 * parsedData[27].split("[#]")[0]); } if (command.equals("disband") &&
-                 * arguments.length == 1 && BotHandler.isSuperOp(event.getUser())) {
-                 * this.bot.sendMessage(event.getUser().getNick() + " -> Shutting down...");
-                 * System.exit(0); }
-                 *
-                 * if (BotHandler.isOp(event.getUser())) { if
-                 * (arguments[1].equalsIgnoreCase("off")) { BotHandler.setAreRequestsOn(false);
-                 * this.bot.sendAction("-> Requests are now off!"); } else if
-                 * (arguments[1].equalsIgnoreCase("on")) { BotHandler.setAreRequestsOn(true);
-                 * this.bot.sendAction("-> Requests are now on!"); } }
-                 */
             }
         }
     }

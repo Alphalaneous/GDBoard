@@ -27,7 +27,8 @@ public class LevelsWindow2 {
 				@Override
 				public void resizing(int resizeCorner, int newX, int newY, int newW, int newH) {
 					if(!(newH < 80 || newH > 800)) {
-						if(newY <= 93){
+
+						if(newX + width >= 672 && newX <= 1248 && newY <= 93){
 							newY = 93;
 						}
 						setBounds(getX(), newY, getWidth(), newH);
@@ -120,6 +121,9 @@ public class LevelsWindow2 {
 
 	static void createButton(String name, String author, String ID, String difficulty,
 							 boolean epic, boolean featured) throws IOException {
+
+		//TODO Add star count
+
 		defaultUI.setBackground(Defaults.MAIN);
 
 		defaultUI.setHover(Defaults.HOVER);

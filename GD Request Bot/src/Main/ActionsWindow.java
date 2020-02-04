@@ -45,7 +45,6 @@ class ActionsWindow {
 		try {
 			origNext = ImageIO.read(new File("src/resources/Icons/next.png"));
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		assert origNext != null;
@@ -78,7 +77,6 @@ class ActionsWindow {
 							fr.write(Requests.levels.get(LevelsWindow2.getSelectedID()).getLevelID() + "\n");
 							fr.close();
 						} catch (IOException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 						Requests.levels.remove(LevelsWindow2.getSelectedID());
@@ -97,15 +95,7 @@ class ActionsWindow {
 			}
 		});
 
-		// BufferedImage origSkip = null;
-		// try {
-		// origSkip = ImageIO.read(new File("src/resources/Icons/skip.png"));
-		// } catch (IOException e1) {
-		// TODO Auto-generated catch block
-		// e1.printStackTrace();
-		// }
-		// Image skipImg = origSkip.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-		// ImageIcon skipNew = new ImageIcon(skipImg);
+
 
 		JButton skip = new RoundedJButton(nextNew);
 		skip.setPreferredSize(new Dimension(50, 50));
@@ -153,13 +143,10 @@ class ActionsWindow {
 			}
 		});
 
-		// TODO: Add blocking
-
 		BufferedImage origCopy = null;
 		try {
 			origCopy = ImageIO.read(new File("src/resources/Icons/clipboard.png"));
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		assert origCopy != null;

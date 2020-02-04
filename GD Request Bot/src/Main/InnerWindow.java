@@ -151,7 +151,6 @@ class InnerWindow extends ResizablePanel {
 		try {
 			iconImage = ImageIO.read(new File(iconLocation));
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		assert iconImage != null;
@@ -179,7 +178,6 @@ class InnerWindow extends ResizablePanel {
 		try {
 			xImage = ImageIO.read(new File("src/resources/WindowIcons/X.png"));
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		assert xImage != null;
@@ -212,7 +210,6 @@ class InnerWindow extends ResizablePanel {
 		try {
 			pinImage = ImageIO.read(new File("src/resources/WindowIcons/pin.png"));
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		assert pinImage != null;
@@ -226,7 +223,6 @@ class InnerWindow extends ResizablePanel {
 		try {
 			origPinPressed = ImageIO.read(new File("src/resources/WindowIcons/pinPressed.png"));
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		assert origPinPressed != null;

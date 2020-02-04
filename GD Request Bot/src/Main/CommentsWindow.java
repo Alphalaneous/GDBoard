@@ -32,7 +32,7 @@ class CommentsWindow {
 				public void resizing(int resizeCorner, int newX, int newY, int newW, int newH) {
 
 					if(!(newH < 100 || newH > 800)) {
-						if(newY <= 93){
+						if(newX + width >= 672 && newX <= 1248 && newY <= 93){
 							newY = 93;
 						}
 					setBounds(getX(), newY, getWidth(), newH);

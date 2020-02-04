@@ -15,6 +15,8 @@ class ParseLevel {
 
 	static void parse(byte[] level, String levelID) throws IOException {
 
+		//TODO Fix old level parsing
+
 		ArrayList<GDObject> lvlObject = new ArrayList<>();
 		String decompressed = decompress(level);
 		ArrayList<String[]> Objects = new ArrayList<>();

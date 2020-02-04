@@ -156,6 +156,9 @@ class Requests {
 	}
 
 	public static void addRequest(String ID, String requester) throws IOException {
+
+		//TODO Automatic song downloads
+
 		GDLevel level = client.getLevelById(Integer.parseInt(ID)).block();
 
 		LevelData levelData = new LevelData();

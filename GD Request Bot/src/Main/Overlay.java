@@ -18,7 +18,9 @@ class Overlay {
 	// --------------------
 
 	static void setFrame() {
-		
+
+		//TODO Windowed Mode
+
 		// --------------------
 		// default frame stuff
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
