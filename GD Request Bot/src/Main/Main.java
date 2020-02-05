@@ -7,7 +7,9 @@ import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
 import org.slf4j.LoggerFactory;
 
-import java.awt.AWTException;
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -51,11 +53,11 @@ public class Main {
 		GetTheme theme = new GetTheme();
 		theme.start();
 
-		/*
-		 * FileDialog fd = new FileDialog(new JFrame()); fd.setVisible(true); File[] f =
-		 * fd.getFiles(); if(f.length > 0){
-		 * System.out.println(fd.getFiles()[0].getAbsolutePath()); } 
-		 */
+
+		 /*FileDialog fd = new FileDialog(new JFrame()); fd.setVisible(true); File[] f =
+		 fd.getFiles(); if(f.length > 0){
+		 System.out.println(fd.getFiles()[0].getAbsolutePath()); }*/
+
 
 		Overlay.setFrame();
 		KeyListener.hook();

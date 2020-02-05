@@ -4,7 +4,7 @@ import java.awt.Point;
 
 public class Settings extends Thread {
 
-	//TODO Settings content, OAuth, Blocked IDs, Blocked Users, Requests status, Requests Limit, Followers Only, Subscribers only, Cheer requirements
+	//cccccTODO Settings content, OAuth, Blocked IDs, Blocked Users, Requests status, Requests Limit, Followers Only, Subscribers only, Cheer requirements
 
 	//private static boolean requests = true;
 	//private static String oauth;

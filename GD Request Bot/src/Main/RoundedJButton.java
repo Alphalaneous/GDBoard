@@ -1,8 +1,6 @@
 package Main;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Shape;
+import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
 import javax.swing.ImageIcon;
@@ -34,12 +32,18 @@ public class RoundedJButton extends JButton {
 	}
 
 	protected void paintComponent(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+
 		if (getModel().isArmed()) {
 			g.setColor(Defaults.HOVER);
 		} else {
 			g.setColor(getBackground());
 		}
-		g.fillOval(0, 0, getSize().width, getSize().height);
+		RenderingHints qualityHints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		qualityHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		g2.setRenderingHints(qualityHints);
+		g2.fillOval(0, 0, getSize().width, getSize().height);
+
 
 		super.paintComponent(g);
 	}
@@ -55,6 +59,8 @@ public class RoundedJButton extends JButton {
 		if (shape == null || !shape.getBounds().equals(getBounds())) {
 			shape = new Ellipse2D.Float(0, 0, getWidth(), getHeight());
 		}
+
+
 		return shape.contains(x, y);
 	}
 }

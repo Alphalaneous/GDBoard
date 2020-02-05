@@ -1,5 +1,8 @@
 package Main;
 
+import com.jidesoft.swing.Resizable;
+import com.jidesoft.swing.ResizablePanel;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +19,7 @@ class ActionsWindow {
 
 	private static int height = 60;
 	private static int width = 200;
-	private static JPanel window = new InnerWindow("Actions", 1920 - width - 10, 200, width, height,
+	private static ResizablePanel window = new InnerWindow("Actions", 1920 - width - 10, 200, width, height,
 			"src/resources/Icons/Actions.png").createPanel();
 	private static JPanel mainPanel = new JPanel();
 	private static JPanel panel = new JPanel();
