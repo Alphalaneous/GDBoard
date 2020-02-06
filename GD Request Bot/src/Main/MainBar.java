@@ -42,11 +42,11 @@ class MainBar {
 		ImageIcon imgNew = new ImageIcon(imgScaled);
 
 		JLabel icon = new JLabel(imgNew);
-
+		double ratio = 1920/Defaults.screenSize.getWidth();
 		Overlay.alwaysFront(barPanel);
 		barPanel.setOpaque(false);
 		barPanel.setSize(580, 65);
-		barPanel.setLocation(670, 30);
+		barPanel.setLocation((int) (670/ratio), 30);
 		barPanel.setLayout(null);
 		barPanel.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 50)));
 		barPanel.addMouseListener(new MouseAdapter() {
@@ -174,6 +174,8 @@ class MainBar {
 				component.setBackground(Defaults.MAIN);
 			}
 		}
+		int middle = (int) (Defaults.screenSize.getWidth() / 2);
+		barPanel.setLocation(middle-290 , 30);
 	}
 
 	static void setInvisible() {

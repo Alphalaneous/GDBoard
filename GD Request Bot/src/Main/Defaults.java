@@ -3,6 +3,7 @@ import java.awt.*;
 
 public class Defaults {
 	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	static Dimension prevScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	static Color MAIN;
 	static Color BUTTON;
 	static Color HOVER;
@@ -34,5 +35,28 @@ public class Defaults {
 		TOP = Color.WHITE;
 		FOREGROUND = Color.BLACK;
 		Overlay.refreshUI();
+	}
+	static void screenSize(){
+
+		Thread thread = new Thread(() -> {
+			while(true){
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+				if(!screenSize.equals(prevScreenSize)) {
+					CommentsWindow.refreshUI();
+					ActionsWindow.refreshUI();
+					InfoWindow.refreshUI();
+					LevelsWindow2.refreshUI();
+					SongWindow.refreshUI();
+					MainBar.refreshUI();
+				}
+				prevScreenSize = screenSize;
+			}
+		});
+		thread.start();
 	}
 }

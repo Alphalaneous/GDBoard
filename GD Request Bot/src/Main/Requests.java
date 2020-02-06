@@ -283,7 +283,7 @@ class Requests {
 							+ Requests.levels.get(0).getLevelID() + "). Requested by "
 							+ Requests.levels.get(0).getRequester());
 				}
-				LevelsWindow2.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured());
+				LevelsWindow2.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars());
 				parse.start();
 			}
 		}

@@ -42,6 +42,7 @@ public class LevelsWindow2 {
 	}.createPanel();
 	private static JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
 	private static int selectedID = 0;
+	private static int prevSelectedID = 0;
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static JButtonUI selectUI = new JButtonUI();
 	private static JButtonUI warningUI = new JButtonUI();
@@ -120,9 +121,7 @@ public class LevelsWindow2 {
 	}
 
 	static void createButton(String name, String author, String ID, String difficulty,
-							 boolean epic, boolean featured) throws IOException {
-
-		//TODO Add star count
+							 boolean epic, boolean featured, int starCount) throws IOException {
 
 		defaultUI.setBackground(Defaults.MAIN);
 
@@ -150,6 +149,7 @@ public class LevelsWindow2 {
 		JLabel lID = new JLabel(ID);
 		JLabel lAuthor = new JLabel(author);
 		JLabel lAnalyzed = new JLabel();
+		JLabel lStarCount = new JLabel(starCount + "*");
 
 		String[] difficulties = { "NA", "easy", "normal", "hard", "harder", "insane", "easy demon", "medium demon",
 				"hard demon", "insane demon", "extreme demon" };
@@ -183,7 +183,12 @@ public class LevelsWindow2 {
 		request.add(lAuthor);
 		request.add(lAnalyzed);
 		request.add(reqDifficulty);
+		System.out.println(starCount);
+		if(starCount !=0){
+			request.add(lStarCount);
+		}
 		request.setLayout(null);
+
 
 		lName.setFont(new Font("bahnschrift", Font.PLAIN, 20));
 		lName.setBounds(60, 0, (int) lName.getPreferredSize().getWidth(), 30);
@@ -192,12 +197,16 @@ public class LevelsWindow2 {
 		lAuthor.setFont(new Font("bahnschrift", Font.PLAIN, 12));
 		lAuthor.setBounds((int) (400 - lAuthor.getPreferredSize().getWidth()) - 10, 3,
 				(int) lAuthor.getPreferredSize().getWidth(), 20);
+		lStarCount.setFont(new Font("bahnschrift", Font.PLAIN, 18));
+		lStarCount.setBounds((int) (400 - lStarCount.getPreferredSize().getWidth()) - 10, 26,
+				(int) lStarCount.getPreferredSize().getWidth(), 20);
 		lAnalyzed.setFont(new Font("bahnschrift", Font.PLAIN, 12));
 
 		lName.setForeground(Defaults.FOREGROUND);
 		lAuthor.setForeground(Defaults.FOREGROUND);
 		lID.setForeground(Defaults.FOREGROUND);
 		lAnalyzed.setForeground(Defaults.FOREGROUND);
+		lStarCount.setForeground(Defaults.FOREGROUND);
 
 		request.setBackground(Defaults.MAIN);
 		request.setUI(defaultUI);
@@ -250,14 +259,18 @@ public class LevelsWindow2 {
 						selectedID = j;
 					}
 				}
-				Thread thread = new Thread(() -> {
-					CommentsWindow.unloadComments(true);
-					CommentsWindow.loadComments(0, false);
-				});
-				thread.start();
-				SongWindow.refreshInfo();
-				InfoWindow.refreshInfo();
+				if(selectedID != prevSelectedID){
+					Thread thread = new Thread(() -> {
+						CommentsWindow.unloadComments(true);
+						CommentsWindow.loadComments(0, false);
+					});
+					thread.start();
 
+					SongWindow.refreshInfo();
+					InfoWindow.refreshInfo();
+				}
+
+				prevSelectedID = selectedID;
 			}
 		});
 		if(Requests.levels.size() == 1){

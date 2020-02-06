@@ -23,8 +23,8 @@ class InnerWindow extends ResizablePanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private final String title;
-	private final int x;
-	private final int y;
+	private final double x;
+	private final double y;
 	private int width;
 	private int height;
 	private final String iconLocation;
@@ -43,9 +43,43 @@ class InnerWindow extends ResizablePanel {
 	private JButtonUI defaultUI = new JButtonUI();
 
 	InnerWindow(final String title, final int x, final int y, final int width, final int height, final String iconLocation) {
+		double y1;
+		double x1;
+		double ratio = 1920 / Defaults.screenSize.getWidth();
+		System.out.println(ratio);
 		this.title = title;
-		this.x = x;
-		this.y = y;
+		x1 = x / ratio;
+		y1 = y / ratio;
+		if(x + width >= Defaults.screenSize.getWidth() + 1) {
+			x1 = Defaults.screenSize.getWidth() + 1 - width;
+		}
+		if(x <= -1) {
+			x1 = -1;
+		}
+		if(y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+			y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
+		}
+		if(y <= -1) {
+			y1 = -1;
+		}
+		if(x + width >= Defaults.screenSize.getWidth() + 1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+			x1 = Defaults.screenSize.getWidth() + 1 - width;
+			y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
+		}
+		if(x + width >= Defaults.screenSize.getWidth() + 1 &&y <= -1) {
+			x1 = Defaults.screenSize.getWidth() + 1 - width;
+			y1 = -1;
+		}
+		if(x <= -1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+			x1 = -1;
+			y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
+		}
+		if(x <= -1 && y <= -1) {
+			x1 = -1;
+			y1 = -1;
+		}
+		this.x = x1;
+		this.y = y1;
 		this.width = width;
 		this.height = height;
 		this.iconLocation = iconLocation;
@@ -69,17 +103,13 @@ class InnerWindow extends ResizablePanel {
 				moveToFront();
 			}
 		});
-		
 
-		
-
-		// TODO: Make position values relate to screen size
 		// --------------------
 		// Panel that holds everything
 
 		setBackground(new Color(0, 0, 0, 0));
 		setLayout(null);
-		setBounds(x, y, width + 2, height + 32);
+		setBounds((int)x, (int)y, width + 2, height + 32);
 		setOpaque(false);
 		setBorder(BorderFactory.createLineBorder(new Color(255,255,255,50)));
 
@@ -108,35 +138,36 @@ class InnerWindow extends ResizablePanel {
 		        Point p = new Point();
 		        p.setLocation(x, y);
 		        setLocation(p);
-		        if(x + width >= 1921) {
-		        	p.setLocation(1921 - width, p.getY());
+		        if(x + width >= Defaults.screenSize.getWidth() + 1) {
+		        	p.setLocation(Defaults.screenSize.getWidth() + 1 - width, p.getY());
 					setLocation(p);
 				}
 				if(x <= -1) {
 					p.setLocation(-1, p.getY());
 					setLocation(p);
 				}
-				if(y + height + 32 >= 1081) {
-					p.setLocation(p.getX(), 1081 - height - 32);
+				if(y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+					p.setLocation(p.getX(), Defaults.screenSize.getHeight() + 1 - height - 32);
 					setLocation(p);
 				}
 				if(y <= -1) {
 					p.setLocation(p.getX(), -1);
 					setLocation(p);
 				}
-				if(x + width >= 1921 && y + height + 32 >= 1081) {
-					setLocation(1921 - width, 1081 - height - 32);
+				if(x + width >= Defaults.screenSize.getWidth() + 1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+					setLocation((int) Defaults.screenSize.getWidth() + 1 - width, (int) Defaults.screenSize.getHeight() + 1 - height - 32);
 				}
-				if(x + width >= 1921 &&y <= -1) {
-					setLocation(1921 - width, -1);
+				if(x + width >= Defaults.screenSize.getWidth() + 1 &&y <= -1) {
+					setLocation((int) Defaults.screenSize.getWidth() + 1 - width, -1);
 				}
-				if(x <= -1 && y + height + 32 >= 1081) {
-					setLocation(-1, 1081 - height - 32);
+				if(x <= -1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+					setLocation(-1, (int) Defaults.screenSize.getHeight() + 1 - height - 32);
 				}
 				if(x <= -1 && y <= -1) {
 					setLocation(-1, -1);
 				}
-				if(x + width >= 672 && x <= 1248 && y <= 93) {
+				double ratio = 1920 / Defaults.screenSize.getWidth();
+				if(x + width >= 672/ratio && x <= 672/ratio + 576 && y <= 93) {
 					p.setLocation(p.getX(), 93);
 					setLocation(p);
 				}
@@ -296,7 +327,38 @@ class InnerWindow extends ResizablePanel {
 				component.setForeground(Defaults.FOREGROUND);
 			}
 		}
-		
+		Point p = new Point();
+		if(x + width >= Defaults.screenSize.getWidth() + 1) {
+			p.setLocation(Defaults.screenSize.getWidth() + 1 - width, p.getY());
+			setLocation(p);
+		}
+		if(x <= -1) {
+			p.setLocation(-1, p.getY());
+			setLocation(p);
+		}
+		if(y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+			p.setLocation(p.getX(), Defaults.screenSize.getHeight() + 1 - height - 32);
+			setLocation(p);
+		}
+		if(y <= -1) {
+			p.setLocation(p.getX(), -1);
+			setLocation(p);
+		}
+		if(x + width >= Defaults.screenSize.getWidth() + 1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+			setLocation((int) Defaults.screenSize.getWidth() + 1 - width, (int) Defaults.screenSize.getHeight() + 1 - height - 32);
+		}
+		if(x + width >= Defaults.screenSize.getWidth() + 1 &&y <= -1) {
+			setLocation((int) Defaults.screenSize.getWidth() + 1 - width, -1);
+		}
+		if(x <= -1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+			setLocation(-1, (int) Defaults.screenSize.getHeight() + 1 - height - 32);
+		}
+
+		int middle = (int) (Defaults.screenSize.getWidth() / 2);
+		if(x + width >= middle-290 && x <= middle+290 && y <= 93) {
+			p.setLocation(p.getX(), 93);
+			setLocation(p);
+		}
 	}
 	public void resetDimensions(int width, int height){
 		this.height = height;
