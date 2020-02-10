@@ -102,6 +102,7 @@ class ParseLevel {
                     for (int m = 0; k < Requests.getLevelData().size(); m++) {
                         if (Requests.getLevelData().get(m).getLevelID().equalsIgnoreCase(levelID)) {
                             LevelsWindow.updateUI(Requests.getLevelData().get(k).getLevelID(), Requests.getLevelData().get(k).getContainsVulgar(), Requests.getLevelData().get(k).getContainsImage(), false);
+                            break;
                         }
                     }
                 }

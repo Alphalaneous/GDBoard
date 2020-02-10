@@ -2,14 +2,12 @@ package Main;
 
 import com.jidesoft.swing.ResizablePanel;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,11 +17,10 @@ class ActionsWindow {
 	private static int height = 60;
 	private static int width = 260;
 	private static ResizablePanel window = new InnerWindow("Actions", 1920 - width - 10, 200, width, height,
-			"\uEBFC").createPanel();
+			"\uE7C9").createPanel();
 	private static JPanel mainPanel = new JPanel();
 	private static JPanel panel = new JPanel();
 	private static JButtonUI defaultUI = new JButtonUI();
-	//TODO Button Icons
 	static void createPanel() {
 
 		mainPanel.setBounds(1, 31, width, height);
@@ -41,24 +38,15 @@ class ActionsWindow {
 		layout.setVgap(10);
 		panel.setLayout(layout);
 
-		BufferedImage origNext = null;
-		try {
-			origNext = ImageIO.read(new File("src/resources/Icons/next.png"));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		assert origNext != null;
-		Image nextImg = origNext.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-		ImageIcon nextNew = new ImageIcon(nextImg);
 		//TODO make custom Yes/No dialog
-		JButton block = new RoundedJButton("block");
+		JButton block = new RoundedJButton("\uE8F8");
 		//TODO Block level, Block requester, Block author
 		block.setPreferredSize(new Dimension(50, 50));
 		block.setUI(defaultUI);
 		block.setBackground(Defaults.BUTTON);
 		block.setForeground(Defaults.FOREGROUND);
 		block.setBorder(BorderFactory.createEmptyBorder());
-		block.setFont(new Font("bahnschrift", Font.BOLD, 14));
+		block.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
 		block.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -95,13 +83,13 @@ class ActionsWindow {
 				LevelsWindow.setOneSelect();
 			}
 		});
-		JButton clear = new RoundedJButton("clear");
+		JButton clear = new RoundedJButton("\uE107");
 		clear.setPreferredSize(new Dimension(50, 50));
 		clear.setUI(defaultUI);
 		clear.setBackground(Defaults.BUTTON);
 		clear.setForeground(Defaults.FOREGROUND);
 		clear.setBorder(BorderFactory.createEmptyBorder());
-		clear.setFont(new Font("bahnschrift", Font.BOLD, 14));
+		clear.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
 		clear.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -128,13 +116,13 @@ class ActionsWindow {
 		});
 
 
-		JButton skip = new RoundedJButton(nextNew);
+		JButton skip = new RoundedJButton("\uE101");
 		skip.setPreferredSize(new Dimension(50, 50));
 		skip.setUI(defaultUI);
 		skip.setBackground(Defaults.BUTTON);
 		skip.setForeground(Defaults.FOREGROUND);
 		skip.setBorder(BorderFactory.createEmptyBorder());
-		skip.setFont(new Font("bahnschrift", Font.BOLD, 14));
+		skip.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
 		skip.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -175,23 +163,13 @@ class ActionsWindow {
 			}
 		});
 
-		BufferedImage origCopy = null;
-		try {
-			origCopy = ImageIO.read(new File("src/resources/Icons/clipboard.png"));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		assert origCopy != null;
-		Image copyImg = origCopy.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-		ImageIcon copyNew = new ImageIcon(copyImg);
-
-		JButton copy = new RoundedJButton(copyNew);
+		JButton copy = new RoundedJButton("\uF0E3");
 		copy.setPreferredSize(new Dimension(50, 50));
 		copy.setUI(defaultUI);
 		copy.setBackground(Defaults.BUTTON);
 		copy.setForeground(Defaults.FOREGROUND);
 		copy.setBorder(BorderFactory.createEmptyBorder());
-		copy.setFont(new Font("bahnschrift", Font.BOLD, 14));
+		copy.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
 		copy.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {

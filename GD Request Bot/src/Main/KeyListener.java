@@ -46,11 +46,6 @@ class KeyListener {
 
 					}
 				}
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
 			}
 		});
 		Robot r = new Robot();
@@ -58,7 +53,7 @@ class KeyListener {
 			ControllerManager controllers = new ControllerManager();
 			controllers.initSDLGamepad();
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

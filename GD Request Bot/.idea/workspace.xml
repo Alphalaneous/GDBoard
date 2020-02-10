@@ -6,17 +6,78 @@
       <change beforePath="$PROJECT_DIR$/bin/Main/ActionsWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ActionsWindow$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/ActionsWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ActionsWindow$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/ActionsWindow$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ActionsWindow$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/ActionsWindow$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ActionsWindow$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/ActionsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ActionsWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/ChatBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ChatBot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/CheckBoxButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CheckBoxButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$6$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$6$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$6$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$6$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/Defaults.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Defaults.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/GDObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/GDObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/GetComments.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/GetComments.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/InfoWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InfoWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/JButtonUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/JButtonUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/KeyListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/KeyListener$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/KeyListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/KeyListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/LevelData.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/LevelsWindow$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelsWindow$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/LevelsWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelsWindow$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/LevelsWindow$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelsWindow$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/LevelsWindow$2$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelsWindow$2$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/LevelsWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelsWindow$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/LevelsWindow$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelsWindow$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/LevelsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelsWindow.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/MainBar$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/MainBar$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/MainBar$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/MainBar$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/MainBar$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/MainBar$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/MainBar$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/MainBar$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/MainBar$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/MainBar$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/MainBar$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/MainBar$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/MainBar.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/MainBar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/Overlay$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Overlay$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/Overlay.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Overlay.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/ParseLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ParseLevel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/PlaySong.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/PlaySong.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/Requests.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Requests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/RoundedJButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/RoundedJButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Settings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/SettingsWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/SettingsWindow$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/SettingsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/SettingsWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/SongWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/SongWindow$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/SongWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/SongWindow$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/SongWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/SongWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/AccountSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/AccountSettings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/BlockedIDsSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/BlockedIDsSettings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/GeneralSetttings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/GeneralSetttings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/OverlaySettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/OverlaySettings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/PersonalizationSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/PersonalizationSettings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/ShortcutSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/ShortcutSettings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/ActionsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/ActionsWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/CommentsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/CommentsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Defaults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Defaults.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/InnerWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/InnerWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/LevelsWindow2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/LevelsWindow2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/MainBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/MainBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Requests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Requests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/GetComments.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/KeyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/KeyListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/LevelsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/LevelsWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/MainBar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/Overlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Overlay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/ParseLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/ParseLevel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/PlaySong.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SongWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SongWindow.java" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,121 +100,6 @@
   <component name="FavoritesManager">
     <favorites_list name="GD Request Bot" />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/MainBar.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="821">
-              <caret line="165" column="61" lean-forward="true" selection-start-line="165" selection-start-column="61" selection-end-line="165" selection-end-column="61" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/InnerWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="184" column="74" lean-forward="true" selection-start-line="184" selection-start-column="8" selection-end-line="184" selection-end-column="74" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/ActionsWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="21" column="19" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Settings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
-              <folding>
-                <marker date="1581279450291" expanded="false" signature="452:482" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Main/CommentsWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="139" column="61" selection-start-line="139" selection-start-column="61" selection-end-line="139" selection-end-column="61" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4998#5643#0" expanded="true" />
-                <element signature="e#5642#5643#0" expanded="true" />
-                <element signature="e#6736#6913#0" expanded="true" />
-                <element signature="e#6912#6913#0" expanded="true" />
-                <element signature="e#7045#7222#0" expanded="true" />
-                <element signature="e#7221#7222#0" expanded="true" />
-                <element signature="e#14873#14874#0" expanded="true" />
-                <element signature="e#14920#14921#0" expanded="true" />
-                <element signature="e#14954#14955#0" expanded="true" />
-                <element signature="e#15007#15008#0" expanded="true" />
-                <element signature="e#15039#15040#0" expanded="true" />
-                <element signature="e#15090#15091#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/SettingsWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/SongWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="19" column="133" selection-start-line="19" selection-start-column="127" selection-end-line="19" selection-end-column="133" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/GetComments.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="35" column="21" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/LevelsWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="22" column="147" lean-forward="true" selection-start-line="22" selection-start-column="147" selection-end-line="22" selection-end-column="153" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/InfoWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="18" column="111" lean-forward="true" selection-start-line="18" selection-start-column="105" selection-end-line="18" selection-end-column="111" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -169,83 +115,8 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/Main/Overlay.java" />
-        <option value="$PROJECT_DIR$/src/Main/KeyListener.java" />
-        <option value="$PROJECT_DIR$/src/Main/Settings.java" />
-        <option value="$PROJECT_DIR$/src/Main/Main.java" />
-        <option value="$PROJECT_DIR$/src/Main/Requests.java" />
-        <option value="$PROJECT_DIR$/src/Main/SongWindow.java" />
-        <option value="$PROJECT_DIR$/src/Main/GetComments.java" />
-        <option value="$PROJECT_DIR$/src/Main/ActionsWindow.java" />
-        <option value="$PROJECT_DIR$/src/Main/ChatBot.java" />
-        <option value="$PROJECT_DIR$/src/Main/Defaults.java" />
-        <option value="$PROJECT_DIR$/src/Main/InfoWindow.java" />
-        <option value="$PROJECT_DIR$/src/Main/InnerWindow.java" />
-        <option value="$PROJECT_DIR$/src/Main/LevelData.java" />
-        <option value="$PROJECT_DIR$/src/Main/LevelsWindow.java" />
-        <option value="$PROJECT_DIR$/src/Main/MainBar.java" />
-        <option value="$PROJECT_DIR$/src/Main/CommentsWindow.java" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="413" />
-    <option name="y" value="23" />
-    <option name="width" value="1385" />
-    <option name="height" value="971" />
-  </component>
   <component name="ProjectId" id="1X2386Wf5oMdxwOPKjpPdGzrXYK" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="SettingsPanels" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-    </panes>
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -265,18 +136,6 @@
   </component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration default="true" type="Applet">
@@ -306,12 +165,14 @@
       </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <properties />
       <listeners />
@@ -356,49 +217,9 @@
       <workItem from="1580921227300" duration="169000" />
       <workItem from="1580921413841" duration="4987000" />
       <workItem from="1581007245076" duration="6709000" />
+      <workItem from="1581352541254" duration="8303000" />
     </task>
     <servers />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="468" y="28" width="1385" height="971" extended-state="0" />
-    <editor active="true" />
-    <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3245283" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.36873507" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.3286119" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Maven" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Capture Analysis" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -409,12 +230,6 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
               <option name="COLUMN_ORDER" />
             </State>
           </value>
@@ -453,41 +268,53 @@
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state x="-1280" y="276" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580835374427" />
-    <state x="-1164" y="425" width="408" height="238" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1581008061882">
+    <state x="-1164" y="425" width="408" height="238" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1581353587961">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="-1164" y="425" width="408" height="238" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581008061882" />
+    <state x="-1164" y="425" width="408" height="238" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581353587961" />
     <state x="-1254" y="272" key="FileChooserDialogImpl" timestamp="1580921390551">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state x="-1254" y="272" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580921390551" />
     <state x="666" y="262" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580230266371" />
-    <state width="1877" height="269" key="GridCell.Tab.0.bottom" timestamp="1581015987629">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="1493" height="269" key="GridCell.Tab.0.bottom" timestamp="1581360867371">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1877" height="269" key="GridCell.Tab.0.bottom/0.0.1097.577/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581354944176" />
     <state width="1877" height="270" key="GridCell.Tab.0.bottom/0.0.1280.680/1280.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581012210989" />
-    <state width="1877" height="269" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581015987629" />
+    <state width="1877" height="269" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581359338106" />
+    <state width="1493" height="269" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1080/-1920.0.1920.1080@0.0.1536.824" timestamp="1581360867371" />
+    <state width="1877" height="269" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581360168291" />
     <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580929227128" />
     <state width="1877" height="270" key="GridCell.Tab.0.bottom/0.0.800.560/800.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581013556990" />
-    <state width="1877" height="269" key="GridCell.Tab.0.center" timestamp="1581015987629">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="1493" height="269" key="GridCell.Tab.0.center" timestamp="1581360867371">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1877" height="269" key="GridCell.Tab.0.center/0.0.1097.577/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581354944176" />
     <state width="1877" height="270" key="GridCell.Tab.0.center/0.0.1280.680/1280.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581012210989" />
-    <state width="1877" height="269" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581015987629" />
+    <state width="1877" height="269" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581359338106" />
+    <state width="1493" height="269" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1080/-1920.0.1920.1080@0.0.1536.824" timestamp="1581360867371" />
+    <state width="1877" height="269" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581360168291" />
     <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580929227128" />
     <state width="1877" height="270" key="GridCell.Tab.0.center/0.0.800.560/800.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581013556990" />
-    <state width="1877" height="269" key="GridCell.Tab.0.left" timestamp="1581015987621">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="1493" height="269" key="GridCell.Tab.0.left" timestamp="1581360867371">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1877" height="269" key="GridCell.Tab.0.left/0.0.1097.577/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581354944176" />
     <state width="1877" height="270" key="GridCell.Tab.0.left/0.0.1280.680/1280.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581012210989" />
-    <state width="1877" height="269" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581015987621" />
+    <state width="1877" height="269" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581359338106" />
+    <state width="1493" height="269" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1080/-1920.0.1920.1080@0.0.1536.824" timestamp="1581360867371" />
+    <state width="1877" height="269" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581360168291" />
     <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580929227128" />
     <state width="1877" height="270" key="GridCell.Tab.0.left/0.0.800.560/800.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581013556990" />
-    <state width="1877" height="269" key="GridCell.Tab.0.right" timestamp="1581015987629">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="1493" height="269" key="GridCell.Tab.0.right" timestamp="1581360867371">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1877" height="269" key="GridCell.Tab.0.right/0.0.1097.577/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581354944176" />
     <state width="1877" height="270" key="GridCell.Tab.0.right/0.0.1280.680/1280.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581012210989" />
-    <state width="1877" height="269" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581015987629" />
+    <state width="1877" height="269" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581359338106" />
+    <state width="1493" height="269" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1080/-1920.0.1920.1080@0.0.1536.824" timestamp="1581360867371" />
+    <state width="1877" height="269" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581360168291" />
     <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580929227128" />
     <state width="1877" height="270" key="GridCell.Tab.0.right/0.0.800.560/800.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581013556990" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1580929227128">
@@ -523,198 +350,6 @@
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state x="-1297" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580837643089" />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/7zE4C6A655D/TwitchBot.class" />
-    <entry file="jar://$PROJECT_DIR$/../../../GDBoard Dependencies/TwitchIRC_v1.2.jar!/com/cavariux/twitchirc/Core/TwitchBot.class" />
-    <entry file="file://$PROJECT_DIR$/src/Main/ChatBot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="97" column="70" selection-start-line="97" selection-start-column="70" selection-end-line="97" selection-end-column="70" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/CheckBoxButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-97">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Defaults.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/GDObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/JButtonUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/KeyListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/LevelData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" selection-start-column="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="18" column="121" selection-start-line="18" selection-start-column="121" selection-end-line="18" selection-end-column="121" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Overlay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/ParseLevel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/PlaySong.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="50" column="60" selection-start-line="50" selection-start-column="60" selection-end-line="50" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/RoundedJButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Settings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
-          <folding>
-            <marker date="1581279450291" expanded="false" signature="452:482" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SongWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="19" column="133" selection-start-line="19" selection-start-column="127" selection-end-line="19" selection-end-column="133" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/InfoWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="18" column="111" lean-forward="true" selection-start-line="18" selection-start-column="105" selection-end-line="18" selection-end-column="111" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/LevelsWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="22" column="147" lean-forward="true" selection-start-line="22" selection-start-column="147" selection-end-line="22" selection-end-column="153" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/ActionsWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="21" column="19" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/InnerWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="184" column="74" lean-forward="true" selection-start-line="184" selection-start-column="8" selection-end-line="184" selection-end-column="74" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/MainBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="821">
-          <caret line="165" column="61" lean-forward="true" selection-start-line="165" selection-start-column="61" selection-end-line="165" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/GetComments.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="35" column="21" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/CommentsWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="139" column="61" selection-start-line="139" selection-start-column="61" selection-end-line="139" selection-end-column="61" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4998#5643#0" expanded="true" />
-            <element signature="e#5642#5643#0" expanded="true" />
-            <element signature="e#6736#6913#0" expanded="true" />
-            <element signature="e#6912#6913#0" expanded="true" />
-            <element signature="e#7045#7222#0" expanded="true" />
-            <element signature="e#7221#7222#0" expanded="true" />
-            <element signature="e#14873#14874#0" expanded="true" />
-            <element signature="e#14920#14921#0" expanded="true" />
-            <element signature="e#14954#14955#0" expanded="true" />
-            <element signature="e#15007#15008#0" expanded="true" />
-            <element signature="e#15039#15040#0" expanded="true" />
-            <element signature="e#15090#15091#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
   </component>
   <component name="masterDetails">
     <states>

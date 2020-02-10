@@ -148,7 +148,8 @@ public class LevelsWindow {
 		JLabel lID = new JLabel("By " + author + " (" + ID + ")");
 		JLabel lAuthor = new JLabel(requester);
 		JLabel lAnalyzed = new JLabel();
-		JLabel lStarCount = new JLabel(starCount + "*");
+		JLabel lStarCount = new JLabel(String.valueOf(starCount));
+		JLabel lStar = new JLabel("\uE24A");
 
 		String[] difficulties = { "NA", "easy", "normal", "hard", "harder", "insane", "easy demon", "medium demon",
 				"hard demon", "insane demon", "extreme demon" };
@@ -188,6 +189,7 @@ public class LevelsWindow {
 		System.out.println(starCount);
 		if(starCount !=0){
 			request.add(lStarCount);
+			request.add(lStar);
 		}
 		request.setLayout(null);
 
@@ -200,8 +202,11 @@ public class LevelsWindow {
 		lAuthor.setBounds((int) (400 - lAuthor.getPreferredSize().getWidth()) - 10, 3,
 				(int) lAuthor.getPreferredSize().getWidth() + 5, 20);
 		lStarCount.setFont(new Font("bahnschrift", Font.PLAIN, 18));
-		lStarCount.setBounds((int) (400 - lStarCount.getPreferredSize().getWidth()) - 10, 26,
+		lStarCount.setBounds((int) ((int) (400 - lStarCount.getPreferredSize().getWidth()) - 30), 26,
 				(int) lStarCount.getPreferredSize().getWidth() + 5, 20);
+		lStar.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 16));
+		lStar.setBounds((int) (400 - lStar.getPreferredSize().getWidth()) - 10, 26,
+				(int) lStar.getPreferredSize().getWidth() + 5, 20);
 		lAnalyzed.setFont(new Font("bahnschrift", Font.PLAIN, 12));
 
 		lName.setForeground(Defaults.FOREGROUND);
@@ -209,6 +214,7 @@ public class LevelsWindow {
 		lID.setForeground(Defaults.FOREGROUND);
 		lAnalyzed.setForeground(Defaults.FOREGROUND);
 		lStarCount.setForeground(Defaults.FOREGROUND);
+		lStar.setForeground(Defaults.FOREGROUND);
 
 		request.setBackground(Defaults.MAIN);
 		request.setUI(defaultUI);
@@ -300,16 +306,24 @@ public class LevelsWindow {
 		defaultUI.setHover(Defaults.HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
 		selectUI.setHover(Defaults.BUTTON_HOVER);
+		selectUI.setSelect(Defaults.SELECT);
 		mainPanel.setBackground(Defaults.MAIN);
+		int i = 0;
 		for(Component component : mainPanel.getComponents()){
 			if(component instanceof JButton){
-				component.setBackground(Defaults.MAIN);
+				if(selectedID == i){
+					component.setBackground(Defaults.SELECT);
+				}
+				else {
+					component.setBackground(Defaults.MAIN);
+				}
 				for(Component component2 : ((JButton) component).getComponents()){
 					if(component2 instanceof JLabel){
 						component2.setForeground(Defaults.FOREGROUND);
 					}
 				}
 			}
+			i++;
 		}
 	}
 	static void setOneSelect(){

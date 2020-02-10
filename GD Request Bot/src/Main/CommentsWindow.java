@@ -2,12 +2,22 @@ package Main;
 
 import com.jidesoft.swing.Resizable;
 import com.jidesoft.swing.ResizablePanel;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.text.StringEscapeUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
@@ -137,21 +147,16 @@ class CommentsWindow {
                 ((InnerWindow) window).moveToFront();
                 super.mousePressed(e);
                 page++;
-                //TODO Fix comments last page (again........)
-                try {
                     unloadComments(false);
-                    loadComments(page, topC);
-                } catch (Exception g) {
-                    g.printStackTrace();
-                    page--;
-                    try {
-                        loadComments(page, topC);
-                    } catch (Exception f) {
-                        f.printStackTrace();
+                    if(!loadComments(page, topC)){
+                        page--;
+                        try {
+                            loadComments(page, topC);
+                        } catch (Exception f) {
+                            f.printStackTrace();
+                        }
                     }
                 }
-
-            }
         });
         newUI.setBackground(Defaults.MAIN);
         newUI.setHover(Defaults.HOVER);
@@ -236,7 +241,7 @@ class CommentsWindow {
         panel.updateUI();
     }
 
-    static void loadComments(int page, boolean top) {
+    static boolean loadComments(int page, boolean top) {
 
         panel.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 4));
 
@@ -265,11 +270,21 @@ class CommentsWindow {
                     commenter.setBounds(9, 4, (int) (width * 0.5), 18);
                     JLabel percentLabel = new JLabel();
                     percentLabel.setFont(new Font("bahnschrift", Font.BOLD, 14));
+                    JLabel likeIcon = new JLabel();
+                    if(Integer.parseInt(likes.get(i)) < 0){
+                        likeIcon.setText("\uE8E0");
+                    }
+                    else{
+                        likeIcon.setText("\uE8E1");
+                    }
+
+                    likeIcon.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 14));
+                    likeIcon.setBounds(width - 20, 4, (int) (width * 0.5), 18);
 
 
                     JLabel likesLabel = new JLabel();
                     likesLabel.setFont(new Font("bahnschrift", Font.BOLD, 10));
-                    likesLabel.setBounds(width - 10, 4, (int) (width * 0.5), 18);
+
 
 
                     JTextPane comment = new JTextPane();
@@ -280,10 +295,13 @@ class CommentsWindow {
                     cmtPanel.add(comment);
                     cmtPanel.add(percentLabel);
                     cmtPanel.add(likesLabel);
+                    cmtPanel.add(likeIcon);
 
                     commenter.setForeground(Defaults.FOREGROUND);
                     percentLabel.setForeground(Defaults.FOREGROUND2);
                     likesLabel.setForeground(Defaults.FOREGROUND);
+                    likeIcon.setForeground(Defaults.FOREGROUND);
+
                     comment.setOpaque(false);
                     comment.setEditable(false);
 
@@ -297,12 +315,8 @@ class CommentsWindow {
                         percentLabel.setText(percent.get(i) + "%");
                         percentLabel.setBounds(commenter.getPreferredSize().width + 20, 4, percentLabel.getPreferredSize().width + 5, 18);
                     }
-                    if (likes.get(i).equalsIgnoreCase("1")) {
-                        likesLabel.setText(likes.get(i) + " Like");
-                    } else {
-                        likesLabel.setText(likes.get(i) + " Likes");
-                    }
-                    likesLabel.setBounds(width - likesLabel.getPreferredSize().width - 10, 4, likesLabel.getPreferredSize().width + 5, 18);
+                    likesLabel.setText(likes.get(i));
+                    likesLabel.setBounds(width - likesLabel.getPreferredSize().width - 26, 4, likesLabel.getPreferredSize().width + 5, 18);
 
                     panel.add(cmtPanel);
                     panelHeight = panelHeight + 32 + comment.getPreferredSize().height;
@@ -323,8 +337,9 @@ class CommentsWindow {
             SwingUtilities.invokeLater(() -> scrollPane.getVerticalScrollBar().setValue(0));
         }
         catch (Exception ignored){
-
+            return false;
         }
+        return true;
     }
 
     static void refreshUI() {
@@ -335,6 +350,7 @@ class CommentsWindow {
         defaultUI.setBackground(Defaults.TOP);
         defaultUI.setHover(Defaults.HOVER);
         defaultUI.setSelect(Defaults.SELECT);
+        scrollPane.getViewport().setBackground(Defaults.SUB_MAIN);
         for (Component component : panel.getComponents()) {
             if (component instanceof JPanel) {
                 component.setBackground(Defaults.MAIN);
@@ -362,7 +378,7 @@ class CommentsWindow {
                 component.setForeground(Defaults.FOREGROUND);
             }
         }
-        panel.setBackground(Defaults.MAIN);
+        panel.setBackground(Defaults.SUB_MAIN);
         buttons.setBackground(Defaults.SUB_MAIN);
     }
 
@@ -378,3 +394,52 @@ class CommentsWindow {
         ((InnerWindow) window).setVisible();
     }
 }
+class GetComments {
+    private ArrayList<ArrayList<String>> Comments = new ArrayList<>();
+    private ArrayList<String> commentContent = new ArrayList<>();
+    private ArrayList<String> commenters = new ArrayList<>();
+    private ArrayList<String> percent = new ArrayList<>();
+    private ArrayList<String> likes = new ArrayList<>();
+
+    ArrayList<ArrayList<String>> getComments(String levelID, int page, boolean top) throws IOException {
+        URL gdAPI;
+        if (top) {
+            gdAPI = new URL("https://gdbrowser.com/api/comments/" + levelID + "?page=" + page + "&top");
+        } else {
+            gdAPI = new URL("https://gdbrowser.com/api/comments/" + levelID + "?page=" + page);
+        }
+        URLConnection con = gdAPI.openConnection();
+        InputStream is = con.getInputStream();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        String message = "{\"Comments\" : " + IOUtils.toString(br) + "}";
+        JSONObject obj = new JSONObject(message);
+        JSONArray arr;
+        try {
+            arr = obj.getJSONArray("Comments");
+
+            assert arr != null;
+            for (int i = 0; i < arr.length(); i++) {
+                try {
+                    commentContent.add(StringEscapeUtils.unescapeHtml4(arr.getJSONObject(i).getString("content")));
+                    Comments.add(commentContent);
+                    commenters.add(arr.getJSONObject(i).getString("username"));
+                    Comments.add(commenters);
+                    try {
+                        percent.add(StringEscapeUtils.unescapeHtml4(arr.getJSONObject(i).getString("percent")));
+                    } catch (Exception e) {
+                        percent.add("0");
+                    }
+                    Comments.add(percent);
+                    likes.add(arr.getJSONObject(i).getString("likes"));
+                    Comments.add(likes);
+                } catch (Exception ignored) {
+                    break;
+                }
+            }
+        } catch (Exception ignored) {
+
+        }
+        return Comments;
+    }
+}
+

@@ -1,12 +1,17 @@
 package Main;
 
 import com.jidesoft.swing.ResizablePanel;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -23,8 +28,8 @@ class SongWindow {
 	private static JLabel songAuthor = new JLabel();
 	private static JLabel songID = new JLabel();
 	private static JButtonUI defaultUI = new JButtonUI();
-	private static JButton play = new RoundedJButton("Play");
-	private static JButton stop = new RoundedJButton("Stop");
+	private static JButton play = new RoundedJButton("\uEDB5");
+	private static JButton stop = new RoundedJButton("\uF12A");
 
 	static void createPanel() {
 		ArrayList<PlaySong> songs = new ArrayList<PlaySong>();
@@ -44,7 +49,7 @@ class SongWindow {
 		play.setBackground(Defaults.BUTTON);
 		play.setForeground(Defaults.FOREGROUND);
 		play.setBorder(BorderFactory.createEmptyBorder());
-		play.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		play.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
 		play.addMouseListener(new MouseAdapter() {
 			@SuppressWarnings("deprecation")
 			@Override
@@ -69,7 +74,7 @@ class SongWindow {
 		stop.setBackground(Defaults.BUTTON);
 		stop.setForeground(Defaults.FOREGROUND);
 		stop.setBorder(BorderFactory.createEmptyBorder());
-		stop.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		stop.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 26));
 		stop.addMouseListener(new MouseAdapter() {
 			@SuppressWarnings("deprecation")
 			@Override
@@ -162,3 +167,26 @@ class SongWindow {
 		((InnerWindow) window).setVisible();
 	}
 }
+class PlaySong extends Thread {
+
+	private String URL;
+
+	void setSong(String URL){
+		this.URL = URL;
+	}
+
+	public void run() {
+
+		try {
+			Player mp3player;
+			BufferedInputStream inp;
+			assert URL != null;
+			inp = new BufferedInputStream(new URL(URL).openStream());
+			mp3player = new Player(inp);
+			mp3player.play();
+		} catch (IOException | JavaLayerException | NullPointerException e) {
+			e.printStackTrace();
+		}
+	}
+}
+
