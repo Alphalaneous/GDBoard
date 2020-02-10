@@ -1,6 +1,5 @@
 package Main;
 
-import com.jidesoft.swing.Resizable;
 import com.jidesoft.swing.ResizablePanel;
 
 import javax.imageio.ImageIO;
@@ -18,13 +17,13 @@ import java.io.IOException;
 class ActionsWindow {
 
 	private static int height = 60;
-	private static int width = 200;
+	private static int width = 260;
 	private static ResizablePanel window = new InnerWindow("Actions", 1920 - width - 10, 200, width, height,
-			"src/resources/Icons/Actions.png").createPanel();
+			"\uEBFC").createPanel();
 	private static JPanel mainPanel = new JPanel();
 	private static JPanel panel = new JPanel();
 	private static JButtonUI defaultUI = new JButtonUI();
-
+	//TODO Button Icons
 	static void createPanel() {
 
 		mainPanel.setBounds(1, 31, width, height);
@@ -37,7 +36,7 @@ class ActionsWindow {
 		panel.setPreferredSize(new Dimension(width, height));
 		panel.setBounds(15, 5, width - 30, height - 10);
 		panel.setBackground(Defaults.MAIN);
-		GridLayout layout = new GridLayout(1, 3);
+		GridLayout layout = new GridLayout(1, 4);
 		layout.setHgap(10);
 		layout.setVgap(10);
 		panel.setLayout(layout);
@@ -51,8 +50,9 @@ class ActionsWindow {
 		assert origNext != null;
 		Image nextImg = origNext.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 		ImageIcon nextNew = new ImageIcon(nextImg);
-
+		//TODO make custom Yes/No dialog
 		JButton block = new RoundedJButton("block");
+		//TODO Block level, Block requester, Block author
 		block.setPreferredSize(new Dimension(50, 50));
 		block.setUI(defaultUI);
 		block.setBackground(Defaults.BUTTON);
@@ -67,7 +67,7 @@ class ActionsWindow {
 				if (Requests.levels.size() != 0) {
 					Object[] options = { "Yes", "No" };
 					int n = JOptionPane.showOptionDialog(Overlay.frame,
-							"Block " + Requests.levels.get(LevelsWindow2.getSelectedID()).getLevelID() + "?",
+							"Block " + Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "?",
 							"Block ID? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 					if (n == 0) {
@@ -75,13 +75,13 @@ class ActionsWindow {
 						FileWriter fr;
 						try {
 							fr = new FileWriter(file, true);
-							fr.write(Requests.levels.get(LevelsWindow2.getSelectedID()).getLevelID() + "\n");
+							fr.write(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "\n");
 							fr.close();
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
-						Requests.levels.remove(LevelsWindow2.getSelectedID());
-						LevelsWindow2.removeButton();
+						Requests.levels.remove(LevelsWindow.getSelectedID());
+						LevelsWindow.removeButton();
 
 						Thread thread = new Thread(() -> {
 							CommentsWindow.unloadComments(true);
@@ -92,10 +92,40 @@ class ActionsWindow {
 					SongWindow.refreshInfo();
 					InfoWindow.refreshInfo();
 				}
-				LevelsWindow2.setOneSelect();
+				LevelsWindow.setOneSelect();
 			}
 		});
-
+		JButton clear = new RoundedJButton("clear");
+		clear.setPreferredSize(new Dimension(50, 50));
+		clear.setUI(defaultUI);
+		clear.setBackground(Defaults.BUTTON);
+		clear.setForeground(Defaults.FOREGROUND);
+		clear.setBorder(BorderFactory.createEmptyBorder());
+		clear.setFont(new Font("bahnschrift", Font.BOLD, 14));
+		clear.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				((InnerWindow) window).moveToFront();
+				super.mousePressed(e);
+				Object[] options = { "Yes", "No" };
+				int n = JOptionPane.showOptionDialog(Overlay.frame,
+						"Clear the queue?",
+						"Clear? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+				if (n == 0) {
+					if (Requests.levels.size() != 0) {
+						for (int i = 0; i < Requests.levels.size(); i++) {
+							LevelsWindow.removeButton();
+						}
+						Requests.levels.clear();
+						SongWindow.refreshInfo();
+						InfoWindow.refreshInfo();
+						CommentsWindow.unloadComments(true);
+					}
+					LevelsWindow.setOneSelect();
+				}
+			}
+		});
 
 
 		JButton skip = new RoundedJButton(nextNew);
@@ -113,32 +143,33 @@ class ActionsWindow {
 				if (Requests.levels.size() != 0) {
 
 
-					if (!(Requests.levels.size() <= 1) && LevelsWindow2.getSelectedID() == 0) {
+					if (!(Requests.levels.size() <= 1) && LevelsWindow.getSelectedID() == 0) {
 						StringSelection selection = new StringSelection(
-								Requests.levels.get(LevelsWindow2.getSelectedID()+1).getLevelID());
+								Requests.levels.get(LevelsWindow.getSelectedID()+1).getLevelID());
 						Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 						clipboard.setContents(selection, selection);
 					}
-					if (LevelsWindow2.getSelectedID() == 0 && Requests.levels.size() > 1) {
-						Requests.levels.remove(LevelsWindow2.getSelectedID());
-						LevelsWindow2.removeButton();
+					if (LevelsWindow.getSelectedID() == 0 && Requests.levels.size() > 1) {
+						Requests.levels.remove(LevelsWindow.getSelectedID());
+						LevelsWindow.removeButton();
 						
 						Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
 								+ Requests.levels.get(0).getLevelID() + "). Requested by "
 								+ Requests.levels.get(0).getRequester());
 					} else {
-						Requests.levels.remove(LevelsWindow2.getSelectedID());
-						LevelsWindow2.removeButton();
+						Requests.levels.remove(LevelsWindow.getSelectedID());
+						LevelsWindow.removeButton();
 						
 					}
+					Thread thread = new Thread(() -> {
+						CommentsWindow.unloadComments(true);
+						CommentsWindow.loadComments(0, false);
+					});
+					thread.start();
 
 				}
-				LevelsWindow2.setOneSelect();
-				Thread thread = new Thread(() -> {
-					CommentsWindow.unloadComments(true);
-					CommentsWindow.loadComments(0, false);
-				});
-				thread.start();
+				LevelsWindow.setOneSelect();
+
 				SongWindow.refreshInfo();
 				InfoWindow.refreshInfo();
 			}
@@ -168,7 +199,7 @@ class ActionsWindow {
 				super.mousePressed(e);
 				if (Requests.levels.size() != 0) {
 					StringSelection selection = new StringSelection(
-							Requests.levels.get(LevelsWindow2.getSelectedID()).getLevelID());
+							Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
 					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 					clipboard.setContents(selection, selection);
 				}
@@ -178,6 +209,7 @@ class ActionsWindow {
 		panel.add(skip);
 		panel.add(copy);
 		panel.add(block);
+		panel.add(clear);
 		mainPanel.add(panel);
 		window.add(mainPanel);
 		((InnerWindow) window).refreshListener();

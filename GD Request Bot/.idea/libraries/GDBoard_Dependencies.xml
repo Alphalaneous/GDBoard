@@ -8,7 +8,6 @@
       <root url="jar://$PROJECT_DIR$/../../../GDBoard Dependencies/json-20140107.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../GDBoard Dependencies/jregistry-1.8.3.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../GDBoard Dependencies/system-hook-3.5.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../GDBoard Dependencies/TwitchIRC_v1.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../GDBoard Dependencies/twitch-api-wrapper-0.3-jar-with-dependencies.jar!/" />
       <root url="file://$PROJECT_DIR$/../../../GDBoard Dependencies" />
       <root url="file://$PROJECT_DIR$/../../../GDBoard Dependencies/bin" />

@@ -69,7 +69,7 @@ class MainBar {
 		buttonPanel.setLayout(new GridLayout(1, 2, 0, 0));
 
 		//if (Settings.isRequests()) {
-			JButton toggleSong = createButton("src/resources/Icons/note.png");
+			JButton toggleSong = createButton("\uEC4F");
 			toggleSong.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
@@ -78,7 +78,7 @@ class MainBar {
 				}
 			});
 
-			JButton toggleComments = createButton("src/resources/Icons/comments.png");
+			JButton toggleComments = createButton("\uEBDB");
 			toggleComments.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
@@ -87,7 +87,7 @@ class MainBar {
 				}
 			});
 
-			JButton toggleInfo = createButton("src/resources/Icons/info.png");
+			JButton toggleInfo = createButton("\uE946");
 			toggleInfo.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
@@ -96,16 +96,16 @@ class MainBar {
 				}
 			});
 
-			JButton toggleLevels = createButton("src/resources/Icons/queue.png");
+			JButton toggleLevels = createButton("\uE179");
 			toggleLevels.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
 					super.mousePressed(e);
-					LevelsWindow2.toggleVisible();
+					LevelsWindow.toggleVisible();
 				}
 			});
 
-			JButton toggleActions = createButton("src/resources/Icons/actions.png");
+			JButton toggleActions = createButton("\uEBFC");
 			toggleActions.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
@@ -134,25 +134,16 @@ class MainBar {
 		Overlay.addToFrame(barPanel);
 	}
 
-	private static JButton createButton(String location) {
-		BufferedImage origImg = null;
-		try {
-			origImg = ImageIO.read(new File(location));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		assert origImg != null;
-		Image scaledImg = origImg.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-		ImageIcon imgNew = new ImageIcon(scaledImg);
+	private static JButton createButton(String icon) {
 
 		defaultUI.setBackground(Defaults.MAIN);
-		JButton button = new JButton(imgNew);
+		JButton button = new JButton(icon);
 		button.setPreferredSize(new Dimension(65, 64));
 		button.setBackground(Defaults.MAIN);
 		button.setUI(defaultUI);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
-		button.setFont(new Font("bahnschrift", Font.BOLD, 14));
+		button.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
 		return button;
 	}
 
@@ -172,6 +163,7 @@ class MainBar {
 		for (Component component : buttonPanel.getComponents()) {
 			if (component instanceof JButton) {
 				component.setBackground(Defaults.MAIN);
+				component.setForeground(Defaults.FOREGROUND);
 			}
 		}
 		int middle = (int) (Defaults.screenSize.getWidth() / 2);

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/Main/ActionsWindow.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/ChatBot.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/CheckBoxButton.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/CommentsWindow.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/Defaults.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/GDObject.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/GetComments.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/InfoWindow.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/InnerWindow.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/JButtonUI.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/KeyListener.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/LevelData.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/LevelsWindow.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/Main.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/MainBar.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/Overlay.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/ParseLevel.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/PlaySong.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/Requests.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/RoundedJButton.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/Settings.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/SettingsWindow.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Main/SongWindow.java" charset="UTF-8" />
+  </component>
+</project>

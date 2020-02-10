@@ -15,6 +15,7 @@ class KeyListener {
 	// TODO: Switch to https://github.com/kwhat/jnativehook
 	private static boolean openKeyReleased = false;
 	static void hook() throws AWTException {
+		//TODO rework opening and closing locks
 		GlobalKeyboardHook keyboardHook = new GlobalKeyboardHook(true);
 		keyboardHook.addKeyListener(new GlobalKeyAdapter() {
 
@@ -45,13 +46,22 @@ class KeyListener {
 
 					}
 				}
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 		Robot r = new Robot();
 		Thread thread = new Thread(() -> {
 			ControllerManager controllers = new ControllerManager();
 			controllers.initSDLGamepad();
-
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			while(true) {
 				  ControllerState currState = controllers.getState(0);
 				  if(currState.leftStickClick) {
@@ -65,14 +75,15 @@ class KeyListener {
 				  if(currState.rightStickClick) {
 					  r.keyPress(KeyEvent.VK_CONTROL);
 					  r.keyPress(KeyEvent.VK_V);
-					  try {
-						Thread.sleep(200);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+
 					  r.keyRelease(KeyEvent.VK_V);
 					  r.keyRelease(KeyEvent.VK_CONTROL);
 				  }
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				}
 		});
 		thread.start();

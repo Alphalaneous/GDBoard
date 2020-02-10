@@ -76,8 +76,16 @@ class Overlay {
 	}
 
 	static void refreshUI() {
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		frame.setSize(Defaults.screenSize);
+		frame.invalidate();
+		frame.revalidate();
 		SettingsWindow.refreshUI();
-		LevelsWindow2.refreshUI();
+		LevelsWindow.refreshUI();
 		InfoWindow.refreshUI();
 		CommentsWindow.refreshUI();
 		ActionsWindow.refreshUI();
@@ -91,7 +99,7 @@ class Overlay {
 		CommentsWindow.setInvisible();
 		ActionsWindow.setInvisible();
 		InfoWindow.setInvisible();
-		LevelsWindow2.setInvisible();
+		LevelsWindow.setInvisible();
 		SongWindow.setInvisible();
 		SettingsWindow.setInvisible();
 		MainBar.setInvisible();
@@ -106,7 +114,7 @@ class Overlay {
 		CommentsWindow.setVisible();
 		ActionsWindow.setVisible();
 		InfoWindow.setVisible();
-		LevelsWindow2.setVisible();
+		LevelsWindow.setVisible();
 		SongWindow.setVisible();
 		SettingsWindow.setVisible();
 		MainBar.setVisible();

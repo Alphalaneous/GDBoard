@@ -16,11 +16,11 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.Objects;
 
-public class LevelsWindow2 {
+public class LevelsWindow {
 
 	private static int width = 400;
 	private static int height = 400;
-	private static ResizablePanel window = new InnerWindow("Requests", Settings.getRequestsWLoc().x, Settings.getRequestsWLoc().y, width, height, "src/resources/Icons/Queue.png"){
+	private static ResizablePanel window = new InnerWindow("Requests", Settings.getRequestsWLoc().x, Settings.getRequestsWLoc().y, width, height, "\uE179"){
 		@Override
 		protected Resizable createResizable() {
 			return new Resizable(this) {
@@ -121,8 +121,7 @@ public class LevelsWindow2 {
 	}
 
 	static void createButton(String name, String author, String ID, String difficulty,
-							 boolean epic, boolean featured, int starCount) throws IOException {
-
+							 boolean epic, boolean featured, int starCount, String requester) throws IOException {
 		defaultUI.setBackground(Defaults.MAIN);
 
 		defaultUI.setHover(Defaults.HOVER);
@@ -146,8 +145,8 @@ public class LevelsWindow2 {
 		noticeSelectUI.setSelect(new Color(150, 150, 0));
 
 		JLabel lName = new JLabel(name);
-		JLabel lID = new JLabel(ID);
-		JLabel lAuthor = new JLabel(author);
+		JLabel lID = new JLabel("By " + author + " (" + ID + ")");
+		JLabel lAuthor = new JLabel(requester);
 		JLabel lAnalyzed = new JLabel();
 		JLabel lStarCount = new JLabel(starCount + "*");
 
@@ -157,19 +156,22 @@ public class LevelsWindow2 {
 
 		for (String difficultyA : difficulties) {
 			if (difficulty.equalsIgnoreCase(difficultyA)) {
+				if(difficulty.equalsIgnoreCase("insane") && starCount == 1){
+					difficultyA = "auto";
+				}
 				if (epic) {
 					reqDifficulty.setIcon(new ImageIcon(ImageIO
-							.read(Objects.requireNonNull(LevelsWindow2.class.getClassLoader()
+							.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
 									.getResource("DifficultyIcons/Epic/" + difficultyA + ".png")))
 							.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
 				} else if (featured) {
 					reqDifficulty.setIcon(new ImageIcon(ImageIO
-							.read(Objects.requireNonNull(LevelsWindow2.class.getClassLoader()
+							.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
 									.getResource("DifficultyIcons/Featured/" + difficultyA + ".png")))
 							.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
 				} else {
 					reqDifficulty.setIcon(new ImageIcon(ImageIO
-							.read(Objects.requireNonNull(LevelsWindow2.class.getClassLoader()
+							.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
 									.getResource("DifficultyIcons/Normal/" + difficultyA + ".png")))
 							.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
 				}
@@ -191,15 +193,15 @@ public class LevelsWindow2 {
 
 
 		lName.setFont(new Font("bahnschrift", Font.PLAIN, 20));
-		lName.setBounds(60, 0, (int) lName.getPreferredSize().getWidth(), 30);
+		lName.setBounds(60, 0, (int) lName.getPreferredSize().getWidth() + 5, 30);
 		lID.setFont(new Font("bahnschrift", Font.PLAIN, 12));
-		lID.setBounds(60, 26, (int) lID.getPreferredSize().getWidth(), 20);
+		lID.setBounds(60, 26, (int) lID.getPreferredSize().getWidth() + 5, 20);
 		lAuthor.setFont(new Font("bahnschrift", Font.PLAIN, 12));
 		lAuthor.setBounds((int) (400 - lAuthor.getPreferredSize().getWidth()) - 10, 3,
-				(int) lAuthor.getPreferredSize().getWidth(), 20);
+				(int) lAuthor.getPreferredSize().getWidth() + 5, 20);
 		lStarCount.setFont(new Font("bahnschrift", Font.PLAIN, 18));
 		lStarCount.setBounds((int) (400 - lStarCount.getPreferredSize().getWidth()) - 10, 26,
-				(int) lStarCount.getPreferredSize().getWidth(), 20);
+				(int) lStarCount.getPreferredSize().getWidth() + 5, 20);
 		lAnalyzed.setFont(new Font("bahnschrift", Font.PLAIN, 12));
 
 		lName.setForeground(Defaults.FOREGROUND);
@@ -225,7 +227,6 @@ public class LevelsWindow2 {
 		request.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-
 				((InnerWindow) window).moveToFront();
 				super.mousePressed(e);
 				Component[] comp = mainPanel.getComponents();
@@ -246,8 +247,7 @@ public class LevelsWindow2 {
 				}
 
 				for (int j = 0; j < Requests.levels.size(); j++) {
-
-					if (lID.getText().equals(Requests.levels.get(j).getLevelID())) {
+					if (lID.getText().contains("(" + Requests.levels.get(j).getLevelID() + ")")) {
 						if (Requests.levels.get(j).getContainsVulgar() && Requests.levels.get(j).getAnalyzed()) {
 							request.setUI(noticeSelectUI);
 						} else if (Requests.levels.get(j).getContainsImage() && Requests.levels.get(j).getAnalyzed()) {
@@ -343,7 +343,7 @@ public class LevelsWindow2 {
 			if (component instanceof JButton) {
 				for (Component component2 : ((JButton) component).getComponents()) {
 					if (component2 instanceof JLabel) {
-						if (((JLabel) component2).getText().equals(ID)) {
+						if (((JLabel) component2).getText().contains("(" + ID + ")")) {
 							if (image) {
 								((JLabel) ((JButton) component).getComponent(3)).setText("Analyzed");
 								((JButton) component).getComponent(3).setBounds(
@@ -373,6 +373,14 @@ public class LevelsWindow2 {
 										26,
 										(int) ((JButton) component).getComponent(3).getPreferredSize().getWidth(),
 										20);
+							}else{
+								((JLabel) ((JButton) component).getComponent(3)).setText("Failed Analyzing");
+								((JButton) component).getComponent(3).setBounds(
+										(int) (400 - ((JButton) component).getComponent(3).getPreferredSize()
+												.getWidth()) - 10,
+										26,
+										(int) ((JButton) component).getComponent(3).getPreferredSize().getWidth(),
+										20);
 							}
 						}
 					}
@@ -395,8 +403,5 @@ public class LevelsWindow2 {
         mainPanel.setBounds(0, 0, width, panelHeight);
         mainPanel.setPreferredSize(new Dimension(width, panelHeight));
 		mainPanel.updateUI();
-	}
-	static Point getLocationValue() {
-		return window.getLocation();
 	}
 }

@@ -2,6 +2,9 @@ package Main;
 
 class LevelData {
 
+
+
+
 	String getRequester() {
 		return requester;
 	}
@@ -29,10 +32,6 @@ class LevelData {
 	String getDownloads() {
 		return downloads;
 	}
-
-	//String getLength() {
-	//	return length;
-	//}
 
 	String getLevelID() {
 		return levelID;
@@ -90,6 +89,14 @@ class LevelData {
 		return stars;
 	}
 
+	String getSongURL(){
+		return downloadURL;
+	}
+
+	String getLength(){
+		return length;
+	}
+
 	private String requester;
 	private String author;
 	private String name;
@@ -97,13 +104,12 @@ class LevelData {
 	private String description;
 	private String likes;
 	private String downloads;
-	//private String length;
 	private String levelID;
 	//private int coins;
 	//private boolean verifiedCoins;
 	private boolean featured;
 	private boolean epic;
-
+	private String downloadURL;
 
 	private String songName;
 	private String songAuthor;
@@ -114,6 +120,7 @@ class LevelData {
 	private boolean containsImage;
 	private boolean analyzed = false;
 	private int stars;
+	private String length;
 	
 	void setStars(int stars) {
 		this.stars = stars;
@@ -163,10 +170,6 @@ class LevelData {
 		this.downloads = downloads;
 	}
 
-	//void setLength(String length) {
-	//	this.length = length;
-	//}
-
 	void setLevelID(String levelID) {
 		this.levelID = levelID;
 	}
@@ -199,7 +202,15 @@ class LevelData {
 		this.songID = songID;
 	}
 
-	//void setSongSize(String songSize) {
+    void setSongURL(String downloadURL) {
+		this.downloadURL = downloadURL;
+    }
+
+    void setLength(String length) {
+		this.length = length;
+    }
+
+    //void setSongSize(String songSize) {
 	//	this.songSize = songSize;
 	//}
 }

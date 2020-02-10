@@ -23,7 +23,7 @@ class CommentsWindow {
     private static int height = 350;
     private static int width = 300;
     private static ResizablePanel window = new InnerWindow("Comments", 10, 500, width, height,
-            "src/resources/Icons/Comments.png") {
+            "\uEBDB") {
         @Override
         protected Resizable createResizable() {
 
@@ -137,10 +137,12 @@ class CommentsWindow {
                 ((InnerWindow) window).moveToFront();
                 super.mousePressed(e);
                 page++;
+                //TODO Fix comments last page (again........)
                 try {
                     unloadComments(false);
                     loadComments(page, topC);
-                } catch (Exception ignored) {
+                } catch (Exception g) {
+                    g.printStackTrace();
                     page--;
                     try {
                         loadComments(page, topC);
@@ -222,7 +224,6 @@ class CommentsWindow {
         Overlay.addToFrame(window);
     }
 
-
     static void unloadComments(boolean reset) {
         if (reset) {
             topC = false;
@@ -240,58 +241,90 @@ class CommentsWindow {
         panel.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 4));
 
         GetComments getComments = new GetComments();
-        ArrayList<String> commentText = null;
-        ArrayList<String> commenterText = null;
         try {
-            commentText = getComments.getComments(Requests.levels.get(LevelsWindow2.getSelectedID()).getLevelID(), page, top)
+            ArrayList<String> commentText = getComments.getComments(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID(), page, top)
                     .get(0);
-            commenterText = getComments
-                    .getComments(Requests.levels.get(LevelsWindow2.getSelectedID()).getLevelID(), page, top).get(1);
-        } catch (Exception ignored) {
-        }
-        ArrayList<String> finalCommentText = commentText;
-        ArrayList<String> finalCommenterText = commenterText;
-        panel.setVisible(false);
+            ArrayList<String> commenterText = getComments
+                    .getComments(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID(), page, top).get(1);
+            ArrayList<String> percent = getComments
+                    .getComments(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID(), page, top).get(2);
+            ArrayList<String> likes = getComments
+                    .getComments(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID(), page, top).get(3);
+            panel.setVisible(false);
 
-        int panelHeight = 0;
-        assert finalCommentText != null;
-        try {
-            for (int i = 0; i < finalCommentText.size() / 2; i++) {
-                assert finalCommenterText != null;
-                JPanel cmtPanel = new JPanel(null);
-                cmtPanel.setBackground(Defaults.MAIN);
+            int panelHeight = 0;
+            assert commentText != null;
+            try {
+                for (int i = 0; i < commentText.size() / 4; i++) {
+                    assert commenterText != null;
+                    JPanel cmtPanel = new JPanel(null);
+                    cmtPanel.setBackground(Defaults.MAIN);
 
-                JLabel commenter = new JLabel();
-                commenter.setFont(new Font("bahnschrift", Font.BOLD, 14));
-                commenter.setBounds(9, 4, (int) (width * 0.5), 18);
-                JTextPane comment = new JTextPane();
-                comment.setFont(new Font("bahnschrift", Font.PLAIN, 12));
-                comment.setBounds(6, 24, width - 6, 60);
-                cmtPanel.add(commenter);
-                cmtPanel.add(comment);
-                commenter.setForeground(Defaults.FOREGROUND);
-                comment.setOpaque(false);
-                comment.setEditable(false);
-                comment.setForeground(Defaults.FOREGROUND);
-                comment.setText(finalCommentText.get(i));
-                commenter.setText(finalCommenterText.get(i));
-                panel.add(cmtPanel);
-                panelHeight = panelHeight + 32 + comment.getPreferredSize().height;
-                cmtPanel.setPreferredSize(new Dimension(width, 28 + comment.getPreferredSize().height));
+                    JLabel commenter = new JLabel();
+                    commenter.setFont(new Font("bahnschrift", Font.BOLD, 14));
+                    commenter.setBounds(9, 4, (int) (width * 0.5), 18);
+                    JLabel percentLabel = new JLabel();
+                    percentLabel.setFont(new Font("bahnschrift", Font.BOLD, 14));
+
+
+                    JLabel likesLabel = new JLabel();
+                    likesLabel.setFont(new Font("bahnschrift", Font.BOLD, 10));
+                    likesLabel.setBounds(width - 10, 4, (int) (width * 0.5), 18);
+
+
+                    JTextPane comment = new JTextPane();
+                    comment.setFont(new Font("bahnschrift", Font.PLAIN, 12));
+                    comment.setBounds(6, 24, width - 6, 60);
+
+                    cmtPanel.add(commenter);
+                    cmtPanel.add(comment);
+                    cmtPanel.add(percentLabel);
+                    cmtPanel.add(likesLabel);
+
+                    commenter.setForeground(Defaults.FOREGROUND);
+                    percentLabel.setForeground(Defaults.FOREGROUND2);
+                    likesLabel.setForeground(Defaults.FOREGROUND);
+                    comment.setOpaque(false);
+                    comment.setEditable(false);
+
+                    comment.setForeground(Defaults.FOREGROUND);
+                    comment.setText(commentText.get(i));
+                    if(commenterText.get(i).equalsIgnoreCase(Requests.levels.get(LevelsWindow.getSelectedID()).getAuthor())){
+                        commenter.setForeground(new Color(16, 164,0));
+                    }
+                    commenter.setText(commenterText.get(i));
+                    if (!percent.get(i).equalsIgnoreCase("0")) {
+                        percentLabel.setText(percent.get(i) + "%");
+                        percentLabel.setBounds(commenter.getPreferredSize().width + 20, 4, percentLabel.getPreferredSize().width + 5, 18);
+                    }
+                    if (likes.get(i).equalsIgnoreCase("1")) {
+                        likesLabel.setText(likes.get(i) + " Like");
+                    } else {
+                        likesLabel.setText(likes.get(i) + " Likes");
+                    }
+                    likesLabel.setBounds(width - likesLabel.getPreferredSize().width - 10, 4, likesLabel.getPreferredSize().width + 5, 18);
+
+                    panel.add(cmtPanel);
+                    panelHeight = panelHeight + 32 + comment.getPreferredSize().height;
+                    cmtPanel.setPreferredSize(new Dimension(width, 28 + comment.getPreferredSize().height));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception ignored) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            panel.setPreferredSize(new Dimension(width, panelHeight));
+            panel.updateUI();
+            panel.setVisible(true);
+            scrollPane.getVerticalScrollBar().setValue(0);
+            SwingUtilities.invokeLater(() -> scrollPane.getVerticalScrollBar().setValue(0));
+        }
+        catch (Exception ignored){
 
         }
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        panel.setPreferredSize(new Dimension(width, panelHeight));
-        panel.updateUI();
-        panel.setVisible(true);
-        scrollPane.getVerticalScrollBar().setValue(0);
-        SwingUtilities.invokeLater(() -> scrollPane.getVerticalScrollBar().setValue(0));
     }
 
     static void refreshUI() {
@@ -299,12 +332,23 @@ class CommentsWindow {
         newUI.setBackground(Defaults.MAIN);
         newUI.setHover(Defaults.HOVER);
         newUI.setSelect(Defaults.SELECT);
+        defaultUI.setBackground(Defaults.TOP);
+        defaultUI.setHover(Defaults.HOVER);
+        defaultUI.setSelect(Defaults.SELECT);
         for (Component component : panel.getComponents()) {
             if (component instanceof JPanel) {
                 component.setBackground(Defaults.MAIN);
                 for (Component component1 : ((JPanel) component).getComponents()) {
                     if (component1 instanceof JLabel) {
-                        component1.setForeground(Defaults.FOREGROUND);
+                        if(((JLabel) component1).getText().contains("%")){
+                            component1.setForeground(Defaults.FOREGROUND2);
+                        }
+                        else if(((JLabel) component1).getText().equalsIgnoreCase(Requests.levels.get(LevelsWindow.getSelectedID()).getAuthor())){
+                            component1.setForeground(new Color(16, 164,0));
+                        }
+                        else {
+                            component1.setForeground(Defaults.FOREGROUND);
+                        }
                     }
                     if (component1 instanceof JTextPane) {
                         component1.setForeground(Defaults.FOREGROUND);
@@ -312,7 +356,14 @@ class CommentsWindow {
                 }
             }
         }
+        for (Component component : buttons.getComponents()) {
+            if (component instanceof JButton) {
+                component.setBackground(Defaults.TOP);
+                component.setForeground(Defaults.FOREGROUND);
+            }
+        }
         panel.setBackground(Defaults.MAIN);
+        buttons.setBackground(Defaults.SUB_MAIN);
     }
 
     static void toggleVisible() {

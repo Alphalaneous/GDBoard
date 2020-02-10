@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 class SongWindow {
 	private static int height = 85;
 	private static int width = 300;
-	private static ResizablePanel window = new InnerWindow("Music - Newgrounds Audio", 1920 - width - 10, 600, width, height, "src/resources/Icons/note.png").createPanel();
+	private static ResizablePanel window = new InnerWindow("Music - Newgrounds Audio", 1920 - width - 10, 600, width, height, "\uEC4F").createPanel();
 	private static JPanel panel = new JPanel();
 	private static JLabel songName = new JLabel();
 	private static JLabel songAuthor = new JLabel();
@@ -57,7 +57,7 @@ class SongWindow {
 						songs.clear();
 					}
 					songs.add(new PlaySong());
-					songs.get(0).setSong(Requests.levels.get(LevelsWindow2.getSelectedID()).getSongID());
+					songs.get(0).setSong(Requests.levels.get(LevelsWindow.getSelectedID()).getSongURL());
 					songs.get(0).start();
 				}
 			}
@@ -117,8 +117,8 @@ class SongWindow {
 			play.setVisible(false);
 			
 		} else {
-			songName.setText(Requests.levels.get(LevelsWindow2.getSelectedID()).getSongName());
-			songAuthor.setText(Requests.levels.get(LevelsWindow2.getSelectedID()).getSongAuthor());
+			songName.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getSongName());
+			songAuthor.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getSongAuthor());
 			songAuthor.setBounds(width - songAuthor.getPreferredSize().width - 10, 5, width, 20);
 
 			if(songName.getText().equalsIgnoreCase("Custom") && songAuthor.getText().equalsIgnoreCase("")){
@@ -127,7 +127,7 @@ class SongWindow {
 				play.setVisible(false);
 			}
 			else{
-				songID.setText(Requests.levels.get(LevelsWindow2.getSelectedID()).getSongID());
+				songID.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getSongID());
 				play.setVisible(true);
 				stop.setVisible(true);
 			}

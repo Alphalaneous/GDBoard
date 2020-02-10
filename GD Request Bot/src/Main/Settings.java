@@ -2,7 +2,7 @@ package Main;
 
 import java.awt.Point;
 
-public class Settings extends Thread {
+public class Settings {
 
 	//cccccTODO Settings content, OAuth, Blocked IDs, Blocked Users, Requests status, Requests Limit, Followers Only, Subscribers only, Cheer requirements
 
@@ -27,18 +27,6 @@ public class Settings extends Thread {
 	//}
 	static Point getRequestsWLoc() {
 		return requestsWLoc;
-	}
-	public void run() {
-		requestsWLoc = LevelsWindow2.getLocationValue();
-		
-		
-		
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
 	}
 	
 }

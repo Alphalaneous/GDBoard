@@ -1,15 +1,13 @@
 package Main;
 
+import Chat.Channel;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
-import com.cavariux.twitchirc.Chat.Channel;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -22,7 +20,6 @@ public class Main {
 
 		//TODO, deregister resize on pin
 
-		Defaults.screenSize();
 		Logger root = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 		root.setLevel(Level.INFO);
 		if (!Settings.hasOauth()) {
@@ -43,15 +40,14 @@ public class Main {
 			if (authSuccess) {
 				String accessToken = twitch.auth().getAccessToken();
 				System.out.println("Access Token: " + accessToken);
-				//Settings.setOAuth(accessToken);
 			} else {
 				System.out.println(twitch.auth().getAuthenticationError());
 			}
 		}
 
 		bot = new ChatBot();
-		GetTheme theme = new GetTheme();
-		theme.start();
+		//GetTheme theme = new GetTheme();
+		//theme.start();
 
 
 		 /*FileDialog fd = new FileDialog(new JFrame()); fd.setVisible(true); File[] f =
@@ -62,9 +58,9 @@ public class Main {
 		Overlay.setFrame();
 		KeyListener.hook();
 		MainBar.createBar();
-
+		Defaults.startMainThread();
 		//if (Settings.isRequests()) {
-			LevelsWindow2.createPanel();
+			LevelsWindow.createPanel();
 			ActionsWindow.createPanel();
 			InfoWindow.createWindow();
 			InfoWindow.refreshInfo();
@@ -74,8 +70,8 @@ public class Main {
 			SongWindow.refreshInfo();
 		//}
 
-		Time time = new Time();
-		time.start();
+		//Time time = new Time();
+		//time.start();
 		Overlay.setVisible();
 
 		//if (Settings.isRequests()) {

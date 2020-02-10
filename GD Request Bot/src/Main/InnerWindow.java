@@ -2,51 +2,48 @@ package Main;
 
 import com.jidesoft.swing.ResizablePanel;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 class InnerWindow extends ResizablePanel {
 
 	// --------------------
 	// Constructor
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private final String title;
 	private final double x;
 	private final double y;
 	private int width;
 	private int height;
-	private final String iconLocation;
+	private final String icon;
 
 	// --------------------
 	// Starting values and Initialization
 
 	private boolean isPinPressed = false;
 	private boolean toggleState = true;
-	private JButton pinButton;
+	private JButton closeButton = new JButton("\uE894");
+	private JButton pinButton = new JButton("\uE840");
+	private JLabel pinButtonFill = new JLabel("  \uE842");
 	private JPanel topBar = new JPanel(null);
+	private JLabel windowIcon = new JLabel();
 
 	// --------------------
 	// JButtonUI Changes
 
 	private JButtonUI defaultUI = new JButtonUI();
 
-	InnerWindow(final String title, final int x, final int y, final int width, final int height, final String iconLocation) {
+	//TODO Top of screen sliding in
+
+	InnerWindow(final String title, final int x, final int y, final int width, final int height, final String icon) {
 		double y1;
 		double x1;
 		double ratio = 1920 / Defaults.screenSize.getWidth();
-		System.out.println(ratio);
 		this.title = title;
 		x1 = x / ratio;
 		y1 = y / ratio;
@@ -78,11 +75,15 @@ class InnerWindow extends ResizablePanel {
 			x1 = -1;
 			y1 = -1;
 		}
+		int middle = (int) (Defaults.screenSize.getWidth() / 2);
+		if(x + width >= middle-290 && x <= middle+290 && y <= 93) {
+			y1 = 93;
+		}
 		this.x = x1;
 		this.y = y1;
 		this.width = width;
 		this.height = height;
-		this.iconLocation = iconLocation;
+		this.icon = icon;
 	}
 
 	// --------------------
@@ -166,8 +167,8 @@ class InnerWindow extends ResizablePanel {
 				if(x <= -1 && y <= -1) {
 					setLocation(-1, -1);
 				}
-				double ratio = 1920 / Defaults.screenSize.getWidth();
-				if(x + width >= 672/ratio && x <= 672/ratio + 576 && y <= 93) {
+				int middle = (int) (Defaults.screenSize.getWidth() / 2);
+				if(x + width >= middle-290 && x <= middle+290 && y <= 93) {
 					p.setLocation(p.getX(), 93);
 					setLocation(p);
 				}
@@ -177,20 +178,11 @@ class InnerWindow extends ResizablePanel {
 
 		topBar.addMouseListener(mia);
 		topBar.addMouseMotionListener(mia);
-		
-		BufferedImage iconImage = null;
-		try {
-			iconImage = ImageIO.read(new File(iconLocation));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		assert iconImage != null;
-		Image iconImageScaled = iconImage.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-		ImageIcon iconImageFinal = new ImageIcon(iconImageScaled);
-		JLabel windowIcon = new JLabel(iconImageFinal);
-		
-		windowIcon.setBounds(3,0,30,30);
-		
+
+		windowIcon.setForeground(Defaults.FOREGROUND);
+		windowIcon.setText(icon);
+		windowIcon.setBounds(10,0,30,30);
+		windowIcon.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 14));
 		topBar.add(windowIcon);
 
 		// --------------------
@@ -202,22 +194,10 @@ class InnerWindow extends ResizablePanel {
 		titleText.setForeground(Defaults.FOREGROUND);
 		topBar.add(titleText);
 
-		// --------------------
-		// X Icon Image on Button
-
-		BufferedImage xImage = null;
-		try {
-			xImage = ImageIO.read(new File("src/resources/WindowIcons/X.png"));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		assert xImage != null;
-		Image xIconScaled = xImage.getScaledInstance(17, 17, Image.SCALE_SMOOTH);
-		ImageIcon xIcon = new ImageIcon(xIconScaled);
-
-		JButton closeButton = new JButton(xIcon);
+		closeButton.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 14));
 		closeButton.setBounds(width - 30, 0, 30, 30);
 		closeButton.setMargin(new Insets(0, 0, 0, 0));
+		closeButton.setForeground(Defaults.FOREGROUND);
 		closeButton.setBorder(BorderFactory.createEmptyBorder());
 		closeButton.setBackground(Defaults.TOP);
 		closeButton.setUI(defaultUI);
@@ -234,38 +214,19 @@ class InnerWindow extends ResizablePanel {
 
 		topBar.add(closeButton);
 
-		// --------------------
-		// Pin Icon Image on Button
-
-		BufferedImage pinImage = null;
-		try {
-			pinImage = ImageIO.read(new File("src/resources/WindowIcons/pin.png"));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		assert pinImage != null;
-		Image pinScaled = pinImage.getScaledInstance(14, 14, Image.SCALE_SMOOTH);
-		ImageIcon pinIcon = new ImageIcon(pinScaled);
-
-		// --------------------
-		// Pressed Pin Icon Image on Button
-
-		BufferedImage origPinPressed = null;
-		try {
-			origPinPressed = ImageIO.read(new File("src/resources/WindowIcons/pinPressed.png"));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		assert origPinPressed != null;
-		Image pinPressed = origPinPressed.getScaledInstance(14, 14, Image.SCALE_SMOOTH);
-		ImageIcon pinIconPressed = new ImageIcon(pinPressed);
-
-		pinButton = new JButton(pinIcon);
 		pinButton.setBounds(width - 60, 0, 30, 30);
 		pinButton.setMargin(new Insets(0, 0, 0, 0));
 		pinButton.setBorder(BorderFactory.createEmptyBorder());
 		pinButton.setBackground(Defaults.TOP);
+		pinButton.setForeground(Defaults.FOREGROUND);
 		pinButton.setUI(defaultUI);
+		pinButton.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 14));
+		pinButtonFill.setBounds(width - 60, 0, 30, 30);
+		pinButtonFill.setBorder(BorderFactory.createEmptyBorder());
+		pinButtonFill.setForeground(Defaults.FOREGROUND);
+		pinButtonFill.setBackground(new Color(0,0,0,0));
+		pinButtonFill.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 14));
+		pinButtonFill.setVisible(false);
 
 		// --------------------
 		// Pin Switching
@@ -279,14 +240,14 @@ class InnerWindow extends ResizablePanel {
 					// --------------------
 					// Set to unpressed Pin Icon
 
-					pinButton.setIcon(pinIcon);
+					pinButtonFill.setVisible(false);
 					isPinPressed = false;
 
 				} else {
 
 					// --------------------
 					// Set to pressed Pin Icon
-					pinButton.setIcon(pinIconPressed);
+					pinButtonFill.setVisible(true);
 					isPinPressed = true;
 
 				}
@@ -294,7 +255,7 @@ class InnerWindow extends ResizablePanel {
 		});
 
 		topBar.add(pinButton);
-
+		pinButton.add(pinButtonFill);
 		// --------------------
 
 		add(topBar);
@@ -313,12 +274,15 @@ class InnerWindow extends ResizablePanel {
     		});
         }
 	}
-	
 	public void refreshUI() {
 		defaultUI.setBackground(Defaults.TOP);
 		defaultUI.setHover(Defaults.HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
 		topBar.setBackground(Defaults.TOP);
+		closeButton.setForeground(Defaults.FOREGROUND);
+		windowIcon.setForeground(Defaults.FOREGROUND);
+		pinButton.setForeground(Defaults.FOREGROUND);
+		pinButtonFill.setForeground(Defaults.FOREGROUND);
 		for (Component component : topBar.getComponents()) {
 			if (component instanceof JButton) {
 				component.setBackground(Defaults.TOP);
@@ -327,40 +291,50 @@ class InnerWindow extends ResizablePanel {
 				component.setForeground(Defaults.FOREGROUND);
 			}
 		}
-		Point p = new Point();
+
+		double y1;
+		double x1;
+		double ratioX = 1920 / Defaults.screenSize.getWidth();
+		double ratioY = 1080 / Defaults.screenSize.getHeight();
+		int x = getX();
+		int y = getY();
+		x1 = x / ratioX;
+		y1 = y / ratioY;
 		if(x + width >= Defaults.screenSize.getWidth() + 1) {
-			p.setLocation(Defaults.screenSize.getWidth() + 1 - width, p.getY());
-			setLocation(p);
+			x1 = Defaults.screenSize.getWidth() + 1 - width;
 		}
 		if(x <= -1) {
-			p.setLocation(-1, p.getY());
-			setLocation(p);
+			x1 = -1;
 		}
 		if(y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
-			p.setLocation(p.getX(), Defaults.screenSize.getHeight() + 1 - height - 32);
-			setLocation(p);
+			y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
 		}
 		if(y <= -1) {
-			p.setLocation(p.getX(), -1);
-			setLocation(p);
+			y1 = -1;
 		}
 		if(x + width >= Defaults.screenSize.getWidth() + 1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
-			setLocation((int) Defaults.screenSize.getWidth() + 1 - width, (int) Defaults.screenSize.getHeight() + 1 - height - 32);
+			x1 = Defaults.screenSize.getWidth() + 1 - width;
+			y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
 		}
 		if(x + width >= Defaults.screenSize.getWidth() + 1 &&y <= -1) {
-			setLocation((int) Defaults.screenSize.getWidth() + 1 - width, -1);
+			x1 = Defaults.screenSize.getWidth() + 1 - width;
+			y1 = -1;
 		}
 		if(x <= -1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
-			setLocation(-1, (int) Defaults.screenSize.getHeight() + 1 - height - 32);
+			x1 = -1;
+			y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
 		}
-
+		if(x <= -1 && y <= -1) {
+			x1 = -1;
+			y1 = -1;
+		}
 		int middle = (int) (Defaults.screenSize.getWidth() / 2);
 		if(x + width >= middle-290 && x <= middle+290 && y <= 93) {
-			p.setLocation(p.getX(), 93);
-			setLocation(p);
+			y1 = 93;
 		}
+		setLocation((int)x1, (int)y1);
 	}
-	public void resetDimensions(int width, int height){
+	void resetDimensions(int width, int height){
 		this.height = height;
 		this.width = width;
 
