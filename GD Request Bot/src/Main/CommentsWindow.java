@@ -24,10 +24,6 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 class CommentsWindow {
-    private static JButton top = new JButton("Top");
-    private static JButton new1 = new JButton("New");
-    private static JButton next = new JButton(">");
-    private static JButton prev = new JButton("<");
     private static JPanel panel = new JPanel();
     private static JButtonUI defaultUI = new JButtonUI();
     private static int height = 350;
@@ -67,14 +63,12 @@ class CommentsWindow {
         panel.setBounds(0, 0, width, height);
         buttons.setLayout(null);
         buttons.setBounds(1, height + 1, width, 30);
-        buttons.setBackground(Defaults.SUB_MAIN);
+        buttons.setBackground(Defaults.TOP);
+
+        JButton top = createButton("\uE8E1", 90);
+
         buttons.add(top);
-        top.setMargin(new Insets(0, 0, 0, 0));
-        top.setBorder(BorderFactory.createEmptyBorder());
-        top.setForeground(Defaults.FOREGROUND);
-        top.setBackground(Defaults.TOP);
-        top.setUI(defaultUI);
-        top.setBounds(90, 0, 30, 30);
+
         top.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -90,13 +84,11 @@ class CommentsWindow {
 
             }
         });
+
+        JButton new1 = createButton("\uE823", 120);
+
         buttons.add(new1);
-        new1.setMargin(new Insets(0, 0, 0, 0));
-        new1.setBorder(BorderFactory.createEmptyBorder());
-        new1.setForeground(Defaults.FOREGROUND);
-        new1.setBackground(Defaults.TOP);
-        new1.setUI(defaultUI);
-        new1.setBounds(120, 0, 30, 30);
+
         new1.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -112,13 +104,11 @@ class CommentsWindow {
 
             }
         });
+
+        JButton prev = createButton("\uE760", 0);
+
         buttons.add(prev);
-        prev.setMargin(new Insets(0, 0, 0, 0));
-        prev.setBorder(BorderFactory.createEmptyBorder());
-        prev.setForeground(Defaults.FOREGROUND);
-        prev.setBackground(Defaults.TOP);
-        prev.setUI(defaultUI);
-        prev.setBounds(0, 0, 30, 30);
+
         prev.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -134,13 +124,11 @@ class CommentsWindow {
                 }
             }
         });
+
+        JButton next = createButton("\uE761", 30);
+
         buttons.add(next);
-        next.setMargin(new Insets(0, 0, 0, 0));
-        next.setBorder(BorderFactory.createEmptyBorder());
-        next.setForeground(Defaults.FOREGROUND);
-        next.setBackground(Defaults.TOP);
-        next.setUI(defaultUI);
-        next.setBounds(30, 0, 30, 30);
+
         next.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -158,10 +146,14 @@ class CommentsWindow {
                     }
                 }
         });
+
+
         newUI.setBackground(Defaults.MAIN);
         newUI.setHover(Defaults.HOVER);
         panel.setBackground(Defaults.SUB_MAIN);
         panel.setPreferredSize(new Dimension(width, height - 30));
+
+
         scrollPane.setBackground(Defaults.SUB_MAIN);
         scrollPane.getViewport().setBackground(Defaults.SUB_MAIN);
         scrollPane.getVerticalScrollBar().setOpaque(false);
@@ -341,7 +333,17 @@ class CommentsWindow {
         }
         return true;
     }
-
+    private static JButton createButton(String icon, int x){
+        JButton button = new JButton(icon);
+        button.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
+        button.setMargin(new Insets(0, 0, 0, 0));
+        button.setBorder(BorderFactory.createEmptyBorder());
+        button.setForeground(Defaults.FOREGROUND);
+        button.setBackground(Defaults.TOP);
+        button.setUI(defaultUI);
+        button.setBounds(x, 0, 30, 30);
+        return button;
+    }
     static void refreshUI() {
         ((InnerWindow) window).refreshUI();
         newUI.setBackground(Defaults.MAIN);
@@ -379,7 +381,7 @@ class CommentsWindow {
             }
         }
         panel.setBackground(Defaults.SUB_MAIN);
-        buttons.setBackground(Defaults.SUB_MAIN);
+        buttons.setBackground(Defaults.TOP);
     }
 
     static void toggleVisible() {

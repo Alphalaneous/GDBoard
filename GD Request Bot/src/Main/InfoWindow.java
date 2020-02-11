@@ -20,7 +20,7 @@ class InfoWindow {
 
 	static void createWindow() {
 
-		
+		//TODO Description Scrolling
 
 		panel.setPreferredSize(new Dimension(width, height));
 		panel.setBounds(1, 31, 160, height);

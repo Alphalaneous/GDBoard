@@ -46,14 +46,10 @@ public class Main {
 		}
 
 		bot = new ChatBot();
-		//GetTheme theme = new GetTheme();
-		//theme.start();
-
 
 		 /*FileDialog fd = new FileDialog(new JFrame()); fd.setVisible(true); File[] f =
 		 fd.getFiles(); if(f.length > 0){
 		 System.out.println(fd.getFiles()[0].getAbsolutePath()); }*/
-
 
 		Overlay.setFrame();
 		KeyListener.hook();
@@ -79,7 +75,11 @@ public class Main {
 			Channel channel = bot.joinChannel("#alphalaneous");
 			bot.sendMessage("Thank you for using RequestBot by Alphalaneous! Type !help for list of commands!",
 					channel);
-			bot.start();
+			while(true) {
+
+				bot.start();
+			}
+
 		//}
 
 		/*
