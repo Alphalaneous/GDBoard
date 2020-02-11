@@ -8,13 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/ActionsWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ActionsWindow$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/ActionsWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ActionsWindow$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/ActionsWindow$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ActionsWindow$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/ActionsWindow$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ActionsWindow$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/ActionsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ActionsWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/ChatBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ChatBot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/CheckBoxButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CheckBoxButton.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$1$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$2.class" afterDir="false" />
@@ -25,20 +18,14 @@
       <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$6$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$6$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$6.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/Defaults.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Defaults.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/GDObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/GDObject.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/GetComments.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/GetComments.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/InfoWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InfoWindow.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$5.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/JButtonUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/JButtonUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/KeyListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/KeyListener$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/KeyListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/KeyListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/LevelData.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelData.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/LevelsWindow$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelsWindow$1$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/LevelsWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelsWindow$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/LevelsWindow$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelsWindow$2$1.class" afterDir="false" />
@@ -56,35 +43,9 @@
       <change beforePath="$PROJECT_DIR$/bin/Main/MainBar.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/MainBar.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/Overlay$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Overlay$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/Overlay.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Overlay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/ParseLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ParseLevel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/PlaySong.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/PlaySong.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/Requests.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Requests.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/RoundedJButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/RoundedJButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Settings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/SettingsWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/SettingsWindow$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/SettingsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/SettingsWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/SongWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/SongWindow$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/SongWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/SongWindow$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/SongWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/SongWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/AccountSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/AccountSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/BlockedIDsSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/BlockedIDsSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/GeneralSetttings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/GeneralSetttings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/OverlaySettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/OverlaySettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/PersonalizationSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/PersonalizationSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/ShortcutSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/ShortcutSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/ActionsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/ActionsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/CommentsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/CommentsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/GetComments.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/KeyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/KeyListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/LevelsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/LevelsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/MainBar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/InnerWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/InnerWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/Overlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Overlay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/ParseLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/ParseLevel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/PlaySong.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/SongWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SongWindow.java" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/bin/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -107,58 +68,6 @@
   <component name="FavoritesManager">
     <favorites_list name="GD Request Bot" />
   </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/CommentsWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="65" column="44" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="79" column="16" selection-start-line="79" selection-start-column="16" selection-end-line="79" selection-end-column="16" />
-              <folding>
-                <element signature="e#2629#2630#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Main/InfoWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/InnerWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="196" column="75" lean-forward="true" selection-start-line="196" selection-start-column="75" selection-end-line="196" selection-end-column="75" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/ActionsWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="48" column="69" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="69" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -174,85 +83,8 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/Main/CommentsWindow.java" />
-        <option value="$PROJECT_DIR$/src/Main/InnerWindow.java" />
-        <option value="$PROJECT_DIR$/src/Main/Main.java" />
-        <option value="$PROJECT_DIR$/src/Main/InfoWindow.java" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="558" />
-    <option name="y" value="106" />
-    <option name="width" value="1385" />
-    <option name="height" value="971" />
-  </component>
   <component name="ProjectId" id="1X2386Wf5oMdxwOPKjpPdGzrXYK" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="bin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
-              <item name="GD_Request_Bot_jar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Main" type="462c0819:PsiDirectoryNode" />
-              <item name="CommentsWindow.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -272,18 +104,6 @@
   </component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration default="true" type="Applet">
@@ -313,12 +133,14 @@
       </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <properties />
       <listeners />
@@ -364,40 +186,9 @@
       <workItem from="1580921413841" duration="4987000" />
       <workItem from="1581007245076" duration="6709000" />
       <workItem from="1581352541254" duration="8303000" />
+      <workItem from="1581439191273" duration="8382000" />
     </task>
     <servers />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="558" y="106" width="1385" height="971" extended-state="0" />
-    <editor active="true" />
-    <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24981132" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.32936078" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3627685" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Maven" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -408,12 +199,6 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
               <option name="COLUMN_ORDER" />
             </State>
           </value>
@@ -444,6 +229,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580230323702" />
+    <state x="-1155" y="250" key="#com.intellij.ide.util.MemberChooser" timestamp="1581441599616">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="-1155" y="250" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581441599616" />
     <state x="808" y="409" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1580230235292">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -452,53 +241,53 @@
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state x="-1280" y="276" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580835374427" />
-    <state x="-1164" y="425" width="408" height="238" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1581353587961">
+    <state x="-1164" y="425" width="408" height="238" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1581446136222">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="-1164" y="425" width="408" height="238" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581353587961" />
+    <state x="-1164" y="425" width="408" height="238" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581446136222" />
     <state x="-1254" y="272" key="FileChooserDialogImpl" timestamp="1580921390551">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state x="-1254" y="272" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580921390551" />
     <state x="666" y="262" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580230266371" />
-    <state width="1493" height="269" key="GridCell.Tab.0.bottom" timestamp="1581360867371">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="269" key="GridCell.Tab.0.bottom" timestamp="1581446596214">
+      <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1877" height="269" key="GridCell.Tab.0.bottom/0.0.1097.577/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581354944176" />
     <state width="1877" height="270" key="GridCell.Tab.0.bottom/0.0.1280.680/1280.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581012210989" />
     <state width="1877" height="269" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581359338106" />
     <state width="1493" height="269" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1080/-1920.0.1920.1080@0.0.1536.824" timestamp="1581360867371" />
-    <state width="1877" height="269" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581360168291" />
+    <state width="1877" height="269" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581446596214" />
     <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580929227128" />
     <state width="1877" height="270" key="GridCell.Tab.0.bottom/0.0.800.560/800.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581013556990" />
-    <state width="1493" height="269" key="GridCell.Tab.0.center" timestamp="1581360867371">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="269" key="GridCell.Tab.0.center" timestamp="1581446596214">
+      <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1877" height="269" key="GridCell.Tab.0.center/0.0.1097.577/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581354944176" />
     <state width="1877" height="270" key="GridCell.Tab.0.center/0.0.1280.680/1280.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581012210989" />
     <state width="1877" height="269" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581359338106" />
     <state width="1493" height="269" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1080/-1920.0.1920.1080@0.0.1536.824" timestamp="1581360867371" />
-    <state width="1877" height="269" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581360168291" />
+    <state width="1877" height="269" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581446596214" />
     <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580929227128" />
     <state width="1877" height="270" key="GridCell.Tab.0.center/0.0.800.560/800.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581013556990" />
-    <state width="1493" height="269" key="GridCell.Tab.0.left" timestamp="1581360867371">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="269" key="GridCell.Tab.0.left" timestamp="1581446596214">
+      <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1877" height="269" key="GridCell.Tab.0.left/0.0.1097.577/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581354944176" />
     <state width="1877" height="270" key="GridCell.Tab.0.left/0.0.1280.680/1280.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581012210989" />
     <state width="1877" height="269" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581359338106" />
     <state width="1493" height="269" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1080/-1920.0.1920.1080@0.0.1536.824" timestamp="1581360867371" />
-    <state width="1877" height="269" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581360168291" />
+    <state width="1877" height="269" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581446596214" />
     <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580929227128" />
     <state width="1877" height="270" key="GridCell.Tab.0.left/0.0.800.560/800.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581013556990" />
-    <state width="1493" height="269" key="GridCell.Tab.0.right" timestamp="1581360867371">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1877" height="269" key="GridCell.Tab.0.right" timestamp="1581446596214">
+      <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1877" height="269" key="GridCell.Tab.0.right/0.0.1097.577/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581354944176" />
     <state width="1877" height="270" key="GridCell.Tab.0.right/0.0.1280.680/1280.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581012210989" />
     <state width="1877" height="269" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581359338106" />
     <state width="1493" height="269" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1080/-1920.0.1920.1080@0.0.1536.824" timestamp="1581360867371" />
-    <state width="1877" height="269" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581360168291" />
+    <state width="1877" height="269" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581446596214" />
     <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580929227128" />
     <state width="1877" height="270" key="GridCell.Tab.0.right/0.0.800.560/800.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581013556990" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1580929227128">
@@ -534,46 +323,6 @@
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state x="-1297" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580837643089" />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Main/ActionsWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="48" column="69" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/CommentsWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="65" column="44" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/InnerWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="196" column="75" lean-forward="true" selection-start-line="196" selection-start-column="75" selection-end-line="196" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="79" column="16" selection-start-line="79" selection-start-column="16" selection-end-line="79" selection-end-column="16" />
-          <folding>
-            <element signature="e#2629#2630#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/InfoWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
   </component>
   <component name="masterDetails">
     <states>

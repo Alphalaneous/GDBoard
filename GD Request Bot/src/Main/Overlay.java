@@ -243,6 +243,9 @@ class MainBar {
 
 		Overlay.addToFrame(barPanel);
 	}
+	static JPanel getMainBar(){
+		return barPanel;
+	}
 
 	private static JButton createButton(String icon) {
 
