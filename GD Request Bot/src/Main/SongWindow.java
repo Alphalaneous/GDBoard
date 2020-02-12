@@ -20,20 +20,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 class SongWindow {
-	private static int height = 85;
+	private static int height = 90;
 	private static int width = 300;
 	private static ResizablePanel window = new InnerWindow("Music - Newgrounds Audio", 1920 - width - 10, 600, width, height, "\uEC4F").createPanel();
 	private static JPanel panel = new JPanel();
 	private static JLabel songName = new JLabel();
-	private static JLabel songAuthor = new JLabel();
-	private static JLabel songID = new JLabel();
+	private static JLabel songAuthorID = new JLabel();
 	private static JButtonUI defaultUI = new JButtonUI();
-	private static JButton play = new RoundedJButton("\uEDB5");
-	private static JButton stop = new RoundedJButton("\uF12A");
+	private static JButton play = new RoundedJButton("\uF5B0");
+	private static JButton stop = new RoundedJButton("\uE009");
 
 	static void createPanel() {
 		ArrayList<PlaySong> songs = new ArrayList<PlaySong>();
-		
 		panel.setBounds(1, 31, width, height);
 		panel.setBackground(Defaults.MAIN);
 		panel.setLayout(null);
@@ -74,7 +72,7 @@ class SongWindow {
 		stop.setBackground(Defaults.BUTTON);
 		stop.setForeground(Defaults.FOREGROUND);
 		stop.setBorder(BorderFactory.createEmptyBorder());
-		stop.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 26));
+		stop.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
 		stop.addMouseListener(new MouseAdapter() {
 			@SuppressWarnings("deprecation")
 			@Override
@@ -91,19 +89,14 @@ class SongWindow {
 		songName.setFont(new Font("bahnschrift", Font.PLAIN, 20));
 		songName.setBounds(10, 5, width, 30);
 		songName.setForeground(Defaults.FOREGROUND);
-		
-		songAuthor.setFont(new Font("bahnschrift", Font.PLAIN, 14));
-		songAuthor.setBounds(width - songAuthor.getPreferredSize().width - 10, 5, width, 20);
-		songAuthor.setForeground(Defaults.FOREGROUND);
-		
-		songID.setFont(new Font("bahnschrift", Font.PLAIN, 14));
-		songID.setBounds(10, height - 30, width, 20);
-		songID.setForeground(Defaults.FOREGROUND);
+
+		songAuthorID.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		songAuthorID.setBounds(10, height - 30, width, 20);
+		songAuthorID.setForeground(Defaults.FOREGROUND);
 		
 		
 		panel.add(songName);
-		panel.add(songAuthor);
-		panel.add(songID);
+		panel.add(songAuthorID);
 		panel.add(play);
 		panel.add(stop);
 		window.add(panel);
@@ -115,24 +108,20 @@ class SongWindow {
 	static void refreshInfo() {
 		if (Requests.levels.size() == 0) {
 			songName.setText("N/A");
-			songAuthor.setText("N/A");
-			songAuthor.setBounds(width - songAuthor.getPreferredSize().width - 10, 5, width, 20);
-			songID.setText("N/A");
+			songAuthorID.setText("N/A");
 			stop.setVisible(false);
 			play.setVisible(false);
 			
 		} else {
 			songName.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getSongName());
-			songAuthor.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getSongAuthor());
-			songAuthor.setBounds(width - songAuthor.getPreferredSize().width - 10, 5, width, 20);
 
-			if(songName.getText().equalsIgnoreCase("Custom") && songAuthor.getText().equalsIgnoreCase("")){
-				songID.setText("");
+			if(songName.getText().equalsIgnoreCase("Custom") && Requests.levels.get(LevelsWindow.getSelectedID()).getSongAuthor().equalsIgnoreCase("")){
+				songAuthorID.setText("");
 				stop.setVisible(false);
 				play.setVisible(false);
 			}
 			else{
-				songID.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getSongID());
+				songAuthorID.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getSongAuthor() + " (" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ")");
 				play.setVisible(true);
 				stop.setVisible(true);
 			}
@@ -146,8 +135,7 @@ class SongWindow {
 		defaultUI.setSelect(Defaults.SELECT);
 		panel.setBackground(Defaults.MAIN);
 		songName.setForeground(Defaults.FOREGROUND);
-		songAuthor.setForeground(Defaults.FOREGROUND);
-		songID.setForeground(Defaults.FOREGROUND);
+		songAuthorID.setForeground(Defaults.FOREGROUND);
 		for(Component component : panel.getComponents())
 			if(component instanceof JButton) {
 				component.setBackground(Defaults.BUTTON);

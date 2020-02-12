@@ -37,9 +37,6 @@ class InnerWindow extends ResizablePanel {
     // JButtonUI Changes
 
     private JButtonUI defaultUI = new JButtonUI();
-
-    //TODO Top of screen sliding in
-
     InnerWindow(final String title, final int x, final int y, final int width, final int height, final String icon) {
         double y1;
         double x1;
@@ -127,13 +124,19 @@ class InnerWindow extends ResizablePanel {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				//TODO Fix ctrl alt del
-				Point p = MouseInfo.getPointerInfo().getLocation();
-			SwingUtilities.convertPointFromScreen(p, topBar);
+                Point p = null;
+				try {
+                    p = MouseInfo.getPointerInfo().getLocation();
+                    SwingUtilities.convertPointFromScreen(p, topBar);
+                }
+				catch (NullPointerException ignored){
+
+                }
 
 			//System.out.println(title + " | X: " + p.getX() + " Y: " + p.getY());
 			if(Overlay.isVisible && !isDragging[0]) {
-				if (p.getY() <= 30 && p.getY() >= 27 && p.getX() >= 0 && p.getX() <= width) {
+                assert p != null;
+                if (p.getY() <= 30 && p.getY() >= 27 && p.getX() >= 0 && p.getX() <= width) {
 					if (getY() <= -10) {
 						Thread thread = new Thread(() -> {
 							for (int j = 0; j < 15; j++) {
@@ -152,7 +155,8 @@ class InnerWindow extends ResizablePanel {
 					}
 				}
 			}
-			if((p.getX() >= width || p.getX() <= -1 || p.getY() <=-1 || p.getY() >= 30) && exited[0]){
+                assert p != null;
+                if((p.getX() >= width || p.getX() <= -1 || p.getY() <=-1 || p.getY() >= 30) && exited[0]){
 				if(getY() <= 0){
 					setLocation(getX(), -31);
 				}
@@ -208,8 +212,6 @@ class InnerWindow extends ResizablePanel {
                 if (x <= -1 && y <= -1) {
                     setLocation(-1, -1);
                 }
-                int middle = (int) (Defaults.screenSize.getWidth() / 2);
-				double ratio = 1920/Defaults.screenSize.getWidth();
 
                 if (x + width >= MainBar.getMainBar().getX() && x <= MainBar.getMainBar().getWidth() + MainBar.getMainBar().getX()-2 && y <= 93) {
                     p.setLocation(p.getX(), 93);
@@ -343,7 +345,7 @@ class InnerWindow extends ResizablePanel {
         }
     }
 
-    public void refreshUI() {
+    void refreshUI() {
         defaultUI.setBackground(Defaults.TOP);
         defaultUI.setHover(Defaults.HOVER);
         defaultUI.setSelect(Defaults.SELECT);
@@ -410,7 +412,7 @@ class InnerWindow extends ResizablePanel {
 
     }
 
-    public void setVisible() {
+    void setVisible() {
         topBar.setVisible(true);
         setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 50)));
         if (toggleState) {
@@ -423,9 +425,10 @@ class InnerWindow extends ResizablePanel {
             setVisible(false);
         }
         topBar.setVisible(false);
-        setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0, 0)));
 
+        setBorder(BorderFactory.createEmptyBorder(-1,-1,-1,-1));
     }
+
 
     void toggle() {
         if (toggleState) {

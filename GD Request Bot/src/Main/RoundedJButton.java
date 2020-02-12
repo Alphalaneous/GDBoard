@@ -3,7 +3,6 @@ package Main;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class RoundedJButton extends JButton {
@@ -15,15 +14,6 @@ public class RoundedJButton extends JButton {
 
 	RoundedJButton(String label) {
 		super(label);
-		Dimension size = getPreferredSize();
-		size.width = size.height = Math.max(size.width, size.height);
-		setPreferredSize(size);
-
-		setContentAreaFilled(false);
-	}
-
-	RoundedJButton(ImageIcon img) {
-		super(img);
 		Dimension size = getPreferredSize();
 		size.width = size.height = Math.max(size.width, size.height);
 		setPreferredSize(size);

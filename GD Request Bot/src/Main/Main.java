@@ -18,8 +18,6 @@ public class Main {
 
 	public static void main(String[] args) throws IOException, IllegalArgumentException, URISyntaxException, AWTException {
 
-		//TODO, deregister resize on pin
-
 		Logger root = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 		root.setLevel(Level.INFO);
 		if (!Settings.hasOauth()) {

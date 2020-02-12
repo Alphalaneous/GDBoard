@@ -121,7 +121,7 @@ class Requests {
 
             while (sc.hasNextLine()) {
                 if (levelData.getLevelID().equals(sc.nextLine())) {
-                    //Main.sendMessage("@" + levelData.getRequester() + " That Level is Blocked!");
+                    Main.sendMessage("@" + levelData.getRequester() + " That Level is Blocked!");
                     System.out.println("Blocked ID");
                     valid = false;
 

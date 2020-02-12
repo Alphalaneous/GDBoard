@@ -20,27 +20,26 @@ class InfoWindow {
 
 	static void createWindow() {
 
-		//TODO Description Scrolling
-
 		panel.setPreferredSize(new Dimension(width, height));
 		panel.setBounds(1, 31, 160, height);
 		panel.setBackground(Defaults.MAIN);
 
-		descPanel.setPreferredSize(new Dimension(width, height));
+		descPanel.setPreferredSize(new Dimension(240, height));
 		descPanel.setBounds(161, 31, 240, height);
 		descPanel.setBackground(Defaults.SUB_MAIN);
 		descPanel.setLayout(null);
+		descPanel.setOpaque(true);
 
 		panel.setLayout(null);
-		likes = createLabel("LIKES: N/A", 10, 10, width/2, 20);
-		downloads = createLabel("DOWNLOADS: N/A", 10, 32, width/2, 20);
-		length = createLabel("LENGTH: NA", 10, 54, width/2, 20);
+		likes = createLabel("LIKES: N/A", 10, width/2);
+		downloads = createLabel("DOWNLOADS: N/A", 32, width/2);
+		length = createLabel("LENGTH: NA", 54, width/2);
 		description.setText("N/A");
 		StyledDocument doc = description.getStyledDocument();
 		SimpleAttributeSet center = new SimpleAttributeSet();
 		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
 		doc.setParagraphAttributes(0, doc.getLength(), center, false);
-		description.setFont(new Font("bahnschrift", Font.PLAIN, 16));
+		description.setFont(new Font("bahnschrift", Font.PLAIN, 14));
 		description.setOpaque(false);
 		description.setEditable(false);
 		description.setForeground(Defaults.FOREGROUND);
@@ -69,7 +68,6 @@ class InfoWindow {
 			length.setText("LENGTH: " + Requests.levels.get(LevelsWindow.getSelectedID()).getLength());
 			downloads.setText("DOWNLOADS: " + Requests.levels.get(LevelsWindow.getSelectedID()).getDownloads());
 		}
-
 	}
 	static void refreshUI() {
 		((InnerWindow) window).refreshUI();
@@ -80,10 +78,10 @@ class InfoWindow {
 		downloads.setForeground(Defaults.FOREGROUND);
 		description.setForeground(Defaults.FOREGROUND);
 	}
-	private static JLabel createLabel(String text, int x, int y, int width, int height){
+	private static JLabel createLabel(String text, int y, int width){
 		JLabel label = new JLabel(text);
 		label.setFont(new Font("bahnschrift", Font.PLAIN, 14));
-		label.setBounds(x, y, width, height);
+		label.setBounds(10, y, width, 20);
 		label.setForeground(Defaults.FOREGROUND);
 		return label;
 	}

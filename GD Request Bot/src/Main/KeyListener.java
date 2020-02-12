@@ -12,10 +12,8 @@ import lc.kra.system.keyboard.event.GlobalKeyEvent;
 
 class KeyListener {
 
-	// TODO: Switch to https://github.com/kwhat/jnativehook
 	private static boolean openKeyReleased = false;
 	static void hook() throws AWTException {
-		//TODO rework opening and closing locks
 		GlobalKeyboardHook keyboardHook = new GlobalKeyboardHook(true);
 		keyboardHook.addKeyListener(new GlobalKeyAdapter() {
 

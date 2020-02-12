@@ -9,10 +9,12 @@ import com.github.alex1304.jdash.entity.GDLevel;
 import com.github.alex1304.jdash.exception.MissingAccessException;
 import com.github.alex1304.jdash.util.LevelSearchFilters;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,7 +30,6 @@ public class ChatBot extends TwitchBot {
     public void onMessage(User user, Channel channel, String msg) {
         // --------------------
         // If the bot sends the message, don't read it
-        // TODO: Account Adding
 
         // --------------------
         // If message does start with "!" (Is a command)
@@ -42,7 +43,7 @@ public class ChatBot extends TwitchBot {
             String command = msg.split("\\s+")[0];
             String[] arguments = msg.split("\\s+");
             int level = 1;
-            if(arguments.length > 1) {
+            if (arguments.length > 1) {
                 try {
                     level = Integer.parseInt(arguments[1]);
                 } catch (Exception ignored) {
@@ -53,28 +54,28 @@ public class ChatBot extends TwitchBot {
             }
             try {
                 if (command.equalsIgnoreCase("ID") || command.equalsIgnoreCase("name")
-                          || command.equalsIgnoreCase("level")) {
+                        || command.equalsIgnoreCase("level")) {
 
-                    Main.sendMessage("@" + user + " The level at position " + level + " is " + Requests.levels.get(level-1).getName() + " ("
-                            + Requests.levels.get(level-1).getLevelID() + ")");
+                    Main.sendMessage("@" + user + " The level at position " + level + " is " + Requests.levels.get(level - 1).getName() + " by " + Requests.levels.get(level - 1).getAuthor() + " ("
+                            + Requests.levels.get(level - 1).getLevelID() + ")");
                 }
-                if(command.equalsIgnoreCase("current")){
-                    Main.sendMessage("@" + user + " The current level is " + Requests.levels.get(0).getName() + " ("
+                if (command.equalsIgnoreCase("current")) {
+                    Main.sendMessage("@" + user + " The current level is " + Requests.levels.get(0).getName() + " by " + Requests.levels.get(level - 1).getAuthor() + " ("
                             + Requests.levels.get(0).getLevelID() + ")");
                 }
                 if (command.equalsIgnoreCase("song")) {
-                    Main.sendMessage("@" + user + " The song is " + Requests.levels.get(level-1).getSongName() + " by "
-                            + Requests.levels.get(level-1).getSongAuthor() + " (" + Requests.levels.get(level-1).getSongID()
+                    Main.sendMessage("@" + user + " The song is " + Requests.levels.get(level - 1).getSongName() + " by "
+                            + Requests.levels.get(level - 1).getSongAuthor() + " (" + Requests.levels.get(level - 1).getSongID()
                             + ")");
                 }
                 if (command.equalsIgnoreCase("likes")) {
-                    Main.sendMessage("@" + user + " There are " + Requests.levels.get(level-1).getLikes() + " likes!");
+                    Main.sendMessage("@" + user + " There are " + Requests.levels.get(level - 1).getLikes() + " likes!");
                 }
                 if (command.equalsIgnoreCase("downloads")) {
-                    Main.sendMessage("@" + user + " There are " + Requests.levels.get(level-1).getDownloads() + " downloads!");
+                    Main.sendMessage("@" + user + " There are " + Requests.levels.get(level - 1).getDownloads() + " downloads!");
                 }
                 if (command.equalsIgnoreCase("difficulty")) {
-                    Main.sendMessage("@" + user + " The difficulty is " + Requests.levels.get(level-1).getDifficulty().toLowerCase());
+                    Main.sendMessage("@" + user + " The difficulty is " + Requests.levels.get(level - 1).getDifficulty().toLowerCase());
                 }
 
 
@@ -208,7 +209,7 @@ public class ChatBot extends TwitchBot {
                     } else if (arguments[1].contains("remove")) {
                         sendMessage("@" + user + " Used to remove a level from the queue | Usage: \"!remove <Position>\"", channel);
                     } else if (arguments[1].contains("block")) {
-                        sendMessage("@" + user + " Used to block a level ID | Usage: \"!block\" to block the current ID | \"!block <Level ID>\" to block a specific ID", channel);
+                        sendMessage("@" + user + " Used to block a level ID | Usage: \"!block <Level ID>\" to block a specific ID", channel);
                     } else if (arguments[1].contains("blockuser")) {
                         sendMessage("@" + user + " Used to block a user | Usage: \"!blockuser\" to block the current user | \"!blockuser <Username>\" to block a specific user", channel);
                     }
@@ -234,8 +235,75 @@ public class ChatBot extends TwitchBot {
                     }
                 }
             }
+            if (command.equalsIgnoreCase("unblock") && (user.isMod(channel) || isBroadcaster)) {
+                String unblocked = arguments[1];
+                try {
+                    boolean exists = false;
+                    File file = new File("blocked.txt");
+
+                    Scanner sc = new Scanner(file);
+                    while (sc.hasNextLine()) {
+                        if (String.valueOf(unblocked).equals(sc.nextLine())) {
+                            System.out.println("Blocked ID");
+                            exists = true;
+                            break;
+                        }
+                    }
+                    sc.close();
+                    if(exists) {
+                        File temp = new File("_temp_");
+                        PrintWriter out = new PrintWriter(new FileWriter(temp));
+                        Files.lines(file.toPath())
+                                .filter(line -> !line.contains(unblocked))
+                                .forEach(out::println);
+                        out.flush();
+                        out.close();
+                        file.delete();
+                        temp.renameTo(file);
+                        sendMessage("@" + user + " Successfully unblocked " + arguments[1], channel);
+                    }
+                    else {
+                        sendMessage("@" + user + " That level isn't blocked!", channel);
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    sendMessage("@" + user + " unblock failed!", channel);
+                }
+            }
             if (command.equalsIgnoreCase("block") && (user.isMod(channel) || isBroadcaster)) {
-                sendMessage("Soon...", channel); //TODO Blocking IDs
+                try {
+                    int blockedID = Integer.parseInt(arguments[1]);
+                    boolean goThrough = true;
+                    File file = new File("blocked.txt");
+                    Scanner sc = new Scanner(file);
+
+                    while (sc.hasNextLine()) {
+                        if (String.valueOf(blockedID).equals(sc.nextLine())) {
+                            System.out.println("Blocked ID");
+                            goThrough = false;
+                            break;
+                        }
+                    }
+                    sc.close();
+                    if(goThrough) {
+                        FileWriter fr;
+                        try {
+                            fr = new FileWriter(file, true);
+                            fr.write(blockedID + "\n");
+                            fr.close();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                        sendMessage("@" + user + " Successfully blocked " + arguments[1], channel);
+                    }
+                    else {
+                        sendMessage("@" + user + " ID Already Blocked!", channel);
+                    }
+                }
+                catch (Exception e){
+                    sendMessage("@" + user + " Invalid ID", channel);
+                }
+
             }
             if (command.equalsIgnoreCase("blockuser") && (user.isMod(channel) || isBroadcaster)) {
                 sendMessage("Soon...", channel); //TODO Blocking User
@@ -248,8 +316,7 @@ public class ChatBot extends TwitchBot {
                 Matcher m = null;
                 try {
                     m = Pattern.compile("(\\d+)").matcher(arguments[1]);
-                }
-                catch (Exception ignored){
+                } catch (Exception ignored) {
                 }
                 assert m != null;
                 if (m.matches() && arguments.length <= 2) {
@@ -325,7 +392,7 @@ public class ChatBot extends TwitchBot {
                     }
                 }
             }
-        } else {
+        } else if (!msg.startsWith("!")){
 
             // --------------------
             // Get request from chat without commands

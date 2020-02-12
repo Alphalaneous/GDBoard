@@ -145,7 +145,7 @@ public class LevelsWindow {
 		noticeSelectUI.setSelect(new Color(150, 150, 0));
 
 		JLabel lName = new JLabel(name);
-		JLabel lID = new JLabel("By " + author + " (" + ID + ")");
+		JLabel lAuthorID = new JLabel("By " + author + " (" + ID + ")");
 		JLabel lAuthor = new JLabel(requester);
 		JLabel lAnalyzed = new JLabel();
 		JLabel lStarCount = new JLabel(String.valueOf(starCount));
@@ -182,7 +182,7 @@ public class LevelsWindow {
 		JButton request = new JButton();
 
 		request.add(lName);
-		request.add(lID);
+		request.add(lAuthorID);
 		request.add(lAuthor);
 		request.add(lAnalyzed);
 		request.add(reqDifficulty);
@@ -196,13 +196,13 @@ public class LevelsWindow {
 
 		lName.setFont(new Font("bahnschrift", Font.PLAIN, 20));
 		lName.setBounds(60, 0, (int) lName.getPreferredSize().getWidth() + 5, 30);
-		lID.setFont(new Font("bahnschrift", Font.PLAIN, 12));
-		lID.setBounds(60, 26, (int) lID.getPreferredSize().getWidth() + 5, 20);
+		lAuthorID.setFont(new Font("bahnschrift", Font.PLAIN, 12));
+		lAuthorID.setBounds(60, 26, (int) lAuthorID.getPreferredSize().getWidth() + 5, 20);
 		lAuthor.setFont(new Font("bahnschrift", Font.PLAIN, 12));
 		lAuthor.setBounds((int) (400 - lAuthor.getPreferredSize().getWidth()) - 10, 3,
 				(int) lAuthor.getPreferredSize().getWidth() + 5, 20);
 		lStarCount.setFont(new Font("bahnschrift", Font.PLAIN, 18));
-		lStarCount.setBounds((int) ((int) (400 - lStarCount.getPreferredSize().getWidth()) - 30), 26,
+		lStarCount.setBounds(((int) (400 - lStarCount.getPreferredSize().getWidth()) - 30), 26,
 				(int) lStarCount.getPreferredSize().getWidth() + 5, 20);
 		lStar.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 16));
 		lStar.setBounds((int) (400 - lStar.getPreferredSize().getWidth()) - 10, 26,
@@ -211,7 +211,7 @@ public class LevelsWindow {
 
 		lName.setForeground(Defaults.FOREGROUND);
 		lAuthor.setForeground(Defaults.FOREGROUND);
-		lID.setForeground(Defaults.FOREGROUND);
+		lAuthorID.setForeground(Defaults.FOREGROUND);
 		lAnalyzed.setForeground(Defaults.FOREGROUND);
 		lStarCount.setForeground(Defaults.FOREGROUND);
 		lStar.setForeground(Defaults.FOREGROUND);
@@ -253,7 +253,7 @@ public class LevelsWindow {
 				}
 
 				for (int j = 0; j < Requests.levels.size(); j++) {
-					if (lID.getText().contains("(" + Requests.levels.get(j).getLevelID() + ")")) {
+					if (lAuthorID.getText().contains("(" + Requests.levels.get(j).getLevelID() + ")")) {
 						if (Requests.levels.get(j).getContainsVulgar() && Requests.levels.get(j).getAnalyzed()) {
 							request.setUI(noticeSelectUI);
 						} else if (Requests.levels.get(j).getContainsImage() && Requests.levels.get(j).getAnalyzed()) {
@@ -293,7 +293,6 @@ public class LevelsWindow {
 		panelHeight = panelHeight + 50;
 		mainPanel.setBounds(0, 0, width, panelHeight);
 		mainPanel.setPreferredSize(new Dimension(width, panelHeight));
-		// mainPanel.revalidate();
 		scrollPane.updateUI();
 		mainPanel.add(request);
 		mainPanel.updateUI();
