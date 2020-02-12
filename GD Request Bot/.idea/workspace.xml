@@ -8,6 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/ChatBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ChatBot.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$1$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$2.class" afterDir="false" />
@@ -19,12 +20,15 @@
       <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$6.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/GetComments.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/GetComments.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/InfoWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InfoWindow.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$6.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/KeyListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/KeyListener$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/KeyListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/KeyListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/LevelsWindow$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelsWindow$1$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/LevelsWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelsWindow$1.class" afterDir="false" />
@@ -43,12 +47,54 @@
       <change beforePath="$PROJECT_DIR$/bin/Main/MainBar.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/MainBar.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/Overlay$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Overlay$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Main/Overlay.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Overlay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/InnerWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/InnerWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/PlaySong.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/PlaySong.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/Requests.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Requests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/RoundedJButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/RoundedJButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/SongWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/SongWindow$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/SongWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/SongWindow$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/SongWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/SongWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Resources/Icons/actions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Resources/Icons/check.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Resources/Icons/clipboard.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Resources/Icons/comments.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Resources/Icons/dislike.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Resources/Icons/info.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Resources/Icons/like.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Resources/Icons/next.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Resources/Icons/note.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Resources/Icons/play.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Resources/Icons/queue.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Resources/Icons/skip.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Resources/Icons/square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Resources/Icons/squareWhite.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Resources/Icons/stop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Resources/WindowIcons/X.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Resources/WindowIcons/pin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Resources/WindowIcons/pinPressed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blocked.txt" beforeDir="false" afterPath="$PROJECT_DIR$/blocked.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/CommentsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/CommentsWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/LevelsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/LevelsWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/Overlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Overlay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/Icons/actions.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/Icons/check.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/Icons/clipboard.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/Icons/comments.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/Icons/dislike.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/Icons/info.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/Icons/like.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/Icons/next.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/Icons/note.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/Icons/play.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/Icons/queue.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/Icons/skip.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/Icons/square.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/Icons/squareWhite.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/Icons/stop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/WindowIcons/X.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/WindowIcons/pin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/WindowIcons/pinPressed.png" beforeDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/classes/" />
-    <ignored path="$PROJECT_DIR$/bin/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,83 +117,6 @@
   <component name="FavoritesManager">
     <favorites_list name="GD Request Bot" />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/ChatBot.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="394" column="41" lean-forward="true" selection-start-line="394" selection-start-column="41" selection-end-line="394" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="122" column="52" selection-start-line="122" selection-start-column="50" selection-end-line="122" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Settings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/blocked.txt">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/CheckBoxButton.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blockedOrig.txt">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.project">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/InnerWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="428" column="8" selection-start-line="428" selection-start-column="8" selection-end-line="428" selection-end-column="8" />
-              <folding>
-                <element signature="e#14710#14711#0" expanded="true" />
-                <element signature="e#14781#14782#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/ActionsWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="66" column="32" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -164,83 +133,8 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/Main/SongWindow.java" />
-        <option value="$PROJECT_DIR$/src/Main/LevelsWindow.java" />
-        <option value="$PROJECT_DIR$/src/Main/RoundedJButton.java" />
-        <option value="$PROJECT_DIR$/src/Main/InfoWindow.java" />
-        <option value="$PROJECT_DIR$/src/Main/KeyListener.java" />
-        <option value="$PROJECT_DIR$/src/Main/CommentsWindow.java" />
-        <option value="$PROJECT_DIR$/src/Main/InnerWindow.java" />
-        <option value="$PROJECT_DIR$/src/Main/Main.java" />
-        <option value="$PROJECT_DIR$/src/Main/Requests.java" />
-        <option value="$PROJECT_DIR$/blocked.txt" />
-        <option value="$PROJECT_DIR$/src/Main/ChatBot.java" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="408" />
-    <option name="y" value="-13" />
-    <option name="width" value="1385" />
-    <option name="height" value="971" />
-  </component>
   <component name="ProjectId" id="1X2386Wf5oMdxwOPKjpPdGzrXYK" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Main" type="462c0819:PsiDirectoryNode" />
-              <item name="CommentsWindow.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Main" type="462c0819:PsiDirectoryNode" />
-              <item name="Overlay.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Main" type="462c0819:PsiDirectoryNode" />
-              <item name="SongWindow.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-    </panes>
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -260,18 +154,6 @@
   </component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration default="true" type="Applet">
@@ -301,12 +183,14 @@
       </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <properties />
       <listeners />
@@ -353,48 +237,9 @@
       <workItem from="1581007245076" duration="6709000" />
       <workItem from="1581352541254" duration="8303000" />
       <workItem from="1581439191273" duration="8382000" />
+      <workItem from="1581525521783" duration="4820000" />
     </task>
     <servers />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17910448" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32827735" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info active="true" anchor="bottom" id="TODO" order="6" visible="true" weight="0.32827735" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Maven" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Capture Analysis" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -405,12 +250,6 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
               <option name="COLUMN_ORDER" />
             </State>
           </value>
@@ -441,9 +280,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580230323702" />
-    <state x="-1155" y="250" key="#com.intellij.ide.util.MemberChooser" timestamp="1581441599616">
+    <state x="-1155" y="250" key="#com.intellij.ide.util.MemberChooser" timestamp="1581532146682">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
+    <state x="-1155" y="250" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1080/1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581532146682" />
     <state x="-1155" y="250" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581441599616" />
     <state x="808" y="409" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1580230235292">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -462,43 +302,47 @@
     </state>
     <state x="-1254" y="272" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580921390551" />
     <state x="666" y="262" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580230266371" />
-    <state width="1877" height="269" key="GridCell.Tab.0.bottom" timestamp="1581446596214">
+    <state width="1877" height="269" key="GridCell.Tab.0.bottom" timestamp="1581533447705">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1877" height="269" key="GridCell.Tab.0.bottom/0.0.1097.577/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581354944176" />
     <state width="1877" height="270" key="GridCell.Tab.0.bottom/0.0.1280.680/1280.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581012210989" />
     <state width="1877" height="269" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581359338106" />
     <state width="1493" height="269" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1080/-1920.0.1920.1080@0.0.1536.824" timestamp="1581360867371" />
+    <state width="1877" height="269" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1080/1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581533447705" />
     <state width="1877" height="269" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581446596214" />
     <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580929227128" />
     <state width="1877" height="270" key="GridCell.Tab.0.bottom/0.0.800.560/800.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581013556990" />
-    <state width="1877" height="269" key="GridCell.Tab.0.center" timestamp="1581446596214">
+    <state width="1877" height="269" key="GridCell.Tab.0.center" timestamp="1581533447705">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1877" height="269" key="GridCell.Tab.0.center/0.0.1097.577/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581354944176" />
     <state width="1877" height="270" key="GridCell.Tab.0.center/0.0.1280.680/1280.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581012210989" />
     <state width="1877" height="269" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581359338106" />
     <state width="1493" height="269" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1080/-1920.0.1920.1080@0.0.1536.824" timestamp="1581360867371" />
+    <state width="1877" height="269" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1080/1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581533447705" />
     <state width="1877" height="269" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581446596214" />
     <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580929227128" />
     <state width="1877" height="270" key="GridCell.Tab.0.center/0.0.800.560/800.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581013556990" />
-    <state width="1877" height="269" key="GridCell.Tab.0.left" timestamp="1581446596214">
+    <state width="1877" height="269" key="GridCell.Tab.0.left" timestamp="1581533447705">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1877" height="269" key="GridCell.Tab.0.left/0.0.1097.577/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581354944176" />
     <state width="1877" height="270" key="GridCell.Tab.0.left/0.0.1280.680/1280.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581012210989" />
     <state width="1877" height="269" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581359338106" />
     <state width="1493" height="269" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1080/-1920.0.1920.1080@0.0.1536.824" timestamp="1581360867371" />
+    <state width="1877" height="269" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1080/1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581533447705" />
     <state width="1877" height="269" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581446596214" />
     <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580929227128" />
     <state width="1877" height="270" key="GridCell.Tab.0.left/0.0.800.560/800.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581013556990" />
-    <state width="1877" height="269" key="GridCell.Tab.0.right" timestamp="1581446596214">
+    <state width="1877" height="269" key="GridCell.Tab.0.right" timestamp="1581533447705">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state width="1877" height="269" key="GridCell.Tab.0.right/0.0.1097.577/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581354944176" />
     <state width="1877" height="270" key="GridCell.Tab.0.right/0.0.1280.680/1280.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581012210989" />
     <state width="1877" height="269" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581359338106" />
     <state width="1493" height="269" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1080/-1920.0.1920.1080@0.0.1536.824" timestamp="1581360867371" />
+    <state width="1877" height="269" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1080/1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581533447705" />
     <state width="1877" height="269" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581446596214" />
     <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@0.0.1920.1040" timestamp="1580929227128" />
     <state width="1877" height="270" key="GridCell.Tab.0.right/0.0.800.560/800.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1581013556990" />
@@ -535,178 +379,6 @@
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state x="-1297" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580837643089" />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Main/JButtonUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/LevelsWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="203" column="68" lean-forward="true" selection-start-line="203" selection-start-column="68" selection-end-line="203" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/ParseLevel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/RoundedJButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SongWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Defaults.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/GDObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/KeyListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-153">
-          <caret line="15" column="44" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Overlay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="22" column="19" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/../../../GDBoard Dependencies/jide-common.jar!/com/jidesoft/swing/ResizablePanel.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-102">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding>
-            <element signature="e#959#960#0" expanded="true" />
-            <element signature="e#1001#1002#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/CommentsWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="34" column="22" selection-start-line="34" selection-start-column="22" selection-end-line="34" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/../../../GDBoard Dependencies/jide-common.jar!/com/jidesoft/swing/Resizable.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="119" column="27" selection-start-line="119" selection-start-column="16" selection-end-line="119" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/InfoWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="18" column="123" selection-start-line="18" selection-start-column="123" selection-end-line="18" selection-end-column="123" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/InnerWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="428" column="8" selection-start-line="428" selection-start-column="8" selection-end-line="428" selection-end-column="8" />
-          <folding>
-            <element signature="e#14710#14711#0" expanded="true" />
-            <element signature="e#14781#14782#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blockedOrig.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_temp_">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/ActionsWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="66" column="32" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="122" column="52" selection-start-line="122" selection-start-column="50" selection-end-line="122" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Settings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/CheckBoxButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/ChatBot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="394" column="41" lean-forward="true" selection-start-line="394" selection-start-column="41" selection-end-line="394" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.project">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blocked.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
   </component>
   <component name="masterDetails">
     <states>

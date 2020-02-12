@@ -64,8 +64,6 @@ public class Main {
 			SongWindow.refreshInfo();
 		//}
 
-		//Time time = new Time();
-		//time.start();
 		Overlay.setVisible();
 
 		//if (Settings.isRequests()) {
@@ -76,6 +74,12 @@ public class Main {
 			while(true) {
 
 				bot.start();
+				System.out.println("No Connection");
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 
 		//}

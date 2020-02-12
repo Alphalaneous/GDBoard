@@ -17,6 +17,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -259,6 +261,21 @@ class CommentsWindow {
                     cmtPanel.setBackground(Defaults.MAIN);
 
                     JLabel commenter = new JLabel();
+                    commenter.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                    int finalI = i;
+                    commenter.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            super.mouseClicked(e);
+                            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                                try {
+                                    Desktop.getDesktop().browse(new URI("http://www.gdbrowser.com/profile/" + commenterText.get(finalI)));
+                                } catch (IOException | URISyntaxException ex) {
+                                    ex.printStackTrace();
+                                }
+                            }
+                        }
+                    });
                     commenter.setFont(new Font("bahnschrift", Font.BOLD, 14));
                     commenter.setBounds(9, 4, (int) (width * 0.5), 18);
                     JLabel percentLabel = new JLabel();

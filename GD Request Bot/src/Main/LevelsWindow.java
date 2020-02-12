@@ -14,6 +14,8 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Objects;
 
 public class LevelsWindow {
@@ -233,8 +235,22 @@ public class LevelsWindow {
 		request.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
+				if(SwingUtilities.isMiddleMouseButton(e)){
+					if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+						try {
+							Desktop.getDesktop().browse(new URI("http://www.gdbrowser.com/" + ID));
+						} catch (IOException | URISyntaxException ex) {
+							ex.printStackTrace();
+						}
+					}
+				}
+				//TODO Right click moves level to top!
+				if(SwingUtilities.isRightMouseButton(e)) {
+					
+				}
 				((InnerWindow) window).moveToFront();
 				super.mousePressed(e);
+
 				Component[] comp = mainPanel.getComponents();
 				for (int j = 0; j < comp.length; j++) {
 					if (comp[j] instanceof JButton) {
