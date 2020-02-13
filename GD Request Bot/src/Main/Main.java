@@ -49,11 +49,11 @@ public class Main {
 		bot.connect();																//Connect the bot
 		bot.sendMessage("Thank you for using GDBoard by Alphalaneous! Type !help for list of commands!", bot.joinChannel(Settings.channel));
 
-
+		Defaults.       startMainThread();		//Starts thread that always checks for changes such as time, resolution, and color scheme
 		Overlay.        setFrame();				//Creates the JFrame that contains everything
 		KeyListener.    hook();					//Starts a Keyboard and Controller Listener
 		MainBar.        createBar();			//Creates the main "Game Bar" in the top center
-		Defaults.       startMainThread();		//Starts thread that always checks for changes such as time, resolution, and color scheme
+
 		LevelsWindow.   createPanel();			//Creates the Levels Window containing all the requests in the level queue
 		ActionsWindow.  createPanel();			//Creates the Action Window containing buttons that do specific actions
 		InfoWindow.     createPanel();			//Creates the Info Window containing the information of the selected level

@@ -275,6 +275,16 @@ class CommentsWindow {
                                 }
                             }
                         }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+                            super.mouseEntered(e);
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+                            super.mouseExited(e);
+                        }
                     });
                     commenter.setFont(new Font("bahnschrift", Font.BOLD, 14));
                     commenter.setBounds(9, 4, (int) (width * 0.5), 18);

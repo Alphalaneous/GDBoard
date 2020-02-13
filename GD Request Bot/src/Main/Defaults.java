@@ -52,10 +52,12 @@ public class Defaults {
 		final int[] prevTheme = {((RegDWORDValue) personalizeStart.getValue("AppsUseLightTheme")).getIntValue()};
 
 		if(prevTheme[0] == 0) {
+			System.out.println("Theme first");
 			Defaults.setDark();
 			dark.set(true);
 		}
 		else if (prevTheme[0] == 1) {
+			System.out.println("Theme first");
 			Defaults.setLight();
 			dark.set(false);
 		}

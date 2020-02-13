@@ -134,7 +134,8 @@ class InnerWindow extends ResizablePanel {
                 }
 
 			//System.out.println(title + " | X: " + p.getX() + " Y: " + p.getY());
-			if(Overlay.isVisible && !isDragging[0]) {
+                //region some name
+			if(Overlay.isVisible && !isDragging[0]){
                 assert p != null;
                 if (p.getY() <= 30 && p.getY() >= 27 && p.getX() >= 0 && p.getX() <= width) {
 					if (getY() <= -10) {
@@ -155,6 +156,8 @@ class InnerWindow extends ResizablePanel {
 					}
 				}
 			}
+			//endregion
+
                 assert p != null;
                 if((p.getX() >= width || p.getX() <= -1 || p.getY() <=-1 || p.getY() >= 30) && exited[0]){
 				if(getY() <= 0){

@@ -23,6 +23,9 @@ class Overlay {
 	static boolean isVisible = true;
 
 	// --------------------
+	static JLayeredPane getMainFrame(){
+		return mainFrame;
+	}
 
 	static void setFrame() {
 
@@ -141,22 +144,9 @@ class MainBar {
 	private static JLabel icon =  new JLabel();
 
 	static void createBar() {
-		BufferedImage img = null;
-		try {
-			if(!Defaults.dark.get()) {
-				img = ImageIO.read(new File("src/resources/Icons/barIconLight.png"));
-			}
-			if(Defaults.dark.get()){
-				img = ImageIO.read(new File("src/resources/Icons/barIconDark.png"));
-			}
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		assert img != null;
-		Image imgScaled = img.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
-		ImageIcon imgNew = new ImageIcon(imgScaled);
 
-		icon.setIcon(imgNew);
+
+
 		double ratio = 1920/Defaults.screenSize.getWidth();
 		Overlay.alwaysFront(barPanel);
 		barPanel.setOpaque(false);
@@ -176,8 +166,7 @@ class MainBar {
 		mainPanel.setLayout(null);
 		barPanel.add(mainPanel);
 
-		icon.setBounds(20, -1, 64, 64);
-		mainPanel.add(icon);
+
 
 		buttonPanel.setBounds(160, 0, 420, 64);
 		buttonPanel.setBackground(Defaults.MAIN);
@@ -241,13 +230,32 @@ class MainBar {
 		time.setFont(font);
 		time.setForeground(Defaults.FOREGROUND);
 
-
-
 		mainPanel.add(time);
 		mainPanel.add(buttonPanel);
 
+		BufferedImage img = null;
+		System.out.println("Bar first");
+		try {
+			if(Defaults.dark.get()) {
+				System.out.println("DARK");
+				img = ImageIO.read(new File("src/resources/Icons/barIconLight.png"));
+			}
+			if(!Defaults.dark.get()){
+				System.out.println("LIGHT");
+				img = ImageIO.read(new File("src/resources/Icons/barIconDark.png"));
+			}
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		assert img != null;
+		Image imgScaled = img.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+		ImageIcon imgNew = new ImageIcon(imgScaled);
+		icon.setIcon(imgNew);
+		icon.setBounds(20, -1, 64, 64);
+		mainPanel.add(icon);
+
 		Overlay.addToFrame(barPanel);
-		refreshUI();
+
 	}
 	static JPanel getMainBar(){
 		return barPanel;
