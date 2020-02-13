@@ -18,7 +18,7 @@ class InfoWindow {
 	private static JTextPane description = new JTextPane();
 	private static JPanel window = new InnerWindow("Information", 1920 - width - 10, 10, width, height, "\uE946").createPanel();
 
-	static void createWindow() {
+	static void createPanel() {
 
 		panel.setPreferredSize(new Dimension(width, height));
 		panel.setBounds(1, 31, 160, height);

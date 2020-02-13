@@ -91,7 +91,7 @@ class SongWindow {
 		songName.setForeground(Defaults.FOREGROUND);
 
 		songAuthorID.setFont(new Font("bahnschrift", Font.PLAIN, 14));
-		songAuthorID.setBounds(10, height - 30, width, 20);
+		songAuthorID.setBounds(10, height - 30, width/2, 20);
 		songAuthorID.setForeground(Defaults.FOREGROUND);
 		
 		

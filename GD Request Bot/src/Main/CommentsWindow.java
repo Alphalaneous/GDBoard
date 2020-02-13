@@ -297,9 +297,9 @@ class CommentsWindow {
 
 
 
-                    JTextPane comment = new JTextPane();
+                    JLabel comment = new JLabel();
                     comment.setFont(new Font("bahnschrift", Font.PLAIN, 12));
-                    comment.setBounds(6, 24, width - 6, 60);
+                    comment.setBounds(9, 24, width - 6, 60);
 
                     cmtPanel.add(commenter);
                     cmtPanel.add(comment);
@@ -313,10 +313,9 @@ class CommentsWindow {
                     likeIcon.setForeground(Defaults.FOREGROUND);
 
                     comment.setOpaque(false);
-                    comment.setEditable(false);
-
+                    String commentTextFormat = String.format("<html><div WIDTH=%d>%s</div></html>", width-8, commentText.get(i));
                     comment.setForeground(Defaults.FOREGROUND);
-                    comment.setText(commentText.get(i));
+                    comment.setText(commentTextFormat);
                     if(commenterText.get(i).equalsIgnoreCase(Requests.levels.get(LevelsWindow.getSelectedID()).getAuthor())){
                         commenter.setForeground(new Color(16, 164,0));
                     }
@@ -327,7 +326,8 @@ class CommentsWindow {
                     }
                     likesLabel.setText(likes.get(i));
                     likesLabel.setBounds(width - likesLabel.getPreferredSize().width - 26, 4, likesLabel.getPreferredSize().width + 5, 18);
-
+                    comment.setBounds(9, 24, width - 8, comment.getPreferredSize().height);
+                    commenter.setBounds(9, 4, commenter.getPreferredSize().width, 18);
                     panel.add(cmtPanel);
                     panelHeight = panelHeight + 32 + comment.getPreferredSize().height;
                     cmtPanel.setPreferredSize(new Dimension(width, 28 + comment.getPreferredSize().height));
@@ -340,6 +340,7 @@ class CommentsWindow {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            ((InnerWindow)window).refreshListener();
             panel.setPreferredSize(new Dimension(width, panelHeight));
             panel.updateUI();
             panel.setVisible(true);

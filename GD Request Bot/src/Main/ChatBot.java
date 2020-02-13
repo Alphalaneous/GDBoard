@@ -22,73 +22,72 @@ public class ChatBot extends TwitchBot {
 
     ChatBot() {
         this.setUsername("chatbot");
-        this.setOauth_Key("oauth:" + Settings.getOAuth());
+        this.setOauth_Key("oauth:" + Settings.oauth);
     }
-
 
     @Override
     public void onMessage(User user, Channel channel, String msg) {
-        // --------------------
-        // If the bot sends the message, don't read it
-
-        // --------------------
-        // If message does start with "!" (Is a command)
 
         if (msg.startsWith("!")) {
-            msg = msg.replaceAll("[!?,]", "");
 
-            // --------------------
-            // Split message into arguments, get first part of command
+            String command = msg.split(" ")[0];
+            command.replaceAll("!", "");
+            String[] arguments = msg.split(" ");
+            boolean isBroadcaster = ("#" + user).equalsIgnoreCase(String.valueOf(channel));
 
-            String command = msg.split("\\s+")[0];
-            String[] arguments = msg.split("\\s+");
             int level = 1;
             if (arguments.length > 1) {
                 try {
                     level = Integer.parseInt(arguments[1]);
+                    if (level <= 0 || level > Requests.levels.size() + 1) {
+                        level = 1;
+                    }
                 } catch (Exception ignored) {
                 }
-                if (level <= 0) {
-                    level = 1;
-                }
             }
-            try {
-                if (command.equalsIgnoreCase("ID") || command.equalsIgnoreCase("name")
-                        || command.equalsIgnoreCase("level")) {
+            if (command.equalsIgnoreCase("ID") ||
+                    command.equalsIgnoreCase("name") ||
+                    command.equalsIgnoreCase("level")) {
 
-                    Main.sendMessage("@" + user + " The level at position " + level + " is " + Requests.levels.get(level - 1).getName() + " by " + Requests.levels.get(level - 1).getAuthor() + " ("
-                            + Requests.levels.get(level - 1).getLevelID() + ")");
-                }
-                if (command.equalsIgnoreCase("current")) {
-                    Main.sendMessage("@" + user + " The current level is " + Requests.levels.get(0).getName() + " by " + Requests.levels.get(level - 1).getAuthor() + " ("
-                            + Requests.levels.get(0).getLevelID() + ")");
-                }
-                if (command.equalsIgnoreCase("song")) {
-                    Main.sendMessage("@" + user + " The song is " + Requests.levels.get(level - 1).getSongName() + " by "
-                            + Requests.levels.get(level - 1).getSongAuthor() + " (" + Requests.levels.get(level - 1).getSongID()
-                            + ")");
-                }
-                if (command.equalsIgnoreCase("likes")) {
-                    Main.sendMessage("@" + user + " There are " + Requests.levels.get(level - 1).getLikes() + " likes!");
-                }
-                if (command.equalsIgnoreCase("downloads")) {
-                    Main.sendMessage("@" + user + " There are " + Requests.levels.get(level - 1).getDownloads() + " downloads!");
-                }
-                if (command.equalsIgnoreCase("difficulty")) {
-                    Main.sendMessage("@" + user + " The difficulty is " + Requests.levels.get(level - 1).getDifficulty().toLowerCase());
-                }
-
-
-            } catch (IndexOutOfBoundsException e) {
-                e.printStackTrace();
+                Main.sendMessage("@" + user + " The level at position " +
+                        level + " is " + Requests.levels.get(level - 1).getName() +
+                        " by " + Requests.levels.get(level - 1).getAuthor() + " (" +
+                        Requests.levels.get(level - 1).getLevelID() + ")");
             }
+            if (command.equalsIgnoreCase("current")) {
 
+                Main.sendMessage("@" + user + " The current level is " +
+                        Requests.levels.get(0).getName() + " by " +
+                        Requests.levels.get(level - 1).getAuthor() + " (" +
+                        Requests.levels.get(0).getLevelID() + ")");
+            }
+            if (command.equalsIgnoreCase("song")) {
+
+                Main.sendMessage("@" + user + " The song is " +
+                        Requests.levels.get(level - 1).getSongName() + " by " +
+                        Requests.levels.get(level - 1).getSongAuthor() +
+                        " (" + Requests.levels.get(level - 1).getSongID() + ")");
+            }
+            if (command.equalsIgnoreCase("likes")) {
+
+                Main.sendMessage("@" + user + " There are " +
+                        Requests.levels.get(level - 1).getLikes() + " likes!");
+            }
+            if (command.equalsIgnoreCase("downloads")) {
+
+                Main.sendMessage("@" + user + " There are " +
+                        Requests.levels.get(level - 1).getDownloads() + " downloads!");
+            }
+            if (command.equalsIgnoreCase("difficulty")) {
+
+                Main.sendMessage("@" + user + " The difficulty is " +
+                        Requests.levels.get(level - 1).getDifficulty().toLowerCase());
+            }
             if (command.equalsIgnoreCase("remove")) {
+
                 for (int i = 0; i < Requests.levels.size(); i++) {
                     try {
-
-                        if (Requests.levels.get(i).getLevelID().equals(Requests.levels
-                                .get(level - 1).getLevelID())
+                        if (Requests.levels.get(i).getLevelID().equals(Requests.levels.get(level - 1).getLevelID())
                                 && String.valueOf(user).equalsIgnoreCase(Requests.levels.get(i).getRequester())) {
                             LevelsWindow.removeButton(i);
                             Requests.levels.remove(i);
@@ -102,17 +101,26 @@ public class ChatBot extends TwitchBot {
                             thread.start();
                             sendMessage("@" + user + ", your level has been removed!", channel);
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                        if (Requests.levels.get(i).getLevelID().equals(Requests.levels.get(level - 1).getLevelID())
+                                && (user.isMod(channel) || isBroadcaster)) {
+                            LevelsWindow.removeButton(i);
+                            Requests.levels.remove(i);
+                            SongWindow.refreshInfo();
+                            InfoWindow.refreshInfo();
+                            Thread thread = new Thread(() -> {
+                                CommentsWindow.unloadComments(true);
+                                CommentsWindow.loadComments(0, false);
+                            });
+                            LevelsWindow.setOneSelect();
+                            thread.start();
+                            sendMessage("@" + user + ", your level has been removed!", channel);
+                        }
+                    } catch (Exception ignored) {
                     }
                 }
             }
-
-            // --------------------
-            // Queue Command
-
-            boolean isBroadcaster = ("#" + user).equalsIgnoreCase(String.valueOf(channel));
             if (command.equalsIgnoreCase("clear") && (user.isMod(channel) || isBroadcaster)) {
+
                 for (int i = 0; i < Requests.levels.size(); i++) {
                     LevelsWindow.removeButton();
                 }
@@ -122,9 +130,15 @@ public class ChatBot extends TwitchBot {
                 CommentsWindow.unloadComments(true);
                 sendMessage("@" + user + " Successfully cleared the queue!", channel);
             }
-            if (command.equalsIgnoreCase("q") || command.equalsIgnoreCase("queue") || command.equalsIgnoreCase("levellist")
-                    || command.equalsIgnoreCase("list") || command.equalsIgnoreCase("requests") || command.equalsIgnoreCase("page")) {
+            if (command.equalsIgnoreCase("q") ||
+                    command.equalsIgnoreCase("queue") ||
+                    command.equalsIgnoreCase("levelList") ||
+                    command.equalsIgnoreCase("list") ||
+                    command.equalsIgnoreCase("requests") ||
+                    command.equalsIgnoreCase("page")) {
+
                 if (user.isMod(channel) || isBroadcaster) {
+
                     StringBuilder message = new StringBuilder();
                     int page = 1;
                     try {
@@ -157,8 +171,9 @@ public class ChatBot extends TwitchBot {
             }
 
 
-            if (command.equalsIgnoreCase("p") || command.equalsIgnoreCase("where") || command.equalsIgnoreCase("position")) {
-
+            if (command.equalsIgnoreCase("p") ||
+                    command.equalsIgnoreCase("where") ||
+                    command.equalsIgnoreCase("position")) {
 
                 ArrayList<LevelData> userLevels = new ArrayList<>();
                 ArrayList<Integer> userPosition = new ArrayList<>();
@@ -250,7 +265,7 @@ public class ChatBot extends TwitchBot {
                         }
                     }
                     sc.close();
-                    if(exists) {
+                    if (exists) {
                         File temp = new File("_temp_");
                         PrintWriter out = new PrintWriter(new FileWriter(temp));
                         Files.lines(file.toPath())
@@ -261,8 +276,7 @@ public class ChatBot extends TwitchBot {
                         file.delete();
                         temp.renameTo(file);
                         sendMessage("@" + user + " Successfully unblocked " + arguments[1], channel);
-                    }
-                    else {
+                    } else {
                         sendMessage("@" + user + " That level isn't blocked!", channel);
                     }
                 } catch (IOException ex) {
@@ -285,7 +299,7 @@ public class ChatBot extends TwitchBot {
                         }
                     }
                     sc.close();
-                    if(goThrough) {
+                    if (goThrough) {
                         FileWriter fr;
                         try {
                             fr = new FileWriter(file, true);
@@ -295,24 +309,23 @@ public class ChatBot extends TwitchBot {
                             e1.printStackTrace();
                         }
                         sendMessage("@" + user + " Successfully blocked " + arguments[1], channel);
-                    }
-                    else {
+                    } else {
                         sendMessage("@" + user + " ID Already Blocked!", channel);
                     }
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     sendMessage("@" + user + " Invalid ID", channel);
                 }
 
             }
-            if (command.equalsIgnoreCase("blockuser") && (user.isMod(channel) || isBroadcaster)) {
+            if (command.equalsIgnoreCase("blockUser") && (user.isMod(channel) || isBroadcaster)) {
                 sendMessage("Soon...", channel); //TODO Blocking User
             }
 
-            // --------------------
-            // Get request via command (Allows for smaller numbers
 
-            if (command.equalsIgnoreCase("r") || command.equalsIgnoreCase("request") || command.equalsIgnoreCase("req") || command.equalsIgnoreCase("send")) {
+            if (command.equalsIgnoreCase("r") ||
+                    command.equalsIgnoreCase("request") ||
+                    command.equalsIgnoreCase("req") ||
+                    command.equalsIgnoreCase("send")) {
                 Matcher m = null;
                 try {
                     m = Pattern.compile("(\\d+)").matcher(arguments[1]);
@@ -392,7 +405,7 @@ public class ChatBot extends TwitchBot {
                     }
                 }
             }
-        } else if (!msg.startsWith("!")){
+        } else if (!msg.startsWith("!")) {
 
             // --------------------
             // Get request from chat without commands

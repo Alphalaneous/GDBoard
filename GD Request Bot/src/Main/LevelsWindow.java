@@ -244,10 +244,6 @@ public class LevelsWindow {
 						}
 					}
 				}
-				//TODO Right click moves level to top!
-				if(SwingUtilities.isRightMouseButton(e)) {
-					
-				}
 				((InnerWindow) window).moveToFront();
 				super.mousePressed(e);
 
@@ -312,6 +308,7 @@ public class LevelsWindow {
 		scrollPane.updateUI();
 		mainPanel.add(request);
 		mainPanel.updateUI();
+		((InnerWindow)window).refreshListener();
 	}
 
 	static void refreshUI() {

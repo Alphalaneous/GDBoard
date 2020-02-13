@@ -4,6 +4,7 @@ import com.registry.RegistryKey;
 
 import java.awt.*;
 import java.time.LocalDateTime;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Defaults {
 	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -17,6 +18,7 @@ public class Defaults {
 	public static Color FOREGROUND;
 	static Color FOREGROUND2;
 	static Color BUTTON_HOVER;
+	static AtomicBoolean dark = new AtomicBoolean();
 	
 	
 	private static void setDark() {
@@ -51,9 +53,11 @@ public class Defaults {
 
 		if(prevTheme[0] == 0) {
 			Defaults.setDark();
+			dark.set(true);
 		}
 		else if (prevTheme[0] == 1) {
 			Defaults.setLight();
+			dark.set(false);
 		}
 		Thread thread = new Thread(() -> {
 			while(true){
@@ -74,21 +78,19 @@ public class Defaults {
 					hour = 12;
 				}
 				MainBar.setTime(hour + ":" + String.format("%02d", minute) + " " + half);
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+
 				RegistryKey personalize = new RegistryKey(
 						"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
 
 				int theme = ((RegDWORDValue) personalize.getValue("AppsUseLightTheme")).getIntValue();
 				if(theme == 0 && prevTheme[0] == 1) {
 					Defaults.setDark();
+					dark.set(true);
 					prevTheme[0] = 0;
 				}
 				else if (theme == 1 && prevTheme[0] == 0) {
 					Defaults.setLight();
+					dark.set(false);
 					prevTheme[0] = 1;
 				}
 
@@ -97,6 +99,11 @@ public class Defaults {
 					Overlay.refreshUI();
 				}
 				prevScreenSize = screenSize;
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 			}
 		});
 		thread.start();

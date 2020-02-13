@@ -333,10 +333,30 @@ class InnerWindow extends ResizablePanel {
     }
 
     void refreshListener() {
-        Component[] components = getComponents();
-        for (Component component : components) {
+        for (Component component : getComponents()) {
+            if(component instanceof JPanel && !component.equals(topBar)) {
+                for (Component component1 : ((JPanel) component).getComponents()) {
+                    if(component1 instanceof JPanel) {
+                        for (Component component2 : ((JPanel) component1).getComponents()) {
+                            component2.addMouseListener(new MouseAdapter() {
+                                public void mousePressed(MouseEvent e) {
+                                    super.mouseClicked(e);
+                                    moveToFront();
+                                }
+                            });
+                        }
+                    }
+                    component1.addMouseListener(new MouseAdapter() {
+
+                        public void mousePressed(MouseEvent e) {
+                            super.mouseClicked(e);
+                            moveToFront();
+                        }
+                    });
+                }
+            }
             component.addMouseListener(new MouseAdapter() {
-                @Override
+
                 public void mousePressed(MouseEvent e) {
                     super.mouseClicked(e);
                     moveToFront();
