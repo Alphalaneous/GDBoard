@@ -118,7 +118,7 @@ class Requests {
                 }
 
             }
-            File file = new File("blocked.txt");
+            File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
             Scanner sc = new Scanner(file);
 
             while (sc.hasNextLine()) {
@@ -198,18 +198,19 @@ class Requests {
                             if (Objects.get(i)[j].equals("41")) {
                                 lvlObject.get(i).color1HSVEnabled(Double.parseDouble(Objects.get(i)[j + 1]));
                             }
-                            File file = new File("blockedWords.txt");
-                            Scanner sc = new Scanner(file);
-
-
+                            InputStream is = Main.class.getClassLoader()
+                                    .getResourceAsStream("blockedWords.txt");
+                            assert is != null;
+                            InputStreamReader isr = new InputStreamReader(is);
+                            BufferedReader br = new BufferedReader(isr);
+                           String line;
                             out:
-                            while (sc.hasNextLine()) {
+                            while ((line = br.readLine()) != null) {
                                 String[] text = lvlObject.get(i).getObjectText().toUpperCase().split(" ");
-                                String word = sc.nextLine();
 
                                 for (String s : text) {
 
-                                    if (s.equalsIgnoreCase(word)) {
+                                    if (s.equalsIgnoreCase(line)) {
                                         System.out.println("Contains Vulgar");
                                         Requests.getLevelData().get(k).setContainsVulgar();
                                         break out;
@@ -231,8 +232,8 @@ class Requests {
                                 Requests.getLevelData().get(k).setContainsImage();
                                 break outer;
                             }
-
-                            sc.close();
+                            isr.close();
+                            br.close();
 
                         }
                     }

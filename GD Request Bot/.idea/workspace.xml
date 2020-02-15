@@ -82,44 +82,45 @@
     <favorites_list name="GD Request Bot" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="69" selection-start-line="69" selection-end-line="69" />
+            <state relative-caret-position="161">
+              <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#983#1003#0" />
-                <element signature="e#1377#1402#0" />
-                <element signature="e#3610#3660#0" />
                 <element signature="n#!!doc;n#sendMessage#0;n#Main#0" />
+                <element signature="e#4216#4217#0" expanded="true" />
                 <element signature="e#4331#4332#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/LevelsWindow.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="774">
-              <caret line="167" column="60" selection-start-line="167" selection-start-column="60" selection-end-line="167" selection-end-column="60" />
+            <state relative-caret-position="1233">
+              <caret line="235" column="39" lean-forward="true" selection-start-line="235" selection-start-column="39" selection-end-line="235" selection-end-column="39" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/MainBar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="98" column="44" selection-start-line="98" selection-start-column="44" selection-end-line="98" selection-end-column="44" />
-              <folding>
-                <element signature="e#2458#2606#0" expanded="true" />
-                <element signature="e#2605#2606#0" expanded="true" />
-                <element signature="e#2692#2840#0" expanded="true" />
-                <element signature="e#2839#2840#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="248">
+              <caret line="126" column="43" selection-start-line="126" selection-start-column="35" selection-end-line="127" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/RoundedJButton.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
             </state>
           </provider>
         </entry>
@@ -127,8 +128,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/ChatBot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="683">
-              <caret line="307" column="80" selection-start-line="307" selection-start-column="80" selection-end-line="307" selection-end-column="80" />
+            <state relative-caret-position="248">
+              <caret line="295" column="87" selection-start-line="295" selection-start-column="37" selection-end-line="295" selection-end-column="87" />
               <folding>
                 <element signature="n#!!doc;n#ChatBot#0;n#ChatBot#0" />
                 <element signature="e#964#1001#0" />
@@ -171,25 +172,6 @@
                 <element signature="e#7959#8101#1" />
                 <element signature="e#8141#8172#0" />
                 <element signature="e#9762#9783#0" />
-                <element signature="e#17410#17466#0" />
-                <element signature="e#17647#17671#0" />
-                <element signature="e#21924#21962#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/ActionsWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-663">
-              <caret line="117" column="84" selection-start-line="117" selection-start-column="84" selection-end-line="117" selection-end-column="84" />
-              <folding>
-                <element signature="n#!!doc;n#createButton#0;n#ActionsWindow#0" />
-                <element signature="n#!!doc;n#refreshUI#0;n#ActionsWindow#0" />
-                <element signature="n#!!doc;n#toggleVisible#0;n#ActionsWindow#0" />
-                <element signature="n#!!doc;n#setInvisible#0;n#ActionsWindow#0" />
-                <element signature="n#!!doc;n#setVisible#0;n#ActionsWindow#0" />
               </folding>
             </state>
           </provider>
@@ -198,13 +180,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Settings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
+            <state relative-caret-position="986">
               <caret line="60" selection-start-line="60" selection-end-line="60" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1343#1344#0" expanded="true" />
                 <element signature="e#1372#1373#0" expanded="true" />
-                <element signature="e#1418#1419#0" expanded="true" />
-                <element signature="e#1471#1472#0" expanded="true" />
+                <element signature="e#1501#1502#0" expanded="true" />
                 <element signature="e#1527#1528#0" expanded="true" />
               </folding>
             </state>
@@ -224,7 +206,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Defaults.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
+            <state relative-caret-position="680">
               <caret line="45" selection-start-line="45" selection-end-line="45" />
             </state>
           </provider>
@@ -233,7 +215,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Overlay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
+            <state relative-caret-position="452">
               <caret line="87" selection-start-line="87" selection-end-line="87" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -265,7 +247,6 @@
         <option value="$PROJECT_DIR$/src/Main/InnerWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/GDObject.java" />
         <option value="$PROJECT_DIR$/src/Main/KeyListener.java" />
-        <option value="$PROJECT_DIR$/src/Main/Requests.java" />
         <option value="$PROJECT_DIR$/src/Main/CommentsWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/RoundedJButton.java" />
         <option value="$PROJECT_DIR$/src/Main/Overlay.java" />
@@ -280,12 +261,13 @@
         <option value="$PROJECT_DIR$/src/Main/Main.java" />
         <option value="$PROJECT_DIR$/src/Main/LevelsWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/MainBar.java" />
+        <option value="$PROJECT_DIR$/src/Main/Requests.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="237" />
-    <option name="y" value="28" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="384" />
+    <option name="y" value="47" />
     <option name="width" value="1385" />
     <option name="height" value="971" />
   </component>
@@ -296,8 +278,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -349,6 +329,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -361,7 +343,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1581729192102" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1581735572473" />
     <property name="last_opened_file_path" value="D:/Users/Ashton/eclipse-workspace/Random ID Generator" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.14648438" />
@@ -392,7 +374,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JAR Application.GD Request Bot.jar">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -448,8 +430,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="JAR Application.GD Request Bot.jar" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -492,34 +474,34 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="237" y="28" width="1385" height="971" extended-state="0" />
+    <frame x="384" y="47" width="1385" height="971" extended-state="0" />
     <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20754717" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21660377" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.3293556" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3627685" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3627685" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.18019094" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Maven" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.3293556" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -675,13 +657,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/ParseLevel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="128" lean-forward="true" selection-end-line="128" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/ParseLevel.java" />
     <entry file="file://$PROJECT_DIR$/src/Main/CheckBoxButton.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="27">
@@ -837,13 +813,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="159" column="25" selection-start-line="159" selection-start-column="25" selection-end-line="159" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/SettingsWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -869,20 +838,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/properties.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/properties.txt" />
     <entry file="jar://C:/Program Files/Java/jdk-12.0.1/lib/src.zip!/java.base/java/util/Properties.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="169">
           <caret line="402" column="29" selection-start-line="402" selection-start-column="29" selection-end-line="402" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/RoundedJButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
@@ -893,10 +853,65 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-12.0.1/lib/src.zip!/java.desktop/java/awt/EventDispatchThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="89" selection-start-line="89" selection-end-line="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/LevelsWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2499">
+          <caret line="167" column="60" selection-start-line="167" selection-start-column="60" selection-end-line="167" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/ActionsWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1819">
+          <caret line="117" column="84" selection-start-line="117" selection-start-column="84" selection-end-line="117" selection-end-column="84" />
+          <folding>
+            <element signature="n#!!doc;n#createButton#0;n#ActionsWindow#0" />
+            <element signature="n#!!doc;n#refreshUI#0;n#ActionsWindow#0" />
+            <element signature="n#!!doc;n#toggleVisible#0;n#ActionsWindow#0" />
+            <element signature="n#!!doc;n#setInvisible#0;n#ActionsWindow#0" />
+            <element signature="n#!!doc;n#setVisible#0;n#ActionsWindow#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Settings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="60" selection-start-line="60" selection-end-line="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1343#1344#0" expanded="true" />
+            <element signature="e#1372#1373#0" expanded="true" />
+            <element signature="e#1501#1502#0" expanded="true" />
+            <element signature="e#1527#1528#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blockedOrig.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blocked.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Defaults.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/ChatBot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="683">
-          <caret line="307" column="80" selection-start-line="307" selection-start-column="80" selection-end-line="307" selection-end-column="80" />
+        <state relative-caret-position="248">
+          <caret line="295" column="87" selection-start-line="295" selection-start-column="37" selection-end-line="295" selection-end-column="87" />
           <folding>
             <element signature="n#!!doc;n#ChatBot#0;n#ChatBot#0" />
             <element signature="e#964#1001#0" />
@@ -939,79 +954,20 @@
             <element signature="e#7959#8101#1" />
             <element signature="e#8141#8172#0" />
             <element signature="e#9762#9783#0" />
-            <element signature="e#17410#17466#0" />
-            <element signature="e#17647#17671#0" />
-            <element signature="e#21924#21962#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/ActionsWindow.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/RoundedJButton.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-663">
-          <caret line="117" column="84" selection-start-line="117" selection-start-column="84" selection-end-line="117" selection-end-column="84" />
-          <folding>
-            <element signature="n#!!doc;n#createButton#0;n#ActionsWindow#0" />
-            <element signature="n#!!doc;n#refreshUI#0;n#ActionsWindow#0" />
-            <element signature="n#!!doc;n#toggleVisible#0;n#ActionsWindow#0" />
-            <element signature="n#!!doc;n#setInvisible#0;n#ActionsWindow#0" />
-            <element signature="n#!!doc;n#setVisible#0;n#ActionsWindow#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-12.0.1/lib/src.zip!/java.desktop/java/awt/EventDispatchThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="89" selection-start-line="89" selection-end-line="89" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Settings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="60" selection-start-line="60" selection-end-line="60" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1372#1373#0" expanded="true" />
-            <element signature="e#1418#1419#0" expanded="true" />
-            <element signature="e#1471#1472#0" expanded="true" />
-            <element signature="e#1527#1528#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blockedOrig.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blocked.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="69" selection-start-line="69" selection-end-line="69" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#983#1003#0" />
-            <element signature="e#1377#1402#0" />
-            <element signature="e#3610#3660#0" />
-            <element signature="n#!!doc;n#sendMessage#0;n#Main#0" />
-            <element signature="e#4331#4332#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Defaults.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="45" selection-start-line="45" selection-end-line="45" />
+        <state relative-caret-position="17">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Overlay.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
+        <state relative-caret-position="452">
           <caret line="87" selection-start-line="87" selection-end-line="87" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1019,23 +975,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/LevelsWindow.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="774">
-          <caret line="167" column="60" selection-start-line="167" selection-start-column="60" selection-end-line="167" selection-end-column="60" />
+        <state relative-caret-position="161">
+          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="n#!!doc;n#sendMessage#0;n#Main#0" />
+            <element signature="e#4216#4217#0" expanded="true" />
+            <element signature="e#4331#4332#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/MainBar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="98" column="44" selection-start-line="98" selection-start-column="44" selection-end-line="98" selection-end-column="44" />
-          <folding>
-            <element signature="e#2458#2606#0" expanded="true" />
-            <element signature="e#2605#2606#0" expanded="true" />
-            <element signature="e#2692#2840#0" expanded="true" />
-            <element signature="e#2839#2840#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="248">
+          <caret line="126" column="43" selection-start-line="126" selection-start-column="35" selection-end-line="127" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1233">
+          <caret line="235" column="39" lean-forward="true" selection-start-line="235" selection-start-column="39" selection-end-line="235" selection-end-column="39" />
         </state>
       </provider>
     </entry>
