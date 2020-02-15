@@ -45,7 +45,7 @@ class Settings {
 			hasOauth = false;
 		}
 		try {
-			channel = gfg.get("channel").toString();
+			channel = gfg.get("channel").toString().toLowerCase();
 			hasChannel = true;
 		}
 		catch (NullPointerException e){

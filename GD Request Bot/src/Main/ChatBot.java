@@ -294,29 +294,31 @@ public class ChatBot extends TwitchBot {
             try {
                 boolean exists = false;
                 File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
-
-                Scanner sc = new Scanner(file);
-                while (sc.hasNextLine()) {
-                    if (String.valueOf(unblocked).equals(sc.nextLine())) {
-                        System.out.println("Blocked ID");
-                        exists = true;
-                        break;
+                if(file.exists()) {
+                    Scanner sc = new Scanner(file);
+                    while (sc.hasNextLine()) {
+                        if (String.valueOf(unblocked).equals(sc.nextLine())) {
+                            System.out.println("Blocked ID");
+                            exists = true;
+                            break;
+                        }
                     }
-                }
-                sc.close();
-                if (exists) {
-                    File temp = new File(System.getenv("APPDATA") + "\\GDBoard\\_temp_");
-                    PrintWriter out = new PrintWriter(new FileWriter(temp));
-                    Files.lines(file.toPath())
-                            .filter(line -> !line.contains(unblocked))
-                            .forEach(out::println);
-                    out.flush();
-                    out.close();
-                    file.delete();
-                    temp.renameTo(file);
-                    sendMessage("@" + user + " Successfully unblocked " + arguments[1], channel);
-                } else {
-                    sendMessage("@" + user + " That level isn't blocked!", channel);
+                    sc.close();
+
+                    if (exists) {
+                        File temp = new File(System.getenv("APPDATA") + "\\GDBoard\\_temp_");
+                        PrintWriter out = new PrintWriter(new FileWriter(temp));
+                        Files.lines(file.toPath())
+                                .filter(line -> !line.contains(unblocked))
+                                .forEach(out::println);
+                        out.flush();
+                        out.close();
+                        file.delete();
+                        temp.renameTo(file);
+                        sendMessage("@" + user + " Successfully unblocked " + arguments[1], channel);
+                    } else {
+                        sendMessage("@" + user + " That level isn't blocked!", channel);
+                    }
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -332,27 +334,28 @@ public class ChatBot extends TwitchBot {
                 boolean goThrough = true;
                 File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
                 Scanner sc = new Scanner(file);
-
-                while (sc.hasNextLine()) {
-                    if (String.valueOf(blockedID).equals(sc.nextLine())) {
-                        System.out.println("Blocked ID");
-                        goThrough = false;
-                        break;
+                if(file.exists()) {
+                    while (sc.hasNextLine()) {
+                        if (String.valueOf(blockedID).equals(sc.nextLine())) {
+                            System.out.println("Blocked ID");
+                            goThrough = false;
+                            break;
+                        }
                     }
-                }
-                sc.close();
-                if (goThrough) {
-                    FileWriter fr;
-                    try {
-                        fr = new FileWriter(file, true);
-                        fr.write(blockedID + "\n");
-                        fr.close();
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
+                    sc.close();
+                    if (goThrough) {
+                        FileWriter fr;
+                        try {
+                            fr = new FileWriter(file, true);
+                            fr.write(blockedID + "\n");
+                            fr.close();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                        sendMessage("@" + user + " Successfully blocked " + arguments[1], channel);
+                    } else {
+                        sendMessage("@" + user + " ID Already Blocked!", channel);
                     }
-                    sendMessage("@" + user + " Successfully blocked " + arguments[1], channel);
-                } else {
-                    sendMessage("@" + user + " ID Already Blocked!", channel);
                 }
             } catch (Exception e) {
                 sendMessage("@" + user + " Invalid ID", channel);

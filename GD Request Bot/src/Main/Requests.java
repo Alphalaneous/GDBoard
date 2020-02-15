@@ -118,19 +118,22 @@ class Requests {
                 }
 
             }
+
             File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
+            if(file.exists()) {
             Scanner sc = new Scanner(file);
 
-            while (sc.hasNextLine()) {
-                if (levelData.getLevelID().equals(sc.nextLine())) {
-                    Main.sendMessage("@" + levelData.getRequester() + " That Level is Blocked!");
-                    System.out.println("Blocked ID");
-                    valid = false;
+                while (sc.hasNextLine()) {
+                    if (levelData.getLevelID().equals(sc.nextLine())) {
+                        Main.sendMessage("@" + levelData.getRequester() + " That Level is Blocked!");
+                        System.out.println("Blocked ID");
+                        valid = false;
 
-                    break;
+                        break;
+                    }
                 }
+                sc.close();
             }
-            sc.close();
             if (valid) {
 
                 // --------------------

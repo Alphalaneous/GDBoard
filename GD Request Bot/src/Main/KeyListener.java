@@ -14,7 +14,7 @@ class KeyListener {
 
 	private static boolean openKeyReleased = false;
 	static void hook() throws AWTException {
-
+	//TODO custom keybinds
 		//region Keyboard Listener
 		GlobalKeyboardHook keyboardHook = new GlobalKeyboardHook(true);
 		keyboardHook.addKeyListener(new GlobalKeyAdapter() {
