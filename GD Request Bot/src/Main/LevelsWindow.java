@@ -165,17 +165,17 @@ public class LevelsWindow {
 				if (epic) {
 					reqDifficulty.setIcon(new ImageIcon(ImageIO
 							.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
-									.getResource("DifficultyIcons/Epic/" + difficultyA + ".png")))
+									.getResource("Resources/DifficultyIcons/Epic/" + difficultyA + ".png")))
 							.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
 				} else if (featured) {
 					reqDifficulty.setIcon(new ImageIcon(ImageIO
 							.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
-									.getResource("DifficultyIcons/Featured/" + difficultyA + ".png")))
+									.getResource("Resources/DifficultyIcons/Featured/" + difficultyA + ".png")))
 							.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
 				} else {
 					reqDifficulty.setIcon(new ImageIcon(ImageIO
 							.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
-									.getResource("DifficultyIcons/Normal/" + difficultyA + ".png")))
+									.getResource("Resources/DifficultyIcons/Normal/" + difficultyA + ".png")))
 							.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
 				}
 			}

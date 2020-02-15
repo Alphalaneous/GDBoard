@@ -8,7 +8,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.swing.*;
-import javax.swing.event.MouseInputListener;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -21,7 +20,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
@@ -54,6 +52,7 @@ class CommentsWindow {
                 }
             };
         }
+
     }.createPanel();
     private static JButtonUI newUI = new JButtonUI();
     private static JScrollPane scrollPane = new JScrollPane(panel);
@@ -61,102 +60,17 @@ class CommentsWindow {
     private static boolean topC = false;
     private static int page = 0;
 
+    //region Create Panel
     static void createPanel() {
+
+        //region Panel attributes
         panel.setLayout(null);
         panel.setBounds(0, 0, width, height);
-        buttons.setLayout(null);
-        buttons.setBounds(1, height + 1, width, 30);
-        buttons.setBackground(Defaults.TOP);
-
-        JButton top = createButton("\uE8E1", 90);
-
-        buttons.add(top);
-
-        top.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                ((InnerWindow) window).moveToFront();
-                super.mousePressed(e);
-                topC = true;
-                page = 0;
-                try {
-                    unloadComments(false);
-                    loadComments(0, true);
-                } catch (Exception ignored) {
-                }
-
-            }
-        });
-
-        JButton new1 = createButton("\uE823", 120);
-
-        buttons.add(new1);
-
-        new1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                ((InnerWindow) window).moveToFront();
-                super.mousePressed(e);
-                topC = false;
-                page = 0;
-                try {
-                    unloadComments(false);
-                    loadComments(0, false);
-                } catch (Exception ignored) {
-                }
-
-            }
-        });
-
-        JButton prev = createButton("\uE760", 0);
-
-        buttons.add(prev);
-
-        prev.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                ((InnerWindow) window).moveToFront();
-                super.mousePressed(e);
-                if (page != 0) {
-                    page--;
-                    try {
-                        unloadComments(false);
-                        loadComments(page, topC);
-                    } catch (Exception ignored) {
-                    }
-                }
-            }
-        });
-
-        JButton next = createButton("\uE761", 30);
-
-        buttons.add(next);
-
-        next.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                ((InnerWindow) window).moveToFront();
-                super.mousePressed(e);
-                page++;
-                    unloadComments(false);
-                    if(!loadComments(page, topC)){
-                        page--;
-                        try {
-                            loadComments(page, topC);
-                        } catch (Exception f) {
-                            f.printStackTrace();
-                        }
-                    }
-                }
-        });
-
-
-        newUI.setBackground(Defaults.MAIN);
-        newUI.setHover(Defaults.HOVER);
         panel.setBackground(Defaults.SUB_MAIN);
         panel.setPreferredSize(new Dimension(width, height - 30));
+        //endregion
 
-
+        //region ScrollPane attributes
         scrollPane.setBackground(Defaults.SUB_MAIN);
         scrollPane.getViewport().setBackground(Defaults.SUB_MAIN);
         scrollPane.getVerticalScrollBar().setOpaque(false);
@@ -219,11 +133,108 @@ class CommentsWindow {
             }
         });
         window.add(scrollPane);
+        //endregion
+
+        //region Buttons Panel attributes
+        buttons.setLayout(null);
+        buttons.setBounds(1, height + 1, width, 30);
+        buttons.setBackground(Defaults.TOP);
         window.add(buttons);
+        //endregion
+
+        //region Create Top Comments Button
+        JButton top = createButton("\uE8E1", 90);
+        top.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                ((InnerWindow) window).moveToFront();
+                super.mousePressed(e);
+                topC = true;
+                page = 0;
+                try {
+                    unloadComments(false);
+                    loadComments(0, true);
+                } catch (Exception ignored) {
+                }
+
+            }
+        });
+        buttons.add(top);
+        //endregion
+
+        //region Create Recent Comments Button
+        JButton recent = createButton("\uE823", 120);
+        recent.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                ((InnerWindow) window).moveToFront();
+                super.mousePressed(e);
+                topC = false;
+                page = 0;
+                try {
+                    unloadComments(false);
+                    loadComments(0, false);
+                } catch (Exception ignored) {
+                }
+
+            }
+        });
+        buttons.add(recent);
+        //endregion
+
+        //region Create Previous Page Button
+        JButton prev = createButton("\uE760", 0);
+        prev.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                ((InnerWindow) window).moveToFront();
+                super.mousePressed(e);
+                if (page != 0) {
+                    page--;
+                    try {
+                        unloadComments(false);
+                        loadComments(page, topC);
+                    } catch (Exception ignored) {
+                    }
+                }
+            }
+        });
+        buttons.add(prev);
+        //endregion
+
+        //region Create Next Page Button
+        JButton next = createButton("\uE761", 30);
+        next.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                ((InnerWindow) window).moveToFront();
+                super.mousePressed(e);
+                page++;
+                    unloadComments(false);
+                    if(!loadComments(page, topC)){
+                        page--;
+                        try {
+                            loadComments(page, topC);
+                        } catch (Exception f) {
+                            f.printStackTrace();
+                        }
+                    }
+                }
+        });
+        buttons.add(next);
+        //endregion
+
+        //region NewUI Attributes
+        newUI.setBackground(Defaults.MAIN);
+        newUI.setHover(Defaults.HOVER);
+        //endregion
+
         ((InnerWindow) window).refreshListener();
         Overlay.addToFrame(window);
     }
+    //endregion
 
+    //region UnloadComments (So you don't have all the pages on one page)
     static void unloadComments(boolean reset) {
         if (reset) {
             topC = false;
@@ -235,120 +246,129 @@ class CommentsWindow {
         panel.removeAll();
         panel.updateUI();
     }
+    //endregion
 
+    //region LoadComments
     static boolean loadComments(int page, boolean top) {
 
         panel.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 4));
+        panel.setVisible(false);
 
-        GetComments getComments = new GetComments();
+        int panelHeight = 0;
+        URL gdAPI;
+        String message = null;
         try {
-            ArrayList<String> commentText = getComments.getComments(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID(), page, top)
-                    .get(0);
-            ArrayList<String> commenterText = getComments
-                    .getComments(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID(), page, top).get(1);
-            ArrayList<String> percent = getComments
-                    .getComments(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID(), page, top).get(2);
-            ArrayList<String> likes = getComments
-                    .getComments(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID(), page, top).get(3);
-            panel.setVisible(false);
+            if (top) {
+                gdAPI = new URL("https://gdbrowser.com/api/comments/" + Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "?page=" + page + "&top");
+            }
+            else {
+                gdAPI = new URL("https://gdbrowser.com/api/comments/" + Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "?page=" + page);
+            }
+            URLConnection con = gdAPI.openConnection();
+            InputStream is = con.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            message = "{\"Comments\" : " + IOUtils.toString(br) + "}";
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        assert message != null;
+        JSONObject obj = new JSONObject(message);
+        JSONArray arr;
+        try {
+            arr = obj.getJSONArray("Comments");
 
-            int panelHeight = 0;
-            assert commentText != null;
-            try {
-                for (int i = 0; i < commentText.size() / 4; i++) {
-                    assert commenterText != null;
-                    JPanel cmtPanel = new JPanel(null);
-                    cmtPanel.setBackground(Defaults.MAIN);
+            assert arr != null;
+            for (int i = 0; i < arr.length(); i++) {
+                String percent;
+                try {
+                    percent = StringEscapeUtils.unescapeHtml4(arr.getJSONObject(i).getString("percent") + "%");
+                } catch (Exception e) {
+                    percent = "";
+                }
+                JPanel cmtPanel = new JPanel(null);
+                cmtPanel.setBackground(Defaults.MAIN);
 
-                    JLabel commenter = new JLabel();
-                    commenter.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-                    int finalI = i;
-                    commenter.addMouseListener(new MouseAdapter() {
-                        @Override
-                        public void mouseClicked(MouseEvent e) {
-                            super.mouseClicked(e);
-                            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-                                try {
-                                    Desktop.getDesktop().browse(new URI("http://www.gdbrowser.com/profile/" + commenterText.get(finalI)));
-                                } catch (IOException | URISyntaxException ex) {
-                                    ex.printStackTrace();
-                                }
+                JLabel commenter = new JLabel();
+                commenter.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                int finalI = i;
+                commenter.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        super.mouseClicked(e);
+                        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                            try {
+                                Desktop.getDesktop().browse(new URI("http://www.gdbrowser.com/profile/" + arr.getJSONObject(finalI).getString("username")));
+                            } catch (IOException | URISyntaxException ex) {
+                                ex.printStackTrace();
                             }
                         }
-
-                        @Override
-                        public void mouseEntered(MouseEvent e) {
-                            super.mouseEntered(e);
-                        }
-
-                        @Override
-                        public void mouseExited(MouseEvent e) {
-                            super.mouseExited(e);
-                        }
-                    });
-                    commenter.setFont(new Font("bahnschrift", Font.BOLD, 14));
-                    commenter.setBounds(9, 4, (int) (width * 0.5), 18);
-                    JLabel percentLabel = new JLabel();
-                    percentLabel.setFont(new Font("bahnschrift", Font.BOLD, 14));
-                    JLabel likeIcon = new JLabel();
-                    if(Integer.parseInt(likes.get(i)) < 0){
-                        likeIcon.setText("\uE8E0");
-                    }
-                    else{
-                        likeIcon.setText("\uE8E1");
                     }
 
-                    likeIcon.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 14));
-                    likeIcon.setBounds(width - 20, 4, (int) (width * 0.5), 18);
-
-
-                    JLabel likesLabel = new JLabel();
-                    likesLabel.setFont(new Font("bahnschrift", Font.BOLD, 10));
-
-
-
-                    JLabel comment = new JLabel();
-                    comment.setFont(new Font("bahnschrift", Font.PLAIN, 12));
-                    comment.setBounds(9, 24, width - 6, 60);
-
-                    cmtPanel.add(commenter);
-                    cmtPanel.add(comment);
-                    cmtPanel.add(percentLabel);
-                    cmtPanel.add(likesLabel);
-                    cmtPanel.add(likeIcon);
-
-                    commenter.setForeground(Defaults.FOREGROUND);
-                    percentLabel.setForeground(Defaults.FOREGROUND2);
-                    likesLabel.setForeground(Defaults.FOREGROUND);
-                    likeIcon.setForeground(Defaults.FOREGROUND);
-
-                    comment.setOpaque(false);
-                    String commentTextFormat = String.format("<html><div WIDTH=%d>%s</div></html>", width-8, commentText.get(i));
-                    comment.setForeground(Defaults.FOREGROUND);
-                    comment.setText(commentTextFormat);
-                    if(commenterText.get(i).equalsIgnoreCase(Requests.levels.get(LevelsWindow.getSelectedID()).getAuthor())){
-                        commenter.setForeground(new Color(16, 164,0));
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                        super.mouseEntered(e);
+                        commenter.setFont(new Font("bahnschrift", Font.BOLD, 15));
+                        commenter.setBounds(7, 4, commenter.getPreferredSize().width + 5, 18);
                     }
-                    commenter.setText(commenterText.get(i));
-                    if (!percent.get(i).equalsIgnoreCase("0")) {
-                        percentLabel.setText(percent.get(i) + "%");
-                        percentLabel.setBounds(commenter.getPreferredSize().width + 20, 4, percentLabel.getPreferredSize().width + 5, 18);
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                        super.mouseExited(e);
+                        commenter.setFont(new Font("bahnschrift", Font.BOLD, 14));
+                        commenter.setBounds(9, 4, commenter.getPreferredSize().width, 18);
                     }
-                    likesLabel.setText(likes.get(i));
-                    likesLabel.setBounds(width - likesLabel.getPreferredSize().width - 26, 4, likesLabel.getPreferredSize().width + 5, 18);
-                    comment.setBounds(9, 24, width - 8, comment.getPreferredSize().height);
-                    commenter.setBounds(9, 4, commenter.getPreferredSize().width, 18);
-                    panel.add(cmtPanel);
-                    panelHeight = panelHeight + 32 + comment.getPreferredSize().height;
-                    cmtPanel.setPreferredSize(new Dimension(width, 28 + comment.getPreferredSize().height));
+                });
+                commenter.setFont(new Font("bahnschrift", Font.BOLD, 14));
+                JLabel percentLabel = new JLabel();
+                percentLabel.setFont(new Font("bahnschrift", Font.BOLD, 14));
+                JLabel likeIcon = new JLabel();
+                if(Integer.parseInt(arr.getJSONObject(i).getString("likes")) < 0){
+                    likeIcon.setText("\uE8E0");
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                else{
+                    likeIcon.setText("\uE8E1");
+                }
+
+                likeIcon.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 14));
+                likeIcon.setBounds(width - 20, 4, (int) (width * 0.5), 18);
+
+                JLabel likesLabel = new JLabel();
+                likesLabel.setFont(new Font("bahnschrift", Font.BOLD, 10));
+
+                JLabel comment = new JLabel();
+                comment.setFont(new Font("bahnschrift", Font.PLAIN, 12));
+                comment.setBounds(9, 24, width - 6, 60);
+
+                cmtPanel.add(commenter);
+                cmtPanel.add(comment);
+                cmtPanel.add(percentLabel);
+                cmtPanel.add(likesLabel);
+                cmtPanel.add(likeIcon);
+
+                commenter.setForeground(Defaults.FOREGROUND);
+                percentLabel.setForeground(Defaults.FOREGROUND2);
+                likesLabel.setForeground(Defaults.FOREGROUND);
+                likeIcon.setForeground(Defaults.FOREGROUND);
+
+                comment.setOpaque(false);
+                String commentTextFormat = String.format("<html><div WIDTH=%d>%s</div></html>", width-8, StringEscapeUtils.unescapeHtml4(arr.getJSONObject(i).getString("content")));
+                comment.setForeground(Defaults.FOREGROUND);
+                comment.setText(commentTextFormat);
+                if(arr.getJSONObject(i).getString("username").equalsIgnoreCase(Requests.levels.get(LevelsWindow.getSelectedID()).getAuthor())){
+                    commenter.setForeground(new Color(16, 164,0));
+                }
+                commenter.setText(arr.getJSONObject(i).getString("username"));
+                percentLabel.setText(percent);
+                percentLabel.setBounds(commenter.getPreferredSize().width + 20, 4, percentLabel.getPreferredSize().width + 5, 18);
+                likesLabel.setText(arr.getJSONObject(i).getString("likes"));
+                likesLabel.setBounds(width - likesLabel.getPreferredSize().width - 26, 4, likesLabel.getPreferredSize().width + 5, 18);
+                comment.setBounds(9, 24, width - 8, comment.getPreferredSize().height);
+                commenter.setBounds(9, 4, commenter.getPreferredSize().width, 18);
+                panel.add(cmtPanel);
+                panelHeight = panelHeight + 32 + comment.getPreferredSize().height;
+                cmtPanel.setPreferredSize(new Dimension(width, 28 + comment.getPreferredSize().height));
+
             }
             ((InnerWindow)window).refreshListener();
             panel.setPreferredSize(new Dimension(width, panelHeight));
@@ -356,12 +376,14 @@ class CommentsWindow {
             panel.setVisible(true);
             scrollPane.getVerticalScrollBar().setValue(0);
             SwingUtilities.invokeLater(() -> scrollPane.getVerticalScrollBar().setValue(0));
-        }
-        catch (Exception ignored){
+        } catch (Exception e) {
             return false;
         }
         return true;
     }
+    //endregion
+
+    //region CreateButton
     private static JButton createButton(String icon, int x){
         JButton button = new JButton(icon);
         button.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
@@ -373,6 +395,9 @@ class CommentsWindow {
         button.setBounds(x, 0, 30, 30);
         return button;
     }
+    //endregion
+
+    //region RefreshUI
     static void refreshUI() {
         ((InnerWindow) window).refreshUI();
         newUI.setBackground(Defaults.MAIN);
@@ -412,65 +437,24 @@ class CommentsWindow {
         panel.setBackground(Defaults.SUB_MAIN);
         buttons.setBackground(Defaults.TOP);
     }
+    //endregion
 
+    //region ToggleVisible
     static void toggleVisible() {
         ((InnerWindow) window).toggle();
     }
+    //endregion
 
+    //region SetInvisible
     static void setInvisible() {
         ((InnerWindow) window).setInvisible();
     }
+    //endregion
 
+    //region SetVisible
     static void setVisible() {
         ((InnerWindow) window).setVisible();
     }
-}
-class GetComments {
-    private ArrayList<ArrayList<String>> Comments = new ArrayList<>();
-    private ArrayList<String> commentContent = new ArrayList<>();
-    private ArrayList<String> commenters = new ArrayList<>();
-    private ArrayList<String> percent = new ArrayList<>();
-    private ArrayList<String> likes = new ArrayList<>();
-
-    ArrayList<ArrayList<String>> getComments(String levelID, int page, boolean top) throws IOException {
-        URL gdAPI;
-        if (top) {
-            gdAPI = new URL("https://gdbrowser.com/api/comments/" + levelID + "?page=" + page + "&top");
-        } else {
-            gdAPI = new URL("https://gdbrowser.com/api/comments/" + levelID + "?page=" + page);
-        }
-        URLConnection con = gdAPI.openConnection();
-        InputStream is = con.getInputStream();
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        String message = "{\"Comments\" : " + IOUtils.toString(br) + "}";
-        JSONObject obj = new JSONObject(message);
-        JSONArray arr;
-        try {
-            arr = obj.getJSONArray("Comments");
-
-            assert arr != null;
-            for (int i = 0; i < arr.length(); i++) {
-                try {
-                    commentContent.add(StringEscapeUtils.unescapeHtml4(arr.getJSONObject(i).getString("content")));
-                    Comments.add(commentContent);
-                    commenters.add(arr.getJSONObject(i).getString("username"));
-                    Comments.add(commenters);
-                    try {
-                        percent.add(StringEscapeUtils.unescapeHtml4(arr.getJSONObject(i).getString("percent")));
-                    } catch (Exception e) {
-                        percent.add("0");
-                    }
-                    Comments.add(percent);
-                    likes.add(arr.getJSONObject(i).getString("likes"));
-                    Comments.add(likes);
-                } catch (Exception ignored) {
-                    break;
-                }
-            }
-        } catch (Exception ignored) {
-
-        }
-        return Comments;
-    }
+    //endregion
 }
 

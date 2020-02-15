@@ -21,6 +21,8 @@ class ActionsWindow {
 	private static JPanel mainPanel = new JPanel();
 	private static JPanel panel = new JPanel();
 	private static JButtonUI defaultUI = new JButtonUI();
+
+	//region Create Panel
 	static void createPanel() {
 
 		mainPanel.setBounds(1, 31, width, height);
@@ -33,20 +35,74 @@ class ActionsWindow {
 		panel.setPreferredSize(new Dimension(width, height));
 		panel.setBounds(15, 5, width - 30, height - 10);
 		panel.setBackground(Defaults.MAIN);
-		GridLayout layout = new GridLayout(1, 4);
-		layout.setHgap(10);
-		layout.setVgap(10);
-		panel.setLayout(layout);
+		panel.setLayout(new GridLayout(1, 4,10,10));
 
 		//TODO make custom Yes/No dialog
-		JButton block = new RoundedJButton("\uE8F8");
-		//TODO Block level, Block requester, Block author
-		block.setPreferredSize(new Dimension(50, 50));
-		block.setUI(defaultUI);
-		block.setBackground(Defaults.BUTTON);
-		block.setForeground(Defaults.FOREGROUND);
-		block.setBorder(BorderFactory.createEmptyBorder());
-		block.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
+
+		//region Create Skip Button
+		JButton skip = createButton("\uE101");
+		skip.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				((InnerWindow) window).moveToFront();
+				super.mousePressed(e);
+				if (Requests.levels.size() != 0) {
+
+
+					if (!(Requests.levels.size() <= 1) && LevelsWindow.getSelectedID() == 0) {
+						StringSelection selection = new StringSelection(
+								Requests.levels.get(LevelsWindow.getSelectedID()+1).getLevelID());
+						Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+						clipboard.setContents(selection, selection);
+					}
+					if (LevelsWindow.getSelectedID() == 0 && Requests.levels.size() > 1) {
+						Requests.levels.remove(LevelsWindow.getSelectedID());
+						LevelsWindow.removeButton();
+
+						Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
+								+ Requests.levels.get(0).getLevelID() + "). Requested by "
+								+ Requests.levels.get(0).getRequester());
+					} else {
+						Requests.levels.remove(LevelsWindow.getSelectedID());
+						LevelsWindow.removeButton();
+
+					}
+					Thread thread = new Thread(() -> {
+						CommentsWindow.unloadComments(true);
+						CommentsWindow.loadComments(0, false);
+					});
+					thread.start();
+
+				}
+				LevelsWindow.setOneSelect();
+
+				SongWindow.refreshInfo();
+				InfoWindow.refreshInfo();
+			}
+		});
+		panel.add(skip);
+		//endregion
+
+		//region Create Copy Button
+		JButton copy = createButton("\uF0E3");
+		copy.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				((InnerWindow) window).moveToFront();
+				super.mousePressed(e);
+				if (Requests.levels.size() != 0) {
+					StringSelection selection = new StringSelection(
+							Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
+					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+					clipboard.setContents(selection, selection);
+				}
+			}
+		});
+		panel.add(copy);
+		//endregion
+
+		//region Create Block Button
+		JButton block = createButton("\uE8F8");
 		block.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -59,7 +115,7 @@ class ActionsWindow {
 							"Block ID? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 					if (n == 0) {
-						File file = new File("blocked.txt");
+						File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
 						FileWriter fr;
 						try {
 							fr = new FileWriter(file, true);
@@ -83,13 +139,11 @@ class ActionsWindow {
 				LevelsWindow.setOneSelect();
 			}
 		});
-		JButton clear = new RoundedJButton("\uE107");
-		clear.setPreferredSize(new Dimension(50, 50));
-		clear.setUI(defaultUI);
-		clear.setBackground(Defaults.BUTTON);
-		clear.setForeground(Defaults.FOREGROUND);
-		clear.setBorder(BorderFactory.createEmptyBorder());
-		clear.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
+		panel.add(block);
+		//endregion
+
+		//region Create Clear Button
+		JButton clear = createButton("\uE107");
 		clear.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -114,86 +168,30 @@ class ActionsWindow {
 				}
 			}
 		});
-
-
-		JButton skip = new RoundedJButton("\uE101");
-		skip.setPreferredSize(new Dimension(50, 50));
-		skip.setUI(defaultUI);
-		skip.setBackground(Defaults.BUTTON);
-		skip.setForeground(Defaults.FOREGROUND);
-		skip.setBorder(BorderFactory.createEmptyBorder());
-		skip.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
-		skip.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				((InnerWindow) window).moveToFront();
-				super.mousePressed(e);
-				if (Requests.levels.size() != 0) {
-
-
-					if (!(Requests.levels.size() <= 1) && LevelsWindow.getSelectedID() == 0) {
-						StringSelection selection = new StringSelection(
-								Requests.levels.get(LevelsWindow.getSelectedID()+1).getLevelID());
-						Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-						clipboard.setContents(selection, selection);
-					}
-					if (LevelsWindow.getSelectedID() == 0 && Requests.levels.size() > 1) {
-						Requests.levels.remove(LevelsWindow.getSelectedID());
-						LevelsWindow.removeButton();
-						
-						Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
-								+ Requests.levels.get(0).getLevelID() + "). Requested by "
-								+ Requests.levels.get(0).getRequester());
-					} else {
-						Requests.levels.remove(LevelsWindow.getSelectedID());
-						LevelsWindow.removeButton();
-						
-					}
-					Thread thread = new Thread(() -> {
-						CommentsWindow.unloadComments(true);
-						CommentsWindow.loadComments(0, false);
-					});
-					thread.start();
-
-				}
-				LevelsWindow.setOneSelect();
-
-				SongWindow.refreshInfo();
-				InfoWindow.refreshInfo();
-			}
-		});
-
-		JButton copy = new RoundedJButton("\uF0E3");
-		copy.setPreferredSize(new Dimension(50, 50));
-		copy.setUI(defaultUI);
-		copy.setBackground(Defaults.BUTTON);
-		copy.setForeground(Defaults.FOREGROUND);
-		copy.setBorder(BorderFactory.createEmptyBorder());
-		copy.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
-		copy.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				((InnerWindow) window).moveToFront();
-				super.mousePressed(e);
-				if (Requests.levels.size() != 0) {
-					StringSelection selection = new StringSelection(
-							Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
-					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-					clipboard.setContents(selection, selection);
-				}
-			}
-		});
-
-		panel.add(skip);
-		panel.add(copy);
-		panel.add(block);
 		panel.add(clear);
+		//endregion
+
 		mainPanel.add(panel);
 		window.add(mainPanel);
 		((InnerWindow) window).refreshListener();
 		Overlay.addToFrame(window);
 	}
+	//endregion
 
+	//region Create Button
+	private static JButton createButton(String icon) {
+		JButton button = new RoundedJButton(icon);
+		button.setPreferredSize(new Dimension(50, 50));
+		button.setUI(defaultUI);
+		button.setBackground(Defaults.BUTTON);
+		button.setForeground(Defaults.FOREGROUND);
+		button.setBorder(BorderFactory.createEmptyBorder());
+		button.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
+		return button;
+	}
+	//endregion
+
+	//region RefreshUI
 	static void refreshUI() {
 		((InnerWindow) window).refreshUI();
 		defaultUI.setBackground(Defaults.BUTTON);
@@ -207,18 +205,24 @@ class ActionsWindow {
 				component.setForeground(Defaults.FOREGROUND);
 			}
 		}
-
 	}
+	//endregion
 
+	//region Toggle Visible
 	static void toggleVisible() {
 		((InnerWindow) window).toggle();
 	}
+	//endregion
 
+	//region SetInvisible
 	static void setInvisible() {
 		((InnerWindow) window).setInvisible();
 	}
+	//endregion
 
+	//region SetVisible
 	static void setVisible() {
 		((InnerWindow) window).setVisible();
 	}
+	//endregion
 }

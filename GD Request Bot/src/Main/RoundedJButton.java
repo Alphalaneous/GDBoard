@@ -7,9 +7,6 @@ import javax.swing.JButton;
 
 public class RoundedJButton extends JButton {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	RoundedJButton(String label) {

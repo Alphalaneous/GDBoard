@@ -11,9 +11,6 @@ import java.awt.event.MouseEvent;
 
 class InnerWindow extends ResizablePanel {
 
-    // --------------------
-    // Constructor
-
     private static final long serialVersionUID = 1L;
     private final String title;
     private final double x;
@@ -22,9 +19,6 @@ class InnerWindow extends ResizablePanel {
     private int height;
     private final String icon;
 
-    // --------------------
-    // Starting values and Initialization
-
     private boolean isPinPressed = false;
     private boolean toggleState = true;
     private JButton closeButton = new JButton("\uE894");
@@ -32,11 +26,9 @@ class InnerWindow extends ResizablePanel {
     private JLabel pinButtonFill = new JLabel("  \uE842");
     private JPanel topBar = new JPanel(null);
     private JLabel windowIcon = new JLabel();
-
-    // --------------------
-    // JButtonUI Changes
-
     private JButtonUI defaultUI = new JButtonUI();
+
+    //region Constructor for InnerWindow
     InnerWindow(final String title, final int x, final int y, final int width, final int height, final String icon) {
         double y1;
         double x1;
@@ -82,17 +74,12 @@ class InnerWindow extends ResizablePanel {
         this.height = height;
         this.icon = icon;
     }
+    //endregion
 
-    // --------------------
-
+    //region Create InnerWindow
     ResizablePanel createPanel() {
 
-		final boolean[] isDragging = {false};
-		final boolean[] exited = {false};
-        // --------------------
-        // Mouse Listener to stop allowing clicking through the panel to close the
-        // window
-
+        //region No Click Through listener
         setDoubleBuffered(true);
         addMouseListener(new MouseAdapter() {
             @Override
@@ -101,22 +88,19 @@ class InnerWindow extends ResizablePanel {
                 moveToFront();
             }
         });
+        //endregion
 
-        // --------------------
-        // Panel that holds everything
-
+        //region Defaults and Attributes
+        final boolean[] isDragging = {false};
+        final boolean[] exited = {false};
         setBackground(new Color(0, 0, 0, 0));
         setLayout(null);
         setBounds((int) x, (int) y, width + 2, height + 32);
         setOpaque(false);
         setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 50)));
+        //endregion
 
-        // --------------------
-        // Top Bar Panel (holds X, title, and Pin)
-
-        topBar.setBackground(Defaults.TOP);
-        topBar.setBounds(1, 1, width, 30);
-
+        //region Mouse Relative to Window
 		Thread threadPos = new Thread(() -> {
 			while(true){
 				try {
@@ -133,8 +117,6 @@ class InnerWindow extends ResizablePanel {
 
                 }
 
-			//System.out.println(title + " | X: " + p.getX() + " Y: " + p.getY());
-                //region some name
 			if(Overlay.isVisible && !isDragging[0]){
                 assert p != null;
                 if (p.getY() <= 30 && p.getY() >= 27 && p.getX() >= 0 && p.getX() <= width) {
@@ -156,7 +138,6 @@ class InnerWindow extends ResizablePanel {
 					}
 				}
 			}
-			//endregion
 
                 assert p != null;
                 if((p.getX() >= width || p.getX() <= -1 || p.getY() <=-1 || p.getY() >= 30) && exited[0]){
@@ -167,9 +148,9 @@ class InnerWindow extends ResizablePanel {
 			}
 		});
 		threadPos.start();
+        //endregion
 
-        // --------------------
-        // Frame movement when dragging Top Bar
+        //region TopBar Dragging
         MouseInputAdapter mia = new MouseInputAdapter() {
             Point location;
             Point pressed;
@@ -248,22 +229,25 @@ class InnerWindow extends ResizablePanel {
 
         topBar.addMouseListener(mia);
         topBar.addMouseMotionListener(mia);
+        //endregion
 
+        //region WindowIcon attributes
         windowIcon.setForeground(Defaults.FOREGROUND);
         windowIcon.setText(icon);
         windowIcon.setBounds(10, 0, 30, 30);
         windowIcon.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 14));
         topBar.add(windowIcon);
+        //endregion
 
-        // --------------------
-        // Title text on Top Bar
-
+        //region TitleText attributes and initialization
         JLabel titleText = new JLabel(title);
         titleText.setFont(new Font("bahnschrift", Font.PLAIN, 14));
         titleText.setBounds(35, 0, width - 60, 30);
         titleText.setForeground(Defaults.FOREGROUND);
         topBar.add(titleText);
+        //endregion
 
+        //region CloseButton attributes
         closeButton.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 14));
         closeButton.setBounds(width - 30, 0, 30, 30);
         closeButton.setMargin(new Insets(0, 0, 0, 0));
@@ -273,9 +257,6 @@ class InnerWindow extends ResizablePanel {
         closeButton.setUI(defaultUI);
 		closeButton.addMouseListener(topScreenIA);
 		closeButton.addMouseMotionListener(topScreenIA);
-        // --------------------
-        // InnerWindow Closing
-
         closeButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -284,6 +265,9 @@ class InnerWindow extends ResizablePanel {
         });
 
         topBar.add(closeButton);
+        //endregion
+
+        //region Pin Button Attributes
 
         pinButton.setBounds(width - 60, 0, 30, 30);
         pinButton.setMargin(new Insets(0, 0, 0, 0));
@@ -300,9 +284,11 @@ class InnerWindow extends ResizablePanel {
         pinButtonFill.setBackground(new Color(0, 0, 0, 0));
         pinButtonFill.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 14));
         pinButtonFill.setVisible(false);
+        topBar.add(pinButton);
+        pinButton.add(pinButtonFill);
+        //endregion
 
-        // --------------------
-        // Pin Switching
+        //region Pin Switching
 
         pinButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -326,15 +312,19 @@ class InnerWindow extends ResizablePanel {
                 }
             }
         });
+        //endregion
 
-        topBar.add(pinButton);
-        pinButton.add(pinButtonFill);
-        // --------------------
-
+        //region TopBar attributes
+        topBar.setBackground(Defaults.TOP);
+        topBar.setBounds(1, 1, width, 30);
         add(topBar);
+        //endregion
+
         return this;
     }
+    //endregion
 
+    //region Mouse Listener Refresh for Moving Window to Top
     void refreshListener() {
         for (Component component : getComponents()) {
             if(component instanceof JPanel && !component.equals(topBar)) {
@@ -367,7 +357,9 @@ class InnerWindow extends ResizablePanel {
             });
         }
     }
+    //endregion
 
+    //region Refresh UI
     void refreshUI() {
         defaultUI.setBackground(Defaults.TOP);
         defaultUI.setHover(Defaults.HOVER);
@@ -428,13 +420,17 @@ class InnerWindow extends ResizablePanel {
         }
         setLocation((int) x1, (int) y1);
     }
+    //endregion
 
+    //region Refresh dimensions (for when resized)
     void resetDimensions(int width, int height) {
         this.height = height;
         this.width = width;
 
     }
+    //endregion
 
+    //region Set InnerWindow visible
     void setVisible() {
         topBar.setVisible(true);
         setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 50)));
@@ -442,7 +438,9 @@ class InnerWindow extends ResizablePanel {
             setVisible(true);
         }
     }
+    //endregion
 
+    //region Set InnerWindow invisible
     void setInvisible() {
         if (!isPinPressed) {
             setVisible(false);
@@ -451,8 +449,9 @@ class InnerWindow extends ResizablePanel {
 
         setBorder(BorderFactory.createEmptyBorder(-1,-1,-1,-1));
     }
+    //endregion
 
-
+    //region Toggle Visibility of InnerWindiw
     void toggle() {
         if (toggleState) {
             setVisible(false);
@@ -462,15 +461,17 @@ class InnerWindow extends ResizablePanel {
             toggleState = true;
         }
     }
+    //endregion
 
-    //boolean getPinState() {
-    //	return isPinPressed;
-    //}
+    //region Move InnerWindow to front
     void moveToFront() {
         Overlay.moveToFront(this);
     }
+    //endregion
 
+    //region Set PinButton visible
     void setPinVisible() {
         pinButton.setVisible(false);
     }
+    //endregion
 }

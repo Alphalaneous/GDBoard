@@ -14,6 +14,8 @@ class KeyListener {
 
 	private static boolean openKeyReleased = false;
 	static void hook() throws AWTException {
+
+		//region Keyboard Listener
 		GlobalKeyboardHook keyboardHook = new GlobalKeyboardHook(true);
 		keyboardHook.addKeyListener(new GlobalKeyAdapter() {
 
@@ -46,6 +48,9 @@ class KeyListener {
 				}
 			}
 		});
+		//endregion
+
+		//region Controller Listener
 		Robot r = new Robot();
 		Thread thread = new Thread(() -> {
 			ControllerManager controllers = new ControllerManager();
@@ -80,5 +85,6 @@ class KeyListener {
 				}
 		});
 		thread.start();
+		//endregion
 	}
 }

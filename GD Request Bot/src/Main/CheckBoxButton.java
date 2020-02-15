@@ -8,9 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 public class CheckBoxButton extends JButton {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private final String buttonText;
 	private final int width;

@@ -7,9 +7,9 @@ import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.net.SocketException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -18,15 +18,26 @@ public class Main {
 
 	private static ChatBot bot;
 
+	//region Main
 	public static void main(String[] args) throws IOException, IllegalArgumentException, URISyntaxException, AWTException, InterruptedException {
 
-		Logger root = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);		//Create root logger object
-		root.setLevel(Level.INFO);													//Disable all logging except for INFO
+		Settings.loadSettings();
 
-		Settings.setOAuth("meuwul05bn5t246c9tmg490z735oqv");						//Temporary Setting initialization
-		Settings.setChannel("Alphalaneous");										//TODO Make actual settings file to initialize from
+		//region Turn off logging (From separate library)
+		//Logger root = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);		//Create root logger object
+		//root.setLevel(Level.INFO);													//Disable all logging except for INFO
+		//endregion
 
-		if (!Settings.hasOauth()) {													//If the oauth token is not acquired, get one from twitch
+		//region Get Channel
+		if(!Settings.hasChannel){
+			String channel = JOptionPane.showInputDialog("Enter your channel");
+			Settings.setChannel(channel);
+			Settings.writeSettings("channel", channel);
+		}
+		//endregion
+
+		//region Get Twitch oauth
+		if (!Settings.hasOauth) {													//If the oauth token is not acquired, get one from twitch
 
 			Twitch twitch = new Twitch();											//Create Twitch object from TwitchAPI
 			URI callbackUri = new URI("http://127.0.0.1:23522/authorize.html"); //Set Callback URL to go to when auth success
@@ -39,16 +50,23 @@ public class Main {
 			Desktop.getDesktop().browse(authUrl);									//Open in the default browser
 			if (twitch.auth().awaitAccessToken()) {									//If oauth retrieving succeeds, set oauth in settings
 				Settings.setOAuth(twitch.auth().getAccessToken());
+				Settings.writeSettings("oauth", twitch.auth().getAccessToken());
 			}
 			else {																	//Else print error
 				System.out.println(twitch.auth().getAuthenticationError());
 			}
 		}
+		Settings.loadSettings();
 
+		//endregion
+
+		//region Create ChatBot and send starting message
 		bot = new ChatBot();														//Create ChatBot
 		bot.connect();																//Connect the bot
 		bot.sendMessage("Thank you for using GDBoard by Alphalaneous! Type !help for list of commands!", bot.joinChannel(Settings.channel));
+		//endregion
 
+		//region Start and Create Everything
 		Defaults.       startMainThread();		//Starts thread that always checks for changes such as time, resolution, and color scheme
 		Overlay.        setFrame();				//Creates the JFrame that contains everything
 		KeyListener.    hook();					//Starts a Keyboard and Controller Listener
@@ -65,6 +83,9 @@ public class Main {
 
 		Overlay.        setVisible();
 
+		//endregion
+
+		//region Start ChatBot and keep trying if it fails
 		while(true) {							//If the Chat Bot fails, try again
 			try {
 				bot.start();
@@ -77,9 +98,13 @@ public class Main {
 			Thread.sleep(100);			//Sleep before trying again
 
 		}
+		//endregion
 	}
+	//endregion
 
+	//region SendMessage to send messages as created ChatBot
 	static void sendMessage(String message) {	//Send message as created static ChatBot
 		bot.sendMessage(message, Channel.getChannel(Settings.channel, bot));
 	}
+	//endregion
 }

@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 public class GDObject {
 
+
     private double id;
     private double x;
     private double y;

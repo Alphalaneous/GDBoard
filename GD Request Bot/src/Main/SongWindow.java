@@ -12,7 +12,6 @@ import java.awt.event.MouseEvent;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -27,61 +26,57 @@ class SongWindow {
 	private static JLabel songName = new JLabel();
 	private static JLabel songAuthorID = new JLabel();
 	private static JButtonUI defaultUI = new JButtonUI();
-	private static JButton play = new RoundedJButton("\uF5B0");
-	private static JButton stop = new RoundedJButton("\uE009");
+	private static JButton play;
+	private static JButton stop;
 
 	static void createPanel() {
-		ArrayList<PlaySong> songs = new ArrayList<PlaySong>();
 		panel.setBounds(1, 31, width, height);
 		panel.setBackground(Defaults.MAIN);
 		panel.setLayout(null);
-		
+		final Thread[] thread = new Thread[1];
 		
 		
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
 
-		play.setPreferredSize(new Dimension(50, 50));
-		play.setUI(defaultUI);
-		play.setBounds(width - 110, height - 55, 50,50);
-		play.setBackground(Defaults.BUTTON);
-		play.setForeground(Defaults.FOREGROUND);
-		play.setBorder(BorderFactory.createEmptyBorder());
-		play.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
+		play = createButton("\uF5B0", 110);
 		play.addMouseListener(new MouseAdapter() {
-			@SuppressWarnings("deprecation")
 			@Override
+			@SuppressWarnings("deprecation")
 			public void mousePressed(MouseEvent e) {
 				((InnerWindow) window).moveToFront();
 				super.mousePressed(e);
+
 				if (Requests.levels.size() != 0) {
-					if (songs.size() > 0) {
-						songs.get(0).stop();
-						songs.clear();
+
+					if(thread[0] != null) {
+						thread[0].stop();
 					}
-					songs.add(new PlaySong());
-					songs.get(0).setSong(Requests.levels.get(LevelsWindow.getSelectedID()).getSongURL());
-					songs.get(0).start();
+					thread[0] = new Thread(() -> {
+						try {
+							Player mp3player;
+							BufferedInputStream inp;
+							inp = new BufferedInputStream(new URL(Requests.levels.get(LevelsWindow.getSelectedID()).getSongURL()).openStream());
+							mp3player = new Player(inp);
+							mp3player.play();
+						} catch (IOException | JavaLayerException | NullPointerException f) {
+							f.printStackTrace();
+						}
+					});
+					thread[0].start();
 				}
 			}
 		});
 
-		stop.setPreferredSize(new Dimension(50, 50));
-		stop.setUI(defaultUI);
-		stop.setBounds(width - 55, height - 55, 50,50);
-		stop.setBackground(Defaults.BUTTON);
-		stop.setForeground(Defaults.FOREGROUND);
-		stop.setBorder(BorderFactory.createEmptyBorder());
-		stop.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
+		stop = createButton("\uE009", 55);
 		stop.addMouseListener(new MouseAdapter() {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void mousePressed(MouseEvent e) {
 				((InnerWindow) window).moveToFront();
 				super.mousePressed(e);
-				if (songs.size() > 0) {
-					songs.get(0).stop();
-					songs.clear();
+				if (thread[0].isAlive()) {
+					thread[0].stop();
 				}
 			}
 		});
@@ -105,6 +100,19 @@ class SongWindow {
 		
 		Overlay.addToFrame(window);
 	}
+
+	private static RoundedJButton createButton(String icon, int i) {
+		RoundedJButton button = new RoundedJButton(icon);
+		button.setPreferredSize(new Dimension(50, 50));
+		button.setUI(defaultUI);
+		button.setBounds(width - i, height - 55, 50, 50);
+		button.setBackground(Defaults.BUTTON);
+		button.setForeground(Defaults.FOREGROUND);
+		button.setBorder(BorderFactory.createEmptyBorder());
+		button.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
+		return button;
+	}
+
 	static void refreshInfo() {
 		if (Requests.levels.size() == 0) {
 			songName.setText("N/A");
@@ -153,28 +161,6 @@ class SongWindow {
 
 	static void setVisible() {
 		((InnerWindow) window).setVisible();
-	}
-}
-class PlaySong extends Thread {
-
-	private String URL;
-
-	void setSong(String URL){
-		this.URL = URL;
-	}
-
-	public void run() {
-
-		try {
-			Player mp3player;
-			BufferedInputStream inp;
-			assert URL != null;
-			inp = new BufferedInputStream(new URL(URL).openStream());
-			mp3player = new Player(inp);
-			mp3player.play();
-		} catch (IOException | JavaLayerException | NullPointerException e) {
-			e.printStackTrace();
-		}
 	}
 }
 
