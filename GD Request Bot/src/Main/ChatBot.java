@@ -53,55 +53,61 @@ public class ChatBot extends TwitchBot {
         if (command.equalsIgnoreCase("!ID") ||
                 command.equalsIgnoreCase("!name") ||
                 command.equalsIgnoreCase("!level")) {
-
-            Main.sendMessage("@" + user + " The level at position " +
-                    level + " is " + Requests.levels.get(level - 1).getName() +
-                    " by " + Requests.levels.get(level - 1).getAuthor() + " (" +
-                    Requests.levels.get(level - 1).getLevelID() + ")");
+            if(Requests.levels.size() > 0) {
+                Main.sendMessage("@" + user + " The level at position " +
+                        level + " is " + Requests.levels.get(level - 1).getName() +
+                        " by " + Requests.levels.get(level - 1).getAuthor() + " (" +
+                        Requests.levels.get(level - 1).getLevelID() + ")");
+            }
         }
         //endregion
 
         //region Current Command
         if (command.equalsIgnoreCase("!current")) {
-
-            Main.sendMessage("@" + user + " The current level is " +
-                    Requests.levels.get(0).getName() + " by " +
-                    Requests.levels.get(level - 1).getAuthor() + " (" +
-                    Requests.levels.get(0).getLevelID() + ")");
+            if(Requests.levels.size() > 0) {
+                Main.sendMessage("@" + user + " The current level is " +
+                        Requests.levels.get(0).getName() + " by " +
+                        Requests.levels.get(level - 1).getAuthor() + " (" +
+                        Requests.levels.get(0).getLevelID() + ")");
+            }
         }
         //endregion
 
         //region Song Command
         if (command.equalsIgnoreCase("!song")) {
-
-            Main.sendMessage("@" + user + " The song is " +
-                    Requests.levels.get(level - 1).getSongName() + " by " +
-                    Requests.levels.get(level - 1).getSongAuthor() +
-                    " (" + Requests.levels.get(level - 1).getSongID() + ")");
+            if(Requests.levels.size() > 0) {
+                Main.sendMessage("@" + user + " The song is " +
+                        Requests.levels.get(level - 1).getSongName() + " by " +
+                        Requests.levels.get(level - 1).getSongAuthor() +
+                        " (" + Requests.levels.get(level - 1).getSongID() + ")");
+            }
         }
         //endregion
 
         //region Likes Command
         if (command.equalsIgnoreCase("!likes")) {
-
-            Main.sendMessage("@" + user + " There are " +
-                    Requests.levels.get(level - 1).getLikes() + " likes!");
+            if(Requests.levels.size() > 0) {
+                Main.sendMessage("@" + user + " There are " +
+                        Requests.levels.get(level - 1).getLikes() + " likes!");
+            }
         }
         //endregion
 
         //region Downloads Command
         if (command.equalsIgnoreCase("!downloads")) {
-
-            Main.sendMessage("@" + user + " There are " +
-                    Requests.levels.get(level - 1).getDownloads() + " downloads!");
+            if(Requests.levels.size() > 0) {
+                Main.sendMessage("@" + user + " There are " +
+                        Requests.levels.get(level - 1).getDownloads() + " downloads!");
+            }
         }
         //endregion
 
         //region Difficulty Command
         if (command.equalsIgnoreCase("!difficulty")) {
-
-            Main.sendMessage("@" + user + " The difficulty is " +
-                    Requests.levels.get(level - 1).getDifficulty().toLowerCase());
+            if(Requests.levels.size() > 0) {
+                Main.sendMessage("@" + user + " The difficulty is " +
+                        Requests.levels.get(level - 1).getDifficulty().toLowerCase());
+            }
         }
         //endregion
 
