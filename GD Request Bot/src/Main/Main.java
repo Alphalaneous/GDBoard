@@ -34,6 +34,9 @@ public class Main {
 			Settings.setChannel(channel);
 			Settings.writeSettings("channel", channel);
 		}
+		if(!Settings.hasWindowed){
+            Settings.writeSettings("windowed", "false");
+        }
 		//endregion
 
 		//region Get Twitch oauth
@@ -69,9 +72,10 @@ public class Main {
 		//region Start and Create Everything
 		Defaults.       startMainThread();		//Starts thread that always checks for changes such as time, resolution, and color scheme
 		Overlay.        setFrame();				//Creates the JFrame that contains everything
-		KeyListener.    hook();					//Starts a Keyboard and Controller Listener
-		MainBar.        createBar();			//Creates the main "Game Bar" in the top center
-
+		KeyListener.hook();                    //Starts a Keyboard and Controller Listener
+		if(!Settings.windowedMode) {
+			MainBar.createBar();            //Creates the main "Game Bar" in the top center
+		}
 		LevelsWindow.   createPanel();			//Creates the Levels Window containing all the requests in the level queue
 		ActionsWindow.  createPanel();			//Creates the Action Window containing buttons that do specific actions
 		InfoWindow.     createPanel();			//Creates the Info Window containing the information of the selected level
@@ -81,6 +85,9 @@ public class Main {
 		InfoWindow.     refreshInfo();			//Refreshes the information shown on the Info Window for the first time
 		SongWindow.     refreshInfo();			//Refreshes the information shown on the Song Window for the first time
 
+        if(Settings.windowedMode) {
+            Overlay.refreshUI();
+        }
 		Overlay.        setVisible();
 
 		//endregion

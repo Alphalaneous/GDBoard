@@ -16,7 +16,7 @@ class InfoWindow {
 	private static JLabel downloads = new JLabel();
 	private static JLabel length = new JLabel();
 	private static JTextPane description = new JTextPane();
-	private static JPanel window = new InnerWindow("Information", 1920 - width - 10, 10, width, height, "\uE946").createPanel();
+	private static JPanel window = new InnerWindow("Information", Settings.getInfoWLoc().x, Settings.getInfoWLoc().y, width, height, "\uE946").createPanel();
 
 	static void createPanel() {
 

@@ -465,6 +465,6 @@
     </orderEntry>
     <orderEntry type="library" name="GDBoard Dependencies" level="project" />
     <orderEntry type="library" name="jide-common" level="project" />
-    <orderEntry type="library" name="TwitchIRC Custom" level="project" />
+    <orderEntry type="library" name="TwitchIRC_v1.2" level="project" />
   </component>
 </module>

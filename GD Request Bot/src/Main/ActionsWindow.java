@@ -16,7 +16,7 @@ class ActionsWindow {
 
 	private static int height = 60;
 	private static int width = 260;
-	private static ResizablePanel window = new InnerWindow("Actions", 1920 - width - 10, 200, width, height,
+	private static ResizablePanel window = new InnerWindow("Actions", Settings.getActionsWLoc().x, Settings.getActionsWLoc().y, width, height,
 			"\uE7C9").createPanel();
 	private static JPanel mainPanel = new JPanel();
 	private static JPanel panel = new JPanel();
@@ -26,7 +26,7 @@ class ActionsWindow {
 	static void createPanel() {
 
 		mainPanel.setBounds(1, 31, width, height);
-		mainPanel.setBackground(Defaults.MAIN);
+
 		mainPanel.setLayout(null);
 
 		defaultUI.setBackground(Defaults.BUTTON);
@@ -34,7 +34,14 @@ class ActionsWindow {
 
 		panel.setPreferredSize(new Dimension(width, height));
 		panel.setBounds(15, 5, width - 30, height - 10);
-		panel.setBackground(Defaults.MAIN);
+		if(!Settings.windowedMode) {
+			mainPanel.setBackground(Defaults.MAIN);
+			panel.setBackground(Defaults.MAIN);
+		}
+		else{
+			mainPanel.setBackground(Defaults.SUB_MAIN);
+			panel.setBackground(Defaults.SUB_MAIN);
+		}
 		panel.setLayout(new GridLayout(1, 4,10,10));
 
 		//TODO make custom Yes/No dialog
@@ -183,7 +190,12 @@ class ActionsWindow {
 		JButton button = new RoundedJButton(icon);
 		button.setPreferredSize(new Dimension(50, 50));
 		button.setUI(defaultUI);
-		button.setBackground(Defaults.BUTTON);
+		if(!Settings.windowedMode) {
+			button.setBackground(Defaults.BUTTON);
+		}
+		else {
+			button.setBackground(Defaults.MAIN);
+		}
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
@@ -194,14 +206,27 @@ class ActionsWindow {
 	//region RefreshUI
 	static void refreshUI() {
 		((InnerWindow) window).refreshUI();
-		defaultUI.setBackground(Defaults.BUTTON);
+
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
-		mainPanel.setBackground(Defaults.MAIN);
-		panel.setBackground(Defaults.MAIN);
+		if(!Settings.windowedMode) {
+			defaultUI.setBackground(Defaults.BUTTON);
+			mainPanel.setBackground(Defaults.MAIN);
+			panel.setBackground(Defaults.MAIN);
+		}
+		else{
+			defaultUI.setBackground(Defaults.MAIN);
+			mainPanel.setBackground(Defaults.SUB_MAIN);
+			panel.setBackground(Defaults.SUB_MAIN);
+		}
 		for (Component component : panel.getComponents()) {
 			if (component instanceof JButton) {
-				component.setBackground(Defaults.BUTTON);
+				if(!Settings.windowedMode) {
+					component.setBackground(Defaults.BUTTON);
+				}
+				else {
+					component.setBackground(Defaults.MAIN);
+				}
 				component.setForeground(Defaults.FOREGROUND);
 			}
 		}

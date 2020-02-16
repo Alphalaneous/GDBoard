@@ -62,7 +62,7 @@ public class ChatBot extends TwitchBot {
         }
         //endregion
 
-        //region Current Command
+        //region Current Command //TODO Requested By Text
         if (command.equalsIgnoreCase("!current")) {
             if(Requests.levels.size() > 0) {
                 Main.sendMessage("@" + user + " The current level is " +
@@ -382,82 +382,87 @@ public class ChatBot extends TwitchBot {
                 command.equalsIgnoreCase("!req") ||
                 command.equalsIgnoreCase("!send")) {
             Matcher m = null;
-            try {
-                m = Pattern.compile("(\\d+)").matcher(arguments[1]);
-            } catch (Exception ignored) {
-            }
-            assert m != null;
-            if (m.matches() && arguments.length <= 2) {
+            if(arguments.length > 1) {
                 try {
-                    Requests.addRequest(m.group(1), String.valueOf(user), false);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    m = Pattern.compile("(\\d+)").matcher(arguments[1]);
+                } catch (Exception ignored) {
                 }
-            } else {
-                StringBuilder message = new StringBuilder();
-                for (int i = 1; i < arguments.length; i++) {
-                    if (arguments.length - 1 == i) {
-                        message.append(arguments[i]);
-                    } else {
-                        message.append(arguments[i]).append(" ");
-                    }
-                }
-                if (message.toString().contains("by")) {
-                    String level1 = message.toString().split("by ")[0].toUpperCase();
-                    String username = message.toString().split("by ")[1];
-                    AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
+                assert m != null;
+                if (m.matches() && arguments.length <= 2) {
                     try {
-                        outerLoop:
-                        for (int j = 0; j < 10; j++) {
-                            Object[] levelPage = Objects.requireNonNull(client.getLevelsByUser(Objects.requireNonNull(client.searchUser(username).block()), j)
-                                    .block()).asList().toArray();
-                            for (int i = 0; i < 10; i++) {
-                                if (((GDLevel) levelPage[i]).getName().toUpperCase()
-                                        .startsWith(level1.substring(0, level1.length() - 1))) {
-                                    Requests.addRequest(String.valueOf(((GDLevel) levelPage[i]).getId()),
-                                            String.valueOf(user), false);
-                                    break outerLoop;
-                                }
-                            }
-                        }
-
-                    } catch (IndexOutOfBoundsException ignored) {
-                    } catch (MissingAccessException | IOException e) {
-                        sendMessage("@" + user + " That level or user doesn't exist!", channel);
-                        e.printStackTrace();
-                    }
-
-                } else if (message.toString().contains("with")) {
-                    String level1 = message.toString().split("with ")[0].toUpperCase();
-                    String songUrl = message.toString().split("with ")[1];
-                    try {
-
-                        new URL(songUrl).toURI();
-                        try {
-                            Requests.addRequest(m.group(1), String.valueOf(user), true);
-                            //TODO: figure out custom music somehow...
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        Requests.addRequest(m.group(1), String.valueOf(user), false);
                     } catch (Exception e) {
                         e.printStackTrace();
-                        sendMessage("@" + user + " Not a valid link!", channel);
                     }
-                    System.out.println("Level ID: " + level1 + " Song Link: " + songUrl);
                 } else {
+                    StringBuilder message = new StringBuilder();
+                    for (int i = 1; i < arguments.length; i++) {
+                        if (arguments.length - 1 == i) {
+                            message.append(arguments[i]);
+                        } else {
+                            message.append(arguments[i]).append(" ");
+                        }
+                    }
+                    if (message.toString().contains("by")) {
+                        String level1 = message.toString().split("by ")[0].toUpperCase();
+                        String username = message.toString().split("by ")[1];
+                        AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
+                        try {
+                            outerLoop:
+                            for (int j = 0; j < 10; j++) {
+                                Object[] levelPage = Objects.requireNonNull(client.getLevelsByUser(Objects.requireNonNull(client.searchUser(username).block()), j)
+                                        .block()).asList().toArray();
+                                for (int i = 0; i < 10; i++) {
+                                    if (((GDLevel) levelPage[i]).getName().toUpperCase()
+                                            .startsWith(level1.substring(0, level1.length() - 1))) {
+                                        Requests.addRequest(String.valueOf(((GDLevel) levelPage[i]).getId()),
+                                                String.valueOf(user), false);
+                                        break outerLoop;
+                                    }
+                                }
+                            }
 
-                    AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
-                    try {
-                        Requests.addRequest(String
-                                        .valueOf(Objects.requireNonNull(client.searchLevels(message.toString(), LevelSearchFilters.create(), 0)
-                                                .block()).asList().get(0).getId()),
-                                String.valueOf(user), false);
-                    } catch (MissingAccessException | IOException e) {
-                        sendMessage("@" + user + " That level doesn't exist!", channel);
-                        e.printStackTrace();
+                        } catch (IndexOutOfBoundsException ignored) {
+                        } catch (MissingAccessException | IOException e) {
+                            sendMessage("@" + user + " That level or user doesn't exist!", channel);
+                            e.printStackTrace();
+                        }
+
+                    } else if (message.toString().contains("with")) {
+                        String level1 = message.toString().split("with ")[0].toUpperCase();
+                        String songUrl = message.toString().split("with ")[1];
+                        try {
+
+                            new URL(songUrl).toURI();
+                            try {
+                                Requests.addRequest(m.group(1), String.valueOf(user), true);
+                                //TODO: figure out custom music somehow...
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            sendMessage("@" + user + " Not a valid link!", channel);
+                        }
+                        System.out.println("Level ID: " + level1 + " Song Link: " + songUrl);
+                    } else {
+
+                        AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
+                        try {
+                            Requests.addRequest(String
+                                            .valueOf(Objects.requireNonNull(client.searchLevels(message.toString(), LevelSearchFilters.create(), 0)
+                                                    .block()).asList().get(0).getId()),
+                                    String.valueOf(user), false);
+                        } catch (MissingAccessException | IOException e) {
+                            sendMessage("@" + user + " That level doesn't exist!", channel);
+                            e.printStackTrace();
+                        }
                     }
                 }
+            }
+            else{
+                sendMessage("@" + user + " Please specify an ID!!", channel);
             }
         }
         //endregion

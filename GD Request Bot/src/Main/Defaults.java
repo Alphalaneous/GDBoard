@@ -57,11 +57,11 @@ public class Defaults {
 		}
 		if(prevTheme[0] == 0) {
 			Defaults.setDark();
-			dark.set(true);
+			dark.set(false);
 		}
 		else if (prevTheme[0] == 1) {
 			Defaults.setLight();
-			dark.set(false);
+			dark.set(true);
 		}
 		Thread thread = new Thread(() -> {
 			while(true){
@@ -93,25 +93,27 @@ public class Defaults {
 				}
 				if(theme == 0 && prevTheme[0] == 1) {
 					Defaults.setDark();
-					dark.set(true);
+					dark.set(false);
 					prevTheme[0] = 0;
 				}
 				else if (theme == 1 && prevTheme[0] == 0) {
 					Defaults.setLight();
-					dark.set(false);
+					dark.set(true);
 					prevTheme[0] = 1;
 				}
-
-				screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-				if(!screenSize.equals(prevScreenSize)) {
-					Overlay.refreshUI();
+				if(!Settings.windowedMode) {
+					screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+					if (!screenSize.equals(prevScreenSize)) {
+						Overlay.refreshUI();
+					}
+					prevScreenSize = screenSize;
 				}
-				prevScreenSize = screenSize;
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
 			}
 		});
 		thread.start();

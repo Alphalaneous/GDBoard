@@ -27,9 +27,10 @@ import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 class CommentsWindow {
     private static JPanel panel = new JPanel();
     private static JButtonUI defaultUI = new JButtonUI();
+
     private static int height = 350;
     private static int width = 300;
-    private static ResizablePanel window = new InnerWindow("Comments", 10, 500, width, height,
+    private static ResizablePanel window = new InnerWindow("Comments", Settings.getCommentWLoc().x, Settings.getCommentWLoc().y, width, height,
             "\uEBDB") {
         @Override
         protected Resizable createResizable() {
@@ -62,7 +63,9 @@ class CommentsWindow {
 
     //region Create Panel
     static void createPanel() {
-
+        if(Settings.windowedMode) {
+            //window.setBounds(Settings.getCommentWLoc().x, Settings.getCommentWLoc().y, width, 500);
+        }
         //region Panel attributes
         panel.setLayout(null);
         panel.setBounds(0, 0, width, height);

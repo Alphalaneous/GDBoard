@@ -22,7 +22,7 @@ class MainBar {
 	private static JPanel buttonPanel = new JPanel();
 	private static JLabel icon =  new JLabel();
 
-	static void createBar() {
+	static void createBar() throws IOException {
 
 
 
@@ -120,14 +120,13 @@ class MainBar {
 
 		mainPanel.add(time);
 		mainPanel.add(buttonPanel);
-
 		BufferedImage img = null;
 		try {
-			if(Defaults.dark.get()) {
+			if(!Defaults.dark.get()) {
 				img = ImageIO.read(Objects.requireNonNull(Main.class.getClassLoader()
 						.getResource("Resources/Icons/barIconLight.png")));
 			}
-			if(!Defaults.dark.get()){
+			else if(Defaults.dark.get()){
 				img = ImageIO.read(Objects.requireNonNull(Main.class.getClassLoader()
 						.getResource("Resources/Icons/barIconDark.png")));
 			}
@@ -137,8 +136,10 @@ class MainBar {
 		assert img != null;
 		Image imgScaled = img.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
 		ImageIcon imgNew = new ImageIcon(imgScaled);
+
 		icon.setIcon(imgNew);
 		icon.setBounds(20, -1, 64, 64);
+		icon.updateUI();
 		mainPanel.add(icon);
 
 		Overlay.addToFrame(barPanel);
@@ -169,11 +170,11 @@ class MainBar {
 	static void refreshUI() {
 		BufferedImage img = null;
 		try {
-			if(!Defaults.dark.get()) {
+			if(Defaults.dark.get()) {
 				img = ImageIO.read(Objects.requireNonNull(Main.class.getClassLoader()
 						.getResource("Resources/Icons/barIconLight.png")));
 			}
-			if(Defaults.dark.get()){
+			else if(!Defaults.dark.get()){
 				img = ImageIO.read(Objects.requireNonNull(Main.class.getClassLoader()
 						.getResource("Resources/Icons/barIconDark.png")));
 			}

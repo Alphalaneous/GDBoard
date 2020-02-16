@@ -34,42 +34,48 @@ class InnerWindow extends ResizablePanel {
         double x1;
         double ratio = 1920 / Defaults.screenSize.getWidth();
         this.title = title;
-        x1 = x / ratio;
-        y1 = y / ratio;
-        if (x + width >= Defaults.screenSize.getWidth() + 1) {
-            x1 = Defaults.screenSize.getWidth() + 1 - width;
+        if(!Settings.windowedMode) {
+            x1 = x / ratio;
+            y1 = y / ratio;
+            if (x + width >= Defaults.screenSize.getWidth() + 1) {
+                x1 = Defaults.screenSize.getWidth() + 1 - width;
+            }
+            if (x <= -1) {
+                x1 = -1;
+            }
+            if (y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+                y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
+            }
+            if (y <= -1) {
+                y1 = -1;
+            }
+            if (x + width >= Defaults.screenSize.getWidth() + 1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+                x1 = Defaults.screenSize.getWidth() + 1 - width;
+                y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
+            }
+            if (x + width >= Defaults.screenSize.getWidth() + 1 && y <= -1) {
+                x1 = Defaults.screenSize.getWidth() + 1 - width;
+                y1 = -1;
+            }
+            if (x <= -1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+                x1 = -1;
+                y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
+            }
+            if (x <= -1 && y <= -1) {
+                x1 = -1;
+                y1 = -1;
+            }
+            int middle = (int) (Defaults.screenSize.getWidth() / 2);
+            if (x + width >= middle - 290 && x <= middle + 290 && y <= 93) {
+                y1 = 93;
+            }
+            this.x = x1;
+            this.y = y1;
         }
-        if (x <= -1) {
-            x1 = -1;
+        else{
+            this.x = x;
+            this.y = y;
         }
-        if (y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
-            y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
-        }
-        if (y <= -1) {
-            y1 = -1;
-        }
-        if (x + width >= Defaults.screenSize.getWidth() + 1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
-            x1 = Defaults.screenSize.getWidth() + 1 - width;
-            y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
-        }
-        if (x + width >= Defaults.screenSize.getWidth() + 1 && y <= -1) {
-            x1 = Defaults.screenSize.getWidth() + 1 - width;
-            y1 = -1;
-        }
-        if (x <= -1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
-            x1 = -1;
-            y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
-        }
-        if (x <= -1 && y <= -1) {
-            x1 = -1;
-            y1 = -1;
-        }
-        int middle = (int) (Defaults.screenSize.getWidth() / 2);
-        if (x + width >= middle - 290 && x <= middle + 290 && y <= 93) {
-            y1 = 93;
-        }
-        this.x = x1;
-        this.y = y1;
         this.width = width;
         this.height = height;
         this.icon = icon;
@@ -95,62 +101,74 @@ class InnerWindow extends ResizablePanel {
         final boolean[] exited = {false};
         setBackground(new Color(0, 0, 0, 0));
         setLayout(null);
-        setBounds((int) x, (int) y, width + 2, height + 32);
+        if(!Settings.windowedMode) {
+            setBounds((int) x, (int) y, width + 2, height + 32);
+        }
+        else {
+            setBounds((int) x, (int) y, width + 2, height);
+        }
         setOpaque(false);
-        setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 50)));
+        if(!Settings.windowedMode) {
+            setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 50)));
+        }
+        else {
+            setBorder(BorderFactory.createEmptyBorder(-1,-1,-1,-1));
+        }
         //endregion
 
         //region Mouse Relative to Window
-		Thread threadPos = new Thread(() -> {
-			while(true){
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-                Point p = null;
-				try {
-                    p = MouseInfo.getPointerInfo().getLocation();
-                    SwingUtilities.convertPointFromScreen(p, topBar);
+        if(!Settings.windowedMode) {
+            Thread threadPos = new Thread(() -> {
+                while (true) {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Point p = null;
+                    try {
+                        p = MouseInfo.getPointerInfo().getLocation();
+                        SwingUtilities.convertPointFromScreen(p, topBar);
+                    } catch (NullPointerException ignored) {
+
+                    }
+
+                    if (Overlay.isVisible && !isDragging[0]) {
+                        assert p != null;
+                        if (p.getY() <= 30 && p.getY() >= 27 && p.getX() >= 0 && p.getX() <= width) {
+                            if (getY() <= -10) {
+                                Thread thread = new Thread(() -> {
+                                    for (int j = 0; j < 15; j++) {
+                                        try {
+                                            Thread.sleep(1);
+                                        } catch (InterruptedException ex) {
+                                            ex.printStackTrace();
+                                        }
+                                        if (getY() >= -3 && getY() <= 0) {
+                                            break;
+                                        }
+                                        setLocation(getX(), getY() + 3);
+                                    }
+                                });
+                                thread.start();
+                            }
+                        }
+                    }
+
+                    assert p != null;
+                    if ((p.getX() >= width || p.getX() <= -1 || p.getY() <= -1 || p.getY() >= 30) && exited[0]) {
+                        if (getY() <= 0) {
+                            setLocation(getX(), -31);
+                        }
+                    }
                 }
-				catch (NullPointerException ignored){
-
-                }
-
-			if(Overlay.isVisible && !isDragging[0]){
-                assert p != null;
-                if (p.getY() <= 30 && p.getY() >= 27 && p.getX() >= 0 && p.getX() <= width) {
-					if (getY() <= -10) {
-						Thread thread = new Thread(() -> {
-							for (int j = 0; j < 15; j++) {
-								try {
-									Thread.sleep(1);
-								} catch (InterruptedException ex) {
-									ex.printStackTrace();
-								}
-								if (getY() >= -3 && getY() <= 0) {
-									break;
-								}
-								setLocation(getX(), getY() + 3);
-							}
-						});
-						thread.start();
-					}
-				}
-			}
-
-                assert p != null;
-                if((p.getX() >= width || p.getX() <= -1 || p.getY() <=-1 || p.getY() >= 30) && exited[0]){
-				if(getY() <= 0){
-					setLocation(getX(), -31);
-				}
-			}
-			}
-		});
-		threadPos.start();
+            });
+            threadPos.start();
+        }
         //endregion
 
         //region TopBar Dragging
+
         MouseInputAdapter mia = new MouseInputAdapter() {
             Point location;
             Point pressed;
@@ -226,9 +244,10 @@ class InnerWindow extends ResizablePanel {
 				exited[0] = true;
 			}
 		};
-
-        topBar.addMouseListener(mia);
-        topBar.addMouseMotionListener(mia);
+        if(!Settings.windowedMode) {
+            topBar.addMouseListener(mia);
+            topBar.addMouseMotionListener(mia);
+        }
         //endregion
 
         //region WindowIcon attributes
@@ -255,8 +274,10 @@ class InnerWindow extends ResizablePanel {
         closeButton.setBorder(BorderFactory.createEmptyBorder());
         closeButton.setBackground(Defaults.TOP);
         closeButton.setUI(defaultUI);
-		closeButton.addMouseListener(topScreenIA);
-		closeButton.addMouseMotionListener(topScreenIA);
+        if(!Settings.windowedMode) {
+            closeButton.addMouseListener(topScreenIA);
+            closeButton.addMouseMotionListener(topScreenIA);
+        }
         closeButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -317,7 +338,9 @@ class InnerWindow extends ResizablePanel {
         //region TopBar attributes
         topBar.setBackground(Defaults.TOP);
         topBar.setBounds(1, 1, width, 30);
-        add(topBar);
+        if(!Settings.windowedMode) {
+            add(topBar);
+        }
         //endregion
 
         return this;
@@ -361,6 +384,12 @@ class InnerWindow extends ResizablePanel {
 
     //region Refresh UI
     void refreshUI() {
+
+        if(Settings.windowedMode && this.getComponents().length > 0){
+            for(int i = 0; i < this.getComponents().length; i++){
+                this.getComponent(i).setBounds(this.getComponent(i).getX(),0, this.getComponent(i).getWidth(), this.getComponent(i).getHeight());
+            }
+        }
         defaultUI.setBackground(Defaults.TOP);
         defaultUI.setHover(Defaults.HOVER);
         defaultUI.setSelect(Defaults.SELECT);
@@ -377,48 +406,49 @@ class InnerWindow extends ResizablePanel {
                 component.setForeground(Defaults.FOREGROUND);
             }
         }
-
-        double y1;
-        double x1;
-        double ratioX = 1920 / Defaults.screenSize.getWidth();
-        double ratioY = 1080 / Defaults.screenSize.getHeight();
-        int x = getX();
-        int y = getY();
-        x1 = x / ratioX;
-        y1 = y / ratioY;
-        if (x + width >= Defaults.screenSize.getWidth() + 1) {
-            x1 = Defaults.screenSize.getWidth() + 1 - width;
+        if(!Settings.windowedMode) {
+            double y1;
+            double x1;
+            double ratioX = 1920 / Defaults.screenSize.getWidth();
+            double ratioY = 1080 / Defaults.screenSize.getHeight();
+            int x = getX();
+            int y = getY();
+            x1 = x / ratioX;
+            y1 = y / ratioY;
+            if (x + width >= Defaults.screenSize.getWidth() + 1) {
+                x1 = Defaults.screenSize.getWidth() + 1 - width;
+            }
+            if (x <= -1) {
+                x1 = -1;
+            }
+            if (y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+                y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
+            }
+            if (y <= -1) {
+                y1 = -31;
+            }
+            if (x + width >= Defaults.screenSize.getWidth() + 1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+                x1 = Defaults.screenSize.getWidth() + 1 - width;
+                y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
+            }
+            if (x + width >= Defaults.screenSize.getWidth() + 1 && y <= -1) {
+                x1 = Defaults.screenSize.getWidth() + 1 - width;
+                y1 = -31;
+            }
+            if (x <= -1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+                x1 = -1;
+                y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
+            }
+            if (x <= -1 && y <= -1) {
+                x1 = -1;
+                y1 = -31;
+            }
+            int middle = (int) (Defaults.screenSize.getWidth() / 2);
+            if (x + width >= middle - 290 && x <= middle + 290 && y <= 93) {
+                y1 = 93;
+            }
+            setLocation((int) x1, (int) y1);
         }
-        if (x <= -1) {
-            x1 = -1;
-        }
-        if (y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
-            y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
-        }
-        if (y <= -1) {
-            y1 = -31;
-        }
-        if (x + width >= Defaults.screenSize.getWidth() + 1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
-            x1 = Defaults.screenSize.getWidth() + 1 - width;
-            y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
-        }
-        if (x + width >= Defaults.screenSize.getWidth() + 1 && y <= -1) {
-            x1 = Defaults.screenSize.getWidth() + 1 - width;
-            y1 = -31;
-        }
-        if (x <= -1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
-            x1 = -1;
-            y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
-        }
-        if (x <= -1 && y <= -1) {
-            x1 = -1;
-            y1 = -31;
-        }
-        int middle = (int) (Defaults.screenSize.getWidth() / 2);
-        if (x + width >= middle - 290 && x <= middle + 290 && y <= 93) {
-            y1 = 93;
-        }
-        setLocation((int) x1, (int) y1);
     }
     //endregion
 
