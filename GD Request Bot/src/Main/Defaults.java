@@ -48,9 +48,13 @@ public class Defaults {
 	static void startMainThread(){
 		RegistryKey personalizeStart = new RegistryKey(
 				"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
-
-		final int[] prevTheme = {((RegDWORDValue) personalizeStart.getValue("AppsUseLightTheme")).getIntValue()};
-
+		final int[] prevTheme = new int[1];
+		try {
+			 prevTheme[0] = ((RegDWORDValue) personalizeStart.getValue("AppsUseLightTheme")).getIntValue();
+		}
+		catch (NullPointerException e){
+			prevTheme[0] = 1;
+		}
 		if(prevTheme[0] == 0) {
 			Defaults.setDark();
 			dark.set(true);
@@ -78,11 +82,15 @@ public class Defaults {
 					hour = 12;
 				}
 				MainBar.setTime(hour + ":" + String.format("%02d", minute) + " " + half);
-
 				RegistryKey personalize = new RegistryKey(
-						"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
+							"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
 
-				int theme = ((RegDWORDValue) personalize.getValue("AppsUseLightTheme")).getIntValue();
+				int theme = 0;
+				try {
+					theme = ((RegDWORDValue) personalize.getValue("AppsUseLightTheme")).getIntValue();
+				}
+				catch (NullPointerException ignored){
+				}
 				if(theme == 0 && prevTheme[0] == 1) {
 					Defaults.setDark();
 					dark.set(true);
