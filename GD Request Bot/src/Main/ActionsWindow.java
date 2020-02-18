@@ -15,7 +15,7 @@ import java.io.IOException;
 class ActionsWindow {
 
 	private static int height = 60;
-	private static int width = 260;
+	private static int width = 300;
 	private static ResizablePanel window = new InnerWindow("Actions", Settings.getActionsWLoc().x, Settings.getActionsWLoc().y, width, height,
 			"\uE7C9").createPanel();
 	private static JPanel mainPanel = new JPanel();
@@ -32,8 +32,8 @@ class ActionsWindow {
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
 
-		panel.setPreferredSize(new Dimension(width, height));
-		panel.setBounds(15, 5, width - 30, height - 10);
+		panel.setPreferredSize(new Dimension(width-60, height));
+		panel.setBounds(30, 5, width - 60, height - 10);
 		if(!Settings.windowedMode) {
 			mainPanel.setBackground(Defaults.MAIN);
 			panel.setBackground(Defaults.MAIN);

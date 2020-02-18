@@ -86,12 +86,28 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
+            <state relative-caret-position="1115">
               <caret line="89" column="9" selection-start-line="89" selection-start-column="9" selection-end-line="89" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="n#!!doc;n#sendMessage#0;n#Main#0" />
+                <element signature="e#4438#4439#0" expanded="true" />
                 <element signature="e#4553#4554#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Main/Settings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="251">
+              <caret line="175" column="9" lean-forward="true" selection-start-line="175" selection-start-column="9" selection-end-line="175" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#6042#6043#0" expanded="true" />
+                <element signature="e#6122#6123#0" expanded="true" />
+                <element signature="e#6230#6231#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -100,15 +116,39 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/ActionsWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="185" column="15" selection-start-line="185" selection-start-column="15" selection-end-line="185" selection-end-column="15" />
+            <state relative-caret-position="425">
+              <caret line="35" column="26" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
               <folding>
                 <element signature="n#!!doc;n#toggleVisible#0;n#ActionsWindow#0" />
+                <element signature="e#7145#7146#0" expanded="true" />
                 <element signature="e#7183#7184#0" expanded="true" />
                 <element signature="n#!!doc;n#setInvisible#0;n#ActionsWindow#0" />
+                <element signature="e#7250#7251#0" expanded="true" />
                 <element signature="e#7294#7295#0" expanded="true" />
                 <element signature="n#!!doc;n#setVisible#0;n#ActionsWindow#0" />
+                <element signature="e#7357#7358#0" expanded="true" />
                 <element signature="e#7399#7400#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/InfoWindow.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-34">
+              <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/Overlay.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-5">
+              <caret line="53" column="55" selection-start-line="53" selection-start-column="55" selection-end-line="53" selection-end-column="55" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -117,88 +157,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/MainBar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="134" column="9" selection-start-line="123" selection-start-column="8" selection-end-line="134" selection-end-column="9" />
-              <folding>
-                <element signature="e#4250#4251#0" expanded="true" />
-                <element signature="e#4272#4273#0" expanded="true" />
-                <element signature="e#6138#6139#0" expanded="true" />
-                <element signature="e#6171#6172#0" expanded="true" />
-                <element signature="e#6200#6201#0" expanded="true" />
-                <element signature="e#6232#6233#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="213">
+              <caret line="104" column="45" lean-forward="true" selection-start-line="104" selection-start-column="45" selection-end-line="104" selection-end-column="45" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/ChatBot.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="29">
-              <caret line="75" column="8" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="8" />
-              <folding>
-                <element signature="n#!!doc;n#ChatBot#0;n#ChatBot#0" />
-                <element signature="e#964#1001#0" />
-                <element signature="e#1120#1148#0" />
-                <element signature="e#1206#1468#1" />
-                <element signature="e#1224#1416#0" />
-                <element signature="e#1352#1402#1" />
-                <element signature="e#1498#1529#0" />
-                <element signature="e#2101#2150#0" />
-                <element signature="e#3054#3076#0" />
-                <element signature="e#3367#3393#0" />
-                <element signature="e#3696#3723#0" />
-                <element signature="e#4034#4057#0" />
-                <element signature="e#5984#6006#0" />
-                <element signature="e#8586#8617#0" />
-                <element signature="e#10207#10228#0" />
-                <element signature="e#14932#14956#0" />
-                <element signature="e#16690#16712#0" />
-                <element signature="e#18252#18308#0" />
-              </folding>
+            <state relative-caret-position="454">
+              <caret line="240" column="21" selection-start-line="240" selection-start-column="21" selection-end-line="240" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Defaults.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/LevelData.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="63" column="25" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Settings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="76" column="5" selection-start-line="76" selection-start-column="5" selection-end-line="76" selection-end-column="5" />
+            <state relative-caret-position="2142">
+              <caret line="192" column="9" selection-start-line="192" selection-start-column="9" selection-end-line="192" selection-end-column="9" />
               <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/KeyListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="34" selection-start-line="34" selection-end-line="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Main/Overlay.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="97">
-              <caret line="53" column="64" selection-start-line="53" selection-start-column="64" selection-end-line="53" selection-end-column="64" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1584#1585#0" expanded="true" />
-                <element signature="e#1623#1624#0" expanded="true" />
+                <element signature="e#2976#2977#0" expanded="true" />
+                <element signature="e#3007#3008#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -207,7 +188,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/LevelsWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
+            <state relative-caret-position="2686">
               <caret line="178" column="74" selection-start-line="178" selection-start-column="28" selection-end-line="178" selection-end-column="74" />
             </state>
           </provider>
@@ -216,9 +197,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/InnerWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="391" column="9" selection-start-line="391" selection-start-column="9" selection-end-line="391" selection-end-column="9" />
+            <state relative-caret-position="129">
+              <caret line="222" selection-start-line="222" selection-end-line="222" />
               <folding>
+                <element signature="e#8793#8794#0" expanded="true" />
+                <element signature="e#8875#8876#0" expanded="true" />
+                <element signature="e#8959#8960#0" expanded="true" />
                 <element signature="n#!!doc;n#refreshListener#0;n#InnerWindow#0" />
                 <element signature="method#refreshListener#0;class#InnerWindow#0" />
                 <element signature="n#!!doc;n#resetDimensions#0;n#InnerWindow#0" />
@@ -229,11 +213,9 @@
                 <element signature="n#!!doc;n#toggle#0;n#InnerWindow#0" />
                 <element signature="method#toggle#0;class#InnerWindow#0" />
                 <element signature="n#!!doc;n#moveToFront#0;n#InnerWindow#0" />
-                <element signature="e#17855#17856#0" expanded="true" />
-                <element signature="e#17896#17897#0" expanded="true" />
+                <element signature="e#18029#18030#0" expanded="true" />
                 <element signature="n#!!doc;n#setPinVisible#0;n#InnerWindow#0" />
-                <element signature="e#17975#17976#0" expanded="true" />
-                <element signature="e#18018#18019#0" expanded="true" />
+                <element signature="e#18151#18152#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -265,19 +247,19 @@
         <option value="$PROJECT_DIR$/properties.txt" />
         <option value="$PROJECT_DIR$/config.properties" />
         <option value="$PROJECT_DIR$/src/Main/LevelsWindow.java" />
-        <option value="$PROJECT_DIR$/src/Main/Requests.java" />
         <option value="$PROJECT_DIR$/src/Main/ChatBot.java" />
         <option value="$PROJECT_DIR$/src/Main/InfoWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/SongWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/CommentsWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/KeyListener.java" />
-        <option value="$PROJECT_DIR$/src/Main/ActionsWindow.java" />
-        <option value="$PROJECT_DIR$/src/Main/InnerWindow.java" />
-        <option value="$PROJECT_DIR$/src/Main/Settings.java" />
         <option value="$PROJECT_DIR$/src/Main/Defaults.java" />
-        <option value="$PROJECT_DIR$/src/Main/MainBar.java" />
         <option value="$PROJECT_DIR$/src/Main/Main.java" />
         <option value="$PROJECT_DIR$/src/Main/Overlay.java" />
+        <option value="$PROJECT_DIR$/src/Main/Requests.java" />
+        <option value="$PROJECT_DIR$/src/Main/MainBar.java" />
+        <option value="$PROJECT_DIR$/src/Main/InnerWindow.java" />
+        <option value="$PROJECT_DIR$/src/Main/ActionsWindow.java" />
+        <option value="$PROJECT_DIR$/src/Main/Settings.java" />
       </list>
     </option>
   </component>
@@ -288,8 +270,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="388" />
-    <option name="y" value="16" />
+    <option name="x" value="431" />
+    <option name="y" value="39" />
     <option name="width" value="1385" />
     <option name="height" value="973" />
   </component>
@@ -358,8 +340,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -372,7 +354,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1581896571356" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1581987022865" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../GDBoard Dependencies/TwitchIRC_v1.2.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.14648438" />
@@ -383,12 +365,13 @@
     <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\classes\artifacts\GD_Request_Bot_jar" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources" />
       <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Main" />
       <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\classes\artifacts\GD_Request_Bot_jar" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -503,9 +486,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="388" y="16" width="1385" height="973" extended-state="0" />
+    <frame x="431" y="39" width="1385" height="973" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22867924" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -693,13 +676,6 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Main/ParseLevel.java" />
     <entry file="file://$PROJECT_DIR$/properties.txt" />
-    <entry file="jar://C:/Program Files/Java/jdk-12.0.1/lib/src.zip!/java.base/java/util/Properties.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="402" column="29" selection-start-line="402" selection-start-column="29" selection-end-line="402" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -745,31 +721,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="122" column="31" selection-start-line="122" selection-start-column="31" selection-end-line="122" selection-end-column="31" />
-          <folding>
-            <element signature="e#7254#7255#0" expanded="true" />
-            <element signature="e#7283#7284#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/LevelData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/InfoWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="18" column="114" selection-start-line="18" selection-start-column="114" selection-end-line="18" selection-end-column="114" />
         </state>
       </provider>
     </entry>
@@ -819,31 +770,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/KeyListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/ActionsWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="185" column="15" selection-start-line="185" selection-start-column="15" selection-end-line="185" selection-end-column="15" />
-          <folding>
-            <element signature="n#!!doc;n#toggleVisible#0;n#ActionsWindow#0" />
-            <element signature="e#7183#7184#0" expanded="true" />
-            <element signature="n#!!doc;n#setInvisible#0;n#ActionsWindow#0" />
-            <element signature="e#7294#7295#0" expanded="true" />
-            <element signature="n#!!doc;n#setVisible#0;n#ActionsWindow#0" />
-            <element signature="e#7399#7400#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/ChatBot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
+        <state relative-caret-position="340">
           <caret line="75" column="8" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="8" />
           <folding>
             <element signature="n#!!doc;n#ChatBot#0;n#ChatBot#0" />
@@ -868,11 +797,60 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Defaults.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="63" column="25" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/KeyListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/LevelData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2142">
+          <caret line="192" column="9" selection-start-line="192" selection-start-column="9" selection-end-line="192" selection-end-column="9" />
+          <folding>
+            <element signature="e#2976#2977#0" expanded="true" />
+            <element signature="e#3007#3008#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/LevelsWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2686">
+          <caret line="178" column="74" selection-start-line="178" selection-start-column="28" selection-end-line="178" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-12.0.1/lib/src.zip!/java.base/java/util/Properties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="402" column="29" selection-start-line="402" selection-start-column="29" selection-end-line="402" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/MainBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="104" column="45" lean-forward="true" selection-start-line="104" selection-start-column="45" selection-end-line="104" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/InnerWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="391" column="9" selection-start-line="391" selection-start-column="9" selection-end-line="391" selection-end-column="9" />
+        <state relative-caret-position="129">
+          <caret line="222" selection-start-line="222" selection-end-line="222" />
           <folding>
+            <element signature="e#8793#8794#0" expanded="true" />
+            <element signature="e#8875#8876#0" expanded="true" />
+            <element signature="e#8959#8960#0" expanded="true" />
             <element signature="n#!!doc;n#refreshListener#0;n#InnerWindow#0" />
             <element signature="method#refreshListener#0;class#InnerWindow#0" />
             <element signature="n#!!doc;n#resetDimensions#0;n#InnerWindow#0" />
@@ -883,74 +861,77 @@
             <element signature="n#!!doc;n#toggle#0;n#InnerWindow#0" />
             <element signature="method#toggle#0;class#InnerWindow#0" />
             <element signature="n#!!doc;n#moveToFront#0;n#InnerWindow#0" />
-            <element signature="e#17855#17856#0" expanded="true" />
-            <element signature="e#17896#17897#0" expanded="true" />
+            <element signature="e#18029#18030#0" expanded="true" />
             <element signature="n#!!doc;n#setPinVisible#0;n#InnerWindow#0" />
-            <element signature="e#17975#17976#0" expanded="true" />
-            <element signature="e#18018#18019#0" expanded="true" />
+            <element signature="e#18151#18152#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="240" column="21" selection-start-line="240" selection-start-column="21" selection-end-line="240" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1115">
+          <caret line="89" column="9" selection-start-line="89" selection-start-column="9" selection-end-line="89" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="n#!!doc;n#sendMessage#0;n#Main#0" />
+            <element signature="e#4438#4439#0" expanded="true" />
+            <element signature="e#4553#4554#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/InfoWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-34">
+          <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/ActionsWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="35" column="26" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
+          <folding>
+            <element signature="n#!!doc;n#toggleVisible#0;n#ActionsWindow#0" />
+            <element signature="e#7145#7146#0" expanded="true" />
+            <element signature="e#7183#7184#0" expanded="true" />
+            <element signature="n#!!doc;n#setInvisible#0;n#ActionsWindow#0" />
+            <element signature="e#7250#7251#0" expanded="true" />
+            <element signature="e#7294#7295#0" expanded="true" />
+            <element signature="n#!!doc;n#setVisible#0;n#ActionsWindow#0" />
+            <element signature="e#7357#7358#0" expanded="true" />
+            <element signature="e#7399#7400#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Overlay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5">
+          <caret line="53" column="55" selection-start-line="53" selection-start-column="55" selection-end-line="53" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Settings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="76" column="5" selection-start-line="76" selection-start-column="5" selection-end-line="76" selection-end-column="5" />
+        <state relative-caret-position="251">
+          <caret line="175" column="9" lean-forward="true" selection-start-line="175" selection-start-column="9" selection-end-line="175" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Defaults.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="63" column="25" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/MainBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="134" column="9" selection-start-line="123" selection-start-column="8" selection-end-line="134" selection-end-column="9" />
-          <folding>
-            <element signature="e#4250#4251#0" expanded="true" />
-            <element signature="e#4272#4273#0" expanded="true" />
-            <element signature="e#6138#6139#0" expanded="true" />
-            <element signature="e#6171#6172#0" expanded="true" />
-            <element signature="e#6200#6201#0" expanded="true" />
-            <element signature="e#6232#6233#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="89" column="9" selection-start-line="89" selection-start-column="9" selection-end-line="89" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="n#!!doc;n#sendMessage#0;n#Main#0" />
-            <element signature="e#4553#4554#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/LevelsWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="178" column="74" selection-start-line="178" selection-start-column="28" selection-end-line="178" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Overlay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="53" column="64" selection-start-line="53" selection-start-column="64" selection-end-line="53" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1584#1585#0" expanded="true" />
-            <element signature="e#1623#1624#0" expanded="true" />
+            <element signature="e#6042#6043#0" expanded="true" />
+            <element signature="e#6122#6123#0" expanded="true" />
+            <element signature="e#6230#6231#0" expanded="true" />
           </folding>
         </state>
       </provider>

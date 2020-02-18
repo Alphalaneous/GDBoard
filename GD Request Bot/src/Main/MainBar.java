@@ -101,6 +101,11 @@ class MainBar {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				super.mousePressed(e);
+				try {
+					Settings.writeLocation();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				System.exit(0);
 			}
 		});

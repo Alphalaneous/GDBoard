@@ -8,6 +8,7 @@ import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 class InnerWindow extends ResizablePanel {
 
@@ -219,6 +220,8 @@ class InnerWindow extends ResizablePanel {
                     p.setLocation(p.getX(), 93);
                     setLocation(p);
                 }
+
+                    Settings.setLoction(title, (int) x + "," + (int) y);
 
             }
 

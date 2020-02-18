@@ -90,7 +90,7 @@ class Requests {
                         parse(Objects.requireNonNull(Objects
                                 .requireNonNull(client.getLevelById(Long.parseLong(ID)).block()).download().block())
                                 .getData(), ID);
-                        levelData.setAnalyzed();
+                        //levelData.setAnalyzed();
 
                         LevelsWindow.updateUI(levelData.getLevelID(), levelData.getContainsVulgar(), levelData.getContainsImage(), levelData.getAnalyzed());
                     }
@@ -98,10 +98,8 @@ class Requests {
                     e.printStackTrace();
                     System.out.println("Couldn't Analyze Level");
                 }
-
-
             });
-
+            parse.start();
             // --------------------
             // Loop through levels to check if level is already in queue
 
@@ -151,7 +149,7 @@ class Requests {
                             + Requests.levels.get(0).getRequester());
                 }
                 LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester());
-                parse.start();
+
             }
         }
     }
@@ -164,6 +162,7 @@ class Requests {
 
         ArrayList<GDObject> lvlObject = new ArrayList<>();
         for (int k = 0; k < Requests.getLevelData().size(); k++) {
+
             if (Requests.getLevelData().get(k).getLevelID().equalsIgnoreCase(levelID)) {
                 try {
                     String decompressed = decompress(level);
@@ -202,7 +201,7 @@ class Requests {
                                 lvlObject.get(i).color1HSVEnabled(Double.parseDouble(Objects.get(i)[j + 1]));
                             }
                             InputStream is = Main.class.getClassLoader()
-                                    .getResourceAsStream("blockedWords.txt");
+                                    .getResourceAsStream("Resources/blockedWords.txt");
                             assert is != null;
                             InputStreamReader isr = new InputStreamReader(is);
                             BufferedReader br = new BufferedReader(isr);
@@ -212,7 +211,7 @@ class Requests {
                                 String[] text = lvlObject.get(i).getObjectText().toUpperCase().split(" ");
 
                                 for (String s : text) {
-
+                                    System.out.println(text);
                                     if (s.equalsIgnoreCase(line)) {
                                         System.out.println("Contains Vulgar");
                                         Requests.getLevelData().get(k).setContainsVulgar();
@@ -240,13 +239,13 @@ class Requests {
 
                         }
                     }
-                    System.out.println("Analyzed");
                     Requests.getLevelData().get(k).setAnalyzed();
                     LevelsWindow.updateUI(Requests.getLevelData().get(k).getLevelID(), Requests.getLevelData().get(k).getContainsVulgar(), Requests.getLevelData().get(k).getContainsImage(), true);
                     break;
 
 
                 } catch (Exception e) {
+                    e.printStackTrace();
                     for (int m = 0; k < Requests.getLevelData().size(); m++) {
                         if (Requests.getLevelData().get(m).getLevelID().equalsIgnoreCase(levelID)) {
                             LevelsWindow.updateUI(Requests.getLevelData().get(k).getLevelID(), Requests.getLevelData().get(k).getContainsVulgar(), Requests.getLevelData().get(k).getContainsImage(), false);
