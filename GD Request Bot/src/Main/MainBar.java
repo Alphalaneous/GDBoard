@@ -7,7 +7,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,13 +15,14 @@ import java.util.Objects;
 class MainBar {
 
 	private static JButtonUI defaultUI = new JButtonUI();
+	private static JButtonUI subUI = new JButtonUI();
 	private static JLabel time = new JLabel();
 	private static JPanel barPanel = new JPanel();
 	private static JPanel mainPanel = new JPanel();
 	private static JPanel buttonPanel = new JPanel();
 	private static JLabel icon =  new JLabel();
 
-	static void createBar() throws IOException {
+	static void createBar() {
 
 
 
@@ -96,7 +96,7 @@ class MainBar {
 				ActionsWindow.toggleVisible();
 			}
 		});
-		JButton close = createButton("\uE10A");
+		JButton close = createSubButton("\uE10A");
 		close.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -166,47 +166,71 @@ class MainBar {
 		button.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
 		return button;
 	}
+	private static JButton createSubButton(String icon) {
+
+		subUI.setBackground(Defaults.TOP);
+		JButton button = new JButton(icon);
+		button.setPreferredSize(new Dimension(65, 64));
+		button.setBackground(Defaults.TOP);
+		button.setUI(subUI);
+		button.setForeground(Defaults.FOREGROUND);
+		button.setBorder(BorderFactory.createEmptyBorder());
+		button.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
+		return button;
+	}
 
 	static void setTime(String timeValue) {
 		time.setText(timeValue);
-		time.setBounds(148 - time.getPreferredSize().width, -1, (int) time.getPreferredSize().getWidth(), 64);
+		time.setBounds(148 - time.getPreferredSize().width, 2, (int) time.getPreferredSize().getWidth(), 64);
 		time.updateUI();
 	}
-	static void refreshUI() {
-		BufferedImage img = null;
-		try {
-			if(Defaults.dark.get()) {
-				img = ImageIO.read(Objects.requireNonNull(Main.class.getClassLoader()
-						.getResource("Resources/Icons/barIconLight.png")));
+	static void refreshUI(boolean color) {
+		if(color) {
+			BufferedImage img = null;
+			try {
+				if (Defaults.dark.get()) {
+					System.out.println("Dark");
+					img = ImageIO.read(Objects.requireNonNull(Main.class.getClassLoader()
+							.getResource("Resources/Icons/barIconLight.png")));
+				} else if (!Defaults.dark.get()) {
+					System.out.println("Light");
+					img = ImageIO.read(Objects.requireNonNull(Main.class.getClassLoader()
+							.getResource("Resources/Icons/barIconDark.png")));
+				}
+			} catch (IOException e1) {
+				e1.printStackTrace();
 			}
-			else if(!Defaults.dark.get()){
-				img = ImageIO.read(Objects.requireNonNull(Main.class.getClassLoader()
-						.getResource("Resources/Icons/barIconDark.png")));
-			}
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		assert img != null;
-		Image imgScaled = img.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
-		ImageIcon imgNew = new ImageIcon(imgScaled);
+			assert img != null;
+			Image imgScaled = img.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+			ImageIcon imgNew = new ImageIcon(imgScaled);
 
-		icon.setIcon(imgNew);
-		icon.setBounds(20, -1, 64, 64);
+			icon.setIcon(imgNew);
+			icon.setBounds(20, -1, 64, 64);
 
-		mainPanel.setBackground(Defaults.TOP);
-		buttonPanel.setBackground(Defaults.TOP);
-		defaultUI.setBackground(Defaults.MAIN);
-		defaultUI.setHover(Defaults.HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
-		time.setForeground(Defaults.FOREGROUND);
-		for (Component component : buttonPanel.getComponents()) {
-			if (component instanceof JButton) {
-				component.setBackground(Defaults.MAIN);
-				component.setForeground(Defaults.FOREGROUND);
+			mainPanel.setBackground(Defaults.TOP);
+			buttonPanel.setBackground(Defaults.TOP);
+			defaultUI.setBackground(Defaults.MAIN);
+			defaultUI.setHover(Defaults.HOVER);
+			defaultUI.setSelect(Defaults.SELECT);
+			subUI.setBackground(Defaults.TOP);
+			subUI.setHover(Defaults.HOVER);
+			subUI.setSelect(Defaults.SELECT);
+			time.setForeground(Defaults.FOREGROUND);
+			for (Component component : buttonPanel.getComponents()) {
+				if (component instanceof JButton) {
+					if (((JButton) component).getText().equalsIgnoreCase("\uE10A")) {
+						component.setBackground(Defaults.TOP);
+					} else {
+						component.setBackground(Defaults.MAIN);
+					}
+					component.setForeground(Defaults.FOREGROUND);
+				}
 			}
 		}
-		int middle = (int) (Defaults.screenSize.getWidth() / 2);
-		barPanel.setLocation(middle-290 , 30);
+		else {
+			int middle = (int) (Defaults.screenSize.getWidth() / 2);
+			barPanel.setLocation(middle - 290, 30);
+		}
 	}
 
 	static void setInvisible() {

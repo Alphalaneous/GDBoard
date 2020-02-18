@@ -70,6 +70,13 @@ class ActionsWindow {
 								+ Requests.levels.get(0).getLevelID() + "). Requested by "
 								+ Requests.levels.get(0).getRequester());
 					} else {
+						if(Requests.levels.get(LevelsWindow.getSelectedID()).getSongName().equalsIgnoreCase("Custom")){
+							File tempSong = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp");
+							File rename = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
+							File remove = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
+							remove.delete();
+							tempSong.renameTo(rename);
+						}
 						Requests.levels.remove(LevelsWindow.getSelectedID());
 						LevelsWindow.removeButton();
 
@@ -200,6 +207,12 @@ class ActionsWindow {
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
 		return button;
+	}
+	//endregion
+
+	//region Set Pin
+	static void setPin(boolean pin){
+		((InnerWindow) window).setPin(pin);
 	}
 	//endregion
 

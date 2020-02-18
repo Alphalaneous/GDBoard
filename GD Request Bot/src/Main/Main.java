@@ -86,7 +86,7 @@ public class Main {
 		SongWindow.     refreshInfo();			//Refreshes the information shown on the Song Window for the first time
 
         if(Settings.windowedMode) {
-            Overlay.refreshUI();
+            Overlay.refreshUI(true);
         }
 		Overlay.        setVisible();
 

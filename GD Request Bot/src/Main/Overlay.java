@@ -22,8 +22,6 @@ class Overlay {
 
     static void setFrame() {
 
-        //TODO Windowed Mode
-
         // --------------------
         // default frame stuff
 
@@ -56,6 +54,7 @@ class Overlay {
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setIconImage(img);
             frame.setSize(new Dimension(720, 554));
             frame.setResizable(false);
@@ -97,7 +96,7 @@ class Overlay {
         frame.setVisible(true);
     }
 
-    static void refreshUI() {
+    static void refreshUI(boolean color) {
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
@@ -117,7 +116,7 @@ class Overlay {
         CommentsWindow.refreshUI();
         ActionsWindow.refreshUI();
         SongWindow.refreshUI();
-        MainBar.refreshUI();
+        MainBar.refreshUI(color);
 
     }
 

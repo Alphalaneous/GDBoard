@@ -197,17 +197,17 @@ public class LevelsWindow {
 
 
 		lName.setFont(new Font("bahnschrift", Font.PLAIN, 20));
-		lName.setBounds(60, 0, (int) lName.getPreferredSize().getWidth() + 5, 30);
+		lName.setBounds(60, 2, (int) lName.getPreferredSize().getWidth() + 5, 30);
 		lAuthorID.setFont(new Font("bahnschrift", Font.PLAIN, 12));
-		lAuthorID.setBounds(60, 26, (int) lAuthorID.getPreferredSize().getWidth() + 5, 20);
+		lAuthorID.setBounds(60, 28, (int) lAuthorID.getPreferredSize().getWidth() + 5, 20);
 		lAuthor.setFont(new Font("bahnschrift", Font.PLAIN, 12));
 		lAuthor.setBounds((int) (400 - lAuthor.getPreferredSize().getWidth()) - 10, 3,
 				(int) lAuthor.getPreferredSize().getWidth() + 5, 20);
 		lStarCount.setFont(new Font("bahnschrift", Font.PLAIN, 18));
-		lStarCount.setBounds(((int) (400 - lStarCount.getPreferredSize().getWidth()) - 30), 26,
+		lStarCount.setBounds(((int) (400 - lStarCount.getPreferredSize().getWidth()) - 30), 28,
 				(int) lStarCount.getPreferredSize().getWidth() + 5, 20);
 		lStar.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 16));
-		lStar.setBounds((int) (400 - lStar.getPreferredSize().getWidth()) - 10, 26,
+		lStar.setBounds((int) (400 - lStar.getPreferredSize().getWidth()) - 10, 25,
 				(int) lStar.getPreferredSize().getWidth() + 5, 20);
 		lAnalyzed.setFont(new Font("bahnschrift", Font.PLAIN, 12));
 
@@ -226,7 +226,7 @@ public class LevelsWindow {
 			lAnalyzed.setText("Analyzing...");
 		}
 
-		lAnalyzed.setBounds((int) (400 - lAnalyzed.getPreferredSize().getWidth()) - 10, 26,
+		lAnalyzed.setBounds((int) (400 - lAnalyzed.getPreferredSize().getWidth()) - 10, 28,
 				(int) lAnalyzed.getPreferredSize().getWidth(), 20);
 
 		request.setBorder(BorderFactory.createEmptyBorder());
@@ -310,7 +310,9 @@ public class LevelsWindow {
 		mainPanel.updateUI();
 		((InnerWindow)window).refreshListener();
 	}
-
+	static void setPin(boolean pin){
+		((InnerWindow) window).setPin(pin);
+	}
 	static void refreshUI() {
 		((InnerWindow) window).refreshUI();
 		defaultUI.setBackground(Defaults.MAIN);
@@ -375,7 +377,7 @@ public class LevelsWindow {
 								((JButton) component).getComponent(3).setBounds(
 										(int) (400 - ((JButton) component).getComponent(3).getPreferredSize()
 												.getWidth()) - 10,
-										26,
+										28,
 										(int) ((JButton) component).getComponent(3).getPreferredSize().getWidth(),
 										20);
 								component.setBackground(new Color(150, 0, 0));
@@ -386,7 +388,7 @@ public class LevelsWindow {
 								((JButton) component).getComponent(3).setBounds(
 										(int) (400 - ((JButton) component).getComponent(3).getPreferredSize()
 												.getWidth()) - 10,
-										26,
+										28,
 										(int) ((JButton) component).getComponent(3).getPreferredSize().getWidth(),
 										20);
 								component.setBackground(new Color(150, 150, 0));
@@ -396,7 +398,7 @@ public class LevelsWindow {
 								((JButton) component).getComponent(3).setBounds(
 										(int) (400 - ((JButton) component).getComponent(3).getPreferredSize()
 												.getWidth()) - 10,
-										26,
+										28,
 										(int) ((JButton) component).getComponent(3).getPreferredSize().getWidth(),
 										20);
 							}else{
@@ -404,7 +406,7 @@ public class LevelsWindow {
 								((JButton) component).getComponent(3).setBounds(
 										(int) (400 - ((JButton) component).getComponent(3).getPreferredSize()
 												.getWidth()) - 10,
-										26,
+										28,
 										(int) ((JButton) component).getComponent(3).getPreferredSize().getWidth(),
 										20);
 							}

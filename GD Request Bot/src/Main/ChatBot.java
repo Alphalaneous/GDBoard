@@ -57,18 +57,18 @@ public class ChatBot extends TwitchBot {
                 Main.sendMessage("@" + user + " The level at position " +
                         level + " is " + Requests.levels.get(level - 1).getName() +
                         " by " + Requests.levels.get(level - 1).getAuthor() + " (" +
-                        Requests.levels.get(level - 1).getLevelID() + ")");
+                        Requests.levels.get(level - 1).getLevelID() + ") Requested by " + Requests.levels.get(level - 1).getRequester());
             }
         }
         //endregion
 
-        //region Current Command //TODO Requested By Text
+        //region Current Command
         if (command.equalsIgnoreCase("!current")) {
             if(Requests.levels.size() > 0) {
                 Main.sendMessage("@" + user + " The current level is " +
                         Requests.levels.get(0).getName() + " by " +
-                        Requests.levels.get(level - 1).getAuthor() + " (" +
-                        Requests.levels.get(0).getLevelID() + ")");
+                        Requests.levels.get(0).getAuthor() + " (" +
+                        Requests.levels.get(0).getLevelID() + ") Requested by " + Requests.levels.get(0).getRequester());
             }
         }
         //endregion
@@ -390,7 +390,7 @@ public class ChatBot extends TwitchBot {
                 assert m != null;
                 if (m.matches() && arguments.length <= 2) {
                     try {
-                        Requests.addRequest(m.group(1), String.valueOf(user), false);
+                        Requests.addRequest(m.group(1), String.valueOf(user), false, null);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -416,7 +416,7 @@ public class ChatBot extends TwitchBot {
                                     if (((GDLevel) levelPage[i]).getName().toUpperCase()
                                             .startsWith(level1.substring(0, level1.length() - 1))) {
                                         Requests.addRequest(String.valueOf(((GDLevel) levelPage[i]).getId()),
-                                                String.valueOf(user), false);
+                                                String.valueOf(user), false, null);
                                         break outerLoop;
                                     }
                                 }
@@ -433,10 +433,8 @@ public class ChatBot extends TwitchBot {
                         String songUrl = message.toString().split("with ")[1];
                         try {
 
-                            new URL(songUrl).toURI();
                             try {
-                                Requests.addRequest(m.group(1), String.valueOf(user), true);
-                                //TODO: figure out custom music somehow...
+                                Requests.addRequest(m.group(1), String.valueOf(user), true, songUrl);
 
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -453,7 +451,7 @@ public class ChatBot extends TwitchBot {
                             Requests.addRequest(String
                                             .valueOf(Objects.requireNonNull(client.searchLevels(message.toString(), LevelSearchFilters.create(), 0)
                                                     .block()).asList().get(0).getId()),
-                                    String.valueOf(user), false);
+                                    String.valueOf(user), false, null);
                         } catch (MissingAccessException | IOException e) {
                             sendMessage("@" + user + " That level doesn't exist!", channel);
                             e.printStackTrace();
@@ -482,7 +480,7 @@ public class ChatBot extends TwitchBot {
                         }
                     }
                     if (!mention.contains(m.group(1))) {
-                        Requests.addRequest(m.group(1), String.valueOf(user), false);
+                        Requests.addRequest(m.group(1), String.valueOf(user), false, null);
                     }
 
                 } catch (Exception e) {

@@ -82,11 +82,11 @@ class SongWindow {
 		});
 		
 		songName.setFont(new Font("bahnschrift", Font.PLAIN, 20));
-		songName.setBounds(10, 5, width, 30);
+		songName.setBounds(10, 7, width, 30);
 		songName.setForeground(Defaults.FOREGROUND);
 
 		songAuthorID.setFont(new Font("bahnschrift", Font.PLAIN, 14));
-		songAuthorID.setBounds(10, height - 30, width/2, 20);
+		songAuthorID.setBounds(10, height - 28, width/2, 20);
 		songAuthorID.setForeground(Defaults.FOREGROUND);
 		
 		
@@ -100,7 +100,9 @@ class SongWindow {
 		
 		Overlay.addToFrame(window);
 	}
-
+	static void setPin(boolean pin){
+		((InnerWindow) window).setPin(pin);
+	}
 	private static RoundedJButton createButton(String icon, int i) {
 		RoundedJButton button = new RoundedJButton(icon);
 		button.setPreferredSize(new Dimension(50, 50));

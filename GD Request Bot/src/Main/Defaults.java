@@ -20,7 +20,7 @@ public class Defaults {
 	static Color BUTTON_HOVER;
 	static AtomicBoolean dark = new AtomicBoolean();
 	
-	
+	//region Dark Mode
 	private static void setDark() {
 		MAIN = new Color(31,31,31);
 		BUTTON = new Color(50,50,50);
@@ -31,8 +31,11 @@ public class Defaults {
 		TOP = Color.BLACK;
 		FOREGROUND = Color.WHITE;
 		FOREGROUND2 = new Color(140,140,140);
-		Overlay.refreshUI();
+		Overlay.refreshUI(true);
 	}
+	//endregion
+
+	//region Light Mode
 	private static void setLight() {
 		MAIN = new Color(230,230,230);
 		BUTTON = new Color(210,210,210);
@@ -43,8 +46,11 @@ public class Defaults {
 		TOP = Color.WHITE;
 		FOREGROUND = Color.BLACK;
 		FOREGROUND2 = new Color(100,100,100);
-		Overlay.refreshUI();
+		Overlay.refreshUI(true);
 	}
+	//endregion
+
+	//region Main Thread
 	static void startMainThread(){
 		RegistryKey personalizeStart = new RegistryKey(
 				"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
@@ -104,7 +110,7 @@ public class Defaults {
 				if(!Settings.windowedMode) {
 					screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 					if (!screenSize.equals(prevScreenSize)) {
-						Overlay.refreshUI();
+						Overlay.refreshUI(false);
 					}
 					prevScreenSize = screenSize;
 				}
@@ -117,5 +123,7 @@ public class Defaults {
 			}
 		});
 		thread.start();
+
 	}
+	//endregion
 }

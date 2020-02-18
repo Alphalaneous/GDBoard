@@ -4,11 +4,13 @@ import com.github.alex1304.jdash.client.AnonymousGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.entity.GDLevel;
 import com.github.alex1304.jdash.exception.MissingAccessException;
+import org.apache.commons.io.FileUtils;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.*;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -21,7 +23,7 @@ class Requests {
     static ArrayList<LevelData> levels = new ArrayList<>();
     private static AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
 
-    static void addRequest(String ID, String requester, boolean isCustomSong) throws IOException {
+    static void addRequest(String ID, String requester, boolean isCustomSong, String customUrl) throws IOException {
         GDLevel level = null;
         boolean goThrough = true;
         boolean valid = true;
@@ -118,8 +120,8 @@ class Requests {
             }
 
             File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
-            if(file.exists()) {
-            Scanner sc = new Scanner(file);
+            if (file.exists()) {
+                Scanner sc = new Scanner(file);
 
                 while (sc.hasNextLine()) {
                     if (levelData.getLevelID().equals(sc.nextLine())) {
@@ -138,6 +140,51 @@ class Requests {
                 // Adds level to queue array "levels" and refreshes LevelsWindow
 
                 levels.add(levelData);
+                Thread thread = new Thread(() -> {
+                    System.out.println(levelData.getSongID());
+                    try {
+                        File folder = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash");
+                        boolean download = true;
+                        String[] files = folder.list();
+
+                            try {
+                                assert files != null;
+                                if (files.length > 0) {
+                                    for (String file2 : files) {
+                                        if (file2.equalsIgnoreCase(levelData.getSongID() + ".mp3")) {
+                                            if(!isCustomSong) {
+                                                download = false;
+                                            }
+                                            else{
+                                                File file1 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + file2 + "");
+                                                File file3 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + file2 + ".temp");
+                                                file1.renameTo(file3);
+                                            }
+                                            break;
+                                        }
+                                    }
+                                }
+                            } catch (NullPointerException e) {
+                                e.printStackTrace();
+                            }
+
+                        if (download && !levelData.getSongID().equalsIgnoreCase("0")) {
+                            File file2 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3");
+
+                            URL url;
+                            if(isCustomSong){
+                                url = new URL(customUrl);
+                            }
+                            else {
+                                url = new URL(levelData.getSongURL());
+                            }
+                            FileUtils.copyURLToFile(url, file2);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+                thread.start();
                 Main.sendMessage("@" + levelData.getRequester() + " " + levelData.getName() + " ("
                         + levelData.getLevelID() + ") has been added to the queue at position " + levels.size() + "!");
                 if (levels.size() == 1) {
@@ -153,6 +200,7 @@ class Requests {
             }
         }
     }
+
     private static ArrayList<LevelData> getLevelData() {
         return levels;
     }
@@ -205,13 +253,12 @@ class Requests {
                             assert is != null;
                             InputStreamReader isr = new InputStreamReader(is);
                             BufferedReader br = new BufferedReader(isr);
-                           String line;
+                            String line;
                             out:
                             while ((line = br.readLine()) != null) {
                                 String[] text = lvlObject.get(i).getObjectText().toUpperCase().split(" ");
 
                                 for (String s : text) {
-                                    System.out.println(text);
                                     if (s.equalsIgnoreCase(line)) {
                                         System.out.println("Contains Vulgar");
                                         Requests.getLevelData().get(k).setContainsVulgar();

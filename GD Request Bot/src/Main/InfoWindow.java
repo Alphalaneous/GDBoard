@@ -55,7 +55,9 @@ class InfoWindow {
 		((InnerWindow)window).refreshListener();
 		Overlay.addToFrame(window);
 	}
-
+	static void setPin(boolean pin){
+		((InnerWindow) window).setPin(pin);
+	}
 	static void refreshInfo() {
 		if (Requests.levels.size() == 0) {
 			likes.setText("LIKES: N/A");

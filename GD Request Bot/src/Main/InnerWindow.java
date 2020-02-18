@@ -8,7 +8,6 @@ import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 
 class InnerWindow extends ResizablePanel {
 
@@ -95,8 +94,19 @@ class InnerWindow extends ResizablePanel {
                 moveToFront();
             }
         });
-        //endregion
 
+        //endregion
+        Thread threadSet = new Thread(() -> {
+            while(true) {
+                Settings.setLoction(title, getX() + "," + getY() + "," + isPinPressed);
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        threadSet.start();
         //region Defaults and Attributes
         final boolean[] isDragging = {false};
         final boolean[] exited = {false};
@@ -169,7 +179,6 @@ class InnerWindow extends ResizablePanel {
         //endregion
 
         //region TopBar Dragging
-
         MouseInputAdapter mia = new MouseInputAdapter() {
             Point location;
             Point pressed;
@@ -221,7 +230,7 @@ class InnerWindow extends ResizablePanel {
                     setLocation(p);
                 }
 
-                    Settings.setLoction(title, (int) x + "," + (int) y);
+
 
             }
 
@@ -251,6 +260,7 @@ class InnerWindow extends ResizablePanel {
             topBar.addMouseListener(mia);
             topBar.addMouseMotionListener(mia);
         }
+
         //endregion
 
         //region WindowIcon attributes
@@ -264,7 +274,7 @@ class InnerWindow extends ResizablePanel {
         //region TitleText attributes and initialization
         JLabel titleText = new JLabel(title);
         titleText.setFont(new Font("bahnschrift", Font.PLAIN, 14));
-        titleText.setBounds(35, 0, width - 60, 30);
+        titleText.setBounds(35, 2, width - 60, 30);
         titleText.setForeground(Defaults.FOREGROUND);
         topBar.add(titleText);
         //endregion
@@ -347,6 +357,19 @@ class InnerWindow extends ResizablePanel {
         //endregion
 
         return this;
+    }
+    //endregion
+
+    //region SetPin
+    void setPin(boolean pin){
+        isPinPressed = pin;
+        if (!isPinPressed) {
+            pinButtonFill.setVisible(false);
+
+        } else {
+            pinButtonFill.setVisible(true);
+
+        }
     }
     //endregion
 
@@ -484,7 +507,7 @@ class InnerWindow extends ResizablePanel {
     }
     //endregion
 
-    //region Toggle Visibility of InnerWindiw
+    //region Toggle Visibility of InnerWindow
     void toggle() {
         if (toggleState) {
             setVisible(false);

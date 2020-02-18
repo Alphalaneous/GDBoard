@@ -63,9 +63,7 @@ class CommentsWindow {
 
     //region Create Panel
     static void createPanel() {
-        if(Settings.windowedMode) {
-            //window.setBounds(Settings.getCommentWLoc().x, Settings.getCommentWLoc().y, width, 500);
-        }
+
         //region Panel attributes
         panel.setLayout(null);
         panel.setBounds(0, 0, width, height);
@@ -272,8 +270,7 @@ class CommentsWindow {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             message = "{\"Comments\" : " + IOUtils.toString(br) + "}";
         }
-        catch (IOException e){
-            e.printStackTrace();
+        catch (IOException ignored){
         }
         assert message != null;
         JSONObject obj = new JSONObject(message);
@@ -365,7 +362,7 @@ class CommentsWindow {
                 percentLabel.setText(percent);
                 percentLabel.setBounds(commenter.getPreferredSize().width + 20, 4, percentLabel.getPreferredSize().width + 5, 18);
                 likesLabel.setText(arr.getJSONObject(i).getString("likes"));
-                likesLabel.setBounds(width - likesLabel.getPreferredSize().width - 26, 4, likesLabel.getPreferredSize().width + 5, 18);
+                likesLabel.setBounds(width - likesLabel.getPreferredSize().width - 26, 6, likesLabel.getPreferredSize().width + 5, 18);
                 comment.setBounds(9, 24, width - 8, comment.getPreferredSize().height);
                 commenter.setBounds(9, 4, commenter.getPreferredSize().width, 18);
                 panel.add(cmtPanel);
@@ -383,6 +380,12 @@ class CommentsWindow {
             return false;
         }
         return true;
+    }
+    //endregion
+
+    //region Set Pin
+    static void setPin(boolean pin){
+        ((InnerWindow) window).setPin(pin);
     }
     //endregion
 
