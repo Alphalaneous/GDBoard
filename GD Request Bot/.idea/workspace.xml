@@ -7,65 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/META-INF/GD Request Bot.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/bin/META-INF/GD Request Bot.kotlin_module" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/ActionsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ActionsWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/ChatBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ChatBot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/CheckBoxButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CheckBoxButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$2$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$2$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$2$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/CommentsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CommentsWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/Defaults.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Defaults.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/GDObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/GDObject.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/InfoWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InfoWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/InnerWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/InnerWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/JButtonUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/JButtonUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/KeyListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/KeyListener$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/KeyListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/KeyListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/LevelData.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/LevelsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/LevelsWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/MainBar.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/MainBar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/Overlay$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Overlay$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/Overlay.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Overlay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/Requests.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Requests.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/RoundedJButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/RoundedJButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Settings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/SongWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/SongWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/AccountSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/AccountSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/BlockedIDsSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/BlockedIDsSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/GeneralSetttings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/GeneralSetttings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/OverlaySettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/OverlaySettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/PersonalizationSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/PersonalizationSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/ShortcutSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/ShortcutSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/ActionsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/ActionsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/ChatBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/ChatBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/CommentsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/CommentsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Defaults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Defaults.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/InfoWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/InfoWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/InnerWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/InnerWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/LevelsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/LevelsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/MainBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/MainBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Overlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Overlay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Requests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Requests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/SongWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SongWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,7 +174,7 @@
       <workItem from="1581525521783" duration="4820000" />
       <workItem from="1581613645230" duration="6477000" />
       <workItem from="1582043725033" duration="3417000" />
-      <workItem from="1582047156561" duration="5528000" />
+      <workItem from="1582047156561" duration="5699000" />
     </task>
     <servers />
   </component>

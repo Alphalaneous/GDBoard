@@ -107,6 +107,7 @@ class MainBar {
 					e1.printStackTrace();
 				}
 				System.exit(0);
+				//TODO on close reset music
 			}
 		});
 		buttonPanel.add(toggleComments);
