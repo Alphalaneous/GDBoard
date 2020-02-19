@@ -5,12 +5,16 @@ import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.entity.GDLevel;
 import com.github.alex1304.jdash.exception.MissingAccessException;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.*;
 import java.net.URL;
+import java.net.URLConnection;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -74,14 +78,7 @@ class Requests {
                 levelData.setFeatured();
             }
             levelData.setEpic(level.isEpic());
-            if (isCustomSong) {
-                levelData.setSongName("Custom");
-                levelData.setSongAuthor("");
-            } else {
-                levelData.setSongName(Objects.requireNonNull(level.getSong().block()).getSongTitle());
-                levelData.setSongAuthor(Objects.requireNonNull(level.getSong().block()).getSongAuthorName());
 
-            }
             levelData.setSongID(String.valueOf(Objects.requireNonNull(level.getSong().block()).getId()));
             //levelData.setSongSize(String.valueOf(level.getSong().block().getSongSize()));
             levelData.setStars(level.getStars());
@@ -139,6 +136,8 @@ class Requests {
                 // --------------------
                 // Adds level to queue array "levels" and refreshes LevelsWindow
 
+                URL url1 = new URL(customUrl);
+                String fileName = FilenameUtils.getName(url1.getPath());
                 levels.add(levelData);
                 Thread thread = new Thread(() -> {
                     System.out.println(levelData.getSongID());
@@ -146,7 +145,6 @@ class Requests {
                         File folder = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash");
                         boolean download = true;
                         String[] files = folder.list();
-
                             try {
                                 assert files != null;
                                 if (files.length > 0) {
@@ -167,17 +165,21 @@ class Requests {
                             } catch (NullPointerException e) {
                                 e.printStackTrace();
                             }
-
                         if (download && !levelData.getSongID().equalsIgnoreCase("0")) {
                             File file2 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3");
 
                             URL url;
-                            if(isCustomSong){
+                            if(isCustomSong && fileName.endsWith(".mp3")){
                                 url = new URL(customUrl);
+                            }
+                            else if(isCustomSong && !fileName.endsWith(".mp3")){
+                                url = new URL(levelData.getSongURL());
+                                Main.sendMessage("@" + requester + ", Invalid song! (requires .mp3 format)");
                             }
                             else {
                                 url = new URL(levelData.getSongURL());
                             }
+
                             FileUtils.copyURLToFile(url, file2);
                         }
                     } catch (IOException e) {
@@ -194,6 +196,14 @@ class Requests {
                     Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
                             + Requests.levels.get(0).getLevelID() + "). Requested by "
                             + Requests.levels.get(0).getRequester());
+                }
+                if (isCustomSong && fileName.endsWith(".mp3")) {
+                    levelData.setSongName("Custom");
+                    levelData.setSongAuthor("");
+                } else {
+                    levelData.setSongName(Objects.requireNonNull(level.getSong().block()).getSongTitle());
+                    levelData.setSongAuthor(Objects.requireNonNull(level.getSong().block()).getSongAuthorName());
+
                 }
                 LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester());
 

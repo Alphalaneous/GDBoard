@@ -11,6 +11,8 @@ import lc.kra.system.keyboard.GlobalKeyboardHook;
 import lc.kra.system.keyboard.event.GlobalKeyAdapter;
 import lc.kra.system.keyboard.event.GlobalKeyEvent;
 
+import javax.swing.*;
+
 class KeyListener {
 
     private static boolean openKeyReleased = false;
@@ -18,20 +20,21 @@ class KeyListener {
     static void hook() throws AWTException {
         //TODO custom keybinds
         //region Keyboard Listener
+        int keyCode = Settings.keybind;
         GlobalKeyboardHook keyboardHook = new GlobalKeyboardHook(true);
         keyboardHook.addKeyListener(new GlobalKeyAdapter() {
 
 
             @Override
             public void keyReleased(GlobalKeyEvent event) {
-                if (event.getVirtualKeyCode() == GlobalKeyEvent.VK_HOME) {
+                if (event.getVirtualKeyCode() == keyCode) {
                     openKeyReleased = true;
                 }
             }
 
             @Override
             public void keyPressed(GlobalKeyEvent event) {
-                if (event.getVirtualKeyCode() == GlobalKeyEvent.VK_HOME) {
+                if (event.getVirtualKeyCode() == keyCode) {
 
                     if (Overlay.isVisible) {
                         if (openKeyReleased) {

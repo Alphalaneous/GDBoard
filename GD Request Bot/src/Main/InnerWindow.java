@@ -96,17 +96,7 @@ class InnerWindow extends ResizablePanel {
         });
 
         //endregion
-        Thread threadSet = new Thread(() -> {
-            while(true) {
-                Settings.setLoction(title, getX() + "," + getY() + "," + isPinPressed);
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        threadSet.start();
+
         //region Defaults and Attributes
         final boolean[] isDragging = {false};
         final boolean[] exited = {false};
@@ -293,7 +283,7 @@ class InnerWindow extends ResizablePanel {
         }
         closeButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 toggle();
             }
         });
@@ -486,6 +476,10 @@ class InnerWindow extends ResizablePanel {
     }
     //endregion
 
+    void setSettings(){
+        Settings.setWindowSettings(title, getX() + "," + getY() + "," + isPinPressed + "," + isVisible());
+    }
+
     //region Set InnerWindow visible
     void setVisible() {
         topBar.setVisible(true);
@@ -504,6 +498,12 @@ class InnerWindow extends ResizablePanel {
         topBar.setVisible(false);
 
         setBorder(BorderFactory.createEmptyBorder(-1,-1,-1,-1));
+    }
+    //endregion
+
+    //region Set InnerWindow invisible load
+    void setInvisibleLoad() {
+        setVisible(false);
     }
     //endregion
 

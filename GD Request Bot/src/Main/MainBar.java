@@ -7,6 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -101,13 +102,27 @@ class MainBar {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				super.mousePressed(e);
+				ActionsWindow.setSettings();
+				CommentsWindow.setSettings();
+				InfoWindow.setSettings();
+				LevelsWindow.setSettings();
+				SongWindow.setSettings();
 				try {
 					Settings.writeLocation();
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
+
+				for(int i = 0; i < Requests.levels.size(); i++){
+					if (Requests.levels.get(i).getSongName().equalsIgnoreCase("Custom")){
+						File tempSong = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3.temp");
+						File rename = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3");
+						File remove = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3");
+						remove.delete();
+						tempSong.renameTo(rename);
+					}
+				}
 				System.exit(0);
-				//TODO on close reset music
 			}
 		});
 		buttonPanel.add(toggleComments);
@@ -143,6 +158,7 @@ class MainBar {
 		Image imgScaled = img.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
 		ImageIcon imgNew = new ImageIcon(imgScaled);
 
+		//TODO Drag icon to monitor wanted
 		icon.setIcon(imgNew);
 		icon.setBounds(20, -1, 64, 64);
 		icon.updateUI();

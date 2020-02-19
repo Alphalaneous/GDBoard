@@ -14,59 +14,61 @@ class Settings {
 
     static {
         while (true) {
-
             try {
-                writer = new BufferedWriter(new FileWriter(
-
-                        file, true));
+                writer = new BufferedWriter(new FileWriter(file, true));
                 in = new FileInputStream(file);
                 break;
             } catch (IOException e) {
-
                 file.mkdir();
                 file.getParentFile().mkdir();
             }
         }
     }
 
-    static void setLoction(String key, String setting) {
+    static void setWindowSettings(String key, String setting) {
+
         if (key.equalsIgnoreCase("Requests")) {
             int x = Integer.parseInt(setting.split(",")[0]);
             int y = Integer.parseInt(setting.split(",")[1]);
             reqPin = Boolean.parseBoolean(setting.split(",")[2]);
+            reqX = Boolean.parseBoolean(setting.split(",")[3]);
             requestsWLoc = new Point(x, y);
         }
         if (key.equalsIgnoreCase("Comments")) {
             int x = Integer.parseInt(setting.split(",")[0]);
             int y = Integer.parseInt(setting.split(",")[1]);
             comPin = Boolean.parseBoolean(setting.split(",")[2]);
+            comX = Boolean.parseBoolean(setting.split(",")[3]);
             commentWLoc = new Point(x, y);
         }
         if (key.equalsIgnoreCase("Information")) {
             int x = Integer.parseInt(setting.split(",")[0]);
             int y = Integer.parseInt(setting.split(",")[1]);
             infoPin = Boolean.parseBoolean(setting.split(",")[2]);
+            infoX = Boolean.parseBoolean(setting.split(",")[3]);
             infoWLoc = new Point(x, y);
         }
         if (key.equalsIgnoreCase("Actions")) {
             int x = Integer.parseInt(setting.split(",")[0]);
             int y = Integer.parseInt(setting.split(",")[1]);
             actPin = Boolean.parseBoolean(setting.split(",")[2]);
+            actX = Boolean.parseBoolean(setting.split(",")[3]);
             actionsWLoc = new Point(x, y);
         }
         if (key.equalsIgnoreCase("Music - Newgrounds Audio")) {
             int x = Integer.parseInt(setting.split(",")[0]);
             int y = Integer.parseInt(setting.split(",")[1]);
             songPin = Boolean.parseBoolean(setting.split(",")[2]);
+            songX = Boolean.parseBoolean(setting.split(",")[3]);
             songWLoc = new Point(x, y);
         }
     }
     static void writeLocation() throws IOException {
-        writeSettings("song", songWLoc.x + "," + songWLoc.y + "," + songPin);
-        writeSettings("actions", actionsWLoc.x + "," + actionsWLoc.y + "," + actPin);
-        writeSettings("info", infoWLoc.x + "," + infoWLoc.y + "," + infoPin);
-        writeSettings("requests", requestsWLoc.x + "," + requestsWLoc.y + "," + reqPin);
-        writeSettings("comments", commentWLoc.x + "," + commentWLoc.y + "," + comPin);
+        writeSettings("song", songWLoc.x + "," + songWLoc.y + "," + songPin + "," + songX);
+        writeSettings("actions", actionsWLoc.x + "," + actionsWLoc.y + "," + actPin + "," + actX);
+        writeSettings("info", infoWLoc.x + "," + infoWLoc.y + "," + infoPin + "," + infoX);
+        writeSettings("requests", requestsWLoc.x + "," + requestsWLoc.y + "," + reqPin + "," + reqX);
+        writeSettings("comments", commentWLoc.x + "," + commentWLoc.y + "," + comPin + "," + comX);
     }
     static void writeSettings(String key, String setting) throws IOException {
         gfg.load(in);
@@ -93,13 +95,17 @@ class Settings {
 
     }
 
-    static void loadSettings() throws IOException {
+    static void loadSettings(boolean start) throws IOException {
         gfg.load(in);
         try {
             oauth = gfg.get("oauth").toString();
             hasOauth = true;
         } catch (NullPointerException e) {
             hasOauth = false;
+        }
+        try {
+            keybind = Integer.parseInt(gfg.get("keybind").toString());
+        } catch (NullPointerException ignored) {
         }
         try {
             channel = gfg.get("channel").toString().toLowerCase();
@@ -113,45 +119,72 @@ class Settings {
         } catch (NullPointerException e) {
             hasWindowed = false;
         }
-        try {
-            int x = Integer.parseInt(gfg.get("requests").toString().split(",")[0]);
-            int y = Integer.parseInt(gfg.get("requests").toString().split(",")[1]);
-            reqPin = Boolean.parseBoolean(gfg.get("requests").toString().split(",")[2]);
-            requestsWLoc = new Point(x, y);
-            LevelsWindow.setPin(reqPin);
-        } catch (NullPointerException ignored) {
-        }
-        try {
-            int x = Integer.parseInt(gfg.get("actions").toString().split(",")[0]);
-            int y = Integer.parseInt(gfg.get("actions").toString().split(",")[1]);
-            actPin = Boolean.parseBoolean(gfg.get("actions").toString().split(",")[2]);
-            actionsWLoc = new Point(x, y);
-            ActionsWindow.setPin(actPin);
-        } catch (NullPointerException ignored) {
-        }
-        try {
-            int x = Integer.parseInt(gfg.get("comments").toString().split(",")[0]);
-            int y = Integer.parseInt(gfg.get("comments").toString().split(",")[1]);
-            comPin = Boolean.parseBoolean(gfg.get("comments").toString().split(",")[2]);
-            commentWLoc = new Point(x, y);
-            CommentsWindow.setPin(comPin);
-        } catch (NullPointerException ignored) {
-        }
-        try {
-            int x = Integer.parseInt(gfg.get("info").toString().split(",")[0]);
-            int y = Integer.parseInt(gfg.get("info").toString().split(",")[1]);
-            infoPin = Boolean.parseBoolean(gfg.get("info").toString().split(",")[2]);
-            infoWLoc = new Point(x, y);
-            InfoWindow.setPin(infoPin);
-        } catch (NullPointerException ignored) {
-        }
-        try {
-            int x = Integer.parseInt(gfg.get("song").toString().split(",")[0]);
-            int y = Integer.parseInt(gfg.get("song").toString().split(",")[1]);
-            songPin = Boolean.parseBoolean(gfg.get("song").toString().split(",")[2]);
-            songWLoc = new Point(x, y);
-            SongWindow.setPin(songPin);
-        } catch (NullPointerException ignored) {
+        if(!start) {
+            try {
+                int x = Integer.parseInt(gfg.get("requests").toString().split(",")[0]);
+                int y = Integer.parseInt(gfg.get("requests").toString().split(",")[1]);
+                reqPin = Boolean.parseBoolean(gfg.get("requests").toString().split(",")[2]);
+                reqX = Boolean.parseBoolean(gfg.get("requests").toString().split(",")[3]);
+                requestsWLoc = new Point(x, y);
+                LevelsWindow.setPin(reqPin);
+                LevelsWindow.setLocation(requestsWLoc);
+                if (!reqX) {
+                    LevelsWindow.toggleVisible();
+                }
+            } catch (NullPointerException ignored) {
+            }
+            try {
+                int x = Integer.parseInt(gfg.get("actions").toString().split(",")[0]);
+                int y = Integer.parseInt(gfg.get("actions").toString().split(",")[1]);
+                actPin = Boolean.parseBoolean(gfg.get("actions").toString().split(",")[2]);
+                actX = Boolean.parseBoolean(gfg.get("actions").toString().split(",")[3]);
+                actionsWLoc = new Point(x, y);
+                ActionsWindow.setPin(actPin);
+                ActionsWindow.setLocation(actionsWLoc);
+                if (!actX) {
+                    ActionsWindow.toggleVisible();
+                }
+            } catch (NullPointerException ignored) {
+            }
+            try {
+                int x = Integer.parseInt(gfg.get("comments").toString().split(",")[0]);
+                int y = Integer.parseInt(gfg.get("comments").toString().split(",")[1]);
+                comPin = Boolean.parseBoolean(gfg.get("comments").toString().split(",")[2]);
+                comX = Boolean.parseBoolean(gfg.get("comments").toString().split(",")[3]);
+                commentWLoc = new Point(x, y);
+                CommentsWindow.setPin(comPin);
+                CommentsWindow.setLocation(commentWLoc);
+                if (!comX) {
+                    CommentsWindow.toggleVisible();
+                }
+            } catch (NullPointerException ignored) {
+            }
+            try {
+                int x = Integer.parseInt(gfg.get("info").toString().split(",")[0]);
+                int y = Integer.parseInt(gfg.get("info").toString().split(",")[1]);
+                infoPin = Boolean.parseBoolean(gfg.get("info").toString().split(",")[2]);
+                infoX = Boolean.parseBoolean(gfg.get("info").toString().split(",")[3]);
+                infoWLoc = new Point(x, y);
+                InfoWindow.setPin(infoPin);
+                InfoWindow.setLocation(infoWLoc);
+                if (!infoX) {
+                    InfoWindow.toggleVisible();
+                }
+            } catch (NullPointerException ignored) {
+            }
+            try {
+                int x = Integer.parseInt(gfg.get("song").toString().split(",")[0]);
+                int y = Integer.parseInt(gfg.get("song").toString().split(",")[1]);
+                songPin = Boolean.parseBoolean(gfg.get("song").toString().split(",")[2]);
+                songX = Boolean.parseBoolean(gfg.get("song").toString().split(",")[3]);
+                songWLoc = new Point(x, y);
+                SongWindow.setPin(songPin);
+                SongWindow.setLocation(songWLoc);
+                if (!songX) {
+                    SongWindow.toggleVisible();
+                }
+            } catch (NullPointerException ignored) {
+            }
         }
     }
 
@@ -162,6 +195,7 @@ class Settings {
     private static Point commentWLoc = new Point(10, 500);
     private static Point songWLoc = new Point(1920 - 300 - 10, 600);
     private static Point actionsWLoc = new Point(1920 - 260 - 10, 200);
+    static int keybind;
     static String channel;
     static boolean hasOauth = false;
     static boolean hasChannel = false;
@@ -171,6 +205,19 @@ class Settings {
     static boolean comPin = false;
     static boolean actPin = false;
     static boolean reqPin = false;
+    static boolean songX = true;
+    static boolean infoX = true;
+    static boolean comX = true;
+    static boolean actX = true;
+    static boolean reqX = true;
+
+    //TODO Save window sizes
+    //TODO Requests off Setting
+    //TODO User Request Limits
+    //TODO Queue size limits
+    //TODO Follower Only Setting
+    //TODO Sub Only Setting
+    //TODO Cheer Only Setting
 
     static void setWindowedMode(boolean mode) {
         Settings.windowedMode = mode;

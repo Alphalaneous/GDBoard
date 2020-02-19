@@ -263,4 +263,16 @@ class ActionsWindow {
 		((InnerWindow) window).setVisible();
 	}
 	//endregion
+
+	//region SetLocation
+	static void setLocation(Point point){
+		window.setLocation(point);
+	}
+	//endregion
+
+	//region SetSettings
+	static void setSettings(){
+		((InnerWindow) window).setSettings();
+	}
+	//endregion
 }

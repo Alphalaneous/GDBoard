@@ -62,6 +62,8 @@ public class LevelsWindow {
 		mainPanel.setBounds(0, 0, width, panelHeight);
 		mainPanel.setPreferredSize(new Dimension(400, panelHeight));
 
+		//TODO Queue organization
+
 		scrollPane = new JScrollPane(mainPanel);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
 		scrollPane.getViewport().setBackground(Defaults.MAIN);
@@ -356,6 +358,18 @@ public class LevelsWindow {
 	static void setInvisible() {
 		((InnerWindow) window).setInvisible();
 	}
+
+	//region SetLocation
+	static void setLocation(Point point){
+		window.setLocation(point);
+	}
+	//endregion
+
+	//region SetSettings
+	static void setSettings(){
+		((InnerWindow) window).setSettings();
+	}
+	//endregion
 
 	static int getSelectedID() {
 		return selectedID;

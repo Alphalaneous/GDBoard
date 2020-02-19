@@ -4,9 +4,7 @@ import com.jidesoft.swing.ResizablePanel;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedInputStream;
@@ -38,6 +36,8 @@ class SongWindow {
 		
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
+
+		//TODO Song persistence button
 
 		play = createButton("\uF5B0", 110);
 		play.addMouseListener(new MouseAdapter() {
@@ -160,6 +160,18 @@ class SongWindow {
 	static void setInvisible() {
 		((InnerWindow) window).setInvisible();
 	}
+
+	//region SetLocation
+	static void setLocation(Point point){
+		window.setLocation(point);
+	}
+	//endregion
+
+	//region SetSettings
+	static void setSettings(){
+		((InnerWindow) window).setSettings();
+	}
+	//endregion
 
 	static void setVisible() {
 		((InnerWindow) window).setVisible();

@@ -457,6 +457,18 @@ class CommentsWindow {
     }
     //endregion
 
+    //region SetLocation
+    static void setLocation(Point point){
+        window.setLocation(point);
+    }
+    //endregion
+
+    //region SetSettings
+    static void setSettings(){
+        ((InnerWindow) window).setSettings();
+    }
+    //endregion
+
     //region SetVisible
     static void setVisible() {
         ((InnerWindow) window).setVisible();

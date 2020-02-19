@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -20,12 +21,14 @@ public class Main {
 
 	//region Main
 	public static void main(String[] args) throws IOException, IllegalArgumentException, URISyntaxException, AWTException, InterruptedException {
-
-		Settings.loadSettings();
+		//TODO Keybinds
+		Settings.writeSettings("keybind", String.valueOf(KeyEvent.VK_B));
+		Settings.loadSettings(true);
+		Settings.keybind = KeyEvent.VK_B;
 
 		//region Turn off logging (From separate library)
-		//Logger root = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);		//Create root logger object
-		//root.setLevel(Level.INFO);													//Disable all logging except for INFO
+		Logger root = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);		//Create root logger object
+		root.setLevel(Level.INFO);													//Disable all logging except for INFO
 		//endregion
 
 		//region Get Channel
@@ -59,7 +62,7 @@ public class Main {
 				System.out.println(twitch.auth().getAuthenticationError());
 			}
 		}
-		Settings.loadSettings();
+
 
 		//endregion
 
@@ -88,6 +91,7 @@ public class Main {
         if(Settings.windowedMode) {
             Overlay.refreshUI(true);
         }
+		Settings.loadSettings(false);
 		Overlay.        setVisible();
 
 		//endregion
