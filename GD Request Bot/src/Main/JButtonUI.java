@@ -29,6 +29,7 @@ public class JButtonUI extends BasicButtonUI implements java.io.Serializable, Mo
 	private Color hoverColor = Defaults.HOVER;
 	private Color selectColor = Defaults.SELECT;
 
+
 	public void installUI(JComponent c) {
 		super.installUI(c);
 

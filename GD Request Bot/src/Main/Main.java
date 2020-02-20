@@ -22,9 +22,8 @@ public class Main {
 	//region Main
 	public static void main(String[] args) throws IOException, IllegalArgumentException, URISyntaxException, AWTException, InterruptedException {
 		//TODO Keybinds
-		Settings.writeSettings("keybind", String.valueOf(KeyEvent.VK_B));
+		Settings.writeSettings("keybind", String.valueOf(KeyEvent.VK_HOME));
 		Settings.loadSettings(true);
-		Settings.keybind = KeyEvent.VK_B;
 
 		//region Turn off logging (From separate library)
 		Logger root = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);		//Create root logger object

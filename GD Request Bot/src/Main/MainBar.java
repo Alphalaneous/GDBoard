@@ -46,58 +46,100 @@ class MainBar {
 		mainPanel.setLayout(null);
 		barPanel.add(mainPanel);
 
-
-
+		buttonPanel.setLayout(new FlowLayout(0,0,0));
 		buttonPanel.setBounds(160, 0, 420, 64);
 		buttonPanel.setBackground(Defaults.MAIN);
-		buttonPanel.setLayout(new GridLayout(1, 2, 0, 0));
 
-		//if (Settings.isRequests()) {
-		JButton toggleSong = createButton("\uEC4F");
+		JButton toggleSong = createButton("\uEC4F", "Music");
 		toggleSong.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				super.mousePressed(e);
 				SongWindow.toggleVisible();
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				super.mouseEntered(e);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				super.mouseExited(e);
+			}
 		});
 
-		JButton toggleComments = createButton("\uEBDB");
+		JButton toggleComments = createButton("\uEBDB", "Comments");
 		toggleComments.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				super.mousePressed(e);
 				CommentsWindow.toggleVisible();
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				super.mouseEntered(e);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				super.mouseExited(e);
+			}
 		});
 
-		JButton toggleInfo = createButton("\uE946");
+		JButton toggleInfo = createButton("\uE946", "Info");
 		toggleInfo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				super.mousePressed(e);
 				InfoWindow.toggleVisible();
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				super.mouseEntered(e);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				super.mouseExited(e);
+			}
 		});
 
-		JButton toggleLevels = createButton("\uE179");
+		JButton toggleLevels = createButton("\uE179", "Requests");
 		toggleLevels.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				super.mousePressed(e);
 				LevelsWindow.toggleVisible();
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				super.mouseEntered(e);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				super.mouseExited(e);
+			}
 		});
 
-		JButton toggleActions = createButton("\uE7C9");
+		JButton toggleActions = createButton("\uE7C9", "Actions");
 		toggleActions.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				super.mousePressed(e);
 				ActionsWindow.toggleVisible();
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				super.mouseEntered(e);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				super.mouseExited(e);
+			}
 		});
-		JButton close = createSubButton("\uE10A");
+		JButton close = createSubButton("\uE10A", "Close");
 		close.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -124,6 +166,15 @@ class MainBar {
 				}
 				System.exit(0);
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				super.mouseEntered(e);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				super.mouseExited(e);
+			}
 		});
 		buttonPanel.add(toggleComments);
 		buttonPanel.add(toggleSong);
@@ -131,7 +182,8 @@ class MainBar {
 		buttonPanel.add(toggleInfo);
 		buttonPanel.add(toggleActions);
 		buttonPanel.add(close);
-		//}
+
+
 		Map<TextAttribute, Object> attributes = new HashMap<>();
 		attributes.put(TextAttribute.TRACKING, 0.02);
 		Font font = new Font("bahnschrift", Font.BOLD, 23).deriveFont(attributes);
@@ -163,19 +215,39 @@ class MainBar {
 		icon.setBounds(20, -1, 64, 64);
 		icon.updateUI();
 		mainPanel.add(icon);
-
 		Overlay.addToFrame(barPanel);
-
+		Thread thread = new Thread(() -> {
+			while(true){
+				if(Overlay.frame.isDisplayable()){
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					((JButtonTooltip)toggleComments).setTooltipLocation(toggleComments.getLocationOnScreen().x + (toggleComments.getWidth()/2), 70);
+					((JButtonTooltip)toggleActions).setTooltipLocation(toggleActions.getLocationOnScreen().x + (toggleActions.getWidth()/2), 70);
+					((JButtonTooltip)toggleInfo).setTooltipLocation(toggleInfo.getLocationOnScreen().x + (toggleInfo.getWidth()/2), 70);
+					((JButtonTooltip)toggleSong).setTooltipLocation(toggleSong.getLocationOnScreen().x + (toggleSong.getWidth()/2), 70);
+					((JButtonTooltip)toggleLevels).setTooltipLocation(toggleLevels.getLocationOnScreen().x + (toggleLevels.getWidth()/2), 70);
+					((JButtonTooltip)close).setTooltipLocation(close.getLocationOnScreen().x + (close.getWidth()/2), 70);
+					break;
+				}
+			}
+		});
+		thread.start();
 	}
+
+
+
 	static JPanel getMainBar(){
 		return barPanel;
 	}
 
-	private static JButton createButton(String icon) {
+	private static JButton createButton(String icon, String tooltip) {
 
 		defaultUI.setBackground(Defaults.MAIN);
-		JButton button = new JButton(icon);
-		button.setPreferredSize(new Dimension(65, 64));
+		JButton button = new JButtonTooltip(icon,64, tooltip, defaultUI);
+		button.setPreferredSize(new Dimension(70, 64));
 		button.setBackground(Defaults.MAIN);
 		button.setUI(defaultUI);
 		button.setForeground(Defaults.FOREGROUND);
@@ -183,11 +255,11 @@ class MainBar {
 		button.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
 		return button;
 	}
-	private static JButton createSubButton(String icon) {
+	private static JButton createSubButton(String icon, String tooltip) {
 
 		subUI.setBackground(Defaults.TOP);
-		JButton button = new JButton(icon);
-		button.setPreferredSize(new Dimension(65, 64));
+		JButton button = new JButtonTooltip(icon,64, tooltip, subUI);
+		button.setPreferredSize(new Dimension(70, 64));
 		button.setBackground(Defaults.TOP);
 		button.setUI(subUI);
 		button.setForeground(Defaults.FOREGROUND);
