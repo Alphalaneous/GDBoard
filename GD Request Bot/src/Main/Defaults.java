@@ -17,6 +17,7 @@ public class Defaults {
 	static Color TOP;
 	public static Color FOREGROUND;
 	static Color FOREGROUND2;
+	static Color OUTLINE = new Color(70,70,70);
 	static Color BUTTON_HOVER;
 	static AtomicBoolean dark = new AtomicBoolean();
 	
@@ -31,6 +32,7 @@ public class Defaults {
 		TOP = Color.BLACK;
 		FOREGROUND = Color.WHITE;
 		FOREGROUND2 = new Color(140,140,140);
+
 		Overlay.refreshUI(true);
 	}
 	//endregion

@@ -312,6 +312,7 @@ class MainBar {
 					} else {
 						component.setBackground(Defaults.MAIN);
 					}
+					((JButtonTooltip) component).refreshUI();
 					component.setForeground(Defaults.FOREGROUND);
 				}
 			}

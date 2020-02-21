@@ -135,10 +135,15 @@ class Requests {
 
                 // --------------------
                 // Adds level to queue array "levels" and refreshes LevelsWindow
+                URL url1;
+                String fileName = null;
+                if(customUrl != null){
+                    url1 = new URL(customUrl);
+                    fileName = FilenameUtils.getName(url1.getPath());
+                }
 
-                URL url1 = new URL(customUrl);
-                String fileName = FilenameUtils.getName(url1.getPath());
                 levels.add(levelData);
+                String finalFileName = fileName;
                 Thread thread = new Thread(() -> {
                     System.out.println(levelData.getSongID());
                     try {
@@ -169,10 +174,11 @@ class Requests {
                             File file2 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3");
 
                             URL url;
-                            if(isCustomSong && fileName.endsWith(".mp3")){
+                            assert finalFileName != null;
+                            if(isCustomSong && finalFileName.endsWith(".mp3")){
                                 url = new URL(customUrl);
                             }
-                            else if(isCustomSong && !fileName.endsWith(".mp3")){
+                            else if(isCustomSong && !finalFileName.endsWith(".mp3")){
                                 url = new URL(levelData.getSongURL());
                                 Main.sendMessage("@" + requester + ", Invalid song! (requires .mp3 format)");
                             }
@@ -197,6 +203,7 @@ class Requests {
                             + Requests.levels.get(0).getLevelID() + "). Requested by "
                             + Requests.levels.get(0).getRequester());
                 }
+                assert fileName != null;
                 if (isCustomSong && fileName.endsWith(".mp3")) {
                     levelData.setSongName("Custom");
                     levelData.setSongAuthor("");
