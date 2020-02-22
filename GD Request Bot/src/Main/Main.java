@@ -11,6 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.net.BindException;
+import java.net.ServerSocket;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -22,7 +24,10 @@ public class Main {
 	//region Main
 	public static void main(String[] args) throws IOException, IllegalArgumentException, URISyntaxException, AWTException, InterruptedException {
 		//TODO Keybinds
+
+
 		Settings.writeSettings("keybind", String.valueOf(KeyEvent.VK_HOME));
+		Settings.keybind = KeyEvent.VK_HOME;
 		Settings.loadSettings(true);
 
 		//region Turn off logging (From separate library)
