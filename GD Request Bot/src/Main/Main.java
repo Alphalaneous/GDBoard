@@ -26,8 +26,8 @@ public class Main {
 		Settings.loadSettings(true);
 
 		//region Turn off logging (From separate library)
-		Logger root = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);		//Create root logger object
-		root.setLevel(Level.INFO);													//Disable all logging except for INFO
+		//Logger root = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);		//Create root logger object
+		//root.setLevel(Level.INFO);													//Disable all logging except for INFO
 		//endregion
 
 		//region Get Channel

@@ -80,12 +80,12 @@
         <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="379">
-              <caret line="188" column="64" lean-forward="true" selection-start-line="188" selection-start-column="28" selection-end-line="188" selection-end-column="64" />
+              <caret line="188" column="64" selection-start-line="188" selection-start-column="28" selection-end-line="188" selection-end-column="64" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/.version">
           <provider selected="true" editor-type-id="text-editor">
             <state>
@@ -94,10 +94,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1022">
+            <state relative-caret-position="1105">
               <caret line="92" selection-start-line="92" selection-end-line="92" />
             </state>
           </provider>
@@ -116,7 +116,7 @@
         <entry file="file://$PROJECT_DIR$/src/Main/LevelsWindow.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="442">
-              <caret line="200" column="61" lean-forward="true" selection-start-line="200" selection-start-column="22" selection-end-line="200" selection-end-column="61" />
+              <caret line="200" column="61" selection-start-line="200" selection-start-column="22" selection-end-line="200" selection-end-column="61" />
             </state>
           </provider>
         </entry>
@@ -125,7 +125,7 @@
         <entry file="file://$PROJECT_DIR$/src/Main/Overlay.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="323">
-              <caret line="28" column="43" lean-forward="true" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="45" />
+              <caret line="28" column="43" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -178,8 +178,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="380" />
-    <option name="y" value="50" />
+    <option name="x" value="452" />
     <option name="width" value="1385" />
     <option name="height" value="973" />
   </component>
@@ -235,7 +234,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1582407122415" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1582407809523" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../GDBoard Dependencies/TwitchIRC_v1.2.jar!/" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.14648438" />
@@ -362,7 +361,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="380" y="50" width="1385" height="973" extended-state="0" />
+    <frame x="380" y="50" width="1385" height="973" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2535849" />
@@ -374,7 +373,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3297619" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3297619" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -796,14 +795,7 @@
     <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="379">
-          <caret line="188" column="64" lean-forward="true" selection-start-line="188" selection-start-column="28" selection-end-line="188" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1022">
-          <caret line="92" selection-start-line="92" selection-end-line="92" />
+          <caret line="188" column="64" selection-start-line="188" selection-start-column="28" selection-end-line="188" selection-end-column="64" />
         </state>
       </provider>
     </entry>
@@ -817,14 +809,14 @@
     <entry file="file://$PROJECT_DIR$/src/Main/LevelsWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
-          <caret line="200" column="61" lean-forward="true" selection-start-line="200" selection-start-column="22" selection-end-line="200" selection-end-column="61" />
+          <caret line="200" column="61" selection-start-line="200" selection-start-column="22" selection-end-line="200" selection-end-column="61" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Overlay.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
-          <caret line="28" column="43" lean-forward="true" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="45" />
+          <caret line="28" column="43" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -832,6 +824,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="12" selection-start-column="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1105">
+          <caret line="92" selection-start-line="92" selection-end-line="92" />
         </state>
       </provider>
     </entry>
