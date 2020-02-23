@@ -127,9 +127,12 @@ class Settings {
                 reqX = Boolean.parseBoolean(gfg.get("requests").toString().split(",")[3]);
                 requestsWLoc = new Point(x, y);
                 LevelsWindow.setPin(reqPin);
-                LevelsWindow.setLocation(requestsWLoc);
-                if (!reqX) {
-                    LevelsWindow.toggleVisible();
+                if(!Settings.windowedMode) {
+                    LevelsWindow.setLocation(requestsWLoc);
+
+                    if (!reqX) {
+                        LevelsWindow.toggleVisible();
+                    }
                 }
             } catch (NullPointerException ignored) {
             }
@@ -140,9 +143,12 @@ class Settings {
                 actX = Boolean.parseBoolean(gfg.get("actions").toString().split(",")[3]);
                 actionsWLoc = new Point(x, y);
                 ActionsWindow.setPin(actPin);
-                ActionsWindow.setLocation(actionsWLoc);
-                if (!actX) {
-                    ActionsWindow.toggleVisible();
+                if(!Settings.windowedMode) {
+                    ActionsWindow.setLocation(actionsWLoc);
+
+                    if (!actX) {
+                        ActionsWindow.toggleVisible();
+                    }
                 }
             } catch (NullPointerException ignored) {
             }
@@ -153,9 +159,12 @@ class Settings {
                 comX = Boolean.parseBoolean(gfg.get("comments").toString().split(",")[3]);
                 commentWLoc = new Point(x, y);
                 CommentsWindow.setPin(comPin);
-                CommentsWindow.setLocation(commentWLoc);
-                if (!comX) {
-                    CommentsWindow.toggleVisible();
+                if(!Settings.windowedMode) {
+                    CommentsWindow.setLocation(commentWLoc);
+
+                    if (!comX) {
+                        CommentsWindow.toggleVisible();
+                    }
                 }
             } catch (NullPointerException ignored) {
             }
@@ -166,9 +175,12 @@ class Settings {
                 infoX = Boolean.parseBoolean(gfg.get("info").toString().split(",")[3]);
                 infoWLoc = new Point(x, y);
                 InfoWindow.setPin(infoPin);
-                InfoWindow.setLocation(infoWLoc);
-                if (!infoX) {
-                    InfoWindow.toggleVisible();
+                if(!Settings.windowedMode) {
+                    InfoWindow.setLocation(infoWLoc);
+
+                    if (!infoX) {
+                        InfoWindow.toggleVisible();
+                    }
                 }
             } catch (NullPointerException ignored) {
             }
@@ -179,9 +191,11 @@ class Settings {
                 songX = Boolean.parseBoolean(gfg.get("song").toString().split(",")[3]);
                 songWLoc = new Point(x, y);
                 SongWindow.setPin(songPin);
-                SongWindow.setLocation(songWLoc);
-                if (!songX) {
-                    SongWindow.toggleVisible();
+                if(!Settings.windowedMode) {
+                    SongWindow.setLocation(songWLoc);
+                    if (!songX) {
+                        SongWindow.toggleVisible();
+                    }
                 }
             } catch (NullPointerException ignored) {
             }
