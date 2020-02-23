@@ -251,6 +251,7 @@ class ActionsWindow {
             Overlay.addToFrame(window);
         }
         catch (Exception e){
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, e, "Error",  JOptionPane.ERROR_MESSAGE);
         }
     }

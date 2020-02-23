@@ -489,6 +489,7 @@ public class ChatBot extends TwitchBot {
             //endregion
         }
         catch (Exception e){
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, e, "Error",  JOptionPane.ERROR_MESSAGE);
         }
     }
