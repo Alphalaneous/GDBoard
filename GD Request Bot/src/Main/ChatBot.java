@@ -422,7 +422,7 @@ public class ChatBot extends TwitchBot {
                                 }
 
                             } catch (IndexOutOfBoundsException ignored) {
-                            } catch (MissingAccessException | IOException e) {
+                            } catch (MissingAccessException e) {
                                 sendMessage("@" + user + " That level or user doesn't exist!", channel);
                                 e.printStackTrace();
                             }
@@ -451,7 +451,7 @@ public class ChatBot extends TwitchBot {
                                                 .valueOf(Objects.requireNonNull(client.searchLevels(message.toString(), LevelSearchFilters.create(), 0)
                                                         .block()).asList().get(0).getId()),
                                         String.valueOf(user), false, null);
-                            } catch (MissingAccessException | IOException e) {
+                            } catch (MissingAccessException e) {
                                 sendMessage("@" + user + " That level doesn't exist!", channel);
                                 e.printStackTrace();
                             }

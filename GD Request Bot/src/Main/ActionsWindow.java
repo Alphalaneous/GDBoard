@@ -25,51 +25,96 @@ class ActionsWindow {
 
     //region Create Panel
     static void createPanel() {
+        try {
+            mainPanel.setBounds(1, 31, width, height);
 
-        mainPanel.setBounds(1, 31, width, height);
+            mainPanel.setLayout(null);
 
-        mainPanel.setLayout(null);
+            defaultUI.setBackground(Defaults.BUTTON);
+            defaultUI.setHover(Defaults.BUTTON_HOVER);
 
-        defaultUI.setBackground(Defaults.BUTTON);
-        defaultUI.setHover(Defaults.BUTTON_HOVER);
+            panel.setPreferredSize(new Dimension(width - 25, height));
+            panel.setBounds(15, 5, width - 25, height - 10);
+            if (!Settings.windowedMode) {
+                mainPanel.setBackground(Defaults.MAIN);
+                panel.setBackground(Defaults.MAIN);
+            } else {
+                mainPanel.setBackground(Defaults.SUB_MAIN);
+                panel.setBackground(Defaults.SUB_MAIN);
+            }
+            panel.setLayout(new GridLayout(1, 5, 10, 10));
 
-        panel.setPreferredSize(new Dimension(width - 25, height));
-        panel.setBounds(15, 5, width - 25, height - 10);
-        if (!Settings.windowedMode) {
-            mainPanel.setBackground(Defaults.MAIN);
-            panel.setBackground(Defaults.MAIN);
-        } else {
-            mainPanel.setBackground(Defaults.SUB_MAIN);
-            panel.setBackground(Defaults.SUB_MAIN);
-        }
-        panel.setLayout(new GridLayout(1, 5, 10, 10));
+            //TODO make custom Yes/No dialog
 
-        //TODO make custom Yes/No dialog
-
-        //region Create Skip Button
-        JButton skip = createButton("\uE101");
-        skip.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                ((InnerWindow) window).moveToFront();
-                super.mousePressed(e);
-                if (Requests.levels.size() != 0) {
+            //region Create Skip Button
+            JButton skip = createButton("\uE101");
+            skip.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    ((InnerWindow) window).moveToFront();
+                    super.mousePressed(e);
+                    if (Requests.levels.size() != 0) {
 
 
-                    if (!(Requests.levels.size() <= 1) && LevelsWindow.getSelectedID() == 0) {
-                        StringSelection selection = new StringSelection(
-                                Requests.levels.get(LevelsWindow.getSelectedID() + 1).getLevelID());
-                        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-                        clipboard.setContents(selection, selection);
+                        if (!(Requests.levels.size() <= 1) && LevelsWindow.getSelectedID() == 0) {
+                            StringSelection selection = new StringSelection(
+                                    Requests.levels.get(LevelsWindow.getSelectedID() + 1).getLevelID());
+                            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                            clipboard.setContents(selection, selection);
+                        }
+                        if (LevelsWindow.getSelectedID() == 0 && Requests.levels.size() > 1) {
+                            Requests.levels.remove(LevelsWindow.getSelectedID());
+                            LevelsWindow.removeButton();
+
+                            Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
+                                    + Requests.levels.get(0).getLevelID() + "). Requested by "
+                                    + Requests.levels.get(0).getRequester());
+                        } else {
+                            if (Requests.levels.get(LevelsWindow.getSelectedID()).getSongName().equalsIgnoreCase("Custom")) {
+                                File tempSong = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp");
+                                File rename = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
+                                File remove = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
+                                remove.delete();
+                                tempSong.renameTo(rename);
+                            }
+                            Requests.levels.remove(LevelsWindow.getSelectedID());
+                            LevelsWindow.removeButton();
+
+                        }
+                        Thread thread = new Thread(() -> {
+                            CommentsWindow.unloadComments(true);
+                            if (Requests.levels.size() != 0) {
+                                CommentsWindow.loadComments(0, false);
+                            }
+                        });
+                        thread.start();
+
                     }
-                    if (LevelsWindow.getSelectedID() == 0 && Requests.levels.size() > 1) {
-                        Requests.levels.remove(LevelsWindow.getSelectedID());
-                        LevelsWindow.removeButton();
+                    LevelsWindow.setOneSelect();
 
-                        Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
-                                + Requests.levels.get(0).getLevelID() + "). Requested by "
-                                + Requests.levels.get(0).getRequester());
-                    } else {
+                    SongWindow.refreshInfo();
+                    InfoWindow.refreshInfo();
+                }
+            });
+            panel.add(skip);
+            //endregion
+
+            //region Create Random Button
+            Random random = new Random();
+            JButton randNext = createButton("\uE897");
+            randNext.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    ((InnerWindow) window).moveToFront();
+                    super.mousePressed(e);
+                    int num = 0;
+                    try {
+                        num = random.nextInt(Requests.levels.size() - 2) + 1;
+                    } catch (Exception ignored) {
+
+                    }
+                    if (Requests.levels.size() != 0) {
+
                         if (Requests.levels.get(LevelsWindow.getSelectedID()).getSongName().equalsIgnoreCase("Custom")) {
                             File tempSong = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp");
                             File rename = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
@@ -80,175 +125,134 @@ class ActionsWindow {
                         Requests.levels.remove(LevelsWindow.getSelectedID());
                         LevelsWindow.removeButton();
 
-                    }
-                    Thread thread = new Thread(() -> {
-                        CommentsWindow.unloadComments(true);
-                        if(Requests.levels.size() != 0) {
-                            CommentsWindow.loadComments(0, false);
+
+                        if (Requests.levels.size() == 1) {
+                            LevelsWindow.setOneSelect();
+                        } else {
+                            LevelsWindow.setSelect(num);
                         }
-                    });
-                    thread.start();
-
-                }
-                LevelsWindow.setOneSelect();
-
-                SongWindow.refreshInfo();
-                InfoWindow.refreshInfo();
-            }
-        });
-        panel.add(skip);
-        //endregion
-
-        //region Create Random Button
-        Random random = new Random();
-        JButton randNext = createButton("\uE897");
-        randNext.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                ((InnerWindow) window).moveToFront();
-                super.mousePressed(e);
-                int num = 0;
-                try {
-                    num = random.nextInt(Requests.levels.size() - 2) + 1;
-                } catch (Exception ignored) {
-
-                }
-                if (Requests.levels.size() != 0) {
-
-                    if (Requests.levels.get(LevelsWindow.getSelectedID()).getSongName().equalsIgnoreCase("Custom")) {
-                        File tempSong = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp");
-                        File rename = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
-                        File remove = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
-                        remove.delete();
-                        tempSong.renameTo(rename);
-                    }
-                    Requests.levels.remove(LevelsWindow.getSelectedID());
-                    LevelsWindow.removeButton();
-
-
-                    if (Requests.levels.size() == 1) {
-                        LevelsWindow.setOneSelect();
-                    } else {
-                        LevelsWindow.setSelect(num);
-                    }
-                    Thread thread = new Thread(() -> {
-                        CommentsWindow.unloadComments(true);
-                        if (Requests.levels.size() != 0) {
-                            CommentsWindow.loadComments(0, false);
-                        }
-                    });
-                    thread.start();
-                    if (Requests.levels.size() != 0) {
-                        System.out.println(num);
-                        StringSelection selection = new StringSelection(
-                                Requests.levels.get(num).getLevelID());
-                        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-                        clipboard.setContents(selection, selection);
-
-                        Main.sendMessage("Now Playing " + Requests.levels.get(num).getName() + " ("
-                                + Requests.levels.get(num).getLevelID() + "). Requested by "
-                                + Requests.levels.get(num).getRequester());
-                    }
-                }
-                SongWindow.refreshInfo();
-                InfoWindow.refreshInfo();
-            }
-        });
-        panel.add(randNext);
-        //endregion
-
-        //region Create Copy Button
-        JButton copy = createButton("\uF0E3");
-        copy.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                ((InnerWindow) window).moveToFront();
-                super.mousePressed(e);
-                if (Requests.levels.size() != 0) {
-                    StringSelection selection = new StringSelection(
-                            Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
-                    Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-                    clipboard.setContents(selection, selection);
-                }
-            }
-        });
-        panel.add(copy);
-        //endregion
-
-        //region Create Block Button
-        JButton block = createButton("\uE8F8");
-        block.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                ((InnerWindow) window).moveToFront();
-                super.mousePressed(e);
-                if (Requests.levels.size() != 0) {
-                    Object[] options = {"Yes", "No"};
-                    int n = JOptionPane.showOptionDialog(Overlay.frame,
-                            "Block " + Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "?",
-                            "Block ID? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
-                            JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-                    if (n == 0) {
-                        File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
-                        FileWriter fr;
-                        try {
-                            fr = new FileWriter(file, true);
-                            fr.write(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "\n");
-                            fr.close();
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
-                        Requests.levels.remove(LevelsWindow.getSelectedID());
-                        LevelsWindow.removeButton();
-
                         Thread thread = new Thread(() -> {
                             CommentsWindow.unloadComments(true);
-                            CommentsWindow.loadComments(0, false);
+                            if (Requests.levels.size() != 0) {
+                                CommentsWindow.loadComments(0, false);
+                            }
                         });
                         thread.start();
+                        if (Requests.levels.size() != 0) {
+                            System.out.println(num);
+                            StringSelection selection = new StringSelection(
+                                    Requests.levels.get(num).getLevelID());
+                            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                            clipboard.setContents(selection, selection);
+
+                            Main.sendMessage("Now Playing " + Requests.levels.get(num).getName() + " ("
+                                    + Requests.levels.get(num).getLevelID() + "). Requested by "
+                                    + Requests.levels.get(num).getRequester());
+                        }
                     }
                     SongWindow.refreshInfo();
                     InfoWindow.refreshInfo();
                 }
-                LevelsWindow.setOneSelect();
-            }
-        });
-        panel.add(block);
-        //endregion
+            });
+            panel.add(randNext);
+            //endregion
 
-        //region Create Clear Button
-        JButton clear = createButton("\uE107");
-        clear.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                ((InnerWindow) window).moveToFront();
-                super.mousePressed(e);
-                Object[] options = {"Yes", "No"};
-                int n = JOptionPane.showOptionDialog(Overlay.frame,
-                        "Clear the queue?",
-                        "Clear? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
-                        JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-                if (n == 0) {
+            //region Create Copy Button
+            JButton copy = createButton("\uF0E3");
+            copy.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    ((InnerWindow) window).moveToFront();
+                    super.mousePressed(e);
                     if (Requests.levels.size() != 0) {
-                        for (int i = 0; i < Requests.levels.size(); i++) {
+                        StringSelection selection = new StringSelection(
+                                Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
+                        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                        clipboard.setContents(selection, selection);
+                    }
+                }
+            });
+            panel.add(copy);
+            //endregion
+
+            //region Create Block Button
+            JButton block = createButton("\uE8F8");
+            block.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    ((InnerWindow) window).moveToFront();
+                    super.mousePressed(e);
+                    if (Requests.levels.size() != 0) {
+                        Object[] options = {"Yes", "No"};
+                        int n = JOptionPane.showOptionDialog(Overlay.frame,
+                                "Block " + Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "?",
+                                "Block ID? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
+                                JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+                        if (n == 0) {
+                            File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
+                            FileWriter fr;
+                            try {
+                                fr = new FileWriter(file, true);
+                                fr.write(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "\n");
+                                fr.close();
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                            Requests.levels.remove(LevelsWindow.getSelectedID());
                             LevelsWindow.removeButton();
+
+                            Thread thread = new Thread(() -> {
+                                CommentsWindow.unloadComments(true);
+                                CommentsWindow.loadComments(0, false);
+                            });
+                            thread.start();
                         }
-                        Requests.levels.clear();
                         SongWindow.refreshInfo();
                         InfoWindow.refreshInfo();
-                        CommentsWindow.unloadComments(true);
                     }
                     LevelsWindow.setOneSelect();
                 }
-            }
-        });
-        panel.add(clear);
-        //endregion
+            });
+            panel.add(block);
+            //endregion
 
-        mainPanel.add(panel);
-        window.add(mainPanel);
-        ((InnerWindow) window).refreshListener();
-        Overlay.addToFrame(window);
+            //region Create Clear Button
+            JButton clear = createButton("\uE107");
+            clear.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    ((InnerWindow) window).moveToFront();
+                    super.mousePressed(e);
+                    Object[] options = {"Yes", "No"};
+                    int n = JOptionPane.showOptionDialog(Overlay.frame,
+                            "Clear the queue?",
+                            "Clear? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
+                            JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+                    if (n == 0) {
+                        if (Requests.levels.size() != 0) {
+                            for (int i = 0; i < Requests.levels.size(); i++) {
+                                LevelsWindow.removeButton();
+                            }
+                            Requests.levels.clear();
+                            SongWindow.refreshInfo();
+                            InfoWindow.refreshInfo();
+                            CommentsWindow.unloadComments(true);
+                        }
+                        LevelsWindow.setOneSelect();
+                    }
+                }
+            });
+            panel.add(clear);
+            //endregion
+
+            mainPanel.add(panel);
+            window.add(mainPanel);
+            ((InnerWindow) window).refreshListener();
+            Overlay.addToFrame(window);
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null, e, "Error",  JOptionPane.ERROR_MESSAGE);
+        }
     }
     //endregion
 
