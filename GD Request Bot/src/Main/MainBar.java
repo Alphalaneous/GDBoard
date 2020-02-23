@@ -46,7 +46,7 @@ class MainBar {
 		mainPanel.setLayout(null);
 		barPanel.add(mainPanel);
 
-		buttonPanel.setLayout(new FlowLayout(0,0,0));
+		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
 		buttonPanel.setBounds(160, 0, 420, 64);
 		buttonPanel.setBackground(Defaults.MAIN);
 
@@ -224,12 +224,12 @@ class MainBar {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					((JButtonTooltip)toggleComments).setTooltipLocation(toggleComments.getLocationOnScreen().x + (toggleComments.getWidth()/2), 70);
-					((JButtonTooltip)toggleActions).setTooltipLocation(toggleActions.getLocationOnScreen().x + (toggleActions.getWidth()/2), 70);
-					((JButtonTooltip)toggleInfo).setTooltipLocation(toggleInfo.getLocationOnScreen().x + (toggleInfo.getWidth()/2), 70);
-					((JButtonTooltip)toggleSong).setTooltipLocation(toggleSong.getLocationOnScreen().x + (toggleSong.getWidth()/2), 70);
-					((JButtonTooltip)toggleLevels).setTooltipLocation(toggleLevels.getLocationOnScreen().x + (toggleLevels.getWidth()/2), 70);
-					((JButtonTooltip)close).setTooltipLocation(close.getLocationOnScreen().x + (close.getWidth()/2), 70);
+					((JButtonTooltip)toggleComments).setTooltipLocation(toggleComments.getLocationOnScreen().x + (toggleComments.getWidth()/2));
+					((JButtonTooltip)toggleActions).setTooltipLocation(toggleActions.getLocationOnScreen().x + (toggleActions.getWidth()/2));
+					((JButtonTooltip)toggleInfo).setTooltipLocation(toggleInfo.getLocationOnScreen().x + (toggleInfo.getWidth()/2));
+					((JButtonTooltip)toggleSong).setTooltipLocation(toggleSong.getLocationOnScreen().x + (toggleSong.getWidth()/2));
+					((JButtonTooltip)toggleLevels).setTooltipLocation(toggleLevels.getLocationOnScreen().x + (toggleLevels.getWidth()/2));
+					((JButtonTooltip)close).setTooltipLocation(close.getLocationOnScreen().x + (close.getWidth()/2));
 					break;
 				}
 			}

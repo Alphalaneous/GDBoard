@@ -11,8 +11,6 @@ import lc.kra.system.keyboard.GlobalKeyboardHook;
 import lc.kra.system.keyboard.event.GlobalKeyAdapter;
 import lc.kra.system.keyboard.event.GlobalKeyEvent;
 
-import javax.swing.*;
-
 class KeyListener {
 
     private static boolean openKeyReleased = false;

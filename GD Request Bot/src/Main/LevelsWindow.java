@@ -351,6 +351,21 @@ public class LevelsWindow {
 			}
 		}
 	}
+
+	static void setSelect(int i){
+		int j = 0;
+		for(Component component : mainPanel.getComponents()){
+			if(component instanceof JButton){
+				if(j == i) {
+					component.setBackground(Defaults.SELECT);
+					((JButton) component).setUI(selectUI);
+					selectedID = i;
+					break;
+				}
+				j++;
+			}
+		}
+	}
 	static void toggleVisible() {
 		((InnerWindow) window).toggle();
 	}

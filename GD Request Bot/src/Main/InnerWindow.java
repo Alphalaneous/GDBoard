@@ -501,12 +501,6 @@ class InnerWindow extends ResizablePanel {
     }
     //endregion
 
-    //region Set InnerWindow invisible load
-    void setInvisibleLoad() {
-        setVisible(false);
-    }
-    //endregion
-
     //region Toggle Visibility of InnerWindow
     void toggle() {
         if (toggleState) {

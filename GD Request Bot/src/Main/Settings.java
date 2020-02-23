@@ -214,16 +214,16 @@ class Settings {
     static boolean hasOauth = false;
     static boolean hasChannel = false;
     static boolean hasWindowed = false;
-    static boolean songPin = false;
-    static boolean infoPin = false;
-    static boolean comPin = false;
-    static boolean actPin = false;
-    static boolean reqPin = false;
-    static boolean songX = true;
-    static boolean infoX = true;
-    static boolean comX = true;
-    static boolean actX = true;
-    static boolean reqX = true;
+    private static boolean songPin = false;
+    private static boolean infoPin = false;
+    private static boolean comPin = false;
+    private static boolean actPin = false;
+    private static boolean reqPin = false;
+    private static boolean songX = true;
+    private static boolean infoX = true;
+    private static boolean comX = true;
+    private static boolean actX = true;
+    private static boolean reqX = true;
 
     //TODO Save window sizes
     //TODO Requests off Setting
@@ -233,9 +233,9 @@ class Settings {
     //TODO Sub Only Setting
     //TODO Cheer Only Setting
 
-    static void setWindowedMode(boolean mode) {
+    /*static void setWindowedMode(boolean mode) {
         Settings.windowedMode = mode;
-    }
+    }*/
 
     static void setOAuth(String oauth) {
         Settings.oauth = oauth;

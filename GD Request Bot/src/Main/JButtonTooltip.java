@@ -4,13 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.font.TextAttribute;
 import java.awt.geom.Area;
 import java.awt.geom.RoundRectangle2D;
-import java.util.Collections;
 
 public class JButtonTooltip extends JButton {
-    JPanel panel = new JPanel(){
+    private JPanel panel = new JPanel(){
             @Override
             protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -69,8 +67,8 @@ public class JButtonTooltip extends JButton {
         this.setText(text);
         Overlay.addToFrame(panel);
     }
-    public void setTooltipLocation(int x, int y){
-        panel.setBounds(x -  (tooltipLabel.getPreferredSize().width + 22)/2 , y + 30, tooltipLabel.getPreferredSize().width + 22, tooltipLabel.getPreferredSize().height + 20);
+    void setTooltipLocation(int x){
+        panel.setBounds(x -  (tooltipLabel.getPreferredSize().width + 22)/2 , 70 + 30, tooltipLabel.getPreferredSize().width + 22, tooltipLabel.getPreferredSize().height + 20);
     }
     public void refreshUI(){
         panel.setBackground(Defaults.TOP);

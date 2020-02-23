@@ -1,18 +1,13 @@
 package Main;
 
 import Chat.Channel;
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.Logger;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
-import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 
 
 public class Main {
@@ -20,7 +15,7 @@ public class Main {
 	private static ChatBot bot;
 
 	//region Main
-	public static void main(String[] args) throws IOException, IllegalArgumentException, URISyntaxException, AWTException, InterruptedException {
+	public static void main(String[] args) throws IllegalArgumentException {
 		//TODO Keybinds
 
 		try {
@@ -28,11 +23,6 @@ public class Main {
 			Settings.writeSettings("keybind", String.valueOf(KeyEvent.VK_HOME));
 			Settings.keybind = KeyEvent.VK_HOME;
 			Settings.loadSettings(true);
-
-			//region Turn off logging (From separate library)
-			//Logger root = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);		//Create root logger object
-			//root.setLevel(Level.INFO);													//Disable all logging except for INFO
-			//endregion
 
 			//region Get Channel
 			if (!Settings.hasChannel) {

@@ -11,7 +11,6 @@ import com.github.alex1304.jdash.util.LevelSearchFilters;
 
 import javax.swing.*;
 import java.io.*;
-import java.net.URL;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -490,7 +489,7 @@ public class ChatBot extends TwitchBot {
             //endregion
         }
         catch (Exception e){
-            JOptionPane.showMessageDialog(null, "test", "Error",  JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e, "Error",  JOptionPane.ERROR_MESSAGE);
         }
     }
 }
