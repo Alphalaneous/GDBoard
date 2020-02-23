@@ -56,6 +56,7 @@ public class Defaults {
 	static void startMainThread(){
 		RegistryKey personalizeStart = new RegistryKey(
 				"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
+
 		final int[] prevTheme = new int[1];
 		try {
 			 prevTheme[0] = ((RegDWORDValue) personalizeStart.getValue("AppsUseLightTheme")).getIntValue();
