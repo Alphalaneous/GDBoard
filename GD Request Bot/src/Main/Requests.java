@@ -23,10 +23,10 @@ import java.util.zip.GZIPInputStream;
 class Requests {
 
     static ArrayList<LevelData> levels = new ArrayList<>();
-    private static AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
 
     static void addRequest(String ID, String requester, boolean isCustomSong, String customUrl) {
         try {
+            AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
             GDLevel level = null;
             boolean goThrough = true;
             boolean valid = true;
