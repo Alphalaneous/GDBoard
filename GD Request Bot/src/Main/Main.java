@@ -89,7 +89,6 @@ public class Main {
 			Overlay.setVisible();
 
 			//endregion
-
 			//region Start ChatBot and keep trying if it fails
 			while (true) {                            //If the Chat Bot fails, try again
 				try {
@@ -114,6 +113,9 @@ public class Main {
 	//region SendMessage to send messages as created ChatBot
 	static void sendMessage(String message) {	//Send message as created static ChatBot
 		bot.sendMessage(message, Channel.getChannel(Settings.channel, bot));
+	}
+	static ChatBot getChatBot(){
+		return bot;
 	}
 	//endregion
 }

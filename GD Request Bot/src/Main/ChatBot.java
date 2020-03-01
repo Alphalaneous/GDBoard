@@ -18,15 +18,17 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("ALL")
 public class ChatBot extends TwitchBot {
+
 
     //region ChatBor Constructor
     ChatBot() {
         this.setUsername("chatbot");
         this.setOauth_Key("oauth:" + Settings.oauth);
+
     }
     //endregion
-
     @Override
     public void onMessage(User user, Channel channel, String msg) {
         boolean isBroadcaster = ("#" + user).equalsIgnoreCase(String.valueOf(channel));
@@ -48,7 +50,6 @@ public class ChatBot extends TwitchBot {
                 }
             }
             //endregion
-
             //region ID/Name/Level Commands
             if (command.equalsIgnoreCase("!ID") ||
                     command.equalsIgnoreCase("!name") ||
@@ -131,7 +132,7 @@ public class ChatBot extends TwitchBot {
                             sendMessage("@" + user + ", your level has been removed!", channel);
                         }
                         if (Requests.levels.get(i).getLevelID().equals(Requests.levels.get(level - 1).getLevelID())
-                                && (user.isMod(channel) || isBroadcaster)) {
+                                && (Defaults.mods.contains(user) || isBroadcaster)) {
                             LevelsWindow.removeButton(i);
                             Requests.levels.remove(i);
                             SongWindow.refreshInfo();
@@ -171,15 +172,13 @@ public class ChatBot extends TwitchBot {
                     command.equalsIgnoreCase("!list") ||
                     command.equalsIgnoreCase("!requests") ||
                     command.equalsIgnoreCase("!page")) {
-
-                if (user.isMod(channel) || isBroadcaster) {
+                if (Defaults.mods.contains(user) || isBroadcaster) {
 
                     StringBuilder message = new StringBuilder();
                     int page = 1;
                     try {
                         page = Integer.parseInt(arguments[1]);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } catch (Exception ignored) {
                     }
                     int pages = (Requests.levels.size() - 1) / 10;
                     message.append("Page ").append(page).append(" of ").append(pages + 1).append(" of the queue | ");
@@ -193,7 +192,6 @@ public class ChatBot extends TwitchBot {
                         try {
                             message.append(i + 1).append(": ").append(Requests.levels.get(i).getName()).append(" (").append(Requests.levels.get(i).getLevelID()).append("), ");
                         } catch (IndexOutOfBoundsException e) {
-                            e.printStackTrace();
                             message.delete(0, message.length());
                             sendMessage("@" + user + " No levels on page " + page, channel);
                             break;
@@ -245,7 +243,7 @@ public class ChatBot extends TwitchBot {
 
             //region Help Command
             if (command.equalsIgnoreCase("!help")) {
-                if (user.isMod(channel) || isBroadcaster) {
+                if (Defaults.mods.contains(user) || isBroadcaster) {
                     if (arguments.length == 1) {
                         sendMessage("@" + user + " List of Commands | Type !help <command> for more help. | !request | !position | !ID | !difficulty | !song | !likes | !downloads | !remove | !queue | !block | !blockuser", channel);
                     } else if (arguments[1].equalsIgnoreCase("request")) {
@@ -287,14 +285,14 @@ public class ChatBot extends TwitchBot {
                     } else if (arguments[1].equalsIgnoreCase("downloads")) {
                         sendMessage("@" + user + " Used to find the current level's download count | Usage: \"!count\"", channel);
                     } else if (arguments[1].equalsIgnoreCase("remove")) {
-                        sendMessage("@" + user + " Used to remove your own levels from the queue | Usage: \"!remove <Position>\" (To find position, use \"!position\"", channel);
+                        sendMessage("@" + user + " Used to remove your own levels from the queue | Usage: \"!remove <Position>\" (To find position, use \"!position\")", channel);
                     }
                 }
             }
             //endregion
 
             //region Unblock Command
-            if (command.equalsIgnoreCase("!unblock") && (user.isMod(channel) || isBroadcaster)) {
+            if (command.equalsIgnoreCase("!unblock") && (Defaults.mods.contains(user) || isBroadcaster)) {
                 String unblocked = arguments[1];
                 try {
                     boolean exists = false;
@@ -333,7 +331,7 @@ public class ChatBot extends TwitchBot {
             //endregion
 
             //region Block Command
-            if (command.equalsIgnoreCase("!block") && (user.isMod(channel) || isBroadcaster)) {
+            if (command.equalsIgnoreCase("!block") && (Defaults.mods.contains(user) || isBroadcaster)) {
                 try {
                     int blockedID = Integer.parseInt(arguments[1]);
                     boolean goThrough = true;
@@ -370,7 +368,7 @@ public class ChatBot extends TwitchBot {
             //endregion
 
             //region BlockUser Command //TODO: Finish Blocking Users
-            if (command.equalsIgnoreCase("!blockUser") && (user.isMod(channel) || isBroadcaster)) {
+            if (command.equalsIgnoreCase("!blockUser") && (Defaults.mods.contains(user) || isBroadcaster)) {
                 sendMessage("Soon...", channel);
             }
             //endregion

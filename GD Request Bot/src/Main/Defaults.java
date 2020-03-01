@@ -1,9 +1,13 @@
 package Main;
+import Chat.Channel;
+import Chat.User;
 import com.registry.RegDWORDValue;
 import com.registry.RegistryKey;
 
 import java.awt.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Defaults {
@@ -14,6 +18,7 @@ public class Defaults {
 	private static Rectangle prevScreenSize = GraphicsEnvironment
 			.getLocalGraphicsEnvironment()
 			.getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();
+	static List<User> mods = new ArrayList<>();
 	static Color MAIN;
 	static Color BUTTON;
 	static Color HOVER;
@@ -77,8 +82,29 @@ public class Defaults {
 			Defaults.setLight();
 			dark.set(true);
 		}
+		Thread modCheck = new Thread(() ->{
+			while(true){
+				try{
+					mods = Channel.getChannel(Settings.channel, Main.getChatBot()).getMods();
+					for(int i = 0; i < mods.size(); i++){
+						System.out.println(mods.get(i));
+					}
+
+				}
+				catch (Exception e){
+					e.printStackTrace();
+				}
+				try {
+					Thread.sleep(30000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		modCheck.start();
 		Thread thread = new Thread(() -> {
 			while(true){
+
 				int minute;
 				int hour;
 				String half;
