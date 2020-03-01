@@ -34,7 +34,7 @@ class Overlay {
             frame.setBackground(new Color(0, 0, 0, 100));
 
             frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-            frame.setSize(Defaults.screenSize);
+            frame.setBounds(Defaults.screenSize);
             frame.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
@@ -105,7 +105,7 @@ class Overlay {
 
             frame.getContentPane().setBackground(Defaults.SUB_MAIN);
         } else {
-            frame.setSize(Defaults.screenSize);
+            frame.setBounds(Defaults.screenSize);
         }
         frame.invalidate();
         frame.revalidate();

@@ -18,6 +18,8 @@ public class Main {
 	public static void main(String[] args) throws IllegalArgumentException {
 		//TODO Keybinds
 
+
+
 		try {
 
 			Settings.writeSettings("keybind", String.valueOf(KeyEvent.VK_HOME));

@@ -7,8 +7,13 @@ import java.time.LocalDateTime;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Defaults {
-	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	private static Dimension prevScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	static int screenNum = 0;
+	static Rectangle screenSize =  GraphicsEnvironment
+			.getLocalGraphicsEnvironment()
+			.getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();
+	private static Rectangle prevScreenSize = GraphicsEnvironment
+			.getLocalGraphicsEnvironment()
+			.getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();
 	static Color MAIN;
 	static Color BUTTON;
 	static Color HOVER;
@@ -111,7 +116,9 @@ public class Defaults {
 					prevTheme[0] = 1;
 				}
 				if(!Settings.windowedMode) {
-					screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+					screenSize = GraphicsEnvironment
+							.getLocalGraphicsEnvironment()
+							.getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();
 					if (!screenSize.equals(prevScreenSize)) {
 						Overlay.refreshUI(false);
 					}

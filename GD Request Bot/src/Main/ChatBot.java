@@ -53,7 +53,7 @@ public class ChatBot extends TwitchBot {
             if (command.equalsIgnoreCase("!ID") ||
                     command.equalsIgnoreCase("!name") ||
                     command.equalsIgnoreCase("!level")) {
-                if (Requests.levels.size() > 0) {
+                if (Requests.levels.size() > 0 && level <= Requests.levels.size()) {
                     Main.sendMessage("@" + user + " The level at position " +
                             level + " is " + Requests.levels.get(level - 1).getName() +
                             " by " + Requests.levels.get(level - 1).getAuthor() + " (" +
@@ -64,7 +64,7 @@ public class ChatBot extends TwitchBot {
 
             //region Current Command
             if (command.equalsIgnoreCase("!current")) {
-                if (Requests.levels.size() > 0) {
+                if (Requests.levels.size() > 0 && level <= Requests.levels.size()) {
                     Main.sendMessage("@" + user + " The current level is " +
                             Requests.levels.get(0).getName() + " by " +
                             Requests.levels.get(0).getAuthor() + " (" +
@@ -75,7 +75,7 @@ public class ChatBot extends TwitchBot {
 
             //region Song Command
             if (command.equalsIgnoreCase("!song")) {
-                if (Requests.levels.size() > 0) {
+                if (Requests.levels.size() > 0 && level <= Requests.levels.size()) {
                     Main.sendMessage("@" + user + " The song is " +
                             Requests.levels.get(level - 1).getSongName() + " by " +
                             Requests.levels.get(level - 1).getSongAuthor() +
@@ -86,7 +86,7 @@ public class ChatBot extends TwitchBot {
 
             //region Likes Command
             if (command.equalsIgnoreCase("!likes")) {
-                if (Requests.levels.size() > 0) {
+                if (Requests.levels.size() > 0 && level <= Requests.levels.size()) {
                     Main.sendMessage("@" + user + " There are " +
                             Requests.levels.get(level - 1).getLikes() + " likes!");
                 }
@@ -95,7 +95,7 @@ public class ChatBot extends TwitchBot {
 
             //region Downloads Command
             if (command.equalsIgnoreCase("!downloads")) {
-                if (Requests.levels.size() > 0) {
+                if (Requests.levels.size() > 0 && level <= Requests.levels.size()) {
                     Main.sendMessage("@" + user + " There are " +
                             Requests.levels.get(level - 1).getDownloads() + " downloads!");
                 }
@@ -104,7 +104,7 @@ public class ChatBot extends TwitchBot {
 
             //region Difficulty Command
             if (command.equalsIgnoreCase("!difficulty")) {
-                if (Requests.levels.size() > 0) {
+                if (Requests.levels.size() > 0 && level <= Requests.levels.size()) {
                     Main.sendMessage("@" + user + " The difficulty is " +
                             Requests.levels.get(level - 1).getDifficulty().toLowerCase());
                 }
