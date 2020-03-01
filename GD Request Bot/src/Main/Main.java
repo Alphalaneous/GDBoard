@@ -35,6 +35,9 @@ public class Main {
 			if (!Settings.hasWindowed) {
 				Settings.writeSettings("windowed", "false");
 			}
+			if(!Settings.hasMonitor){
+				Settings.writeSettings("monitor", "0");
+			}
 			//endregion
 
 			//region Get Twitch oauth

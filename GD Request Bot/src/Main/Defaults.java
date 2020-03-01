@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Defaults {
-	static int screenNum = 0;
+
+	static int screenNum = Settings.monitor;
 	static Rectangle screenSize =  GraphicsEnvironment
 			.getLocalGraphicsEnvironment()
 			.getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();

@@ -1,6 +1,6 @@
 package Main;
 
-import java.awt.Point;
+import java.awt.*;
 import java.io.*;
 import java.util.Properties;
 
@@ -119,6 +119,19 @@ class Settings {
         } catch (NullPointerException e) {
             hasWindowed = false;
         }
+        try{
+            GraphicsDevice[] screens =  GraphicsEnvironment
+                    .getLocalGraphicsEnvironment()
+                    .getScreenDevices();
+            monitor = Integer.parseInt(gfg.get("monitor").toString());
+            if(monitor >= screens.length){
+                monitor = 0;
+            }
+            hasMonitor = true;
+        }
+        catch (NullPointerException e){
+            hasMonitor = false;
+        }
         if(!start) {
             try {
                 int x = Integer.parseInt(gfg.get("requests").toString().split(",")[0]);
@@ -210,7 +223,9 @@ class Settings {
     private static Point songWLoc = new Point(1920 - 300 - 10, 600);
     private static Point actionsWLoc = new Point(1920 - 260 - 10, 200);
     static int keybind;
+    static int monitor;
     static String channel;
+    static boolean hasMonitor = false;
     static boolean hasOauth = false;
     static boolean hasChannel = false;
     static boolean hasWindowed = false;
