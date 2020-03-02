@@ -51,30 +51,17 @@ class MainBar {
                 GraphicsDevice[] screens = GraphicsEnvironment
                         .getLocalGraphicsEnvironment()
                         .getScreenDevices();
-                if (MouseInfo.getPointerInfo().getLocation().x > Defaults.screenSize.width + Defaults.screenSize.x) {
-                    int screenNum = 0;
-                    for (GraphicsDevice screen : screens) {
-
-                        if (MouseInfo.getPointerInfo().getLocation().x > screen.getDefaultConfiguration().getBounds().width + screen.getDefaultConfiguration().getBounds().x) {
-                            Defaults.screenNum = screenNum;
-                            System.out.println(screenNum);
-                        }
-                        screenNum++;
-                    }
-                }
-                if (MouseInfo.getPointerInfo().getLocation().x < Defaults.screenSize.x) {
-                    int screenNum = 0;
-                    for (GraphicsDevice screen : screens) {
-                        if (MouseInfo.getPointerInfo().getLocation().x < screen.getDefaultConfiguration().getBounds().x) {
-                            Defaults.screenNum = screenNum;
-                            System.out.println(screenNum);
-                        }
-                        screenNum++;
+                int mouseX = MouseInfo.getPointerInfo().getLocation().x;
+                int mouseY = MouseInfo.getPointerInfo().getLocation().y;
+                Point mouse = new Point(mouseX, mouseY);
+                for(GraphicsDevice screen : screens){
+                    if(screen.getDefaultConfiguration().getBounds().contains(mouse)){
+                        Defaults.screenNum = Integer.parseInt(screen.getIDstring().replaceAll("Display", "").replace("\\", ""));
                     }
                 }
             }
         };
-        // mainPanel.addMouseListener(mia);//TODO Figure out dragging multi monitor
+        mainPanel.addMouseListener(mia);
         mainPanel.addMouseMotionListener(mia);
 
         mainPanel.setBounds(1, 1, 578, 63);
@@ -93,16 +80,6 @@ class MainBar {
                 super.mousePressed(e);
                 SongWindow.toggleVisible();
             }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                super.mouseEntered(e);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                super.mouseExited(e);
-            }
         });
 
         JButton toggleComments = createButton("\uEBDB", "Comments");
@@ -111,16 +88,6 @@ class MainBar {
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
                 CommentsWindow.toggleVisible();
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                super.mouseEntered(e);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                super.mouseExited(e);
             }
         });
 
@@ -131,16 +98,6 @@ class MainBar {
                 super.mousePressed(e);
                 InfoWindow.toggleVisible();
             }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                super.mouseEntered(e);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                super.mouseExited(e);
-            }
         });
 
         JButton toggleLevels = createButton("\uE179", "Requests");
@@ -149,16 +106,6 @@ class MainBar {
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
                 LevelsWindow.toggleVisible();
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                super.mouseEntered(e);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                super.mouseExited(e);
             }
         });
 
@@ -169,15 +116,13 @@ class MainBar {
                 super.mousePressed(e);
                 ActionsWindow.toggleVisible();
             }
-
+        });
+        JButton toggleSettings = createSubButton("\uE713", "Settings");
+        toggleSettings.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseEntered(MouseEvent e) {
-                super.mouseEntered(e);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                super.mouseExited(e);
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                SettingsWindow.toggleVisible();
             }
         });
         JButton close = createSubButton("\uE10A", "Close");
@@ -192,6 +137,7 @@ class MainBar {
                 SongWindow.setSettings();
                 try {
                     Settings.writeLocation();
+                    Settings.writeSettings("monitor", String.valueOf(Defaults.screenNum));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -223,6 +169,7 @@ class MainBar {
         buttonPanel.add(toggleLevels);
         buttonPanel.add(toggleInfo);
         buttonPanel.add(toggleActions);
+        buttonPanel.add(toggleSettings);
         buttonPanel.add(close);
 
 
@@ -251,7 +198,6 @@ class MainBar {
         Image imgScaled = img.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
         ImageIcon imgNew = new ImageIcon(imgScaled);
 
-        //TODO Drag icon to monitor wanted
         icon.setIcon(imgNew);
         icon.setBounds(20, -1, 64, 64);
         icon.updateUI();
@@ -259,19 +205,17 @@ class MainBar {
         Overlay.addToFrame(barPanel);
         Thread thread = new Thread(() -> {
             while (true) {
-                if (Overlay.frame.isDisplayable()) {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                try {
                     ((JButtonTooltip) toggleComments).setTooltipLocation(toggleComments.getLocationOnScreen().x + (toggleComments.getWidth() / 2));
                     ((JButtonTooltip) toggleActions).setTooltipLocation(toggleActions.getLocationOnScreen().x + (toggleActions.getWidth() / 2));
                     ((JButtonTooltip) toggleInfo).setTooltipLocation(toggleInfo.getLocationOnScreen().x + (toggleInfo.getWidth() / 2));
                     ((JButtonTooltip) toggleSong).setTooltipLocation(toggleSong.getLocationOnScreen().x + (toggleSong.getWidth() / 2));
                     ((JButtonTooltip) toggleLevels).setTooltipLocation(toggleLevels.getLocationOnScreen().x + (toggleLevels.getWidth() / 2));
+                    ((JButtonTooltip) toggleSettings).setTooltipLocation(toggleSettings.getLocationOnScreen().x + (toggleSettings.getWidth() / 2));
                     ((JButtonTooltip) close).setTooltipLocation(close.getLocationOnScreen().x + (close.getWidth() / 2));
                     break;
+                }
+                catch (Exception ignored){
                 }
             }
         });
@@ -287,7 +231,7 @@ class MainBar {
 
         defaultUI.setBackground(Defaults.MAIN);
         JButton button = new JButtonTooltip(icon, 64, tooltip, defaultUI);
-        button.setPreferredSize(new Dimension(70, 64));
+        button.setPreferredSize(new Dimension(64, 64));
         button.setBackground(Defaults.MAIN);
         button.setUI(defaultUI);
         button.setForeground(Defaults.FOREGROUND);
@@ -300,7 +244,7 @@ class MainBar {
 
         subUI.setBackground(Defaults.TOP);
         JButton button = new JButtonTooltip(icon, 64, tooltip, subUI);
-        button.setPreferredSize(new Dimension(70, 64));
+        button.setPreferredSize(new Dimension(50, 64));
         button.setBackground(Defaults.TOP);
         button.setUI(subUI);
         button.setForeground(Defaults.FOREGROUND);

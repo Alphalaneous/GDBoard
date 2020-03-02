@@ -2,9 +2,7 @@ package Main;
 
 import com.jidesoft.swing.ResizablePanel;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -17,7 +15,7 @@ class SettingsWindow {
 	private static int width = 622;
 	private static int height = 622;
 	private static ResizablePanel window = new InnerWindow("Settings", 1920 / 2 - 250, 1080 / 2 - 300, width, height,
-			"src/resources/Icons/Actions.png").createPanel();
+			"\uE713").createPanel();
 	private static JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
 	private static JPanel content = new JPanel();
 	private static JPanel blankSpace = new JPanel();
@@ -36,17 +34,19 @@ class SettingsWindow {
 		content.setBounds(208, 31, 415, height);
 		content.setBackground(Defaults.SUB_MAIN);
 		content.setLayout(null);
-		content.add(SettingsPanels.GeneralSetttings.createPanel());
+		content.add(SettingsPanels.GeneralSettings.createPanel());
 
 		JButton general = createButton("General");
-		JButton overlays = createButton("Overlays");
+		general.setBackground(Defaults.SELECT);
+		general.setUI(selectUI);
+		//JButton overlays = createButton("Overlays");
 		JButton accounts = createButton("Accounts");
 		JButton shortcuts = createButton("Shortcuts");
 		JButton personalization = createButton("Personalization");
-		JButton blocked = createButton("Blocked IDs");
+		JButton blocked = createButton("Blocked");
 
 		buttons.add(general);
-		buttons.add(overlays);
+		//buttons.add(overlays);
 		buttons.add(accounts);
 		buttons.add(shortcuts);
 		buttons.add(personalization);
@@ -77,7 +77,9 @@ class SettingsWindow {
 						component2.setForeground(Defaults.FOREGROUND);
 					}
 				}
-				component.setBackground(Defaults.MAIN);
+				if(!((JButton) component).getUI().equals(selectUI)) {
+					component.setBackground(Defaults.MAIN);
+				}
 
 			}
 		}
@@ -107,10 +109,10 @@ class SettingsWindow {
 
 		label.setBounds(20, 9, 208, 20);
 		label.setForeground(Defaults.FOREGROUND);
+		label.setFont(new Font("bahnschrift", Font.PLAIN, 14));
 
 		button.setLayout(null);
 		button.add(label);
-
 		button.setBackground(Defaults.MAIN);
 		button.setUI(defaultUI);
 		button.setForeground(Defaults.FOREGROUND);
@@ -130,7 +132,7 @@ class SettingsWindow {
 						switch (((JLabel) component2).getText()) {
 							case "General":
 								content.remove(0);
-								content.add(SettingsPanels.GeneralSetttings.createPanel());
+								content.add(SettingsPanels.GeneralSettings.createPanel());
 								content.updateUI();
 								break;
 							case "Overlays":
@@ -153,9 +155,9 @@ class SettingsWindow {
 								content.add(SettingsPanels.PersonalizationSettings.createPanel());
 								content.updateUI();
 								break;
-							case "Blocked IDs":
+							case "Blocked":
 								content.remove(0);
-								content.add(SettingsPanels.BlockedIDsSettings.createPanel());
+								content.add(SettingsPanels.BlockedSettings.createPanel());
 								content.updateUI();
 								break;
 						}
@@ -171,8 +173,14 @@ class SettingsWindow {
 					}
 				}
 				button.setUI(selectUI);
+				button.setBackground(Defaults.SELECT);
 			}
 		});
 		return button;
 	}
+	//region Toggle Visible
+	static void toggleVisible() {
+		((InnerWindow) window).toggle();
+	}
+	//endregion
 }

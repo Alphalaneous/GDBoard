@@ -81,7 +81,7 @@ public class Main {
 			InfoWindow.createPanel();            //Creates the Info Window containing the information of the selected level
 			CommentsWindow.createPanel();            //Creates the Comment Window containing the comments of the selected level
 			SongWindow.createPanel();            //Creates the Song Window allowing you to play the song of the selected level
-
+			SettingsWindow.createPanel();
 			InfoWindow.refreshInfo();            //Refreshes the information shown on the Info Window for the first time
 			SongWindow.refreshInfo();            //Refreshes the information shown on the Song Window for the first time
 
@@ -112,7 +112,6 @@ public class Main {
 		//endregion
 	}
 	//endregion
-
 	//region SendMessage to send messages as created ChatBot
 	static void sendMessage(String message) {	//Send message as created static ChatBot
 		bot.sendMessage(message, Channel.getChannel(Settings.channel, bot));

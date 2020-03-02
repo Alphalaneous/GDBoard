@@ -20,16 +20,16 @@ public class Defaults {
 			.getLocalGraphicsEnvironment()
 			.getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();
 	static List<User> mods = new ArrayList<>();
-	static Color MAIN;
-	static Color BUTTON;
-	static Color HOVER;
+	public static Color MAIN;
+	public static Color BUTTON;
+	public static Color HOVER;
 	public static Color SUB_MAIN;
-	static Color SELECT;
-	static Color TOP;
+	public static Color SELECT;
+	public static Color TOP;
 	public static Color FOREGROUND;
-	static Color FOREGROUND2;
-	static Color OUTLINE = new Color(70,70,70);
-	static Color BUTTON_HOVER;
+	public static Color FOREGROUND2;
+	public static Color OUTLINE = new Color(70,70,70);
+	public static Color BUTTON_HOVER;
 	static AtomicBoolean dark = new AtomicBoolean();
 	
 	//region Dark Mode

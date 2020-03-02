@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-class Overlay {
+public class Overlay {
 
     // --------------------
     // Create JFrame Object
@@ -32,8 +32,6 @@ class Overlay {
             frame.setUndecorated(true);
 
             frame.setBackground(new Color(0, 0, 0, 100));
-
-            frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
             frame.setBounds(Defaults.screenSize);
             frame.addMouseListener(new MouseAdapter() {
                 @Override
@@ -118,7 +116,9 @@ class Overlay {
         MainBar.refreshUI(color);
 
     }
-
+    public static JFrame getWindow(){
+        return frame;
+    }
     static void setWindowsInvisible() {
         isVisible = false;
         frame.setBackground(new Color(0, 0, 0, 0));

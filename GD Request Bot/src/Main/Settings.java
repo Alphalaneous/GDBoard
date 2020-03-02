@@ -4,7 +4,7 @@ import java.awt.*;
 import java.io.*;
 import java.util.Properties;
 
-class Settings {
+public class Settings {
 
     private static Properties gfg = new Properties();
     private static FileInputStream in;
@@ -70,7 +70,7 @@ class Settings {
         writeSettings("requests", requestsWLoc.x + "," + requestsWLoc.y + "," + reqPin + "," + reqX);
         writeSettings("comments", commentWLoc.x + "," + commentWLoc.y + "," + comPin + "," + comX);
     }
-    static void writeSettings(String key, String setting) throws IOException {
+    public static void writeSettings(String key, String setting) throws IOException {
         gfg.load(in);
         if (gfg.containsKey(key)) {
             BufferedReader file = new BufferedReader(new FileReader(System.getenv("APPDATA") + "\\GDBoard\\config.properties"));
@@ -252,7 +252,7 @@ class Settings {
         Settings.windowedMode = mode;
     }*/
 
-    static void setOAuth(String oauth) {
+    public static void setOAuth(String oauth) {
         Settings.oauth = oauth;
     }
 
