@@ -23,6 +23,10 @@ public class CurvedButton extends JButton {
 
         setContentAreaFilled(false);
     }
+    public void setLText(String text) {
+        this.text.setText(text);
+        refresh();
+    }
 
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;

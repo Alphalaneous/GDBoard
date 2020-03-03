@@ -25,10 +25,10 @@ public class AccountSettings {
 		panel.setLayout(null);
 		CurvedButton button = new CurvedButton("Reauthenticate Twitch");
 		JButtonUI defaultUI = new JButtonUI();
-		defaultUI.setBackground(Defaults.MAIN);
+		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
-		button.setBackground(Defaults.MAIN);
+		button.setBackground(Defaults.BUTTON);
 		button.setBounds(25,20,365,30);
 		button.setUI(defaultUI);
 		button.setForeground(Defaults.FOREGROUND);

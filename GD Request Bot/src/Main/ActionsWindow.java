@@ -16,7 +16,7 @@ import java.util.Random;
 class ActionsWindow {
 
     private static int height = 60;
-    private static int width = 400;
+    private static int width = 300;
     private static ResizablePanel window = new InnerWindow("Actions", Settings.getActionsWLoc().x, Settings.getActionsWLoc().y, width, height,
             "\uE7C9").createPanel();
     private static JPanel mainPanel = new JPanel();
@@ -34,7 +34,7 @@ class ActionsWindow {
             defaultUI.setHover(Defaults.BUTTON_HOVER);
 
             panel.setPreferredSize(new Dimension(width - 25, height));
-            panel.setBounds(20, 5, width - 40, height - 10);
+            panel.setBounds(10, 5, width - 20, height - 10);
             if (!Settings.windowedMode) {
                 mainPanel.setBackground(Defaults.MAIN);
                 panel.setBackground(Defaults.MAIN);
@@ -65,12 +65,16 @@ class ActionsWindow {
                         if (LevelsWindow.getSelectedID() == 0 && Requests.levels.size() > 1) {
                             Requests.levels.remove(LevelsWindow.getSelectedID());
                             LevelsWindow.removeButton();
-
+                            File wait = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.wait");
+                            File temp = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp");
+                            File song = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
+                            song.renameTo(temp);
+                            wait.renameTo(song);
                             Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
                                     + Requests.levels.get(0).getLevelID() + "). Requested by "
                                     + Requests.levels.get(0).getRequester());
                         } else {
-                            if (Requests.levels.get(LevelsWindow.getSelectedID()).getSongName().equalsIgnoreCase("Custom")) {
+                            if (Requests.levels.get(LevelsWindow.getSelectedID()).getSongName().equalsIgnoreCase("Custom") && !Requests.levels.get(LevelsWindow.getSelectedID()).getPersist()) {
                                 File tempSong = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp");
                                 File rename = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
                                 File remove = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
@@ -115,11 +119,13 @@ class ActionsWindow {
                     }
                     if (Requests.levels.size() != 0) {
 
-                        if (Requests.levels.get(LevelsWindow.getSelectedID()).getSongName().equalsIgnoreCase("Custom")) {
+                        if (Requests.levels.get(LevelsWindow.getSelectedID()).getSongName().equalsIgnoreCase("Custom") && !Requests.levels.get(LevelsWindow.getSelectedID()).getPersist()) {
                             File tempSong = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp");
                             File rename = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
                             File remove = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
+                            File wait = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.wait");
                             remove.delete();
+                            wait.delete();
                             tempSong.renameTo(rename);
                         }
                         Requests.levels.remove(LevelsWindow.getSelectedID());
@@ -144,7 +150,11 @@ class ActionsWindow {
                                     Requests.levels.get(num).getLevelID());
                             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                             clipboard.setContents(selection, selection);
-
+                            File wait = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.wait");
+                            File temp = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp");
+                            File song = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
+                            song.renameTo(temp);
+                            wait.renameTo(song);
                             Main.sendMessage("Now Playing " + Requests.levels.get(num).getName() + " ("
                                     + Requests.levels.get(num).getLevelID() + "). Requested by "
                                     + Requests.levels.get(num).getRequester());
@@ -231,6 +241,13 @@ class ActionsWindow {
                     if (n == 0) {
                         if (Requests.levels.size() != 0) {
                             for (int i = 0; i < Requests.levels.size(); i++) {
+                                    if (Requests.levels.get(i).getSongName().equalsIgnoreCase("Custom")) {
+                                        File tempSong = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3.temp");
+                                        File rename = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3");
+                                        File remove = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3");
+                                        remove.delete();
+                                        tempSong.renameTo(rename);
+                                    }
                                 LevelsWindow.removeButton();
                             }
                             Requests.levels.clear();
@@ -244,40 +261,6 @@ class ActionsWindow {
             });
             panel.add(clear);
             //endregion
-            JButton stop = createButton("\uE71A");
-            stop.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    ((InnerWindow) window).moveToFront();
-                    super.mousePressed(e);
-                    Object[] options = {"Yes", "No"};
-                    if(requests) {
-                        int n = JOptionPane.showOptionDialog(Overlay.frame,
-                                "Stop requests??",
-                                "Stop? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
-                                JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-                        stop.setText("\uE768");
-                        if (n == 0) {
-                            requests = false;
-                            Main.sendMessage("/me Requests are now off!");
-
-                        }
-                    }
-                    else{
-                        int n = JOptionPane.showOptionDialog(Overlay.frame,
-                                "Start requests??",
-                                "Start? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
-                                JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-                        stop.setText("\uE71A");
-                        if (n == 0) {
-                            requests = true;
-                            Main.sendMessage("/me Requests are now on!");
-
-                        }
-                    }
-                }
-            });
-            panel.add(stop);
             mainPanel.add(panel);
             window.add(mainPanel);
             ((InnerWindow) window).refreshListener();

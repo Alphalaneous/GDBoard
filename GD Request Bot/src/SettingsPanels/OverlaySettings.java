@@ -1,11 +1,8 @@
 package SettingsPanels;
 
-import java.awt.Color;
-import java.awt.Dimension;
+import Main.CheckboxButton;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class OverlaySettings {
@@ -15,11 +12,7 @@ public class OverlaySettings {
 		panel.setDoubleBuffered(true);
 		panel.setBounds(0, 0, 415, 622);
 		panel.setBackground(Main.Defaults.SUB_MAIN);
-		
-		JButton toggleRequests = new Main.CheckBoxButton("Show request overlays (Requires Restart)", 415,30).createButton();
-		
-		
-		panel.add(toggleRequests);
+
 		return panel;
 		
 	}

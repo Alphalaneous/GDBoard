@@ -140,6 +140,7 @@ class Requests {
                         if (customUrl != null) {
                             url1 = new URL(customUrl);
                             fileName = FilenameUtils.getName(url1.getPath());
+                            System.out.println(fileName);
                         }
 
                         levels.add(levelData);
@@ -157,10 +158,11 @@ class Requests {
                                             if (file2.equalsIgnoreCase(levelData.getSongID() + ".mp3")) {
                                                 if (!isCustomSong) {
                                                     download = false;
-                                                } else {
-                                                    File file1 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + file2 + "");
-                                                    File file3 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + file2 + ".temp");
-                                                    file1.renameTo(file3);
+                                                }
+                                                else if(Requests.levels.size() == 1){
+                                                    File temp = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp");
+                                                    File song = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
+                                                    song.renameTo(temp);
                                                 }
                                                 break;
                                             }
@@ -170,8 +172,13 @@ class Requests {
                                     e.printStackTrace();
                                 }
                                 if (download && !levelData.getSongID().equalsIgnoreCase("0")) {
-                                    File file2 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3");
-
+                                    File file2;
+                                    if(Requests.levels.size() == 1){
+                                        file2 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3");
+                                    }
+                                    else {
+                                        file2 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3.wait");
+                                    }
                                     URL url;
                                     assert finalFileName != null;
                                     if (isCustomSong && finalFileName.endsWith(".mp3")) {
@@ -201,7 +208,7 @@ class Requests {
                                     + Requests.levels.get(0).getRequester());
                         }
                         assert fileName != null;
-                        if (isCustomSong && fileName.endsWith(".mp3")) {
+                        if (isCustomSong) {
                             levelData.setSongName("Custom");
                             levelData.setSongAuthor("");
                         } else {

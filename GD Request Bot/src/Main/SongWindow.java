@@ -26,6 +26,7 @@ class SongWindow {
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static JButton play;
 	private static JButton stop;
+	private static CurvedButton persist = new CurvedButton("Make music persist?");
 
 	static void createPanel() {
 		panel.setBounds(1, 31, width, height);
@@ -45,7 +46,6 @@ class SongWindow {
 			@SuppressWarnings("deprecation")
 			public void mousePressed(MouseEvent e) {
 				((InnerWindow) window).moveToFront();
-				super.mousePressed(e);
 
 				if (Requests.levels.size() != 0) {
 
@@ -74,13 +74,33 @@ class SongWindow {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				((InnerWindow) window).moveToFront();
-				super.mousePressed(e);
 				if (thread[0].isAlive()) {
 					thread[0].stop();
 				}
 			}
 		});
-		
+		persist.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if(!Requests.levels.get(LevelsWindow.getSelectedID()).getPersist()) {
+					persist.setLText("Remove persist?");
+					Requests.levels.get(LevelsWindow.getSelectedID()).setPersist(true);
+				}
+				else{
+					persist.setLText("Make music persist?");
+					Requests.levels.get(LevelsWindow.getSelectedID()).setPersist(false);
+				}
+			}
+		});
+		persist.setBounds(20,height-40,260,30);
+		persist.setBackground(Defaults.BUTTON);
+		persist.setUI(defaultUI);
+		persist.setForeground(Defaults.FOREGROUND);
+		persist.setBorder(BorderFactory.createEmptyBorder());
+		persist.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		persist.refresh();
+		persist.setVisible(false);
+
 		songName.setFont(new Font("bahnschrift", Font.PLAIN, 20));
 		songName.setBounds(10, 7, width, 30);
 		songName.setForeground(Defaults.FOREGROUND);
@@ -89,7 +109,7 @@ class SongWindow {
 		songAuthorID.setBounds(10, height - 28, width/2, 20);
 		songAuthorID.setForeground(Defaults.FOREGROUND);
 		
-		
+		panel.add(persist);
 		panel.add(songName);
 		panel.add(songAuthorID);
 		panel.add(play);
@@ -129,11 +149,13 @@ class SongWindow {
 				songAuthorID.setText("");
 				stop.setVisible(false);
 				play.setVisible(false);
+				persist.setVisible(true);
 			}
 			else{
 				songAuthorID.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getSongAuthor() + " (" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ")");
 				play.setVisible(true);
 				stop.setVisible(true);
+				persist.setVisible(false);
 			}
 		}
 	}

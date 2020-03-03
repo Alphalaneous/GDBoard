@@ -23,6 +23,13 @@ class SettingsWindow {
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static JButtonUI selectUI = new JButtonUI();
 
+	private static JPanel general = SettingsPanels.GeneralSettings.createPanel();
+	private static JPanel overlay = SettingsPanels.OverlaySettings.createPanel();
+	private static JPanel accounts = SettingsPanels.AccountSettings.createPanel();
+	private static JPanel shortcuts = SettingsPanels.ShortcutSettings.createPanel();
+	private static JPanel personalization = SettingsPanels.PersonalizationSettings.createPanel();
+	private static JPanel blocked = SettingsPanels.BlockedSettings.createPanel();
+
 	static void createPanel() {
 
 		blankSpace.setBounds(1, 31, 208, 20);
@@ -34,12 +41,25 @@ class SettingsWindow {
 		content.setBounds(208, 31, 415, height);
 		content.setBackground(Defaults.SUB_MAIN);
 		content.setLayout(null);
-		content.add(SettingsPanels.GeneralSettings.createPanel());
+
+		content.add(general);
+		content.add(overlay);
+		content.add(accounts);
+		content.add(shortcuts);
+		content.add(personalization);
+		content.add(blocked);
+
+		general.setVisible(true);
+		overlay.setVisible(false);
+		accounts.setVisible(false);
+		shortcuts.setVisible(false);
+		personalization.setVisible(false);
+		blocked.setVisible(false);
 
 		JButton general = createButton("General");
 		general.setBackground(Defaults.SELECT);
 		general.setUI(selectUI);
-		//JButton overlays = createButton("Overlays");
+		JButton overlays = createButton("Overlays");
 		JButton accounts = createButton("Accounts");
 		JButton shortcuts = createButton("Shortcuts");
 		JButton personalization = createButton("Personalization");
@@ -124,41 +144,32 @@ class SettingsWindow {
 			public void mousePressed(MouseEvent e) {
 				((InnerWindow) window).moveToFront();
 				super.mousePressed(e);
-
 				for (Component component2 : button.getComponents()) {
 					if (component2 instanceof JLabel) {
 						System.out.println(((JLabel) component2).getText());
-
+						for (Component componentA : content.getComponents()) {
+							if (componentA instanceof JPanel) {
+								componentA.setVisible(false);
+							}
+						}
 						switch (((JLabel) component2).getText()) {
 							case "General":
-								content.remove(0);
-								content.add(SettingsPanels.GeneralSettings.createPanel());
-								content.updateUI();
+								general.setVisible(true);
 								break;
 							case "Overlays":
-								content.remove(0);
-								content.add(SettingsPanels.OverlaySettings.createPanel());
-								content.updateUI();
+								overlay.setVisible(true);
 								break;
 							case "Accounts":
-								content.remove(0);
-								content.add(SettingsPanels.AccountSettings.createPanel());
-								content.updateUI();
+								accounts.setVisible(true);
 								break;
 							case "Shortcuts":
-								content.remove(0);
-								content.add(SettingsPanels.ShortcutSettings.createPanel());
-								content.updateUI();
+								shortcuts.setVisible(true);
 								break;
 							case "Personalization":
-								content.remove(0);
-								content.add(SettingsPanels.PersonalizationSettings.createPanel());
-								content.updateUI();
+								personalization.setVisible(true);
 								break;
 							case "Blocked":
-								content.remove(0);
-								content.add(SettingsPanels.BlockedSettings.createPanel());
-								content.updateUI();
+								blocked.setVisible(true);
 								break;
 						}
 						break;

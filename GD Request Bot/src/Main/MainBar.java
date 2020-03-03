@@ -23,10 +23,10 @@ class MainBar {
     private static JPanel mainPanel = new JPanel();
     private static JPanel buttonPanel = new JPanel();
     private static JLabel icon = new JLabel();
-
+    static boolean requests = true;
     static void createBar() {
 
-
+        //TODO Settings and request toggle buttons in windowed mode
         double ratio = 1920 / Defaults.screenSize.getWidth();
         Overlay.alwaysFront(barPanel);
         barPanel.setOpaque(false);
@@ -117,6 +117,25 @@ class MainBar {
                 ActionsWindow.toggleVisible();
             }
         });
+        JButton stopReqs = createSubButton("\uE71A", "Toggle Requests");
+        stopReqs.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if(requests) {
+                        stopReqs.setText("\uE768");
+                        requests = false;
+                        Main.sendMessage("/me Requests are now off!");
+
+                }
+                else{
+                        stopReqs.setText("\uE71A");
+                        requests = true;
+                        Main.sendMessage("/me Requests are now on!");
+
+
+                }
+            }
+        });
         JButton toggleSettings = createSubButton("\uE713", "Settings");
         toggleSettings.addMouseListener(new MouseAdapter() {
             @Override
@@ -144,12 +163,20 @@ class MainBar {
                 }
 
                 for (int i = 0; i < Requests.levels.size(); i++) {
-                    if (Requests.levels.get(i).getSongName().equalsIgnoreCase("Custom")) {
+                    if (Requests.levels.get(i).getSongName().equalsIgnoreCase("Custom") && !Requests.levels.get(LevelsWindow.getSelectedID()).getPersist()) {
                         File tempSong = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3.temp");
+                        File wait = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3.wait");
                         File rename = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3");
                         File remove = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3");
                         remove.delete();
+                        wait.delete();
                         tempSong.renameTo(rename);
+                    }
+                    else if(Requests.levels.get(i).getSongName().equalsIgnoreCase("Custom")){
+                        File tempSong = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3.temp");
+                        File wait = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3.wait");
+                        tempSong.delete();
+                        wait.delete();
                     }
                 }
                 System.exit(0);
@@ -170,6 +197,7 @@ class MainBar {
         buttonPanel.add(toggleLevels);
         buttonPanel.add(toggleInfo);
         buttonPanel.add(toggleActions);
+        buttonPanel.add(stopReqs);
         buttonPanel.add(toggleSettings);
         buttonPanel.add(close);
 
@@ -212,6 +240,7 @@ class MainBar {
                     ((JButtonTooltip) toggleInfo).setTooltipLocation(toggleInfo.getLocationOnScreen().x + (toggleInfo.getWidth() / 2));
                     ((JButtonTooltip) toggleSong).setTooltipLocation(toggleSong.getLocationOnScreen().x + (toggleSong.getWidth() / 2));
                     ((JButtonTooltip) toggleLevels).setTooltipLocation(toggleLevels.getLocationOnScreen().x + (toggleLevels.getWidth() / 2));
+                    ((JButtonTooltip) stopReqs).setTooltipLocation(stopReqs.getLocationOnScreen().x + (stopReqs.getWidth() / 2));
                     ((JButtonTooltip) toggleSettings).setTooltipLocation(toggleSettings.getLocationOnScreen().x + (toggleSettings.getWidth() / 2));
                     ((JButtonTooltip) close).setTooltipLocation(close.getLocationOnScreen().x + (close.getWidth() / 2));
                     break;
@@ -232,7 +261,7 @@ class MainBar {
 
         defaultUI.setBackground(Defaults.MAIN);
         JButton button = new JButtonTooltip(icon, 64, tooltip, defaultUI);
-        button.setPreferredSize(new Dimension(64, 64));
+        button.setPreferredSize(new Dimension(60, 64));
         button.setBackground(Defaults.MAIN);
         button.setUI(defaultUI);
         button.setForeground(Defaults.FOREGROUND);
@@ -245,7 +274,7 @@ class MainBar {
 
         subUI.setBackground(Defaults.TOP);
         JButton button = new JButtonTooltip(icon, 64, tooltip, subUI);
-        button.setPreferredSize(new Dimension(50, 64));
+        button.setPreferredSize(new Dimension(40, 64));
         button.setBackground(Defaults.TOP);
         button.setUI(subUI);
         button.setForeground(Defaults.FOREGROUND);

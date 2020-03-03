@@ -97,6 +97,10 @@ class LevelData {
 		return length;
 	}
 
+	boolean getPersist(){
+		return persist;
+	}
+
 	private String requester;
 	private String author;
 	private String name;
@@ -121,6 +125,7 @@ class LevelData {
 	private boolean analyzed = false;
 	private int stars;
 	private String length;
+	private boolean persist;
 	
 	void setStars(int stars) {
 		this.stars = stars;
@@ -141,7 +146,10 @@ class LevelData {
 	//void setLevelData(ArrayList<GDObject> levelData) {
 	//	this.levelData = levelData;
 	//}
-	
+	void setPersist(boolean persist){
+		this.persist = persist;
+	}
+
 	void setRequester(String requester) {
 		this.requester = requester;
 	}
