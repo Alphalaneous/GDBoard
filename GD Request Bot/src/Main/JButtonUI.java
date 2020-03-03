@@ -103,13 +103,13 @@ public class JButtonUI extends BasicButtonUI implements java.io.Serializable, Mo
 			c.setBackground(m_backgroundNormal);
 		}
 	}
-	void setSelect(Color color) {
+	public void setSelect(Color color) {
 		selectColor = color;
 	}
 	public void setBackground(Color color) {
 		bgColor = color;
 	}
-	void setHover(Color color) {
+	public void setHover(Color color) {
 		hoverColor = color;
 	}
 }

@@ -48,9 +48,9 @@ class SettingsWindow {
 		buttons.add(general);
 		//buttons.add(overlays);
 		buttons.add(accounts);
-		buttons.add(shortcuts);
-		buttons.add(personalization);
-		buttons.add(blocked);
+		//buttons.add(shortcuts);
+		//buttons.add(personalization);
+		//buttons.add(blocked);
 
 		window.add(blankSpace);
 		window.add(buttons);
@@ -178,9 +178,19 @@ class SettingsWindow {
 		});
 		return button;
 	}
+	//region SetLocation
+	static void setLocation(Point point){
+		window.setLocation(point);
+	}
+	//endregion
 	//region Toggle Visible
 	static void toggleVisible() {
 		((InnerWindow) window).toggle();
+	}
+	//endregion
+	//region SetSettings
+	static void setSettings(){
+		((InnerWindow) window).setSettings();
 	}
 	//endregion
 }

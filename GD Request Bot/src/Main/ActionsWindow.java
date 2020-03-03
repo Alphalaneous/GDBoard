@@ -16,13 +16,13 @@ import java.util.Random;
 class ActionsWindow {
 
     private static int height = 60;
-    private static int width = 300;
+    private static int width = 400;
     private static ResizablePanel window = new InnerWindow("Actions", Settings.getActionsWLoc().x, Settings.getActionsWLoc().y, width, height,
             "\uE7C9").createPanel();
     private static JPanel mainPanel = new JPanel();
     private static JPanel panel = new JPanel();
     private static JButtonUI defaultUI = new JButtonUI();
-
+    static boolean requests = true;
     //region Create Panel
     static void createPanel() {
         try {
@@ -34,7 +34,7 @@ class ActionsWindow {
             defaultUI.setHover(Defaults.BUTTON_HOVER);
 
             panel.setPreferredSize(new Dimension(width - 25, height));
-            panel.setBounds(15, 5, width - 25, height - 10);
+            panel.setBounds(20, 5, width - 40, height - 10);
             if (!Settings.windowedMode) {
                 mainPanel.setBackground(Defaults.MAIN);
                 panel.setBackground(Defaults.MAIN);
@@ -244,7 +244,40 @@ class ActionsWindow {
             });
             panel.add(clear);
             //endregion
+            JButton stop = createButton("\uE71A");
+            stop.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    ((InnerWindow) window).moveToFront();
+                    super.mousePressed(e);
+                    Object[] options = {"Yes", "No"};
+                    if(requests) {
+                        int n = JOptionPane.showOptionDialog(Overlay.frame,
+                                "Stop requests??",
+                                "Stop? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
+                                JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+                        stop.setText("\uE768");
+                        if (n == 0) {
+                            requests = false;
+                            Main.sendMessage("/me Requests are now off!");
 
+                        }
+                    }
+                    else{
+                        int n = JOptionPane.showOptionDialog(Overlay.frame,
+                                "Start requests??",
+                                "Start? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
+                                JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+                        stop.setText("\uE71A");
+                        if (n == 0) {
+                            requests = true;
+                            Main.sendMessage("/me Requests are now on!");
+
+                        }
+                    }
+                }
+            });
+            panel.add(stop);
             mainPanel.add(panel);
             window.add(mainPanel);
             ((InnerWindow) window).refreshListener();

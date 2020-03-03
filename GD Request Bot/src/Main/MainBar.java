@@ -135,6 +135,7 @@ class MainBar {
                 InfoWindow.setSettings();
                 LevelsWindow.setSettings();
                 SongWindow.setSettings();
+                SettingsWindow.setSettings();
                 try {
                     Settings.writeLocation();
                     Settings.writeSettings("monitor", String.valueOf(Defaults.screenNum));

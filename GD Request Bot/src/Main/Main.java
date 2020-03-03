@@ -93,17 +93,8 @@ public class Main {
 
 			//endregion
 			//region Start ChatBot and keep trying if it fails
-			while (true) {                            //If the Chat Bot fails, try again
-				try {
-					bot.start();
-				} catch (Exception e) {
-					bot = new ChatBot();                                                //Create ChatBot
-					bot.connect();                                                        //Connect the bot
-				}
-				//Start the Chat Bot
-				Thread.sleep(100);            //Sleep before trying again
+			restartBot();		//Start the Chat Bot
 
-			}
 		}
 		catch (Exception e){
 			e.printStackTrace();
@@ -118,6 +109,13 @@ public class Main {
 	}
 	static ChatBot getChatBot(){
 		return bot;
+	}
+	public static void restartBot(){
+			bot.stop();
+			bot = new ChatBot();
+			bot.connect();
+			bot.joinChannel(Settings.channel);
+			bot.start();		//Start the Chat Bot
 	}
 	//endregion
 }

@@ -2,16 +2,15 @@ package SettingsPanels;
 
 import Main.Defaults;
 import Main.Main;
-import Main.Overlay;
+import Main.JButtonUI;
 import Main.Settings;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
+import Main.CurvedButton;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.lang.management.ManagementFactory;
 import java.net.URI;
 
 import javax.swing.*;
@@ -23,7 +22,18 @@ public class AccountSettings {
 		panel.setDoubleBuffered(true);
 		panel.setBounds(0, 0, 415, 622);
 		panel.setBackground(Defaults.SUB_MAIN);
-		JButton button = new JButton("Reauthenticate (Requires Restart)");
+		panel.setLayout(null);
+		CurvedButton button = new CurvedButton("Reauthenticate Twitch");
+		JButtonUI defaultUI = new JButtonUI();
+		defaultUI.setBackground(Defaults.MAIN);
+		defaultUI.setHover(Defaults.HOVER);
+		defaultUI.setSelect(Defaults.SELECT);
+		button.setBackground(Defaults.MAIN);
+		button.setBounds(25,20,365,30);
+		button.setUI(defaultUI);
+		button.setForeground(Defaults.FOREGROUND);
+		button.setBorder(BorderFactory.createEmptyBorder());
+		button.setFont(new Font("bahnschrift", Font.PLAIN, 14));
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -41,6 +51,7 @@ public class AccountSettings {
 						if (twitch.auth().awaitAccessToken()) {                                    //If oauth retrieving succeeds, set oauth in settings
 							Settings.setOAuth(twitch.auth().getAccessToken());
 							Settings.writeSettings("oauth", twitch.auth().getAccessToken());
+							Main.restartBot();
 						} else {                                                                    //Else print error
 							System.out.println(twitch.auth().getAuthenticationError());
 						}
@@ -51,6 +62,7 @@ public class AccountSettings {
 				thread.start();
 			}
 		});
+		button.refresh();
 		panel.add(button);
 		return panel;
 		

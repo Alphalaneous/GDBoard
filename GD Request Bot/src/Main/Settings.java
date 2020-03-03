@@ -62,6 +62,12 @@ public class Settings {
             songX = Boolean.parseBoolean(setting.split(",")[3]);
             songWLoc = new Point(x, y);
         }
+        if (key.equalsIgnoreCase("Settings")) {
+            int x = Integer.parseInt(setting.split(",")[0]);
+            int y = Integer.parseInt(setting.split(",")[1]);
+            settingsX = Boolean.parseBoolean(setting.split(",")[3]);
+            settingsWLoc = new Point(x, y);
+        }
     }
     static void writeLocation() throws IOException {
         writeSettings("song", songWLoc.x + "," + songWLoc.y + "," + songPin + "," + songX);
@@ -69,6 +75,7 @@ public class Settings {
         writeSettings("info", infoWLoc.x + "," + infoWLoc.y + "," + infoPin + "," + infoX);
         writeSettings("requests", requestsWLoc.x + "," + requestsWLoc.y + "," + reqPin + "," + reqX);
         writeSettings("comments", commentWLoc.x + "," + commentWLoc.y + "," + comPin + "," + comX);
+        writeSettings("settings", settingsWLoc.x + "," + settingsWLoc.y  + "," + settingsX);
     }
     public static void writeSettings(String key, String setting) throws IOException {
         gfg.load(in);
@@ -212,6 +219,19 @@ public class Settings {
                 }
             } catch (NullPointerException ignored) {
             }
+            try {
+                int x = Integer.parseInt(gfg.get("settings").toString().split(",")[0]);
+                int y = Integer.parseInt(gfg.get("settings").toString().split(",")[1]);
+                settingsX = Boolean.parseBoolean(gfg.get("settings").toString().split(",")[2]);
+                settingsWLoc = new Point(x, y);
+                if(!Settings.windowedMode) {
+                    SettingsWindow.setLocation(settingsWLoc);
+                    if (!settingsX) {
+                        SettingsWindow.toggleVisible();
+                    }
+                }
+            } catch (NullPointerException ignored) {
+            }
         }
     }
 
@@ -222,6 +242,7 @@ public class Settings {
     private static Point commentWLoc = new Point(10, 500);
     private static Point songWLoc = new Point(1920 - 300 - 10, 600);
     private static Point actionsWLoc = new Point(1920 - 260 - 10, 200);
+    private static Point settingsWLoc = new Point(1920/2 - 250, 1080/2 - 300);
     static int keybind;
     static int monitor;
     static String channel;
@@ -239,6 +260,7 @@ public class Settings {
     private static boolean comX = true;
     private static boolean actX = true;
     private static boolean reqX = true;
+    private static boolean settingsX = false;
 
     //TODO Save window sizes
     //TODO Requests off Setting
