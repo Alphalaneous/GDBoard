@@ -6,46 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Main/CurvedButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/META-INF/GD Request Bot.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/bin/META-INF/GD Request Bot.kotlin_module" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/ChatBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/ChatBot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/Defaults.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Defaults.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/JButtonUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/JButtonUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/MainBar$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/MainBar$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/MainBar$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/MainBar$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/MainBar$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/MainBar$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/MainBar$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/MainBar$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/MainBar$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/MainBar$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/MainBar$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/MainBar$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/MainBar$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/MainBar$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/MainBar$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/MainBar$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/MainBar.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/MainBar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/Overlay$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Overlay$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/Overlay.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Overlay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Settings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/SettingsWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/SettingsWindow$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/SettingsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/SettingsWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/AccountSettings$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/AccountSettings$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/AccountSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/AccountSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/BlockedSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/BlockedSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/GeneralSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/GeneralSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/PersonalizationSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/PersonalizationSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/ShortcutSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/ShortcutSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/ActionsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/ActionsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/JButtonUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/JButtonUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/MainBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/MainBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Requests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Requests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/SettingsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SettingsPanels/AccountSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SettingsPanels/AccountSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SettingsPanels/BlockedSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SettingsPanels/BlockedSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SettingsPanels/ShortcutSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SettingsPanels/ShortcutSettings.java" afterDir="false" />
-    </list>
+    <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -283,7 +244,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1583195372022" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1583195719177" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Java Stuff/GDBoard" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.14648438" />
@@ -411,7 +372,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="496" y="26" width="1385" height="973" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Image Layers" />
       <window_info id="Designer" />
@@ -426,7 +386,7 @@
       <window_info anchor="bottom" id="Messages" weight="0.3297619" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3297619" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3297619" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />

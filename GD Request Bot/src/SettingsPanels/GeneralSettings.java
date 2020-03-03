@@ -5,10 +5,7 @@ import Main.Main;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class GeneralSettings {
 	public static JPanel createPanel() {
@@ -17,8 +14,12 @@ public class GeneralSettings {
 		panel.setDoubleBuffered(true);
 		panel.setBounds(0, 0, 415, 622);
 		panel.setBackground(Defaults.SUB_MAIN);
-		InputStream is = Main.class.getClassLoader()
-				.getResourceAsStream(".version");
+		InputStream is = null;
+		try {
+			is = new FileInputStream(System.getenv("APPDATA") + "\\GDBoard\\version.txt");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		assert is != null;
 		InputStreamReader isr = new InputStreamReader(is);
 		BufferedReader br = new BufferedReader(isr);
