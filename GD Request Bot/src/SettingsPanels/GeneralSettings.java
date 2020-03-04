@@ -7,14 +7,22 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
-import java.util.Set;
 
 public class GeneralSettings {
 	private static JButtonUI defaultUI = new JButtonUI();
 	public static boolean followersOption = false;
 	public static boolean subsOption = false;
+	public static boolean ratedOption = false;
 	private static CheckboxButton followers = createButton("Followers Only", 50);
-	private static CheckboxButton subs = createButton("Subscribers Only", 80);
+	//private static CheckboxButton subs = createButton("Subscribers Only", 80);
+	private static CheckboxButton rated = createButton("Rated Levels Only", 80);
+	/*private static CheckboxButton auto = createButton("Auto", 110);
+	private static CheckboxButton easy = createButton("Easy", 140);
+	private static CheckboxButton normal = createButton("Normal", 170);
+	private static CheckboxButton hard = createButton("Hard", 200);
+	private static CheckboxButton harder = createButton("Harder", 230);
+	private static CheckboxButton insane = createButton("Insane", 260);
+	private static CheckboxButton demon = createButton("Demon", 290);*/
 	public static JPanel createPanel() {
 
 		defaultUI.setBackground(Defaults.BUTTON);
@@ -48,15 +56,30 @@ public class GeneralSettings {
 			}
 		});
 
-		subs.addMouseListener(new MouseAdapter() {
+		/*subs.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				subsOption = subs.getSelectedState();
 			}
+		});*/
+
+		rated.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				ratedOption = rated.getSelectedState();
+			}
 		});
 
 		panel.add(followers);
-		panel.add(subs);
+		//panel.add(subs);
+		panel.add(rated);
+		/*panel.add(auto);
+		panel.add(easy);
+		panel.add(normal);
+		panel.add(hard);
+		panel.add(harder);
+		panel.add(insane);
+		panel.add(demon);*/
 		panel.add(label);
 
 		return panel;
@@ -67,9 +90,11 @@ public class GeneralSettings {
 	public static void loadSettings(){
 		try {
 			followersOption = Boolean.parseBoolean(Settings.getSettings("followers"));
-			subsOption = Boolean.parseBoolean(Settings.getSettings("subs"));
+			//subsOption = Boolean.parseBoolean(Settings.getSettings("subs"));
+			ratedOption = Boolean.parseBoolean(Settings.getSettings("rated"));
 			followers.setChecked(followersOption);
-			subs.setChecked(subsOption);
+			//subs.setChecked(subsOption);
+			rated.setChecked(ratedOption);
 		}
 		catch (Exception ignored){
 
@@ -78,13 +103,14 @@ public class GeneralSettings {
 	public static void setSettings(){
 		try {
 			Settings.writeSettings("followers", String.valueOf(followersOption));
-			Settings.writeSettings("subs", String.valueOf(subsOption));
+			//Settings.writeSettings("subs", String.valueOf(subsOption));
+			Settings.writeSettings("rated", String.valueOf(ratedOption));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static CheckboxButton createButton(String text, int y){
+	private static CheckboxButton createButton(String text, int y){
 
 		CheckboxButton button = new CheckboxButton(text);
 		button.setBounds(25,y,365,30);

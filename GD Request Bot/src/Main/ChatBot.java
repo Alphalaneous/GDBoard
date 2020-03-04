@@ -295,6 +295,7 @@ public class ChatBot extends TwitchBot {
             //region Unblock Command
             if (command.equalsIgnoreCase("!unblock") && (Defaults.mods.contains(user) || isBroadcaster)) {
                 String unblocked = arguments[1];
+                BlockedSettings.removeID(unblocked);
                 try {
                     boolean exists = false;
                     File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
@@ -328,7 +329,6 @@ public class ChatBot extends TwitchBot {
                     ex.printStackTrace();
                     sendMessage("@" + user + " unblock failed!", channel);
                 }
-                BlockedSettings.loadIDs();
             }
             //endregion
 
@@ -337,6 +337,7 @@ public class ChatBot extends TwitchBot {
 
                 try {
                     int blockedID = Integer.parseInt(arguments[1]);
+                    BlockedSettings.addButton(String.valueOf(blockedID));
                     boolean goThrough = true;
                     File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
                     Scanner sc = new Scanner(file);
@@ -366,7 +367,6 @@ public class ChatBot extends TwitchBot {
                 } catch (Exception e) {
                     sendMessage("@" + user + " Invalid ID", channel);
                 }
-                BlockedSettings.loadIDs();
             }
             //endregion
 
@@ -384,6 +384,7 @@ public class ChatBot extends TwitchBot {
                 Matcher m = null;
                 if(!user.isFollowing(channel) && GeneralSettings.followersOption){
                     if(!(isBroadcaster || Defaults.mods.contains(user))) {
+                        sendMessage("@" + user + " Please follow to request levels!", channel);
                         return;
                     }
                 }
@@ -392,6 +393,7 @@ public class ChatBot extends TwitchBot {
                         return;
                     }
                 }
+
                 if (arguments.length > 1) {
                     try {
                         m = Pattern.compile("(\\d+)").matcher(arguments[1]);
@@ -478,14 +480,13 @@ public class ChatBot extends TwitchBot {
             else {
                 if(!user.isFollowing(channel) && GeneralSettings.followersOption){
                     if(!(isBroadcaster || Defaults.mods.contains(user))){
-                        System.out.println("no f");
+                        sendMessage("@" + user + " Please follow to request levels!", channel);
                         return;
                     }
 
                 }
                 if(!user.isSubscribed(channel, Settings.oauth) && GeneralSettings.subsOption){
                     if(!(isBroadcaster || Defaults.mods.contains(user))) {
-                        System.out.println("no s");
                         return;
                     }
                 }

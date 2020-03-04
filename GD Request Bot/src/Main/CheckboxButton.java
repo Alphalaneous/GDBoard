@@ -33,22 +33,25 @@ public class CheckboxButton extends JButton {
 		setContentAreaFilled(false);
 		addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e){
-				check.setText("\uE73B");
-				check.setForeground(Color.LIGHT_GRAY);
-				hover.setVisible(false);
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					check.setText("\uE73B");
+					check.setForeground(Color.LIGHT_GRAY);
+					hover.setVisible(false);
+				}
 			}
 			public void mouseReleased(MouseEvent e) {
-				if(isChecked) {
-					check.setText("\uE922");
-					check.setForeground(Color.LIGHT_GRAY);
-					checkSymbol.setVisible(false);
-					isChecked = false;
-				}
-				else {
-					check.setText("\uE73B");
-					check.setForeground(new Color(75, 155, 240));
-					checkSymbol.setVisible(true);
-					isChecked = true;
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					if (isChecked) {
+						check.setText("\uE922");
+						check.setForeground(Color.LIGHT_GRAY);
+						checkSymbol.setVisible(false);
+						isChecked = false;
+					} else {
+						check.setText("\uE73B");
+						check.setForeground(new Color(75, 155, 240));
+						checkSymbol.setVisible(true);
+						isChecked = true;
+					}
 				}
 				hover.setVisible(true);
 			}

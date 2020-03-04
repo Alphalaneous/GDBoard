@@ -200,6 +200,7 @@ class ActionsWindow {
                                 "Block ID? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
                                 JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
                         if (n == 0) {
+                            BlockedSettings.removeID(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
                             File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
                             FileWriter fr;
                             try {
@@ -224,7 +225,7 @@ class ActionsWindow {
                         InfoWindow.refreshInfo();
                     }
                     LevelsWindow.setOneSelect();
-                    BlockedSettings.loadIDs();
+
                 }
             });
             panel.add(block);

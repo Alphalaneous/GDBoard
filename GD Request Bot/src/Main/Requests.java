@@ -1,5 +1,6 @@
 package Main;
 
+import SettingsPanels.GeneralSettings;
 import com.github.alex1304.jdash.client.AnonymousGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.entity.GDLevel;
@@ -46,7 +47,10 @@ class Requests {
                 // --------------------
                 Thread parse;
                 if (goThrough) {
-
+                    if (level != null && GeneralSettings.ratedOption && !(level.getStars() > 0)) {
+                        Main.sendMessage("@" + requester + " Please send star rated levels only!");
+                        return;
+                    }
                     levelData.setRequester(requester);
                     assert level != null;
                     levelData.setAuthor(level.getCreatorName());
