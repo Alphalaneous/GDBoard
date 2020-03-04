@@ -60,7 +60,7 @@ public class Overlay {
         frame.setLayout(null);
 
         mainFrame.setDoubleBuffered(true);
-        mainFrame.setBounds(0, 0, 1920, 1080);
+        mainFrame.setBounds(0, 0, Defaults.screenSize.width, Defaults.screenSize.height);
         mainFrame.setBackground(new Color(0, 0, 0, 0));
         mainFrame.setLayout(null);
 
