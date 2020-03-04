@@ -103,6 +103,7 @@ public class Overlay {
 
             frame.getContentPane().setBackground(Defaults.SUB_MAIN);
         } else {
+            mainFrame.setBounds(0, 0, Defaults.screenSize.width, Defaults.screenSize.height);
             frame.setBounds(Defaults.screenSize);
         }
         frame.invalidate();
