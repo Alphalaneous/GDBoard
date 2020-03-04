@@ -207,9 +207,11 @@ class Requests {
                             StringSelection selection = new StringSelection(Requests.levels.get(0).getLevelID());
                             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                             clipboard.setContents(selection, selection);
-                            Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
-                                    + Requests.levels.get(0).getLevelID() + "). Requested by "
-                                    + Requests.levels.get(0).getRequester());
+                            if(!GeneralSettings.nowPlayingOption) {
+                                Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
+                                        + Requests.levels.get(0).getLevelID() + "). Requested by "
+                                        + Requests.levels.get(0).getRequester());
+                            }
                         }
                         assert fileName != null;
                         if (isCustomSong) {

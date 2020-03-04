@@ -1,6 +1,7 @@
 package Main;
 
 import SettingsPanels.BlockedSettings;
+import SettingsPanels.GeneralSettings;
 import com.jidesoft.swing.ResizablePanel;
 
 import javax.swing.*;
@@ -71,9 +72,11 @@ class ActionsWindow {
                             File song = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
                             song.renameTo(temp);
                             wait.renameTo(song);
-                            Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
-                                    + Requests.levels.get(0).getLevelID() + "). Requested by "
-                                    + Requests.levels.get(0).getRequester());
+                            if(!GeneralSettings.nowPlayingOption) {
+                                Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
+                                        + Requests.levels.get(0).getLevelID() + "). Requested by "
+                                        + Requests.levels.get(0).getRequester());
+                            }
                         } else {
                             if (Requests.levels.get(LevelsWindow.getSelectedID()).getSongName().equalsIgnoreCase("Custom") && !Requests.levels.get(LevelsWindow.getSelectedID()).getPersist()) {
                                 File tempSong = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp");
@@ -156,9 +159,11 @@ class ActionsWindow {
                             File song = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
                             song.renameTo(temp);
                             wait.renameTo(song);
-                            Main.sendMessage("Now Playing " + Requests.levels.get(num).getName() + " ("
-                                    + Requests.levels.get(num).getLevelID() + "). Requested by "
-                                    + Requests.levels.get(num).getRequester());
+                            if(!GeneralSettings.nowPlayingOption) {
+                                Main.sendMessage("Now Playing " + Requests.levels.get(num).getName() + " ("
+                                        + Requests.levels.get(num).getLevelID() + "). Requested by "
+                                        + Requests.levels.get(num).getRequester());
+                            }
                         }
                     }
                     SongWindow.refreshInfo();

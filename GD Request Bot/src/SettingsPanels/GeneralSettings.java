@@ -13,9 +13,11 @@ public class GeneralSettings {
 	public static boolean followersOption = false;
 	public static boolean subsOption = false;
 	public static boolean ratedOption = false;
+	public static boolean nowPlayingOption = false;
 	private static CheckboxButton followers = createButton("Followers Only", 50);
 	//private static CheckboxButton subs = createButton("Subscribers Only", 80);
 	private static CheckboxButton rated = createButton("Rated Levels Only", 80);
+	private static CheckboxButton nowPlaying = createButton("Disable Now Playing Message", 110);
 	/*private static CheckboxButton auto = createButton("Auto", 110);
 	private static CheckboxButton easy = createButton("Easy", 140);
 	private static CheckboxButton normal = createButton("Normal", 170);
@@ -70,9 +72,17 @@ public class GeneralSettings {
 			}
 		});
 
+		nowPlaying.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				nowPlayingOption = nowPlaying.getSelectedState();
+			}
+		});
+
 		panel.add(followers);
 		//panel.add(subs);
 		panel.add(rated);
+		panel.add(nowPlaying);
 		/*panel.add(auto);
 		panel.add(easy);
 		panel.add(normal);
@@ -92,9 +102,11 @@ public class GeneralSettings {
 			followersOption = Boolean.parseBoolean(Settings.getSettings("followers"));
 			//subsOption = Boolean.parseBoolean(Settings.getSettings("subs"));
 			ratedOption = Boolean.parseBoolean(Settings.getSettings("rated"));
+			nowPlayingOption = Boolean.parseBoolean(Settings.getSettings("disableNP"));
 			followers.setChecked(followersOption);
 			//subs.setChecked(subsOption);
 			rated.setChecked(ratedOption);
+			nowPlaying.setChecked(nowPlayingOption);
 		}
 		catch (Exception ignored){
 
@@ -105,6 +117,7 @@ public class GeneralSettings {
 			Settings.writeSettings("followers", String.valueOf(followersOption));
 			//Settings.writeSettings("subs", String.valueOf(subsOption));
 			Settings.writeSettings("rated", String.valueOf(ratedOption));
+			Settings.writeSettings("disableNP", String.valueOf(nowPlayingOption));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
