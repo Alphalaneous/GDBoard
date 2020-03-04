@@ -70,7 +70,7 @@ class SettingsWindow {
 		buttons.add(accounts);
 		//buttons.add(shortcuts);
 		//buttons.add(personalization);
-		//buttons.add(blocked);
+		buttons.add(blocked);
 
 		window.add(blankSpace);
 		window.add(buttons);

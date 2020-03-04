@@ -1,5 +1,6 @@
 package Main;
 
+import SettingsPanels.BlockedSettings;
 import com.jidesoft.swing.ResizablePanel;
 
 import javax.swing.*;
@@ -213,7 +214,9 @@ class ActionsWindow {
 
                             Thread thread = new Thread(() -> {
                                 CommentsWindow.unloadComments(true);
-                                CommentsWindow.loadComments(0, false);
+                                if(Requests.levels.size() > 0) {
+                                    CommentsWindow.loadComments(0, false);
+                                }
                             });
                             thread.start();
                         }
@@ -221,6 +224,7 @@ class ActionsWindow {
                         InfoWindow.refreshInfo();
                     }
                     LevelsWindow.setOneSelect();
+                    BlockedSettings.loadIDs();
                 }
             });
             panel.add(block);

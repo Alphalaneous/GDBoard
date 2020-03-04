@@ -15,7 +15,7 @@ public class Overlay {
     // --------------------
     // Create JFrame Object
 
-    static JFrame frame = new JFrame();
+    public static JFrame frame = new JFrame();
     private static JLayeredPane mainFrame = new JLayeredPane();
     static boolean isVisible = true;
 

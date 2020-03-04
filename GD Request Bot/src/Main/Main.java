@@ -1,6 +1,7 @@
 package Main;
 
 import Chat.Channel;
+import SettingsPanels.GeneralSettings;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
 
@@ -56,6 +57,7 @@ public class Main {
 					Settings.setOAuth(twitch.auth().getAccessToken());
 					Settings.writeSettings("oauth", twitch.auth().getAccessToken());
 				} else {                                                                    //Else print error
+					JOptionPane.showMessageDialog(null, "Failed to Authenticate Twitch account", "Error",  JOptionPane.ERROR_MESSAGE);
 					System.out.println(twitch.auth().getAuthenticationError());
 				}
 			}
@@ -89,6 +91,7 @@ public class Main {
 				Overlay.refreshUI(true);
 			}
 			Settings.loadSettings(false);
+			GeneralSettings.loadSettings();
 			Overlay.setVisible();
 
 			//endregion

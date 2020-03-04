@@ -8,7 +8,6 @@ import javax.swing.*;
 
 public class CurvedButton extends JButton {
 
-    private static final long serialVersionUID = 1L;
     JLabel text = new JLabel();
 
     public CurvedButton(String label) {
@@ -56,8 +55,6 @@ public class CurvedButton extends JButton {
         if (shape == null || !shape.getBounds().equals(getBounds())) {
             shape = new RoundRectangle2D.Float(0,0,getWidth(),getHeight(),10,10);
         }
-
-
         return shape.contains(x, y);
     }
     public void refresh(){

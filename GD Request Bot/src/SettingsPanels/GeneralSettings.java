@@ -1,18 +1,22 @@
 package SettingsPanels;
 
-import Main.CheckboxButton;
-import Main.Defaults;
-import Main.CurvedButton;
-import Main.JButtonUI;
+import Main.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.*;
+import java.util.Set;
 
 public class GeneralSettings {
 	private static JButtonUI defaultUI = new JButtonUI();
-
+	public static boolean followersOption = false;
+	public static boolean subsOption = false;
+	private static CheckboxButton followers = createButton("Followers Only", 50);
+	private static CheckboxButton subs = createButton("Subscribers Only", 80);
 	public static JPanel createPanel() {
+
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
@@ -21,28 +25,35 @@ public class GeneralSettings {
 		panel.setDoubleBuffered(true);
 		panel.setBounds(0, 0, 415, 622);
 		panel.setBackground(Defaults.SUB_MAIN);
-		InputStream is = null;
+		JLabel label;
+		InputStream is;
 		try {
 			is = new FileInputStream(System.getenv("APPDATA") + "\\GDBoard\\version.txt");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		assert is != null;
-		InputStreamReader isr = new InputStreamReader(is);
-		BufferedReader br = new BufferedReader(isr);
-		JLabel label = null;
-		try {
+			InputStreamReader isr = new InputStreamReader(is);
+			BufferedReader br = new BufferedReader(isr);
 			label = new JLabel("GDBoard version: " + br.readLine().replaceAll("version=", ""));
+
 		} catch (IOException e) {
-			e.printStackTrace();
+			label = new JLabel("GDBoard version: unknown");
 		}
-		assert label != null;
+
 		label.setForeground(Defaults.FOREGROUND2);
 		label.setFont(new Font("bahnschrift", Font.PLAIN, 14));
 		label.setBounds(25,20,label.getPreferredSize().width+5,label.getPreferredSize().height+5);
-		CheckboxButton followers = createButton("Followers Only", 50);
-		CheckboxButton subs = createButton("Subscribers Only", 80);
 
+		followers.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				followersOption = followers.getSelectedState();
+			}
+		});
+
+		subs.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				subsOption = subs.getSelectedState();
+			}
+		});
 
 		panel.add(followers);
 		panel.add(subs);
@@ -53,6 +64,26 @@ public class GeneralSettings {
 
 
 	}
+	public static void loadSettings(){
+		try {
+			followersOption = Boolean.parseBoolean(Settings.getSettings("followers"));
+			subsOption = Boolean.parseBoolean(Settings.getSettings("subs"));
+			followers.setChecked(followersOption);
+			subs.setChecked(subsOption);
+		}
+		catch (Exception ignored){
+
+		}
+	}
+	public static void setSettings(){
+		try {
+			Settings.writeSettings("followers", String.valueOf(followersOption));
+			Settings.writeSettings("subs", String.valueOf(subsOption));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static CheckboxButton createButton(String text, int y){
 
 		CheckboxButton button = new CheckboxButton(text);

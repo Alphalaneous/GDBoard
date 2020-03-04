@@ -1,5 +1,7 @@
 package Main;
 
+import SettingsPanels.GeneralSettings;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
@@ -155,13 +157,14 @@ class MainBar {
                 LevelsWindow.setSettings();
                 SongWindow.setSettings();
                 SettingsWindow.setSettings();
+
                 try {
                     Settings.writeLocation();
                     Settings.writeSettings("monitor", String.valueOf(Defaults.screenNum));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
-
+                GeneralSettings.setSettings();
                 for (int i = 0; i < Requests.levels.size(); i++) {
                     if (Requests.levels.get(i).getSongName().equalsIgnoreCase("Custom") && !Requests.levels.get(LevelsWindow.getSelectedID()).getPersist()) {
                         File tempSong = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3.temp");

@@ -3,6 +3,8 @@ package Main;
 import Chat.Channel;
 import Chat.User;
 import Core.TwitchBot;
+import SettingsPanels.BlockedSettings;
+import SettingsPanels.GeneralSettings;
 import com.github.alex1304.jdash.client.AnonymousGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.entity.GDLevel;
@@ -26,7 +28,6 @@ public class ChatBot extends TwitchBot {
     ChatBot() {
         this.setUsername("chatbot");
         this.setOauth_Key("oauth:" + Settings.oauth);
-
     }
     //endregion
     @Override
@@ -327,11 +328,13 @@ public class ChatBot extends TwitchBot {
                     ex.printStackTrace();
                     sendMessage("@" + user + " unblock failed!", channel);
                 }
+                BlockedSettings.loadIDs();
             }
             //endregion
 
             //region Block Command
             if (command.equalsIgnoreCase("!block") && (Defaults.mods.contains(user) || isBroadcaster)) {
+
                 try {
                     int blockedID = Integer.parseInt(arguments[1]);
                     boolean goThrough = true;
@@ -363,7 +366,7 @@ public class ChatBot extends TwitchBot {
                 } catch (Exception e) {
                     sendMessage("@" + user + " Invalid ID", channel);
                 }
-
+                BlockedSettings.loadIDs();
             }
             //endregion
 
@@ -379,6 +382,16 @@ public class ChatBot extends TwitchBot {
                     command.equalsIgnoreCase("!req") ||
                     command.equalsIgnoreCase("!send")) {
                 Matcher m = null;
+                if(!user.isFollowing(channel) && GeneralSettings.followersOption){
+                    if(!(isBroadcaster || Defaults.mods.contains(user))) {
+                        return;
+                    }
+                }
+                if(!user.isSubscribed(channel, Settings.oauth) && GeneralSettings.subsOption){
+                    if(!(isBroadcaster || Defaults.mods.contains(user))) {
+                        return;
+                    }
+                }
                 if (arguments.length > 1) {
                     try {
                         m = Pattern.compile("(\\d+)").matcher(arguments[1]);
@@ -463,7 +476,19 @@ public class ChatBot extends TwitchBot {
 
             //region Get Requests without Commands
             else {
+                if(!user.isFollowing(channel) && GeneralSettings.followersOption){
+                    if(!(isBroadcaster || Defaults.mods.contains(user))){
+                        System.out.println("no f");
+                        return;
+                    }
 
+                }
+                if(!user.isSubscribed(channel, Settings.oauth) && GeneralSettings.subsOption){
+                    if(!(isBroadcaster || Defaults.mods.contains(user))) {
+                        System.out.println("no s");
+                        return;
+                    }
+                }
                 Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(msg);
                 if (m.find()) {
                     try {

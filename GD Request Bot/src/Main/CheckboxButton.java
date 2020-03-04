@@ -3,9 +3,6 @@ package Main;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.*;
 
@@ -21,11 +18,11 @@ public class CheckboxButton extends JButton {
 		text.setText(label);
 		text.setForeground(getForeground());
 		check.setForeground(getForeground());
-		check.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 18));
+		check.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 16));
 		checkSymbol.setForeground(getForeground());
-		checkSymbol.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 18));
+		checkSymbol.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 16));
 		hover.setForeground(getForeground());
-		hover.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 18));
+		hover.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 16));
 		checkSymbol.setVisible(false);
 		hover.setVisible(false);
 		add(hover);
@@ -56,7 +53,6 @@ public class CheckboxButton extends JButton {
 				hover.setVisible(true);
 			}
 			public void mouseEntered(MouseEvent e) {
-				//check.setForeground(Color.LIGHT_GRAY);
 				hover.setVisible(true);
 			}
 			public void mouseExited(MouseEvent e) {
@@ -73,6 +69,22 @@ public class CheckboxButton extends JButton {
 				hover.setVisible(false);
 			}
 		});
+	}
+	public boolean getSelectedState(){
+		return isChecked;
+	}
+	public void setChecked(boolean checked){
+		this.isChecked = checked;
+		if(!isChecked) {
+			check.setText("\uE922");
+			check.setForeground(Color.LIGHT_GRAY);
+			checkSymbol.setVisible(false);
+		}
+		else {
+			check.setText("\uE73B");
+			check.setForeground(new Color(75, 155, 240));
+			checkSymbol.setVisible(true);
+		}
 	}
 	public void setLText(String text) {
 		this.text.setText(text);

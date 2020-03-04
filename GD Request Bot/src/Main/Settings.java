@@ -90,7 +90,7 @@ public class Settings {
             file.close();
 
             FileOutputStream fileOut = new FileOutputStream(System.getenv("APPDATA") + "\\GDBoard\\config.properties");
-            fileOut.write(inputBuffer.toString().replace(gfg.get(key).toString(), setting).getBytes());
+            fileOut.write(inputBuffer.toString().replace(key + "=" + gfg.get(key).toString(), key + "=" + setting).getBytes());
             fileOut.close();
             System.out.println(key + ": " + setting);
         } else {
@@ -101,7 +101,10 @@ public class Settings {
         }
 
     }
-
+    public static String getSettings(String key) throws IOException {
+        gfg.load(in);
+        return gfg.get(key).toString();
+    }
     static void loadSettings(boolean start) throws IOException {
         gfg.load(in);
         try {
