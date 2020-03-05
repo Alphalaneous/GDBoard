@@ -106,7 +106,10 @@ public class Settings {
 
     public static String getSettings(String key) throws IOException {
         gfg.load(in);
-        return gfg.get(key).toString();
+        if(gfg.containsKey(key)) {
+            return gfg.get(key).toString();
+        }
+        return "";
     }
 
     static void loadSettings(boolean start) throws IOException {
@@ -116,28 +119,34 @@ public class Settings {
                 .getScreenDevices();
 
         gfg.load(in);
-
-        oauth = gfg.get("oauth").toString();
-        hasOauth = oauth != null;
-
-        keybind = Integer.parseInt(gfg.get("keybind").toString());
-
-        channel = gfg.get("channel").toString().toLowerCase();
-        hasChannel = gfg.get("channel").toString() != null;
-
-        windowedMode = Boolean.parseBoolean(gfg.get("windowed").toString());
-        hasWindowed = gfg.get("windowed").toString() != null;
-
-        monitor = Integer.parseInt(gfg.get("monitor").toString());
-        if (monitor >= screens.length) {
-            monitor = 0;
+        if(gfg.containsKey("oauth") ) {
+            oauth = gfg.get("oauth").toString();
+            hasOauth = true;
         }
-        hasMonitor = gfg.get("monitor").toString() != null;
+        if(gfg.containsKey("keybind")) {
+            keybind = Integer.parseInt(gfg.get("keybind").toString());
+        }
+        if(gfg.containsKey("channel")) {
+            channel = gfg.get("channel").toString().toLowerCase();
+            hasChannel = true;
+        }
+        if(gfg.containsKey("windowed")) {
+            windowedMode = Boolean.parseBoolean(gfg.get("windowed").toString());
+            hasWindowed = true;
+        }
+        if(gfg.containsKey("monitor")) {
+            monitor = Integer.parseInt(gfg.get("monitor").toString());
+            if (monitor >= screens.length) {
+                monitor = 0;
+            }
+            hasMonitor = true;
+        }
 
 
         if (!start) {
-            String req = gfg.get("requests").toString();
-            if (req != null) {
+
+            if (gfg.containsKey("requests")) {
+                String req = gfg.get("requests").toString();
                 int x = Integer.parseInt(req.split(",")[0]);
                 int y = Integer.parseInt(req.split(",")[1]);
                 reqPin = Boolean.parseBoolean(req.split(",")[2]);
@@ -152,8 +161,9 @@ public class Settings {
                     }
                 }
             }
-            String act = gfg.get("actions").toString();
-            if (act != null) {
+
+            if (gfg.containsKey("actions")) {
+                String act = gfg.get("actions").toString();
                 int x = Integer.parseInt(act.split(",")[0]);
                 int y = Integer.parseInt(act.split(",")[1]);
                 actPin = Boolean.parseBoolean(act.split(",")[2]);
@@ -168,8 +178,9 @@ public class Settings {
                     }
                 }
             }
-            String com = gfg.get("comments").toString();
-            if (com != null) {
+
+            if (gfg.containsKey("comments")) {
+                String com = gfg.get("comments").toString();
                 int x = Integer.parseInt(com.split(",")[0]);
 
                 int y = Integer.parseInt(com.split(",")[1]);
@@ -185,8 +196,9 @@ public class Settings {
                     }
                 }
             }
-            String info = gfg.get("info").toString();
-            if (info != null){
+
+            if (gfg.containsKey("info")){
+                String info = gfg.get("info").toString();
                 int x = Integer.parseInt(info.split(",")[0]);
                 int y = Integer.parseInt(info.split(",")[1]);
                 infoPin = Boolean.parseBoolean(info.split(",")[2]);
@@ -201,8 +213,9 @@ public class Settings {
                     }
                 }
             }
-            String song = gfg.get("song").toString();
-            if(song != null){
+
+            if(gfg.containsKey("song")){
+                String song = gfg.get("song").toString();
                 int x = Integer.parseInt(song.split(",")[0]);
                 int y = Integer.parseInt(song.split(",")[1]);
                 songPin = Boolean.parseBoolean(song.split(",")[2]);
@@ -216,8 +229,9 @@ public class Settings {
                     }
                 }
             }
-            String set = gfg.get("settings").toString();
-            if(set != null){
+
+            if(gfg.containsKey("settings")){
+                String set = gfg.get("settings").toString();
                 int x = Integer.parseInt(set.split(",")[0]);
                 int y = Integer.parseInt(set.split(",")[1]);
                 settingsX = Boolean.parseBoolean(set.split(",")[2]);
