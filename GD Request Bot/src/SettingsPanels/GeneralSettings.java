@@ -108,8 +108,8 @@ public class GeneralSettings {
 			rated.setChecked(ratedOption);
 			nowPlaying.setChecked(nowPlayingOption);
 		}
-		catch (Exception ignored){
-
+		catch (IOException e){
+			JOptionPane.showMessageDialog(null, "There was an error reading the config file!", "Error",  JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	public static void setSettings(){
@@ -119,7 +119,7 @@ public class GeneralSettings {
 			Settings.writeSettings("rated", String.valueOf(ratedOption));
 			Settings.writeSettings("disableNP", String.valueOf(nowPlayingOption));
 		} catch (IOException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "There was an error writing to the file!", "Error",  JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

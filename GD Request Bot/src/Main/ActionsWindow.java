@@ -13,6 +13,10 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Random;
 
 class ActionsWindow {
@@ -25,6 +29,7 @@ class ActionsWindow {
     private static JPanel panel = new JPanel();
     private static JButtonUI defaultUI = new JButtonUI();
     static boolean requests = true;
+
     //region Create Panel
     static void createPanel() {
         try {
@@ -67,23 +72,29 @@ class ActionsWindow {
                         if (LevelsWindow.getSelectedID() == 0 && Requests.levels.size() > 1) {
                             Requests.levels.remove(LevelsWindow.getSelectedID());
                             LevelsWindow.removeButton();
-                            File wait = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.wait");
-                            File temp = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp");
-                            File song = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
-                            song.renameTo(temp);
-                            wait.renameTo(song);
-                            if(!GeneralSettings.nowPlayingOption) {
+                            Path wait = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.wait");
+                            Path song = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
+                            try {
+                                Files.move(song, song.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp"), StandardCopyOption.REPLACE_EXISTING);
+                                Files.move(wait, wait.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3"), StandardCopyOption.REPLACE_EXISTING);
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                            if (!GeneralSettings.nowPlayingOption) {
                                 Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
                                         + Requests.levels.get(0).getLevelID() + "). Requested by "
                                         + Requests.levels.get(0).getRequester());
                             }
                         } else {
                             if (Requests.levels.get(LevelsWindow.getSelectedID()).getSongName().equalsIgnoreCase("Custom") && !Requests.levels.get(LevelsWindow.getSelectedID()).getPersist()) {
-                                File tempSong = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp");
-                                File rename = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
-                                File remove = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
-                                remove.delete();
-                                tempSong.renameTo(rename);
+                                Path tempSong = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp");
+                                Path remove = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
+                                try {
+                                    Files.delete(remove);
+                                    Files.move(tempSong, tempSong.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3"), StandardCopyOption.REPLACE_EXISTING);
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                }
                             }
                             Requests.levels.remove(LevelsWindow.getSelectedID());
                             LevelsWindow.removeButton();
@@ -124,13 +135,16 @@ class ActionsWindow {
                     if (Requests.levels.size() != 0) {
 
                         if (Requests.levels.get(LevelsWindow.getSelectedID()).getSongName().equalsIgnoreCase("Custom") && !Requests.levels.get(LevelsWindow.getSelectedID()).getPersist()) {
-                            File tempSong = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp");
-                            File rename = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
-                            File remove = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
-                            File wait = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.wait");
-                            remove.delete();
-                            wait.delete();
-                            tempSong.renameTo(rename);
+                            Path tempSong = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp");
+                            Path remove = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
+                            Path wait = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.wait");
+                            try {
+                                Files.delete(remove);
+                                Files.delete(wait);
+                                Files.move(tempSong, tempSong.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3"), StandardCopyOption.REPLACE_EXISTING);
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
                         }
                         Requests.levels.remove(LevelsWindow.getSelectedID());
                         LevelsWindow.removeButton();
@@ -154,12 +168,15 @@ class ActionsWindow {
                                     Requests.levels.get(num).getLevelID());
                             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                             clipboard.setContents(selection, selection);
-                            File wait = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.wait");
-                            File temp = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp");
-                            File song = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
-                            song.renameTo(temp);
-                            wait.renameTo(song);
-                            if(!GeneralSettings.nowPlayingOption) {
+                            Path wait = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.wait");
+                            Path song = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
+                            try {
+                                Files.move(song, song.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp"), StandardCopyOption.REPLACE_EXISTING);
+                                Files.move(wait, wait.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3"), StandardCopyOption.REPLACE_EXISTING);
+                            }catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+                            if (!GeneralSettings.nowPlayingOption) {
                                 Main.sendMessage("Now Playing " + Requests.levels.get(num).getName() + " ("
                                         + Requests.levels.get(num).getLevelID() + "). Requested by "
                                         + Requests.levels.get(num).getRequester());
@@ -213,14 +230,14 @@ class ActionsWindow {
                                 fr.write(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "\n");
                                 fr.close();
                             } catch (IOException e1) {
-                                e1.printStackTrace();
+                                JOptionPane.showMessageDialog(null, "There was an error writing to the file!", "Error", JOptionPane.ERROR_MESSAGE);
                             }
                             Requests.levels.remove(LevelsWindow.getSelectedID());
                             LevelsWindow.removeButton();
 
                             Thread thread = new Thread(() -> {
                                 CommentsWindow.unloadComments(true);
-                                if(Requests.levels.size() > 0) {
+                                if (Requests.levels.size() > 0) {
                                     CommentsWindow.loadComments(0, false);
                                 }
                             });
@@ -251,12 +268,15 @@ class ActionsWindow {
                     if (n == 0) {
                         if (Requests.levels.size() != 0) {
                             for (int i = 0; i < Requests.levels.size(); i++) {
-                                    if (Requests.levels.get(i).getSongName().equalsIgnoreCase("Custom")) {
-                                        File tempSong = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3.temp");
-                                        File rename = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3");
-                                        File remove = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3");
-                                        remove.delete();
-                                        tempSong.renameTo(rename);
+                                if (Requests.levels.get(i).getSongName().equalsIgnoreCase("Custom")) {
+                                    Path tempSong = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3.temp");
+                                    Path remove = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3");
+                                    try {
+                                        Files.delete(remove);
+                                        Files.move(tempSong, tempSong.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3"), StandardCopyOption.REPLACE_EXISTING);
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    }
                                     }
                                 LevelsWindow.removeButton();
                             }
@@ -275,10 +295,9 @@ class ActionsWindow {
             window.add(mainPanel);
             ((InnerWindow) window).refreshListener();
             Overlay.addToFrame(window);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, e, "Error",  JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     //endregion

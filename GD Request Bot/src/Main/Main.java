@@ -18,9 +18,7 @@ public class Main {
 	//region Main
 	public static void main(String[] args) throws IllegalArgumentException {
 		//TODO Keybinds
-
-
-
+		//TODO Use nio everywhere
 		try {
 
 			Settings.writeSettings("keybind", String.valueOf(KeyEvent.VK_HOME));
@@ -61,7 +59,6 @@ public class Main {
 					System.out.println(twitch.auth().getAuthenticationError());
 				}
 			}
-
 
 			//endregion
 

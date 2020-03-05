@@ -15,6 +15,10 @@ import java.awt.datatransfer.StringSelection;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Objects;
@@ -42,8 +46,6 @@ class Requests {
                     goThrough = false;
                 }
                 LevelData levelData = new LevelData();
-
-
                 // --------------------
                 Thread parse;
                 if (goThrough) {
@@ -93,13 +95,10 @@ class Requests {
                                 parse(Objects.requireNonNull(Objects
                                         .requireNonNull(client.getLevelById(Long.parseLong(ID)).block()).download().block())
                                         .getData(), ID);
-                                //levelData.setAnalyzed();
-
                                 LevelsWindow.updateUI(levelData.getLevelID(), levelData.getContainsVulgar(), levelData.getContainsImage(), levelData.getAnalyzed());
                             }
                         } catch (IllegalArgumentException e) {
-                            e.printStackTrace();
-                            System.out.println("Couldn't Analyze Level");
+                            JOptionPane.showMessageDialog(null, "There was an error analyzing " + levelData.getLevelID() + "!", "Error",  JOptionPane.ERROR_MESSAGE);
                         }
                     });
                     parse.start();
@@ -109,7 +108,6 @@ class Requests {
                     for (int k = 0; k < levels.size(); k++) {
 
                         if (levelData.getLevelID().equals(levels.get(k).getLevelID())) {
-
                             int j = k + 1;
                             Main.sendMessage(
                                     "@" + levelData.getRequester() + " Level is already in the queue at position " + j + "!");
@@ -117,7 +115,6 @@ class Requests {
                             valid = false;
                             break;
                         }
-
                     }
 
                     File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
@@ -129,14 +126,12 @@ class Requests {
                                 Main.sendMessage("@" + levelData.getRequester() + " That Level is Blocked!");
                                 System.out.println("Blocked ID");
                                 valid = false;
-
                                 break;
                             }
                         }
                         sc.close();
                     }
                     if (valid) {
-
                         // --------------------
                         // Adds level to queue array "levels" and refreshes LevelsWindow
                         URL url1;
@@ -155,8 +150,7 @@ class Requests {
                                 File folder = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash");
                                 boolean download = true;
                                 String[] files = folder.list();
-                                try {
-                                    assert files != null;
+                                if(files != null){
                                     if (files.length > 0) {
                                         for (String file2 : files) {
                                             if (file2.equalsIgnoreCase(levelData.getSongID() + ".mp3")) {
@@ -164,16 +158,14 @@ class Requests {
                                                     download = false;
                                                 }
                                                 else if(Requests.levels.size() == 1){
-                                                    File temp = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp");
-                                                    File song = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
-                                                    song.renameTo(temp);
+
+                                                    Path song = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
+                                                    Files.move(song, song.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp"), StandardCopyOption.REPLACE_EXISTING);
                                                 }
                                                 break;
                                             }
                                         }
                                     }
-                                } catch (NullPointerException e) {
-                                    e.printStackTrace();
                                 }
                                 if (download && !levelData.getSongID().equalsIgnoreCase("0")) {
                                     File file2;
@@ -185,11 +177,11 @@ class Requests {
                                     }
                                     URL url;
                                     assert finalFileName != null;
-                                    if (isCustomSong && finalFileName.endsWith(".mp3")) {
-                                        url = new URL(customUrl);
-                                    } else if (isCustomSong && !finalFileName.endsWith(".mp3")) {
+                                    if (isCustomSong && !finalFileName.endsWith(".mp3")) {
                                         url = new URL(levelData.getSongURL());
                                         Main.sendMessage("@" + requester + ", Invalid song! (requires .mp3 format)");
+                                    } else if (isCustomSong && finalFileName.endsWith(".mp3")) {
+                                        url = new URL(customUrl);
                                     } else {
                                         url = new URL(levelData.getSongURL());
                                     }
@@ -317,16 +309,12 @@ class Requests {
                             }
                             isr.close();
                             br.close();
-
                         }
                     }
                     Requests.getLevelData().get(k).setAnalyzed();
                     LevelsWindow.updateUI(Requests.getLevelData().get(k).getLevelID(), Requests.getLevelData().get(k).getContainsVulgar(), Requests.getLevelData().get(k).getContainsImage(), true);
                     break;
-
-
                 } catch (Exception e) {
-                    e.printStackTrace();
                     for (int m = 0; k < Requests.getLevelData().size(); m++) {
                         if (Requests.getLevelData().get(m).getLevelID().equalsIgnoreCase(levelID)) {
                             LevelsWindow.updateUI(Requests.getLevelData().get(k).getLevelID(), Requests.getLevelData().get(k).getContainsVulgar(), Requests.getLevelData().get(k).getContainsImage(), false);

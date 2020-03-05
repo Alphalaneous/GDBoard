@@ -11,10 +11,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.URL;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 class SongWindow {
 	private static int height = 90;
@@ -60,7 +57,7 @@ class SongWindow {
 							mp3player = new Player(inp);
 							mp3player.play();
 						} catch (IOException | JavaLayerException | NullPointerException f) {
-							f.printStackTrace();
+							JOptionPane.showMessageDialog(null, "There was an error playing the music!", "Error",  JOptionPane.ERROR_MESSAGE);
 						}
 					});
 					thread[0].start();
@@ -141,7 +138,7 @@ class SongWindow {
 			songAuthorID.setText("N/A");
 			stop.setVisible(false);
 			play.setVisible(false);
-			
+			persist.setVisible(false);
 		} else {
 			songName.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getSongName());
 

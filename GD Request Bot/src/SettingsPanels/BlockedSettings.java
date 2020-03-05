@@ -108,9 +108,7 @@ public class BlockedSettings {
 
             while (sc.hasNextLine()) {
 
-                System.out.println("test");
-
-                innerPanel.add(addButton(sc.nextLine()));
+                addButton(sc.nextLine());
                 i++;
             }
             sc.close();
@@ -130,13 +128,13 @@ public class BlockedSettings {
             }
         }
     }
-    public static JButton addButton(String ID){
+
+    public static void addButton(String ID){
         if (i % 5 == 0) {
             height = height + 35;
             innerPanel.setBounds(0, 0, 415, height + 4);
             innerPanel.setPreferredSize(new Dimension(415, height + 4));
             scrollPane.updateUI();
-            System.out.println(height);
         }
         File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
         JButtonUI defaultUI = new JButtonUI();
@@ -162,7 +160,6 @@ public class BlockedSettings {
                 if (n == 0) {
                     if (file.exists()) {
                         try {
-                            System.out.println("test");
                             File temp = new File(System.getenv("APPDATA") + "\\GDBoard\\_temp_");
                             PrintWriter out = new PrintWriter(new FileWriter(temp));
                             Files.lines(file.toPath())
@@ -174,7 +171,7 @@ public class BlockedSettings {
                             temp.renameTo(file);
 
                         } catch (IOException ex) {
-                            ex.printStackTrace();
+                            JOptionPane.showMessageDialog(null, "There was an error writing to the file!", "Error",  JOptionPane.ERROR_MESSAGE);
                         }
                     }
                     innerPanel.remove(button);
@@ -183,6 +180,6 @@ public class BlockedSettings {
             }
         });
 
-        return button;
+        innerPanel.add(button);
     }
 }

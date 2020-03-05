@@ -365,7 +365,7 @@ public class ChatBot extends TwitchBot {
                         }
                     }
                 } catch (Exception e) {
-                    sendMessage("@" + user + " Invalid ID", channel);
+                    sendMessage("@" + user + " Block failed!", channel);
                 }
             }
             //endregion
@@ -444,15 +444,8 @@ public class ChatBot extends TwitchBot {
                             String level1 = message.toString().split("with ")[0].toUpperCase();
                             String songUrl = message.toString().split("with ")[1];
                             try {
-
-                                try {
-                                    Requests.addRequest(m.group(1), String.valueOf(user), true, songUrl);
-
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
+                                Requests.addRequest(m.group(1), String.valueOf(user), true, songUrl);
                             } catch (Exception e) {
-                                e.printStackTrace();
                                 sendMessage("@" + user + " Not a valid link!", channel);
                             }
                             System.out.println("Level ID: " + level1 + " Song Link: " + songUrl);
