@@ -30,6 +30,14 @@ class MainBar {
     private static JPanel buttonPanel = new JPanel();
     private static JLabel icon = new JLabel();
     static boolean requests = true;
+    private static JButton toggleSong = createButton("\uEC4F", "Music");
+    private static JButton toggleComments = createButton("\uEBDB", "Comments");
+    private static JButton toggleInfo = createButton("\uE946", "Info");
+    private static JButton toggleLevels = createButton("\uE179", "Requests");
+    private static JButton toggleActions = createButton("\uE7C9", "Actions");
+    private static JButton stopReqs = createSubButton("\uE71A", "Toggle Requests");
+    private static JButton toggleSettings = createSubButton("\uE713", "Settings");
+    private static JButton close = createSubButton("\uE10A", "Close");
     static void createBar() {
 
         //TODO Settings and request toggle buttons in windowed mode
@@ -79,7 +87,7 @@ class MainBar {
         buttonPanel.setBounds(160, 0, 420, 64);
         buttonPanel.setBackground(Defaults.MAIN);
 
-        JButton toggleSong = createButton("\uEC4F", "Music");
+
         toggleSong.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -88,7 +96,7 @@ class MainBar {
             }
         });
 
-        JButton toggleComments = createButton("\uEBDB", "Comments");
+
         toggleComments.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -97,7 +105,7 @@ class MainBar {
             }
         });
 
-        JButton toggleInfo = createButton("\uE946", "Info");
+
         toggleInfo.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -106,7 +114,7 @@ class MainBar {
             }
         });
 
-        JButton toggleLevels = createButton("\uE179", "Requests");
+
         toggleLevels.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -115,7 +123,7 @@ class MainBar {
             }
         });
 
-        JButton toggleActions = createButton("\uE7C9", "Actions");
+
         toggleActions.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -123,7 +131,7 @@ class MainBar {
                 ActionsWindow.toggleVisible();
             }
         });
-        JButton stopReqs = createSubButton("\uE71A", "Toggle Requests");
+
         stopReqs.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -142,7 +150,7 @@ class MainBar {
                 }
             }
         });
-        JButton toggleSettings = createSubButton("\uE713", "Settings");
+
         toggleSettings.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -150,7 +158,7 @@ class MainBar {
                 SettingsWindow.toggleVisible();
             }
         });
-        JButton close = createSubButton("\uE10A", "Close");
+
         close.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -247,14 +255,7 @@ class MainBar {
         Thread thread = new Thread(() -> {
             while (true) {
                 try {
-                    ((JButtonTooltip) toggleComments).setTooltipLocation(toggleComments.getLocationOnScreen().x + (toggleComments.getWidth() / 2));
-                    ((JButtonTooltip) toggleActions).setTooltipLocation(toggleActions.getLocationOnScreen().x + (toggleActions.getWidth() / 2));
-                    ((JButtonTooltip) toggleInfo).setTooltipLocation(toggleInfo.getLocationOnScreen().x + (toggleInfo.getWidth() / 2));
-                    ((JButtonTooltip) toggleSong).setTooltipLocation(toggleSong.getLocationOnScreen().x + (toggleSong.getWidth() / 2));
-                    ((JButtonTooltip) toggleLevels).setTooltipLocation(toggleLevels.getLocationOnScreen().x + (toggleLevels.getWidth() / 2));
-                    ((JButtonTooltip) stopReqs).setTooltipLocation(stopReqs.getLocationOnScreen().x + (stopReqs.getWidth() / 2));
-                    ((JButtonTooltip) toggleSettings).setTooltipLocation(toggleSettings.getLocationOnScreen().x + (toggleSettings.getWidth() / 2));
-                    ((JButtonTooltip) close).setTooltipLocation(close.getLocationOnScreen().x + (close.getWidth() / 2));
+
                     break;
                 }
                 catch (Exception ignored){
@@ -264,7 +265,16 @@ class MainBar {
         thread.start();
     }
 
-
+    static void setTooltips(){
+        ((JButtonTooltip) toggleComments).setTooltipLocation(toggleComments.getLocationOnScreen().x + (toggleComments.getWidth() / 2));
+        ((JButtonTooltip) toggleActions).setTooltipLocation(toggleActions.getLocationOnScreen().x + (toggleActions.getWidth() / 2));
+        ((JButtonTooltip) toggleInfo).setTooltipLocation(toggleInfo.getLocationOnScreen().x + (toggleInfo.getWidth() / 2));
+        ((JButtonTooltip) toggleSong).setTooltipLocation(toggleSong.getLocationOnScreen().x + (toggleSong.getWidth() / 2));
+        ((JButtonTooltip) toggleLevels).setTooltipLocation(toggleLevels.getLocationOnScreen().x + (toggleLevels.getWidth() / 2));
+        ((JButtonTooltip) stopReqs).setTooltipLocation(stopReqs.getLocationOnScreen().x + (stopReqs.getWidth() / 2));
+        ((JButtonTooltip) toggleSettings).setTooltipLocation(toggleSettings.getLocationOnScreen().x + (toggleSettings.getWidth() / 2));
+        ((JButtonTooltip) close).setTooltipLocation(close.getLocationOnScreen().x + (close.getWidth() / 2));
+    }
     static JPanel getMainBar() {
         return barPanel;
     }

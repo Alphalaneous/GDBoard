@@ -90,8 +90,8 @@ public class Main {
 			Settings.loadSettings(false);
 			GeneralSettings.loadSettings();
 			Overlay.setVisible();
-
-			//endregion
+			MainBar.setTooltips();
+				//endregion
 			//region Start ChatBot and keep trying if it fails
 			restartBot();		//Start the Chat Bot
 
