@@ -14,10 +14,12 @@ public class GeneralSettings {
 	public static boolean subsOption = false;
 	public static boolean ratedOption = false;
 	public static boolean nowPlayingOption = false;
+	public static boolean autoDownloadOption = false;
 	private static CheckboxButton followers = createButton("Followers Only", 50);
 	//private static CheckboxButton subs = createButton("Subscribers Only", 80);
 	private static CheckboxButton rated = createButton("Rated Levels Only", 80);
 	private static CheckboxButton nowPlaying = createButton("Disable Now Playing Message", 110);
+	private static CheckboxButton autoDownload = createButton("Automatically download Music (Experimental)", 140);
 	/*private static CheckboxButton auto = createButton("Auto", 110);
 	private static CheckboxButton easy = createButton("Easy", 140);
 	private static CheckboxButton normal = createButton("Normal", 170);
@@ -79,10 +81,18 @@ public class GeneralSettings {
 			}
 		});
 
+		autoDownload.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				autoDownloadOption = autoDownload.getSelectedState();
+			}
+		});
+
 		panel.add(followers);
 		//panel.add(subs);
 		panel.add(rated);
 		panel.add(nowPlaying);
+		panel.add(autoDownload);
 		/*panel.add(auto);
 		panel.add(easy);
 		panel.add(normal);
@@ -103,10 +113,12 @@ public class GeneralSettings {
 			//subsOption = Boolean.parseBoolean(Settings.getSettings("subs"));
 			ratedOption = Boolean.parseBoolean(Settings.getSettings("rated"));
 			nowPlayingOption = Boolean.parseBoolean(Settings.getSettings("disableNP"));
+			autoDownloadOption = Boolean.parseBoolean(Settings.getSettings("autoDL"));
 			followers.setChecked(followersOption);
 			//subs.setChecked(subsOption);
 			rated.setChecked(ratedOption);
 			nowPlaying.setChecked(nowPlayingOption);
+			autoDownload.setChecked(autoDownloadOption);
 		}
 		catch (IOException e){
 			JOptionPane.showMessageDialog(null, "There was an error reading the config file!", "Error",  JOptionPane.ERROR_MESSAGE);
@@ -118,6 +130,7 @@ public class GeneralSettings {
 			//Settings.writeSettings("subs", String.valueOf(subsOption));
 			Settings.writeSettings("rated", String.valueOf(ratedOption));
 			Settings.writeSettings("disableNP", String.valueOf(nowPlayingOption));
+			Settings.writeSettings("autoDL", String.valueOf(autoDownloadOption));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "There was an error writing to the file!", "Error",  JOptionPane.ERROR_MESSAGE);
 		}

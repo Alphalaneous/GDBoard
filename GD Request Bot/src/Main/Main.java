@@ -90,10 +90,10 @@ public class Main {
 			Settings.loadSettings(false);
 			GeneralSettings.loadSettings();
 			Overlay.setVisible();
-			MainBar.setTooltips();
+
 				//endregion
 			//region Start ChatBot and keep trying if it fails
-			restartBot();		//Start the Chat Bot
+			startBot();		//Start the Chat Bot
 
 		}
 		catch (Exception e){
@@ -110,7 +110,7 @@ public class Main {
 	static ChatBot getChatBot(){
 		return bot;
 	}
-	public static void restartBot(){
+	public static void startBot(){
 			bot.stop();
 			bot = new ChatBot();
 			bot.connect();

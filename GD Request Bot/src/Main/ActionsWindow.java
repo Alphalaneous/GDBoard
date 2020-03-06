@@ -13,10 +13,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.*;
 import java.util.Random;
 
 class ActionsWindow {
@@ -75,8 +72,12 @@ class ActionsWindow {
                             Path wait = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.wait");
                             Path song = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
                             try {
-                                Files.move(song, song.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp"), StandardCopyOption.REPLACE_EXISTING);
-                                Files.move(wait, wait.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3"), StandardCopyOption.REPLACE_EXISTING);
+                                if(Files.exists(song)) {
+                                    Files.move(song, song.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp"), StandardCopyOption.REPLACE_EXISTING);
+                                }
+                                if(Files.exists(wait)) {
+                                    Files.move(wait, wait.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3"), StandardCopyOption.REPLACE_EXISTING);
+                                }
                             } catch (IOException e1) {
                                 e1.printStackTrace();
                             }
@@ -90,8 +91,12 @@ class ActionsWindow {
                                 Path tempSong = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp");
                                 Path remove = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
                                 try {
-                                    Files.delete(remove);
-                                    Files.move(tempSong, tempSong.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3"), StandardCopyOption.REPLACE_EXISTING);
+                                    if(Files.exists(remove)) {
+                                        Files.delete(remove);
+                                    }
+                                    if(Files.exists(tempSong)) {
+                                        Files.move(tempSong, tempSong.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3"), StandardCopyOption.REPLACE_EXISTING);
+                                    }
                                 } catch (IOException e1) {
                                     e1.printStackTrace();
                                 }
@@ -139,9 +144,15 @@ class ActionsWindow {
                             Path remove = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
                             Path wait = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.wait");
                             try {
-                                Files.delete(remove);
-                                Files.delete(wait);
-                                Files.move(tempSong, tempSong.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3"), StandardCopyOption.REPLACE_EXISTING);
+                                if(Files.exists(remove)) {
+                                    Files.delete(remove);
+                                }
+                                if(Files.exists(wait)) {
+                                    Files.delete(wait);
+                                }
+                                if(Files.exists(tempSong)) {
+                                    Files.move(tempSong, tempSong.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3"), StandardCopyOption.REPLACE_EXISTING);
+                                }
                             } catch (IOException e1) {
                                 e1.printStackTrace();
                             }
@@ -171,8 +182,12 @@ class ActionsWindow {
                             Path wait = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.wait");
                             Path song = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
                             try {
-                                Files.move(song, song.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp"), StandardCopyOption.REPLACE_EXISTING);
-                                Files.move(wait, wait.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3"), StandardCopyOption.REPLACE_EXISTING);
+                                if(Files.exists(song)) {
+                                    Files.move(song, song.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp"), StandardCopyOption.REPLACE_EXISTING);
+                                }
+                                if(Files.exists(wait)) {
+                                    Files.move(wait, wait.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3"), StandardCopyOption.REPLACE_EXISTING);
+                                }
                             }catch (IOException e1) {
                                 e1.printStackTrace();
                             }
@@ -223,12 +238,16 @@ class ActionsWindow {
                                 JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
                         if (n == 0) {
                             BlockedSettings.removeID(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
-                            File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
-                            FileWriter fr;
+                            Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
+
                             try {
-                                fr = new FileWriter(file, true);
-                                fr.write(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "\n");
-                                fr.close();
+                                if(!Files.exists(file)){
+                                    Files.createFile(file);
+                                }
+                                Files.write(
+                                        file,
+                                        (Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "\n").getBytes(),
+                                        StandardOpenOption.APPEND);
                             } catch (IOException e1) {
                                 JOptionPane.showMessageDialog(null, "There was an error writing to the file!", "Error", JOptionPane.ERROR_MESSAGE);
                             }

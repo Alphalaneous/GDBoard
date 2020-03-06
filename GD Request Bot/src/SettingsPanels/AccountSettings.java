@@ -51,7 +51,7 @@ public class AccountSettings {
 						if (twitch.auth().awaitAccessToken()) {                                    //If oauth retrieving succeeds, set oauth in settings
 							Settings.setOAuth(twitch.auth().getAccessToken());
 							Settings.writeSettings("oauth", twitch.auth().getAccessToken());
-							Main.restartBot();
+							Main.startBot();
 						} else {                                                                    //Else print error
 							JOptionPane.showMessageDialog(null, "Failed to Authenticate Twitch account", "Error",  JOptionPane.ERROR_MESSAGE);
 							System.out.println(twitch.auth().getAuthenticationError());

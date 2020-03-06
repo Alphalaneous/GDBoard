@@ -38,6 +38,7 @@ class MainBar {
     private static JButton stopReqs = createSubButton("\uE71A", "Toggle Requests");
     private static JButton toggleSettings = createSubButton("\uE713", "Settings");
     private static JButton close = createSubButton("\uE10A", "Close");
+
     static void createBar() {
 
         //TODO Settings and request toggle buttons in windowed mode
@@ -68,8 +69,8 @@ class MainBar {
                 int mouseX = MouseInfo.getPointerInfo().getLocation().x;
                 int mouseY = MouseInfo.getPointerInfo().getLocation().y;
                 Point mouse = new Point(mouseX, mouseY);
-                for(GraphicsDevice screen : screens){
-                    if(screen.getDefaultConfiguration().getBounds().contains(mouse)){
+                for (GraphicsDevice screen : screens) {
+                    if (screen.getDefaultConfiguration().getBounds().contains(mouse)) {
                         Defaults.screenNum = Integer.parseInt(screen.getIDstring().replaceAll("Display", "").replace("\\", ""));
                     }
                 }
@@ -135,16 +136,15 @@ class MainBar {
         stopReqs.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if(requests) {
-                        stopReqs.setText("\uE768");
-                        requests = false;
-                        Main.sendMessage("/me Requests are now off!");
+                if (requests) {
+                    stopReqs.setText("\uE768");
+                    requests = false;
+                    Main.sendMessage("/me Requests are now off!");
 
-                }
-                else{
-                        stopReqs.setText("\uE71A");
-                        requests = true;
-                        Main.sendMessage("/me Requests are now on!");
+                } else {
+                    stopReqs.setText("\uE71A");
+                    requests = true;
+                    Main.sendMessage("/me Requests are now on!");
 
 
                 }
@@ -183,16 +183,19 @@ class MainBar {
                         Path wait = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3.wait");
                         Path remove = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3");
                         try {
-                            Files.delete(remove);
-                            if(Files.exists(wait)) {
+                            if (Files.exists(remove)) {
+                                Files.delete(remove);
+                            }
+                            if (Files.exists(wait)) {
                                 Files.delete(wait);
                             }
-                            Files.move(tempSong, tempSong.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3"), StandardCopyOption.REPLACE_EXISTING);
+                            if (Files.exists(tempSong)) {
+                                Files.move(tempSong, tempSong.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3"), StandardCopyOption.REPLACE_EXISTING);
+                            }
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
-                    }
-                    else if(Requests.levels.get(i).getSongName().equalsIgnoreCase("Custom")){
+                    } else if (Requests.levels.get(i).getSongName().equalsIgnoreCase("Custom")) {
                         File tempSong = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3.temp");
                         File wait = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3.wait");
                         tempSong.delete();
@@ -257,15 +260,14 @@ class MainBar {
                 try {
 
                     break;
-                }
-                catch (Exception ignored){
+                } catch (Exception ignored) {
                 }
             }
         });
         thread.start();
     }
 
-    static void setTooltips(){
+    static void setTooltips() {
         ((JButtonTooltip) toggleComments).setTooltipLocation(toggleComments.getLocationOnScreen().x + (toggleComments.getWidth() / 2));
         ((JButtonTooltip) toggleActions).setTooltipLocation(toggleActions.getLocationOnScreen().x + (toggleActions.getWidth() / 2));
         ((JButtonTooltip) toggleInfo).setTooltipLocation(toggleInfo.getLocationOnScreen().x + (toggleInfo.getWidth() / 2));
@@ -275,6 +277,7 @@ class MainBar {
         ((JButtonTooltip) toggleSettings).setTooltipLocation(toggleSettings.getLocationOnScreen().x + (toggleSettings.getWidth() / 2));
         ((JButtonTooltip) close).setTooltipLocation(close.getLocationOnScreen().x + (close.getWidth() / 2));
     }
+
     static JPanel getMainBar() {
         return barPanel;
     }

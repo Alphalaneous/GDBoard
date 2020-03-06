@@ -89,8 +89,13 @@ public class Overlay {
     }
 
     static void setVisible() {
-
         frame.setVisible(true);
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        MainBar.setTooltips();
     }
 
     static void refreshUI(boolean color) {

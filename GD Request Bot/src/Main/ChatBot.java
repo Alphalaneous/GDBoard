@@ -13,7 +13,7 @@ import com.github.alex1304.jdash.util.LevelSearchFilters;
 
 import javax.swing.*;
 import java.io.*;
-import java.nio.file.Files;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -298,8 +298,8 @@ public class ChatBot extends TwitchBot {
                 BlockedSettings.removeID(unblocked);
                 try {
                     boolean exists = false;
-                    File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
-                    if (file.exists()) {
+                    Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
+                    if (Files.exists(file)) {
                         Scanner sc = new Scanner(file);
                         while (sc.hasNextLine()) {
                             if (String.valueOf(unblocked).equals(sc.nextLine())) {
@@ -311,15 +311,15 @@ public class ChatBot extends TwitchBot {
                         sc.close();
 
                         if (exists) {
-                            File temp = new File(System.getenv("APPDATA") + "\\GDBoard\\_temp_");
-                            PrintWriter out = new PrintWriter(new FileWriter(temp));
-                            Files.lines(file.toPath())
+                            Path temp = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\_temp_");
+                            PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
+                            Files.lines(file)
                                     .filter(line -> !line.contains(unblocked))
                                     .forEach(out::println);
                             out.flush();
                             out.close();
-                            file.delete();
-                            temp.renameTo(file);
+                            Files.delete(file);
+                            Files.move(temp, temp.resolveSibling(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt"), StandardCopyOption.REPLACE_EXISTING);
                             sendMessage("@" + user + " Successfully unblocked " + arguments[1], channel);
                         } else {
                             sendMessage("@" + user + " That level isn't blocked!", channel);
@@ -331,17 +331,19 @@ public class ChatBot extends TwitchBot {
                 }
             }
             //endregion
-
+            boolean stopReq = false;
             //region Block Command
             if (command.equalsIgnoreCase("!block") && (Defaults.mods.contains(user) || isBroadcaster)) {
-
+                stopReq = true;
                 try {
                     int blockedID = Integer.parseInt(arguments[1]);
                     BlockedSettings.addButton(String.valueOf(blockedID));
                     boolean goThrough = true;
-                    File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
-                    Scanner sc = new Scanner(file);
-                    if (file.exists()) {
+                    Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
+                    if(!Files.exists(file)) {
+                        Files.createFile(file);
+                    }
+                    Scanner sc = new Scanner(file.toFile());
                         while (sc.hasNextLine()) {
                             if (String.valueOf(blockedID).equals(sc.nextLine())) {
                                 System.out.println("Blocked ID");
@@ -351,11 +353,8 @@ public class ChatBot extends TwitchBot {
                         }
                         sc.close();
                         if (goThrough) {
-                            FileWriter fr;
                             try {
-                                fr = new FileWriter(file, true);
-                                fr.write(blockedID + "\n");
-                                fr.close();
+                                Files.write(file, (blockedID + "\n").getBytes(), StandardOpenOption.APPEND);
                             } catch (IOException e1) {
                                 e1.printStackTrace();
                             }
@@ -363,8 +362,8 @@ public class ChatBot extends TwitchBot {
                         } else {
                             sendMessage("@" + user + " ID Already Blocked!", channel);
                         }
-                    }
                 } catch (Exception e) {
+                    e.printStackTrace();
                     sendMessage("@" + user + " Block failed!", channel);
                 }
             }
@@ -388,11 +387,11 @@ public class ChatBot extends TwitchBot {
                         return;
                     }
                 }
-                if(!user.isSubscribed(channel, Settings.oauth) && GeneralSettings.subsOption){
+                /*if(!user.isSubscribed(channel, Settings.oauth) && GeneralSettings.subsOption){
                     if(!(isBroadcaster || Defaults.mods.contains(user))) {
                         return;
                     }
-                }
+                }*/
 
                 if (arguments.length > 1) {
                     try {
@@ -470,7 +469,7 @@ public class ChatBot extends TwitchBot {
             //endregion
 
             //region Get Requests without Commands
-            else {
+            else if (!stopReq){
                 if(!user.isFollowing(channel) && GeneralSettings.followersOption){
                     if(!(isBroadcaster || Defaults.mods.contains(user))){
                         sendMessage("@" + user + " Please follow to request levels!", channel);
@@ -478,11 +477,11 @@ public class ChatBot extends TwitchBot {
                     }
 
                 }
-                if(!user.isSubscribed(channel, Settings.oauth) && GeneralSettings.subsOption){
+                /*if(!user.isSubscribed(channel, Settings.oauth) && GeneralSettings.subsOption){
                     if(!(isBroadcaster || Defaults.mods.contains(user))) {
                         return;
                     }
-                }
+                }*/
                 Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(msg);
                 if (m.find()) {
                     try {
@@ -503,6 +502,7 @@ public class ChatBot extends TwitchBot {
                     }
                 }
             }
+            stopReq = false;
             //endregion
         }
         catch (Exception e){
