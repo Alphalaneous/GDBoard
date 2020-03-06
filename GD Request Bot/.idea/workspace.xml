@@ -8,21 +8,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/CheckBoxButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CheckBoxButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/CheckboxButton$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/CheckboxButton$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/Overlay$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Overlay$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/Overlay.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Overlay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Settings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/SongWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/SongWindow$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/SongWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/SongWindow$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/SongWindow$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/SongWindow$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Main/SongWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/SongWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/BlockedSettings$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/BlockedSettings$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/BlockedSettings$1$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/BlockedSettings$1$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/BlockedSettings$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/BlockedSettings$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/BlockedSettings$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/BlockedSettings$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/SettingsPanels/BlockedSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/SettingsPanels/BlockedSettings.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/ActionsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/ActionsWindow.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -50,12 +37,35 @@
     <favorites_list name="GD Request Bot" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="28" selection-start-line="28" selection-end-line="28" />
+            <state relative-caret-position="432">
+              <caret line="138" column="64" lean-forward="true" selection-start-line="138" selection-start-column="64" selection-end-line="138" selection-end-column="64" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/ActionsWindow.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-646">
+              <caret line="308" column="33" selection-start-line="308" selection-start-column="33" selection-end-line="308" selection-end-column="33" />
+              <folding>
+                <element signature="e#1871#6779#0" expanded="true" />
+                <element signature="e#6778#6779#0" expanded="true" />
+                <element signature="e#7013#12282#0" expanded="true" />
+                <element signature="e#12281#12282#0" expanded="true" />
+                <element signature="e#15894#18168#0" expanded="true" />
+                <element signature="e#18167#18168#0" expanded="true" />
+                <element signature="e#19297#19298#0" expanded="true" />
+                <element signature="e#20425#20426#0" expanded="true" />
+                <element signature="e#20554#20555#0" expanded="true" />
+                <element signature="e#20677#20678#0" expanded="true" />
+                <element signature="e#20803#20804#0" expanded="true" />
+                <element signature="e#20929#20930#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -65,6 +75,28 @@
           <provider selected="true" editor-type-id="text-editor">
             <state>
               <caret column="12" selection-start-column="12" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/MainBar.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="22" column="6" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/Overlay.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1411">
+              <caret line="93" column="49" selection-start-line="93" selection-start-column="49" selection-end-line="93" selection-end-column="49" />
+              <folding>
+                <element signature="e#3507#3508#0" expanded="true" />
+                <element signature="e#3535#3536#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -90,6 +122,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/src/Main/ActionsWindow.java" />
         <option value="$PROJECT_DIR$/src/.version" />
       </list>
     </option>
@@ -107,7 +140,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -131,6 +163,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -285,17 +318,13 @@
     <frame x="204" y="26" width="1385" height="986" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24981132" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2573585" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Designer" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32942554" />
@@ -303,14 +332,18 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Maven" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -471,10 +504,49 @@
     <state x="-1297" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1080/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1580837643089" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/MainBar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
+          <caret line="22" column="6" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Overlay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1411">
+          <caret line="93" column="49" selection-start-line="93" selection-start-column="49" selection-end-line="93" selection-end-column="49" />
+          <folding>
+            <element signature="e#3507#3508#0" expanded="true" />
+            <element signature="e#3535#3536#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="138" column="64" lean-forward="true" selection-start-line="138" selection-start-column="64" selection-end-line="138" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/ActionsWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-646">
+          <caret line="308" column="33" selection-start-line="308" selection-start-column="33" selection-end-line="308" selection-end-column="33" />
+          <folding>
+            <element signature="e#1871#6779#0" expanded="true" />
+            <element signature="e#6778#6779#0" expanded="true" />
+            <element signature="e#7013#12282#0" expanded="true" />
+            <element signature="e#12281#12282#0" expanded="true" />
+            <element signature="e#15894#18168#0" expanded="true" />
+            <element signature="e#18167#18168#0" expanded="true" />
+            <element signature="e#19297#19298#0" expanded="true" />
+            <element signature="e#20425#20426#0" expanded="true" />
+            <element signature="e#20554#20555#0" expanded="true" />
+            <element signature="e#20677#20678#0" expanded="true" />
+            <element signature="e#20803#20804#0" expanded="true" />
+            <element signature="e#20929#20930#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
