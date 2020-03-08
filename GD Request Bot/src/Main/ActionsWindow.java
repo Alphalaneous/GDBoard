@@ -10,8 +10,6 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.Random;
@@ -57,15 +55,15 @@ class ActionsWindow {
                 public void mousePressed(MouseEvent e) {
                     ((InnerWindow) window).moveToFront();
                     super.mousePressed(e);
+
                     if (Requests.levels.size() != 0) {
-
-
                         if (!(Requests.levels.size() <= 1) && LevelsWindow.getSelectedID() == 0) {
                             StringSelection selection = new StringSelection(
                                     Requests.levels.get(LevelsWindow.getSelectedID() + 1).getLevelID());
                             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                             clipboard.setContents(selection, selection);
                         }
+
                         if (LevelsWindow.getSelectedID() == 0 && Requests.levels.size() > 1) {
                             Requests.levels.remove(LevelsWindow.getSelectedID());
                             LevelsWindow.removeButton();
@@ -83,6 +81,7 @@ class ActionsWindow {
                                     e1.printStackTrace();
                                 }
                             }
+
                             if (!GeneralSettings.nowPlayingOption) {
                                 Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
                                         + Requests.levels.get(0).getLevelID() + "). Requested by "
@@ -118,6 +117,7 @@ class ActionsWindow {
                         thread.start();
 
                     }
+                    GeneralSettings.setOutputStringFile(Requests.parseInfoString(GeneralSettings.outputString, 0));
                     LevelsWindow.setOneSelect();
 
                     SongWindow.refreshInfo();
@@ -141,6 +141,7 @@ class ActionsWindow {
                     } catch (Exception ignored) {
 
                     }
+
                     if (Requests.levels.size() != 0) {
 
                         if (Requests.levels.get(LevelsWindow.getSelectedID()).getSongName().equalsIgnoreCase("Custom") && !Requests.levels.get(LevelsWindow.getSelectedID()).getPersist()) {
@@ -199,6 +200,7 @@ class ActionsWindow {
                                     e1.printStackTrace();
                                 }
                             }
+
                             if (!GeneralSettings.nowPlayingOption) {
                                 Main.sendMessage("Now Playing " + Requests.levels.get(num).getName() + " ("
                                         + Requests.levels.get(num).getLevelID() + "). Requested by "
@@ -206,6 +208,7 @@ class ActionsWindow {
                             }
                         }
                     }
+                    GeneralSettings.setOutputStringFile(Requests.parseInfoString(GeneralSettings.outputString, num));
                     SongWindow.refreshInfo();
                     InfoWindow.refreshInfo();
                 }

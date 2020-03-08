@@ -2,6 +2,7 @@ package Main;
 
 import Chat.Channel;
 import SettingsPanels.GeneralSettings;
+import SettingsPanels.RequestSettings;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
 
@@ -89,6 +90,7 @@ public class Main {
 			}
 			Settings.loadSettings(false);
 			GeneralSettings.loadSettings();
+			RequestSettings.loadSettings();
 			Overlay.setVisible();
 
 				//endregion

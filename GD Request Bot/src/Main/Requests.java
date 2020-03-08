@@ -1,6 +1,7 @@
 package Main;
 
 import SettingsPanels.GeneralSettings;
+import SettingsPanels.RequestSettings;
 import com.github.alex1304.jdash.client.AnonymousGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.entity.GDLevel;
@@ -31,7 +32,7 @@ class Requests {
     static ArrayList<LevelData> levels = new ArrayList<>();
 
     static void addRequest(String ID, String requester, boolean isCustomSong, String customUrl) {
-        if(ActionsWindow.requests) {
+        if(MainBar.requests) {
             try {
                 AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
                 GDLevel level = null;
@@ -50,7 +51,7 @@ class Requests {
                 // --------------------
                 Thread parse;
                 if (goThrough) {
-                    if (level != null && GeneralSettings.ratedOption && !(level.getStars() > 0)) {
+                    if (level != null && RequestSettings.ratedOption && !(level.getStars() > 0)) {
                         Main.sendMessage("@" + requester + " Please send star rated levels only!");
                         return;
                     }
@@ -210,6 +211,7 @@ class Requests {
                             StringSelection selection = new StringSelection(Requests.levels.get(0).getLevelID());
                             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                             clipboard.setContents(selection, selection);
+                            GeneralSettings.setOutputStringFile(Requests.parseInfoString(GeneralSettings.outputString, 0));
                             if(!GeneralSettings.nowPlayingOption) {
                                 Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
                                         + Requests.levels.get(0).getLevelID() + "). Requested by "
@@ -350,5 +352,23 @@ class Requests {
         gis.close();
         bis.close();
         return sb.toString();
+    }
+    static String parseInfoString(String text, int level){
+        if(Requests.levels.size() != 0) {
+            text = text.replaceAll("(?i)%levelName%", levels.get(level).getName())
+                    .replaceAll("(?i)%levelID%", levels.get(level).getLevelID())
+                    .replaceAll("(?i)%author%", levels.get(level).getAuthor())
+                    .replaceAll("(?i)%requester%", levels.get(level).getRequester())
+                    .replaceAll("(?i)%songName%", levels.get(level).getSongName())
+                    .replaceAll("(?i)%songID%", levels.get(level).getSongID())
+                    .replaceAll("(?i)likes%", levels.get(level).getLikes())
+                    .replaceAll("(?i)%downloads%", levels.get(level).getDownloads())
+                    .replaceAll("(?i)%description%", levels.get(level).getDescription())
+                    .replaceAll("(?i)%coins%", levels.get(level).getDescription());
+            return text;
+        }
+        else{
+            return GeneralSettings.noLevelString;
+        }
     }
 }

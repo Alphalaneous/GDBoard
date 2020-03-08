@@ -96,7 +96,7 @@ public class Defaults {
 					e.printStackTrace();
 				}
 				try {
-					Thread.sleep(30000);
+					Thread.sleep(10000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

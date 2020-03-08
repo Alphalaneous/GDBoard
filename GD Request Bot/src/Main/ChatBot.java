@@ -34,7 +34,7 @@ public class ChatBot extends TwitchBot {
     public void onMessage(User user, Channel channel, String msg) {
         boolean isBroadcaster = ("#" + user).equalsIgnoreCase(String.valueOf(channel));
         try {
-            //region Split Commands and Arguments
+            //region Split CommandSettings and Arguments
             String command = msg.split(" ")[0];
             String[] arguments = msg.split(" ");
             //endregion
@@ -51,7 +51,7 @@ public class ChatBot extends TwitchBot {
                 }
             }
             //endregion
-            //region ID/Name/Level Commands
+            //region ID/Name/Level CommandSettings
             if (command.equalsIgnoreCase("!ID") ||
                     command.equalsIgnoreCase("!name") ||
                     command.equalsIgnoreCase("!level")) {
@@ -246,7 +246,7 @@ public class ChatBot extends TwitchBot {
             if (command.equalsIgnoreCase("!help")) {
                 if (Defaults.mods.contains(user) || isBroadcaster) {
                     if (arguments.length == 1) {
-                        sendMessage("@" + user + " List of Commands | Type !help <command> for more help. | !request | !position | !ID | !difficulty | !song | !likes | !downloads | !remove | !queue | !block | !blockuser", channel);
+                        sendMessage("@" + user + " List of CommandSettings | Type !help <command> for more help. | !request | !position | !ID | !difficulty | !song | !likes | !downloads | !remove | !queue | !block | !blockuser", channel);
                     } else if (arguments[1].equalsIgnoreCase("request")) {
                         sendMessage("@" + user + " Used to send requests | Usage: \"!request <Level ID>\" to send via level ID | \"!request <Level Name>\" to send via level name | \"!request <Level Name> by <User>\" to send via level name by a user.", channel);
                     } else if (arguments[1].equalsIgnoreCase("position")) {
@@ -270,7 +270,7 @@ public class ChatBot extends TwitchBot {
                     }
                 } else {
                     if (arguments.length == 1) {
-                        sendMessage("@" + user + " List of Commands | Type !help <command> for more help. | !request | !position | !ID | !difficulty | !song | !likes | !downloads | !remove", channel);
+                        sendMessage("@" + user + " List of CommandSettings | Type !help <command> for more help. | !request | !position | !ID | !difficulty | !song | !likes | !downloads | !remove", channel);
                     } else if (arguments[1].equalsIgnoreCase("request")) {
                         sendMessage("@" + user + " Used to send requests | Usage: \"!request <Level ID>\" to send via level ID | \"!request <Level Name>\" to send via level name | \"!request <Level Name> by <User>\" to send via level name by a user.", channel);
                     } else if (arguments[1].equalsIgnoreCase("position")) {
@@ -468,15 +468,9 @@ public class ChatBot extends TwitchBot {
             }
             //endregion
 
-            //region Get Requests without Commands
+            //region Get Requests without CommandSettings
             else if (!stopReq){
-                if(!user.isFollowing(channel) && GeneralSettings.followersOption){
-                    if(!(isBroadcaster || Defaults.mods.contains(user))){
-                        sendMessage("@" + user + " Please follow to request levels!", channel);
-                        return;
-                    }
 
-                }
                 /*if(!user.isSubscribed(channel, Settings.oauth) && GeneralSettings.subsOption){
                     if(!(isBroadcaster || Defaults.mods.contains(user))) {
                         return;
@@ -484,6 +478,12 @@ public class ChatBot extends TwitchBot {
                 }*/
                 Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(msg);
                 if (m.find()) {
+                    if(!user.isFollowing(channel) && GeneralSettings.followersOption){
+                        if(!(isBroadcaster || Defaults.mods.contains(user))){
+                            sendMessage("@" + user + " Please follow to request levels!", channel);
+                            return;
+                        }
+                    }
                     try {
                         String[] msgs = msg.split(" ");
                         String mention = "";

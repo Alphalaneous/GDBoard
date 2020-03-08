@@ -1,5 +1,6 @@
 package Main;
 
+import SettingsPanels.CommandSettings;
 import com.jidesoft.swing.ResizablePanel;
 
 import java.awt.*;
@@ -26,6 +27,8 @@ class SettingsWindow {
 	private static JPanel general = SettingsPanels.GeneralSettings.createPanel();
 	private static JPanel overlay = SettingsPanels.OverlaySettings.createPanel();
 	private static JPanel accounts = SettingsPanels.AccountSettings.createPanel();
+	private static JPanel commands = SettingsPanels.CommandSettings.createPanel();
+	private static JPanel requests = SettingsPanels.RequestSettings.createPanel();
 	private static JPanel shortcuts = SettingsPanels.ShortcutSettings.createPanel();
 	private static JPanel personalization = SettingsPanels.PersonalizationSettings.createPanel();
 	private static JPanel blocked = SettingsPanels.BlockedSettings.createPanel();
@@ -45,6 +48,8 @@ class SettingsWindow {
 		content.add(general);
 		content.add(overlay);
 		content.add(accounts);
+		content.add(commands);
+		content.add(requests);
 		content.add(shortcuts);
 		content.add(personalization);
 		content.add(blocked);
@@ -52,15 +57,20 @@ class SettingsWindow {
 		general.setVisible(true);
 		overlay.setVisible(false);
 		accounts.setVisible(false);
+		commands.setVisible(false);
+		requests.setVisible(false);
 		shortcuts.setVisible(false);
 		personalization.setVisible(false);
 		blocked.setVisible(false);
+
 
 		JButton general = createButton("General");
 		general.setBackground(Defaults.SELECT);
 		general.setUI(selectUI);
 		JButton overlays = createButton("Overlays");
 		JButton accounts = createButton("Accounts");
+		JButton commands = createButton("Commands");
+		JButton requests = createButton("Requests");
 		JButton shortcuts = createButton("Shortcuts");
 		JButton personalization = createButton("Personalization");
 		JButton blocked = createButton("Blocked");
@@ -68,6 +78,8 @@ class SettingsWindow {
 		buttons.add(general);
 		//buttons.add(overlays);
 		buttons.add(accounts);
+		buttons.add(commands);
+		buttons.add(requests);
 		//buttons.add(shortcuts);
 		//buttons.add(personalization);
 		buttons.add(blocked);
@@ -170,6 +182,12 @@ class SettingsWindow {
 								break;
 							case "Blocked":
 								blocked.setVisible(true);
+								break;
+							case "Commands":
+								commands.setVisible(true);
+								break;
+							case "Requests":
+								requests.setVisible(true);
 								break;
 						}
 						break;

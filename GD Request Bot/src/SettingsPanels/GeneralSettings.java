@@ -7,19 +7,23 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 public class GeneralSettings {
 	private static JButtonUI defaultUI = new JButtonUI();
 	public static boolean followersOption = false;
 	public static boolean subsOption = false;
-	public static boolean ratedOption = false;
 	public static boolean nowPlayingOption = false;
 	public static boolean autoDownloadOption = false;
 	private static CheckboxButton followers = createButton("Followers Only", 50);
 	//private static CheckboxButton subs = createButton("Subscribers Only", 80);
-	private static CheckboxButton rated = createButton("Rated Levels Only", 80);
-	private static CheckboxButton nowPlaying = createButton("Disable Now Playing Message", 110);
-	private static CheckboxButton autoDownload = createButton("Automatically download Music (Experimental)", 140);
+	private static CheckboxButton nowPlaying = createButton("Disable Now Playing Message", 50);
+	private static CheckboxButton autoDownload = createButton("Automatically download Music (Experimental)", 80);
+	public static String outputString = "Currently playing %levelName% (%levelID%) by %author%!";
+	public static String noLevelString = "There are no levels in the queue!";
 	/*private static CheckboxButton auto = createButton("Auto", 110);
 	private static CheckboxButton easy = createButton("Easy", 140);
 	private static CheckboxButton normal = createButton("Normal", 170);
@@ -67,12 +71,7 @@ public class GeneralSettings {
 			}
 		});*/
 
-		rated.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				ratedOption = rated.getSelectedState();
-			}
-		});
+
 
 		nowPlaying.addMouseListener(new MouseAdapter() {
 			@Override
@@ -88,9 +87,9 @@ public class GeneralSettings {
 			}
 		});
 
-		panel.add(followers);
+		//panel.add(followers);
 		//panel.add(subs);
-		panel.add(rated);
+
 		panel.add(nowPlaying);
 		panel.add(autoDownload);
 		/*panel.add(auto);
@@ -107,16 +106,32 @@ public class GeneralSettings {
 
 
 	}
+	public static void setOutputStringFile(String text){
+		Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\output.txt");
+		try {
+		if(!Files.exists(file)) {
+			Files.createFile(file);
+		}
+		Files.write(file, text.getBytes());
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
 	public static void loadSettings(){
 		try {
 			followersOption = Boolean.parseBoolean(Settings.getSettings("followers"));
 			//subsOption = Boolean.parseBoolean(Settings.getSettings("subs"));
-			ratedOption = Boolean.parseBoolean(Settings.getSettings("rated"));
+			if(!Settings.getSettings("outputString").equalsIgnoreCase("")) {
+				outputString = Settings.getSettings("outputString");
+			}
+			if(!Settings.getSettings("noLevelString").equalsIgnoreCase("")) {
+				noLevelString = Settings.getSettings("noLevelString");
+			}
 			nowPlayingOption = Boolean.parseBoolean(Settings.getSettings("disableNP"));
 			autoDownloadOption = Boolean.parseBoolean(Settings.getSettings("autoDL"));
 			followers.setChecked(followersOption);
 			//subs.setChecked(subsOption);
-			rated.setChecked(ratedOption);
+
 			nowPlaying.setChecked(nowPlayingOption);
 			autoDownload.setChecked(autoDownloadOption);
 		}
@@ -128,7 +143,7 @@ public class GeneralSettings {
 		try {
 			Settings.writeSettings("followers", String.valueOf(followersOption));
 			//Settings.writeSettings("subs", String.valueOf(subsOption));
-			Settings.writeSettings("rated", String.valueOf(ratedOption));
+
 			Settings.writeSettings("disableNP", String.valueOf(nowPlayingOption));
 			Settings.writeSettings("autoDL", String.valueOf(autoDownloadOption));
 		} catch (IOException e) {
@@ -147,4 +162,5 @@ public class GeneralSettings {
 		button.refresh();
 		return button;
 	}
+
 }

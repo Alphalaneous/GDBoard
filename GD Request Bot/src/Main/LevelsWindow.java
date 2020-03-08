@@ -170,6 +170,7 @@ public class LevelsWindow {
 								.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
 										.getResource("Resources/DifficultyIcons/Epic/" + difficultyA + ".png")))
 								.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
+						//TODO Fix epic hard demon
 					} else if (featured) {
 						reqDifficulty.setIcon(new ImageIcon(ImageIO
 								.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
