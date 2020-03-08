@@ -90,12 +90,8 @@ public class Overlay {
 
     static void setVisible() {
         frame.setVisible(true);
-        while(true) {
-            if(Overlay.getWindow().isVisible()) {
-                MainBar.setTooltips();
-                break;
-            }
-        }
+        MainBar.setTooltips();
+
     }
 
     static void refreshUI(boolean color) {

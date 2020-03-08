@@ -270,14 +270,22 @@ class MainBar {
     }
 
     static void setTooltips() {
-        ((JButtonTooltip) toggleComments).setTooltipLocation(toggleComments.getLocationOnScreen().x + (toggleComments.getWidth() / 2));
-        ((JButtonTooltip) toggleActions).setTooltipLocation(toggleActions.getLocationOnScreen().x + (toggleActions.getWidth() / 2));
-        ((JButtonTooltip) toggleInfo).setTooltipLocation(toggleInfo.getLocationOnScreen().x + (toggleInfo.getWidth() / 2));
-        ((JButtonTooltip) toggleSong).setTooltipLocation(toggleSong.getLocationOnScreen().x + (toggleSong.getWidth() / 2));
-        ((JButtonTooltip) toggleLevels).setTooltipLocation(toggleLevels.getLocationOnScreen().x + (toggleLevels.getWidth() / 2));
-        ((JButtonTooltip) stopReqs).setTooltipLocation(stopReqs.getLocationOnScreen().x + (stopReqs.getWidth() / 2));
-        ((JButtonTooltip) toggleSettings).setTooltipLocation(toggleSettings.getLocationOnScreen().x + (toggleSettings.getWidth() / 2));
-        ((JButtonTooltip) close).setTooltipLocation(close.getLocationOnScreen().x + (close.getWidth() / 2));
+        Thread thread = new Thread(() -> {
+            while(true) {
+                if (Overlay.getWindow().isVisible()) {
+                    ((JButtonTooltip) toggleComments).setTooltipLocation(toggleComments.getLocationOnScreen().x + (toggleComments.getWidth() / 2));
+                    ((JButtonTooltip) toggleActions).setTooltipLocation(toggleActions.getLocationOnScreen().x + (toggleActions.getWidth() / 2));
+                    ((JButtonTooltip) toggleInfo).setTooltipLocation(toggleInfo.getLocationOnScreen().x + (toggleInfo.getWidth() / 2));
+                    ((JButtonTooltip) toggleSong).setTooltipLocation(toggleSong.getLocationOnScreen().x + (toggleSong.getWidth() / 2));
+                    ((JButtonTooltip) toggleLevels).setTooltipLocation(toggleLevels.getLocationOnScreen().x + (toggleLevels.getWidth() / 2));
+                    ((JButtonTooltip) stopReqs).setTooltipLocation(stopReqs.getLocationOnScreen().x + (stopReqs.getWidth() / 2));
+                    ((JButtonTooltip) toggleSettings).setTooltipLocation(toggleSettings.getLocationOnScreen().x + (toggleSettings.getWidth() / 2));
+                    ((JButtonTooltip) close).setTooltipLocation(close.getLocationOnScreen().x + (close.getWidth() / 2));
+                    break;
+                }
+            }
+        });
+        thread.start();
     }
 
     static JPanel getMainBar() {
