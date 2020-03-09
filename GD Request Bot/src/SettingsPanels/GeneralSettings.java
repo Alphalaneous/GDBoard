@@ -23,8 +23,9 @@ public class GeneralSettings {
 	private static CheckboxButton autoDownload = createButton("Automatically download Music (Experimental)", 80);
 	public static String outputString = "Currently playing %levelName% (%levelID%) by %author%!";
 	public static String noLevelString = "There are no levels in the queue!";
-	public static JLabel queueLimitText = createLabel("Maximum Queue Size: ", 114);
+	public static CheckboxButton queueLimitText = createButton("Maximum Queue Size: ", 110);
 	public static int queueLimit = 0;
+	private static boolean queueLimitBoolean = false;
 	private static FancyTextArea outputStringInput = new FancyTextArea();
 	private static FancyTextArea queueSizeInput = new FancyTextArea();
 	/*private static CheckboxButton auto = createButton("Auto", 110);
@@ -100,7 +101,7 @@ public class GeneralSettings {
 			}
 		});*/
 
-
+		queueSizeInput.setEditable(false);
 
 		nowPlaying.addMouseListener(new MouseAdapter() {
 			@Override
@@ -113,6 +114,18 @@ public class GeneralSettings {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				autoDownloadOption = autoDownload.getSelectedState();
+			}
+		});
+		queueLimitText.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				queueLimitBoolean = queueLimitText.getSelectedState();
+				if(!queueLimitBoolean){
+					queueSizeInput.setEditable(false);
+				}
+				else{
+					queueSizeInput.setEditable(true);
+				}
 			}
 		});
 
@@ -159,11 +172,19 @@ public class GeneralSettings {
 			}
 			nowPlayingOption = Boolean.parseBoolean(Settings.getSettings("disableNP"));
 			autoDownloadOption = Boolean.parseBoolean(Settings.getSettings("autoDL"));
+			queueLimitBoolean = Boolean.parseBoolean(Settings.getSettings("queueLimitEnabled"));
 			followers.setChecked(followersOption);
 			//subs.setChecked(subsOption);
 
 			nowPlaying.setChecked(nowPlayingOption);
 			autoDownload.setChecked(autoDownloadOption);
+			queueLimitText.setChecked(queueLimitBoolean);
+			if(!queueLimitBoolean){
+				queueSizeInput.setEditable(false);
+			}
+			else{
+				queueSizeInput.setEditable(true);
+			}
 		}
 		catch (IOException e){
 			JOptionPane.showMessageDialog(null, "There was an error reading the config file!", "Error",  JOptionPane.ERROR_MESSAGE);
@@ -176,6 +197,7 @@ public class GeneralSettings {
 
 			Settings.writeSettings("disableNP", String.valueOf(nowPlayingOption));
 			Settings.writeSettings("autoDL", String.valueOf(autoDownloadOption));
+			Settings.writeSettings("queueLimitEnabled", String.valueOf(queueLimitBoolean));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "There was an error writing to the file!", "Error",  JOptionPane.ERROR_MESSAGE);
 		}

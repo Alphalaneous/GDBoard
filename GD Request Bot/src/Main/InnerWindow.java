@@ -18,7 +18,7 @@ class InnerWindow extends ResizablePanel {
     private int width;
     private int height;
     private final String icon;
-    private boolean settings = false;
+    private boolean settings;
 
     private boolean isPinPressed = false;
     public boolean toggleState = true;
@@ -31,8 +31,8 @@ class InnerWindow extends ResizablePanel {
 
     //region Constructor for InnerWindow
     InnerWindow(final String title, final int x, final int y, final int width, final int height, final String icon, boolean settings) {
-        double y1;
-        double x1;
+        double y1 = 0;
+        double x1 = 0;
         double ratio = 1920 / Defaults.screenSize.getWidth();
         this.title = title;
         if(!Settings.windowedMode) {
@@ -70,6 +70,7 @@ class InnerWindow extends ResizablePanel {
             if (x + width >= middle - 290 && x <= middle + 290 && y <= 93) {
                 y1 = 93;
             }
+            
             this.x = x1;
             this.y = y1;
         }
@@ -108,7 +109,12 @@ class InnerWindow extends ResizablePanel {
             setBounds((int) x, (int) y, width + 2, height + 32);
         }
         else {
-            setBounds((int) x, (int) y, width + 2, height);
+            if(settings) {
+                setBounds((int) x, (int) y, width + 2, height);
+            }
+            else {
+                SettingsWindow.frame.setLocation((int) x, (int) y);
+            }
         }
         setOpaque(false);
         if(!Settings.windowedMode) {
@@ -191,46 +197,72 @@ class InnerWindow extends ResizablePanel {
                 double x = location.x + dragged.getX() - pressed.getX();
                 double y = location.y + dragged.getY() - pressed.getY();
                 Point p = new Point();
-                p.setLocation(x, y);
-                if(settings) {
-                    p.setLocation(p.getX(), p.getY());
-                    SettingsWindow.frame.setLocation(p);
+                    p.setLocation(x, y);
+                    if(!settings) {
+                        if (x + width >= Defaults.screenSize.getWidth() + 1) {
+                            p.setLocation(Defaults.screenSize.getWidth() + 1 - width, p.getY());
+                        }
+                        if (x <= -1) {
+                            p.setLocation(-1, p.getY());
+                        }
+                        if (y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+                            p.setLocation(p.getX(), Defaults.screenSize.getHeight() + 1 - height - 32);
+                        }
+                        if (y <= -1) {
+                            p.setLocation(p.getX(), -1);
+                        }
+                        if (x + width >= Defaults.screenSize.getWidth() + 1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+                            p.setLocation((int) Defaults.screenSize.getWidth() + 1 - width, (int) Defaults.screenSize.getHeight() + 1 - height - 32);
+                        }
+                        if (x + width >= Defaults.screenSize.getWidth() + 1 && y <= -1) {
+                            p.setLocation((int) Defaults.screenSize.getWidth() + 1 - width, -1);
+                        }
+                        if (x <= -1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+                            p.setLocation(-1, (int) Defaults.screenSize.getHeight() + 1 - height - 32);
+                        }
+                        if (x <= -1 && y <= -1) {
+                            p.setLocation(-1, -1);
+                        }
 
-                }
-                else {
-                    if (x + width >= Defaults.screenSize.getWidth() + 1) {
-                        p.setLocation(Defaults.screenSize.getWidth() + 1 - width, p.getY());
-                    }
-                    if (x <= -1) {
-                        p.setLocation(-1, p.getY());
-                    }
-                    if (y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
-                        p.setLocation(p.getX(), Defaults.screenSize.getHeight() + 1 - height - 32);
-                    }
-                    if (y <= -1) {
-                        p.setLocation(p.getX(), -1);
-                    }
-                    if (x + width >= Defaults.screenSize.getWidth() + 1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
-                        p.setLocation((int) Defaults.screenSize.getWidth() + 1 - width, (int) Defaults.screenSize.getHeight() + 1 - height - 32);
-                    }
-                    if (x + width >= Defaults.screenSize.getWidth() + 1 && y <= -1) {
-                        p.setLocation((int) Defaults.screenSize.getWidth() + 1 - width, -1);
-                    }
-                    if (x <= -1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
-                        p.setLocation(-1, (int) Defaults.screenSize.getHeight() + 1 - height - 32);
-                    }
-                    if (x <= -1 && y <= -1) {
-                        p.setLocation(-1, -1);
-                    }
+                        if (x + width >= MainBar.getMainBar().getX() && x <= MainBar.getMainBar().getWidth() + MainBar.getMainBar().getX() - 2 && y <= 93) {
+                            p.setLocation(p.getX(), 93);
 
-                    if (x + width >= MainBar.getMainBar().getX() && x <= MainBar.getMainBar().getWidth() + MainBar.getMainBar().getX() - 2 && y <= 93) {
-                        p.setLocation(p.getX(), 93);
-
-                    }
-                    if (!settings) {
+                        }
                         setLocation(p);
                     }
-                }
+                    else {
+                        if (x + width >= Defaults.screenSize.getWidth() + Defaults.screenSize.x + 1) {
+                            p.setLocation(Defaults.screenSize.getWidth() + Defaults.screenSize.x + 1 - width, p.getY());
+                        }
+                        if (x <= -1 + Defaults.screenSize.x) {
+                            p.setLocation(-1 + Defaults.screenSize.x, p.getY());
+                        }
+                        if (y + height + 32 >= Defaults.screenSize.getHeight()  + Defaults.screenSize.y+ 1) {
+                            p.setLocation(p.getX(), Defaults.screenSize.getHeight() + Defaults.screenSize.y + 1 - height - 32);
+                        }
+                        if (y <= -1  + Defaults.screenSize.y) {
+                            p.setLocation(p.getX(), -1 + Defaults.screenSize.y);
+                        }
+                        if (x + width >= Defaults.screenSize.getWidth() + Defaults.screenSize.x+ 1 && y + height + 32 >= Defaults.screenSize.getHeight() + Defaults.screenSize.y + 1) {
+                            p.setLocation((int) Defaults.screenSize.getWidth() + Defaults.screenSize.x + 1 - width, (int) Defaults.screenSize.getHeight() + Defaults.screenSize.y + 1 - height - 32);
+                        }
+                        if (x + width >= Defaults.screenSize.getWidth() + Defaults.screenSize.x + 1 && y <= -1 + Defaults.screenSize.y) {
+                            p.setLocation((int) Defaults.screenSize.getWidth() + Defaults.screenSize.x + 1 - width, -1 + Defaults.screenSize.y);
+                        }
+                        if (x <= -1 + Defaults.screenSize.x && y + height + 32 >= Defaults.screenSize.getHeight() + Defaults.screenSize.y + 1) {
+                            p.setLocation(-1 + Defaults.screenSize.x, (int) Defaults.screenSize.getHeight() + Defaults.screenSize.y + 1 - height - 32);
+                        }
+                        if (x <= -1 + Defaults.screenSize.x && y <= -1 + Defaults.screenSize.y) {
+                            p.setLocation(-1 + Defaults.screenSize.x, -1 + Defaults.screenSize.y);
+                        }
+
+                        if (x + width >= MainBar.getMainBar().getX() + Defaults.screenSize.x && x <= MainBar.getMainBar().getWidth() + MainBar.getMainBar().getX() + Defaults.screenSize.x - 2 && y <= 93 + Defaults.screenSize.y) {
+                            p.setLocation(p.getX(), 93 + Defaults.screenSize.y);
+
+                        }
+                        SettingsWindow.frame.setLocation(p);
+                    }
+
 
             }
 
@@ -296,7 +328,7 @@ class InnerWindow extends ResizablePanel {
             public void mousePressed(MouseEvent e) {
                 if(!settings){
                     toggle();
-                } else if (settings){
+                } else {
                     SettingsWindow.toggleVisible();
                 }
 
@@ -449,44 +481,47 @@ class InnerWindow extends ResizablePanel {
                 y = getY();
             }
             else {
-                x = SettingsWindow.frame.getX();
-                y = SettingsWindow.frame.getY();
+                //TODO Settngs window stays at location when moving between monitors
+                x = (int) ((Defaults.screenSize.getWidth()/2 - SettingsWindow.frame.getWidth()/2) + Defaults.screenSize.x);
+                y = 150 + Defaults.screenSize.y;
+                SettingsWindow.frame.setLocation(x, y);
+                System.out.println("Start: " + x + ", " + y);
             }
             x1 = x / ratioX;
             y1 = y / ratioY;
-            if (x + width >= Defaults.screenSize.getWidth() + 1) {
-                x1 = Defaults.screenSize.getWidth() + 1 - width;
-            }
-            if (x <= -1) {
-                x1 = -1;
-            }
-            if (y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
-                y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
-            }
-            if (y <= -1) {
-                y1 = -31;
-            }
-            if (x + width >= Defaults.screenSize.getWidth() + 1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
-                x1 = Defaults.screenSize.getWidth() + 1 - width;
-                y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
-            }
-            if (x + width >= Defaults.screenSize.getWidth() + 1 && y <= -1) {
-                x1 = Defaults.screenSize.getWidth() + 1 - width;
-                y1 = -31;
-            }
-            if (x <= -1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
-                x1 = -1;
-                y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
-            }
-            if (x <= -1 && y <= -1) {
-                x1 = -1;
-                y1 = -31;
-            }
-            int middle = (int) (Defaults.screenSize.getWidth() / 2);
-            if (x + width >= middle - 290 && x <= middle + 290 && y <= 93) {
-                y1 = 93;
-            }
             if(!settings) {
+                if (x + width >= Defaults.screenSize.getWidth() + 1) {
+                    x1 = Defaults.screenSize.getWidth() + 1 - width;
+                }
+                if (x <= -1) {
+                    x1 = -1;
+                }
+                if (y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+                    y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
+                }
+                if (y <= -1) {
+                    y1 = -31;
+                }
+                if (x + width >= Defaults.screenSize.getWidth() + 1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+                    x1 = Defaults.screenSize.getWidth() + 1 - width;
+                    y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
+                }
+                if (x + width >= Defaults.screenSize.getWidth() + 1 && y <= -1) {
+                    x1 = Defaults.screenSize.getWidth() + 1 - width;
+                    y1 = -31;
+                }
+                if (x <= -1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+                    x1 = -1;
+                    y1 = Defaults.screenSize.getHeight() + 1 - height - 32;
+                }
+                if (x <= -1 && y <= -1) {
+                    x1 = -1;
+                    y1 = -31;
+                }
+                int middle = (int) (Defaults.screenSize.getWidth() / 2);
+                if (x + width >= middle - 290 && x <= middle + 290 && y <= 93) {
+                    y1 = 93;
+                }
                 setLocation((int) x1, (int) y1);
             }
         }
@@ -510,7 +545,12 @@ class InnerWindow extends ResizablePanel {
         topBar.setVisible(true);
         setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 50)));
         if (toggleState) {
-            setVisible(true);
+            if(!settings) {
+                setVisible(true);
+            }
+            else {
+                SettingsWindow.frame.setVisible(true);
+            }
         }
     }
     //endregion
@@ -518,7 +558,12 @@ class InnerWindow extends ResizablePanel {
     //region Set InnerWindow invisible
     void setInvisible() {
         if (!isPinPressed) {
-            setVisible(false);
+            if(!settings) {
+                setVisible(false);
+            }
+            else {
+                SettingsWindow.frame.setVisible(false);
+            }
         }
         topBar.setVisible(false);
 
@@ -529,10 +574,20 @@ class InnerWindow extends ResizablePanel {
     //region Toggle Visibility of InnerWindow
     void toggle() {
         if (toggleState) {
-            setVisible(false);
+            if(!settings) {
+                setVisible(false);
+            }
+            else {
+                SettingsWindow.frame.setVisible(false);
+            }
             toggleState = false;
         } else {
-            setVisible(true);
+            if(!settings) {
+                setVisible(true);
+            }
+            else {
+                SettingsWindow.frame.setVisible(true);
+            }
             toggleState = true;
         }
     }

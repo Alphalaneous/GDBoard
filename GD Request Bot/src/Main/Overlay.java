@@ -93,6 +93,7 @@ public class Overlay {
         frame.setVisible(true);
         MainBar.setTooltips();
         frame.setAlwaysOnTop(true);
+        SettingsWindow.toFront();
     }
 
     static void refreshUI(boolean color) {

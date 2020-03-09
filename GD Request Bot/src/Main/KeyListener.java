@@ -19,10 +19,9 @@ public class KeyListener implements NativeKeyListener {
                 if (openKeyReleased) {
                     if (!Settings.windowedMode) {
                         Overlay.setWindowsInvisible();
-                    } else {
-                        Overlay.frame.toFront();
-                        Overlay.frame.requestFocus();
                     }
+                    Overlay.frame.toFront();
+                    Overlay.frame.requestFocus();
                     openKeyReleased = false;
                 }
 
@@ -34,6 +33,7 @@ public class KeyListener implements NativeKeyListener {
                     }
                     Overlay.frame.toFront();
                     Overlay.frame.requestFocus();
+                    SettingsWindow.toFront();
                     openKeyReleased = false;
                 }
 

@@ -16,7 +16,7 @@ public class Defaults {
 	static Rectangle screenSize =  GraphicsEnvironment
 			.getLocalGraphicsEnvironment()
 			.getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();
-	private static Rectangle prevScreenSize = GraphicsEnvironment
+	static Rectangle prevScreenSize = GraphicsEnvironment
 			.getLocalGraphicsEnvironment()
 			.getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();
 	static List<User> mods = new ArrayList<>();

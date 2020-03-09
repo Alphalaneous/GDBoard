@@ -20,7 +20,6 @@ public class SettingsWindow {
 
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static JButtonUI selectUI = new JButtonUI();
-	private static boolean toggleState = true;
 	private static JPanel general = SettingsPanels.GeneralSettings.createPanel();
 	private static JPanel overlay = SettingsPanels.OverlaySettings.createPanel();
 	private static JPanel accounts = SettingsPanels.AccountSettings.createPanel();
@@ -94,23 +93,10 @@ public class SettingsWindow {
 		((InnerWindow) window).refreshListener();
 		frame.add(window);
 		frame.setVisible(true);
-		Thread thread = new Thread(() -> {
-			while(true) {
-				if (run) {
-					frame.toFront();
-
-				}
-				try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		thread.start();
-
 	}
-
+	static void toFront(){
+		frame.toFront();
+	}
 	static void refreshUI() {
 		((InnerWindow) window).refreshUI();
 		blankSpace.setBackground(Defaults.MAIN);
@@ -137,18 +123,18 @@ public class SettingsWindow {
 
 	}
 
-	/*static void toggleVisible() {
+	static void toggleVisible() {
+
 		((InnerWindow) window).toggle();
-	}*/
+	}
 
 	static void setInvisible() {
-		frame.setVisible(false);
-		toggleState = false;
+		((InnerWindow) window).setInvisible();
 	}
 
 	static void setVisible() {
-		frame.setVisible(true);
-		toggleState = true;
+		((InnerWindow) window).setVisible();
+
 	}
 
 	private static JButton createButton(String text) {
@@ -232,17 +218,6 @@ public class SettingsWindow {
 	//region SetLocation
 	static void setLocation(Point point){
 		frame.setLocation(point);
-	}
-	//endregion
-	//region Toggle Visible
-	static void toggleVisible() {
-		if (toggleState) {
-			frame.setVisible(false);
-			toggleState = false;
-		} else {
-			frame.setVisible(true);
-			toggleState = true;
-		}
 	}
 	//endregion
 	//region SetSettings

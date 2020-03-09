@@ -85,9 +85,14 @@ public class Main {
 			//endregion
 
 			//region Create ChatBot and send starting message
-			bot = new ChatBot();                                                        //Create ChatBot
-			bot.connect();                                                                //Connect the bot
-			bot.sendMessage("Thank you for using GDBoard by Alphalaneous! Type !help for list of commands!", bot.joinChannel(Settings.channel));
+			while(true) {
+				if (startBot()) {        //Start the Chat Bot
+					bot.sendMessage("Thank you for using GDBoard by Alphalaneous! Type !help for list of commands!", bot.joinChannel(Settings.channel));
+					break;
+				}
+				System.out.println("Retrying");
+				Thread.sleep(10000);
+			}
 			//endregion
 
 			//region Start and Create Everything
@@ -115,14 +120,15 @@ public class Main {
 			GeneralSettings.loadSettings();
 			RequestSettings.loadSettings();
 			Overlay.setVisible();
-
+			SettingsWindow.toFront();
 			//endregion
 			//region Start ChatBot and keep trying if it fails
-			startBot();        //Start the Chat Bot
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
+
 		}
 		//endregion
 	}
@@ -137,12 +143,21 @@ public class Main {
 		return bot;
 	}
 
-	public static void startBot() {
-		bot.stop();
-		bot = new ChatBot();
-		bot.connect();
-		bot.joinChannel(Settings.channel);
-		bot.start();        //Start the Chat Bot
+	public static boolean startBot() {
+		try {
+			if (bot != null) {
+				bot.stop();
+			}
+			bot = new ChatBot();
+			bot.connect();
+			bot.joinChannel(Settings.channel);
+			bot.start();        //Start the Chat Bot
+			return true;
+		}
+		catch (Exception e){
+			bot = null;
+			return false;
+		}
 	}
 	public static class MyLookAndFeel extends NimbusLookAndFeel {
 		@Override
