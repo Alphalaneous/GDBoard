@@ -82,27 +82,6 @@ public class JButtonUI extends BasicButtonUI implements java.io.Serializable, Mo
 		c.setBackground(bgColor);
 		c.repaint();
 	}
-
-	public void keyTyped(KeyEvent e) {
-	}
-
-	public void keyPressed(KeyEvent e) {
-		int code = e.getKeyCode();
-		if (code == KeyEvent.VK_ENTER || code == KeyEvent.VK_SPACE) {
-			JComponent c = (JComponent) e.getComponent();
-			c.setBorder(m_borderLowered);
-			c.setBackground(m_backgroundPressed);
-		}
-	}
-
-	public void keyReleased(KeyEvent e) {
-		int code = e.getKeyCode();
-		if (code == KeyEvent.VK_ENTER || code == KeyEvent.VK_SPACE) {
-			JComponent c = (JComponent) e.getComponent();
-			c.setBorder(m_borderRaised);
-			c.setBackground(m_backgroundNormal);
-		}
-	}
 	public void setSelect(Color color) {
 		selectColor = color;
 	}
@@ -111,5 +90,20 @@ public class JButtonUI extends BasicButtonUI implements java.io.Serializable, Mo
 	}
 	public void setHover(Color color) {
 		hoverColor = color;
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+
 	}
 }

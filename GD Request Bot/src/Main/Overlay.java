@@ -2,6 +2,7 @@ package Main;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -26,7 +27,7 @@ public class Overlay {
 
 
         frame.setFocusableWindowState(false);
-        frame.setAlwaysOnTop(true);
+
 
         if (!Settings.windowedMode) {
             frame.setUndecorated(true);
@@ -63,7 +64,7 @@ public class Overlay {
         mainFrame.setBounds(0, 0, Defaults.screenSize.width, Defaults.screenSize.height);
         mainFrame.setBackground(new Color(0, 0, 0, 0));
         mainFrame.setLayout(null);
-
+        frame.toBack();
         frame.add(mainFrame);
 
     }
@@ -91,7 +92,7 @@ public class Overlay {
     static void setVisible() {
         frame.setVisible(true);
         MainBar.setTooltips();
-
+        frame.setAlwaysOnTop(true);
     }
 
     static void refreshUI(boolean color) {

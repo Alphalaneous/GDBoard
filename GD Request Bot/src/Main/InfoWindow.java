@@ -16,7 +16,7 @@ class InfoWindow {
 	private static JLabel downloads = new JLabel();
 	private static JLabel length = new JLabel();
 	private static JTextPane description = new JTextPane();
-	private static JPanel window = new InnerWindow("Information", Settings.getInfoWLoc().x, Settings.getInfoWLoc().y, width, height, "\uE946").createPanel();
+	private static JPanel window = new InnerWindow("Information", Settings.getInfoWLoc().x, Settings.getInfoWLoc().y, width, height, "\uE946", false).createPanel();
 
 	static void createPanel() {
 
@@ -43,6 +43,7 @@ class InfoWindow {
 		description.setOpaque(false);
 		description.setEditable(false);
 		description.setForeground(Defaults.FOREGROUND);
+		description.setBackground(new Color(0,0,0,0));
 		description.setBounds(5,5,230, height-10);
 
 		panel.add(likes);

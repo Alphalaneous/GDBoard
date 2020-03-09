@@ -5,11 +5,24 @@ import SettingsPanels.GeneralSettings;
 import SettingsPanels.RequestSettings;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
+import org.jnativehook.GlobalScreen;
 
 import javax.swing.*;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
 import java.awt.event.KeyEvent;
+import java.awt.font.TextAttribute;
+import java.awt.im.InputMethodHighlight;
+import java.awt.image.ColorModel;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 import java.net.URI;
+import java.net.URL;
+import java.util.Map;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Main {
@@ -18,10 +31,18 @@ public class Main {
 
 	//region Main
 	public static void main(String[] args) throws IllegalArgumentException {
-		//TODO Keybinds
 		//TODO Use nio everywhere
 		try {
+			Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+			logger.setLevel(Level.WARNING);
 
+			logger.setUseParentHandlers(false);
+
+			try {
+				UIManager.setLookAndFeel(new MyLookAndFeel());
+			} catch (UnsupportedLookAndFeelException e) {
+				e.printStackTrace();
+			}
 			Settings.writeSettings("keybind", String.valueOf(KeyEvent.VK_HOME));
 			Settings.keybind = KeyEvent.VK_HOME;
 			Settings.loadSettings(true);
@@ -35,7 +56,7 @@ public class Main {
 			if (!Settings.hasWindowed) {
 				Settings.writeSettings("windowed", "false");
 			}
-			if(!Settings.hasMonitor){
+			if (!Settings.hasMonitor) {
 				Settings.writeSettings("monitor", "0");
 			}
 			//endregion
@@ -56,7 +77,7 @@ public class Main {
 					Settings.setOAuth(twitch.auth().getAccessToken());
 					Settings.writeSettings("oauth", twitch.auth().getAccessToken());
 				} else {                                                                    //Else print error
-					JOptionPane.showMessageDialog(null, "Failed to Authenticate Twitch account", "Error",  JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Failed to Authenticate Twitch account", "Error", JOptionPane.ERROR_MESSAGE);
 					System.out.println(twitch.auth().getAuthenticationError());
 				}
 			}
@@ -72,7 +93,9 @@ public class Main {
 			//region Start and Create Everything
 			Defaults.startMainThread();        //Starts thread that always checks for changes such as time, resolution, and color scheme
 			Overlay.setFrame();                //Creates the JFrame that contains everything
-			KeyListener.hook();                    //Starts a Keyboard and Controller Listener
+			ControllerListener.hook();                    //Starts Controller Listener
+			GlobalScreen.registerNativeHook();
+			GlobalScreen.addNativeKeyListener(new KeyListener());
 			if (!Settings.windowedMode) {
 				MainBar.createBar();            //Creates the main "Game Bar" in the top center
 			}
@@ -93,31 +116,40 @@ public class Main {
 			RequestSettings.loadSettings();
 			Overlay.setVisible();
 
-				//endregion
+			//endregion
 			//region Start ChatBot and keep trying if it fails
-			startBot();		//Start the Chat Bot
+			startBot();        //Start the Chat Bot
 
-		}
-		catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e, "Error",  JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		//endregion
 	}
+
 	//endregion
 	//region SendMessage to send messages as created ChatBot
-	static void sendMessage(String message) {	//Send message as created static ChatBot
+	static void sendMessage(String message) {    //Send message as created static ChatBot
 		bot.sendMessage(message, Channel.getChannel(Settings.channel, bot));
 	}
-	static ChatBot getChatBot(){
+
+	static ChatBot getChatBot() {
 		return bot;
 	}
-	public static void startBot(){
-			bot.stop();
-			bot = new ChatBot();
-			bot.connect();
-			bot.joinChannel(Settings.channel);
-			bot.start();		//Start the Chat Bot
+
+	public static void startBot() {
+		bot.stop();
+		bot = new ChatBot();
+		bot.connect();
+		bot.joinChannel(Settings.channel);
+		bot.start();        //Start the Chat Bot
+	}
+	public static class MyLookAndFeel extends NimbusLookAndFeel {
+		@Override
+		public void provideErrorFeedback(Component component) {
+			//super.provideErrorFeedback(component);
+		}
 	}
 	//endregion
+
 }

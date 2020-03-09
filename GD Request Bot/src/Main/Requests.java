@@ -231,7 +231,7 @@ class Requests {
                     }
                 }
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
         else {

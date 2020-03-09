@@ -7,23 +7,20 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
-class SettingsWindow {
+public class SettingsWindow {
 	private static int width = 622;
 	private static int height = 622;
-	private static ResizablePanel window = new InnerWindow("Settings", 1920 / 2 - 250, 1080 / 2 - 300, width, height,
-			"\uE713").createPanel();
+	private static ResizablePanel window = new InnerWindow("Settings", 0, 0, width-2, height,
+			"\uE713", true).createPanel();
 	private static JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
 	private static JPanel content = new JPanel();
 	private static JPanel blankSpace = new JPanel();
 
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static JButtonUI selectUI = new JButtonUI();
-
+	private static boolean toggleState = true;
 	private static JPanel general = SettingsPanels.GeneralSettings.createPanel();
 	private static JPanel overlay = SettingsPanels.OverlaySettings.createPanel();
 	private static JPanel accounts = SettingsPanels.AccountSettings.createPanel();
@@ -32,16 +29,22 @@ class SettingsWindow {
 	private static JPanel shortcuts = SettingsPanels.ShortcutSettings.createPanel();
 	private static JPanel personalization = SettingsPanels.PersonalizationSettings.createPanel();
 	private static JPanel blocked = SettingsPanels.BlockedSettings.createPanel();
-
+	public static boolean run = true;
+	static JDialog frame = new JDialog();
 	static void createPanel() {
+		frame.setAlwaysOnTop(true);
 
+		frame.setUndecorated(true);
+		frame.setSize(width,height+32);
+		frame.setLayout(null);
+		frame.setBackground(new Color(255, 255, 255, 0));
 		blankSpace.setBounds(1, 31, 208, 20);
 		blankSpace.setBackground(Defaults.MAIN);
 
-		buttons.setBounds(1, 51, 208, height - 20);
+		buttons.setBounds(1, 51, 208, height-20);
 		buttons.setBackground(Defaults.MAIN);
 
-		content.setBounds(208, 31, 415, height);
+		content.setBounds(208, 31, 413, height);
 		content.setBackground(Defaults.SUB_MAIN);
 		content.setLayout(null);
 
@@ -80,8 +83,8 @@ class SettingsWindow {
 		buttons.add(accounts);
 		buttons.add(commands);
 		buttons.add(requests);
-		//buttons.add(shortcuts);
-		//buttons.add(personalization);
+		buttons.add(shortcuts);
+		buttons.add(personalization);
 		buttons.add(blocked);
 
 		window.add(blankSpace);
@@ -89,7 +92,23 @@ class SettingsWindow {
 		window.add(content);
 		((InnerWindow) window).setPinVisible();
 		((InnerWindow) window).refreshListener();
-		Overlay.addToFrame(window);
+		frame.add(window);
+		frame.setVisible(true);
+		Thread thread = new Thread(() -> {
+			while(true) {
+				if (run) {
+					frame.toFront();
+
+				}
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		thread.start();
+
 	}
 
 	static void refreshUI() {
@@ -115,6 +134,7 @@ class SettingsWindow {
 
 			}
 		}
+
 	}
 
 	/*static void toggleVisible() {
@@ -122,11 +142,13 @@ class SettingsWindow {
 	}*/
 
 	static void setInvisible() {
-		((InnerWindow) window).setInvisible();
+		frame.setVisible(false);
+		toggleState = false;
 	}
 
 	static void setVisible() {
-		((InnerWindow) window).setVisible();
+		frame.setVisible(true);
+		toggleState = true;
 	}
 
 	private static JButton createButton(String text) {
@@ -209,17 +231,24 @@ class SettingsWindow {
 	}
 	//region SetLocation
 	static void setLocation(Point point){
-		window.setLocation(point);
+		frame.setLocation(point);
 	}
 	//endregion
 	//region Toggle Visible
 	static void toggleVisible() {
-		((InnerWindow) window).toggle();
+		if (toggleState) {
+			frame.setVisible(false);
+			toggleState = false;
+		} else {
+			frame.setVisible(true);
+			toggleState = true;
+		}
 	}
 	//endregion
 	//region SetSettings
 	static void setSettings(){
-		((InnerWindow) window).setSettings();
+		Settings.setWindowSettings("Settings", frame.getX() + "," + frame.getY() + "," + false + "," + frame.isVisible());
+
 	}
 	//endregion
 }

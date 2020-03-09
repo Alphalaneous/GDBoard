@@ -13,13 +13,14 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.Random;
+import java.util.Set;
 
 class ActionsWindow {
 
     private static int height = 60;
     private static int width = 300;
     private static ResizablePanel window = new InnerWindow("Actions", Settings.getActionsWLoc().x, Settings.getActionsWLoc().y, width, height,
-            "\uE7C9").createPanel();
+            "\uE7C9", false).createPanel();
     private static JPanel mainPanel = new JPanel();
     private static JPanel panel = new JPanel();
     private static JButtonUI defaultUI = new JButtonUI();
@@ -242,6 +243,7 @@ class ActionsWindow {
                     ((InnerWindow) window).moveToFront();
                     super.mousePressed(e);
                     if (Requests.levels.size() != 0) {
+                        SettingsWindow.run = false;
                         Object[] options = {"Yes", "No"};
                         int n = JOptionPane.showOptionDialog(Overlay.frame,
                                 "Block " + Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "?",
@@ -275,6 +277,7 @@ class ActionsWindow {
                         }
                         SongWindow.refreshInfo();
                         InfoWindow.refreshInfo();
+                        SettingsWindow.run = true;
                     }
                     LevelsWindow.setOneSelect();
 
@@ -288,6 +291,7 @@ class ActionsWindow {
             clear.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
+                    SettingsWindow.run = false;
                     ((InnerWindow) window).moveToFront();
                     super.mousePressed(e);
                     Object[] options = {"Yes", "No"};
@@ -318,6 +322,7 @@ class ActionsWindow {
                             CommentsWindow.unloadComments(true);
                         }
                         LevelsWindow.setOneSelect();
+                        SettingsWindow.run = true;
                     }
                 }
             });

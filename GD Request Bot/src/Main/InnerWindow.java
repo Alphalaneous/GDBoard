@@ -13,14 +13,15 @@ class InnerWindow extends ResizablePanel {
 
     private static final long serialVersionUID = 1L;
     private final String title;
-    private final double x;
-    private final double y;
+    private double x = 0;
+    private double y = 0;
     private int width;
     private int height;
     private final String icon;
+    private boolean settings = false;
 
     private boolean isPinPressed = false;
-    private boolean toggleState = true;
+    public boolean toggleState = true;
     private JButton closeButton = new JButton("\uE894");
     private JButton pinButton = new JButton("\uE840");
     private JLabel pinButtonFill = new JLabel("  \uE842");
@@ -29,7 +30,7 @@ class InnerWindow extends ResizablePanel {
     private JButtonUI defaultUI = new JButtonUI();
 
     //region Constructor for InnerWindow
-    InnerWindow(final String title, final int x, final int y, final int width, final int height, final String icon) {
+    InnerWindow(final String title, final int x, final int y, final int width, final int height, final String icon, boolean settings) {
         double y1;
         double x1;
         double ratio = 1920 / Defaults.screenSize.getWidth();
@@ -79,6 +80,7 @@ class InnerWindow extends ResizablePanel {
         this.width = width;
         this.height = height;
         this.icon = icon;
+        this.settings = settings;
     }
     //endregion
 
@@ -118,7 +120,7 @@ class InnerWindow extends ResizablePanel {
         //endregion
 
         //region Mouse Relative to Window
-        if(!Settings.windowedMode) {
+        if(!Settings.windowedMode && !settings) {
             Thread threadPos = new Thread(() -> {
                 while (true) {
                     try {
@@ -175,7 +177,12 @@ class InnerWindow extends ResizablePanel {
             public void mousePressed(MouseEvent me) {
                 moveToFront();
                 pressed = me.getLocationOnScreen();
-                location = getLocation();
+                if(!settings) {
+                    location = getLocation();
+                }
+                else{
+                    location = SettingsWindow.frame.getLocation();
+                }
             }
 
             public void mouseDragged(MouseEvent me) {
@@ -185,42 +192,45 @@ class InnerWindow extends ResizablePanel {
                 double y = location.y + dragged.getY() - pressed.getY();
                 Point p = new Point();
                 p.setLocation(x, y);
-                setLocation(p);
-                if (x + width >= Defaults.screenSize.getWidth() + 1) {
-                    p.setLocation(Defaults.screenSize.getWidth() + 1 - width, p.getY());
-                    setLocation(p);
-                }
-                if (x <= -1) {
-                    p.setLocation(-1, p.getY());
-                    setLocation(p);
-                }
-                if (y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
-                    p.setLocation(p.getX(), Defaults.screenSize.getHeight() + 1 - height - 32);
-                    setLocation(p);
-                }
-                if (y <= -1) {
-                    p.setLocation(p.getX(), -1);
-                    setLocation(p);
-                }
-                if (x + width >= Defaults.screenSize.getWidth() + 1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
-                    setLocation((int) Defaults.screenSize.getWidth() + 1 - width, (int) Defaults.screenSize.getHeight() + 1 - height - 32);
-                }
-                if (x + width >= Defaults.screenSize.getWidth() + 1 && y <= -1) {
-                    setLocation((int) Defaults.screenSize.getWidth() + 1 - width, -1);
-                }
-                if (x <= -1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
-                    setLocation(-1, (int) Defaults.screenSize.getHeight() + 1 - height - 32);
-                }
-                if (x <= -1 && y <= -1) {
-                    setLocation(-1, -1);
-                }
+                if(settings) {
+                    p.setLocation(p.getX(), p.getY());
+                    SettingsWindow.frame.setLocation(p);
 
-                if (x + width >= MainBar.getMainBar().getX() && x <= MainBar.getMainBar().getWidth() + MainBar.getMainBar().getX()-2 && y <= 93) {
-                    p.setLocation(p.getX(), 93);
-                    setLocation(p);
                 }
+                else {
+                    if (x + width >= Defaults.screenSize.getWidth() + 1) {
+                        p.setLocation(Defaults.screenSize.getWidth() + 1 - width, p.getY());
+                    }
+                    if (x <= -1) {
+                        p.setLocation(-1, p.getY());
+                    }
+                    if (y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+                        p.setLocation(p.getX(), Defaults.screenSize.getHeight() + 1 - height - 32);
+                    }
+                    if (y <= -1) {
+                        p.setLocation(p.getX(), -1);
+                    }
+                    if (x + width >= Defaults.screenSize.getWidth() + 1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+                        p.setLocation((int) Defaults.screenSize.getWidth() + 1 - width, (int) Defaults.screenSize.getHeight() + 1 - height - 32);
+                    }
+                    if (x + width >= Defaults.screenSize.getWidth() + 1 && y <= -1) {
+                        p.setLocation((int) Defaults.screenSize.getWidth() + 1 - width, -1);
+                    }
+                    if (x <= -1 && y + height + 32 >= Defaults.screenSize.getHeight() + 1) {
+                        p.setLocation(-1, (int) Defaults.screenSize.getHeight() + 1 - height - 32);
+                    }
+                    if (x <= -1 && y <= -1) {
+                        p.setLocation(-1, -1);
+                    }
 
+                    if (x + width >= MainBar.getMainBar().getX() && x <= MainBar.getMainBar().getWidth() + MainBar.getMainBar().getX() - 2 && y <= 93) {
+                        p.setLocation(p.getX(), 93);
 
+                    }
+                    if (!settings) {
+                        setLocation(p);
+                    }
+                }
 
             }
 
@@ -284,7 +294,12 @@ class InnerWindow extends ResizablePanel {
         closeButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                toggle();
+                if(!settings){
+                    toggle();
+                } else if (settings){
+                    SettingsWindow.toggleVisible();
+                }
+
             }
         });
 
@@ -427,8 +442,16 @@ class InnerWindow extends ResizablePanel {
             double x1;
             double ratioX = 1920 / Defaults.screenSize.getWidth();
             double ratioY = 1080 / Defaults.screenSize.getHeight();
-            int x = getX();
-            int y = getY();
+            int x;
+            int y;
+            if(!settings) {
+                x = getX();
+                y = getY();
+            }
+            else {
+                x = SettingsWindow.frame.getX();
+                y = SettingsWindow.frame.getY();
+            }
             x1 = x / ratioX;
             y1 = y / ratioY;
             if (x + width >= Defaults.screenSize.getWidth() + 1) {
@@ -463,7 +486,9 @@ class InnerWindow extends ResizablePanel {
             if (x + width >= middle - 290 && x <= middle + 290 && y <= 93) {
                 y1 = 93;
             }
-            setLocation((int) x1, (int) y1);
+            if(!settings) {
+                setLocation((int) x1, (int) y1);
+            }
         }
     }
     //endregion

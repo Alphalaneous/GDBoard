@@ -22,7 +22,7 @@ public class LevelsWindow {
 
 	private static int width = 400;
 	private static int height = 400;
-	private static ResizablePanel window = new InnerWindow("Requests", Settings.getRequestsWLoc().x, Settings.getRequestsWLoc().y, width, height, "\uE179"){
+	private static ResizablePanel window = new InnerWindow("Requests", Settings.getRequestsWLoc().x, Settings.getRequestsWLoc().y, width, height, "\uE179", false){
 		@Override
 		protected Resizable createResizable() {
 			return new Resizable(this) {
@@ -170,7 +170,6 @@ public class LevelsWindow {
 								.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
 										.getResource("Resources/DifficultyIcons/Epic/" + difficultyA + ".png")))
 								.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
-						//TODO Fix epic hard demon
 					} else if (featured) {
 						reqDifficulty.setIcon(new ImageIcon(ImageIO
 								.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()

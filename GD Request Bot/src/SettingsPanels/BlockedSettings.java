@@ -153,10 +153,12 @@ public class BlockedSettings {
             @Override
             public void mousePressed(MouseEvent e) {
                 Object[] options = {"Yes", "No"};
+                SettingsWindow.run = false;
                 int n = JOptionPane.showOptionDialog(Overlay.frame,
                         "Unblock " + button.getText() + "?",
                         "Unblock ID? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
                         JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+
                 if (n == 0) {
                     if (file.exists()) {
                         try {
@@ -171,12 +173,14 @@ public class BlockedSettings {
                             temp.renameTo(file);
 
                         } catch (IOException ex) {
-                            JOptionPane.showMessageDialog(null, "There was an error writing to the file!", "Error",  JOptionPane.ERROR_MESSAGE);
+
+                            JOptionPane.showMessageDialog(Overlay.frame, "There was an error writing to the file!", "Error",  JOptionPane.ERROR_MESSAGE);
                         }
                     }
                     innerPanel.remove(button);
                     innerPanel.updateUI();
                 }
+                SettingsWindow.run = true;
             }
         });
 

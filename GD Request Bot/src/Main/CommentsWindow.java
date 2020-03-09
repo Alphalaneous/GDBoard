@@ -31,7 +31,7 @@ class CommentsWindow {
     private static int height = 350;
     private static int width = 300;
     private static ResizablePanel window = new InnerWindow("Comments", Settings.getCommentWLoc().x, Settings.getCommentWLoc().y, width, height,
-            "\uEBDB") {
+            "\uEBDB", false) {
         @Override
         protected Resizable createResizable() {
 

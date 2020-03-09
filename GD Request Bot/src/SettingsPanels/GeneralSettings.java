@@ -4,13 +4,12 @@ import Main.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
+import java.awt.event.KeyListener;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 
 public class GeneralSettings {
 	private static JButtonUI defaultUI = new JButtonUI();
@@ -24,6 +23,10 @@ public class GeneralSettings {
 	private static CheckboxButton autoDownload = createButton("Automatically download Music (Experimental)", 80);
 	public static String outputString = "Currently playing %levelName% (%levelID%) by %author%!";
 	public static String noLevelString = "There are no levels in the queue!";
+	public static JLabel queueLimitText = createLabel("Maximum Queue Size: ", 114);
+	public static int queueLimit = 0;
+	private static FancyTextArea outputStringInput = new FancyTextArea();
+	private static FancyTextArea queueSizeInput = new FancyTextArea();
 	/*private static CheckboxButton auto = createButton("Auto", 110);
 	private static CheckboxButton easy = createButton("Easy", 140);
 	private static CheckboxButton normal = createButton("Normal", 170);
@@ -36,6 +39,32 @@ public class GeneralSettings {
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
+
+		queueSizeInput.setBounds(25,143,365, 32);
+		queueSizeInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
+		queueSizeInput.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				try {
+					queueLimit = Integer.parseInt(queueSizeInput.getText());
+				}
+				catch (NumberFormatException f){
+					queueLimit = 0;
+				}
+				System.out.println(queueLimit);
+			}
+		});
+
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setDoubleBuffered(true);
@@ -89,7 +118,6 @@ public class GeneralSettings {
 
 		//panel.add(followers);
 		//panel.add(subs);
-
 		panel.add(nowPlaying);
 		panel.add(autoDownload);
 		/*panel.add(auto);
@@ -100,6 +128,8 @@ public class GeneralSettings {
 		panel.add(insane);
 		panel.add(demon);*/
 		panel.add(label);
+		panel.add(queueLimitText);
+		panel.add(queueSizeInput);
 
 		return panel;
 
@@ -150,7 +180,14 @@ public class GeneralSettings {
 			JOptionPane.showMessageDialog(null, "There was an error writing to the file!", "Error",  JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	private static JLabel createLabel(String text, int y){
+		JLabel label = new JLabel(text);
+		label.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		label.setBounds(25,y,label.getPreferredSize().width + 5,30);
+		label.setForeground(Defaults.FOREGROUND);
 
+		return label;
+	}
 	private static CheckboxButton createButton(String text, int y){
 
 		CheckboxButton button = new CheckboxButton(text);

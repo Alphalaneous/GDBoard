@@ -257,16 +257,6 @@ class MainBar {
         icon.updateUI();
         mainPanel.add(icon);
         Overlay.addToFrame(barPanel);
-        Thread thread = new Thread(() -> {
-            while (true) {
-                try {
-
-                    break;
-                } catch (Exception ignored) {
-                }
-            }
-        });
-        thread.start();
     }
 
     static void setTooltips() {
@@ -321,7 +311,6 @@ class MainBar {
     static void setTime(String timeValue) {
         time.setText(timeValue);
         time.setBounds(148 - time.getPreferredSize().width, 2, (int) time.getPreferredSize().getWidth(), 64);
-        time.updateUI();
     }
 
     static void refreshUI(boolean color) {
