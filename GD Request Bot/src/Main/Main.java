@@ -1,8 +1,8 @@
 package Main;
 
-import Chat.Channel;
 import SettingsPanels.GeneralSettings;
 import SettingsPanels.RequestSettings;
+import com.cavariux.twitchirc.Chat.Channel;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
 import org.jnativehook.GlobalScreen;
@@ -10,17 +10,8 @@ import org.jnativehook.GlobalScreen;
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
-import java.awt.datatransfer.Clipboard;
 import java.awt.event.KeyEvent;
-import java.awt.font.TextAttribute;
-import java.awt.im.InputMethodHighlight;
-import java.awt.image.ColorModel;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 import java.net.URI;
-import java.net.URL;
-import java.util.Map;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -84,16 +75,7 @@ public class Main {
 
 			//endregion
 
-			//region Create ChatBot and send starting message
-			while(true) {
-				if (startBot()) {        //Start the Chat Bot
-					bot.sendMessage("Thank you for using GDBoard by Alphalaneous! Type !help for list of commands!", bot.joinChannel(Settings.channel));
-					break;
-				}
-				System.out.println("Retrying");
-				Thread.sleep(10000);
-			}
-			//endregion
+
 
 			//region Start and Create Everything
 			Defaults.startMainThread();        //Starts thread that always checks for changes such as time, resolution, and color scheme
@@ -122,8 +104,16 @@ public class Main {
 			Overlay.setVisible();
 			SettingsWindow.toFront();
 			//endregion
-			//region Start ChatBot and keep trying if it fails
-
+			//region Create ChatBot and send starting message
+			while(true) {
+				if (startBot()) {        //Start the Chat Bot
+					bot.sendMessage("Thank you for using GDBoard by Alphalaneous! Type !help for list of commands!", bot.joinChannel(Settings.channel));
+					break;
+				}
+				System.out.println("Retrying");
+				Thread.sleep(10000);
+			}
+			//endregion
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -151,7 +141,9 @@ public class Main {
 			bot = new ChatBot();
 			bot.connect();
 			bot.joinChannel(Settings.channel);
+			bot.setClientID("fzwze6vc6d2f7qodgkpq2w8nnsz3rl");
 			bot.start();        //Start the Chat Bot
+			System.out.println("Success");
 			return true;
 		}
 		catch (Exception e){

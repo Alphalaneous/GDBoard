@@ -19,13 +19,13 @@ public class GeneralSettings {
 	public static boolean autoDownloadOption = false;
 	private static CheckboxButton followers = createButton("Followers Only", 50);
 	//private static CheckboxButton subs = createButton("Subscribers Only", 80);
-	private static CheckboxButton nowPlaying = createButton("Disable Now Playing Message", 50);
-	private static CheckboxButton autoDownload = createButton("Automatically download Music (Experimental)", 80);
+	private static CheckboxButton nowPlaying = createButton("Disable Now Playing Message", 80);
+	private static CheckboxButton autoDownload = createButton("Automatically download Music (Experimental)", 110);
 	public static String outputString = "Currently playing %levelName% (%levelID%) by %author%!";
 	public static String noLevelString = "There are no levels in the queue!";
-	public static CheckboxButton queueLimitText = createButton("Maximum Queue Size: ", 110);
+	public static CheckboxButton queueLimitText = createButton("Maximum Queue Size: ", 140);
 	public static int queueLimit = 0;
-	private static boolean queueLimitBoolean = false;
+	public static boolean queueLimitBoolean = false;
 	private static FancyTextArea outputStringInput = new FancyTextArea();
 	private static FancyTextArea queueSizeInput = new FancyTextArea();
 	/*private static CheckboxButton auto = createButton("Auto", 110);
@@ -41,8 +41,9 @@ public class GeneralSettings {
 		defaultUI.setHover(Defaults.HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
 
-		queueSizeInput.setBounds(25,143,365, 32);
+		queueSizeInput.setBounds(25,173,365, 32);
 		queueSizeInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
+
 		queueSizeInput.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -129,7 +130,7 @@ public class GeneralSettings {
 			}
 		});
 
-		//panel.add(followers);
+		panel.add(followers);
 		//panel.add(subs);
 		panel.add(nowPlaying);
 		panel.add(autoDownload);
@@ -173,6 +174,10 @@ public class GeneralSettings {
 			nowPlayingOption = Boolean.parseBoolean(Settings.getSettings("disableNP"));
 			autoDownloadOption = Boolean.parseBoolean(Settings.getSettings("autoDL"));
 			queueLimitBoolean = Boolean.parseBoolean(Settings.getSettings("queueLimitEnabled"));
+			if(!Settings.getSettings("queueLimit").equalsIgnoreCase("")) {
+				queueLimit = Integer.parseInt(Settings.getSettings("queueLimit"));
+				queueSizeInput.setText(String.valueOf(queueLimit));
+			}
 			followers.setChecked(followersOption);
 			//subs.setChecked(subsOption);
 
@@ -198,6 +203,7 @@ public class GeneralSettings {
 			Settings.writeSettings("disableNP", String.valueOf(nowPlayingOption));
 			Settings.writeSettings("autoDL", String.valueOf(autoDownloadOption));
 			Settings.writeSettings("queueLimitEnabled", String.valueOf(queueLimitBoolean));
+			Settings.writeSettings("queueLimit", String.valueOf(queueLimit));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "There was an error writing to the file!", "Error",  JOptionPane.ERROR_MESSAGE);
 		}

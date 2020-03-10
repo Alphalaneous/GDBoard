@@ -1,6 +1,6 @@
 package Main;
-import Chat.Channel;
-import Chat.User;
+import com.cavariux.twitchirc.Chat.Channel;
+import com.cavariux.twitchirc.Chat.User;
 import com.registry.RegDWORDValue;
 import com.registry.RegistryKey;
 

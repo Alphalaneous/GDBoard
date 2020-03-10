@@ -33,6 +33,11 @@ class Requests {
 
     static void addRequest(String ID, String requester, boolean isCustomSong, String customUrl) {
         if(MainBar.requests) {
+            if(GeneralSettings.queueLimitBoolean && (levels.size() >= GeneralSettings.queueLimit)){
+                System.out.println(GeneralSettings.queueLimit + ", " + (levels.size()));
+                Main.sendMessage("@" + requester + " The queue is full!");
+                return;
+            }
             try {
                 AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
                 GDLevel level = null;

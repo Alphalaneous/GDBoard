@@ -1,10 +1,10 @@
 package Main;
 
-import Chat.Channel;
-import Chat.User;
-import Core.TwitchBot;
 import SettingsPanels.BlockedSettings;
 import SettingsPanels.GeneralSettings;
+import com.cavariux.twitchirc.Chat.Channel;
+import com.cavariux.twitchirc.Chat.User;
+import com.cavariux.twitchirc.Core.TwitchBot;
 import com.github.alex1304.jdash.client.AnonymousGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.entity.GDLevel;
@@ -381,10 +381,12 @@ public class ChatBot extends TwitchBot {
                     command.equalsIgnoreCase("!req") ||
                     command.equalsIgnoreCase("!send")) {
                 Matcher m = null;
-                if(!user.isFollowing(channel) && GeneralSettings.followersOption){
-                    if(!(isBroadcaster || Defaults.mods.contains(user))) {
-                        sendMessage("@" + user + " Please follow to request levels!", channel);
-                        return;
+                if (GeneralSettings.followersOption) {
+                    if (!Twitch.isFollowing(user)) {
+                        if (!(isBroadcaster || Defaults.mods.contains(user))) {
+                            sendMessage("@" + user + " Please follow to request levels!", channel);
+                            return;
+                        }
                     }
                 }
                 /*if(!user.isSubscribed(channel, Settings.oauth) && GeneralSettings.subsOption){
@@ -478,10 +480,12 @@ public class ChatBot extends TwitchBot {
                 }*/
                 Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(msg);
                 if (m.find()) {
-                    if(!user.isFollowing(channel) && GeneralSettings.followersOption){
-                        if(!(isBroadcaster || Defaults.mods.contains(user))){
-                            sendMessage("@" + user + " Please follow to request levels!", channel);
-                            return;
+                    if (GeneralSettings.followersOption){
+                        if (!Twitch.isFollowing(user)) {
+                            if (!(isBroadcaster || Defaults.mods.contains(user))) {
+                                sendMessage("@" + user + " Please follow to request levels!", channel);
+                                return;
+                            }
                         }
                     }
                     try {
