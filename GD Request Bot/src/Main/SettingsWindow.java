@@ -80,10 +80,10 @@ public class SettingsWindow {
 		buttons.add(general);
 		//buttons.add(overlays);
 		buttons.add(accounts);
-		buttons.add(commands);
+		//buttons.add(commands);
 		buttons.add(requests);
-		buttons.add(shortcuts);
-		buttons.add(personalization);
+		//buttons.add(shortcuts);
+		//buttons.add(personalization);
 		buttons.add(blocked);
 
 		window.add(blankSpace);
