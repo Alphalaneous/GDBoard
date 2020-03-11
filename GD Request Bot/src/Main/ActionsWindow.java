@@ -2,6 +2,7 @@ package Main;
 
 import SettingsPanels.BlockedSettings;
 import SettingsPanels.GeneralSettings;
+import SettingsPanels.OutputSettings;
 import com.jidesoft.swing.ResizablePanel;
 
 import javax.swing.*;
@@ -118,7 +119,7 @@ class ActionsWindow {
                         thread.start();
 
                     }
-                    GeneralSettings.setOutputStringFile(Requests.parseInfoString(GeneralSettings.outputString, 0));
+                    OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
                     LevelsWindow.setOneSelect();
 
                     SongWindow.refreshInfo();
@@ -209,7 +210,7 @@ class ActionsWindow {
                             }
                         }
                     }
-                    GeneralSettings.setOutputStringFile(Requests.parseInfoString(GeneralSettings.outputString, num));
+                    OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, num));
                     SongWindow.refreshInfo();
                     InfoWindow.refreshInfo();
                 }

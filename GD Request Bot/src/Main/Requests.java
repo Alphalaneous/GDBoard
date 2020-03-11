@@ -1,6 +1,7 @@
 package Main;
 
 import SettingsPanels.GeneralSettings;
+import SettingsPanels.OutputSettings;
 import SettingsPanels.RequestSettings;
 import com.github.alex1304.jdash.client.AnonymousGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
@@ -216,7 +217,7 @@ class Requests {
                             StringSelection selection = new StringSelection(Requests.levels.get(0).getLevelID());
                             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                             clipboard.setContents(selection, selection);
-                            GeneralSettings.setOutputStringFile(Requests.parseInfoString(GeneralSettings.outputString, 0));
+                            OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
                             if(!GeneralSettings.nowPlayingOption) {
                                 Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
                                         + Requests.levels.get(0).getLevelID() + "). Requested by "
@@ -373,7 +374,7 @@ class Requests {
             return text;
         }
         else{
-            return GeneralSettings.noLevelString;
+            return OutputSettings.noLevelString;
         }
     }
 }

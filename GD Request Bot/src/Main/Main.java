@@ -1,6 +1,7 @@
 package Main;
 
 import SettingsPanels.GeneralSettings;
+import SettingsPanels.OutputSettings;
 import SettingsPanels.RequestSettings;
 import com.cavariux.twitchirc.Chat.Channel;
 import com.mb3364.twitch.api.Twitch;
@@ -91,6 +92,7 @@ public class Main {
 			}
 			Settings.loadSettings(false);
 			GeneralSettings.loadSettings();
+			OutputSettings.loadSettings();
 			RequestSettings.loadSettings();
 			Overlay.setVisible();
 			SettingsWindow.toFront();

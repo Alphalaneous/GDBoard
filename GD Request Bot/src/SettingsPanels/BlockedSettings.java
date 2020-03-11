@@ -7,6 +7,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
 
 import javax.swing.*;
@@ -16,27 +19,77 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 public class BlockedSettings {
+    private static JButtonUI defaultUI = new JButtonUI();
     private static JPanel panel = new JPanel();
     private static JPanel innerPanel = new JPanel();
     private static JScrollPane scrollPane = new JScrollPane(innerPanel);
+    private static FancyTextArea blockedInput = new FancyTextArea(true);
+    private static RoundedJButton addID = new RoundedJButton("\uECC8");
     private static int i = 0;
     private static int height = 0;
+
     public static JPanel createPanel() {
+
+        defaultUI.setBackground(Defaults.BUTTON);
+        defaultUI.setHover(Defaults.BUTTON_HOVER);
+        defaultUI.setSelect(Defaults.SELECT);
+
+        panel.setBackground(Defaults.TOP);
+        panel.setLayout(null);
         JLabel label = new JLabel("Blocked IDs:");
         label.setForeground(Defaults.FOREGROUND2);
         label.setFont(new Font("bahnschrift", Font.PLAIN, 14));
-        label.setBounds(25,15,label.getPreferredSize().width+5,label.getPreferredSize().height+5);
+        label.setBounds(25, 20, label.getPreferredSize().width + 5, label.getPreferredSize().height + 5);
+
+        blockedInput.setBounds(260, 15, 100, 32);
+        addID.setBackground(Defaults.BUTTON);
+        addID.setBounds(370, 16, 30, 30);
+        addID.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 22));
+        addID.setForeground(Defaults.FOREGROUND);
+        addID.setUI(defaultUI);
+
+
+        panel.add(addID);
+        panel.add(blockedInput);
         panel.add(label);
-        panel.setBackground(Defaults.SUB_MAIN);
-        panel.setLayout(null);
         innerPanel.setDoubleBuffered(true);
         innerPanel.setBounds(0, 0, 415, 622);
         innerPanel.setPreferredSize(new Dimension(415, 622));
         innerPanel.setBackground(Defaults.SUB_MAIN);
+        addID.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                try {
+                    Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
+                    boolean goThrough = true;
+                    Scanner sc = new Scanner(file.toFile());
+                    while (sc.hasNextLine()) {
+                        if (String.valueOf(blockedInput.getText()).equals(sc.nextLine())) {
+                            goThrough = false;
+                            break;
+                        }
+                    }
+                    sc.close();
+                    if (goThrough) {
+                        if (!blockedInput.getText().equalsIgnoreCase("")) {
+                            if (!Files.exists(file)) {
+                                Files.createFile(file);
+                            }
+                            Files.write(file, (blockedInput.getText() + "\n").getBytes(), StandardOpenOption.APPEND);
+                            addButton(blockedInput.getText());
+                            blockedInput.setText("");
+                            innerPanel.updateUI();
+                        }
+                    }
+                } catch (IOException e1) {
+                    JOptionPane.showMessageDialog(null, "There was an error writing to the file!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
 
+            }
+        });
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.getViewport().setBackground(Defaults.MAIN);
-        scrollPane.setBounds(0, 40, 415 + 1, 582);
+        scrollPane.setBounds(0, 60, 415 + 1, 582);
         scrollPane.setPreferredSize(new Dimension(415, 622));
         scrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.getVerticalScrollBar().setUnitIncrement(30);
@@ -129,7 +182,7 @@ public class BlockedSettings {
         }
     }
 
-    public static void addButton(String ID){
+    public static void addButton(String ID) {
         if (i % 5 == 0) {
             height = height + 35;
             innerPanel.setBounds(0, 0, 415, height + 4);
@@ -141,7 +194,7 @@ public class BlockedSettings {
         defaultUI.setBackground(Defaults.BUTTON);
         defaultUI.setHover(Defaults.HOVER);
         defaultUI.setSelect(Defaults.SELECT);
-        JButton button = new JButton(ID);
+        CurvedButton button = new CurvedButton(ID);
 
         button.setBackground(Defaults.BUTTON);
         button.setUI(defaultUI);
@@ -155,7 +208,7 @@ public class BlockedSettings {
                 Object[] options = {"Yes", "No"};
                 SettingsWindow.run = false;
                 int n = JOptionPane.showOptionDialog(Overlay.frame,
-                        "Unblock " + button.getText() + "?",
+                        "Unblock " + button.getLText() + "?",
                         "Unblock ID? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
                         JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 
@@ -174,7 +227,7 @@ public class BlockedSettings {
 
                         } catch (IOException ex) {
 
-                            JOptionPane.showMessageDialog(Overlay.frame, "There was an error writing to the file!", "Error",  JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(Overlay.frame, "There was an error writing to the file!", "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                     innerPanel.remove(button);
@@ -183,7 +236,8 @@ public class BlockedSettings {
                 SettingsWindow.run = true;
             }
         });
-
+        button.refresh();
         innerPanel.add(button);
+
     }
 }

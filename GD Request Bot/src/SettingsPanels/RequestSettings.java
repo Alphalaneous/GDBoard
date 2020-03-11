@@ -13,7 +13,13 @@ import java.io.IOException;
 
 public class RequestSettings {
     private static JButtonUI defaultUI = new JButtonUI();
-
+    /*private static CheckboxButton auto = createButton("Auto", 110);
+        private static CheckboxButton easy = createButton("Easy", 140);
+        private static CheckboxButton normal = createButton("Normal", 170);
+        private static CheckboxButton hard = createButton("Hard", 200);
+        private static CheckboxButton harder = createButton("Harder", 230);
+        private static CheckboxButton insane = createButton("Insane", 260);
+        private static CheckboxButton demon = createButton("Demon", 290);*/
     public static boolean ratedOption = false;
     private static CheckboxButton rated = createButton("Rated Levels Only", 15);
 

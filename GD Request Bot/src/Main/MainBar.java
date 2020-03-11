@@ -1,6 +1,7 @@
 package Main;
 
 import SettingsPanels.GeneralSettings;
+import SettingsPanels.OutputSettings;
 import SettingsPanels.RequestSettings;
 
 import javax.imageio.ImageIO;
@@ -179,6 +180,7 @@ class MainBar {
                 }
                 GeneralSettings.setSettings();
                 RequestSettings.setSettings();
+                OutputSettings.setSettings();
                 for (int i = 0; i < Requests.levels.size(); i++) {
                     if (Requests.levels.get(i).getSongName().equalsIgnoreCase("Custom") && !Requests.levels.get(LevelsWindow.getSelectedID()).getPersist()) {
                         Path tempSong = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3.temp");

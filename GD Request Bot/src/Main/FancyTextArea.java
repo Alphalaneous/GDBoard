@@ -7,7 +7,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 public class FancyTextArea extends JTextArea {
-    public FancyTextArea() {
+    public FancyTextArea(boolean intFilter) {
 
         setBackground(new Color(58, 58, 58));
         setForeground(Defaults.FOREGROUND);
@@ -29,17 +29,13 @@ public class FancyTextArea extends JTextArea {
                         BorderFactory.createEmptyBorder(8, 8, 8, 8)));
             }
         });
-        PlainDocument doc = (PlainDocument) getDocument();
-        doc.setDocumentFilter(new MyIntFilter());
+        if(intFilter) {
+            PlainDocument doc = (PlainDocument) getDocument();
+            doc.setDocumentFilter(new MyIntFilter());
+        }
     }
 
-    public String getRealText() {
-        return getText().replace("\u200B", "");
-    }
-
-    public class MyCaret extends DefaultCaret {
-
-        private String mark = "|";
+    public static class MyCaret extends DefaultCaret {
 
         MyCaret() {
             setBlinkRate(500);
@@ -89,13 +85,14 @@ public class FancyTextArea extends JTextArea {
                 FontMetrics fm = comp.getFontMetrics(comp.getFont());
 
                 g.setColor(comp.getCaretColor());
+                String mark = "|";
                 g.drawString(mark, x, y + fm.getAscent());
             }
         }
 
     }
 
-    class MyIntFilter extends DocumentFilter {
+    static class MyIntFilter extends DocumentFilter {
         @Override
         public void insertString(FilterBypass fb, int offset, String string,
                                  AttributeSet attr) throws BadLocationException {
@@ -112,6 +109,9 @@ public class FancyTextArea extends JTextArea {
 
         private boolean test(String text) {
             try {
+                if(text.equalsIgnoreCase("")){
+                    return true;
+                }
                 Integer.parseInt(text);
                 return true;
             } catch (NumberFormatException e) {

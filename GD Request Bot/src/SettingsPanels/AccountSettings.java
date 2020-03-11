@@ -30,6 +30,7 @@ public class AccountSettings {
 		defaultUI.setSelect(Defaults.SELECT);
 		button.setBackground(Defaults.BUTTON);
 		button.setBounds(25,20,365,30);
+		button.setPreferredSize(new Dimension(365,30));
 		button.setUI(defaultUI);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());

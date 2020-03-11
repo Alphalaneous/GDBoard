@@ -1,6 +1,6 @@
 package Main;
 
-import SettingsPanels.CommandSettings;
+import SettingsPanels.OutputSettings;
 import com.jidesoft.swing.ResizablePanel;
 
 import java.awt.*;
@@ -21,7 +21,7 @@ public class SettingsWindow {
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static JButtonUI selectUI = new JButtonUI();
 	private static JPanel general = SettingsPanels.GeneralSettings.createPanel();
-	private static JPanel overlay = SettingsPanels.OverlaySettings.createPanel();
+	private static JPanel overlay = OutputSettings.createPanel();
 	private static JPanel accounts = SettingsPanels.AccountSettings.createPanel();
 	private static JPanel commands = SettingsPanels.CommandSettings.createPanel();
 	private static JPanel requests = SettingsPanels.RequestSettings.createPanel();
@@ -69,7 +69,7 @@ public class SettingsWindow {
 		JButton general = createButton("General");
 		general.setBackground(Defaults.SELECT);
 		general.setUI(selectUI);
-		JButton overlays = createButton("Overlays");
+		JButton outputs = createButton("Outputs");
 		JButton accounts = createButton("Accounts");
 		JButton commands = createButton("Commands");
 		JButton requests = createButton("Requests");
@@ -78,11 +78,11 @@ public class SettingsWindow {
 		JButton blocked = createButton("Blocked");
 
 		buttons.add(general);
-		//buttons.add(overlays);
+		buttons.add(outputs);
 		buttons.add(accounts);
 		//buttons.add(commands);
 		buttons.add(requests);
-		//buttons.add(shortcuts);
+		buttons.add(shortcuts);
 		//buttons.add(personalization);
 		buttons.add(blocked);
 
@@ -176,7 +176,7 @@ public class SettingsWindow {
 							case "General":
 								general.setVisible(true);
 								break;
-							case "Overlays":
+							case "Outputs":
 								overlay.setVisible(true);
 								break;
 							case "Accounts":

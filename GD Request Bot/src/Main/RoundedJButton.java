@@ -9,7 +9,7 @@ public class RoundedJButton extends JButton {
 
 	private static final long serialVersionUID = 1L;
 
-	RoundedJButton(String label) {
+	public RoundedJButton(String label) {
 		super(label);
 		Dimension size = getPreferredSize();
 		size.width = size.height = Math.max(size.width, size.height);
