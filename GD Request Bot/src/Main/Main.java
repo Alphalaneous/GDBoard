@@ -24,10 +24,10 @@ public class Main {
 	public static void main(String[] args) throws IllegalArgumentException {
 		//TODO Use nio everywhere
 		try {
-			Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+			/*Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
 			logger.setLevel(Level.WARNING);
 
-			logger.setUseParentHandlers(false);
+			logger.setUseParentHandlers(false);*/
 
 			try {
 				UIManager.setLookAndFeel(new MyLookAndFeel());
