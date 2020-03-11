@@ -1,52 +1,55 @@
 package Main;
-import org.jnativehook.keyboard.NativeKeyEvent;
-import org.jnativehook.keyboard.NativeKeyListener;
+
+import lc.kra.system.keyboard.GlobalKeyboardHook;
+import lc.kra.system.keyboard.event.GlobalKeyAdapter;
+import lc.kra.system.keyboard.event.GlobalKeyEvent;
 
 import java.awt.*;
 
 
-public class KeyListener implements NativeKeyListener {
+public class KeyListener {
     private static boolean openKeyReleased = false;
-    private int keyCode = Settings.keybind;
+    private static int keyCode = Settings.keybind;
+    public static void hook(){
+    GlobalKeyboardHook keyboardHook = new GlobalKeyboardHook(false);
+    keyboardHook.addKeyListener(new GlobalKeyAdapter() {
+        @Override
+        public void keyPressed(GlobalKeyEvent e) {
+            System.out.println(e.getVirtualKeyCode());
+            if (e.getVirtualKeyCode() == keyCode) {
 
-    KeyListener() {
-    }
-    public void nativeKeyPressed(NativeKeyEvent e) {
-        System.out.println(e.getRawCode());
-        if (e.getRawCode() == keyCode) {
-
-            if (!Overlay.frame.getBackground().equals(new Color(0, 0, 0, 0))) {
-                if (openKeyReleased) {
-                    if (!Settings.windowedMode) {
-                        Overlay.setWindowsInvisible();
+                if (!Overlay.frame.getBackground().equals(new Color(0, 0, 0, 0))) {
+                    if (openKeyReleased) {
+                        if (!Settings.windowedMode) {
+                            Overlay.setWindowsInvisible();
+                        }
+                        Overlay.frame.toFront();
+                        Overlay.frame.requestFocus();
+                        openKeyReleased = false;
                     }
-                    Overlay.frame.toFront();
-                    Overlay.frame.requestFocus();
-                    openKeyReleased = false;
-                }
 
 
-            } else {
-                if (openKeyReleased) {
-                    if (!Settings.windowedMode) {
-                        Overlay.setWindowsVisible();
+                } else {
+                    if (openKeyReleased) {
+                        if (!Settings.windowedMode) {
+                            Overlay.setWindowsVisible();
+                        }
+                        Overlay.frame.toFront();
+                        Overlay.frame.requestFocus();
+                        SettingsWindow.toFront();
+                        openKeyReleased = false;
                     }
-                    Overlay.frame.toFront();
-                    Overlay.frame.requestFocus();
-                    SettingsWindow.toFront();
-                    openKeyReleased = false;
-                }
 
+                }
             }
         }
-    }
-
-    public void nativeKeyReleased(NativeKeyEvent e) {
-        if (e.getRawCode() == keyCode) {
-            openKeyReleased = true;
+        @Override
+        public void keyReleased(GlobalKeyEvent e) {
+            if (e.getVirtualKeyCode() == keyCode) {
+                openKeyReleased = true;
+            }
         }
-    }
 
-    public void nativeKeyTyped(NativeKeyEvent e) {
-    }
+    });
+}
 }

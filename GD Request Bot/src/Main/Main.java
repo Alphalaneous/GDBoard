@@ -5,16 +5,12 @@ import SettingsPanels.RequestSettings;
 import com.cavariux.twitchirc.Chat.Channel;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
-import org.jnativehook.GlobalScreen;
 
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.net.URI;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 
 public class Main {
 
@@ -24,10 +20,6 @@ public class Main {
 	public static void main(String[] args) throws IllegalArgumentException {
 		//TODO Use nio everywhere
 		try {
-			/*Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
-			logger.setLevel(Level.WARNING);
-
-			logger.setUseParentHandlers(false);*/
 
 			try {
 				UIManager.setLookAndFeel(new MyLookAndFeel());
@@ -81,8 +73,7 @@ public class Main {
 			Defaults.startMainThread();        //Starts thread that always checks for changes such as time, resolution, and color scheme
 			Overlay.setFrame();                //Creates the JFrame that contains everything
 			ControllerListener.hook();                    //Starts Controller Listener
-			GlobalScreen.registerNativeHook();
-			GlobalScreen.addNativeKeyListener(new KeyListener());
+			KeyListener.hook();
 			if (!Settings.windowedMode) {
 				MainBar.createBar();            //Creates the main "Game Bar" in the top center
 			}

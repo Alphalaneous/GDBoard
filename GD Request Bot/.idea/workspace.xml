@@ -7,7 +7,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/GD_Request_Bot_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/GD_Request_Bot_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/GDBoard_Dependencies.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/TwitchIRC_v1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jide_common.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GD Request Bot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GD Request Bot.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/.version" beforeDir="false" afterPath="$PROJECT_DIR$/bin/.version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/bin/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/KeyListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/KeyListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/Main$MyLookAndFeel.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Main$MyLookAndFeel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/KeyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/KeyListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Main.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
@@ -36,50 +49,45 @@
     <favorites_list name="GD Request Bot" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="29" column="49" selection-start-line="29" selection-start-column="49" selection-end-line="29" selection-end-column="49" />
+            <state relative-caret-position="238">
+              <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
               <folding>
-                <element signature="e#5187#5188#0" expanded="true" />
-                <element signature="e#5305#5306#0" expanded="true" />
-                <element signature="e#5337#5338#0" expanded="true" />
-                <element signature="e#5354#5355#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.classpath">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Settings.java">
+        <entry file="file://$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/launch4j.log">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-34">
-              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+            <state relative-caret-position="255">
+              <caret line="15" selection-start-line="15" selection-end-line="15" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/SettingsWindow.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/KeyListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="85" column="39" lean-forward="true" selection-start-line="85" selection-start-column="39" selection-end-line="85" selection-end-column="39" />
+            <state relative-caret-position="714">
+              <caret line="46" column="8" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/.version">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="12" selection-start-column="12" selection-end-column="12" />
+              <caret column="13" selection-start-column="13" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -110,13 +118,30 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/Main/SettingsWindow.java" />
-        <option value="$PROJECT_DIR$/src/Main/Main.java" />
+        <option value="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
+        <option value="$PROJECT_DIR$/src/JNativeHook/keyboard/NativeKeyListener.java" />
+        <option value="$PROJECT_DIR$/src/JNativeHook/NativeMonitorInfo.java" />
+        <option value="$PROJECT_DIR$/src/JNativeHook/NativeInputEvent.java" />
+        <option value="$PROJECT_DIR$/src/JNativeHook/GlobalScreen.java" />
+        <option value="$PROJECT_DIR$/src/jnativehook/GlobalScreen.java" />
+        <option value="$PROJECT_DIR$/src/jnativehook/keyboard/NativeKeyEvent.java" />
+        <option value="$PROJECT_DIR$/src/jnativehook/mouse/NativeMouseWheelEvent.java" />
+        <option value="$PROJECT_DIR$/src/jnativehook/mouse/NativeMouseEvent.java" />
+        <option value="$PROJECT_DIR$/src/jnativehook/mouse/SwingMouseAdapter.java" />
+        <option value="$PROJECT_DIR$/src/jnativehook/mouse/NativeMouseWheelListener.java" />
+        <option value="$PROJECT_DIR$/src/jnativehook/mouse/NativeMouseMotionListener.java" />
+        <option value="$PROJECT_DIR$/src/jnativehook/mouse/NativeMouseListener.java" />
+        <option value="$PROJECT_DIR$/src/jnativehook/keyboard/SwingKeyAdapter.java" />
+        <option value="$PROJECT_DIR$/src/jnativehook/dispatcher/SwingDispatchService.java" />
+        <option value="$PROJECT_DIR$/src/jnativehook/dispatcher/DefaultDispatchService.java" />
+        <option value="$PROJECT_DIR$/src/Main/KeyListener.java" />
         <option value="$PROJECT_DIR$/src/.version" />
+        <option value="$PROJECT_DIR$/src/Main/Main.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="371" />
+    <option name="x" value="430" />
     <option name="y" value="10" />
     <option name="width" value="1385" />
     <option name="height" value="1009" />
@@ -128,12 +153,37 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
               <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="bin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+              <item name="GD_Request_Bot_jar" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
@@ -146,12 +196,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Main" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -164,9 +216,9 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1583886856105" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1583891185996" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../GDBoard Dependencies/TwitchIRC_v1.2.jar!/" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.14648438" />
     <property name="project.structure.side.proportion" value="0.18710493" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
@@ -175,13 +227,16 @@
     <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\classes\artifacts\GD_Request_Bot_jar" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources" />
-      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Main" />
-      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot" />
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\jnativehook" />
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\JNativeHook\dispatcher" />
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\JNativeHook\keyboard" />
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\JNativeHook\mouse" />
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\JNativeHook" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src" />
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\classes\artifacts\GD_Request_Bot_jar" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -196,7 +251,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JAR Application.GD Request Bot.jar">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -233,6 +288,10 @@
       <option name="JAR_PATH" value="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" />
       <method v="2" />
     </configuration>
+    <configuration name="TwitchIRC_v1.2.jar" type="JarApplication" factoryName="JAR Application" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/../../../Java Stuff/TwitchIRC_v1.2.jar" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="TestNG">
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <properties />
@@ -253,6 +312,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="JAR Application.TwitchIRC_v1.2.jar" />
       </list>
     </recent_temporary>
   </component>
@@ -307,35 +367,34 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="371" y="10" width="1385" height="1009" extended-state="0" />
-    <editor active="true" />
+    <frame x="430" y="10" width="1385" height="1009" extended-state="0" />
     <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24981132" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2573585" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.3294979" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32990867" />
       <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.35958904" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Maven" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32990867" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32876712" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -498,38 +557,97 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Main/Settings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
+        <state relative-caret-position="68">
           <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/SettingsWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="85" column="39" lean-forward="true" selection-start-line="85" selection-start-column="39" selection-end-line="85" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="29" column="49" selection-start-line="29" selection-start-column="49" selection-end-line="29" selection-end-column="49" />
-          <folding>
-            <element signature="e#5187#5188#0" expanded="true" />
-            <element signature="e#5305#5306#0" expanded="true" />
-            <element signature="e#5337#5338#0" expanded="true" />
-            <element signature="e#5354#5355#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1326">
+          <caret line="85" column="39" selection-start-line="85" selection-start-column="39" selection-end-line="85" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.classpath">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="jar://$PROJECT_DIR$/../../../GDBoard Dependencies/jnativehook-2.1.0.jar!/org/jnativehook/GlobalScreen.class" />
+    <entry file="jar://$PROJECT_DIR$/../../../GDBoard Dependencies/jnativehook-2.1.0.jar!/org/jnativehook/keyboard/NativeKeyListener.class" />
+    <entry file="file://$PROJECT_DIR$/src/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/JNativeHook/keyboard.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/NativeSystem.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/NativeMonitorInfo.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/NativeLibraryLocator.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/NativeInputEvent.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/NativeHookException.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/DefaultLibraryLocator.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/AbstractSwingInputAdapter.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/mouse/SwingMouseWheelAdapter.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/mouse/SwingMouseAdapter.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/mouse/NativeMouseWheelListener.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/mouse/NativeMouseWheelEvent.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/mouse/NativeMouseWheelAdapter.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/mouse/NativeMouseMotionListener.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/mouse/NativeMouseMotionAdapter.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/mouse/NativeMouseListener.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/mouse/NativeMouseInputAdapter.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/mouse/NativeMouseInputListener.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/mouse/NativeMouseEvent.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/mouse/NativeMouseAdapter.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/keyboard/SwingKeyAdapter.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/keyboard/NativeKeyListener.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/keyboard/NativeKeyEvent.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/keyboard/NativeKeyAdapter.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/dispatcher/SwingDispatchService.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/dispatcher/DefaultDispatchService.java" />
+    <entry file="file://$PROJECT_DIR$/src/jnativehook/GlobalScreen.java" />
+    <entry file="file://$PROJECT_DIR$/src/Main/KeyListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="46" column="8" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/.version">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="12" selection-start-column="12" selection-end-column="12" />
+          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/7zOC6011A3B/TwitchBot.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-102">
+          <folding>
+            <element signature="e#0#11791#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/launch4j.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -599,7 +717,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>GDBoard Dependencies</last-edited>
+          <last-edited>dependency</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
