@@ -2,8 +2,6 @@ package SettingsPanels;
 
 import Main.Defaults;
 
-import java.awt.Color;
-
 import javax.swing.JPanel;
 
 public class PersonalizationSettings {

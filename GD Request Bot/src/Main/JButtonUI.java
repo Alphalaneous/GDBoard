@@ -17,12 +17,6 @@ public class JButtonUI extends BasicButtonUI implements java.io.Serializable, Mo
 
 	private Border m_borderRaised = UIManager.getBorder("Button.border");
 
-	private Border m_borderLowered = UIManager.getBorder("Button.borderPressed");
-
-	private Color m_backgroundNormal = UIManager.getColor("Button.background");
-
-	private Color m_backgroundPressed = UIManager.getColor("Button.pressedBackground");
-
 	private boolean mouseHover = false;
 
 	private Color bgColor = Defaults.TOP;

@@ -1,6 +1,5 @@
 package Main;
 
-import SettingsPanels.AccountSettings;
 import SettingsPanels.GeneralSettings;
 import SettingsPanels.OutputSettings;
 import SettingsPanels.RequestSettings;
@@ -38,7 +37,7 @@ class MainBar {
     private static JButton toggleInfo = createButton("\uE946", "Info");
     private static JButton toggleLevels = createButton("\uE179", "Requests");
     private static JButton toggleActions = createButton("\uE7C9", "Actions");
-    private static JButton stopReqs = createSubButton("\uE71A", "Toggle Requests");
+    public static JButton stopReqs = createSubButton("\uE71A", "Toggle Requests");
     private static JButton toggleSettings = createSubButton("\uE713", "Settings");
     private static JButton close = createSubButton("\uE10A", "Close");
 
@@ -139,18 +138,7 @@ class MainBar {
         stopReqs.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if (requests) {
-                    stopReqs.setText("\uE768");
-                    requests = false;
-                    Main.sendMessage("/me Requests are now off!");
-
-                } else {
-                    stopReqs.setText("\uE71A");
-                    requests = true;
-                    Main.sendMessage("/me Requests are now on!");
-
-
-                }
+                Functions.requestsToggleFunction();
             }
         });
 
@@ -183,7 +171,7 @@ class MainBar {
                 RequestSettings.setSettings();
                 OutputSettings.setSettings();
                 for (int i = 0; i < Requests.levels.size(); i++) {
-                    if (Requests.levels.get(i).getSongName().equalsIgnoreCase("Custom") && !Requests.levels.get(LevelsWindow.getSelectedID()).getPersist()) {
+                    if (Requests.levels.get(i).getSongName().equalsIgnoreCase("Custom") && Requests.levels.get(LevelsWindow.getSelectedID()).getNotPersist()) {
                         Path tempSong = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3.temp");
                         Path wait = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3.wait");
                         Path remove = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3");

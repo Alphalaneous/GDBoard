@@ -13,8 +13,8 @@ class InnerWindow extends ResizablePanel {
 
     private static final long serialVersionUID = 1L;
     private final String title;
-    private double x = 0;
-    private double y = 0;
+    private double x;
+    private double y;
     private int width;
     private int height;
     private final String icon;
@@ -31,8 +31,8 @@ class InnerWindow extends ResizablePanel {
 
     //region Constructor for InnerWindow
     InnerWindow(final String title, final int x, final int y, final int width, final int height, final String icon, boolean settings) {
-        double y1 = 0;
-        double x1 = 0;
+        double y1;
+        double x1;
         double ratio = 1920 / Defaults.screenSize.getWidth();
         this.title = title;
         if(!Settings.windowedMode) {

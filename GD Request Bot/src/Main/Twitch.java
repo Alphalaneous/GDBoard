@@ -11,17 +11,17 @@ import java.net.URLConnection;
 
 public class Twitch {
 
-    public static boolean isFollowing(User user){
+    public static boolean isNotFollowing(User user){
 
 
         JsonObject isFollowing = twitchAPI("https://api.twitch.tv/helix/users/follows?from_id=" + getIDs(user.toString()) + "&to_id=" + getIDs(Settings.channel.toLowerCase()));
         if(isFollowing != null) {
             String str = isFollowing.get("total").toString();
             System.out.println(str);
-            return str.equalsIgnoreCase("1");
+            return !str.equalsIgnoreCase("1");
         }
         else {
-            return false;
+            return true;
         }
     }
     public static JsonObject twitchAPI(String URL){

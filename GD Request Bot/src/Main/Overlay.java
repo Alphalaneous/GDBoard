@@ -2,7 +2,6 @@ package Main;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;

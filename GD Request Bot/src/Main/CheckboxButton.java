@@ -89,10 +89,10 @@ public class CheckboxButton extends JButton {
 			checkSymbol.setVisible(true);
 		}
 	}
-	public void setLText(String text) {
+	/*public void setLText(String text) {
 		this.text.setText(text);
 		refresh();
-	}
+	}*/
 	public void refresh(){
 		text.setForeground(getForeground());
 		text.setFont(getFont());

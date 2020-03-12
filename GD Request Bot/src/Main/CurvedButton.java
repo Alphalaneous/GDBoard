@@ -1,7 +1,6 @@
 package Main;
 
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
 import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.*;

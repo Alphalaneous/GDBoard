@@ -7,10 +7,6 @@ import java.awt.event.KeyEvent;
 import com.studiohartman.jamepad.ControllerManager;
 import com.studiohartman.jamepad.ControllerState;
 
-import lc.kra.system.keyboard.GlobalKeyboardHook;
-import lc.kra.system.keyboard.event.GlobalKeyAdapter;
-import lc.kra.system.keyboard.event.GlobalKeyEvent;
-
 class ControllerListener {
 
     static void hook() throws AWTException {

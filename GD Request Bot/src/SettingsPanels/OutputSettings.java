@@ -1,14 +1,10 @@
 package SettingsPanels;
 
-import Main.CheckboxButton;
 import Main.Defaults;
 import Main.FancyTextArea;
 import Main.Settings;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;

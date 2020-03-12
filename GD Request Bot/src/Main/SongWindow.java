@@ -77,7 +77,7 @@ class SongWindow {
 		persist.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if(!Requests.levels.get(LevelsWindow.getSelectedID()).getPersist()) {
+				if(Requests.levels.get(LevelsWindow.getSelectedID()).getNotPersist()) {
 					persist.setLText("Remove persist?");
 					Requests.levels.get(LevelsWindow.getSelectedID()).setPersist(true);
 				}

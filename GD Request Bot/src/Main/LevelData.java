@@ -97,8 +97,8 @@ class LevelData {
 		return length;
 	}
 
-	boolean getPersist(){
-		return persist;
+	boolean getNotPersist(){
+		return !persist;
 	}
 
 	private String requester;

@@ -39,6 +39,18 @@ class Requests {
                 Main.sendMessage("@" + requester + " The queue is full!");
                 return;
             }
+            if(GeneralSettings.userLimitOption){
+                int size = 0;
+                for (LevelData level : levels) {
+                    if (level.getRequester().equalsIgnoreCase(requester)) {
+                        size++;
+                    }
+                }
+                if(size >= GeneralSettings.userLimit){
+                    Main.sendMessage("@" + requester + " You have the maximum amount of levels in the queue!");
+                    return;
+                }
+            }
             try {
                 AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
                 GDLevel level = null;

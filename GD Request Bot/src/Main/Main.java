@@ -1,9 +1,6 @@
 package Main;
 
-import SettingsPanels.AccountSettings;
-import SettingsPanels.GeneralSettings;
-import SettingsPanels.OutputSettings;
-import SettingsPanels.RequestSettings;
+import SettingsPanels.*;
 import com.cavariux.twitchirc.Chat.Channel;
 import com.cavariux.twitchirc.Chat.User;
 import com.mb3364.twitch.api.Twitch;
@@ -32,7 +29,6 @@ public class Main {
 				e.printStackTrace();
 			}
 			Settings.writeSettings("keybind", String.valueOf(KeyEvent.VK_HOME));
-			Settings.keybind = KeyEvent.VK_HOME;
 			Settings.loadSettings(true);
 
 			//region Get Channel
@@ -99,6 +95,7 @@ public class Main {
 			OutputSettings.loadSettings();
 			RequestSettings.loadSettings();
 			AccountSettings.loadSettings();
+			ShortcutSettings.loadSettings();
 			Overlay.setVisible();
 			SettingsWindow.toFront();
 			//endregion
@@ -136,8 +133,8 @@ public class Main {
 				while(true){
 					try{
 						mods = Channel.getChannel(Settings.channel, Main.getChatBot()).getMods();
-						for(int i = 0; i < mods.size(); i++){
-							System.out.println(mods.get(i));
+						for (User mod : mods) {
+							System.out.println(mod);
 						}
 					}
 					catch (Exception e){

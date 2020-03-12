@@ -43,7 +43,7 @@ public class SettingsWindow {
 		buttons.setBounds(1, 51, 208, height-20);
 		buttons.setBackground(Defaults.MAIN);
 
-		content.setBounds(208, 31, 413, height);
+		content.setBounds(209, 31, 412, height);
 		content.setBackground(Defaults.SUB_MAIN);
 		content.setLayout(null);
 
@@ -71,10 +71,10 @@ public class SettingsWindow {
 		general.setUI(selectUI);
 		JButton outputs = createButton("Outputs");
 		JButton accounts = createButton("Accounts");
-		JButton commands = createButton("Commands");
+		//JButton commands = createButton("Commands");
 		JButton requests = createButton("Requests");
 		JButton shortcuts = createButton("Shortcuts");
-		JButton personalization = createButton("Personalization");
+		//JButton personalization = createButton("Personalization");
 		JButton blocked = createButton("Blocked");
 
 		buttons.add(general);
@@ -82,7 +82,7 @@ public class SettingsWindow {
 		buttons.add(accounts);
 		//buttons.add(commands);
 		buttons.add(requests);
-		//buttons.add(shortcuts);
+		buttons.add(shortcuts);
 		//buttons.add(personalization);
 		buttons.add(blocked);
 

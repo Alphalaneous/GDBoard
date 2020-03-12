@@ -8,11 +8,8 @@ import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
 import Main.CurvedButton;
 import Main.Main;
-import Main.RoundedJButton;
 
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -21,8 +18,10 @@ import java.net.URI;
 import javax.swing.*;
 
 public class AccountSettings {
+
 	private static String channel = "";
 	private static FancyTextArea channelInput = new FancyTextArea(false);
+
 	public static JPanel createPanel() {
 
 		JButtonUI defaultUI = new JButtonUI();

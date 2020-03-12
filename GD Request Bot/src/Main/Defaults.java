@@ -1,13 +1,9 @@
 package Main;
-import com.cavariux.twitchirc.Chat.Channel;
-import com.cavariux.twitchirc.Chat.User;
 import com.registry.RegDWORDValue;
 import com.registry.RegistryKey;
 
 import java.awt.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Defaults {

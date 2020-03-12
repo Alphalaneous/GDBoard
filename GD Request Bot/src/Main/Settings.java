@@ -123,9 +123,6 @@ public class Settings {
             oauth = gfg.get("oauth").toString();
             hasOauth = true;
         }
-        if(gfg.containsKey("keybind")) {
-            keybind = Integer.parseInt(gfg.get("keybind").toString());
-        }
         if(gfg.containsKey("channel")) {
             channel = gfg.get("channel").toString().toLowerCase();
             hasChannel = true;
@@ -254,7 +251,6 @@ public class Settings {
     private static Point songWLoc = new Point(1920 - 300 - 10, 600);
     private static Point actionsWLoc = new Point(1920 - 260 - 10, 200);
     private static Point settingsWLoc = new Point(1920 / 2 - 250, 1080 / 2 - 300);
-    static int keybind = 36;
     static int monitor;
     public static String channel;
     static boolean hasMonitor = false;

@@ -20,13 +20,7 @@ public class CommandSettings {
         panel.setDoubleBuffered(true);
         panel.setBounds(0, 0, 415, 622);
         panel.setBackground(Defaults.SUB_MAIN);
-
-
-
         return panel;
-
-
-
     }
     public static void loadSettings(){
 
@@ -36,7 +30,6 @@ public class CommandSettings {
     }
 
     private static CheckboxButton createButton(String text, int y){
-
         CheckboxButton button = new CheckboxButton(text);
         button.setBounds(25,y,365,30);
         button.setUI(defaultUI);

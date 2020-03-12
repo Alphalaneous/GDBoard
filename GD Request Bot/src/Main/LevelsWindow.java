@@ -125,7 +125,7 @@ public class LevelsWindow {
 	}
 
 	static void createButton(String name, String author, String ID, String difficulty,
-							 boolean epic, boolean featured, int starCount, String requester) throws IOException {
+							 boolean epic, boolean featured, int starCount, String requester) {
 		try {
 			defaultUI.setBackground(Defaults.MAIN);
 
