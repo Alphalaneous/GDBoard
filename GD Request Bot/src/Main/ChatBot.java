@@ -173,7 +173,7 @@ public class ChatBot extends TwitchBot {
                     command.equalsIgnoreCase("!list") ||
                     command.equalsIgnoreCase("!requests") ||
                     command.equalsIgnoreCase("!page")) {
-                if (Main.mods.contains(user) || isBroadcaster) {
+                //if (Main.mods.contains(user) || isBroadcaster) {
 
                     StringBuilder message = new StringBuilder();
                     int page = 1;
@@ -199,9 +199,9 @@ public class ChatBot extends TwitchBot {
                         }
                     }
                     sendMessage(message, channel);
-                } else {
-                    sendMessage("This command is for mods, use !where or !position to find your position in the queue!", channel);
-                }
+                //} else {
+                    //sendMessage("This command is for mods, use !where or !position to find your position in the queue!", channel);
+                //}
             }
             //endregion
 
