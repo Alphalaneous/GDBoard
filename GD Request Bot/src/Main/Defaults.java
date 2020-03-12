@@ -19,7 +19,7 @@ public class Defaults {
 	static Rectangle prevScreenSize = GraphicsEnvironment
 			.getLocalGraphicsEnvironment()
 			.getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();
-	static List<User> mods = new ArrayList<>();
+
 	public static Color MAIN;
 	public static Color BUTTON;
 	public static Color HOVER;
@@ -83,26 +83,7 @@ public class Defaults {
 			Defaults.setLight();
 			dark.set(true);
 		}
-		Thread modCheck = new Thread(() ->{
-			while(true){
-				try{
-					mods = Channel.getChannel(Settings.channel, Main.getChatBot()).getMods();
-					for(int i = 0; i < mods.size(); i++){
-						System.out.println(mods.get(i));
-					}
 
-				}
-				catch (Exception e){
-					e.printStackTrace();
-				}
-				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		modCheck.start();
 		Thread thread = new Thread(() -> {
 			while(true){
 

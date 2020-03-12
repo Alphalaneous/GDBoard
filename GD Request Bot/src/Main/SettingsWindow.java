@@ -82,7 +82,7 @@ public class SettingsWindow {
 		buttons.add(accounts);
 		//buttons.add(commands);
 		buttons.add(requests);
-		buttons.add(shortcuts);
+		//buttons.add(shortcuts);
 		//buttons.add(personalization);
 		buttons.add(blocked);
 

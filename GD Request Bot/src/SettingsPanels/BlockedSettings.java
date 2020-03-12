@@ -42,6 +42,7 @@ public class BlockedSettings {
         label.setBounds(25, 20, label.getPreferredSize().width + 5, label.getPreferredSize().height + 5);
 
         blockedInput.setBounds(260, 15, 100, 32);
+        blockedInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
         addID.setBackground(Defaults.BUTTON);
         addID.setBounds(370, 16, 30, 30);
         addID.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 22));
@@ -184,7 +185,7 @@ public class BlockedSettings {
 
     public static void addButton(String ID) {
         if (i % 5 == 0) {
-            height = height + 35;
+            height = height + 36;
             innerPanel.setBounds(0, 0, 415, height + 4);
             innerPanel.setPreferredSize(new Dimension(415, height + 4));
             scrollPane.updateUI();

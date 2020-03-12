@@ -256,7 +256,7 @@ public class Settings {
     private static Point settingsWLoc = new Point(1920 / 2 - 250, 1080 / 2 - 300);
     static int keybind = 36;
     static int monitor;
-    static String channel;
+    public static String channel;
     static boolean hasMonitor = false;
     static boolean hasOauth = false;
     static boolean hasChannel = false;
@@ -287,7 +287,7 @@ public class Settings {
         Settings.oauth = oauth;
     }
 
-    static void setChannel(String channel) {
+    public static void setChannel(String channel) {
         Settings.channel = "#" + channel.toLowerCase();
     }
 

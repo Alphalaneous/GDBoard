@@ -133,7 +133,7 @@ public class ChatBot extends TwitchBot {
                             sendMessage("@" + user + ", your level has been removed!", channel);
                         }
                         if (Requests.levels.get(i).getLevelID().equals(Requests.levels.get(level - 1).getLevelID())
-                                && (Defaults.mods.contains(user) || isBroadcaster)) {
+                                && (Main.mods.contains(user) || isBroadcaster)) {
                             LevelsWindow.removeButton(i);
                             Requests.levels.remove(i);
                             SongWindow.refreshInfo();
@@ -173,7 +173,7 @@ public class ChatBot extends TwitchBot {
                     command.equalsIgnoreCase("!list") ||
                     command.equalsIgnoreCase("!requests") ||
                     command.equalsIgnoreCase("!page")) {
-                if (Defaults.mods.contains(user) || isBroadcaster) {
+                if (Main.mods.contains(user) || isBroadcaster) {
 
                     StringBuilder message = new StringBuilder();
                     int page = 1;
@@ -244,7 +244,7 @@ public class ChatBot extends TwitchBot {
 
             //region Help Command
             if (command.equalsIgnoreCase("!help")) {
-                if (Defaults.mods.contains(user) || isBroadcaster) {
+                if (Main.mods.contains(user) || isBroadcaster) {
                     if (arguments.length == 1) {
                         sendMessage("@" + user + " List of CommandSettings | Type !help <command> for more help. | !request | !position | !ID | !difficulty | !song | !likes | !downloads | !remove | !queue | !block | !blockuser", channel);
                     } else if (arguments[1].equalsIgnoreCase("request")) {
@@ -293,7 +293,7 @@ public class ChatBot extends TwitchBot {
             //endregion
 
             //region Unblock Command
-            if (command.equalsIgnoreCase("!unblock") && (Defaults.mods.contains(user) || isBroadcaster)) {
+            if (command.equalsIgnoreCase("!unblock") && (Main.mods.contains(user) || isBroadcaster)) {
                 String unblocked = arguments[1];
                 BlockedSettings.removeID(unblocked);
                 try {
@@ -333,7 +333,7 @@ public class ChatBot extends TwitchBot {
             //endregion
             boolean stopReq = false;
             //region Block Command
-            if (command.equalsIgnoreCase("!block") && (Defaults.mods.contains(user) || isBroadcaster)) {
+            if (command.equalsIgnoreCase("!block") && (Main.mods.contains(user) || isBroadcaster)) {
                 stopReq = true;
                 try {
                     int blockedID = Integer.parseInt(arguments[1]);
@@ -370,7 +370,7 @@ public class ChatBot extends TwitchBot {
             //endregion
 
             //region BlockUser Command //TODO: Finish Blocking Users
-            if (command.equalsIgnoreCase("!blockUser") && (Defaults.mods.contains(user) || isBroadcaster)) {
+            if (command.equalsIgnoreCase("!blockUser") && (Main.mods.contains(user) || isBroadcaster)) {
                 sendMessage("Soon...", channel);
             }
             //endregion
@@ -383,7 +383,7 @@ public class ChatBot extends TwitchBot {
                 Matcher m = null;
                 if (GeneralSettings.followersOption) {
                     if (!Twitch.isFollowing(user)) {
-                        if (!(isBroadcaster || Defaults.mods.contains(user))) {
+                        if (!(isBroadcaster || Main.mods.contains(user))) {
                             sendMessage("@" + user + " Please follow to request levels!", channel);
                             return;
                         }
@@ -482,7 +482,7 @@ public class ChatBot extends TwitchBot {
                 if (m.find()) {
                     if (GeneralSettings.followersOption){
                         if (!Twitch.isFollowing(user)) {
-                            if (!(isBroadcaster || Defaults.mods.contains(user))) {
+                            if (!(isBroadcaster || Main.mods.contains(user))) {
                                 sendMessage("@" + user + " Please follow to request levels!", channel);
                                 return;
                             }

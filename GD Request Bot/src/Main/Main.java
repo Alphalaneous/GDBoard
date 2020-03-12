@@ -1,9 +1,11 @@
 package Main;
 
+import SettingsPanels.AccountSettings;
 import SettingsPanels.GeneralSettings;
 import SettingsPanels.OutputSettings;
 import SettingsPanels.RequestSettings;
 import com.cavariux.twitchirc.Chat.Channel;
+import com.cavariux.twitchirc.Chat.User;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
 
@@ -12,11 +14,13 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
 	private static ChatBot bot;
-
+	static List<User> mods = new ArrayList<>();
 	//region Main
 	public static void main(String[] args) throws IllegalArgumentException {
 		//TODO Use nio everywhere
@@ -94,18 +98,17 @@ public class Main {
 			GeneralSettings.loadSettings();
 			OutputSettings.loadSettings();
 			RequestSettings.loadSettings();
+			AccountSettings.loadSettings();
 			Overlay.setVisible();
 			SettingsWindow.toFront();
 			//endregion
 			//region Create ChatBot and send starting message
-			while(true) {
-				if (startBot()) {        //Start the Chat Bot
-					bot.sendMessage("Thank you for using GDBoard by Alphalaneous! Type !help for list of commands!", bot.joinChannel(Settings.channel));
-					break;
-				}
+			//Start the Chat Bot
+			while (!startBot()) {
 				System.out.println("Retrying");
 				Thread.sleep(10000);
 			}
+
 			//endregion
 
 		} catch (Exception e) {
@@ -128,15 +131,40 @@ public class Main {
 
 	public static boolean startBot() {
 		try {
+
+			Thread modCheck = new Thread(() ->{
+				while(true){
+					try{
+						mods = Channel.getChannel(Settings.channel, Main.getChatBot()).getMods();
+						for(int i = 0; i < mods.size(); i++){
+							System.out.println(mods.get(i));
+						}
+					}
+					catch (Exception e){
+						e.printStackTrace();
+						System.out.println("test");
+					}
+					try {
+						Thread.sleep(10000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			});
 			if (bot != null) {
 				bot.stop();
+			}
+			if(modCheck.isAlive()){
+				modCheck.stop();
 			}
 			bot = new ChatBot();
 			bot.connect();
 			bot.joinChannel(Settings.channel);
 			bot.setClientID("fzwze6vc6d2f7qodgkpq2w8nnsz3rl");
 			bot.start();        //Start the Chat Bot
+			bot.sendMessage("Thank you for using GDBoard by Alphalaneous! Type !help for list of commands!", bot.joinChannel(Settings.channel));
 			System.out.println("Success");
+			modCheck.start();
 			return true;
 		}
 		catch (Exception e){

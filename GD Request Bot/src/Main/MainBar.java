@@ -1,5 +1,6 @@
 package Main;
 
+import SettingsPanels.AccountSettings;
 import SettingsPanels.GeneralSettings;
 import SettingsPanels.OutputSettings;
 import SettingsPanels.RequestSettings;

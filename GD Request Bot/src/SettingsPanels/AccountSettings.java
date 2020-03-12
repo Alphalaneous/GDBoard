@@ -1,35 +1,73 @@
 package SettingsPanels;
 
 import Main.Defaults;
-import Main.Main;
+import Main.FancyTextArea;
 import Main.JButtonUI;
 import Main.Settings;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
 import Main.CurvedButton;
+import Main.Main;
+import Main.RoundedJButton;
 
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.net.URI;
 
 import javax.swing.*;
 
 public class AccountSettings {
-
+	private static String channel = "";
+	private static FancyTextArea channelInput = new FancyTextArea(false);
 	public static JPanel createPanel() {
+
+		JButtonUI defaultUI = new JButtonUI();
+		defaultUI.setBackground(Defaults.BUTTON);
+		defaultUI.setHover(Defaults.BUTTON_HOVER);
+		defaultUI.setSelect(Defaults.SELECT);
+
 		JPanel panel = new JPanel();
 		panel.setDoubleBuffered(true);
 		panel.setBounds(0, 0, 415, 622);
 		panel.setBackground(Defaults.SUB_MAIN);
 		panel.setLayout(null);
+
+		JLabel channelText = new JLabel("Channel:");
+		channelText.setForeground(Defaults.FOREGROUND);
+		channelText.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		channelText.setBounds(25,20,channelText.getPreferredSize().width+5,channelText.getPreferredSize().height+5);
+
+		CurvedButton confirmChannel = new CurvedButton("\uE001");
+		confirmChannel.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 22));
+		confirmChannel.setBounds(330, 46, 60, 30);
+		confirmChannel.setPreferredSize(new Dimension(60,30));
+		confirmChannel.setUI(defaultUI);
+		confirmChannel.setForeground(Defaults.FOREGROUND);
+		confirmChannel.setBackground(Defaults.BUTTON);
+		confirmChannel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				channel = channelInput.getText();
+				Settings.setChannel(channel);
+				try {
+					Settings.writeSettings("channel", channel);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				Thread thread = new Thread(Main::startBot);
+				thread.start();
+			}
+		});
+		channelInput.setBounds(25,45,290,32);
+		channelInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		CurvedButton button = new CurvedButton("Reauthenticate Twitch");
-		JButtonUI defaultUI = new JButtonUI();
-		defaultUI.setBackground(Defaults.BUTTON);
-		defaultUI.setHover(Defaults.HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
+
 		button.setBackground(Defaults.BUTTON);
-		button.setBounds(25,20,365,30);
+		button.setBounds(25,90,365,30);
 		button.setPreferredSize(new Dimension(365,30));
 		button.setUI(defaultUI);
 		button.setForeground(Defaults.FOREGROUND);
@@ -65,8 +103,22 @@ public class AccountSettings {
 			}
 		});
 		button.refresh();
+		panel.add(confirmChannel);
+		panel.add(channelText);
+		panel.add(channelInput);
 		panel.add(button);
+		confirmChannel.refresh();
 		return panel;
-		
+
+	}
+	public static void loadSettings(){
+		try {
+			if(!Settings.getSettings("channel").equalsIgnoreCase("")) {
+				channel = Settings.getSettings("channel");
+				channelInput.setText(channel);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
