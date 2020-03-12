@@ -42,6 +42,18 @@ public class KeyListener {
                     if (e.getVirtualKeyCode() == ShortcutSettings.skipKeybind) {
                         Functions.skipFunction();
                     }
+                    if (e.getVirtualKeyCode() == ShortcutSettings.randKeybind) {
+                        Functions.randomFunction();
+                    }
+                    if (e.getVirtualKeyCode() == ShortcutSettings.copyKeybind) {
+                        Functions.copyFunction();
+                    }
+                    if (e.getVirtualKeyCode() == ShortcutSettings.blockKeybind) {
+                        Functions.blockFunction();
+                    }
+                    if (e.getVirtualKeyCode() == ShortcutSettings.clearKeybind) {
+                        Functions.clearFunction();
+                    }
                     keyReleased = false;
                 }
             }

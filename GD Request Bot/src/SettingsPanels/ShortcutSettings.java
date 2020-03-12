@@ -58,12 +58,23 @@ public class ShortcutSettings {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == 8) {
-                    input.setText("");
-                    try {
-                        Settings.writeSettings(setting, "-1");
-                        loadKeybind(text, -1);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
+                    if(text.equalsIgnoreCase("Open")){
+                        input.setText("Home");
+                        try {
+                            Settings.writeSettings(setting, String.valueOf(36));
+                            loadKeybind(text, 36);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                    else {
+                        input.setText("");
+                        try {
+                            Settings.writeSettings(setting, "-1");
+                            loadKeybind(text, -1);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
                     }
                 } else {
                     input.setText(KeyEvent.getKeyText(e.getKeyCode()));
@@ -107,46 +118,78 @@ public class ShortcutSettings {
 
     public static void loadSettings() throws IOException {
 
-        if (!Settings.getSettings("openKeybind").equalsIgnoreCase("") || !Settings.getSettings("openKeybind").equalsIgnoreCase("-1")) {
+        if (!Settings.getSettings("openKeybind").equalsIgnoreCase("") && !Settings.getSettings("openKeybind").equalsIgnoreCase("-1")) {
             openKeybind = Integer.parseInt(Settings.getSettings("openKeybind"));
         }
-        if (!Settings.getSettings("skipKeybind").equalsIgnoreCase("") || !Settings.getSettings("skipKeybind").equalsIgnoreCase("-1")) {
+        if (!Settings.getSettings("skipKeybind").equalsIgnoreCase("") && !Settings.getSettings("skipKeybind").equalsIgnoreCase("-1")) {
             skipKeybind = Integer.parseInt(Settings.getSettings("skipKeybind"));
         }
-        if (!Settings.getSettings("randomKeybind").equalsIgnoreCase("") || !Settings.getSettings("randomKeybind").equalsIgnoreCase("-1")) {
+        if (!Settings.getSettings("randomKeybind").equalsIgnoreCase("") && !Settings.getSettings("randomKeybind").equalsIgnoreCase("-1")) {
             randKeybind = Integer.parseInt(Settings.getSettings("randomKeybind"));
         }
-        if (!Settings.getSettings("copyKeybind").equalsIgnoreCase("") || !Settings.getSettings("copyKeybind").equalsIgnoreCase("-1")) {
+        if (!Settings.getSettings("copyKeybind").equalsIgnoreCase("") && !Settings.getSettings("copyKeybind").equalsIgnoreCase("-1")) {
             copyKeybind = Integer.parseInt(Settings.getSettings("copyKeybind"));
         }
-        if (!Settings.getSettings("blockKeybind").equalsIgnoreCase("") || !Settings.getSettings("blockKeybind").equalsIgnoreCase("-1")) {
+        if (!Settings.getSettings("blockKeybind").equalsIgnoreCase("") && !Settings.getSettings("blockKeybind").equalsIgnoreCase("-1")) {
             blockKeybind = Integer.parseInt(Settings.getSettings("blockKeybind"));
         }
-        if (!Settings.getSettings("clearKeybind").equalsIgnoreCase("") || !Settings.getSettings("clearKeybind").equalsIgnoreCase("-1")) {
+        if (!Settings.getSettings("clearKeybind").equalsIgnoreCase("") && !Settings.getSettings("clearKeybind").equalsIgnoreCase("-1")) {
             clearKeybind = Integer.parseInt(Settings.getSettings("clearKeybind"));
         }
+
         for (Component component : panel.getComponents()) {
             if (component instanceof JPanel) {
                 for (Component component1 : ((JPanel) component).getComponents()) {
                     if (component1 instanceof JLabel) {
                         System.out.println(((JLabel) component1).getText());
                         if (((JLabel) component1).getText().equalsIgnoreCase("Open")) {
-                            ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(openKeybind));
+                            if(!KeyEvent.getKeyText(openKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
+                                ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(openKeybind));
+                            }
+                            else{
+                                ((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
+                            }
                         }
                         if (((JLabel) component1).getText().equalsIgnoreCase("Skip/Next")) {
-                            ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(skipKeybind));
+                            if(!KeyEvent.getKeyText(skipKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
+                                ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(skipKeybind));
+                            }
+                            else{
+                                ((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
+                            }
                         }
                         if (((JLabel) component1).getText().equalsIgnoreCase("Random")) {
-                            ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(randKeybind));
+                            if(!KeyEvent.getKeyText(randKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
+                                ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(randKeybind));
+                            }
+                            else{
+                                ((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
+                            }
                         }
                         if (((JLabel) component1).getText().equalsIgnoreCase("Copy")) {
-                            ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(copyKeybind));
+                            if(!KeyEvent.getKeyText(copyKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
+                                ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(copyKeybind));
+                            }
+                            else{
+                                ((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
+                            }
                         }
                         if (((JLabel) component1).getText().equalsIgnoreCase("Block")) {
-                            ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(blockKeybind));
+                            if(!KeyEvent.getKeyText(blockKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
+                                ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(blockKeybind));
+                            }
+                            else{
+                                ((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
+                            }
                         }
                         if (((JLabel) component1).getText().equalsIgnoreCase("Clear")) {
-                            ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(clearKeybind));
+                            if(!KeyEvent.getKeyText(clearKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
+                                ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(clearKeybind));
+                                System.out.println(KeyEvent.getKeyText(clearKeybind));
+                            }
+                            else{
+                                ((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
+                            }
 
                         }
                     }
