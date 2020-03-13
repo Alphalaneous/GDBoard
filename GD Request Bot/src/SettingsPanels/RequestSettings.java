@@ -1,9 +1,6 @@
 package SettingsPanels;
 
-import Main.CheckboxButton;
-import Main.Defaults;
-import Main.JButtonUI;
-import Main.Settings;
+import Main.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,13 +19,14 @@ public class RequestSettings {
         private static CheckboxButton demon = createButton("Demon", 290);*/
     public static boolean ratedOption = false;
     private static CheckboxButton rated = createButton("Rated Levels Only", 15);
+    private static JPanel panel = new JPanel();
 
     public static JPanel createPanel() {
 
         defaultUI.setBackground(Defaults.BUTTON);
         defaultUI.setHover(Defaults.HOVER);
         defaultUI.setSelect(Defaults.SELECT);
-        JPanel panel = new JPanel();
+
         panel.setLayout(null);
         panel.setDoubleBuffered(true);
         panel.setBounds(0, 0, 415, 622);
@@ -72,5 +70,32 @@ public class RequestSettings {
         button.setFont(new Font("bahnschrift", Font.PLAIN, 14));
         button.refresh();
         return button;
+    }
+    public static void refreshUI() {
+        defaultUI.setBackground(Defaults.MAIN);
+        defaultUI.setHover(Defaults.BUTTON_HOVER);
+        defaultUI.setSelect(Defaults.SELECT);
+
+        panel.setBackground(Defaults.SUB_MAIN);
+        for (Component component : panel.getComponents()) {
+            if (component instanceof JButton) {
+                for (Component component2 : ((JButton) component).getComponents()) {
+                    if (component2 instanceof JLabel) {
+                        component2.setForeground(Defaults.FOREGROUND);
+                    }
+                }
+                component.setBackground(Defaults.MAIN);
+            }
+            if (component instanceof JLabel) {
+                component.setForeground(Defaults.FOREGROUND);
+
+            }
+            if(component instanceof JTextArea){
+                ((FancyTextArea) component).refreshAll();
+            }
+            if(component instanceof CheckboxButton){
+                ((CheckboxButton) component).refresh();
+            }
+        }
     }
 }

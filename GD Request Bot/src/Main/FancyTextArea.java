@@ -9,7 +9,7 @@ import java.awt.event.FocusListener;
 public class FancyTextArea extends JTextArea {
     public FancyTextArea(boolean intFilter) {
 
-        setBackground(new Color(58, 58, 58));
+        setBackground(Defaults.TEXT_BOX);
         setForeground(Defaults.FOREGROUND);
         setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(175, 175, 175)),
                 BorderFactory.createEmptyBorder(8, 8, 8, 8)));
@@ -34,7 +34,11 @@ public class FancyTextArea extends JTextArea {
             doc.setDocumentFilter(new MyIntFilter());
         }
     }
-
+    public void refreshAll(){
+        setBackground(Defaults.TEXT_BOX);
+        setForeground(Defaults.FOREGROUND);
+        setCaretColor(Defaults.FOREGROUND);
+    }
     public static class MyCaret extends DefaultCaret {
 
         MyCaret() {

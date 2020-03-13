@@ -17,7 +17,6 @@ public class CheckboxButton extends JButton {
 		setLayout(null);
 		text.setText(label);
 		text.setForeground(getForeground());
-		check.setForeground(getForeground());
 		check.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 16));
 		checkSymbol.setForeground(getForeground());
 		checkSymbol.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 16));
@@ -94,14 +93,19 @@ public class CheckboxButton extends JButton {
 		refresh();
 	}*/
 	public void refresh(){
-		text.setForeground(getForeground());
+		if(!isChecked){
+			check.setForeground(Color.LIGHT_GRAY);
+		}
+		else{
+			check.setForeground(new Color(75, 155, 240));
+		}
+		text.setForeground(Defaults.FOREGROUND);
 		text.setFont(getFont());
 		text.setBounds(0, (getHeight()/2)-(text.getPreferredSize().height/2), text.getPreferredSize().width+5, text.getPreferredSize().height+5);
-		check.setForeground(getForeground());
 		check.setBounds(getWidth()-20, 0, 30,30);
-		checkSymbol.setForeground(getForeground());
 		checkSymbol.setBounds(getWidth()-20, 0, 30,30);
-		hover.setForeground(getForeground());
+		checkSymbol.setForeground(Defaults.FOREGROUND);
+		hover.setForeground(Defaults.FOREGROUND);
 		hover.setBounds(getWidth()-20, 0, 30,30);
 	}
 }

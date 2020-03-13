@@ -1,5 +1,7 @@
 package Main;
 
+import SettingsPanels.*;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -117,7 +119,12 @@ public class Overlay {
         ActionsWindow.refreshUI();
         SongWindow.refreshUI();
         MainBar.refreshUI(color);
-
+        AccountSettings.refreshUI();
+        BlockedSettings.refreshUI();
+        GeneralSettings.refreshUI();
+        ShortcutSettings.refreshUI();
+        RequestSettings.refreshUI();
+        OutputSettings.refreshUI();
     }
     public static JFrame getWindow(){
         return frame;

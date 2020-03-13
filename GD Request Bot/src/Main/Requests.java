@@ -22,16 +22,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 import java.util.zip.GZIPInputStream;
 
 class Requests {
 
     static ArrayList<LevelData> levels = new ArrayList<>();
-
+    private static HashMap<String, Integer> userStreamLimitMap = new HashMap<>();
     static void addRequest(String ID, String requester, boolean isCustomSong, String customUrl) {
         if(MainBar.requests) {
             if(GeneralSettings.queueLimitBoolean && (levels.size() >= GeneralSettings.queueLimit)){
@@ -51,6 +48,22 @@ class Requests {
                     return;
                 }
             }
+
+            if(GeneralSettings.userLimitStreamOption){
+                if(userStreamLimitMap.containsKey(requester)) {
+                    if (userStreamLimitMap.get(requester) >= GeneralSettings.userLimitStream) {
+                        Main.sendMessage("@" + requester + " You've reached the maximum amount of levels for the stream!");
+                        return;
+                    }
+                }
+            }
+            if(userStreamLimitMap.containsKey(requester)) {
+                userStreamLimitMap.put(requester, userStreamLimitMap.get(requester) + 1);
+            }
+            else {
+                userStreamLimitMap.put(requester, 1);
+            }
+            System.out.println(userStreamLimitMap.get(requester));
             try {
                 AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
                 GDLevel level = null;

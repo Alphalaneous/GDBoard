@@ -105,6 +105,7 @@ public class SettingsWindow {
 		defaultUI.setSelect(Defaults.SELECT);
 		selectUI.setBackground(Defaults.SELECT);
 		selectUI.setHover(Defaults.BUTTON_HOVER);
+		selectUI.setSelect(Defaults.SELECT);
 		buttons.setBackground(Defaults.MAIN);
 		content.setBackground(Defaults.SUB_MAIN);
 		for (Component component : buttons.getComponents()) {
@@ -116,6 +117,9 @@ public class SettingsWindow {
 				}
 				if(!((JButton) component).getUI().equals(selectUI)) {
 					component.setBackground(Defaults.MAIN);
+				}
+				else{
+					component.setBackground(Defaults.SELECT);
 				}
 
 			}

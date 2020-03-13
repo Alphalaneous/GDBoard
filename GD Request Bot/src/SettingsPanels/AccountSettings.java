@@ -8,6 +8,7 @@ import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
 import Main.CurvedButton;
 import Main.Main;
+import Main.CheckboxButton;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -21,15 +22,17 @@ public class AccountSettings {
 
 	private static String channel = "";
 	private static FancyTextArea channelInput = new FancyTextArea(false);
+	private static JButtonUI defaultUI = new JButtonUI();
+	private static JPanel panel = new JPanel();
 
 	public static JPanel createPanel() {
 
-		JButtonUI defaultUI = new JButtonUI();
+
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
 
-		JPanel panel = new JPanel();
+
 		panel.setDoubleBuffered(true);
 		panel.setBounds(0, 0, 415, 622);
 		panel.setBackground(Defaults.SUB_MAIN);
@@ -118,6 +121,32 @@ public class AccountSettings {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	public static void refreshUI() {
+		defaultUI.setBackground(Defaults.MAIN);
+		defaultUI.setHover(Defaults.BUTTON_HOVER);
+		defaultUI.setSelect(Defaults.SELECT);
+
+		panel.setBackground(Defaults.SUB_MAIN);
+		for (Component component : panel.getComponents()) {
+			if (component instanceof JButton) {
+				for (Component component2 : ((JButton) component).getComponents()) {
+					if (component2 instanceof JLabel) {
+						component2.setForeground(Defaults.FOREGROUND);
+					}
+				}
+				component.setBackground(Defaults.MAIN);
+			}
+			if (component instanceof JLabel) {
+				component.setForeground(Defaults.FOREGROUND);
+			}
+			if(component instanceof JTextArea){
+				((FancyTextArea) component).refreshAll();
+			}
+			if(component instanceof CheckboxButton){
+				((CheckboxButton) component).refresh();
+			}
 		}
 	}
 }

@@ -1,5 +1,6 @@
 package SettingsPanels;
 
+import Main.CheckboxButton;
 import Main.Defaults;
 import Main.FancyTextArea;
 import Main.Settings;
@@ -20,9 +21,10 @@ public class OutputSettings {
 	private static FancyTextArea outputStringInput = new FancyTextArea(false);
 	private static FancyTextArea noLevelsStringInput = new FancyTextArea(false);
 	private static FancyTextArea fileLocationInput = new FancyTextArea(false);
+	private static JPanel panel = new JPanel();
 	public static JPanel createPanel() {
 		//TODO Add scrollbar to Text Area?
-		JPanel panel = new JPanel();
+
 		panel.setDoubleBuffered(true);
 		panel.setBounds(0, 0, 415, 622);
 		panel.setBackground(Main.Defaults.SUB_MAIN);
@@ -130,6 +132,30 @@ public class OutputSettings {
 			Files.write(file, text.getBytes());
 		} catch (IOException e1) {
 			e1.printStackTrace();
+		}
+	}
+	public static void refreshUI() {
+
+		panel.setBackground(Defaults.SUB_MAIN);
+		for (Component component : panel.getComponents()) {
+			if (component instanceof JButton) {
+				for (Component component2 : ((JButton) component).getComponents()) {
+					if (component2 instanceof JLabel) {
+						component2.setForeground(Defaults.FOREGROUND);
+					}
+				}
+				component.setBackground(Defaults.MAIN);
+			}
+			if (component instanceof JLabel) {
+				component.setForeground(Defaults.FOREGROUND);
+
+			}
+			if(component instanceof JTextArea){
+				((FancyTextArea) component).refreshAll();
+			}
+			if(component instanceof CheckboxButton){
+				((CheckboxButton) component).refresh();
+			}
 		}
 	}
 }

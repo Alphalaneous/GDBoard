@@ -188,10 +188,6 @@ public class BlockedSettings {
             scrollPane.updateUI();
         }
         File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
-        JButtonUI defaultUI = new JButtonUI();
-        defaultUI.setBackground(Defaults.BUTTON);
-        defaultUI.setHover(Defaults.HOVER);
-        defaultUI.setSelect(Defaults.SELECT);
         CurvedButton button = new CurvedButton(ID);
 
         button.setBackground(Defaults.BUTTON);
@@ -237,5 +233,47 @@ public class BlockedSettings {
         button.refresh();
         blockedListPanel.add(button);
 
+    }
+    public static void refreshUI() {
+        defaultUI.setBackground(Defaults.BUTTON);
+        defaultUI.setHover(Defaults.BUTTON_HOVER);
+        defaultUI.setSelect(Defaults.SELECT);
+
+        blockedSettingsPanel.setBackground(Defaults.SUB_MAIN);
+        for (Component component : blockedSettingsPanel.getComponents()) {
+            if (component instanceof JButton) {
+                for (Component component2 : ((JButton) component).getComponents()) {
+                    if (component2 instanceof JLabel) {
+                        component2.setForeground(Defaults.FOREGROUND);
+                    }
+                }
+                component.setBackground(Defaults.BUTTON);
+                component.setForeground(Defaults.FOREGROUND);
+            }
+            if (component instanceof JLabel) {
+                component.setForeground(Defaults.FOREGROUND);
+
+            }
+            if(component instanceof JTextArea){
+                ((FancyTextArea) component).refreshAll();
+            }
+        }
+        blockedListPanel.setBackground(Defaults.SUB_MAIN);
+        for (Component component : blockedListPanel.getComponents()) {
+            if (component instanceof JButton) {
+                for (Component component2 : ((JButton) component).getComponents()) {
+                    if (component2 instanceof JLabel) {
+                        component2.setForeground(Defaults.FOREGROUND);
+                    }
+                }
+                component.setBackground(Defaults.BUTTON);
+            }
+            if(component instanceof JTextArea){
+                ((FancyTextArea) component).refreshAll();
+            }
+            if(component instanceof CheckboxButton){
+                ((CheckboxButton) component).refresh();
+            }
+        }
     }
 }

@@ -221,4 +221,34 @@ public class ShortcutSettings {
 
 
     }
+    public static void refreshUI() {
+        defaultUI.setBackground(Defaults.MAIN);
+        defaultUI.setHover(Defaults.BUTTON_HOVER);
+        defaultUI.setSelect(Defaults.SELECT);
+
+        panel.setBackground(Defaults.SUB_MAIN);
+        for (Component component : panel.getComponents()) {
+            if(component instanceof JPanel) {
+                for (Component component2 : ((JPanel) component).getComponents()) {
+                    if (component2 instanceof JButton) {
+                        for (Component component3 : ((JButton) component2).getComponents()) {
+                            if (component3 instanceof JLabel) {
+                                component3.setForeground(Defaults.FOREGROUND);
+                            }
+                        }
+                        component2.setBackground(Defaults.MAIN);
+                    }
+                    if (component2 instanceof JLabel) {
+                        component2.setForeground(Defaults.FOREGROUND);
+
+                    }
+                    if (component2 instanceof JTextArea) {
+                        ((FancyTextArea) component2).refreshAll();
+                    }
+
+                }
+                component.setBackground(Defaults.SUB_MAIN);
+            }
+        }
+    }
 }

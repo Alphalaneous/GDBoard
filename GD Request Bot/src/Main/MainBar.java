@@ -338,7 +338,7 @@ class MainBar {
             time.setForeground(Defaults.FOREGROUND);
             for (Component component : buttonPanel.getComponents()) {
                 if (component instanceof JButton) {
-                    if (((JButton) component).getText().equalsIgnoreCase("\uE10A")) {
+                    if (((JButton) component).getText().equalsIgnoreCase("\uE10A") || ((JButton) component).getText().equalsIgnoreCase("\uE713") || ((JButton) component).getText().equalsIgnoreCase("\uE71A")) {
                         component.setBackground(Defaults.TOP);
                     } else {
                         component.setBackground(Defaults.MAIN);
