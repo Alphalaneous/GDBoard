@@ -87,8 +87,8 @@ public class AccountSettings {
 						URI authUrl = new URI(twitch.auth().getAuthenticationUrl(            //Create URI to get oauth token from twitch
 								twitch.getClientId(), callbackUri, Scopes.USER_READ
 						) + "chat:edit+chat:read+whispers:read+whispers:edit&force_verify=true");
-
-						Desktop.getDesktop().browse(authUrl);                                    //Open in the default browser
+						Runtime rt = Runtime.getRuntime();
+						rt.exec("rundll32 url.dll,FileProtocolHandler " + authUrl);                //Open in the default browser
 						if (twitch.auth().awaitAccessToken()) {                                    //If oauth retrieving succeeds, set oauth in settings
 							Settings.setOAuth(twitch.auth().getAccessToken());
 							Settings.writeSettings("oauth", twitch.auth().getAccessToken());

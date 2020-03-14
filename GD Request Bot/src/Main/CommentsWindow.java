@@ -298,8 +298,9 @@ class CommentsWindow {
                         super.mouseClicked(e);
                         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                             try {
-                                Desktop.getDesktop().browse(new URI("http://www.gdbrowser.com/profile/" + arr.getJSONObject(finalI).getString("username")));
-                            } catch (IOException | URISyntaxException ex) {
+                                Runtime rt = Runtime.getRuntime();
+                                rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://www.gdbrowser.com/profile/" + arr.getJSONObject(finalI).getString("username"));
+                            } catch (IOException ex) {
                                 ex.printStackTrace();
                             }
                         }

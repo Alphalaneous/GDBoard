@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,7 @@ public class Main {
 			}
 			//endregion
 
-			//region Get TwitchAPI oauth
+			//region Get Twitch oauth
 			if (!Settings.hasOauth) {                                                    //If the oauth token is not acquired, get one from twitch
 
 				Twitch twitch = new Twitch();                                            //Create TwitchAPI object from TwitchAPI
@@ -56,12 +57,14 @@ public class Main {
 						twitch.getClientId(), callbackUri, Scopes.USER_READ
 				) + "chat:edit+chat:read+whispers:read+whispers:edit&force_verify=true");
 
-				Desktop.getDesktop().browse(authUrl);                                    //Open in the default browser
+				//Desktop.getDesktop().browse(authUrl);                                    //Open in the default browser
+				Runtime rt = Runtime.getRuntime();
+				rt.exec("rundll32 url.dll,FileProtocolHandler " + authUrl);
 				if (twitch.auth().awaitAccessToken()) {                                    //If oauth retrieving succeeds, set oauth in settings
 					Settings.setOAuth(twitch.auth().getAccessToken());
 					Settings.writeSettings("oauth", twitch.auth().getAccessToken());
 				} else {                                                                    //Else print error
-					JOptionPane.showMessageDialog(null, "Failed to Authenticate TwitchAPI account", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Failed to Authenticate Twitch account", "Error", JOptionPane.ERROR_MESSAGE);
 					System.out.println(twitch.auth().getAuthenticationError());
 				}
 			}
@@ -176,5 +179,4 @@ public class Main {
 		}
 	}
 	//endregion
-
 }

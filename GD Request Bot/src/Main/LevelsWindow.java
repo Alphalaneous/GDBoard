@@ -241,8 +241,9 @@ public class LevelsWindow {
 					if (SwingUtilities.isMiddleMouseButton(e)) {
 						if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
 							try {
-								Desktop.getDesktop().browse(new URI("http://www.gdbrowser.com/" + ID));
-							} catch (IOException | URISyntaxException ex) {
+								Runtime rt = Runtime.getRuntime();
+								rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://www.gdbrowser.com/" + ID);
+							} catch (IOException ex) {
 								ex.printStackTrace();
 							}
 						}
