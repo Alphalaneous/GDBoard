@@ -242,7 +242,6 @@ class Requests {
                             StringSelection selection = new StringSelection(Requests.levels.get(0).getLevelID());
                             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                             clipboard.setContents(selection, selection);
-                            OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
                             if(!GeneralSettings.nowPlayingOption) {
                                 Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
                                         + Requests.levels.get(0).getLevelID() + "). Requested by "
@@ -254,14 +253,17 @@ class Requests {
                             levelData.setSongAuthor("");
                         } else {
                             levelData.setSongName(Objects.requireNonNull(level.getSong().block()).getSongTitle());
+                            System.out.println(Objects.requireNonNull(level.getSong().block()).getSongTitle());
                             levelData.setSongAuthor(Objects.requireNonNull(level.getSong().block()).getSongAuthorName());
 
                         }
+                        OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
                         LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester());
 
                     }
                 }
             } catch (Exception e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -392,10 +394,10 @@ class Requests {
                     .replaceAll("(?i)%requester%", levels.get(level).getRequester())
                     .replaceAll("(?i)%songName%", levels.get(level).getSongName())
                     .replaceAll("(?i)%songID%", levels.get(level).getSongID())
-                    .replaceAll("(?i)likes%", levels.get(level).getLikes())
+                    .replaceAll("(?i)%songArtist%", levels.get(level).getSongAuthor())
+                    .replaceAll("(?i)%likes%", levels.get(level).getLikes())
                     .replaceAll("(?i)%downloads%", levels.get(level).getDownloads())
-                    .replaceAll("(?i)%description%", levels.get(level).getDescription())
-                    .replaceAll("(?i)%coins%", levels.get(level).getDescription());
+                    .replaceAll("(?i)%description%", levels.get(level).getDescription());
             return text;
         }
         else{

@@ -123,6 +123,10 @@ public class Settings {
             oauth = gfg.get("oauth").toString();
             hasOauth = true;
         }
+        /*if(gfg.containsKey("clientID") ) {
+            clientID = gfg.get("clientID").toString();
+            hasClientID = true;
+        }*/
         if(gfg.containsKey("channel")) {
             channel = gfg.get("channel").toString().toLowerCase();
             hasChannel = true;
@@ -245,6 +249,7 @@ public class Settings {
 
     static boolean windowedMode = false;
     static String oauth;
+    //static String clientID;
     private static Point requestsWLoc = new Point(10, 10);
     private static Point infoWLoc = new Point(1920 - 400 - 10, 10);
     private static Point commentWLoc = new Point(10, 500);
@@ -268,6 +273,7 @@ public class Settings {
     private static boolean actX = true;
     private static boolean reqX = true;
     private static boolean settingsX = false;
+    //static boolean hasClientID = false;
 
     //TODO Save window sizes
     //TODO User Request Limits

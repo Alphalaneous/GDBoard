@@ -80,7 +80,7 @@ public class AccountSettings {
 			public void mousePressed(MouseEvent e) {
 				Thread thread = new Thread(() -> {
 					try {
-						Twitch twitch = new Twitch();                                            //Create Twitch object from TwitchAPI
+						Twitch twitch = new Twitch();                                            //Create TwitchAPI object from TwitchAPI
 						URI callbackUri = new URI("http://127.0.0.1:23522/authorize.html"); //Set Callback URL to go to when auth success
 
 						twitch.setClientId("fzwze6vc6d2f7qodgkpq2w8nnsz3rl");                    //Set my app client ID to get oauth
@@ -94,7 +94,7 @@ public class AccountSettings {
 							Settings.writeSettings("oauth", twitch.auth().getAccessToken());
 							Main.startBot();
 						} else {                                                                    //Else print error
-							JOptionPane.showMessageDialog(null, "Failed to Authenticate Twitch account", "Error",  JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Failed to Authenticate TwitchAPI account", "Error",  JOptionPane.ERROR_MESSAGE);
 							System.out.println(twitch.auth().getAuthenticationError());
 						}
 					}

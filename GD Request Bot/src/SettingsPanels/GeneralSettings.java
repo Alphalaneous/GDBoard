@@ -216,6 +216,7 @@ public class GeneralSettings {
 			autoDownload.setChecked(autoDownloadOption);
 			queueLimitText.setChecked(queueLimitBoolean);
 			userLimitText.setChecked(userLimitOption);
+			userLimitStreamText.setChecked(userLimitStreamOption);
 			if(!queueLimitBoolean){
 				queueSizeInput.setEditable(false);
 			}
@@ -248,7 +249,7 @@ public class GeneralSettings {
 			Settings.writeSettings("queueLimit", String.valueOf(queueLimit));
 			Settings.writeSettings("userLimitEnabled", String.valueOf(userLimitOption));
 			Settings.writeSettings("userLimit", String.valueOf(userLimit));
-			Settings.writeSettings("userLimitStreamEnaabled", String.valueOf(userLimitStreamOption));
+			Settings.writeSettings("userLimitStreamEnabled", String.valueOf(userLimitStreamOption));
 			Settings.writeSettings("userLimitStream", String.valueOf(userLimitStream));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "There was an error writing to the file!", "Error",  JOptionPane.ERROR_MESSAGE);

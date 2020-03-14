@@ -5,8 +5,7 @@ import Main.*;
 import javax.swing.*;
 import javax.swing.text.DefaultStyledDocument;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.IOException;
 
 public class ShortcutSettings {
@@ -48,6 +47,7 @@ public class ShortcutSettings {
     }
 
     private static JPanel createKeybindButton(int y, String text, String setting) {
+        final boolean[] isFocused = {false};
         JPanel panel = new JPanel(null);
         panel.setBounds(0, y, 415, 36);
         panel.setBackground(Defaults.SUB_MAIN);
@@ -87,6 +87,27 @@ public class ShortcutSettings {
                 }
             }
         });
+        /*input.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(isFocused[0]){
+                    if (!(e.getButton() < 4)) {
+                        input.setText("Mouse " + e.getButton());
+                    }
+                }
+            }
+        });
+        input.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                isFocused[0] = true;
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                isFocused[0] = false;
+            }
+        });*/
         input.setBounds(285, 1, 100, 32);
 
         input.setDocument(doc);
