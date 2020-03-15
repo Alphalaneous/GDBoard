@@ -1,66 +1,97 @@
 package Main;
 
 import SettingsPanels.ShortcutSettings;
-import lc.kra.system.keyboard.GlobalKeyboardHook;
-import lc.kra.system.keyboard.event.GlobalKeyAdapter;
-import lc.kra.system.keyboard.event.GlobalKeyEvent;
+import org.jnativehook.keyboard.NativeKeyEvent;
+import org.jnativehook.keyboard.SwingKeyAdapter;
 
 import java.awt.*;
 
 
-public class KeyListener {
+public class KeyListener extends SwingKeyAdapter {
     private static boolean keyReleased = false;
 
-    public static void hook() {
-        GlobalKeyboardHook keyboardHook = new GlobalKeyboardHook(false);
-        keyboardHook.addKeyListener(new GlobalKeyAdapter() {
-            @Override
-            public void keyPressed(GlobalKeyEvent e) {
-                System.out.println(e.getVirtualKeyCode());
-                if(keyReleased) {
-                    if (e.getVirtualKeyCode() == ShortcutSettings.openKeybind) {
 
-                        if (!Overlay.frame.getBackground().equals(new Color(0, 0, 0, 0))) {
+    public void nativeKeyPressed(NativeKeyEvent e) {
 
-                            if (!Settings.windowedMode) {
-                                Overlay.setWindowsInvisible();
-                            }
-                            Overlay.frame.toFront();
-                            Overlay.frame.requestFocus();
+        System.out.println(e.getRawCode());
+        System.out.println(ShortcutSettings.skipKeybind);
+        if (keyReleased) {
+            int key = e.getRawCode();
 
-                        } else {
-                            if (!Settings.windowedMode) {
-                                Overlay.setWindowsVisible();
-                            }
-                            Overlay.frame.toFront();
-                            Overlay.frame.requestFocus();
-                            SettingsWindow.toFront();
+            if(key == 187){
+                key = 61;
+            }
+            else if(key == 189){
+                key = 45;
+            }
+            else if(key == 190){
+                key = 46;
+            }
+            else if(key == 188){
+                key = 44;
+            }
+            else if(key == 186){
+                key = 59;
+            }
+            else if(key == 220){
+                key = 92;
+            }
+            else if(key == 221){
+                key = 93;
+            }
+            else if(key == 219){
+                key = 91;
+            }
+            else if(key == 191){
+                key = 47;
+            }
+            else if(key == 46){
+                key = 127;
+            }
+            else if(key == 45){
+                key = 155;
+            }
+            if (key == ShortcutSettings.openKeybind) {
+
+                if (!Overlay.frame.getBackground().equals(new Color(0, 0, 0, 0))) {
+
+                    if (!Settings.windowedMode) {
+                        Overlay.setWindowsInvisible();
+                    }
+                    Overlay.frame.toFront();
+                    Overlay.frame.requestFocus();
+
+                } else {
+                    if (!Settings.windowedMode) {
+                        Overlay.setWindowsVisible();
+                    }
+                    Overlay.frame.toFront();
+                    Overlay.frame.requestFocus();
+                    SettingsWindow.toFront();
 
 
-                        }
-                    }
-                    if (e.getVirtualKeyCode() == ShortcutSettings.skipKeybind) {
-                        Functions.skipFunction();
-                    }
-                    if (e.getVirtualKeyCode() == ShortcutSettings.randKeybind) {
-                        Functions.randomFunction();
-                    }
-                    if (e.getVirtualKeyCode() == ShortcutSettings.copyKeybind) {
-                        Functions.copyFunction();
-                    }
-                    if (e.getVirtualKeyCode() == ShortcutSettings.blockKeybind) {
-                        Functions.blockFunction();
-                    }
-                    if (e.getVirtualKeyCode() == ShortcutSettings.clearKeybind) {
-                        Functions.clearFunction();
-                    }
-                    keyReleased = false;
                 }
             }
-            @Override
-            public void keyReleased(GlobalKeyEvent e) {
-                keyReleased = true;
+            if (key == ShortcutSettings.skipKeybind) {
+                Functions.skipFunction();
             }
-        });
+            if (key == ShortcutSettings.randKeybind) {
+                Functions.randomFunction();
+            }
+            if (key == ShortcutSettings.copyKeybind) {
+                Functions.copyFunction();
+            }
+            if (key == ShortcutSettings.blockKeybind) {
+                Functions.blockFunction();
+            }
+            if (key == ShortcutSettings.clearKeybind) {
+                Functions.clearFunction();
+            }
+            keyReleased = false;
+        }
+    }
+
+    public void nativeKeyReleased(NativeKeyEvent e) {
+        keyReleased = true;
     }
 }

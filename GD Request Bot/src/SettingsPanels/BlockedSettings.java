@@ -6,10 +6,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.nio.file.*;
 import java.util.Scanner;
 
 import javax.swing.*;
@@ -172,9 +169,11 @@ public class BlockedSettings {
 
     public static void removeID(String ID) {
         for (Component component : blockedListPanel.getComponents()) {
-            if (component instanceof JButton) {
-                if (((JButton) component).getText().equalsIgnoreCase(ID)) {
+            if (component instanceof CurvedButton) {
+                System.out.println(((CurvedButton) component).getLText());
+                if (((CurvedButton) component).getLText().equalsIgnoreCase(ID)) {
                     blockedListPanel.remove(component);
+                    blockedListPanel.updateUI();
                 }
             }
         }
@@ -187,7 +186,7 @@ public class BlockedSettings {
             blockedListPanel.setPreferredSize(new Dimension(415, height + 4));
             scrollPane.updateUI();
         }
-        File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
+        Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
         CurvedButton button = new CurvedButton(ID);
 
         button.setBackground(Defaults.BUTTON);
@@ -207,17 +206,17 @@ public class BlockedSettings {
                         JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 
                 if (n == 0) {
-                    if (file.exists()) {
+                    if (Files.exists(file)) {
                         try {
-                            File temp = new File(System.getenv("APPDATA") + "\\GDBoard\\_temp_");
-                            PrintWriter out = new PrintWriter(new FileWriter(temp));
-                            Files.lines(file.toPath())
-                                    .filter(line -> !line.contains(button.getText()))
+                            Path temp = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\_temp_");
+                            PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
+                            Files.lines(file)
+                                    .filter(line -> !line.contains(button.getLText()))
                                     .forEach(out::println);
                             out.flush();
                             out.close();
-                            file.delete();
-                            temp.renameTo(file);
+                            Files.delete(file);
+                            Files.move(temp, temp.resolveSibling(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt"), StandardCopyOption.REPLACE_EXISTING);
 
                         } catch (IOException ex) {
 
@@ -232,6 +231,7 @@ public class BlockedSettings {
         });
         button.refresh();
         blockedListPanel.add(button);
+        blockedListPanel.updateUI();
 
     }
     public static void refreshUI() {

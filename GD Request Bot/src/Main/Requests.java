@@ -29,38 +29,38 @@ class Requests {
 
     static ArrayList<LevelData> levels = new ArrayList<>();
     private static HashMap<String, Integer> userStreamLimitMap = new HashMap<>();
+
     static void addRequest(String ID, String requester, boolean isCustomSong, String customUrl) {
-        if(MainBar.requests) {
-            if(GeneralSettings.queueLimitBoolean && (levels.size() >= GeneralSettings.queueLimit)){
+        if (MainBar.requests) {
+            if (GeneralSettings.queueLimitBoolean && (levels.size() >= GeneralSettings.queueLimit)) {
                 System.out.println(GeneralSettings.queueLimit + ", " + (levels.size()));
                 Main.sendMessage("@" + requester + " The queue is full!");
                 return;
             }
-            if(GeneralSettings.userLimitOption){
+            if (GeneralSettings.userLimitOption) {
                 int size = 0;
                 for (LevelData level : levels) {
                     if (level.getRequester().equalsIgnoreCase(requester)) {
                         size++;
                     }
                 }
-                if(size >= GeneralSettings.userLimit){
+                if (size >= GeneralSettings.userLimit) {
                     Main.sendMessage("@" + requester + " You have the maximum amount of levels in the queue!");
                     return;
                 }
             }
 
-            if(GeneralSettings.userLimitStreamOption){
-                if(userStreamLimitMap.containsKey(requester)) {
+            if (GeneralSettings.userLimitStreamOption) {
+                if (userStreamLimitMap.containsKey(requester)) {
                     if (userStreamLimitMap.get(requester) >= GeneralSettings.userLimitStream) {
                         Main.sendMessage("@" + requester + " You've reached the maximum amount of levels for the stream!");
                         return;
                     }
                 }
             }
-            if(userStreamLimitMap.containsKey(requester)) {
+            if (userStreamLimitMap.containsKey(requester)) {
                 userStreamLimitMap.put(requester, userStreamLimitMap.get(requester) + 1);
-            }
-            else {
+            } else {
                 userStreamLimitMap.put(requester, 1);
             }
             System.out.println(userStreamLimitMap.get(requester));
@@ -111,6 +111,7 @@ class Requests {
                         }
                     }
                     levelData.setLevelID(ID);
+                    levelData.setVersion(level.getGameVersion());
                     //levelData.setCoins(String.valueOf(level.getCoinCount()));
                     //levelData.setVerifiedCoins(level.hasCoinsVerified());
                     if (level.getFeaturedScore() > 0) {
@@ -124,14 +125,16 @@ class Requests {
                     GDLevel finalLevel = level;
                     parse = new Thread(() -> {
                         try {
-                            if (!(finalLevel.getStars() > 0)) {
+                            if (!(finalLevel.getStars() > 0) && finalLevel.getGameVersion()/10 >= 2) {
                                 parse(Objects.requireNonNull(Objects
                                         .requireNonNull(client.getLevelById(Long.parseLong(ID)).block()).download().block())
-                                        .getData(), ID);
+                                        .getData(), ID
+                                );
                                 LevelsWindow.updateUI(levelData.getLevelID(), levelData.getContainsVulgar(), levelData.getContainsImage(), levelData.getAnalyzed());
                             }
+
                         } catch (IllegalArgumentException e) {
-                            JOptionPane.showMessageDialog(null, "There was an error analyzing " + levelData.getLevelID() + "!", "Error",  JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "There was an error analyzing " + levelData.getLevelID() + "!", "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     });
                     parse.start();
@@ -168,7 +171,7 @@ class Requests {
                         // --------------------
                         // Adds level to queue array "levels" and refreshes LevelsWindow
                         levels.add(levelData);
-                        if(GeneralSettings.autoDownloadOption) {
+                        if (GeneralSettings.autoDownloadOption) {
                             URL url1;
                             String fileName = null;
                             if (customUrl != null) {
@@ -201,14 +204,13 @@ class Requests {
                                     }
                                     if (download && !levelData.getSongID().equalsIgnoreCase("0")) {
                                         File file2;
-                                        if(isCustomSong){
+                                        if (isCustomSong) {
                                             if (Requests.levels.size() == 1) {
                                                 file2 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3");
                                             } else {
                                                 file2 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3.wait");
                                             }
-                                        }
-                                        else{
+                                        } else {
                                             file2 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3");
                                         }
                                         URL url;
@@ -219,8 +221,7 @@ class Requests {
                                         } else if (isCustomSong && finalFileName.endsWith(".mp3")) {
                                             try {
                                                 url = new URL(customUrl);
-                                            }
-                                            catch (MalformedURLException e){
+                                            } catch (MalformedURLException e) {
                                                 url = new URL(levelData.getSongURL());
                                                 Main.sendMessage("@" + requester + " Invalid URL!");
                                             }
@@ -242,7 +243,7 @@ class Requests {
                             StringSelection selection = new StringSelection(Requests.levels.get(0).getLevelID());
                             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                             clipboard.setContents(selection, selection);
-                            if(!GeneralSettings.nowPlayingOption) {
+                            if (!GeneralSettings.nowPlayingOption) {
                                 Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
                                         + Requests.levels.get(0).getLevelID() + "). Requested by "
                                         + Requests.levels.get(0).getRequester());
@@ -258,7 +259,7 @@ class Requests {
 
                         }
                         OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
-                        LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester());
+                        LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester(), levelData.getVersion());
 
                     }
                 }
@@ -266,8 +267,7 @@ class Requests {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
             }
-        }
-        else {
+        } else {
             Main.sendMessage("@" + requester + " Requests are off!");
         }
     }
@@ -276,100 +276,84 @@ class Requests {
         return levels;
     }
 
-
     private static void parse(byte[] level, String levelID) {
-
-        ArrayList<GDObject> lvlObject = new ArrayList<>();
-        for (int k = 0; k < Requests.getLevelData().size(); k++) {
-
+        all : for (int k = 0; k < Requests.getLevelData().size(); k++) {
             if (Requests.getLevelData().get(k).getLevelID().equalsIgnoreCase(levelID)) {
+                String decompressed = null;
                 try {
-                    String decompressed = decompress(level);
+                    decompressed = decompress(level);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                assert decompressed != null;
+                int imageIDCount = 0;
+                String color = "";
+                String[] values = decompressed.split(";");
+                for (String value1 : values) {
+                    if (value1.startsWith("1,1110") || value1.startsWith("1,211") || value1.startsWith("1,914")) {
+                        String value = value1.replaceAll("(,[^,]*),", "$1;");
 
-                    ArrayList<String[]> Objects = new ArrayList<>();
+                        String[] attributes = value.split(";");
+                        double scale = 0;
+                        boolean hsv = false;
+                        String tempColor = "";
+                        String text = "";
+                        for (String attribute : attributes) {
 
-                    String[] values = decompressed.split(";");
-                    for (String value : values) {
-                        if ((value.split(",")[1].equalsIgnoreCase("1110")) || (value.split(",")[1].equalsIgnoreCase("211"))
-                                || (value.split(",")[1].equalsIgnoreCase("914"))) {
-                            Objects.add(value.split(","));
+                            if (attribute.startsWith("32")) {
+                                scale = Double.parseDouble(attribute.split(",")[1]);
+                            }
+                            if (attribute.startsWith("41")) {
+                                hsv = true;
+                            }
+                            if (attribute.startsWith("21")) {
+                                tempColor = attribute.split(",")[1];
+                            }
+                            if (attribute.startsWith("31")) {
+                                String formatted = attribute.split(",")[1].replace("_", "/").replace("-", "+");
+                                text = new String(Base64.getDecoder().decode(formatted));
+                            }
                         }
-                    }
-                    int IDImageCount = 0;
+                        InputStream is = Main.class.getClassLoader()
+                                .getResourceAsStream("Resources/blockedWords.txt");
+                        assert is != null;
+                        InputStreamReader isr = new InputStreamReader(is);
+                        BufferedReader br = new BufferedReader(isr);
+                        String line;
 
-                    outer:
-                    for (int i = 0; i < Objects.size(); i++) {
-                        lvlObject.add(new GDObject());
-                        for (int j = 0; j < Objects.get(i).length; j = j + 2) {
-                            if (Objects.get(i)[j].equals("1")) {
-                                lvlObject.get(i).ID(Double.parseDouble(Objects.get(i)[j + 1]));
-                            }
-                            if (Objects.get(i)[j].equals("21")) {
-                                lvlObject.get(i).color1(Double.parseDouble(Objects.get(i)[j + 1]));
-                            }
-                            if (Objects.get(i)[j].equals("31")) {
-                                String formatted = Objects.get(i)[j + 1].replace("_", "/").replace("-", "+");
-                                // System.out.println(formatted);
-                                String text = new String(Base64.getDecoder().decode(formatted));
-                                lvlObject.get(i).objectText(text);
-                            }
-                            if (Objects.get(i)[j].equals("32")) {
-                                lvlObject.get(i).scaling(Double.parseDouble(Objects.get(i)[j + 1]));
-                            }
-                            if (Objects.get(i)[j].equals("41")) {
-                                lvlObject.get(i).color1HSVEnabled(Double.parseDouble(Objects.get(i)[j + 1]));
-                            }
-                            InputStream is = Main.class.getClassLoader()
-                                    .getResourceAsStream("Resources/blockedWords.txt");
-                            assert is != null;
-                            InputStreamReader isr = new InputStreamReader(is);
-                            BufferedReader br = new BufferedReader(isr);
-                            String line;
-                            out:
-                            while ((line = br.readLine()) != null) {
-                                String[] text = lvlObject.get(i).getObjectText().toUpperCase().split(" ");
+                        try {
+                            out: while ((line = br.readLine()) != null) {
+                                String[] text1 = text.toUpperCase().split(" ");
 
-                                for (String s : text) {
+                                for (String s : text1) {
                                     if (s.equalsIgnoreCase(line)) {
                                         System.out.println("Contains Vulgar");
                                         Requests.getLevelData().get(k).setContainsVulgar();
                                         break out;
                                     }
                                 }
-
                             }
-                            if (lvlObject.get(i).getID() == 1110 || lvlObject.get(i).getID() == 211
-                                    && lvlObject.get(i).getScaling() <= 0.1 && lvlObject.get(i).getScaling() != 0.0
-                                    && lvlObject.get(i).getColor1HSVEnabled() == 1) {
-                                double color = lvlObject.get(i).getColor1();
-                                if (lvlObject.get(i).getColor1() == color) {
-                                    IDImageCount++;
+                            if (scale != 0.0 && hsv) {
+                                if (tempColor.equalsIgnoreCase(color)) {
+                                    imageIDCount++;
                                 }
                             }
-                            if (IDImageCount >= 3000) {
-                                System.out.println("Contains Image Hack");
+                            if (imageIDCount >= 3000) {
 
                                 Requests.getLevelData().get(k).setContainsImage();
-                                break outer;
                             }
-                            isr.close();
-                            br.close();
-                        }
-                    }
-                    Requests.getLevelData().get(k).setAnalyzed();
-                    LevelsWindow.updateUI(Requests.getLevelData().get(k).getLevelID(), Requests.getLevelData().get(k).getContainsVulgar(), Requests.getLevelData().get(k).getContainsImage(), true);
-                    break;
-                } catch (Exception e) {
-                    for (int m = 0; k < Requests.getLevelData().size(); m++) {
-                        if (Requests.getLevelData().get(m).getLevelID().equalsIgnoreCase(levelID)) {
+                           color = tempColor;
+                        } catch (IOException e) {
+                            e.printStackTrace();
                             LevelsWindow.updateUI(Requests.getLevelData().get(k).getLevelID(), Requests.getLevelData().get(k).getContainsVulgar(), Requests.getLevelData().get(k).getContainsImage(), false);
-                            break;
+                            break all;
                         }
                     }
                 }
+                Requests.getLevelData().get(k).setAnalyzed();
+                LevelsWindow.updateUI(Requests.getLevelData().get(k).getLevelID(), Requests.getLevelData().get(k).getContainsVulgar(), Requests.getLevelData().get(k).getContainsImage(), true);
             }
         }
-        lvlObject.clear();
     }
 
     private static String decompress(byte[] compressed) throws IOException {
@@ -386,11 +370,12 @@ class Requests {
         bis.close();
         return sb.toString();
     }
-    static String parseInfoString(String text, int level){
-        if(Requests.levels.size() != 0) {
+
+    static String parseInfoString(String text, int level) {
+        if (Requests.levels.size() != 0) {
             text = text.replaceAll("(?i)%levelName%", levels.get(level).getName())
                     .replaceAll("(?i)%levelID%", levels.get(level).getLevelID())
-                    .replaceAll("(?i)%author%", levels.get(level).getAuthor())
+                    .replaceAll("(?i)%levelAuthor%", levels.get(level).getAuthor())
                     .replaceAll("(?i)%requester%", levels.get(level).getRequester())
                     .replaceAll("(?i)%songName%", levels.get(level).getSongName())
                     .replaceAll("(?i)%songID%", levels.get(level).getSongID())
@@ -399,8 +384,7 @@ class Requests {
                     .replaceAll("(?i)%downloads%", levels.get(level).getDownloads())
                     .replaceAll("(?i)%description%", levels.get(level).getDescription());
             return text;
-        }
-        else{
+        } else {
             return OutputSettings.noLevelString;
         }
     }

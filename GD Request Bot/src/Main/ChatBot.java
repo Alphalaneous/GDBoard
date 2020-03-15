@@ -291,9 +291,10 @@ public class ChatBot extends TwitchBot {
                 }
             }
             //endregion
-
+            boolean stopReq = false;
             //region Unblock Command
             if (command.equalsIgnoreCase("!unblock") && (Main.mods.contains(user) || isBroadcaster)) {
+                stopReq = true;
                 String unblocked = arguments[1];
                 BlockedSettings.removeID(unblocked);
                 try {
@@ -320,6 +321,7 @@ public class ChatBot extends TwitchBot {
                             out.close();
                             Files.delete(file);
                             Files.move(temp, temp.resolveSibling(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt"), StandardCopyOption.REPLACE_EXISTING);
+                            BlockedSettings.removeID(arguments[1]);
                             sendMessage("@" + user + " Successfully unblocked " + arguments[1], channel);
                         } else {
                             sendMessage("@" + user + " That level isn't blocked!", channel);
@@ -331,7 +333,7 @@ public class ChatBot extends TwitchBot {
                 }
             }
             //endregion
-            boolean stopReq = false;
+
             //region Block Command
             if (command.equalsIgnoreCase("!block") && (Main.mods.contains(user) || isBroadcaster)) {
                 stopReq = true;
@@ -359,6 +361,7 @@ public class ChatBot extends TwitchBot {
                                 e1.printStackTrace();
                             }
                             sendMessage("@" + user + " Successfully blocked " + arguments[1], channel);
+                            BlockedSettings.addButton(arguments[1]);
                         } else {
                             sendMessage("@" + user + " ID Already Blocked!", channel);
                         }

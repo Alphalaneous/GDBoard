@@ -101,6 +101,8 @@ class LevelData {
 		return !persist;
 	}
 
+	double getVersion() { return version; }
+
 	private String requester;
 	private String author;
 	private String name;
@@ -126,6 +128,7 @@ class LevelData {
 	private int stars;
 	private String length;
 	private boolean persist;
+	private double version;
 	
 	void setStars(int stars) {
 		this.stars = stars;
@@ -182,6 +185,7 @@ class LevelData {
 		this.levelID = levelID;
 	}
 
+	void setVersion(double version) {this.version = version; }
 	//void setCoins(String coins) {
 	//	this.coins = Integer.parseInt(coins);
 	//}

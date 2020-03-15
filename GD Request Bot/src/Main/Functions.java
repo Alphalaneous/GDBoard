@@ -182,7 +182,7 @@ public class Functions {
                     "Block ID? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
             if (n == 0) {
-                BlockedSettings.removeID(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
+                BlockedSettings.addButton(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
                 Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
 
                 try {

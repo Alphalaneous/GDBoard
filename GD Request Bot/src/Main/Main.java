@@ -5,6 +5,8 @@ import com.cavariux.twitchirc.Chat.Channel;
 import com.cavariux.twitchirc.Chat.User;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
+import org.jnativehook.GlobalScreen;
+import org.jnativehook.keyboard.SwingKeyAdapter;
 
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
@@ -77,7 +79,10 @@ public class Main {
 			Defaults.startMainThread();        //Starts thread that always checks for changes such as time, resolution, and color scheme
 			Overlay.setFrame();                //Creates the JFrame that contains everything
 			ControllerListener.hook();                    //Starts Controller Listener
-			KeyListener.hook();
+
+			GlobalScreen.registerNativeHook();
+			GlobalScreen.addNativeKeyListener(new KeyListener());
+
 			if (!Settings.windowedMode) {
 				MainBar.createBar();            //Creates the main "Game Bar" in the top center
 			}

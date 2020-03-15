@@ -3,6 +3,7 @@ package Main;
 import SettingsPanels.GeneralSettings;
 import SettingsPanels.OutputSettings;
 import SettingsPanels.RequestSettings;
+import SettingsPanels.ShortcutSettings;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -169,6 +170,7 @@ class MainBar {
                 }
                 GeneralSettings.setSettings();
                 RequestSettings.setSettings();
+                ShortcutSettings.setSettings();
                 OutputSettings.setSettings();
                 for (int i = 0; i < Requests.levels.size(); i++) {
                     if (Requests.levels.get(i).getSongName().equalsIgnoreCase("Custom") && Requests.levels.get(LevelsWindow.getSelectedID()).getNotPersist()) {
@@ -254,14 +256,15 @@ class MainBar {
         Thread thread = new Thread(() -> {
             while(true) {
                 if (Overlay.getWindow().isVisible()) {
-                    ((JButtonTooltip) toggleComments).setTooltipLocation(toggleComments.getLocationOnScreen().x + (toggleComments.getWidth() / 2));
-                    ((JButtonTooltip) toggleActions).setTooltipLocation(toggleActions.getLocationOnScreen().x + (toggleActions.getWidth() / 2));
-                    ((JButtonTooltip) toggleInfo).setTooltipLocation(toggleInfo.getLocationOnScreen().x + (toggleInfo.getWidth() / 2));
-                    ((JButtonTooltip) toggleSong).setTooltipLocation(toggleSong.getLocationOnScreen().x + (toggleSong.getWidth() / 2));
-                    ((JButtonTooltip) toggleLevels).setTooltipLocation(toggleLevels.getLocationOnScreen().x + (toggleLevels.getWidth() / 2));
-                    ((JButtonTooltip) stopReqs).setTooltipLocation(stopReqs.getLocationOnScreen().x + (stopReqs.getWidth() / 2));
-                    ((JButtonTooltip) toggleSettings).setTooltipLocation(toggleSettings.getLocationOnScreen().x + (toggleSettings.getWidth() / 2));
-                    ((JButtonTooltip) close).setTooltipLocation(close.getLocationOnScreen().x + (close.getWidth() / 2));
+                    ((JButtonTooltip) toggleComments).setTooltipLocation(toggleComments.getLocationOnScreen().x - Defaults.screenSize.x + (toggleComments.getWidth() / 2));
+                    ((JButtonTooltip) toggleActions).setTooltipLocation(toggleActions.getLocationOnScreen().x - Defaults.screenSize.x + (toggleActions.getWidth() / 2));
+                    ((JButtonTooltip) toggleInfo).setTooltipLocation(toggleInfo.getLocationOnScreen().x - Defaults.screenSize.x + (toggleInfo.getWidth() / 2));
+                    ((JButtonTooltip) toggleSong).setTooltipLocation(toggleSong.getLocationOnScreen().x - Defaults.screenSize.x + (toggleSong.getWidth() / 2));
+                    ((JButtonTooltip) toggleLevels).setTooltipLocation(toggleLevels.getLocationOnScreen().x - Defaults.screenSize.x + (toggleLevels.getWidth() / 2));
+                    ((JButtonTooltip) stopReqs).setTooltipLocation(stopReqs.getLocationOnScreen().x - Defaults.screenSize.x + (stopReqs.getWidth() / 2));
+                    ((JButtonTooltip) toggleSettings).setTooltipLocation(toggleSettings.getLocationOnScreen().x - Defaults.screenSize.x + (toggleSettings.getWidth() / 2));
+                    ((JButtonTooltip) close).setTooltipLocation(close.getLocationOnScreen().x - Defaults.screenSize.x + (close.getWidth() / 2));
+
                     break;
                 }
             }

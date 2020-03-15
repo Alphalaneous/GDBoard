@@ -1,6 +1,8 @@
 package SettingsPanels;
 
 import Main.*;
+import org.jnativehook.keyboard.NativeKeyEvent;
+import org.jnativehook.keyboard.SwingKeyAdapter;
 
 import javax.swing.*;
 import javax.swing.text.DefaultStyledDocument;
@@ -24,7 +26,7 @@ public class ShortcutSettings {
     public static int copyKeybind = 0;
     public static int blockKeybind = 0;
     public static int clearKeybind = 0;
-	//TODO Fix F Keys
+    //TODO Fix F Keys
 
     public static JPanel createPanel() {
         defaultUI.setBackground(Defaults.BUTTON);
@@ -54,11 +56,11 @@ public class ShortcutSettings {
         FancyTextArea input = new FancyTextArea(false);
         DefaultStyledDocument doc = new DefaultStyledDocument();
         input.setEditable(false);
-        input.addKeyListener(new KeyAdapter() {
+        input.addKeyListener(new SwingKeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == 8) {
-                    if(text.equalsIgnoreCase("Open")){
+                    if (text.equalsIgnoreCase("Open")) {
                         input.setText("Home");
                         try {
                             Settings.writeSettings(setting, String.valueOf(36));
@@ -66,8 +68,7 @@ public class ShortcutSettings {
                         } catch (IOException ex) {
                             ex.printStackTrace();
                         }
-                    }
-                    else {
+                    } else {
                         input.setText("");
                         try {
                             Settings.writeSettings(setting, "-1");
@@ -80,7 +81,7 @@ public class ShortcutSettings {
                     input.setText(KeyEvent.getKeyText(e.getKeyCode()));
                     try {
                         Settings.writeSettings(setting, String.valueOf(e.getKeyCode()));
-						loadKeybind(text, e.getKeyCode());
+                        loadKeybind(text, e.getKeyCode());
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -137,6 +138,20 @@ public class ShortcutSettings {
         return button;
     }
 
+    public static void setSettings() {
+        try {
+            Settings.writeSettings("openKeybind", String.valueOf(openKeybind));
+            Settings.writeSettings("skipKeybind", String.valueOf(skipKeybind));
+            Settings.writeSettings("randomKeybind", String.valueOf(randKeybind));
+            Settings.writeSettings("copyKeybind", String.valueOf(copyKeybind));
+            Settings.writeSettings("blockKeybind", String.valueOf(blockKeybind));
+            Settings.writeSettings("clearKeybind", String.valueOf(clearKeybind));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public static void loadSettings() throws IOException {
 
         if (!Settings.getSettings("openKeybind").equalsIgnoreCase("") && !Settings.getSettings("openKeybind").equalsIgnoreCase("-1")) {
@@ -164,51 +179,45 @@ public class ShortcutSettings {
                     if (component1 instanceof JLabel) {
                         System.out.println(((JLabel) component1).getText());
                         if (((JLabel) component1).getText().equalsIgnoreCase("Open")) {
-                            if(!KeyEvent.getKeyText(openKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
+                            if (!KeyEvent.getKeyText(openKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
                                 ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(openKeybind));
-                            }
-                            else{
+                            } else {
                                 ((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
                             }
                         }
                         if (((JLabel) component1).getText().equalsIgnoreCase("Skip/Next")) {
-                            if(!KeyEvent.getKeyText(skipKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
+                            if (!KeyEvent.getKeyText(skipKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
                                 ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(skipKeybind));
-                            }
-                            else{
+                            } else {
                                 ((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
                             }
                         }
                         if (((JLabel) component1).getText().equalsIgnoreCase("Random")) {
-                            if(!KeyEvent.getKeyText(randKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
+                            if (!KeyEvent.getKeyText(randKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
                                 ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(randKeybind));
-                            }
-                            else{
+                            } else {
                                 ((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
                             }
                         }
                         if (((JLabel) component1).getText().equalsIgnoreCase("Copy")) {
-                            if(!KeyEvent.getKeyText(copyKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
+                            if (!KeyEvent.getKeyText(copyKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
                                 ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(copyKeybind));
-                            }
-                            else{
+                            } else {
                                 ((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
                             }
                         }
                         if (((JLabel) component1).getText().equalsIgnoreCase("Block")) {
-                            if(!KeyEvent.getKeyText(blockKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
+                            if (!KeyEvent.getKeyText(blockKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
                                 ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(blockKeybind));
-                            }
-                            else{
+                            } else {
                                 ((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
                             }
                         }
                         if (((JLabel) component1).getText().equalsIgnoreCase("Clear")) {
-                            if(!KeyEvent.getKeyText(clearKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
+                            if (!KeyEvent.getKeyText(clearKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
                                 ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(clearKeybind));
                                 System.out.println(KeyEvent.getKeyText(clearKeybind));
-                            }
-                            else{
+                            } else {
                                 ((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
                             }
 
@@ -242,6 +251,7 @@ public class ShortcutSettings {
 
 
     }
+
     public static void refreshUI() {
         defaultUI.setBackground(Defaults.MAIN);
         defaultUI.setHover(Defaults.BUTTON_HOVER);
@@ -249,7 +259,7 @@ public class ShortcutSettings {
 
         panel.setBackground(Defaults.SUB_MAIN);
         for (Component component : panel.getComponents()) {
-            if(component instanceof JPanel) {
+            if (component instanceof JPanel) {
                 for (Component component2 : ((JPanel) component).getComponents()) {
                     if (component2 instanceof JButton) {
                         for (Component component3 : ((JButton) component2).getComponents()) {
