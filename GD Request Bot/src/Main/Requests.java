@@ -32,6 +32,45 @@ class Requests {
 
     static void addRequest(String ID, String requester, boolean isCustomSong, String customUrl) {
         if (MainBar.requests) {
+            Path blocked = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
+            try {
+                if (Files.exists(blocked)) {
+                    Scanner sc = new Scanner(blocked.toFile());
+                    while (sc.hasNextLine()) {
+                        if (ID.equals(sc.nextLine())) {
+                            sc.close();
+                            Main.sendMessage("@" + requester + " That Level is Blocked!");
+                            System.out.println("Blocked ID");
+                            return;
+                        }
+                    }
+                    sc.close();
+                }
+                Path blockedUser = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blockedUsers.txt");
+                if (Files.exists(blockedUser)) {
+                    Scanner sc = new Scanner(blockedUser.toFile());
+                    while (sc.hasNextLine()) {
+                        if (requester.equalsIgnoreCase(sc.nextLine())) {
+                            sc.close();
+                            return;
+                        }
+                    }
+                    sc.close();
+                }
+            }
+            catch (FileNotFoundException e){
+                e.printStackTrace();
+            }
+            for (int k = 0; k < levels.size(); k++) {
+
+                if (ID.equals(levels.get(k).getLevelID())) {
+                    int j = k + 1;
+                    Main.sendMessage(
+                            "@" + requester + " Level is already in the queue at position " + j + "!");
+                    System.out.println("Level Already Exists");
+                    return;
+                }
+            }
             if (GeneralSettings.queueLimitBoolean && (levels.size() >= GeneralSettings.queueLimit)) {
                 System.out.println(GeneralSettings.queueLimit + ", " + (levels.size()));
                 Main.sendMessage("@" + requester + " The queue is full!");
@@ -68,7 +107,6 @@ class Requests {
                 AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
                 GDLevel level = null;
                 boolean goThrough = true;
-                boolean valid = true;
                 try {
                     level = client.getLevelById(Integer.parseInt(ID)).block();
                 } catch (MissingAccessException | NumberFormatException e) {
@@ -141,127 +179,99 @@ class Requests {
                     // --------------------
                     // Loop through levels to check if level is already in queue
 
-                    for (int k = 0; k < levels.size(); k++) {
-
-                        if (levelData.getLevelID().equals(levels.get(k).getLevelID())) {
-                            int j = k + 1;
-                            Main.sendMessage(
-                                    "@" + levelData.getRequester() + " Level is already in the queue at position " + j + "!");
-                            System.out.println("Level Already Exists");
-                            valid = false;
-                            break;
+                    // --------------------
+                    // Adds level to queue array "levels" and refreshes LevelsWindow
+                    levels.add(levelData);
+                    if (GeneralSettings.autoDownloadOption) {
+                        URL url1;
+                        String fileName = null;
+                        if (customUrl != null) {
+                            url1 = new URL(customUrl);
+                            fileName = FilenameUtils.getName(url1.getPath());
+                            System.out.println(fileName);
                         }
-                    }
+                        String finalFileName = fileName;
+                        Thread thread = new Thread(() -> {
+                            System.out.println(levelData.getSongID());
+                            try {
+                                File folder = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash");
+                                boolean download = true;
+                                String[] files = folder.list();
+                                if (files != null) {
+                                    if (files.length > 0) {
+                                        for (String file2 : files) {
+                                            if (file2.equalsIgnoreCase(levelData.getSongID() + ".mp3")) {
+                                                if (!isCustomSong) {
+                                                    download = false;
+                                                } else if (Requests.levels.size() == 1) {
 
-                    File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
-                    if (file.exists()) {
-                        Scanner sc = new Scanner(file);
-
-                        while (sc.hasNextLine()) {
-                            if (levelData.getLevelID().equals(sc.nextLine())) {
-                                Main.sendMessage("@" + levelData.getRequester() + " That Level is Blocked!");
-                                System.out.println("Blocked ID");
-                                valid = false;
-                                break;
-                            }
-                        }
-                        sc.close();
-                    }
-                    if (valid) {
-                        // --------------------
-                        // Adds level to queue array "levels" and refreshes LevelsWindow
-                        levels.add(levelData);
-                        if (GeneralSettings.autoDownloadOption) {
-                            URL url1;
-                            String fileName = null;
-                            if (customUrl != null) {
-                                url1 = new URL(customUrl);
-                                fileName = FilenameUtils.getName(url1.getPath());
-                                System.out.println(fileName);
-                            }
-                            String finalFileName = fileName;
-                            Thread thread = new Thread(() -> {
-                                System.out.println(levelData.getSongID());
-                                try {
-                                    File folder = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash");
-                                    boolean download = true;
-                                    String[] files = folder.list();
-                                    if (files != null) {
-                                        if (files.length > 0) {
-                                            for (String file2 : files) {
-                                                if (file2.equalsIgnoreCase(levelData.getSongID() + ".mp3")) {
-                                                    if (!isCustomSong) {
-                                                        download = false;
-                                                    } else if (Requests.levels.size() == 1) {
-
-                                                        Path song = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
-                                                        Files.move(song, song.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp"), StandardCopyOption.REPLACE_EXISTING);
-                                                    }
-                                                    break;
+                                                    Path song = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
+                                                    Files.move(song, song.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp"), StandardCopyOption.REPLACE_EXISTING);
                                                 }
+                                                break;
                                             }
                                         }
                                     }
-                                    if (download && !levelData.getSongID().equalsIgnoreCase("0")) {
-                                        File file2;
-                                        if (isCustomSong) {
-                                            if (Requests.levels.size() == 1) {
-                                                file2 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3");
-                                            } else {
-                                                file2 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3.wait");
-                                            }
-                                        } else {
-                                            file2 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3");
-                                        }
-                                        URL url;
-                                        assert finalFileName != null;
-                                        if (isCustomSong && !finalFileName.endsWith(".mp3")) {
-                                            url = new URL(levelData.getSongURL());
-                                            Main.sendMessage("@" + requester + ", Invalid song! (requires .mp3 format)");
-                                        } else if (isCustomSong && finalFileName.endsWith(".mp3")) {
-                                            try {
-                                                url = new URL(customUrl);
-                                            } catch (MalformedURLException e) {
-                                                url = new URL(levelData.getSongURL());
-                                                Main.sendMessage("@" + requester + " Invalid URL!");
-                                            }
-                                        } else {
-                                            url = new URL(levelData.getSongURL());
-                                        }
-
-                                        FileUtils.copyURLToFile(url, file2);
-                                    }
-                                } catch (IOException e) {
-                                    e.printStackTrace();
                                 }
-                            });
-                            thread.start();
-                        }
-                        Main.sendMessage("@" + levelData.getRequester() + " " + levelData.getName() + " ("
-                                + levelData.getLevelID() + ") has been added to the queue at position " + levels.size() + "!");
-                        if (levels.size() == 1) {
-                            StringSelection selection = new StringSelection(Requests.levels.get(0).getLevelID());
-                            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-                            clipboard.setContents(selection, selection);
-                            if (!GeneralSettings.nowPlayingOption) {
-                                Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
-                                        + Requests.levels.get(0).getLevelID() + "). Requested by "
-                                        + Requests.levels.get(0).getRequester());
-                            }
-                        }
-                        if (isCustomSong && GeneralSettings.autoDownloadOption) {
-                            levelData.setSongName("Custom");
-                            levelData.setSongAuthor("");
-                        } else {
-                            levelData.setSongName(Objects.requireNonNull(level.getSong().block()).getSongTitle());
-                            System.out.println(Objects.requireNonNull(level.getSong().block()).getSongTitle());
-                            levelData.setSongAuthor(Objects.requireNonNull(level.getSong().block()).getSongAuthorName());
+                                if (download && !levelData.getSongID().equalsIgnoreCase("0")) {
+                                    File file2;
+                                    if (isCustomSong) {
+                                        if (Requests.levels.size() == 1) {
+                                            file2 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3");
+                                        } else {
+                                            file2 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3.wait");
+                                        }
+                                    } else {
+                                        file2 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3");
+                                    }
+                                    URL url;
+                                    assert finalFileName != null;
+                                    if (isCustomSong && !finalFileName.endsWith(".mp3")) {
+                                        url = new URL(levelData.getSongURL());
+                                        Main.sendMessage("@" + requester + ", Invalid song! (requires .mp3 format)");
+                                    } else if (isCustomSong && finalFileName.endsWith(".mp3")) {
+                                        try {
+                                            url = new URL(customUrl);
+                                        } catch (MalformedURLException e) {
+                                            url = new URL(levelData.getSongURL());
+                                            Main.sendMessage("@" + requester + " Invalid URL!");
+                                        }
+                                    } else {
+                                        url = new URL(levelData.getSongURL());
+                                    }
 
+                                    FileUtils.copyURLToFile(url, file2);
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                        thread.start();
+                    }
+                    Main.sendMessage("@" + levelData.getRequester() + " " + levelData.getName() + " ("
+                            + levelData.getLevelID() + ") has been added to the queue at position " + levels.size() + "!");
+                    if (levels.size() == 1) {
+                        StringSelection selection = new StringSelection(Requests.levels.get(0).getLevelID());
+                        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                        clipboard.setContents(selection, selection);
+                        if (!GeneralSettings.nowPlayingOption) {
+                            Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
+                                    + Requests.levels.get(0).getLevelID() + "). Requested by "
+                                    + Requests.levels.get(0).getRequester());
                         }
-                        OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
-                        LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester(), levelData.getVersion());
+                    }
+                    if (isCustomSong && GeneralSettings.autoDownloadOption) {
+                        levelData.setSongName("Custom");
+                        levelData.setSongAuthor("");
+                    } else {
+                        levelData.setSongName(Objects.requireNonNull(level.getSong().block()).getSongTitle());
+                        System.out.println(Objects.requireNonNull(level.getSong().block()).getSongTitle());
+                        levelData.setSongAuthor(Objects.requireNonNull(level.getSong().block()).getSongAuthorName());
 
                     }
+                    OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
+                    LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester(), levelData.getVersion());
+
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -382,7 +392,8 @@ class Requests {
                     .replaceAll("(?i)%songArtist%", levels.get(level).getSongAuthor())
                     .replaceAll("(?i)%likes%", levels.get(level).getLikes())
                     .replaceAll("(?i)%downloads%", levels.get(level).getDownloads())
-                    .replaceAll("(?i)%description%", levels.get(level).getDescription());
+                    .replaceAll("(?i)%description%", levels.get(level).getDescription())
+                    .replaceAll("(?i)%s%", "");
             return text;
         } else {
             return OutputSettings.noLevelString;

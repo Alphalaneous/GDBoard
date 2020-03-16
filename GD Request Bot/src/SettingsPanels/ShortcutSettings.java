@@ -59,7 +59,7 @@ public class ShortcutSettings {
         input.addKeyListener(new SwingKeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == 8) {
+                if (e.getKeyCode() == 8 || e.getKeyCode() == 16 || e.getKeyCode() == 17 || e.getKeyCode() == 18) {
                     if (text.equalsIgnoreCase("Open")) {
                         input.setText("Home");
                         try {
@@ -82,10 +82,12 @@ public class ShortcutSettings {
                     try {
                         Settings.writeSettings(setting, String.valueOf(e.getKeyCode()));
                         loadKeybind(text, e.getKeyCode());
+
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
                 }
+                panel.requestFocusInWindow();
             }
         });
         /*input.addMouseListener(new MouseAdapter() {

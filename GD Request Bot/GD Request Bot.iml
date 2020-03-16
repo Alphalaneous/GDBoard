@@ -68,33 +68,6 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="json-20190722.jar">
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/../../../Java Stuff/json-20190722.jar" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="TwitchIRC_v1.2.jar">
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/../../../Java Stuff/TwitchIRC_v1.2.jar" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="system-hook-3.5.jar">
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/../../../Java Stuff/system-hook-3.5.jar" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
       <library name="jl1.0.1.jar">
         <CLASSES>
           <root url="file://$MODULE_DIR$/../../../Java Stuff/sounds/jl1.0.1.jar" />
@@ -107,15 +80,6 @@
       <library name="tritonus_share.jar">
         <CLASSES>
           <root url="file://$MODULE_DIR$/../../../Java Stuff/sounds/tritonus_share.jar" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="jregistry-1.8.3.jar">
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/../../../Java Stuff/JRegistry-1.8.3_src-bin_x86__x86-64/bin/jregistry-1.8.3.jar" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -374,15 +338,6 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="twitch-api-wrapper-0.3-jar-with-dependencies.jar">
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/../../../Java Stuff/twitch-api-wrapper-0.3-jar-with-dependencies.jar" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
       <library name="client-combined-3.141.59.jar">
         <CLASSES>
           <root url="file://$MODULE_DIR$/../../../Java Stuff/selenium-java-3.141.59/client-combined-3.141.59.jar" />
@@ -445,26 +400,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library name="res">
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/res" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Jamepad.jar">
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/../../../Java Stuff/Jamepad.jar" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="library" name="dependency" level="project" />
-    <orderEntry type="library" name="bin" level="project" />
     <orderEntry type="library" name="jnativehook-2.1.0" level="project" />
   </component>
 </module>

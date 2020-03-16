@@ -28,6 +28,7 @@ public class SettingsWindow {
 	private static JPanel shortcuts = SettingsPanels.ShortcutSettings.createPanel();
 	private static JPanel personalization = SettingsPanels.PersonalizationSettings.createPanel();
 	private static JPanel blocked = SettingsPanels.BlockedSettings.createPanel();
+	private static JPanel blockedUsers = SettingsPanels.BlockedUserSettings.createPanel();
 	public static boolean run = true;
 	static JDialog frame = new JDialog();
 	static void createPanel() {
@@ -55,6 +56,7 @@ public class SettingsWindow {
 		content.add(shortcuts);
 		content.add(personalization);
 		content.add(blocked);
+		content.add(blockedUsers);
 
 		general.setVisible(true);
 		overlay.setVisible(false);
@@ -64,6 +66,7 @@ public class SettingsWindow {
 		shortcuts.setVisible(false);
 		personalization.setVisible(false);
 		blocked.setVisible(false);
+		blockedUsers.setVisible(false);
 
 
 		JButton general = createButton("General");
@@ -75,7 +78,8 @@ public class SettingsWindow {
 		JButton requests = createButton("Requests");
 		JButton shortcuts = createButton("Shortcuts");
 		//JButton personalization = createButton("Personalization");
-		JButton blocked = createButton("Blocked");
+		JButton blocked = createButton("Blocked IDs");
+		JButton blockedUsers = createButton("Blocked Users");
 
 		buttons.add(general);
 		buttons.add(outputs);
@@ -85,6 +89,7 @@ public class SettingsWindow {
 		buttons.add(shortcuts);
 		//buttons.add(personalization);
 		buttons.add(blocked);
+		buttons.add(blockedUsers);
 
 		window.add(blankSpace);
 		window.add(buttons);
@@ -192,8 +197,11 @@ public class SettingsWindow {
 							case "Personalization":
 								personalization.setVisible(true);
 								break;
-							case "Blocked":
+							case "Blocked IDs":
 								blocked.setVisible(true);
+								break;
+							case "Blocked Users":
+								blockedUsers.setVisible(true);
 								break;
 							case "Commands":
 								commands.setVisible(true);

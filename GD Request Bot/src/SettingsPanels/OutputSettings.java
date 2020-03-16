@@ -97,11 +97,11 @@ public class OutputSettings {
 		try {
 			if(!Settings.getSettings("noLevelsString").equalsIgnoreCase("")) {
 				noLevelString = Settings.getSettings("noLevelsString").replace("%n%", "\n");
-				noLevelsStringInput.setText(noLevelString);
+				noLevelsStringInput.setText(noLevelString.replaceAll("%s%", ""));
 			}
 			if(!Settings.getSettings("outputString").equalsIgnoreCase("")) {
 				outputString = Settings.getSettings("outputString").replace("%n%", "\n");
-				outputStringInput.setText(outputString);
+				outputStringInput.setText(outputString.replaceAll("%s%", ""));
 			}
 			if(!Settings.getSettings("outputFileLocation").equalsIgnoreCase("")) {
 				fileLocation = Settings.getSettings("outputFileLocation");
@@ -113,8 +113,8 @@ public class OutputSettings {
 	}
 	public static void setSettings(){
 		try {
-			Settings.writeSettings("outputString", outputString.replace("\n", "%n%"));
-			Settings.writeSettings("noLevelsString", noLevelString.replace("\n", "%n%"));
+			Settings.writeSettings("outputString", "%s%" + outputString.replace("\n", "%n%").replaceAll("%s%", ""));
+			Settings.writeSettings("noLevelsString", "%s%" + noLevelString.replace("\n", "%n%").replaceAll("%s%", ""));
 			Settings.writeSettings("outputFileLocation", fileLocation.replace("\\", "\\\\"));
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -121,6 +121,7 @@ public class Overlay {
         MainBar.refreshUI(color);
         AccountSettings.refreshUI();
         BlockedSettings.refreshUI();
+        BlockedUserSettings.refreshUI();
         GeneralSettings.refreshUI();
         ShortcutSettings.refreshUI();
         RequestSettings.refreshUI();

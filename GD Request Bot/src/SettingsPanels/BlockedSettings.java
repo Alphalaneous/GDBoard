@@ -51,14 +51,17 @@ public class BlockedSettings {
         blockedSettingsPanel.add(blockedInput);
         blockedSettingsPanel.add(label);
         blockedListPanel.setDoubleBuffered(true);
-        blockedListPanel.setBounds(0, 0, 415, 622);
-        blockedListPanel.setPreferredSize(new Dimension(415, 622));
+        blockedListPanel.setBounds(0, 0, 415, 0);
+        blockedListPanel.setPreferredSize(new Dimension(415, 0));
         blockedListPanel.setBackground(Defaults.SUB_MAIN);
         addID.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
                 try {
                     Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
+                    if (!Files.exists(file)) {
+                        Files.createFile(file);
+                    }
                     boolean goThrough = true;
                     Scanner sc = new Scanner(file.toFile());
                     while (sc.hasNextLine()) {
@@ -70,9 +73,7 @@ public class BlockedSettings {
                     sc.close();
                     if (goThrough) {
                         if (!blockedInput.getText().equalsIgnoreCase("")) {
-                            if (!Files.exists(file)) {
-                                Files.createFile(file);
-                            }
+
                             Files.write(file, (blockedInput.getText() + "\n").getBytes(), StandardOpenOption.APPEND);
                             addButton(blockedInput.getText());
                             blockedInput.setText("");
@@ -157,7 +158,6 @@ public class BlockedSettings {
             assert sc != null;
             while (sc.hasNextLine()) {
                 addButton(sc.nextLine());
-                i++;
             }
             sc.close();
         }
@@ -168,6 +168,13 @@ public class BlockedSettings {
     }
 
     public static void removeID(String ID) {
+        i--;
+        if (i % 5 == 0 && i !=0) {
+            height = height - 36;
+            blockedListPanel.setBounds(0, 0, 415, height + 4);
+            blockedListPanel.setPreferredSize(new Dimension(415, height + 4));
+            scrollPane.updateUI();
+        }
         for (Component component : blockedListPanel.getComponents()) {
             if (component instanceof CurvedButton) {
                 System.out.println(((CurvedButton) component).getLText());
@@ -180,6 +187,7 @@ public class BlockedSettings {
     }
 
     public static void addButton(String ID) {
+        i++;
         if (i % 5 == 0) {
             height = height + 36;
             blockedListPanel.setBounds(0, 0, 415, height + 4);
@@ -223,8 +231,7 @@ public class BlockedSettings {
                             JOptionPane.showMessageDialog(Overlay.frame, "There was an error writing to the file!", "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     }
-                    blockedListPanel.remove(button);
-                    blockedListPanel.updateUI();
+                    removeID(button.getLText());
                 }
                 SettingsWindow.run = true;
             }
@@ -239,7 +246,7 @@ public class BlockedSettings {
         defaultUI.setHover(Defaults.BUTTON_HOVER);
         defaultUI.setSelect(Defaults.SELECT);
 
-        blockedSettingsPanel.setBackground(Defaults.SUB_MAIN);
+        blockedSettingsPanel.setBackground(Defaults.TOP);
         for (Component component : blockedSettingsPanel.getComponents()) {
             if (component instanceof JButton) {
                 for (Component component2 : ((JButton) component).getComponents()) {
