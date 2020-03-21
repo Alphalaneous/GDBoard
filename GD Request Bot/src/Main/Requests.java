@@ -31,6 +31,7 @@ class Requests {
     private static HashMap<String, Integer> userStreamLimitMap = new HashMap<>();
 
     static void addRequest(String ID, String requester, boolean isCustomSong, String customUrl) {
+        OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
         if (MainBar.requests) {
             Path blocked = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
             try {
@@ -348,8 +349,7 @@ class Requests {
                                     imageIDCount++;
                                 }
                             }
-                            if (imageIDCount >= 3000) {
-
+                            if (imageIDCount >= 1000) {
                                 Requests.getLevelData().get(k).setContainsImage();
                             }
                            color = tempColor;
@@ -393,10 +393,11 @@ class Requests {
                     .replaceAll("(?i)%likes%", levels.get(level).getLikes())
                     .replaceAll("(?i)%downloads%", levels.get(level).getDownloads())
                     .replaceAll("(?i)%description%", levels.get(level).getDescription())
+                    .replaceAll("(?i)%queueSize%", String.valueOf(levels.size()))
                     .replaceAll("(?i)%s%", "");
             return text;
         } else {
-            return OutputSettings.noLevelString;
+            return OutputSettings.noLevelString.replaceAll("(?i)%s%", "");
         }
     }
 }

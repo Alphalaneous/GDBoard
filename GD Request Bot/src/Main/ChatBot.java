@@ -28,8 +28,13 @@ public class ChatBot extends TwitchBot {
     ChatBot() {
         this.setUsername("chatbot");
         this.setOauth_Key("oauth:" + Settings.oauth);
+
     }
     //endregion
+    @Override
+    protected void onWhisper(User user, String message) {
+
+    }
     @Override
     public void onMessage(User user, Channel channel, String msg) {
         boolean isBroadcaster = ("#" + user).equalsIgnoreCase(String.valueOf(channel));
@@ -339,7 +344,6 @@ public class ChatBot extends TwitchBot {
                 stopReq = true;
                 try {
                     int blockedID = Integer.parseInt(arguments[1]);
-                    BlockedSettings.addButton(String.valueOf(blockedID));
                     boolean goThrough = true;
                     Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
                     if(!Files.exists(file)) {

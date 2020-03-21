@@ -94,7 +94,7 @@ public class AccountSettings {
 							Settings.writeSettings("oauth", twitch.auth().getAccessToken());
 							Main.startBot();
 						} else {                                                                    //Else print error
-							JOptionPane.showMessageDialog(null, "Failed to Authenticate TwitchAPI account", "Error",  JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Failed to Authenticate Twitch account", "Error",  JOptionPane.ERROR_MESSAGE);
 							System.out.println(twitch.auth().getAuthenticationError());
 						}
 					}
