@@ -143,9 +143,11 @@ public class LevelsWindow {
 
             warningUI.setBackground(new Color(150, 0, 0));
             warningUI.setHover(new Color(170, 0, 0));
+            warningUI.setSelect(new Color(150, 0, 0));
 
             noticeUI.setBackground(new Color(150, 150, 0));
             noticeUI.setHover(new Color(170, 170, 0));
+            noticeUI.setSelect(new Color(150, 150, 0));
 
             warningSelectUI.setBackground(new Color(190, 0, 0));
             warningSelectUI.setHover(new Color(200, 0, 0));
@@ -362,9 +364,20 @@ public class LevelsWindow {
     static void setOneSelect() {
         for (Component component : mainPanel.getComponents()) {
             if (component instanceof JButton) {
+                if(((JButton) component).getUI() == warningUI) {
+                    ((JButton)component).setUI(warningSelectUI);
+                    component.setBackground(new Color(150, 0, 0));
+                }
+                else if(((JButton) component).getUI() == noticeUI) {
+                    ((JButton)component).setUI(noticeSelectUI);
+                    component.setBackground(new Color(150, 150, 0));
+                }
+                else{
+                    component.setBackground(Defaults.SELECT);
+                    ((JButton) component).setUI(selectUI);
+                }
                 selectedID = 0;
-                component.setBackground(Defaults.SELECT);
-                ((JButton) component).setUI(selectUI);
+
                 break;
             }
         }
@@ -375,8 +388,18 @@ public class LevelsWindow {
         for (Component component : mainPanel.getComponents()) {
             if (component instanceof JButton) {
                 if (j == i) {
-                    component.setBackground(Defaults.SELECT);
-                    ((JButton) component).setUI(selectUI);
+                    if(((JButton) component).getUI() == warningUI || ((JButton) component).getUI() == warningSelectUI){
+                        ((JButton)component).setUI(warningSelectUI);
+                        component.setBackground(new Color(150, 0, 0));
+                    }
+                    if(((JButton) component).getUI() == noticeUI || ((JButton) component).getUI() == noticeSelectUI){
+                        ((JButton)component).setUI(noticeSelectUI);
+                        component.setBackground(new Color(150, 150, 0));
+                    }
+                    else{
+                        component.setBackground(Defaults.SELECT);
+                        ((JButton) component).setUI(selectUI);
+                    }
                     selectedID = i;
                     break;
                 }
@@ -420,8 +443,8 @@ public class LevelsWindow {
                 for (Component component2 : ((JButton) component).getComponents()) {
                     if (component2 instanceof JLabel) {
                         if (((JLabel) component2).getText().contains("(" + ID + ")")) {
+                            ((JLabel) ((JButton) component).getComponent(3)).setText("Analyzed");
                             if (image) {
-                                ((JLabel) ((JButton) component).getComponent(3)).setText("Analyzed");
                                 ((JButton) component).getComponent(3).setBounds(
                                         (int) (400 - ((JButton) component).getComponent(3).getPreferredSize()
                                                 .getWidth()) - 10,
@@ -432,7 +455,6 @@ public class LevelsWindow {
                                 ((JButton) component).setUI(warningUI);
 
                             } else if (vulgar) {
-                                ((JLabel) ((JButton) component).getComponent(3)).setText("Analyzed");
                                 ((JButton) component).getComponent(3).setBounds(
                                         (int) (400 - ((JButton) component).getComponent(3).getPreferredSize()
                                                 .getWidth()) - 10,
@@ -442,7 +464,6 @@ public class LevelsWindow {
                                 component.setBackground(new Color(150, 150, 0));
                                 ((JButton) component).setUI(noticeUI);
                             } else if (analyzed) {
-                                ((JLabel) ((JButton) component).getComponent(3)).setText("Analyzed");
                                 ((JButton) component).getComponent(3).setBounds(
                                         (int) (400 - ((JButton) component).getComponent(3).getPreferredSize()
                                                 .getWidth()) - 10,
@@ -471,7 +492,6 @@ public class LevelsWindow {
         panelHeight = panelHeight - 50;
         mainPanel.setBounds(0, 0, width, panelHeight);
         mainPanel.setPreferredSize(new Dimension(width, panelHeight));
-        mainPanel.updateUI();
     }
 
     static void removeButton() {
@@ -480,6 +500,5 @@ public class LevelsWindow {
         panelHeight = panelHeight - 50;
         mainPanel.setBounds(0, 0, width, panelHeight);
         mainPanel.setPreferredSize(new Dimension(width, panelHeight));
-        mainPanel.updateUI();
     }
 }

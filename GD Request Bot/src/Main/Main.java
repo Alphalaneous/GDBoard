@@ -6,13 +6,11 @@ import com.cavariux.twitchirc.Chat.User;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
 import org.jnativehook.GlobalScreen;
-import org.jnativehook.keyboard.SwingKeyAdapter;
 
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +19,7 @@ import java.util.logging.Logger;
 
 public class Main {
 
-    private static ChatBot bot;
+    private static ChatBot2 bot;
     static List<User> mods = new ArrayList<>();
 
     //region Main
@@ -144,11 +142,10 @@ public class Main {
             if (bot != null) {
                 bot.stop();
             }
-            bot = new ChatBot();
+            bot = new ChatBot2();
             Thread modCheck = new Thread(() -> {
                 while (true) {
                     try {
-                        System.out.println("test");
                         mods = Channel.getChannel(Settings.channel, bot).getMods();
                         for (User mod : mods) {
                             System.out.println(mod);
@@ -171,8 +168,8 @@ public class Main {
                 bot.start();        //Start the Chat Bot
             });
             thread.start();
-            while(true){
-                if(bot != null) {
+            while (true) {
+                if (bot != null) {
                     Main.sendMessage("Thank you for using GDBoard by Alphalaneous! Type !help for list of commands!");
                     break;
                 }

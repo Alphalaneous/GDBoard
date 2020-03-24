@@ -303,22 +303,27 @@ class Requests {
                 for (String value1 : values) {
                     if (value1.startsWith("1,1110") || value1.startsWith("1,211") || value1.startsWith("1,914")) {
                         String value = value1.replaceAll("(,[^,]*),", "$1;");
-
                         String[] attributes = value.split(";");
                         double scale = 0;
                         boolean hsv = false;
+                        boolean zOrder = false;
                         String tempColor = "";
                         String text = "";
                         for (String attribute : attributes) {
 
                             if (attribute.startsWith("32")) {
-                                scale = Double.parseDouble(attribute.split(",")[1]);
+                                if(Double.parseDouble(attribute.split(",")[1]) < 1) {
+                                    scale = Double.parseDouble(attribute.split(",")[1]);
+                                }
                             }
                             if (attribute.startsWith("41")) {
                                 hsv = true;
                             }
                             if (attribute.startsWith("21")) {
                                 tempColor = attribute.split(",")[1];
+                            }
+                            if(attribute.startsWith("25")){
+                                zOrder = true;
                             }
                             if (attribute.startsWith("31")) {
                                 String formatted = attribute.split(",")[1].replace("_", "/").replace("-", "+");
@@ -345,7 +350,7 @@ class Requests {
                                 }
                             }
                             if (scale != 0.0 && hsv) {
-                                if (tempColor.equalsIgnoreCase(color)) {
+                                if (tempColor.equalsIgnoreCase(color) && !zOrder) {
                                     imageIDCount++;
                                 }
                             }
@@ -362,6 +367,7 @@ class Requests {
                 }
                 Requests.getLevelData().get(k).setAnalyzed();
                 LevelsWindow.updateUI(Requests.getLevelData().get(k).getLevelID(), Requests.getLevelData().get(k).getContainsVulgar(), Requests.getLevelData().get(k).getContainsImage(), true);
+                System.out.println("Analyzed " + k);
             }
         }
     }

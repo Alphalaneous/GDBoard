@@ -11,7 +11,7 @@ import java.net.URLConnection;
 
 public class TwitchAPI {
 
-    public static boolean isNotFollowing(User user){
+    public static boolean isNotFollowing(String user){
 
 
         JsonObject isFollowing = twitchAPI("https://api.twitch.tv/helix/users/follows?from_id=" + getIDs(user.toString()) + "&to_id=" + getIDs(Settings.channel.toLowerCase()));
