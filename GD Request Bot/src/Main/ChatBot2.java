@@ -479,7 +479,7 @@ public class ChatBot2 extends TwitchBot {
                             message.append(arguments[i]).append(" ");
                         }
                     }
-                    if (message.toString().contains("by")) {
+                    if (message.toString().contains(" by ")) {
                         String level1 = message.toString().split("by ")[0].toUpperCase();
                         String username = message.toString().split("by ")[1];
                         AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
