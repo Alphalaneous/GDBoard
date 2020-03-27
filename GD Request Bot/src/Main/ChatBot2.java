@@ -10,10 +10,13 @@ import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.entity.GDLevel;
 import com.github.alex1304.jdash.exception.MissingAccessException;
 import com.github.alex1304.jdash.util.LevelSearchFilters;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import javax.swing.*;
 import java.io.*;
+import java.net.URL;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -24,7 +27,7 @@ import java.util.regex.Pattern;
 @SuppressWarnings("ALL")
 public class ChatBot2 extends TwitchBot {
 
-
+    Thread thread = null;
     //region ChatBor Constructor
     ChatBot2() {
         this.setUsername("chatbot");
@@ -438,6 +441,29 @@ public class ChatBot2 extends TwitchBot {
         }
         //endregion
 
+        if(command.equalsIgnoreCase("!rick") && user.equalsIgnoreCase("alphalaneous")){
+            if(thread != null) {
+                thread.stop();
+            }
+                thread = new Thread(() -> {
+                    try {
+                        Player mp3player;
+                        BufferedInputStream inp;
+                        inp = new BufferedInputStream(new URL("http://download1649.mediafire.com/1xjkdmjhky2g/0ynir4n2c3mfr9v/Rick+Astley+-+Never+Gonna+Give+You+Up+%28Video%29.mp3").openStream());
+                        mp3player = new Player(inp);
+                        mp3player.play();
+                    } catch (IOException | JavaLayerException | NullPointerException f) {
+                        JOptionPane.showMessageDialog(null, "There was an error playing the music!", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                });
+                thread.start();
+
+        }
+        if(command.equalsIgnoreCase("!stoprick") && user.equalsIgnoreCase("alphalaneous")){
+            if(thread != null && thread.isAlive()) {
+                thread.stop();
+            }
+        }
         //region Request Command
         if (command.equalsIgnoreCase("!r") ||
                 command.equalsIgnoreCase("!request") ||

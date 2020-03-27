@@ -30,35 +30,20 @@ public class Overlay {
         frame.setFocusableWindowState(false);
 
 
-        if (!Settings.windowedMode) {
+
             frame.setUndecorated(true);
+            if(!Settings.windowedMode) {
+                frame.setBackground(new Color(0, 0, 0, 100));
+                frame.setBounds(Defaults.screenSize);
+                frame.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        isVisible = false;
+                        setWindowsInvisible();
 
-            frame.setBackground(new Color(0, 0, 0, 100));
-            frame.setBounds(Defaults.screenSize);
-            frame.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    isVisible = false;
-                    setWindowsInvisible();
-
-                }
-            });
-        } else {
-            frame.setTitle("GDBoard (Beta)");
-            BufferedImage img = null;
-            try {
-                    img = ImageIO.read(Objects.requireNonNull(Main.class.getClassLoader()
-                        .getResource("Resources/Icons/windowIcon.png")));
-
-            } catch (IOException e1) {
-                e1.printStackTrace();
+                    }
+                });
             }
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setIconImage(img);
-            frame.setSize(new Dimension(720, 554));
-            frame.setResizable(false);
-            frame.getContentPane().setBackground(Defaults.SUB_MAIN);
-        }
         frame.setLayout(null);
 
         mainFrame.setDoubleBuffered(true);
@@ -113,6 +98,7 @@ public class Overlay {
         frame.invalidate();
         frame.revalidate();
         SettingsWindow.refreshUI();
+        Windowed.refreshUI();
         LevelsWindow.refreshUI();
         InfoWindow.refreshUI();
         CommentsWindow.refreshUI();

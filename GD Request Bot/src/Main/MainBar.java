@@ -161,6 +161,7 @@ class MainBar {
                 LevelsWindow.setSettings();
                 SongWindow.setSettings();
                 SettingsWindow.setSettings();
+                Windowed.setSettings();
 
                 try {
                     Settings.writeLocation();
@@ -255,7 +256,7 @@ class MainBar {
     static void setTooltips() {
         Thread thread = new Thread(() -> {
             while(true) {
-                if (Overlay.getWindow().isVisible()) {
+                if (Overlay.getWindow().isVisible() && !Settings.windowedMode) {
                     ((JButtonTooltip) toggleComments).setTooltipLocation(toggleComments.getLocationOnScreen().x - Defaults.screenSize.x + (toggleComments.getWidth() / 2));
                     ((JButtonTooltip) toggleActions).setTooltipLocation(toggleActions.getLocationOnScreen().x - Defaults.screenSize.x + (toggleActions.getWidth() / 2));
                     ((JButtonTooltip) toggleInfo).setTooltipLocation(toggleInfo.getLocationOnScreen().x - Defaults.screenSize.x + (toggleInfo.getWidth() / 2));

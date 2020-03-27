@@ -18,7 +18,7 @@ class InnerWindow extends ResizablePanel {
     private int width;
     private int height;
     private final String icon;
-    private boolean settings;
+    private boolean floating;
 
     private boolean isPinPressed = false;
     public boolean toggleState = true;
@@ -30,7 +30,7 @@ class InnerWindow extends ResizablePanel {
     private JButtonUI defaultUI = new JButtonUI();
 
     //region Constructor for InnerWindow
-    InnerWindow(final String title, final int x, final int y, final int width, final int height, final String icon, boolean settings) {
+    InnerWindow(final String title, final int x, final int y, final int width, final int height, final String icon, boolean floating) {
         double y1;
         double x1;
         double ratio = 1920 / Defaults.screenSize.getWidth();
@@ -81,7 +81,7 @@ class InnerWindow extends ResizablePanel {
         this.width = width;
         this.height = height;
         this.icon = icon;
-        this.settings = settings;
+        this.floating = floating;
     }
     //endregion
 
@@ -109,24 +109,25 @@ class InnerWindow extends ResizablePanel {
             setBounds((int) x, (int) y, width + 2, height + 32);
         }
         else {
-            if(settings) {
-                setBounds((int) x, (int) y, width + 2, height);
+            if(floating) {
+                setBounds((int) x, (int) y, width + 2, height + 32);
             }
             else {
-                SettingsWindow.frame.setLocation((int) x, (int) y);
+                if(title.equalsIgnoreCase("Settings")) {
+                    SettingsWindow.frame.setLocation((int) x, (int) y);
+                }
+                if(title.equalsIgnoreCase("GDBoard")){
+                    Windowed.frame.setLocation((int) x, (int) y);
+                }
             }
         }
         setOpaque(false);
-        if(!Settings.windowedMode) {
-            setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 50)));
-        }
-        else {
-            setBorder(BorderFactory.createEmptyBorder(-1,-1,-1,-1));
-        }
+        setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 50)));
+
         //endregion
 
         //region Mouse Relative to Window
-        if(!Settings.windowedMode && !settings) {
+        if(!Settings.windowedMode && !floating) {
             Thread threadPos = new Thread(() -> {
                 while (true) {
                     try {
@@ -183,11 +184,16 @@ class InnerWindow extends ResizablePanel {
             public void mousePressed(MouseEvent me) {
                 moveToFront();
                 pressed = me.getLocationOnScreen();
-                if(!settings) {
+                if(!floating) {
                     location = getLocation();
                 }
                 else{
-                    location = SettingsWindow.frame.getLocation();
+                    if(title.equalsIgnoreCase("Settings")) {
+                        location = SettingsWindow.frame.getLocation();
+                    }
+                    if(title.equalsIgnoreCase("GDBoard")){
+                        location = Windowed.frame.getLocation();
+                    }
                 }
             }
 
@@ -198,7 +204,7 @@ class InnerWindow extends ResizablePanel {
                 double y = location.y + dragged.getY() - pressed.getY();
                 Point p = new Point();
                     p.setLocation(x, y);
-                    if(!settings) {
+                    if(!floating) {
                         if (x + width >= Defaults.screenSize.getWidth() + 1) {
                             p.setLocation(Defaults.screenSize.getWidth() + 1 - width, p.getY());
                         }
@@ -231,36 +237,43 @@ class InnerWindow extends ResizablePanel {
                         setLocation(p);
                     }
                     else {
-                        if (x + width >= Defaults.screenSize.getWidth() + Defaults.screenSize.x + 1) {
-                            p.setLocation(Defaults.screenSize.getWidth() + Defaults.screenSize.x + 1 - width, p.getY());
-                        }
-                        if (x <= -1 + Defaults.screenSize.x) {
-                            p.setLocation(-1 + Defaults.screenSize.x, p.getY());
-                        }
-                        if (y + height + 32 >= Defaults.screenSize.getHeight()  + Defaults.screenSize.y+ 1) {
-                            p.setLocation(p.getX(), Defaults.screenSize.getHeight() + Defaults.screenSize.y + 1 - height - 32);
-                        }
-                        if (y <= -1  + Defaults.screenSize.y) {
-                            p.setLocation(p.getX(), -1 + Defaults.screenSize.y);
-                        }
-                        if (x + width >= Defaults.screenSize.getWidth() + Defaults.screenSize.x+ 1 && y + height + 32 >= Defaults.screenSize.getHeight() + Defaults.screenSize.y + 1) {
-                            p.setLocation((int) Defaults.screenSize.getWidth() + Defaults.screenSize.x + 1 - width, (int) Defaults.screenSize.getHeight() + Defaults.screenSize.y + 1 - height - 32);
-                        }
-                        if (x + width >= Defaults.screenSize.getWidth() + Defaults.screenSize.x + 1 && y <= -1 + Defaults.screenSize.y) {
-                            p.setLocation((int) Defaults.screenSize.getWidth() + Defaults.screenSize.x + 1 - width, -1 + Defaults.screenSize.y);
-                        }
-                        if (x <= -1 + Defaults.screenSize.x && y + height + 32 >= Defaults.screenSize.getHeight() + Defaults.screenSize.y + 1) {
-                            p.setLocation(-1 + Defaults.screenSize.x, (int) Defaults.screenSize.getHeight() + Defaults.screenSize.y + 1 - height - 32);
-                        }
-                        if (x <= -1 + Defaults.screenSize.x && y <= -1 + Defaults.screenSize.y) {
-                            p.setLocation(-1 + Defaults.screenSize.x, -1 + Defaults.screenSize.y);
-                        }
+                        if(!Settings.windowedMode) {
+                            if (x + width >= Defaults.screenSize.getWidth() + Defaults.screenSize.x + 1) {
+                                p.setLocation(Defaults.screenSize.getWidth() + Defaults.screenSize.x + 1 - width, p.getY());
+                            }
+                            if (x <= -1 + Defaults.screenSize.x) {
+                                p.setLocation(-1 + Defaults.screenSize.x, p.getY());
+                            }
+                            if (y + height + 32 >= Defaults.screenSize.getHeight() + Defaults.screenSize.y + 1) {
+                                p.setLocation(p.getX(), Defaults.screenSize.getHeight() + Defaults.screenSize.y + 1 - height - 32);
+                            }
+                            if (y <= -1 + Defaults.screenSize.y) {
+                                p.setLocation(p.getX(), -1 + Defaults.screenSize.y);
+                            }
+                            if (x + width >= Defaults.screenSize.getWidth() + Defaults.screenSize.x + 1 && y + height + 32 >= Defaults.screenSize.getHeight() + Defaults.screenSize.y + 1) {
+                                p.setLocation((int) Defaults.screenSize.getWidth() + Defaults.screenSize.x + 1 - width, (int) Defaults.screenSize.getHeight() + Defaults.screenSize.y + 1 - height - 32);
+                            }
+                            if (x + width >= Defaults.screenSize.getWidth() + Defaults.screenSize.x + 1 && y <= -1 + Defaults.screenSize.y) {
+                                p.setLocation((int) Defaults.screenSize.getWidth() + Defaults.screenSize.x + 1 - width, -1 + Defaults.screenSize.y);
+                            }
+                            if (x <= -1 + Defaults.screenSize.x && y + height + 32 >= Defaults.screenSize.getHeight() + Defaults.screenSize.y + 1) {
+                                p.setLocation(-1 + Defaults.screenSize.x, (int) Defaults.screenSize.getHeight() + Defaults.screenSize.y + 1 - height - 32);
+                            }
+                            if (x <= -1 + Defaults.screenSize.x && y <= -1 + Defaults.screenSize.y) {
+                                p.setLocation(-1 + Defaults.screenSize.x, -1 + Defaults.screenSize.y);
+                            }
 
-                        if (x + width >= MainBar.getMainBar().getX() + Defaults.screenSize.x && x <= MainBar.getMainBar().getWidth() + MainBar.getMainBar().getX() + Defaults.screenSize.x - 2 && y <= 93 + Defaults.screenSize.y) {
-                            p.setLocation(p.getX(), 93 + Defaults.screenSize.y);
+                            if (x + width >= MainBar.getMainBar().getX() + Defaults.screenSize.x && x <= MainBar.getMainBar().getWidth() + MainBar.getMainBar().getX() + Defaults.screenSize.x - 2 && y <= 93 + Defaults.screenSize.y) {
+                                p.setLocation(p.getX(), 93 + Defaults.screenSize.y);
 
+                            }
                         }
-                        SettingsWindow.frame.setLocation(p);
+                        if(title.equalsIgnoreCase("Settings")) {
+                            SettingsWindow.frame.setLocation(p);
+                        }
+                        if(title.equalsIgnoreCase("GDBoard")){
+                            Windowed.frame.setLocation(p);
+                        }
                     }
 
 
@@ -288,10 +301,10 @@ class InnerWindow extends ResizablePanel {
 				exited[0] = true;
 			}
 		};
-        if(!Settings.windowedMode) {
+
             topBar.addMouseListener(mia);
             topBar.addMouseMotionListener(mia);
-        }
+
 
         //endregion
 
@@ -319,17 +332,21 @@ class InnerWindow extends ResizablePanel {
         closeButton.setBorder(BorderFactory.createEmptyBorder());
         closeButton.setBackground(Defaults.TOP);
         closeButton.setUI(defaultUI);
-        if(!Settings.windowedMode) {
             closeButton.addMouseListener(topScreenIA);
             closeButton.addMouseMotionListener(topScreenIA);
-        }
+
         closeButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if(!settings){
+                if(!floating){
                     toggle();
                 } else {
-                    SettingsWindow.toggleVisible();
+                    if(title.equalsIgnoreCase("Settings")) {
+                        SettingsWindow.toggleVisible();
+                    }
+                    if(title.equalsIgnoreCase("GDBoard")){
+                        Windowed.toggleVisible();
+                    }
                 }
 
             }
@@ -388,9 +405,9 @@ class InnerWindow extends ResizablePanel {
         //region TopBar attributes
         topBar.setBackground(Defaults.TOP);
         topBar.setBounds(1, 1, width, 30);
-        if(!Settings.windowedMode) {
+
             add(topBar);
-        }
+
         //endregion
 
         return this;
@@ -448,11 +465,7 @@ class InnerWindow extends ResizablePanel {
     //region Refresh UI
     void refreshUI() {
 
-        if(Settings.windowedMode && this.getComponents().length > 0){
-            for(int i = 0; i < this.getComponents().length; i++){
-                this.getComponent(i).setBounds(this.getComponent(i).getX(),0, this.getComponent(i).getWidth(), this.getComponent(i).getHeight());
-            }
-        }
+
         defaultUI.setBackground(Defaults.TOP);
         defaultUI.setHover(Defaults.HOVER);
         defaultUI.setSelect(Defaults.SELECT);
@@ -476,7 +489,7 @@ class InnerWindow extends ResizablePanel {
             double ratioY = 1080 / Defaults.screenSize.getHeight();
             int x;
             int y;
-            if(!settings) {
+            if(!floating) {
                 x = getX();
                 y = getY();
             }
@@ -484,12 +497,14 @@ class InnerWindow extends ResizablePanel {
                 //TODO Settngs window stays at location when moving between monitors
                 x = (int) ((Defaults.screenSize.getWidth()/2 - SettingsWindow.frame.getWidth()/2) + Defaults.screenSize.x);
                 y = 150 + Defaults.screenSize.y;
-                SettingsWindow.frame.setLocation(x, y);
+                if(title.equalsIgnoreCase("Settings")){
+                    SettingsWindow.frame.setLocation(x, y);
+                }
                 System.out.println("Start: " + x + ", " + y);
             }
             x1 = x / ratioX;
             y1 = y / ratioY;
-            if(!settings) {
+            if(!floating) {
                 if (x + width >= Defaults.screenSize.getWidth() + 1) {
                     x1 = Defaults.screenSize.getWidth() + 1 - width;
                 }
@@ -545,7 +560,7 @@ class InnerWindow extends ResizablePanel {
         topBar.setVisible(true);
         setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 50)));
         if (toggleState) {
-            if(!settings) {
+            if(!floating) {
                 setVisible(true);
             }
             else {
@@ -558,11 +573,17 @@ class InnerWindow extends ResizablePanel {
     //region Set InnerWindow invisible
     void setInvisible() {
         if (!isPinPressed) {
-            if(!settings) {
+            if(!floating) {
                 setVisible(false);
             }
             else {
-                SettingsWindow.frame.setVisible(false);
+                if(title.equalsIgnoreCase("Settings")) {
+                    SettingsWindow.frame.setVisible(false);
+                }
+                if(title.equalsIgnoreCase("GDBoard")){
+                    Windowed.frame.setVisible(false);
+                    System.exit(0);
+                }
             }
         }
         topBar.setVisible(false);
@@ -574,19 +595,30 @@ class InnerWindow extends ResizablePanel {
     //region Toggle Visibility of InnerWindow
     void toggle() {
         if (toggleState) {
-            if(!settings) {
+            if(!floating) {
                 setVisible(false);
             }
             else {
-                SettingsWindow.frame.setVisible(false);
+                if(title.equalsIgnoreCase("Settings")) {
+                    SettingsWindow.frame.setVisible(false);
+                }
+                if(title.equalsIgnoreCase("GDBoard")){
+                    Windowed.frame.setVisible(false);
+                    System.exit(0);
+                }
             }
             toggleState = false;
         } else {
-            if(!settings) {
+            if(!floating) {
                 setVisible(true);
             }
             else {
-                SettingsWindow.frame.setVisible(true);
+                if(title.equalsIgnoreCase("Settings")) {
+                    SettingsWindow.frame.setVisible(true);
+                }
+                if(title.equalsIgnoreCase("GDBoard")){
+                    Windowed.frame.setVisible(true);
+                }
             }
             toggleState = true;
         }

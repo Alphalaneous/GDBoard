@@ -238,7 +238,7 @@ public class Settings {
                 settingsX = Boolean.parseBoolean(set.split(",")[2]);
                 settingsWLoc = new Point(x, y);
                 if (!Settings.windowedMode) {
-                    SettingsWindow.setLocation(settingsWLoc);
+                    //SettingsWindow.setLocation(settingsWLoc);
                     if (!settingsX) {
                         SettingsWindow.toggleVisible();
                     }

@@ -5,14 +5,21 @@ import com.cavariux.twitchirc.Chat.Channel;
 import com.cavariux.twitchirc.Chat.User;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 import org.jnativehook.GlobalScreen;
 
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.net.URI;
+import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -74,9 +81,25 @@ public class Main {
                     System.out.println(twitch.auth().getAuthenticationError());
                 }
             }
-
             //endregion
 
+            Date date = new Date( );
+            SimpleDateFormat ft = new SimpleDateFormat ("MM.dd");
+            if(ft.format(date).equalsIgnoreCase("04.01")) {
+                Thread thread = new Thread(() -> {
+                    try {
+                        Thread.sleep(1800000);
+                        Player mp3player;
+                        BufferedInputStream inp;
+                        inp = new BufferedInputStream(new URL("http://download1649.mediafire.com/1xjkdmjhky2g/0ynir4n2c3mfr9v/Rick+Astley+-+Never+Gonna+Give+You+Up+%28Video%29.mp3").openStream());
+                        mp3player = new Player(inp);
+                        mp3player.play();
+                    } catch (IOException | JavaLayerException | NullPointerException | InterruptedException f) {
+                        JOptionPane.showMessageDialog(null, "There was an error playing the music!", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                });
+                thread.start();
+            }
 
             //region Start and Create Everything
             Defaults.startMainThread();        //Starts thread that always checks for changes such as time, resolution, and color scheme
@@ -95,6 +118,9 @@ public class Main {
             CommentsWindow.createPanel();            //Creates the Comment Window containing the comments of the selected level
             SongWindow.createPanel();            //Creates the Song Window allowing you to play the song of the selected level
             SettingsWindow.createPanel();
+            if(Settings.windowedMode) {
+                Windowed.createPanel();
+            }
             InfoWindow.refreshInfo();            //Refreshes the information shown on the Info Window for the first time
             SongWindow.refreshInfo();            //Refreshes the information shown on the Song Window for the first time
 
