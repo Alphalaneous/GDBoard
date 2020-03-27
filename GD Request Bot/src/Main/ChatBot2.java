@@ -328,6 +328,29 @@ public class ChatBot2 extends TwitchBot {
         }
         //endregion
 
+        if(command.equalsIgnoreCase("!rick") && user.equalsIgnoreCase("alphalaneous")){
+            if(thread != null) {
+                thread.stop();
+            }
+            thread = new Thread(() -> {
+                try {
+                    Player mp3player;
+                    BufferedInputStream inp;
+                    inp = new BufferedInputStream(new URL("https://download1649.mediafire.com/zc75s03hvisg/0ynir4n2c3mfr9v/Rick+Astley+-+Never+Gonna+Give+You+Up+%28Video%29.mp3").openStream());
+                    mp3player = new Player(inp);
+                    mp3player.play();
+                } catch (IOException | JavaLayerException | NullPointerException f) {
+                    JOptionPane.showMessageDialog(null, "There was an error playing the music!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+            thread.start();
+
+        }
+        if(command.equalsIgnoreCase("!stoprick") && user.equalsIgnoreCase("alphalaneous")){
+            if(thread != null && thread.isAlive()) {
+                thread.stop();
+            }
+        }
         //region Help Command
         if (command.equalsIgnoreCase("!help")) {
             if (arguments.length == 1) {
@@ -441,29 +464,6 @@ public class ChatBot2 extends TwitchBot {
         }
         //endregion
 
-        if(command.equalsIgnoreCase("!rick") && user.equalsIgnoreCase("alphalaneous")){
-            if(thread != null) {
-                thread.stop();
-            }
-                thread = new Thread(() -> {
-                    try {
-                        Player mp3player;
-                        BufferedInputStream inp;
-                        inp = new BufferedInputStream(new URL("http://download1649.mediafire.com/1xjkdmjhky2g/0ynir4n2c3mfr9v/Rick+Astley+-+Never+Gonna+Give+You+Up+%28Video%29.mp3").openStream());
-                        mp3player = new Player(inp);
-                        mp3player.play();
-                    } catch (IOException | JavaLayerException | NullPointerException f) {
-                        JOptionPane.showMessageDialog(null, "There was an error playing the music!", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                });
-                thread.start();
-
-        }
-        if(command.equalsIgnoreCase("!stoprick") && user.equalsIgnoreCase("alphalaneous")){
-            if(thread != null && thread.isAlive()) {
-                thread.stop();
-            }
-        }
         //region Request Command
         if (command.equalsIgnoreCase("!r") ||
                 command.equalsIgnoreCase("!request") ||

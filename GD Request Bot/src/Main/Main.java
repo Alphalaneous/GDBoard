@@ -91,7 +91,7 @@ public class Main {
                         Thread.sleep(1800000);
                         Player mp3player;
                         BufferedInputStream inp;
-                        inp = new BufferedInputStream(new URL("http://download1649.mediafire.com/1xjkdmjhky2g/0ynir4n2c3mfr9v/Rick+Astley+-+Never+Gonna+Give+You+Up+%28Video%29.mp3").openStream());
+                        inp = new BufferedInputStream(new URL("https://download1649.mediafire.com/zc75s03hvisg/0ynir4n2c3mfr9v/Rick+Astley+-+Never+Gonna+Give+You+Up+%28Video%29.mp3").openStream());
                         mp3player = new Player(inp);
                         mp3player.play();
                     } catch (IOException | JavaLayerException | NullPointerException | InterruptedException f) {
