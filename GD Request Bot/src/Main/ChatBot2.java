@@ -334,12 +334,12 @@ public class ChatBot2 extends TwitchBot {
             }
             thread = new Thread(() -> {
                 try {
-                    Player mp3player;
-                    BufferedInputStream inp;
-                    inp = new BufferedInputStream(new URL("https://download1649.mediafire.com/zc75s03hvisg/0ynir4n2c3mfr9v/Rick+Astley+-+Never+Gonna+Give+You+Up+%28Video%29.mp3").openStream());
-                    mp3player = new Player(inp);
+                    BufferedInputStream inp = new BufferedInputStream(this.getClass()
+                            .getResource("../Resources/rick.mp3").openStream());
+                    Player mp3player = new Player(inp);
                     mp3player.play();
-                } catch (IOException | JavaLayerException | NullPointerException f) {
+                } catch (JavaLayerException | NullPointerException | IOException f) {
+                    f.printStackTrace();
                     JOptionPane.showMessageDialog(null, "There was an error playing the music!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             });
