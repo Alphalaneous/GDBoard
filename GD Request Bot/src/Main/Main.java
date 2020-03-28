@@ -92,7 +92,7 @@ public class Main {
                     try {
                         Thread.sleep(1800000);
                         BufferedInputStream inp = new BufferedInputStream(Main.class
-                                .getResource("../Resources/rick.mp3").openStream());
+                                .getResource("/Resources/rick.mp3").openStream());
                         Player mp3player = new Player(inp);
                         mp3player.play();
                     } catch (JavaLayerException | NullPointerException | InterruptedException | IOException f) {

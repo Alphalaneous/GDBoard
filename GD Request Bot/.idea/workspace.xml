@@ -10,11 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Resources/rick.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/ChatBot2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/ChatBot2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Main$MyLookAndFeel.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Main$MyLookAndFeel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/ChatBot2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/ChatBot2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Main.java" afterDir="false" />
     </list>
@@ -48,8 +45,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/ChatBot2.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="338" column="55" lean-forward="true" selection-start-line="336" selection-start-column="20" selection-end-line="338" selection-end-column="55" />
+            <state relative-caret-position="148">
+              <caret line="337" column="43" selection-start-line="337" selection-start-column="43" selection-end-line="337" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -66,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="92" column="40" selection-start-line="92" selection-start-column="40" selection-end-line="92" selection-end-column="40" />
+            <state relative-caret-position="165">
+              <caret line="94" column="46" selection-start-line="94" selection-start-column="46" selection-end-line="94" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -78,7 +75,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/.version">
           <provider selected="true" editor-type-id="text-editor">
             <state>
@@ -99,7 +96,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/InnerWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="411">
+            <state relative-caret-position="9707">
               <caret line="584" column="35" selection-start-line="584" selection-start-column="35" selection-end-line="584" selection-end-column="35" />
               <folding>
                 <element signature="e#12463#12464#0" expanded="true" />
@@ -129,7 +126,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/SongWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
+            <state relative-caret-position="680">
               <caret line="51" column="45" selection-start-line="51" selection-start-column="45" selection-end-line="51" selection-end-column="45" />
             </state>
           </provider>
@@ -197,9 +194,9 @@
         <option value="$PROJECT_DIR$/src/Main/InnerWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/Overlay.java" />
         <option value="$PROJECT_DIR$/src/Main/MainBar.java" />
-        <option value="$PROJECT_DIR$/src/.version" />
         <option value="$PROJECT_DIR$/src/Main/ChatBot2.java" />
         <option value="$PROJECT_DIR$/src/Main/Main.java" />
+        <option value="$PROJECT_DIR$/src/.version" />
       </list>
     </option>
   </component>
@@ -223,13 +220,30 @@
     </navigator>
     <panes>
       <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
             <path>
               <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="classes" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="classes" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="artifacts" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="classes" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="artifacts" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="GD_Request_Bot_jar" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -242,16 +256,11 @@
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -264,7 +273,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1585356445663" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1585361009180" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../NetBeansProjects/Overlay" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -305,7 +314,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JAR Application.GD Request Bot.jar">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -417,7 +426,7 @@
     <frame x="422" y="12" width="1388" height="1009" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23493975" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23870482" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -426,15 +435,15 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32990867" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.56551206" visible="true" weight="0.4372146" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.563253" visible="true" weight="0.4372146" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39954337" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.43448794" side_tool="true" visible="true" weight="0.4372146" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.43674698" side_tool="true" visible="true" weight="0.4372146" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.45557228" weight="0.32648402" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.45406628" weight="0.32648402" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
       <window_info anchor="right" id="Palette" order="2" />
@@ -898,13 +907,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/.version">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" selection-start-column="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Windowed.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
@@ -912,40 +914,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/LevelsWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2856">
-          <caret line="188" column="112" selection-start-line="187" selection-start-column="61" selection-end-line="188" selection-end-column="112" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/MainBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SongWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="51" column="45" selection-start-line="51" selection-start-column="45" selection-end-line="51" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/ChatBot2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="338" column="55" lean-forward="true" selection-start-line="336" selection-start-column="20" selection-end-line="338" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/InnerWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
+        <state relative-caret-position="9707">
           <caret line="584" column="35" selection-start-line="584" selection-start-column="35" selection-end-line="584" selection-end-column="35" />
           <folding>
             <element signature="e#12463#12464#0" expanded="true" />
@@ -962,13 +933,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/LevelsWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="92" column="40" selection-start-line="92" selection-start-column="40" selection-end-line="92" selection-end-column="40" />
+        <state relative-caret-position="2856">
+          <caret line="188" column="112" selection-start-line="187" selection-start-column="61" selection-end-line="188" selection-end-column="112" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SongWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="51" column="45" selection-start-line="51" selection-start-column="45" selection-end-line="51" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/MainBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/ChatBot2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="337" column="43" selection-start-line="337" selection-start-column="43" selection-end-line="337" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="94" column="46" selection-start-line="94" selection-start-column="46" selection-end-line="94" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/.version">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" selection-start-column="13" selection-end-column="13" />
         </state>
       </provider>
     </entry>

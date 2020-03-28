@@ -335,7 +335,7 @@ public class ChatBot2 extends TwitchBot {
             thread = new Thread(() -> {
                 try {
                     BufferedInputStream inp = new BufferedInputStream(this.getClass()
-                            .getResource("../Resources/rick.mp3").openStream());
+                            .getResource("/Resources/rick.mp3").openStream());
                     Player mp3player = new Player(inp);
                     mp3player.play();
                 } catch (JavaLayerException | NullPointerException | IOException f) {
