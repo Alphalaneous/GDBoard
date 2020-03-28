@@ -530,7 +530,7 @@ public class ChatBot2 extends TwitchBot {
                             e.printStackTrace();
                         }
 
-                    } else if (message.toString().contains("with")) {
+                    } else if (message.toString().contains(" with ")) {
                         String level1 = message.toString().split("with ")[0].toUpperCase();
                         String songUrl = message.toString().split("with ")[1];
                         try {
