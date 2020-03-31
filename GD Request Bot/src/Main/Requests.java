@@ -8,9 +8,7 @@ import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.entity.GDLevel;
 import com.github.alex1304.jdash.exception.MissingAccessException;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -21,7 +19,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.zip.GZIPInputStream;
 
@@ -30,7 +27,7 @@ class Requests {
     static ArrayList<LevelData> levels = new ArrayList<>();
     private static HashMap<String, Integer> userStreamLimitMap = new HashMap<>();
 
-    static void addRequest(String ID, String requester, boolean isCustomSong, String customUrl) {
+    static void addRequest(String ID, String requester) {
         OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
         if (MainBar.requests) {
             Path blocked = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
@@ -58,8 +55,7 @@ class Requests {
                     }
                     sc.close();
                 }
-            }
-            catch (FileNotFoundException e){
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
             for (int k = 0; k < levels.size(); k++) {
@@ -104,191 +100,113 @@ class Requests {
                 userStreamLimitMap.put(requester, 1);
             }
             System.out.println(userStreamLimitMap.get(requester));
+
+            AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
+            GDLevel level;
             try {
-                AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
-                GDLevel level = null;
-                boolean goThrough = true;
-                try {
-                    level = client.getLevelById(Integer.parseInt(ID)).block();
-                } catch (MissingAccessException | NumberFormatException e) {
-                    Main.sendMessage("@" + requester + " That level ID doesn't exist!");
-                    goThrough = false;
-                } catch (Exception e) {
-                    Main.sendMessage("@" + requester + " Level search failed... (Servers down?)");
-                    goThrough = false;
-                }
-                LevelData levelData = new LevelData();
-                // --------------------
-                Thread parse;
-                if (goThrough) {
-                    if (level != null && RequestSettings.ratedOption && !(level.getStars() > 0)) {
-                        Main.sendMessage("@" + requester + " Please send star rated levels only!");
-                        return;
-                    }
-                    levelData.setRequester(requester);
-                    assert level != null;
-                    levelData.setAuthor(level.getCreatorName());
-                    levelData.setName(level.getName());
-                    levelData.setDifficulty(level.getDifficulty().toString());
-                    levelData.setDescription(level.getDescription());
-                    levelData.setLikes(String.valueOf(level.getLikes()));
-                    levelData.setDownloads(String.valueOf(level.getDownloads()));
-                    levelData.setSongURL(Objects.requireNonNull(level.getSong().block()).getDownloadURL());
-                    levelData.setLength(level.getLength().toString());
-                    //levelData.setLength(level.getLength().toString());
-                    if (level.isDemon()) {
-                        if (level.getDifficulty().toString().equalsIgnoreCase("EASY")) {
-                            levelData.setDifficulty("easy demon");
-                        } else if (level.getDifficulty().toString().equalsIgnoreCase("NORMAL")) {
-                            levelData.setDifficulty("medium demon");
-                        } else if (level.getDifficulty().toString().equalsIgnoreCase("HARD")) {
-                            levelData.setDifficulty("hard demon");
-                        } else if (level.getDifficulty().toString().equalsIgnoreCase("HARDER")) {
-                            levelData.setDifficulty("insane demon");
-                        } else if (level.getDifficulty().toString().equalsIgnoreCase("INSANE")) {
-                            levelData.setDifficulty("extreme demon");
-                        }
-                    }
-                    levelData.setLevelID(ID);
-                    levelData.setVersion(level.getGameVersion());
-                    //levelData.setCoins(String.valueOf(level.getCoinCount()));
-                    //levelData.setVerifiedCoins(level.hasCoinsVerified());
-                    if (level.getFeaturedScore() > 0) {
-                        levelData.setFeatured();
-                    }
-                    levelData.setEpic(level.isEpic());
-
-                    levelData.setSongID(String.valueOf(Objects.requireNonNull(level.getSong().block()).getId()));
-                    //levelData.setSongSize(String.valueOf(level.getSong().block().getSongSize()));
-                    levelData.setStars(level.getStars());
-                    GDLevel finalLevel = level;
-                    parse = new Thread(() -> {
-                        try {
-                            if (!(finalLevel.getStars() > 0) && finalLevel.getGameVersion()/10 >= 2) {
-                                parse(Objects.requireNonNull(Objects
-                                        .requireNonNull(client.getLevelById(Long.parseLong(ID)).block()).download().block())
-                                        .getData(), ID
-                                );
-                                LevelsWindow.updateUI(levelData.getLevelID(), levelData.getContainsVulgar(), levelData.getContainsImage(), levelData.getAnalyzed());
-                            }
-
-                        } catch (IllegalArgumentException e) {
-                            JOptionPane.showMessageDialog(null, "There was an error analyzing " + levelData.getLevelID() + "!", "Error", JOptionPane.ERROR_MESSAGE);
-                        }
-                    });
-                    parse.start();
-                    // --------------------
-                    // Loop through levels to check if level is already in queue
-
-                    // --------------------
-                    // Adds level to queue array "levels" and refreshes LevelsWindow
-                    levels.add(levelData);
-                    if (GeneralSettings.autoDownloadOption) {
-                        URL url1;
-                        String fileName = null;
-                        if (customUrl != null) {
-                            url1 = new URL(customUrl);
-                            fileName = FilenameUtils.getName(url1.getPath());
-                            System.out.println(fileName);
-                        }
-                        String finalFileName = fileName;
-                        Thread thread = new Thread(() -> {
-                            System.out.println(levelData.getSongID());
-                            try {
-                                File folder = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash");
-                                boolean download = true;
-                                String[] files = folder.list();
-                                if (files != null) {
-                                    if (files.length > 0) {
-                                        for (String file2 : files) {
-                                            if (file2.equalsIgnoreCase(levelData.getSongID() + ".mp3")) {
-                                                if (!isCustomSong) {
-                                                    download = false;
-                                                } else if (Requests.levels.size() == 1) {
-
-                                                    Path song = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
-                                                    Files.move(song, song.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp"), StandardCopyOption.REPLACE_EXISTING);
-                                                }
-                                                break;
-                                            }
-                                        }
-                                    }
-                                }
-                                if (download && !levelData.getSongID().equalsIgnoreCase("0")) {
-                                    File file2;
-                                    if (isCustomSong) {
-                                        if (Requests.levels.size() == 1) {
-                                            file2 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3");
-                                        } else {
-                                            file2 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3.wait");
-                                        }
-                                    } else {
-                                        file2 = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3");
-                                    }
-                                    URL url;
-                                    assert finalFileName != null;
-                                    if (isCustomSong && !finalFileName.endsWith(".mp3")) {
-                                        url = new URL(levelData.getSongURL());
-                                        Main.sendMessage("@" + requester + ", Invalid song! (requires .mp3 format)");
-                                    } else if (isCustomSong && finalFileName.endsWith(".mp3")) {
-                                        try {
-                                            url = new URL(customUrl);
-                                        } catch (MalformedURLException e) {
-                                            url = new URL(levelData.getSongURL());
-                                            Main.sendMessage("@" + requester + " Invalid URL!");
-                                        }
-                                    } else {
-                                        url = new URL(levelData.getSongURL());
-                                    }
-
-                                    FileUtils.copyURLToFile(url, file2);
-                                }
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        });
-                        thread.start();
-                    }
-                    Main.sendMessage("@" + levelData.getRequester() + " " + levelData.getName() + " ("
-                            + levelData.getLevelID() + ") has been added to the queue at position " + levels.size() + "!");
-                    if (levels.size() == 1) {
-                        StringSelection selection = new StringSelection(Requests.levels.get(0).getLevelID());
-                        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-                        clipboard.setContents(selection, selection);
-                        if (!GeneralSettings.nowPlayingOption) {
-                            Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
-                                    + Requests.levels.get(0).getLevelID() + "). Requested by "
-                                    + Requests.levels.get(0).getRequester());
-                        }
-                    }
-                    if (isCustomSong && GeneralSettings.autoDownloadOption) {
-                        levelData.setSongName("Custom");
-                        levelData.setSongAuthor("");
-                    } else {
-                        levelData.setSongName(Objects.requireNonNull(level.getSong().block()).getSongTitle());
-                        System.out.println(Objects.requireNonNull(level.getSong().block()).getSongTitle());
-                        levelData.setSongAuthor(Objects.requireNonNull(level.getSong().block()).getSongAuthorName());
-
-                    }
-                    OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
-                    LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester(), levelData.getVersion());
-
-                }
+                level = client.getLevelById(Integer.parseInt(ID)).block();
+            } catch (MissingAccessException | NumberFormatException e) {
+                Main.sendMessage("@" + requester + " That level ID doesn't exist!");
+                return;
             } catch (Exception e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
+                Main.sendMessage("@" + requester + " Level search failed... (Servers down?)");
+                return;
             }
+            LevelData levelData = new LevelData();
+            // --------------------
+            Thread parse;
+            if (level != null && RequestSettings.ratedOption && !(level.getStars() > 0)) {
+                Main.sendMessage("@" + requester + " Please send star rated levels only!");
+                return;
+            }
+            levelData.setRequester(requester);
+            levelData.setAuthor(Objects.requireNonNull(level).getCreatorName());
+            levelData.setName(level.getName());
+            levelData.setDifficulty(level.getDifficulty().toString());
+            levelData.setDescription(level.getDescription());
+            levelData.setLikes(String.valueOf(level.getLikes()));
+            levelData.setDownloads(String.valueOf(level.getDownloads()));
+            levelData.setSongURL(Objects.requireNonNull(level.getSong().block()).getDownloadURL());
+            levelData.setLength(level.getLength().toString());
+            levelData.setLevelID(ID);
+            levelData.setVersion(level.getGameVersion());
+            levelData.setEpic(level.isEpic());
+            levelData.setSongID(String.valueOf(Objects.requireNonNull(level.getSong().block()).getId()));
+            levelData.setStars(level.getStars());
+
+            if (levelData.getDescription().toLowerCase().contains("nong")) {
+                String[] words = levelData.getDescription().split(" ");
+                for (String word : words) {
+                    if (isValisURL(word)){
+                        levelData.setSongURL(word);
+                    }
+                }
+            }
+
+            levelData.setSongName(Objects.requireNonNull(level.getSong().block()).getSongTitle());
+            levelData.setSongAuthor(Objects.requireNonNull(level.getSong().block()).getSongAuthorName());
+
+            if (level.getFeaturedScore() > 0) {
+                levelData.setFeatured();
+            }
+
+            if (level.isDemon()) {
+                if (level.getDifficulty().toString().equalsIgnoreCase("EASY")) {
+                    levelData.setDifficulty("easy demon");
+                } else if (level.getDifficulty().toString().equalsIgnoreCase("NORMAL")) {
+                    levelData.setDifficulty("medium demon");
+                } else if (level.getDifficulty().toString().equalsIgnoreCase("HARD")) {
+                    levelData.setDifficulty("hard demon");
+                } else if (level.getDifficulty().toString().equalsIgnoreCase("HARDER")) {
+                    levelData.setDifficulty("insane demon");
+                } else if (level.getDifficulty().toString().equalsIgnoreCase("INSANE")) {
+                    levelData.setDifficulty("extreme demon");
+                }
+            }
+
+            parse = new Thread(() -> {
+                if (!(level.getStars() > 0) && level.getGameVersion() / 10 >= 2) {
+                    parse(Objects.requireNonNull(Objects
+                            .requireNonNull(client.getLevelById(Long.parseLong(ID)).block()).download().block())
+                            .getData(), ID
+                    );
+                    LevelsWindow.updateUI(levelData.getLevelID(), levelData.getContainsVulgar(), levelData.getContainsImage(), levelData.getAnalyzed());
+                }
+            });
+            parse.start();
+
+            levels.add(levelData);
+            if (GeneralSettings.autoDownloadOption) {
+
+            }
+            Main.sendMessage("@" + levelData.getRequester() + " " + levelData.getName() + " ("
+                    + levelData.getLevelID() + ") has been added to the queue at position " + levels.size() + "!");
+            if (levels.size() == 1) {
+                StringSelection selection = new StringSelection(Requests.levels.get(0).getLevelID());
+                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                clipboard.setContents(selection, selection);
+                if (!GeneralSettings.nowPlayingOption) {
+                    Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
+                            + Requests.levels.get(0).getLevelID() + "). Requested by "
+                            + Requests.levels.get(0).getRequester());
+                }
+            }
+            OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
+            LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester(), levelData.getVersion());
+
         } else {
             Main.sendMessage("@" + requester + " Requests are off!");
         }
     }
+
 
     private static ArrayList<LevelData> getLevelData() {
         return levels;
     }
 
     private static void parse(byte[] level, String levelID) {
-        all : for (int k = 0; k < Requests.getLevelData().size(); k++) {
+        all:
+        for (int k = 0; k < Requests.getLevelData().size(); k++) {
             if (Requests.getLevelData().get(k).getLevelID().equalsIgnoreCase(levelID)) {
                 String decompressed = null;
                 try {
@@ -312,7 +230,7 @@ class Requests {
                         for (String attribute : attributes) {
 
                             if (attribute.startsWith("32")) {
-                                if(Double.parseDouble(attribute.split(",")[1]) < 1) {
+                                if (Double.parseDouble(attribute.split(",")[1]) < 1) {
                                     scale = Double.parseDouble(attribute.split(",")[1]);
                                 }
                             }
@@ -322,7 +240,7 @@ class Requests {
                             if (attribute.startsWith("21")) {
                                 tempColor = attribute.split(",")[1];
                             }
-                            if(attribute.startsWith("25")){
+                            if (attribute.startsWith("25")) {
                                 zOrder = true;
                             }
                             if (attribute.startsWith("31")) {
@@ -338,7 +256,8 @@ class Requests {
                         String line;
 
                         try {
-                            out: while ((line = br.readLine()) != null) {
+                            out:
+                            while ((line = br.readLine()) != null) {
                                 String[] text1 = text.toUpperCase().split(" ");
 
                                 for (String s : text1) {
@@ -357,7 +276,7 @@ class Requests {
                             if (imageIDCount >= 1000) {
                                 Requests.getLevelData().get(k).setContainsImage();
                             }
-                           color = tempColor;
+                            color = tempColor;
                         } catch (IOException e) {
                             e.printStackTrace();
                             LevelsWindow.updateUI(Requests.getLevelData().get(k).getLevelID(), Requests.getLevelData().get(k).getContainsVulgar(), Requests.getLevelData().get(k).getContainsImage(), false);
@@ -405,5 +324,16 @@ class Requests {
         } else {
             return OutputSettings.noLevelString.replaceAll("(?i)%s%", "");
         }
+    }
+
+    public static boolean isValisURL(String url) {
+
+        try {
+            URL url1 = new URL(url);
+            return true;
+        } catch (MalformedURLException e) {
+            return false;
+        }
+
     }
 }

@@ -410,7 +410,7 @@ public class ChatBot extends TwitchBot {
                     assert m != null;
                     if (m.matches() && arguments.length <= 2) {
                         try {
-                            Requests.addRequest(m.group(1), String.valueOf(user), false, null);
+                            Requests.addRequest(m.group(1), String.valueOf(user));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -436,7 +436,7 @@ public class ChatBot extends TwitchBot {
                                         if (((GDLevel) levelPage[i]).getName().toUpperCase()
                                                 .startsWith(level1.substring(0, level1.length() - 1))) {
                                             Requests.addRequest(String.valueOf(((GDLevel) levelPage[i]).getId()),
-                                                    String.valueOf(user), false, null);
+                                                    String.valueOf(user));
                                             break outerLoop;
                                         }
                                     }
@@ -447,16 +447,6 @@ public class ChatBot extends TwitchBot {
                                 sendMessage("@" + user + " That level or user doesn't exist!", channel);
                                 e.printStackTrace();
                             }
-
-                        } else if (message.toString().contains("with")) {
-                            String level1 = message.toString().split("with ")[0].toUpperCase();
-                            String songUrl = message.toString().split("with ")[1];
-                            try {
-                                Requests.addRequest(m.group(1), String.valueOf(user), true, songUrl);
-                            } catch (Exception e) {
-                                sendMessage("@" + user + " Not a valid link!", channel);
-                            }
-                            System.out.println("Level ID: " + level1 + " Song Link: " + songUrl);
                         } else {
 
                             AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
@@ -464,7 +454,7 @@ public class ChatBot extends TwitchBot {
                                 Requests.addRequest(String
                                                 .valueOf(Objects.requireNonNull(client.searchLevels(message.toString(), LevelSearchFilters.create(), 0)
                                                         .block()).asList().get(0).getId()),
-                                        String.valueOf(user), false, null);
+                                        String.valueOf(user));
                             } catch (MissingAccessException e) {
                                 sendMessage("@" + user + " That level doesn't exist!", channel);
                                 e.printStackTrace();
@@ -505,7 +495,7 @@ public class ChatBot extends TwitchBot {
                             }
                         }
                         if (!mention.contains(m.group(1))) {
-                            Requests.addRequest(m.group(1), String.valueOf(user), false, null);
+                            Requests.addRequest(m.group(1), String.valueOf(user));
                         }
 
                     } catch (Exception e) {

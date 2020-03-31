@@ -16,7 +16,6 @@ import org.apache.commons.lang3.math.NumberUtils;
 
 import javax.swing.*;
 import java.io.*;
-import java.net.URL;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -48,7 +47,7 @@ public class ChatBot2 extends TwitchBot {
             Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(message);
             if (m.find()) {
                 if (GeneralSettings.followersOption) {
-                    if (TwitchAPI.isNotFollowing(String.valueOf(user))) {
+                    if (TwitchAPI.isNotFollowing(String.valueOf(user)) && !checkMod(String.valueOf(user))) {
                         if (!(("#" + user).equalsIgnoreCase(String.valueOf(Settings.channel)) || Main.mods.contains(user))) {
                             Main.sendMessage("@" + user + " Please follow to request levels!");
                             return;
@@ -65,7 +64,7 @@ public class ChatBot2 extends TwitchBot {
                         }
                     }
                     if (!mention.contains(m.group(1))) {
-                        Requests.addRequest(m.group(1), String.valueOf(user), false, null);
+                        Requests.addRequest(m.group(1), String.valueOf(user));
                     }
 
                 } catch (Exception e) {
@@ -492,7 +491,7 @@ public class ChatBot2 extends TwitchBot {
                 assert m != null;
                 if (m.matches() && arguments.length <= 2) {
                     try {
-                        Requests.addRequest(m.group(1), String.valueOf(user), false, null);
+                        Requests.addRequest(m.group(1), String.valueOf(user));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -518,7 +517,7 @@ public class ChatBot2 extends TwitchBot {
                                     if (((GDLevel) levelPage[i]).getName().toUpperCase()
                                             .startsWith(level1.substring(0, level1.length() - 1))) {
                                         Requests.addRequest(String.valueOf(((GDLevel) levelPage[i]).getId()),
-                                                String.valueOf(user), false, null);
+                                                String.valueOf(user));
                                         break outerLoop;
                                     }
                                 }
@@ -529,24 +528,15 @@ public class ChatBot2 extends TwitchBot {
                             response = "@" + user + " That level or user doesn't exist!";
                             e.printStackTrace();
                         }
-
-                    } else if (message.toString().contains(" with ")) {
-                        String level1 = message.toString().split("with ")[0].toUpperCase();
-                        String songUrl = message.toString().split("with ")[1];
-                        try {
-                            Requests.addRequest(m.group(1), String.valueOf(user), true, songUrl);
-                        } catch (Exception e) {
-                            response = "@" + user + " Not a valid link!";
-                        }
-                        System.out.println("Level ID: " + level1 + " Song Link: " + songUrl);
-                    } else {
+                    }
+                    else {
 
                         AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
                         try {
                             Requests.addRequest(String
                                             .valueOf(Objects.requireNonNull(client.searchLevels(message.toString(), LevelSearchFilters.create(), 0)
                                                     .block()).asList().get(0).getId()),
-                                    String.valueOf(user), false, null);
+                                    String.valueOf(user));
                         } catch (MissingAccessException e) {
                             response = "@" + user + " That level doesn't exist!";
                             e.printStackTrace();

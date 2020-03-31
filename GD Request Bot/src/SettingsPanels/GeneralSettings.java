@@ -19,7 +19,7 @@ public class GeneralSettings {
 	private static JLabel versionLabel = new JLabel();
 	private static CheckboxButton followers = createButton("Followers Only", 50);
 	private static CheckboxButton nowPlaying = createButton("Disable Now Playing Message", 80);
-	private static CheckboxButton autoDownload = createButton("Automatically download Music (Experimental)", 110);
+	//private static CheckboxButton autoDownload = createButton("Automatically download Music (Experimental)", 110);
 	private static CheckboxButton queueLimitText = createButton("Maximum Queue Size: ", 140);
 	private static CheckboxButton userLimitText = createButton("In Queue Request Limit: ", 215);
 	private static CheckboxButton userLimitStreamText = createButton("All Stream Request Limit: ", 290);
@@ -74,12 +74,12 @@ public class GeneralSettings {
 			}
 		});
 
-		autoDownload.addMouseListener(new MouseAdapter() {
+		/*autoDownload.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				autoDownloadOption = autoDownload.getSelectedState();
 			}
-		});
+		});*/
 
 		queueLimitText.addMouseListener(new MouseAdapter() {
 			@Override
@@ -180,7 +180,7 @@ public class GeneralSettings {
 
 		panel.add(followers);
 		panel.add(nowPlaying);
-		panel.add(autoDownload);
+		//panel.add(autoDownload);
 		panel.add(versionLabel);
 		panel.add(queueLimitText);
 		panel.add(queueSizeInput);
@@ -195,7 +195,8 @@ public class GeneralSettings {
 		try {
 			followersOption = Boolean.parseBoolean(Settings.getSettings("followers"));
 			nowPlayingOption = Boolean.parseBoolean(Settings.getSettings("disableNP"));
-			autoDownloadOption = Boolean.parseBoolean(Settings.getSettings("autoDL"));
+			//autoDownloadOption = Boolean.parseBoolean(Settings.getSettings("autoDL"));
+			autoDownloadOption = false;
 			queueLimitBoolean = Boolean.parseBoolean(Settings.getSettings("queueLimitEnabled"));
 			if(!Settings.getSettings("queueLimit").equalsIgnoreCase("")) {
 				queueLimit = Integer.parseInt(Settings.getSettings("queueLimit"));
@@ -213,7 +214,7 @@ public class GeneralSettings {
 			}
 			followers.setChecked(followersOption);
 			nowPlaying.setChecked(nowPlayingOption);
-			autoDownload.setChecked(autoDownloadOption);
+			//autoDownload.setChecked(autoDownloadOption);
 			queueLimitText.setChecked(queueLimitBoolean);
 			userLimitText.setChecked(userLimitOption);
 			userLimitStreamText.setChecked(userLimitStreamOption);

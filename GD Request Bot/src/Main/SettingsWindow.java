@@ -97,7 +97,8 @@ public class SettingsWindow {
 		((InnerWindow) window).setPinVisible();
 		((InnerWindow) window).refreshListener();
 		frame.add(window);
-		frame.setVisible(false);
+		frame.setLocation(Settings.getSettingsWLoc().x, Settings.getSettingsWLoc().y);
+		frame.setVisible(true);
 	}
 	static void toFront(){
 		frame.toFront();

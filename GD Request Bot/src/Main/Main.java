@@ -6,9 +6,13 @@ import com.cavariux.twitchirc.Chat.User;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
 import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.JavaSoundAudioDevice;
 import javazoom.jl.player.Player;
+import javazoom.jl.player.advanced.AdvancedPlayer;
 import org.jnativehook.GlobalScreen;
 
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.SourceDataLine;
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
@@ -16,6 +20,7 @@ import java.awt.event.KeyEvent;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.net.URI;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -84,23 +89,6 @@ public class Main {
                 }
             }
             //endregion
-
-            Date date = new Date( );
-            SimpleDateFormat ft = new SimpleDateFormat ("MM.dd");
-            if(ft.format(date).equalsIgnoreCase("04.01")) {
-                Thread thread = new Thread(() -> {
-                    try {
-                        Thread.sleep(1800000);
-                        BufferedInputStream inp = new BufferedInputStream(Main.class
-                                .getResource("/Resources/rick.mp3").openStream());
-                        Player mp3player = new Player(inp);
-                        mp3player.play();
-                    } catch (JavaLayerException | NullPointerException | InterruptedException | IOException f) {
-                        JOptionPane.showMessageDialog(null, "There was an error playing the music!", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                });
-                thread.start();
-            }
 
             //region Start and Create Everything
             Defaults.startMainThread();        //Starts thread that always checks for changes such as time, resolution, and color scheme

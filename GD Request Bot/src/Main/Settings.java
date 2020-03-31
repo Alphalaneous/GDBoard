@@ -299,6 +299,12 @@ public class Settings {
         }
         return requestsWLoc;
     }
+    static Point getSettingsWLoc() {
+        if (Settings.windowedMode) {
+            settingsWLoc = new Point(0, 0);
+        }
+        return settingsWLoc;
+    }
 
     static Point getInfoWLoc() {
         if (Settings.windowedMode) {
