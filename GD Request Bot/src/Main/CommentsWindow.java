@@ -24,7 +24,7 @@ import java.net.URLConnection;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
-class CommentsWindow {
+public class CommentsWindow {
     private static JPanel panel = new JPanel();
     private static JButtonUI defaultUI = new JButtonUI();
 
@@ -465,7 +465,7 @@ class CommentsWindow {
     //endregion
 
     //region SetSettings
-    static void setSettings(){
+    public static void setSettings(){
         ((InnerWindow) window).setSettings();
     }
     //endregion

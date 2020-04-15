@@ -30,7 +30,7 @@ public class SettingsWindow {
 	private static JPanel blocked = SettingsPanels.BlockedSettings.createPanel();
 	private static JPanel blockedUsers = SettingsPanels.BlockedUserSettings.createPanel();
 	public static boolean run = true;
-	static JDialog frame = new JDialog();
+	public static JDialog frame = new JDialog();
 	static void createPanel() {
 		frame.setAlwaysOnTop(true);
 
@@ -77,7 +77,7 @@ public class SettingsWindow {
 		//JButton commands = createButton("Commands");
 		JButton requests = createButton("Requests");
 		JButton shortcuts = createButton("Shortcuts");
-		//JButton personalization = createButton("Personalization");
+		JButton personalization = createButton("Personalization");
 		JButton blocked = createButton("Blocked IDs");
 		JButton blockedUsers = createButton("Blocked Users");
 
@@ -87,7 +87,7 @@ public class SettingsWindow {
 		//buttons.add(commands);
 		buttons.add(requests);
 		buttons.add(shortcuts);
-		//buttons.add(personalization);
+		buttons.add(personalization);
 		buttons.add(blocked);
 		buttons.add(blockedUsers);
 
@@ -98,7 +98,6 @@ public class SettingsWindow {
 		((InnerWindow) window).refreshListener();
 		frame.add(window);
 		frame.setLocation(Settings.getSettingsWLoc().x, Settings.getSettingsWLoc().y);
-		frame.setVisible(true);
 	}
 	static void toFront(){
 		frame.toFront();
@@ -234,7 +233,7 @@ public class SettingsWindow {
 	}
 	//endregion
 	//region SetSettings
-	static void setSettings(){
+	public static void setSettings(){
 		Settings.setWindowSettings("Settings", frame.getX() + "," + frame.getY() + "," + false + "," + frame.isVisible());
 
 	}

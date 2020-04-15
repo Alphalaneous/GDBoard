@@ -13,8 +13,6 @@ public class KeyListener extends SwingKeyAdapter {
 
     public void nativeKeyPressed(NativeKeyEvent e) {
 
-        System.out.println(e.getRawCode());
-        System.out.println(ShortcutSettings.skipKeybind);
         if (keyReleased) {
             int key = e.getRawCode();
 

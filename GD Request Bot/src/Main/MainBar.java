@@ -173,31 +173,6 @@ class MainBar {
                 RequestSettings.setSettings();
                 ShortcutSettings.setSettings();
                 OutputSettings.setSettings();
-                for (int i = 0; i < Requests.levels.size(); i++) {
-                    if (Requests.levels.get(i).getSongName().equalsIgnoreCase("Custom") && Requests.levels.get(LevelsWindow.getSelectedID()).getNotPersist()) {
-                        Path tempSong = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3.temp");
-                        Path wait = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3.wait");
-                        Path remove = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3");
-                        try {
-                            if (Files.exists(remove)) {
-                                Files.delete(remove);
-                            }
-                            if (Files.exists(wait)) {
-                                Files.delete(wait);
-                            }
-                            if (Files.exists(tempSong)) {
-                                Files.move(tempSong, tempSong.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3"), StandardCopyOption.REPLACE_EXISTING);
-                            }
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
-                    } else if (Requests.levels.get(i).getSongName().equalsIgnoreCase("Custom")) {
-                        File tempSong = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3.temp");
-                        File wait = new File(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3.wait");
-                        tempSong.delete();
-                        wait.delete();
-                    }
-                }
                 System.exit(0);
             }
 
@@ -255,18 +230,20 @@ class MainBar {
 
     static void setTooltips() {
         Thread thread = new Thread(() -> {
-            while(true) {
-                if (Overlay.getWindow().isVisible() && !Settings.windowedMode) {
-                    ((JButtonTooltip) toggleComments).setTooltipLocation(toggleComments.getLocationOnScreen().x - Defaults.screenSize.x + (toggleComments.getWidth() / 2));
-                    ((JButtonTooltip) toggleActions).setTooltipLocation(toggleActions.getLocationOnScreen().x - Defaults.screenSize.x + (toggleActions.getWidth() / 2));
-                    ((JButtonTooltip) toggleInfo).setTooltipLocation(toggleInfo.getLocationOnScreen().x - Defaults.screenSize.x + (toggleInfo.getWidth() / 2));
-                    ((JButtonTooltip) toggleSong).setTooltipLocation(toggleSong.getLocationOnScreen().x - Defaults.screenSize.x + (toggleSong.getWidth() / 2));
-                    ((JButtonTooltip) toggleLevels).setTooltipLocation(toggleLevels.getLocationOnScreen().x - Defaults.screenSize.x + (toggleLevels.getWidth() / 2));
-                    ((JButtonTooltip) stopReqs).setTooltipLocation(stopReqs.getLocationOnScreen().x - Defaults.screenSize.x + (stopReqs.getWidth() / 2));
-                    ((JButtonTooltip) toggleSettings).setTooltipLocation(toggleSettings.getLocationOnScreen().x - Defaults.screenSize.x + (toggleSettings.getWidth() / 2));
-                    ((JButtonTooltip) close).setTooltipLocation(close.getLocationOnScreen().x - Defaults.screenSize.x + (close.getWidth() / 2));
+            if(!Settings.windowedMode) {
+                while (true) {
+                    if (Overlay.getWindow().isVisible() && !Settings.windowedMode) {
+                        ((JButtonTooltip) toggleComments).setTooltipLocation(toggleComments.getLocationOnScreen().x - Defaults.screenSize.x + (toggleComments.getWidth() / 2));
+                        ((JButtonTooltip) toggleActions).setTooltipLocation(toggleActions.getLocationOnScreen().x - Defaults.screenSize.x + (toggleActions.getWidth() / 2));
+                        ((JButtonTooltip) toggleInfo).setTooltipLocation(toggleInfo.getLocationOnScreen().x - Defaults.screenSize.x + (toggleInfo.getWidth() / 2));
+                        ((JButtonTooltip) toggleSong).setTooltipLocation(toggleSong.getLocationOnScreen().x - Defaults.screenSize.x + (toggleSong.getWidth() / 2));
+                        ((JButtonTooltip) toggleLevels).setTooltipLocation(toggleLevels.getLocationOnScreen().x - Defaults.screenSize.x + (toggleLevels.getWidth() / 2));
+                        ((JButtonTooltip) stopReqs).setTooltipLocation(stopReqs.getLocationOnScreen().x - Defaults.screenSize.x + (stopReqs.getWidth() / 2));
+                        ((JButtonTooltip) toggleSettings).setTooltipLocation(toggleSettings.getLocationOnScreen().x - Defaults.screenSize.x + (toggleSettings.getWidth() / 2));
+                        ((JButtonTooltip) close).setTooltipLocation(close.getLocationOnScreen().x - Defaults.screenSize.x + (close.getWidth() / 2));
 
-                    break;
+                        break;
+                    }
                 }
             }
         });

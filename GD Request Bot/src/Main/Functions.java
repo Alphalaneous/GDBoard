@@ -177,10 +177,19 @@ public class Functions {
         if (Requests.levels.size() != 0) {
             SettingsWindow.run = false;
             Object[] options = {"Yes", "No"};
-            int n = JOptionPane.showOptionDialog(Overlay.frame,
-                    "Block " + Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "?",
-                    "Block ID? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
-                    JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+            int n;
+            if(!Settings.windowedMode) {
+                n = JOptionPane.showOptionDialog(Overlay.frame,
+                        "Block " + Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "?",
+                        "Block ID? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+            }
+            else {
+                n = JOptionPane.showOptionDialog(Windowed.frame,
+                        "Block " + Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "?",
+                        "Block ID? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+            }
             if (n == 0) {
                 BlockedSettings.addButton(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
                 Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
@@ -216,10 +225,19 @@ public class Functions {
 
     public static void clearFunction(){
         Object[] options = {"Yes", "No"};
-        int n = JOptionPane.showOptionDialog(Overlay.frame,
-                "Clear the queue?",
-                "Clear? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
-                JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+        int n;
+        if(!Settings.windowedMode) {
+            n = JOptionPane.showOptionDialog(Overlay.frame,
+                    "Clear the queue?",
+                    "Clear? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+        }
+        else {
+            n = JOptionPane.showOptionDialog(Windowed.frame,
+                    "Clear the queue?",
+                    "Clear? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+        }
         if (n == 0) {
             if (Requests.levels.size() != 0) {
                 for (int i = 0; i < Requests.levels.size(); i++) {

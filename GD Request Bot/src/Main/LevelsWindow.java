@@ -11,6 +11,8 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -129,7 +131,9 @@ public class LevelsWindow {
         ((InnerWindow) window).refreshListener();
         Overlay.addToFrame(window);
     }
-
+    static JScrollPane getReqWindow(){
+        return scrollPane;
+    }
     static void createButton(String name, String author, String ID, String difficulty,
                              boolean epic, boolean featured, int starCount, String requester, double version) {
         try {
@@ -258,6 +262,12 @@ public class LevelsWindow {
                                 ex.printStackTrace();
                             }
                         }
+                    }
+                    if (SwingUtilities.isRightMouseButton(e)) {
+                        StringSelection selection = new StringSelection(
+                                ID);
+                        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                        clipboard.setContents(selection, selection);
                     }
                     ((InnerWindow) window).moveToFront();
                     super.mousePressed(e);
@@ -423,7 +433,7 @@ public class LevelsWindow {
     //endregion
 
     //region SetSettings
-    static void setSettings() {
+    public static void setSettings() {
         ((InnerWindow) window).setSettings();
     }
     //endregion

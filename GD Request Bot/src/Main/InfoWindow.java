@@ -6,12 +6,13 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.awt.*;
 
-class InfoWindow {
+public class InfoWindow {
 
 	private static int height = 110;
 	private static int width = 400;
 	private static JPanel panel = new JPanel();
 	private static JPanel descPanel = new JPanel();
+	private static JPanel fullPanel = new JPanel(null);
 	private static JLabel likes = new JLabel();
 	private static JLabel downloads = new JLabel();
 	private static JLabel length = new JLabel();
@@ -21,11 +22,11 @@ class InfoWindow {
 	static void createPanel() {
 
 		panel.setPreferredSize(new Dimension(width, height));
-		panel.setBounds(1, 31, 160, height);
+		panel.setBounds(0, 0, 160, height);
 		panel.setBackground(Defaults.MAIN);
 
 		descPanel.setPreferredSize(new Dimension(240, height));
-		descPanel.setBounds(161, 31, 240, height);
+		descPanel.setBounds(160, 0, 240, height);
 		descPanel.setBackground(Defaults.SUB_MAIN);
 		descPanel.setLayout(null);
 		descPanel.setOpaque(true);
@@ -50,11 +51,15 @@ class InfoWindow {
 		panel.add(downloads);
 		panel.add(length);
 		descPanel.add(description);
-
-		window.add(panel);
-		window.add(descPanel);
+		fullPanel.setBounds(1,31,400,110);
+		fullPanel.add(panel);
+		fullPanel.add(descPanel);
+		window.add(fullPanel);
 		((InnerWindow)window).refreshListener();
 		Overlay.addToFrame(window);
+	}
+	static JPanel getInfoWindow(){
+		return fullPanel;
 	}
 	static void setPin(boolean pin){
 		((InnerWindow) window).setPin(pin);
@@ -104,7 +109,7 @@ class InfoWindow {
 	//endregion
 
 	//region SetSettings
-	static void setSettings(){
+	public static void setSettings(){
 		((InnerWindow) window).setSettings();
 	}
 	//endregion

@@ -26,7 +26,6 @@ public class ShortcutSettings {
     public static int copyKeybind = 0;
     public static int blockKeybind = 0;
     public static int clearKeybind = 0;
-    //TODO Fix F Keys
 
     public static JPanel createPanel() {
         defaultUI.setBackground(Defaults.BUTTON);
@@ -179,7 +178,6 @@ public class ShortcutSettings {
             if (component instanceof JPanel) {
                 for (Component component1 : ((JPanel) component).getComponents()) {
                     if (component1 instanceof JLabel) {
-                        System.out.println(((JLabel) component1).getText());
                         if (((JLabel) component1).getText().equalsIgnoreCase("Open")) {
                             if (!KeyEvent.getKeyText(openKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
                                 ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(openKeybind));
@@ -218,7 +216,6 @@ public class ShortcutSettings {
                         if (((JLabel) component1).getText().equalsIgnoreCase("Clear")) {
                             if (!KeyEvent.getKeyText(clearKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
                                 ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(clearKeybind));
-                                System.out.println(KeyEvent.getKeyText(clearKeybind));
                             } else {
                                 ((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
                             }

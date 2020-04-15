@@ -1,6 +1,7 @@
 package SettingsPanels;
 
 import Main.*;
+import Main.ActionsWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +12,7 @@ import java.io.*;
 public class GeneralSettings {
 	private static JButtonUI defaultUI = new JButtonUI();
 	public static boolean followersOption = false;
+	public static boolean subsOption = false;
 	public static boolean nowPlayingOption = false;
 	public static boolean autoDownloadOption = false;
 	public static boolean queueLimitBoolean = false;
@@ -18,11 +20,16 @@ public class GeneralSettings {
 	public static boolean userLimitStreamOption = false;
 	private static JLabel versionLabel = new JLabel();
 	private static CheckboxButton followers = createButton("Followers Only", 50);
-	private static CheckboxButton nowPlaying = createButton("Disable Now Playing Message", 80);
+	private static CheckboxButton nowPlaying = createButton("Disable Now Playing Message", 110);
 	//private static CheckboxButton autoDownload = createButton("Automatically download Music (Experimental)", 110);
+	private static CheckboxButton subOnly = createButton("Subscribers Only", 80);
+
 	private static CheckboxButton queueLimitText = createButton("Maximum Queue Size: ", 140);
 	private static CheckboxButton userLimitText = createButton("In Queue Request Limit: ", 215);
 	private static CheckboxButton userLimitStreamText = createButton("All Stream Request Limit: ", 290);
+	private static JLabel donation = new JLabel();
+	private static CurvedButton donationButton = new CurvedButton("Donate");
+
 
 	public static int queueLimit = 0;
 	public static int userLimit = 0;
@@ -34,9 +41,8 @@ public class GeneralSettings {
 	private static JPanel panel = new JPanel();
 
 	public static JPanel createPanel() {
-
 		defaultUI.setBackground(Defaults.BUTTON);
-		defaultUI.setHover(Defaults.HOVER);
+		defaultUI.setHover(Defaults.BUTTON_HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
 
 
@@ -60,10 +66,30 @@ public class GeneralSettings {
 		versionLabel.setFont(new Font("bahnschrift", Font.PLAIN, 14));
 		versionLabel.setBounds(25,20,versionLabel.getPreferredSize().width+5,versionLabel.getPreferredSize().height+5);
 
+		donation.setForeground(Defaults.FOREGROUND);
+		donation.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		donation.setText("It would be highly appreciated if you donate!");
+		donation.setBounds(25 + 365/2 - donation.getPreferredSize().width/2,510,donation.getPreferredSize().width+5,donation.getPreferredSize().height+5);
+
+		donationButton.setBounds(25,540, 365,60);
+		donationButton.setPreferredSize(new Dimension(365,60));
+		donationButton.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		donationButton.setUI(defaultUI);
+		donationButton.setForeground(Defaults.FOREGROUND);
+		donationButton.setBackground(Defaults.BUTTON);
+		donationButton.refresh();
+
 		followers.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				followersOption = followers.getSelectedState();
+			}
+		});
+
+		subOnly.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				subsOption = subOnly.getSelectedState();
 			}
 		});
 
@@ -178,7 +204,9 @@ public class GeneralSettings {
 			}
 		});
 
+
 		panel.add(followers);
+		panel.add(subOnly);
 		panel.add(nowPlaying);
 		//panel.add(autoDownload);
 		panel.add(versionLabel);
@@ -188,12 +216,15 @@ public class GeneralSettings {
 		panel.add(userLimitInput);
 		panel.add(userLimitStreamText);
 		panel.add(userLimitStreamInput);
+		//panel.add(donation);
+		//panel.add(donationButton);
 		return panel;
 	}
 
 	public static void loadSettings(){
 		try {
 			followersOption = Boolean.parseBoolean(Settings.getSettings("followers"));
+			subsOption = Boolean.parseBoolean(Settings.getSettings("subscribers"));
 			nowPlayingOption = Boolean.parseBoolean(Settings.getSettings("disableNP"));
 			//autoDownloadOption = Boolean.parseBoolean(Settings.getSettings("autoDL"));
 			autoDownloadOption = false;
@@ -214,6 +245,7 @@ public class GeneralSettings {
 			}
 			followers.setChecked(followersOption);
 			nowPlaying.setChecked(nowPlayingOption);
+			subOnly.setChecked(subsOption);
 			//autoDownload.setChecked(autoDownloadOption);
 			queueLimitText.setChecked(queueLimitBoolean);
 			userLimitText.setChecked(userLimitOption);
@@ -244,6 +276,7 @@ public class GeneralSettings {
 	public static void setSettings(){
 		try {
 			Settings.writeSettings("followers", String.valueOf(followersOption));
+			Settings.writeSettings("subscribers", String.valueOf(subsOption));
 			Settings.writeSettings("disableNP", String.valueOf(nowPlayingOption));
 			Settings.writeSettings("autoDL", String.valueOf(autoDownloadOption));
 			Settings.writeSettings("queueLimitEnabled", String.valueOf(queueLimitBoolean));
@@ -276,7 +309,7 @@ public class GeneralSettings {
 		return button;
 	}
 	public static void refreshUI() {
-		defaultUI.setBackground(Defaults.MAIN);
+		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
 
@@ -288,7 +321,7 @@ public class GeneralSettings {
 						component2.setForeground(Defaults.FOREGROUND);
 					}
 				}
-				component.setBackground(Defaults.MAIN);
+				component.setBackground(Defaults.BUTTON);
 			}
 			if (component instanceof JLabel && !(((JLabel) component).getText().contains("GDBoard"))) {
 				component.setForeground(Defaults.FOREGROUND);

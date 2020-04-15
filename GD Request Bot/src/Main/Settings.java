@@ -68,15 +68,21 @@ public class Settings {
             settingsX = Boolean.parseBoolean(setting.split(",")[3]);
             settingsWLoc = new Point(x, y);
         }
+        if (key.equalsIgnoreCase("Window")) {
+            int x = Integer.parseInt(setting.split(",")[0]);
+            int y = Integer.parseInt(setting.split(",")[1]);
+            windowWLoc = new Point(x, y);
+        }
     }
 
-    static void writeLocation() throws IOException {
+    public static void writeLocation() throws IOException {
         writeSettings("song", songWLoc.x + "," + songWLoc.y + "," + songPin + "," + songX);
         writeSettings("actions", actionsWLoc.x + "," + actionsWLoc.y + "," + actPin + "," + actX);
         writeSettings("info", infoWLoc.x + "," + infoWLoc.y + "," + infoPin + "," + infoX);
         writeSettings("requests", requestsWLoc.x + "," + requestsWLoc.y + "," + reqPin + "," + reqX);
         writeSettings("comments", commentWLoc.x + "," + commentWLoc.y + "," + comPin + "," + comX);
         writeSettings("settings", settingsWLoc.x + "," + settingsWLoc.y + "," + settingsX);
+        writeSettings("window", windowWLoc.x + "," + windowWLoc.y);
     }
 
     public static void writeSettings(String key, String setting) throws IOException {
@@ -230,6 +236,13 @@ public class Settings {
                     }
                 }
             }
+            if(gfg.containsKey("window")){
+                String window = gfg.get("window").toString();
+                int x = Integer.parseInt(window.split(",")[0]);
+                int y = Integer.parseInt(window.split(",")[1]);
+                windowWLoc = new Point(x, y);
+                Windowed.setLocation(windowWLoc);
+            }
 
             if(gfg.containsKey("settings")){
                 String set = gfg.get("settings").toString();
@@ -241,13 +254,15 @@ public class Settings {
                     //SettingsWindow.setLocation(settingsWLoc);
                     if (!settingsX) {
                         SettingsWindow.toggleVisible();
+
                     }
                 }
+                SettingsWindow.setLocation(settingsWLoc);
             }
         }
     }
 
-    static boolean windowedMode = false;
+    public static boolean windowedMode = false;
     static String oauth;
     //static String clientID;
     private static Point requestsWLoc = new Point(10, 10);
@@ -256,6 +271,7 @@ public class Settings {
     private static Point songWLoc = new Point(1920 - 300 - 10, 600);
     private static Point actionsWLoc = new Point(1920 - 260 - 10, 200);
     private static Point settingsWLoc = new Point(1920 / 2 - 250, 1080 / 2 - 300);
+    private static Point windowWLoc = new Point(0, 0);
     static int monitor;
     public static String channel;
     static boolean hasMonitor = false;
@@ -276,8 +292,6 @@ public class Settings {
     //static boolean hasClientID = false;
 
     //TODO Save window sizes
-    //TODO User Request Limits
-    //TODO Queue size limits
     //TODO Sub Only Setting
     //TODO Cheer Only Setting
 
@@ -332,5 +346,8 @@ public class Settings {
             actionsWLoc = new Point(402, 20);
         }
         return actionsWLoc;
+    }
+    static Point getWindowWLoc() {
+        return windowWLoc;
     }
 }

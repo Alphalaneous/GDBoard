@@ -28,9 +28,6 @@ public class Overlay {
 
 
         frame.setFocusableWindowState(false);
-
-
-
             frame.setUndecorated(true);
             if(!Settings.windowedMode) {
                 frame.setBackground(new Color(0, 0, 0, 100));
@@ -45,7 +42,6 @@ public class Overlay {
                 });
             }
         frame.setLayout(null);
-
         mainFrame.setDoubleBuffered(true);
         mainFrame.setBounds(0, 0, Defaults.screenSize.width, Defaults.screenSize.height);
         mainFrame.setBackground(new Color(0, 0, 0, 0));
@@ -89,7 +85,6 @@ public class Overlay {
             e.printStackTrace();
         }
         if (Settings.windowedMode) {
-
             frame.getContentPane().setBackground(Defaults.SUB_MAIN);
         } else {
             mainFrame.setBounds(0, 0, Defaults.screenSize.width, Defaults.screenSize.height);
@@ -97,14 +92,18 @@ public class Overlay {
         }
         frame.invalidate();
         frame.revalidate();
-        SettingsWindow.refreshUI();
-        Windowed.refreshUI();
+        if(Settings.windowedMode) {
+            SettingsWindow.refreshUI();
+            Windowed.refreshUI();
+        }
+        else {
+            CommentsWindow.refreshUI();
+            ActionsWindow.refreshUI();
+            SongWindow.refreshUI();
+            MainBar.refreshUI(color);
+        }
         LevelsWindow.refreshUI();
         InfoWindow.refreshUI();
-        CommentsWindow.refreshUI();
-        ActionsWindow.refreshUI();
-        SongWindow.refreshUI();
-        MainBar.refreshUI(color);
         AccountSettings.refreshUI();
         BlockedSettings.refreshUI();
         BlockedUserSettings.refreshUI();

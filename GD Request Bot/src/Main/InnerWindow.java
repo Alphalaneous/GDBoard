@@ -1,5 +1,9 @@
 package Main;
 
+import SettingsPanels.GeneralSettings;
+import SettingsPanels.OutputSettings;
+import SettingsPanels.RequestSettings;
+import SettingsPanels.ShortcutSettings;
 import com.jidesoft.swing.ResizablePanel;
 
 import javax.swing.*;
@@ -8,6 +12,7 @@ import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 class InnerWindow extends ResizablePanel {
 
@@ -339,7 +344,9 @@ class InnerWindow extends ResizablePanel {
             @Override
             public void mousePressed(MouseEvent e) {
                 if(!floating){
-                    toggle();
+                    if(SwingUtilities.isLeftMouseButton(e)) {
+                        toggle();
+                    }
                 } else {
                     if(title.equalsIgnoreCase("Settings")) {
                         SettingsWindow.toggleVisible();
@@ -381,22 +388,24 @@ class InnerWindow extends ResizablePanel {
         pinButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                moveToFront();
-                if (isPinPressed) {
+                if(SwingUtilities.isLeftMouseButton(e)) {
+                    moveToFront();
+                    if (isPinPressed) {
 
-                    // --------------------
-                    // Set to unpressed Pin Icon
+                        // --------------------
+                        // Set to unpressed Pin Icon
 
-                    pinButtonFill.setVisible(false);
-                    isPinPressed = false;
+                        pinButtonFill.setVisible(false);
+                        isPinPressed = false;
 
-                } else {
+                    } else {
 
-                    // --------------------
-                    // Set to pressed Pin Icon
-                    pinButtonFill.setVisible(true);
-                    isPinPressed = true;
+                        // --------------------
+                        // Set to pressed Pin Icon
+                        pinButtonFill.setVisible(true);
+                        isPinPressed = true;
 
+                    }
                 }
             }
         });
@@ -604,6 +613,17 @@ class InnerWindow extends ResizablePanel {
                 }
                 if(title.equalsIgnoreCase("GDBoard")){
                     Windowed.frame.setVisible(false);
+                    SettingsWindow.setSettings();
+                    Windowed.setSettings();
+                    try {
+                        Settings.writeLocation();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    GeneralSettings.setSettings();
+                    RequestSettings.setSettings();
+                    ShortcutSettings.setSettings();
+                    OutputSettings.setSettings();
                     System.exit(0);
                 }
             }
@@ -615,9 +635,6 @@ class InnerWindow extends ResizablePanel {
             else {
                 if(title.equalsIgnoreCase("Settings")) {
                     SettingsWindow.frame.setVisible(true);
-                }
-                if(title.equalsIgnoreCase("GDBoard")){
-                    Windowed.frame.setVisible(true);
                 }
             }
             toggleState = true;

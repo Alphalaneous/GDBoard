@@ -13,7 +13,7 @@ import java.net.URL;
 
 import javax.swing.*;
 
-class SongWindow {
+public class SongWindow {
 	private static int height = 90;
 	private static int width = 300;
 	private static ResizablePanel window = new InnerWindow("Music - Newgrounds Audio", Settings.getSongWLoc().x, Settings.getSongWLoc().y, width, height, "\uEC4F", false).createPanel();
@@ -185,7 +185,7 @@ class SongWindow {
 	//endregion
 
 	//region SetSettings
-	static void setSettings(){
+	public static void setSettings(){
 		((InnerWindow) window).setSettings();
 	}
 	//endregion

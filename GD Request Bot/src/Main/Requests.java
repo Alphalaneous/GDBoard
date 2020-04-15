@@ -7,7 +7,6 @@ import com.github.alex1304.jdash.client.AnonymousGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.entity.GDLevel;
 import com.github.alex1304.jdash.exception.MissingAccessException;
-import org.apache.commons.io.FileUtils;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -137,7 +136,7 @@ class Requests {
             if (levelData.getDescription().toLowerCase().contains("nong")) {
                 String[] words = levelData.getDescription().split(" ");
                 for (String word : words) {
-                    if (isValisURL(word)){
+                    if (isValidURL(word)){
                         levelData.setSongURL(word);
                     }
                 }
@@ -326,7 +325,7 @@ class Requests {
         }
     }
 
-    public static boolean isValisURL(String url) {
+    public static boolean isValidURL(String url) {
 
         try {
             URL url1 = new URL(url);
