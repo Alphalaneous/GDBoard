@@ -124,6 +124,9 @@ class InnerWindow extends ResizablePanel {
                 if(title.equalsIgnoreCase("GDBoard")){
                     Windowed.frame.setLocation((int) x, (int) y);
                 }
+                if(title.equalsIgnoreCase("Startup")){
+                    Onboarding.frame.setLocation((int) x, (int) y);
+                }
             }
         }
         setOpaque(false);
@@ -199,6 +202,9 @@ class InnerWindow extends ResizablePanel {
                     if(title.equalsIgnoreCase("GDBoard")){
                         location = Windowed.frame.getLocation();
                     }
+                    if(title.equalsIgnoreCase("Startup")){
+                        location = Onboarding.frame.getLocation();
+                    }
                 }
             }
 
@@ -242,7 +248,7 @@ class InnerWindow extends ResizablePanel {
                         setLocation(p);
                     }
                     else {
-                        if(!Settings.windowedMode) {
+                        if(!Settings.windowedMode && !title.equalsIgnoreCase("Startup")) {
                             if (x + width >= Defaults.screenSize.getWidth() + Defaults.screenSize.x + 1) {
                                 p.setLocation(Defaults.screenSize.getWidth() + Defaults.screenSize.x + 1 - width, p.getY());
                             }
@@ -278,6 +284,9 @@ class InnerWindow extends ResizablePanel {
                         }
                         if(title.equalsIgnoreCase("GDBoard")){
                             Windowed.frame.setLocation(p);
+                        }
+                        if(title.equalsIgnoreCase("Startup")){
+                            Onboarding.frame.setLocation(p);
                         }
                     }
 
@@ -353,6 +362,9 @@ class InnerWindow extends ResizablePanel {
                     }
                     if(title.equalsIgnoreCase("GDBoard")){
                         Windowed.toggleVisible();
+                    }
+                    if(title.equalsIgnoreCase("Startup")){
+                        Onboarding.toggleVisible();
                     }
                 }
 
@@ -573,7 +585,12 @@ class InnerWindow extends ResizablePanel {
                 setVisible(true);
             }
             else {
-                SettingsWindow.frame.setVisible(true);
+                if(title.equalsIgnoreCase("Settings")) {
+                    SettingsWindow.frame.setVisible(true);
+                }
+                if(title.equalsIgnoreCase("Startup")){
+                    Onboarding.frame.setVisible(true);
+                }
             }
         }
     }
@@ -593,6 +610,9 @@ class InnerWindow extends ResizablePanel {
                     Windowed.frame.setVisible(false);
                     System.exit(0);
                 }
+                if(title.equalsIgnoreCase("Startup")){
+                    Onboarding.frame.setVisible(false);
+                }
             }
         }
         topBar.setVisible(false);
@@ -610,6 +630,10 @@ class InnerWindow extends ResizablePanel {
             else {
                 if(title.equalsIgnoreCase("Settings")) {
                     SettingsWindow.frame.setVisible(false);
+                }
+                if(title.equalsIgnoreCase("Startup")){
+                    Onboarding.frame.setVisible(false);
+                    System.exit(0);
                 }
                 if(title.equalsIgnoreCase("GDBoard")){
                     Windowed.frame.setVisible(false);
@@ -636,6 +660,9 @@ class InnerWindow extends ResizablePanel {
                 if(title.equalsIgnoreCase("Settings")) {
                     SettingsWindow.frame.setVisible(true);
                 }
+                if(title.equalsIgnoreCase("Startup")){
+                    Onboarding.frame.setVisible(true);
+                }
             }
             toggleState = true;
         }
@@ -651,6 +678,9 @@ class InnerWindow extends ResizablePanel {
     //region Set PinButton visible
     void setPinVisible() {
         pinButton.setVisible(false);
+    }
+    void setCloseVisible() {
+        closeButton.setVisible(false);
     }
     //endregion
 }

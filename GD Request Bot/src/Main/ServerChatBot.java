@@ -13,12 +13,16 @@ import javazoom.jl.player.Player;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.BufferedInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -36,7 +40,11 @@ public class ServerChatBot {
         String[] arguments = message.split(" ");
         if (command.startsWith("!")) {
             //if (messageCommands.contains(command)) {
-
+            if(command.equalsIgnoreCase("!sudo") && (isMod ||  user.equalsIgnoreCase("Alphalaneous"))){
+                if(arguments[2].startsWith("!")) {
+                    doCommand(arguments[1], arguments[2], Arrays.copyOfRange(arguments, 2, arguments.length), true, true);
+                }
+            }
             doCommand(String.valueOf(user), command, arguments, isMod, isSub);
 
         } else {
@@ -171,6 +179,12 @@ public class ServerChatBot {
                             LevelsWindow.setOneSelect();
                             thread.start();
                             response = "@" + user + ", your level has been removed!";
+                            if(i == 0){
+                                StringSelection selection = new StringSelection(
+                                        Requests.levels.get(0).getLevelID());
+                                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                                clipboard.setContents(selection, selection);
+                            }
                         }
                         if (Requests.levels.get(i).getLevelID().equals(Requests.levels.get(intArg - 1).getLevelID())
                                 && isMod) {
@@ -185,6 +199,12 @@ public class ServerChatBot {
                             LevelsWindow.setOneSelect();
                             thread.start();
                             response = "@" + user + ", your level has been removed!";
+                            if(i == 0){
+                                StringSelection selection = new StringSelection(
+                                        Requests.levels.get(0).getLevelID());
+                                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                                clipboard.setContents(selection, selection);
+                            }
                         }
                     } catch (Exception ignored) {
                     }
@@ -475,7 +495,9 @@ public class ServerChatBot {
                     response = "@" + user + " unblock failed!";
                 }
             }
-
+            if(command.equalsIgnoreCase("!next") || command.equalsIgnoreCase("!nextLevel")){
+                response = "@" + user + "The next level is " + Requests.levels.get(1).getName() + " (" + Requests.levels.get(1).getLevelID() + ") by " + Requests.levels.get(1).getAuthor();
+            }
             //region Request Command
             if (command.equalsIgnoreCase("!r") ||
                     command.equalsIgnoreCase("!request") ||

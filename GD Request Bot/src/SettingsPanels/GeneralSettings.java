@@ -13,6 +13,7 @@ public class GeneralSettings {
 	private static JButtonUI defaultUI = new JButtonUI();
 	public static boolean followersOption = false;
 	public static boolean subsOption = false;
+	public static boolean repeatedOption = false;
 	public static boolean nowPlayingOption = false;
 	public static boolean autoDownloadOption = false;
 	public static boolean queueLimitBoolean = false;
@@ -21,12 +22,13 @@ public class GeneralSettings {
 	private static JLabel versionLabel = new JLabel();
 	private static CheckboxButton followers = createButton("Followers Only", 50);
 	private static CheckboxButton nowPlaying = createButton("Disable Now Playing Message", 110);
+	private static CheckboxButton repeated = createButton("Disable Repeated Requests", 140);
 	//private static CheckboxButton autoDownload = createButton("Automatically download Music (Experimental)", 110);
 	private static CheckboxButton subOnly = createButton("Subscribers Only", 80);
 
-	private static CheckboxButton queueLimitText = createButton("Maximum Queue Size: ", 140);
-	private static CheckboxButton userLimitText = createButton("In Queue Request Limit: ", 215);
-	private static CheckboxButton userLimitStreamText = createButton("All Stream Request Limit: ", 290);
+	private static CheckboxButton queueLimitText = createButton("Maximum Queue Size: ", 170);
+	private static CheckboxButton userLimitText = createButton("In Queue Request Limit: ", 245);
+	private static CheckboxButton userLimitStreamText = createButton("All Stream Request Limit: ", 320);
 	private static JLabel donation = new JLabel();
 	private static CurvedButton donationButton = new CurvedButton("Donate");
 
@@ -99,6 +101,12 @@ public class GeneralSettings {
 				nowPlayingOption = nowPlaying.getSelectedState();
 			}
 		});
+		repeated.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				repeatedOption = repeated.getSelectedState();
+			}
+		});
 
 		/*autoDownload.addMouseListener(new MouseAdapter() {
 			@Override
@@ -120,7 +128,7 @@ public class GeneralSettings {
 			}
 		});
 		queueSizeInput.setEditable(false);
-		queueSizeInput.setBounds(25,173,365, 32);
+		queueSizeInput.setBounds(25,203,365, 32);
 		queueSizeInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		queueSizeInput.addKeyListener(new KeyListener() {
 			@Override
@@ -153,7 +161,7 @@ public class GeneralSettings {
 		});
 
 		userLimitInput.setEditable(false);
-		userLimitInput.setBounds(25,245,365, 32);
+		userLimitInput.setBounds(25,275,365, 32);
 		userLimitInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		userLimitInput.addKeyListener(new KeyListener() {
 			@Override
@@ -186,7 +194,7 @@ public class GeneralSettings {
 		});
 
 		userLimitStreamInput.setEditable(false);
-		userLimitStreamInput.setBounds(25,320,365, 32);
+		userLimitStreamInput.setBounds(25,350,365, 32);
 		userLimitStreamInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		userLimitStreamInput.addKeyListener(new KeyListener() {
 			@Override
@@ -208,6 +216,7 @@ public class GeneralSettings {
 		panel.add(followers);
 		panel.add(subOnly);
 		panel.add(nowPlaying);
+		panel.add(repeated);
 		//panel.add(autoDownload);
 		panel.add(versionLabel);
 		panel.add(queueLimitText);
@@ -226,6 +235,7 @@ public class GeneralSettings {
 			followersOption = Boolean.parseBoolean(Settings.getSettings("followers"));
 			subsOption = Boolean.parseBoolean(Settings.getSettings("subscribers"));
 			nowPlayingOption = Boolean.parseBoolean(Settings.getSettings("disableNP"));
+			repeatedOption = Boolean.parseBoolean(Settings.getSettings("repeatedRequests"));
 			//autoDownloadOption = Boolean.parseBoolean(Settings.getSettings("autoDL"));
 			autoDownloadOption = false;
 			queueLimitBoolean = Boolean.parseBoolean(Settings.getSettings("queueLimitEnabled"));
@@ -246,6 +256,7 @@ public class GeneralSettings {
 			followers.setChecked(followersOption);
 			nowPlaying.setChecked(nowPlayingOption);
 			subOnly.setChecked(subsOption);
+			repeated.setChecked(repeatedOption);
 			//autoDownload.setChecked(autoDownloadOption);
 			queueLimitText.setChecked(queueLimitBoolean);
 			userLimitText.setChecked(userLimitOption);
@@ -285,6 +296,7 @@ public class GeneralSettings {
 			Settings.writeSettings("userLimit", String.valueOf(userLimit));
 			Settings.writeSettings("userLimitStreamEnabled", String.valueOf(userLimitStreamOption));
 			Settings.writeSettings("userLimitStream", String.valueOf(userLimitStream));
+			Settings.writeSettings("repeatedRequests", String.valueOf(repeatedOption));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "There was an error writing to the file!", "Error",  JOptionPane.ERROR_MESSAGE);
 		}

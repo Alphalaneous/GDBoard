@@ -141,6 +141,9 @@ public class Settings {
             windowedMode = Boolean.parseBoolean(gfg.get("windowed").toString());
             hasWindowed = true;
         }
+        if(gfg.containsKey("onboarding")) {
+            onboarding = Boolean.parseBoolean(gfg.get("onboarding").toString());
+        }
         if(gfg.containsKey("monitor")) {
             monitor = Integer.parseInt(gfg.get("monitor").toString());
             if (monitor >= screens.length) {
@@ -275,6 +278,7 @@ public class Settings {
     static int monitor;
     public static String channel;
     static boolean hasMonitor = false;
+    public static boolean onboarding = true;
     static boolean hasOauth = false;
     static boolean hasChannel = false;
     static boolean hasWindowed = false;

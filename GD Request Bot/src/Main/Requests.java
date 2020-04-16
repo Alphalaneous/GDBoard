@@ -24,6 +24,7 @@ import java.util.zip.GZIPInputStream;
 class Requests {
 
     static ArrayList<LevelData> levels = new ArrayList<>();
+    static ArrayList<String> addedLevels = new ArrayList<>();
     private static HashMap<String, Integer> userStreamLimitMap = new HashMap<>();
 
     static void addRequest(String ID, String requester) {
@@ -84,7 +85,10 @@ class Requests {
                     return;
                 }
             }
-
+            if(addedLevels.contains(ID) && GeneralSettings.repeatedOption){
+                Main.sendMessage("@" + requester + " That level has been requested before!");
+                return;
+            }
             if (GeneralSettings.userLimitStreamOption) {
                 if (userStreamLimitMap.containsKey(requester)) {
                     if (userStreamLimitMap.get(requester) >= GeneralSettings.userLimitStream) {
@@ -118,6 +122,10 @@ class Requests {
                 Main.sendMessage("@" + requester + " Please send star rated levels only!");
                 return;
             }
+            if (level != null && RequestSettings.unratedOption && level.getStars() > 0) {
+                Main.sendMessage("@" + requester + " Please send unrated levels only!");
+                return;
+            }
             levelData.setRequester(requester);
             levelData.setAuthor(Objects.requireNonNull(level).getCreatorName());
             levelData.setName(level.getName());
@@ -132,16 +140,6 @@ class Requests {
             levelData.setEpic(level.isEpic());
             levelData.setSongID(String.valueOf(Objects.requireNonNull(level.getSong().block()).getId()));
             levelData.setStars(level.getStars());
-
-            if (levelData.getDescription().toLowerCase().contains("nong")) {
-                String[] words = levelData.getDescription().split(" ");
-                for (String word : words) {
-                    if (isValidURL(word)){
-                        levelData.setSongURL(word);
-                    }
-                }
-            }
-
             levelData.setSongName(Objects.requireNonNull(level.getSong().block()).getSongTitle());
             levelData.setSongAuthor(Objects.requireNonNull(level.getSong().block()).getSongAuthorName());
 
@@ -160,6 +158,21 @@ class Requests {
                     levelData.setDifficulty("insane demon");
                 } else if (level.getDifficulty().toString().equalsIgnoreCase("INSANE")) {
                     levelData.setDifficulty("extreme demon");
+                }
+            }
+            System.out.println(levelData.getDifficulty());
+            if(RequestSettings.excludedDifficulties.contains(levelData.getDifficulty().toLowerCase()) && RequestSettings.disableOption){
+                Main.sendMessage("@" + requester + " That difficulty is disabled!");
+                return;
+            }
+
+
+            if (levelData.getDescription().toLowerCase().contains("nong")) {
+                String[] words = levelData.getDescription().split(" ");
+                for (String word : words) {
+                    if (isValidURL(word)){
+                        levelData.setSongURL(word);
+                    }
                 }
             }
 
@@ -191,6 +204,7 @@ class Requests {
                 }
             }
             OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
+            addedLevels.add(Requests.levels.get(0).getLevelID());
             LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester(), levelData.getVersion());
 
         } else {
@@ -284,6 +298,11 @@ class Requests {
                     }
                 }
                 Requests.getLevelData().get(k).setAnalyzed();
+                try {
+                    Thread.sleep(250);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 LevelsWindow.updateUI(Requests.getLevelData().get(k).getLevelID(), Requests.getLevelData().get(k).getContainsVulgar(), Requests.getLevelData().get(k).getContainsImage(), true);
                 System.out.println("Analyzed " + k);
             }

@@ -15,7 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class OutputSettings {
-	public static String outputString = "Currently playing %levelName% (%levelID%) by %author%!";
+	public static String outputString = "Currently playing %levelName% (%levelID%) by %levelAuthor%!";
 	public static String noLevelString = "There are no levels in the queue!";
 	public static String fileLocation = Paths.get(System.getenv("APPDATA") + "\\GDBoard").toString();
 	private static FancyTextArea outputStringInput = new FancyTextArea(false);
@@ -44,7 +44,7 @@ public class OutputSettings {
 					outputString = outputStringInput.getText();
 				}
 				else{
-					outputString = "Currently playing %levelName% (%levelID%) by %author%!";
+					outputString = "Currently playing %levelName% (%levelID%) by %levelAuthor%!";
 				}
 			}
 		});
@@ -64,7 +64,7 @@ public class OutputSettings {
 					noLevelString = noLevelsStringInput.getText();
 				}
 				else{
-					noLevelString = "Currently playing %levelName% (%levelID%) by %author%!";
+					noLevelString = "There are no levels in the queue!";
 				}
 			}
 		});

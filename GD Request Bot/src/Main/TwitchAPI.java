@@ -11,9 +11,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class TwitchAPI {
 
@@ -88,8 +88,9 @@ public class TwitchAPI {
             return "";
         }
     }
-
+    static AtomicBoolean success = new AtomicBoolean(false);
     public static void setOauth() {
+
         Thread thread = new Thread(() -> {
             try {
                 Twitch twitch = new Twitch();
@@ -107,22 +108,20 @@ public class TwitchAPI {
                     String channel = TwitchAPI.getChannel();
                     Settings.setChannel(channel);
                     Settings.writeSettings("channel", channel);
+                    AccountSettings.refreshChannel();
+                    success.set(true);
+                    try {
+                        GDBoardBot.restart();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Failed to Authenticate Twitch account", "Error", JOptionPane.ERROR_MESSAGE);
                     System.out.println(twitch.auth().getAuthenticationError());
+
                 }
             } catch (Exception ignored) {
             }
-            try {
-                GDBoardBot.restart();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            JSONObject authObj = new JSONObject();
-            authObj.put("request_type", "connect");
-            authObj.put("oauth", Settings.oauth);
-            GDBoardBot.sendMessage(authObj.toString());
-            AccountSettings.refreshChannel();
+
         });
         thread.start();
     }

@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Set;
 
 public class Overlay {
 
@@ -102,6 +103,7 @@ public class Overlay {
             SongWindow.refreshUI();
             MainBar.refreshUI(color);
         }
+        Onboarding.refreshUI();
         LevelsWindow.refreshUI();
         InfoWindow.refreshUI();
         AccountSettings.refreshUI();

@@ -154,8 +154,10 @@ public class ShortcutSettings {
     }
 
     public static void loadSettings() throws IOException {
-
-        if (!Settings.getSettings("openKeybind").equalsIgnoreCase("") && !Settings.getSettings("openKeybind").equalsIgnoreCase("-1")) {
+        if(Settings.onboarding){
+            openKeybind = Onboarding.openKeybind;
+        }
+        else if (!Settings.getSettings("openKeybind").equalsIgnoreCase("") && !Settings.getSettings("openKeybind").equalsIgnoreCase("-1")) {
             openKeybind = Integer.parseInt(Settings.getSettings("openKeybind"));
         }
         if (!Settings.getSettings("skipKeybind").equalsIgnoreCase("") && !Settings.getSettings("skipKeybind").equalsIgnoreCase("-1")) {
@@ -227,7 +229,7 @@ public class ShortcutSettings {
         }
     }
 
-    static void loadKeybind(String setting, int keybind) {
+    public static void loadKeybind(String setting, int keybind) {
         if (setting.equalsIgnoreCase("Open")) {
             openKeybind = keybind;
         }

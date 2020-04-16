@@ -21,9 +21,10 @@ class GDBoardBot {
     private static PrintWriter out;
     private static BufferedReader in;
     private static Socket clientSocket;
+    private static JDialog dialog = new JDialog();
     static boolean ready = false;
     static void start() throws IOException {
-        JDialog dialog = new JDialog();
+
         JPanel panel = new JPanel();
         dialog.setSize(new Dimension(200,100));
         JLabel tf = new JLabel("connecting");
@@ -124,7 +125,9 @@ class GDBoardBot {
         out.println(message);
     }
     static void restart() throws IOException {
-        clientSocket.close();
+        if(clientSocket != null) {
+            clientSocket.close();
+        }
         clientSocket = new Socket("165.227.53.200", 2963);
         out = new PrintWriter(clientSocket.getOutputStream(), true);
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
