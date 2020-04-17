@@ -21,9 +21,7 @@ public class Onboarding {
     private static ResizablePanel window = new InnerWindow("Startup", 0,0, width - 2, height,
             "\uF137", true).createPanel();
     private static JPanel content = new JPanel(null);
-    private static JPanel buttonPanel = new JPanel();
     private static JButtonUI defaultUI = new JButtonUI();
-    private static JButtonUI selectUI = new JButtonUI();
     private static JPanel openPanel = createKeybindButton(110, "Open Keybind", "openKeybind");
     public static int openKeybind = 36;
     static JDialog frame = new JDialog();
@@ -125,25 +123,10 @@ public class Onboarding {
 
     static void refreshUI() {
         ((InnerWindow) window).refreshUI();
-        defaultUI.setBackground(Defaults.MAIN);
-        defaultUI.setHover(Defaults.HOVER);
+        defaultUI.setBackground(Defaults.BUTTON);
+        defaultUI.setHover(Defaults.BUTTON_HOVER);
         defaultUI.setSelect(Defaults.SELECT);
-        selectUI.setBackground(Defaults.SELECT);
-        selectUI.setHover(Defaults.BUTTON_HOVER);
-        selectUI.setSelect(Defaults.SELECT);
         content.setBackground(Defaults.SUB_MAIN);
-        buttonPanel.setBackground(Defaults.SUB_MAIN);
-        for (Component component : buttonPanel.getComponents()) {
-            if (component instanceof JButton) {
-                if (!Settings.windowedMode) {
-                    component.setBackground(Defaults.BUTTON);
-                } else {
-                    component.setBackground(Defaults.MAIN);
-                }
-                component.setForeground(Defaults.FOREGROUND);
-            }
-        }
-
     }
 
     static void toggleVisible() {

@@ -67,7 +67,6 @@ class GDBoardBot {
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
         Thread thread = new Thread(() -> {
-            dialog.setVisible(false);
             String inputLine;
             while (true) {
                 while(clientSocket.isClosed() || !clientSocket.isConnected()){
@@ -90,6 +89,7 @@ class GDBoardBot {
                 }
                 if(event.equalsIgnoreCase("connected")){
                     connected = true;
+                    dialog.setVisible(false);
                 }
                 else if(event.equalsIgnoreCase("connect_failed")){
                     System.out.println(object.get("error").toString().replaceAll("\"", ""));

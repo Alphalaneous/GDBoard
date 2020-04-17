@@ -36,6 +36,7 @@ public class Main {
                 Onboarding.createPanel();
                 Onboarding.loadSettings();
                 Onboarding.frame.setVisible(true);
+                Onboarding.refreshUI();
             }
             else{
                 starting = false;
@@ -57,7 +58,8 @@ public class Main {
                         authObj.put("request_type", "connect");
                         authObj.put("oauth", Settings.oauth);
                         GDBoardBot.sendMessage(authObj.toString());
-                        Thread.sleep(5000);
+                        Thread.sleep(2500);
+
                     }
                     if (GDBoardBot.failed) {
                         TwitchAPI.setOauth();

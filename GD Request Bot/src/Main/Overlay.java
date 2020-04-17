@@ -107,7 +107,6 @@ public class Overlay {
             SongWindow.refreshUI();
             MainBar.refreshUI(color);
         }
-        Onboarding.refreshUI();
         LevelsWindow.refreshUI();
         InfoWindow.refreshUI();
         AccountSettings.refreshUI();

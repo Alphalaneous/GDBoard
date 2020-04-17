@@ -142,7 +142,7 @@ public class ActionsWindow {
         panel.setBackground(Defaults.MAIN);
         for (Component component : panel.getComponents()) {
             if (component instanceof JButton) {
-                component.setBackground(Defaults.MAIN);
+                component.setBackground(Defaults.BUTTON);
                 component.setForeground(Defaults.FOREGROUND);
             }
         }
