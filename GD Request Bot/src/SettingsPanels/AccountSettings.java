@@ -17,7 +17,7 @@ import javax.swing.*;
 
 public class AccountSettings {
 	private static JLabel channelText;
-	private static String channel = Settings.channel.replaceAll("#", "");
+	private static String channel = "";
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static JPanel panel = new JPanel();
 
