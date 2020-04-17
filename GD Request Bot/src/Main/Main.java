@@ -52,14 +52,12 @@ public class Main {
                     }
 
                     Thread.sleep(1000);
-                    if(!Settings.onboarding){
+                    while(!GDBoardBot.connected){
                         JSONObject authObj = new JSONObject();
                         authObj.put("request_type", "connect");
                         authObj.put("oauth", Settings.oauth);
                         GDBoardBot.sendMessage(authObj.toString());
-                    }
-                    while (!GDBoardBot.connected && !GDBoardBot.failed) {
-                        Thread.sleep(10);
+                        Thread.sleep(5000);
                     }
                     if (GDBoardBot.failed) {
                         TwitchAPI.setOauth();

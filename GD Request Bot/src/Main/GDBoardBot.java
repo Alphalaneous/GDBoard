@@ -68,7 +68,7 @@ class GDBoardBot {
 
         Thread thread = new Thread(() -> {
             dialog.setVisible(false);
-            String inputLine = "";
+            String inputLine;
             while (true) {
                 while(clientSocket.isClosed() || !clientSocket.isConnected()){
                     try {
