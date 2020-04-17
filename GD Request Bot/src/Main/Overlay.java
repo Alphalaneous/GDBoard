@@ -42,6 +42,10 @@ public class Overlay {
                     }
                 });
             }
+            else{
+                frame.setBackground(new Color(0, 0, 0, 0));
+
+            }
         frame.setLayout(null);
         mainFrame.setDoubleBuffered(true);
         mainFrame.setBounds(0, 0, Defaults.screenSize.width, Defaults.screenSize.height);

@@ -64,13 +64,13 @@ public class Main {
                     }
                     Main.sendMessage("Thank you for using GDBoard by Alphalaneous and TreeHouseFalcon! Type !help for list of commands!");
 
-                    Overlay.setFrame();                //Creates the JFrame that contains everything
                     ControllerListener.hook();         //Starts Controller Listener
 
                     GlobalScreen.registerNativeHook();
                     GlobalScreen.addNativeKeyListener(new KeyListener());
 
                     if (!Settings.windowedMode) {
+                        Overlay.setFrame();                //Creates the JFrame that contains everything
                         MainBar.createBar();            //Creates the main "Game Bar" in the top center
                     }
                     LevelsWindow.createPanel();         //Creates the Levels Window containing all the requests in the level queue
@@ -97,7 +97,9 @@ public class Main {
                     if (Settings.windowedMode) {
                         Windowed.frame.setVisible(true);
                     }
-                    Overlay.setVisible();
+                    else {
+                        Overlay.setVisible();
+                    }
                     SettingsWindow.toFront();
                     SettingsWindow.toggleVisible();
                     OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
