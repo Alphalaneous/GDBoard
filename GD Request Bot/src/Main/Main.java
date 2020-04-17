@@ -32,8 +32,8 @@ public class Main {
             });
             Settings.loadSettings(true);
             Defaults.startMainThread();        //Starts thread that always checks for changes such as time, resolution, and color scheme
-
             if(Settings.onboarding){
+                Thread.sleep(2000);
                 Onboarding.createPanel();
                 Onboarding.loadSettings();
                 Onboarding.frame.setVisible(true);

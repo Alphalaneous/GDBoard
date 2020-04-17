@@ -56,11 +56,12 @@ public class Onboarding {
         JLabel keybindInfo = new JLabel("Set the keybind to open the GDBoard Overlay here!");
         keybindInfo.setFont(new Font("bahnschrift", Font.PLAIN, 12));
         keybindInfo.setBounds(25, 90, width - 50, keybindInfo.getPreferredSize().height + 5);
-
+        keybindInfo.setForeground(Defaults.FOREGROUND);
 
         JLabel authInfo = new JLabel("Press Next to Log In with Twitch and start GDBoard!");
         authInfo.setFont(new Font("bahnschrift", Font.PLAIN, 12));
         authInfo.setBounds(25, height - 80, width - 50, authInfo.getPreferredSize().height + 5);
+        authInfo.setForeground(Defaults.FOREGROUND);
 
         CurvedButton button = new CurvedButton("Next");
         defaultUI.setBackground(Defaults.BUTTON);
@@ -77,8 +78,8 @@ public class Onboarding {
             @Override
             public void mousePressed(MouseEvent e) {
                 try {
-                    TwitchAPI.setOauth();
                     Thread thread = new Thread(() -> {
+                        TwitchAPI.setOauth();
                         while (!TwitchAPI.success.get()) {
                             try {
                                 Thread.sleep(100);
