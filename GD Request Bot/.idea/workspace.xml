@@ -510,7 +510,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="215" y="22" width="1140" height="1009" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.38333333" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -521,7 +520,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32990867" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5579819" visible="true" weight="0.24771689" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5579819" weight="0.24771689" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.42009133" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
