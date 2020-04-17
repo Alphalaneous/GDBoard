@@ -204,7 +204,7 @@ class Requests {
                 }
             }
             OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
-            addedLevels.add(Requests.levels.get(0).getLevelID());
+            addedLevels.add(ID);
             LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester(), levelData.getVersion());
 
         } else {

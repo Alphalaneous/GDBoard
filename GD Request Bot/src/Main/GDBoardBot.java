@@ -21,14 +21,18 @@ class GDBoardBot {
     private static PrintWriter out;
     private static BufferedReader in;
     private static Socket clientSocket;
-    private static JDialog dialog = new JDialog();
     static boolean ready = false;
+    private static JDialog dialog = new JDialog();
+    private static JPanel panel = new JPanel();
+    private static JLabel tf = new JLabel("Connecting...");
     static void start() throws IOException {
 
-        JPanel panel = new JPanel();
         dialog.setSize(new Dimension(200,100));
-        JLabel tf = new JLabel("connecting");
+        tf.setForeground(Color.WHITE);
+        tf.setFont(new Font("bahnschrift", Font.BOLD, 20));
         panel.add(tf);
+        panel.setBackground(new Color(31, 31, 31));
+        panel.setLayout(new GridBagLayout());
         dialog.add(panel);
 
         dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -37,15 +41,17 @@ class GDBoardBot {
         dialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                System.exit(0);
             }
         });
+        dialog.setResizable(false);
+        dialog.setTitle("Connecting to GDBoard");
         dialog.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - dialog.getWidth()/2, Toolkit.getDefaultToolkit().getScreenSize().height/2 - dialog.getHeight()/2);
         dialog.setVisible(true);
 
         try {
-            //clientSocket = new Socket("165.227.53.200", 2963);
-            clientSocket = new Socket("localhost", 2963);
-
+            clientSocket = new Socket("165.227.53.200", 2963);
+            //clientSocket = new Socket("localhost", 2963);
         }
         catch (ConnectException e){
             System.out.println("failed");
@@ -64,7 +70,7 @@ class GDBoardBot {
             dialog.setVisible(false);
             String inputLine = "";
             while (true) {
-                while(clientSocket.isClosed()){
+                while(clientSocket.isClosed() || !clientSocket.isConnected()){
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
@@ -73,7 +79,8 @@ class GDBoardBot {
                 }
                 try {
                     if ((inputLine = in.readLine()) == null) break;
-                } catch (IOException ignored) {
+                } catch (IOException e) {
+                    break;
                 }
                 String event = "";
                 System.out.println(inputLine);
