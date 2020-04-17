@@ -78,8 +78,8 @@ public class Onboarding {
             @Override
             public void mousePressed(MouseEvent e) {
                 try {
+                    TwitchAPI.setOauth();
                     Thread thread = new Thread(() -> {
-                        TwitchAPI.setOauth();
                         while (!TwitchAPI.success.get()) {
                             try {
                                 Thread.sleep(100);
