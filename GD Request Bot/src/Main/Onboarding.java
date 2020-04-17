@@ -93,6 +93,11 @@ public class Onboarding {
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
+                        try {
+                            Settings.writeSettings("onboarding", "false");
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
                         Main.starting = false;
                     });
                     thread.start();

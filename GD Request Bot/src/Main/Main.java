@@ -34,7 +34,6 @@ public class Main {
             Defaults.startMainThread();        //Starts thread that always checks for changes such as time, resolution, and color scheme
 
             if(Settings.onboarding){
-                Settings.writeSettings("onboarding", "false");
                 Onboarding.createPanel();
                 Onboarding.loadSettings();
                 Onboarding.frame.setVisible(true);
