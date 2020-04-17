@@ -18,7 +18,7 @@ import java.io.IOException;
 public class Onboarding {
     static int width = 465;
     static int height = 512;
-    private static ResizablePanel window = new InnerWindow("Startup", 0,0, width - 2, height,
+    private static ResizablePanel window = new InnerWindow("Startup", 0, 0, width - 2, height,
             "\uF137", true).createPanel();
     private static JPanel content = new JPanel(null);
     private static JButtonUI defaultUI = new JButtonUI();
@@ -27,8 +27,7 @@ public class Onboarding {
     static JDialog frame = new JDialog();
 
     static void createPanel() {
-        Onboarding.setLocation(new Point(Defaults.screenSize.width/2 - width/2, Defaults.screenSize.height/2 - height / 2));
-        frame.setAlwaysOnTop(true);
+        Onboarding.setLocation(new Point(Defaults.screenSize.width / 2 - width / 2, Defaults.screenSize.height / 2 - height / 2));
         frame.setUndecorated(true);
         frame.setSize(width, height + 32);
         frame.setLayout(null);
@@ -55,16 +54,44 @@ public class Onboarding {
         keybindInfo.setFont(new Font("bahnschrift", Font.PLAIN, 12));
         keybindInfo.setBounds(25, 90, width - 50, keybindInfo.getPreferredSize().height + 5);
         keybindInfo.setForeground(Defaults.FOREGROUND);
+        defaultUI.setBackground(Defaults.BUTTON);
+        defaultUI.setHover(Defaults.BUTTON_HOVER);
+        defaultUI.setSelect(Defaults.SELECT);
 
         JLabel authInfo = new JLabel("Press Next to Log In with Twitch and start GDBoard!");
         authInfo.setFont(new Font("bahnschrift", Font.PLAIN, 12));
         authInfo.setBounds(25, height - 80, width - 50, authInfo.getPreferredSize().height + 5);
         authInfo.setForeground(Defaults.FOREGROUND);
-
+        CurvedButton moveOn = new CurvedButton("Click here if Success and GDBoard hasn't moved on");
+        moveOn.setBackground(Defaults.BUTTON);
+        moveOn.setBounds(25, height - 140, width - 55, 30);
+        moveOn.setPreferredSize(new Dimension(width - 55, 30));
+        moveOn.setUI(defaultUI);
+        moveOn.setForeground(Defaults.FOREGROUND);
+        moveOn.setBorder(BorderFactory.createEmptyBorder());
+        moveOn.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+        moveOn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                Onboarding.setInvisible();
+                ShortcutSettings.loadKeybind("Open", openKeybind);
+                try {
+                    Settings.writeSettings("openKeybind", String.valueOf(openKeybind));
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                try {
+                    Settings.writeSettings("onboarding", "false");
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                Main.starting = false;
+            }
+        });
+        moveOn.refresh();
+        moveOn.setVisible(false);
         CurvedButton button = new CurvedButton("Next");
-        defaultUI.setBackground(Defaults.BUTTON);
-        defaultUI.setHover(Defaults.BUTTON_HOVER);
-        defaultUI.setSelect(Defaults.SELECT);
+
         button.setBackground(Defaults.BUTTON);
         button.setBounds(25, height - 45, width - 55, 30);
         button.setPreferredSize(new Dimension(width - 55, 30));
@@ -76,6 +103,7 @@ public class Onboarding {
             @Override
             public void mousePressed(MouseEvent e) {
                 try {
+                    moveOn.setVisible(true);
                     TwitchAPI.setOauth();
                     Thread thread = new Thread(() -> {
                         while (!TwitchAPI.success.get()) {
@@ -111,6 +139,7 @@ public class Onboarding {
         content.add(keybindInfo);
         content.add(authInfo);
         content.add(button);
+        content.add(moveOn);
         window.add(content);
         ((InnerWindow) window).setPinVisible();
         ((InnerWindow) window).refreshListener();
