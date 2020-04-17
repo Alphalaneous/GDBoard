@@ -117,6 +117,5 @@ public class Main {
         messageObj.put("request_type", "send_message");
         messageObj.put("message", message);
         GDBoardBot.sendMessage(messageObj.toString());
-        System.out.println("test");
     }
 }

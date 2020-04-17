@@ -20,7 +20,7 @@ public class TwitchAPI {
     static boolean isNotFollowing(String user) {
 
 
-        JsonObject isFollowing = twitchAPI("https://api.twitch.tv/helix/users/follows?from_id=" + getIDs(user.toString()) + "&to_id=" + getIDs(Settings.channel.toLowerCase()));
+        JsonObject isFollowing = twitchAPI("https://api.twitch.tv/helix/users/follows?from_id=" + getIDs(user) + "&to_id=" + getIDs(Settings.channel.toLowerCase()));
         if (isFollowing != null) {
             String str = isFollowing.get("total").toString();
             System.out.println(str);
@@ -106,6 +106,7 @@ public class TwitchAPI {
                     Settings.setOAuth(twitch.auth().getAccessToken());
                     Settings.writeSettings("oauth", twitch.auth().getAccessToken());
                     String channel = TwitchAPI.getChannel();
+                    Settings.channel = channel;
                     Settings.setChannel(channel);
                     Settings.writeSettings("channel", channel);
                     AccountSettings.refreshChannel();
