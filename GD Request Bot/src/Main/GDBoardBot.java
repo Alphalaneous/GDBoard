@@ -83,29 +83,32 @@ class GDBoardBot {
                 }
                 String event = "";
                 System.out.println(inputLine);
-                JsonObject object = JsonObject.readFrom(inputLine);
-                if(object.get("event") != null) {
-                     event = object.get("event").toString().replaceAll("\"", "");
-                }
-                if(event.equalsIgnoreCase("connected")){
-                    connected = true;
-                    dialog.setVisible(false);
-                }
-                else if(event.equalsIgnoreCase("connect_failed")){
-                    System.out.println(object.get("error").toString().replaceAll("\"", ""));
-                    failed = true;
-                }
-                else if(event.equalsIgnoreCase("command") || event.equalsIgnoreCase("level_request")){
-                    String sender = object.get("sender").toString().replaceAll("\"", "");
-                    String message = object.get("message").toString().replaceAll("\"", "");
-                    boolean mod = object.get("mod").asBoolean();
-                    boolean sub = object.get("sub").asBoolean();
-                    try {
-                        ServerChatBot.onMessage(sender, message, mod, sub);
+                try {
+                    JsonObject object = JsonObject.readFrom(inputLine);
+                    if (object.get("event") != null) {
+                        event = object.get("event").toString().replaceAll("\"", "");
                     }
-                    catch (Exception e){
-                        e.printStackTrace();
+                    if (event.equalsIgnoreCase("connected")) {
+                        connected = true;
+                        dialog.setVisible(false);
+                    } else if (event.equalsIgnoreCase("connect_failed")) {
+                        System.out.println(object.get("error").toString().replaceAll("\"", ""));
+                        failed = true;
+                    } else if (event.equalsIgnoreCase("command") || event.equalsIgnoreCase("level_request")) {
+                        String sender = object.get("sender").toString().replaceAll("\"", "");
+                        String message = object.get("message").toString().replaceAll("\"", "");
+                        boolean mod = object.get("mod").asBoolean();
+                        boolean sub = object.get("sub").asBoolean();
+                        try {
+                            ServerChatBot.onMessage(sender, message, mod, sub);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                    continue;
                 }
                 try {
                     Thread.sleep(10);

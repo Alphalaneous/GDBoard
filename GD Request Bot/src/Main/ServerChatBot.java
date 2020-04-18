@@ -36,45 +36,50 @@ public class ServerChatBot {
 
     //endregion
     public static void onMessage(String user, String message, boolean isMod, boolean isSub) {
-        String command = message.split(" ")[0];
-        String[] arguments = message.split(" ");
-        if (command.startsWith("!")) {
-            //if (messageCommands.contains(command)) {
-            if (command.equalsIgnoreCase("!sudo") && (isMod || user.equalsIgnoreCase("Alphalaneous"))) {
-                if (arguments[2].startsWith("!")) {
-                    doCommand(arguments[1], arguments[2], Arrays.copyOfRange(arguments, 2, arguments.length), true, true);
+        try {
+            String command = message.split(" ")[0];
+            String[] arguments = message.split(" ");
+            if (command.startsWith("!")) {
+                //if (messageCommands.contains(command)) {
+                if (command.equalsIgnoreCase("!sudo") && (isMod || user.equalsIgnoreCase("Alphalaneous"))) {
+                    if (arguments[2].startsWith("!")) {
+                        doCommand(arguments[1], arguments[2], Arrays.copyOfRange(arguments, 2, arguments.length), true, true);
+                    }
                 }
-            }
-            doCommand(String.valueOf(user), command, arguments, isMod, isSub);
+                doCommand(String.valueOf(user), command, arguments, isMod, isSub);
 
-        } else {
-            Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(message);
-            if (m.find()) {
-                if (GeneralSettings.followersOption) {
-                    if (TwitchAPI.isNotFollowing(String.valueOf(user)) && isMod) {
-                        if (!(("#" + user).equalsIgnoreCase(String.valueOf(Settings.channel)) || !isMod)) {
-                            Main.sendMessage("@" + user + " Please follow to request levels!");
-                            return;
+            } else {
+                Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(message);
+                if (m.find()) {
+                    if (GeneralSettings.followersOption) {
+                        if (TwitchAPI.isNotFollowing(String.valueOf(user)) && isMod) {
+                            if (!(("#" + user).equalsIgnoreCase(String.valueOf(Settings.channel)) || !isMod)) {
+                                Main.sendMessage("@" + user + " Please follow to request levels!");
+                                return;
+                            }
                         }
                     }
-                }
-                try {
-                    String[] msgs = message.split(" ");
-                    String mention = "";
-                    for (String s : msgs) {
-                        if (s.contains("@")) {
-                            mention = s;
-                            break;
+                    try {
+                        String[] msgs = message.split(" ");
+                        String mention = "";
+                        for (String s : msgs) {
+                            if (s.contains("@")) {
+                                mention = s;
+                                break;
+                            }
                         }
-                    }
-                    if (!mention.contains(m.group(1))) {
-                        Requests.addRequest(m.group(1), String.valueOf(user));
-                    }
+                        if (!mention.contains(m.group(1))) {
+                            Requests.addRequest(m.group(1), String.valueOf(user));
+                        }
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+        }
+        catch (Exception e){
+            e.printStackTrace();
         }
     }
 
@@ -583,7 +588,9 @@ public class ServerChatBot {
                                         String.valueOf(user));
                             } catch (MissingAccessException e) {
                                 response = "@" + user + " That level doesn't exist!";
-                                e.printStackTrace();
+                            } catch (Exception e){
+                                response = "@" + user + " An unknown error occured";
+
                             }
                         }
                     }
