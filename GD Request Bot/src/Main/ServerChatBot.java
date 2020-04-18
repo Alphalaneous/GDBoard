@@ -551,9 +551,6 @@ public class ServerChatBot {
                                 message.append(arguments[i]).append(" ");
                             }
                         }
-                        if (message.toString().contains("-")) {
-                            return;
-                        }
                         if (message.toString().contains(" by ")) {
                             String level1 = message.toString().split("by ")[0].toUpperCase();
                             String username = message.toString().split("by ")[1];

@@ -17,7 +17,6 @@ import javax.swing.*;
 
 public class AccountSettings {
 	private static JLabel channelText;
-	private static String channel = "";
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static JPanel panel = new JPanel();
 
@@ -34,7 +33,11 @@ public class AccountSettings {
 		panel.setBackground(Defaults.SUB_MAIN);
 		panel.setLayout(null);
 
-		channelText = new JLabel("Connected to: " + channel);
+		try {
+			channelText = new JLabel("Connected to: " + Settings.getSettings("channel"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		channelText.setForeground(Defaults.FOREGROUND);
 		channelText.setFont(new Font("bahnschrift", Font.PLAIN, 14));
 		channelText.setBounds(25,20,channelText.getPreferredSize().width+5,channelText.getPreferredSize().height+5);
@@ -73,7 +76,7 @@ public class AccountSettings {
 	public static void loadSettings(){
 		try {
 			if(!Settings.getSettings("channel").equalsIgnoreCase("")) {
-				channel = Settings.getSettings("channel");
+				String channel = Settings.getSettings("channel");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

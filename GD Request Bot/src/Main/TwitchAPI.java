@@ -20,7 +20,12 @@ public class TwitchAPI {
     static boolean isNotFollowing(String user) {
 
 
-        JsonObject isFollowing = twitchAPI("https://api.twitch.tv/helix/users/follows?from_id=" + getIDs(user) + "&to_id=" + getIDs(Settings.channel.toLowerCase()));
+        JsonObject isFollowing = null;
+        try {
+            isFollowing = twitchAPI("https://api.twitch.tv/helix/users/follows?from_id=" + getIDs(user) + "&to_id=" + getIDs(Settings.getSettings("channel")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         if (isFollowing != null) {
             String str = isFollowing.get("total").toString();
             System.out.println(str);
