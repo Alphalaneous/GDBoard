@@ -100,7 +100,12 @@ class GDBoardBot {
                     String message = object.get("message").toString().replaceAll("\"", "");
                     boolean mod = object.get("mod").asBoolean();
                     boolean sub = object.get("sub").asBoolean();
-                    ServerChatBot.onMessage(sender, message, mod, sub);
+                    try {
+                        ServerChatBot.onMessage(sender, message, mod, sub);
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
                 try {
                     Thread.sleep(10);
