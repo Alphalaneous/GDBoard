@@ -57,7 +57,7 @@ public class Main {
                     authObj.put("request_type", "connect");
                     authObj.put("oauth", Settings.oauth);
                     GDBoardBot.sendMessage(authObj.toString());
-
+                    Thread.sleep(1000);
                     while(!GDBoardBot.connected){
                         GDBoardBot.sendMessage(authObj.toString());
                         Thread.sleep(15000);
