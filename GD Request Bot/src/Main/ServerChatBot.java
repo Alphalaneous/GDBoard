@@ -40,8 +40,8 @@ public class ServerChatBot {
         String[] arguments = message.split(" ");
         if (command.startsWith("!")) {
             //if (messageCommands.contains(command)) {
-            if(command.equalsIgnoreCase("!sudo") && (isMod ||  user.equalsIgnoreCase("Alphalaneous"))){
-                if(arguments[2].startsWith("!")) {
+            if (command.equalsIgnoreCase("!sudo") && (isMod || user.equalsIgnoreCase("Alphalaneous"))) {
+                if (arguments[2].startsWith("!")) {
                     doCommand(arguments[1], arguments[2], Arrays.copyOfRange(arguments, 2, arguments.length), true, true);
                 }
             }
@@ -179,7 +179,7 @@ public class ServerChatBot {
                             LevelsWindow.setOneSelect();
                             thread.start();
                             response = "@" + user + ", your level has been removed!";
-                            if(i == 0){
+                            if (i == 0) {
                                 StringSelection selection = new StringSelection(
                                         Requests.levels.get(0).getLevelID());
                                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -199,7 +199,7 @@ public class ServerChatBot {
                             LevelsWindow.setOneSelect();
                             thread.start();
                             response = "@" + user + ", your level has been removed!";
-                            if(i == 0){
+                            if (i == 0) {
                                 StringSelection selection = new StringSelection(
                                         Requests.levels.get(0).getLevelID());
                                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -495,7 +495,7 @@ public class ServerChatBot {
                     response = "@" + user + " unblock failed!";
                 }
             }
-            if(command.equalsIgnoreCase("!next") || command.equalsIgnoreCase("!nextLevel")){
+            if (command.equalsIgnoreCase("!next") || command.equalsIgnoreCase("!nextLevel")) {
                 response = "@" + user + "The next level is " + Requests.levels.get(1).getName() + " (" + Requests.levels.get(1).getLevelID() + ") by " + Requests.levels.get(1).getAuthor();
             }
             //region Request Command
@@ -545,6 +545,9 @@ public class ServerChatBot {
                             } else {
                                 message.append(arguments[i]).append(" ");
                             }
+                        }
+                        if (message.toString().contains("-")) {
+                            return;
                         }
                         if (message.toString().contains(" by ")) {
                             String level1 = message.toString().split("by ")[0].toUpperCase();
@@ -597,8 +600,7 @@ public class ServerChatBot {
                 //}
             }
             //endregion
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             Main.sendMessage("@" + user + " An unknown error occured running the command. Please try again>");
         }
     }
