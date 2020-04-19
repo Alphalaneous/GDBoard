@@ -12,7 +12,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/Onboarding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Onboarding.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
@@ -120,8 +119,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Onboarding.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="41" column="56" lean-forward="true" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
+            <state relative-caret-position="102">
+              <caret line="20" column="28" lean-forward="true" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
               <folding>
                 <element signature="e#6498#6499#0" expanded="true" />
                 <element signature="e#6529#6530#0" expanded="true" />
@@ -232,7 +231,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="228" />
     <option name="y" value="88" />
     <option name="width" value="1546" />
@@ -357,7 +356,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1587315708975" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1587315916332" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Java Stuff/Geometry Dash/GDBoard" />
     <property name="project.structure.last.edited" value="Project" />
@@ -1121,8 +1120,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Onboarding.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="41" column="56" lean-forward="true" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
+        <state relative-caret-position="102">
+          <caret line="20" column="28" lean-forward="true" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
           <folding>
             <element signature="e#6498#6499#0" expanded="true" />
             <element signature="e#6529#6530#0" expanded="true" />
