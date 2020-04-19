@@ -1,6 +1,7 @@
 package Main;
 
 import SettingsPanels.OutputSettings;
+import SettingsPanels.PersonalizationSettings;
 import com.jidesoft.swing.ResizablePanel;
 
 import java.awt.*;
@@ -29,6 +30,8 @@ public class SettingsWindow {
 	private static JPanel personalization = SettingsPanels.PersonalizationSettings.createPanel();
 	private static JPanel blocked = SettingsPanels.BlockedSettings.createPanel();
 	private static JPanel blockedUsers = SettingsPanels.BlockedUserSettings.createPanel();
+	private static JPanel windowed = SettingsPanels.WindowedSettings.createPanel();
+
 	public static boolean run = true;
 	public static JDialog frame = new JDialog();
 	static void createPanel() {
@@ -57,6 +60,7 @@ public class SettingsWindow {
 		content.add(personalization);
 		content.add(blocked);
 		content.add(blockedUsers);
+		content.add(windowed);
 
 		general.setVisible(true);
 		overlay.setVisible(false);
@@ -67,6 +71,7 @@ public class SettingsWindow {
 		personalization.setVisible(false);
 		blocked.setVisible(false);
 		blockedUsers.setVisible(false);
+		windowed.setVisible(false);
 
 
 		JButton general = createButton("General");
@@ -80,6 +85,8 @@ public class SettingsWindow {
 		JButton personalization = createButton("Personalization");
 		JButton blocked = createButton("Blocked IDs");
 		JButton blockedUsers = createButton("Blocked Users");
+		JButton windowed = createButton("Windowed");
+
 
 		buttons.add(general);
 		buttons.add(outputs);
@@ -90,6 +97,9 @@ public class SettingsWindow {
 		buttons.add(personalization);
 		buttons.add(blocked);
 		buttons.add(blockedUsers);
+		if(Settings.windowedMode){
+			buttons.add(windowed);
+		}
 
 		window.add(blankSpace);
 		window.add(buttons);
@@ -208,6 +218,9 @@ public class SettingsWindow {
 								break;
 							case "Requests":
 								requests.setVisible(true);
+								break;
+							case "Windowed":
+								windowed.setVisible(true);
 								break;
 						}
 						break;

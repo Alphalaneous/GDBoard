@@ -1,10 +1,9 @@
 package Main;
 
-import SettingsPanels.GeneralSettings;
-import SettingsPanels.OutputSettings;
-import SettingsPanels.RequestSettings;
-import SettingsPanels.ShortcutSettings;
+import SettingsPanels.*;
 import com.jidesoft.swing.ResizablePanel;
+import org.jnativehook.GlobalScreen;
+import org.jnativehook.NativeHookException;
 
 import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
@@ -645,9 +644,15 @@ class InnerWindow extends ResizablePanel {
                         e.printStackTrace();
                     }
                     GeneralSettings.setSettings();
+                    WindowedSettings.setSettings();
                     RequestSettings.setSettings();
                     ShortcutSettings.setSettings();
                     OutputSettings.setSettings();
+                    try {
+                        GlobalScreen.unregisterNativeHook();
+                    } catch (NativeHookException e) {
+                        e.printStackTrace();
+                    }
                     System.exit(0);
                 }
             }

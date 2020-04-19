@@ -72,6 +72,8 @@ public class AccountSettings {
 	}
 	public static void refreshChannel(){
 		channelText.setText("Connected to: " + Settings.channel.replaceAll("#", ""));
+		channelText.setBounds(25,20,channelText.getPreferredSize().width+5,channelText.getPreferredSize().height+5);
+
 	}
 	public static void loadSettings(){
 		try {

@@ -31,6 +31,7 @@ public class Defaults {
     public static Color BUTTON_HOVER;
     public static Color TEXT_BOX;
     static AtomicBoolean dark = new AtomicBoolean();
+    static AtomicBoolean loaded = new AtomicBoolean();
 
     //region Dark Mode
     private static void setDark() {
@@ -165,7 +166,9 @@ public class Defaults {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
+                if(!loaded.get()){
+                    loaded.set(true);
+                }
             }
         });
         thread.start();

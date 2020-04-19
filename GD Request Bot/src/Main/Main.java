@@ -19,6 +19,7 @@ public class Main {
     static boolean starting = true;
 
     public static void main(String[] args) {
+        Defaults.loaded.set(false);
         //TODO Use nio everywhere
         try {
             Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
@@ -32,6 +33,13 @@ public class Main {
             });
 
             Defaults.startMainThread();        //Starts thread that always checks for changes such as time, resolution, and color scheme
+            int i = 0;
+            while(!Defaults.loaded.get()){
+                System.out.println("Loading... " + i);
+                Thread.sleep(10);
+                i++;
+            }
+            Thread.sleep(500);
             if(Settings.getSettings("onboarding").equalsIgnoreCase("")){
                 Onboarding.createPanel();
                 Onboarding.loadSettings();
@@ -67,11 +75,6 @@ public class Main {
                     }
                     Main.sendMessage("Thank you for using GDBoard by Alphalaneous and TreeHouseFalcon! Type !help for list of commands!");
 
-                    ControllerListener.hook();         //Starts Controller Listener
-
-                    GlobalScreen.registerNativeHook();
-                    GlobalScreen.addNativeKeyListener(new KeyListener());
-
                     if (!Settings.windowedMode) {
                         Overlay.setFrame();                //Creates the JFrame that contains everything
                         MainBar.createBar();            //Creates the main "Game Bar" in the top center
@@ -93,10 +96,15 @@ public class Main {
                     }
                     Settings.loadSettings(false);
                     GeneralSettings.loadSettings();
+                    WindowedSettings.loadSettings();
                     OutputSettings.loadSettings();
                     RequestSettings.loadSettings();
                     AccountSettings.loadSettings();
                     ShortcutSettings.loadSettings();
+                    ControllerListener.hook();         //Starts Controller Listener
+
+                    GlobalScreen.registerNativeHook();
+                    GlobalScreen.addNativeKeyListener(new KeyListener());
                     if (Settings.windowedMode) {
                         Windowed.frame.setVisible(true);
                     }

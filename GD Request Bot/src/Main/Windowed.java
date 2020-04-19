@@ -1,12 +1,18 @@
 package Main;
 
 import SettingsPanels.OutputSettings;
+import SettingsPanels.WindowedSettings;
 import com.jidesoft.swing.ResizablePanel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 public class Windowed {
 	private static int width = 465;
@@ -18,10 +24,20 @@ public class Windowed {
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static JButtonUI selectUI = new JButtonUI();
 	public static boolean run = true;
-	static JDialog frame = new JDialog();
+	static JFrame frame = new JFrame();
+	public static void setOnTop(boolean onTop){
+		frame.setAlwaysOnTop(onTop);
+		frame.setFocusableWindowState(!onTop);
+	}
 	static void createPanel() {
-		frame.setAlwaysOnTop(true);
-		frame.setFocusableWindowState(false);
+		if(WindowedSettings.onTopOption){
+			setOnTop(true);
+		}
+		URL iconURL = Windowed.class.getResource("/Resources/Icons/windowIcon.png");
+		ImageIcon icon = new ImageIcon(iconURL);
+		Image newIcon = icon.getImage().getScaledInstance(120, 120,  Image.SCALE_SMOOTH);
+		frame.setIconImage(newIcon);
+		frame.setTitle("GDBoard");
 		frame.setUndecorated(true);
 		frame.setSize(width,height+32);
 		frame.setLayout(null);
@@ -128,9 +144,6 @@ public class Windowed {
 		((InnerWindow) window).setPinVisible();
 		((InnerWindow) window).refreshListener();
 		frame.add(window);
-	}
-	static void toFront(){
-		frame.toFront();
 	}
 	static void refreshUI() {
 		((InnerWindow) window).refreshUI();

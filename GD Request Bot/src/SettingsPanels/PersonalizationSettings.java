@@ -1,6 +1,7 @@
 package SettingsPanels;
 
 import Main.*;
+import org.jnativehook.GlobalScreen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,6 +48,7 @@ public class PersonalizationSettings {
 							Windowed.setSettings();
 							Settings.writeLocation();
 							GeneralSettings.setSettings();
+							WindowedSettings.setSettings();
 							RequestSettings.setSettings();
 							ShortcutSettings.setSettings();
 							OutputSettings.setSettings();
@@ -67,6 +69,7 @@ public class PersonalizationSettings {
 							OutputSettings.setSettings();
 							Settings.writeSettings("windowed", "true");
 						}
+						GlobalScreen.unregisterNativeHook();
 						Thread.sleep(100);
 					}
 					catch (Exception ignored){

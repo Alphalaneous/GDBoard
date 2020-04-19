@@ -4,6 +4,8 @@ import SettingsPanels.GeneralSettings;
 import SettingsPanels.OutputSettings;
 import SettingsPanels.RequestSettings;
 import SettingsPanels.ShortcutSettings;
+import org.jnativehook.GlobalScreen;
+import org.jnativehook.NativeHookException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -173,6 +175,11 @@ class MainBar {
                 RequestSettings.setSettings();
                 ShortcutSettings.setSettings();
                 OutputSettings.setSettings();
+                try {
+                    GlobalScreen.unregisterNativeHook();
+                } catch (NativeHookException f) {
+                    f.printStackTrace();
+                }
                 System.exit(0);
             }
 

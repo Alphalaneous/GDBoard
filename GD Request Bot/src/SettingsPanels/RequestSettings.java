@@ -241,7 +241,9 @@ public class RequestSettings {
             rated.setChecked(ratedOption);
             unratedOption = Boolean.parseBoolean(Settings.getSettings("unrated"));
             unrated.setChecked(unratedOption);
-            disableOption = Boolean.parseBoolean(Settings.getSettings("disableDifficulties"));
+            if(!Settings.getSettings("disableDifficulties").equalsIgnoreCase("")){
+                disableOption = Boolean.parseBoolean(Settings.getSettings("disableDifficulties"));
+            }
             disableDifficulties.setChecked(disableOption);
             if(!Settings.getSettings("difficultyFilter").equalsIgnoreCase("")) {
                 excludedDifficulties = new ArrayList<>(Arrays.asList(Settings.getSettings("difficultyFilter").split(",")));
