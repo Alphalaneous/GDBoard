@@ -14,6 +14,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.net.URL;
 
 public class Onboarding {
     static int width = 465;
@@ -24,15 +25,21 @@ public class Onboarding {
     private static JButtonUI defaultUI = new JButtonUI();
     private static JPanel openPanel = createKeybindButton(110, "Open Keybind", "openKeybind");
     public static int openKeybind = 36;
-    static JDialog frame = new JDialog();
+    static JFrame frame = new JFrame();
 
     static void createPanel() {
+        URL iconURL = Windowed.class.getResource("/Resources/Icons/windowIcon.png");
+        ImageIcon icon = new ImageIcon(iconURL);
+        Image newIcon = icon.getImage().getScaledInstance(120, 120,  Image.SCALE_SMOOTH);
+        frame.setIconImage(newIcon);
+        frame.setTitle("GDBoard Startup");
         Onboarding.setLocation(new Point(Defaults.screenSize.width / 2 - width / 2, Defaults.screenSize.height / 2 - height / 2));
         frame.setUndecorated(true);
         frame.setSize(width, 512 + 32);
         frame.setPreferredSize(new Dimension(width, 512 + 32));
         frame.setLayout(null);
         frame.setBackground(new Color(255, 255, 255, 0));
+        frame.getContentPane().setSize(width, 512 + 32);
         frame.pack();
 
         content.setBounds(1, 31, width - 2, height);

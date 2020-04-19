@@ -43,8 +43,8 @@ public class Main {
             if(Settings.getSettings("onboarding").equalsIgnoreCase("")){
                 Onboarding.createPanel();
                 Onboarding.loadSettings();
-                Onboarding.frame.setVisible(true);
                 Onboarding.refreshUI();
+                Onboarding.frame.setVisible(true);
             }
             else{
                 starting = false;
