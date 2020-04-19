@@ -108,7 +108,6 @@ class GDBoardBot {
                 }
                 catch (Exception e){
                     e.printStackTrace();
-                    continue;
                 }
                 try {
                     Thread.sleep(10);

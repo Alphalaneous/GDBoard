@@ -29,9 +29,11 @@ public class Onboarding {
     static void createPanel() {
         Onboarding.setLocation(new Point(Defaults.screenSize.width / 2 - width / 2, Defaults.screenSize.height / 2 - height / 2));
         frame.setUndecorated(true);
-        frame.setSize(width, height + 32);
+        frame.setSize(width, 512 + 32);
+        frame.setPreferredSize(new Dimension(width, 512 + 32));
         frame.setLayout(null);
         frame.setBackground(new Color(255, 255, 255, 0));
+        frame.pack();
 
         content.setBounds(1, 31, width - 2, height);
         content.setBackground(Defaults.SUB_MAIN);
