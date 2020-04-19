@@ -59,7 +59,7 @@ public class Main {
                     if (!Settings.hasMonitor) {
                         Settings.writeSettings("monitor", "0");
                     }
-
+                    MouseLock.startLock();
                     Thread.sleep(1000);
                     JSONObject authObj = new JSONObject();
                     authObj.put("request_type", "connect");

@@ -19,6 +19,8 @@ public class ShortcutSettings {
     private static JPanel copyPanel = createKeybindButton(175, "Copy", "copyKeybind");
     private static JPanel blockPanel = createKeybindButton(225, "Block", "blockKeybind");
     private static JPanel clearPanel = createKeybindButton(275, "Clear", "clearKeybind");
+    private static JPanel lockPanel = createKeybindButton(325, "Lock Mouse to GD", "lockKeybind");
+
 
     public static int openKeybind = 36;
     public static int skipKeybind = 0;
@@ -26,6 +28,8 @@ public class ShortcutSettings {
     public static int copyKeybind = 0;
     public static int blockKeybind = 0;
     public static int clearKeybind = 0;
+    public static int lockKeybind = 0;
+
 
     public static JPanel createPanel() {
         defaultUI.setBackground(Defaults.BUTTON);
@@ -43,6 +47,8 @@ public class ShortcutSettings {
         panel.add(copyPanel);
         panel.add(blockPanel);
         panel.add(clearPanel);
+        panel.add(lockPanel);
+
         return panel;
 
     }
@@ -147,6 +153,8 @@ public class ShortcutSettings {
             Settings.writeSettings("copyKeybind", String.valueOf(copyKeybind));
             Settings.writeSettings("blockKeybind", String.valueOf(blockKeybind));
             Settings.writeSettings("clearKeybind", String.valueOf(clearKeybind));
+            Settings.writeSettings("lockKeybind", String.valueOf(lockKeybind));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -174,6 +182,9 @@ public class ShortcutSettings {
         }
         if (!Settings.getSettings("clearKeybind").equalsIgnoreCase("") && !Settings.getSettings("clearKeybind").equalsIgnoreCase("-1")) {
             clearKeybind = Integer.parseInt(Settings.getSettings("clearKeybind"));
+        }
+        if (!Settings.getSettings("lockKeybind").equalsIgnoreCase("") && !Settings.getSettings("lockKeybind").equalsIgnoreCase("-1")) {
+            lockKeybind = Integer.parseInt(Settings.getSettings("lockKeybind"));
         }
 
         for (Component component : panel.getComponents()) {
@@ -223,6 +234,14 @@ public class ShortcutSettings {
                             }
 
                         }
+                        if (((JLabel) component1).getText().equalsIgnoreCase("Lock to GD")) {
+                            if (!KeyEvent.getKeyText(lockKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
+                                ((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(lockKeybind));
+                            } else {
+                                ((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
+                            }
+
+                        }
                     }
                 }
             }
@@ -247,10 +266,10 @@ public class ShortcutSettings {
         }
         if (setting.equalsIgnoreCase("Clear")) {
             clearKeybind = keybind;
-
         }
-
-
+        if (setting.equalsIgnoreCase("Lock Mouse to GD")) {
+            lockKeybind = keybind;
+        }
     }
 
     public static void refreshUI() {

@@ -85,6 +85,9 @@ public class KeyListener extends SwingKeyAdapter {
             if (key == ShortcutSettings.clearKeybind) {
                 Functions.clearFunction();
             }
+            if (key == ShortcutSettings.lockKeybind) {
+                MouseLock.doLock = !MouseLock.doLock;
+            }
             keyReleased = false;
         }
     }
