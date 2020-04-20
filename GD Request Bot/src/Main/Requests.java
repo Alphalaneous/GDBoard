@@ -189,16 +189,20 @@ class Requests {
 
             levels.add(levelData);
             Functions.saveFunction();
-            Main.sendMessage("@" + levelData.getRequester() + " " + levelData.getName() + " ("
-                    + levelData.getLevelID() + ") has been added to the queue at position " + levels.size() + "!");
+            if(Main.doMessage) {
+                Main.sendMessage("@" + levelData.getRequester() + " " + levelData.getName() + " ("
+                        + levelData.getLevelID() + ") has been added to the queue at position " + levels.size() + "!");
+            }
             if (levels.size() == 1) {
                 StringSelection selection = new StringSelection(Requests.levels.get(0).getLevelID());
                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                 clipboard.setContents(selection, selection);
-                if (!GeneralSettings.nowPlayingOption) {
-                    Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
-                            + Requests.levels.get(0).getLevelID() + "). Requested by "
-                            + Requests.levels.get(0).getRequester());
+                if(Main.doMessage) {
+                    if (!GeneralSettings.nowPlayingOption) {
+                        Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
+                                + Requests.levels.get(0).getLevelID() + "). Requested by "
+                                + Requests.levels.get(0).getRequester());
+                    }
                 }
             }
             OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));

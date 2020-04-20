@@ -21,6 +21,9 @@ public class Main {
     static List<User> mods = new ArrayList<>();
     static boolean starting = true;
     static boolean allowRequests = false;
+    static boolean doMessage  = false;
+    static boolean doImage  = false;
+
     public static void main(String[] args) {
         Defaults.loaded.set(false);
         //TODO Use nio everywhere
@@ -41,6 +44,13 @@ public class Main {
                 System.out.println("Loading... " + i);
                 Thread.sleep(10);
                 i++;
+            }
+            Thread.sleep(500);
+            int j = 0;
+            while(!Defaults.colorsLoaded.get()){
+                System.out.println("Loading Colors... " + i);
+                Thread.sleep(10);
+                j++;
             }
             Thread.sleep(500);
             if(Settings.getSettings("onboarding").equalsIgnoreCase("")){
@@ -92,10 +102,7 @@ public class Main {
                     }
                     InfoWindow.refreshInfo();            //Refreshes the information shown on the Info Window for the first time
                     SongWindow.refreshInfo();            //Refreshes the information shown on the Song Window for the first time
-
-                    if (Settings.windowedMode) {
-                        Overlay.refreshUI(true);
-                    }
+                    Overlay.refreshUI(true);
                     Settings.loadSettings(false);
                     GeneralSettings.loadSettings();
                     WindowedSettings.loadSettings();
@@ -137,7 +144,9 @@ public class Main {
                 sc.close();
             }
             Requests.addedLevels.clear();
+            doMessage = true;
             allowRequests = true;
+            doImage = true;
             Main.sendMessage("Thank you for using GDBoard by Alphalaneous and TreeHouseFalcon! Type !help for list of commands!");
 
         } catch (Exception e) {

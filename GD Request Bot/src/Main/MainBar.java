@@ -295,24 +295,26 @@ class MainBar {
     static void refreshUI(boolean color) {
         if (color) {
             BufferedImage img = null;
-            try {
-                if (Defaults.dark.get()) {
-                    System.out.println("Dark");
-                    img = ImageIO.read(Objects.requireNonNull(Main.class.getClassLoader()
-                            .getResource("Resources/Icons/barIconLight.png")));
-                } else if (!Defaults.dark.get()) {
-                    System.out.println("Light");
-                    img = ImageIO.read(Objects.requireNonNull(Main.class.getClassLoader()
-                            .getResource("Resources/Icons/barIconDark.png")));
+            if(Main.doImage) {
+                try {
+                    if (Defaults.dark.get()) {
+                        System.out.println("Dark");
+                        img = ImageIO.read(Objects.requireNonNull(Main.class.getClassLoader()
+                                .getResource("Resources/Icons/barIconLight.png")));
+                    } else if (!Defaults.dark.get()) {
+                        System.out.println("Light");
+                        img = ImageIO.read(Objects.requireNonNull(Main.class.getClassLoader()
+                                .getResource("Resources/Icons/barIconDark.png")));
+                    }
+                } catch (IOException e1) {
+                    e1.printStackTrace();
                 }
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-            assert img != null;
-            Image imgScaled = img.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
-            ImageIcon imgNew = new ImageIcon(imgScaled);
+                assert img != null;
+                Image imgScaled = img.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+                ImageIcon imgNew = new ImageIcon(imgScaled);
 
-            icon.setIcon(imgNew);
+                icon.setIcon(imgNew);
+            }
             icon.setBounds(20, -1, 64, 64);
 
             mainPanel.setBackground(Defaults.TOP);

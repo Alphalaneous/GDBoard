@@ -32,6 +32,8 @@ public class Defaults {
     public static Color TEXT_BOX;
     static AtomicBoolean dark = new AtomicBoolean();
     static AtomicBoolean loaded = new AtomicBoolean();
+    static AtomicBoolean colorsLoaded = new AtomicBoolean();
+
 
     //region Dark Mode
     private static void setDark() {
@@ -60,6 +62,12 @@ public class Defaults {
             FOREGROUND = Color.WHITE;
             FOREGROUND2 = new Color(159, 0, 114);
         }
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        colorsLoaded.set(true);
         Overlay.refreshUI(true);
     }
     //endregion
@@ -92,6 +100,12 @@ public class Defaults {
             FOREGROUND2 = new Color(159, 0, 114);
             Overlay.refreshUI(true);
         }
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        colorsLoaded.set(true);
         Overlay.refreshUI(true);
     }
     //endregion
