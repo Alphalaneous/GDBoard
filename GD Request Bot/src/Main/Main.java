@@ -136,6 +136,7 @@ public class Main {
                 }
                 sc.close();
             }
+            Requests.addedLevels.clear();
             allowRequests = true;
             Main.sendMessage("Thank you for using GDBoard by Alphalaneous and TreeHouseFalcon! Type !help for list of commands!");
 
