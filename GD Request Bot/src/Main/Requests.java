@@ -188,9 +188,7 @@ class Requests {
             parse.start();
 
             levels.add(levelData);
-            if (GeneralSettings.autoDownloadOption) {
-
-            }
+            Functions.saveFunction();
             Main.sendMessage("@" + levelData.getRequester() + " " + levelData.getName() + " ("
                     + levelData.getLevelID() + ") has been added to the queue at position " + levels.size() + "!");
             if (levels.size() == 1) {

@@ -8,13 +8,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.Random;
 
 public class Functions {
 
-    public static void skipFunction(){
+    public static void skipFunction() {
 
         if (Requests.levels.size() != 0) {
             if (!(Requests.levels.size() <= 1) && LevelsWindow.getSelectedID() == 0) {
@@ -25,49 +27,16 @@ public class Functions {
             }
 
             if (LevelsWindow.getSelectedID() == 0 && Requests.levels.size() > 1) {
-                Requests.levels.remove(LevelsWindow.getSelectedID());
-                LevelsWindow.removeButton();
-                if(GeneralSettings.autoDownloadOption) {
-                    Path wait = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.wait");
-                    Path song = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
-                    try {
-                        if (Files.exists(song)) {
-                            Files.move(song, song.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp"), StandardCopyOption.REPLACE_EXISTING);
-                        }
-                        if (Files.exists(wait)) {
-                            Files.move(wait, wait.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3"), StandardCopyOption.REPLACE_EXISTING);
-                        }
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-
                 if (!GeneralSettings.nowPlayingOption) {
                     Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
                             + Requests.levels.get(0).getLevelID() + "). Requested by "
                             + Requests.levels.get(0).getRequester());
                 }
-            } else {
-                if (Requests.levels.get(LevelsWindow.getSelectedID()).getSongName().equalsIgnoreCase("Custom") && Requests.levels.get(LevelsWindow.getSelectedID()).getNotPersist()) {
-                    if(GeneralSettings.autoDownloadOption) {
-                        Path tempSong = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp");
-                        Path remove = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
-                        try {
-                            if (Files.exists(remove)) {
-                                Files.delete(remove);
-                            }
-                            if (Files.exists(tempSong)) {
-                                Files.move(tempSong, tempSong.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3"), StandardCopyOption.REPLACE_EXISTING);
-                            }
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
-                    }
-                }
-                Requests.levels.remove(LevelsWindow.getSelectedID());
-                LevelsWindow.removeButton();
-
             }
+            Requests.levels.remove(LevelsWindow.getSelectedID());
+            LevelsWindow.removeButton();
+            Functions.saveFunction();
+
             Thread thread = new Thread(() -> {
                 CommentsWindow.unloadComments(true);
                 if (Requests.levels.size() != 0) {
@@ -95,29 +64,10 @@ public class Functions {
 
         if (Requests.levels.size() != 0) {
 
-            if (Requests.levels.get(LevelsWindow.getSelectedID()).getSongName().equalsIgnoreCase("Custom") && Requests.levels.get(LevelsWindow.getSelectedID()).getNotPersist()) {
-                if(GeneralSettings.autoDownloadOption) {
-                    Path tempSong = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.temp");
-                    Path remove = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
-                    Path wait = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.wait");
-                    try {
-                        if (Files.exists(remove)) {
-                            Files.delete(remove);
-                        }
-                        if (Files.exists(wait)) {
-                            Files.delete(wait);
-                        }
-                        if (Files.exists(tempSong)) {
-                            Files.move(tempSong, tempSong.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3"), StandardCopyOption.REPLACE_EXISTING);
-                        }
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            }
+
             Requests.levels.remove(LevelsWindow.getSelectedID());
             LevelsWindow.removeButton();
-
+            Functions.saveFunction();
 
             if (Requests.levels.size() == 1) {
                 LevelsWindow.setOneSelect();
@@ -137,7 +87,7 @@ public class Functions {
                         Requests.levels.get(num).getLevelID());
                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                 clipboard.setContents(selection, selection);
-                if(GeneralSettings.autoDownloadOption) {
+                if (GeneralSettings.autoDownloadOption) {
                     Path wait = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3.wait");
                     Path song = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ".mp3");
                     try {
@@ -164,7 +114,7 @@ public class Functions {
         InfoWindow.refreshInfo();
     }
 
-    public static void copyFunction(){
+    public static void copyFunction() {
         if (Requests.levels.size() != 0) {
             StringSelection selection = new StringSelection(
                     Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
@@ -173,18 +123,36 @@ public class Functions {
         }
     }
 
-    public static void blockFunction(){
+    public static void saveFunction() {
+        try {
+            Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\saved.txt");
+            if (!Files.exists(file)) {
+                Files.createFile(file);
+            }
+            FileWriter fooWriter = new FileWriter(file.toFile(), false);
+            StringBuilder message = new StringBuilder();
+            for (int i = 0; i < Requests.levels.size(); i++) {
+                message.append(Requests.levels.get(i).getLevelID()).append(",").append(Requests.levels.get(i).getRequester()).append("\n");
+            }
+            fooWriter.write(message.toString());
+            fooWriter.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void blockFunction() {
         if (Requests.levels.size() != 0) {
             SettingsWindow.run = false;
             Object[] options = {"Yes", "No"};
             int n;
-            if(!Settings.windowedMode) {
+            if (!Settings.windowedMode) {
                 n = JOptionPane.showOptionDialog(Overlay.frame,
                         "Block " + Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "?",
                         "Block ID? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
                         JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-            }
-            else {
+            } else {
                 n = JOptionPane.showOptionDialog(Windowed.frame,
                         "Block " + Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "?",
                         "Block ID? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
@@ -195,7 +163,7 @@ public class Functions {
                 Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
 
                 try {
-                    if(!Files.exists(file)){
+                    if (!Files.exists(file)) {
                         Files.createFile(file);
                     }
                     Files.write(
@@ -207,6 +175,7 @@ public class Functions {
                 }
                 Requests.levels.remove(LevelsWindow.getSelectedID());
                 LevelsWindow.removeButton();
+                Functions.saveFunction();
 
                 Thread thread = new Thread(() -> {
                     CommentsWindow.unloadComments(true);
@@ -223,16 +192,15 @@ public class Functions {
         LevelsWindow.setOneSelect();
     }
 
-    public static void clearFunction(){
+    public static void clearFunction() {
         Object[] options = {"Yes", "No"};
         int n;
-        if(!Settings.windowedMode) {
+        if (!Settings.windowedMode) {
             n = JOptionPane.showOptionDialog(Overlay.frame,
                     "Clear the queue?",
                     "Clear? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-        }
-        else {
+        } else {
             n = JOptionPane.showOptionDialog(Windowed.frame,
                     "Clear the queue?",
                     "Clear? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
@@ -256,6 +224,7 @@ public class Functions {
                     LevelsWindow.removeButton();
                 }
                 Requests.levels.clear();
+                Functions.saveFunction();
                 SongWindow.refreshInfo();
                 InfoWindow.refreshInfo();
                 CommentsWindow.unloadComments(true);
@@ -265,7 +234,7 @@ public class Functions {
         }
     }
 
-    public static void requestsToggleFunction(){
+    public static void requestsToggleFunction() {
         if (MainBar.requests) {
             MainBar.stopReqs.setText("\uE768");
             MainBar.requests = false;

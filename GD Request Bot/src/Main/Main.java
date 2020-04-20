@@ -8,8 +8,11 @@ import org.json.JSONObject;
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,7 +20,7 @@ public class Main {
 
     static List<User> mods = new ArrayList<>();
     static boolean starting = true;
-
+    static boolean allowRequests = false;
     public static void main(String[] args) {
         Defaults.loaded.set(false);
         //TODO Use nio everywhere
@@ -73,12 +76,11 @@ public class Main {
                     if (GDBoardBot.failed) {
                         TwitchAPI.setOauth();
                     }
-                    Main.sendMessage("Thank you for using GDBoard by Alphalaneous and TreeHouseFalcon! Type !help for list of commands!");
-
                     if (!Settings.windowedMode) {
                         Overlay.setFrame();                //Creates the JFrame that contains everything
                         MainBar.createBar();            //Creates the main "Game Bar" in the top center
                     }
+
                     LevelsWindow.createPanel();         //Creates the Levels Window containing all the requests in the level queue
                     ActionsWindow.createPanel();        //Creates the Action Window containing buttons that do specific actions
                     InfoWindow.createPanel();           //Creates the Info Window containing the information of the selected level
@@ -118,6 +120,24 @@ public class Main {
                 }
                 Thread.sleep(100);
             }
+            File file = new File(System.getenv("APPDATA") + "\\GDBoard\\saved.txt");
+
+            if (file.exists()) {
+                Scanner sc = null;
+                try {
+                    sc = new Scanner(file);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                assert sc != null;
+                while (sc.hasNextLine()) {
+                    String[] level = sc.nextLine().split(",");
+                    Requests.addRequest(level[0], level[1]);
+                }
+                sc.close();
+            }
+            allowRequests = true;
+            Main.sendMessage("Thank you for using GDBoard by Alphalaneous and TreeHouseFalcon! Type !help for list of commands!");
 
         } catch (Exception e) {
             e.printStackTrace();

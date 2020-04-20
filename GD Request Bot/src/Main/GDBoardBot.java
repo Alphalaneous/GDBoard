@@ -94,7 +94,7 @@ class GDBoardBot {
                     } else if (event.equalsIgnoreCase("connect_failed")) {
                         System.out.println(object.get("error").toString().replaceAll("\"", ""));
                         failed = true;
-                    } else if (event.equalsIgnoreCase("command") || event.equalsIgnoreCase("level_request")) {
+                    } if ((event.equalsIgnoreCase("command") || event.equalsIgnoreCase("level_request")) && Main.allowRequests) {
                         String sender = object.get("sender").toString().replaceAll("\"", "");
                         String message = object.get("message").toString().replaceAll("\"", "");
                         boolean mod = object.get("mod").asBoolean();

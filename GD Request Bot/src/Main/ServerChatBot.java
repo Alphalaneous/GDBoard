@@ -175,6 +175,7 @@ public class ServerChatBot {
                                 && String.valueOf(user).equalsIgnoreCase(Requests.levels.get(i).getRequester())) {
                             LevelsWindow.removeButton(i);
                             Requests.levels.remove(i);
+                            Functions.saveFunction();
                             SongWindow.refreshInfo();
                             InfoWindow.refreshInfo();
                             Thread thread = new Thread(() -> {
@@ -195,6 +196,7 @@ public class ServerChatBot {
                                 && isMod) {
                             LevelsWindow.removeButton(i);
                             Requests.levels.remove(i);
+                            Functions.saveFunction();
                             SongWindow.refreshInfo();
                             InfoWindow.refreshInfo();
                             Thread thread = new Thread(() -> {
@@ -224,6 +226,8 @@ public class ServerChatBot {
                     LevelsWindow.removeButton();
                 }
                 Requests.levels.clear();
+                Functions.saveFunction();
+
                 SongWindow.refreshInfo();
                 InfoWindow.refreshInfo();
                 CommentsWindow.unloadComments(true);
@@ -501,7 +505,7 @@ public class ServerChatBot {
                 }
             }
             if (command.equalsIgnoreCase("!next") || command.equalsIgnoreCase("!nextLevel")) {
-                response = "@" + user + "The next level is " + Requests.levels.get(1).getName() + " (" + Requests.levels.get(1).getLevelID() + ") by " + Requests.levels.get(1).getAuthor();
+                response = "@" + user + " The next level is " + Requests.levels.get(1).getName() + " (" + Requests.levels.get(1).getLevelID() + ") by " + Requests.levels.get(1).getAuthor();
             }
             //region Request Command
             if (command.equalsIgnoreCase("!r") ||
