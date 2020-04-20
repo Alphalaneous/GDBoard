@@ -102,7 +102,6 @@ public class Main {
                     }
                     InfoWindow.refreshInfo();            //Refreshes the information shown on the Info Window for the first time
                     SongWindow.refreshInfo();            //Refreshes the information shown on the Song Window for the first time
-                    Overlay.refreshUI(true);
                     Settings.loadSettings(false);
                     GeneralSettings.loadSettings();
                     WindowedSettings.loadSettings();
@@ -114,6 +113,7 @@ public class Main {
 
                     GlobalScreen.registerNativeHook();
                     GlobalScreen.addNativeKeyListener(new KeyListener());
+                    Overlay.refreshUI(true);
                     if (Settings.windowedMode) {
                         Windowed.frame.setVisible(true);
                     }
