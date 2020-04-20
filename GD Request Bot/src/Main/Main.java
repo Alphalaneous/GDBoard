@@ -8,6 +8,9 @@ import org.json.JSONObject;
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -23,7 +26,9 @@ public class Main {
     static boolean allowRequests = false;
     static boolean doMessage  = false;
     static boolean doImage  = false;
-
+    private static JDialog dialog = new JDialog();
+    private static JPanel panel = new JPanel();
+    private static JLabel tf = new JLabel("Loading...");
     public static void main(String[] args) {
         Defaults.loaded.set(false);
         //TODO Use nio everywhere
@@ -31,6 +36,28 @@ public class Main {
             Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
             logger.setLevel(Level.OFF);
             logger.setUseParentHandlers(false);
+
+            dialog.setSize(new Dimension(200,100));
+            tf.setForeground(Color.WHITE);
+            tf.setFont(new Font("bahnschrift", Font.BOLD, 20));
+            panel.add(tf);
+            panel.setBackground(new Color(31, 31, 31));
+            panel.setLayout(new GridBagLayout());
+            dialog.add(panel);
+
+            dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+            for ( WindowListener wl : dialog.getWindowListeners())
+                dialog.removeWindowListener(wl);
+            dialog.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setResizable(false);
+            dialog.setTitle("Starting GDBoard");
+            dialog.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - dialog.getWidth()/2, Toolkit.getDefaultToolkit().getScreenSize().height/2 - dialog.getHeight()/2);
+            dialog.setVisible(true);
 
             UIManager.setLookAndFeel(new NimbusLookAndFeel() {
                 @Override
@@ -52,6 +79,7 @@ public class Main {
                 Thread.sleep(10);
                 j++;
             }
+            dialog.setVisible(false);
             Thread.sleep(500);
             if(Settings.getSettings("onboarding").equalsIgnoreCase("")){
                 Onboarding.createPanel();
