@@ -179,11 +179,11 @@ public class Main {
             Thread thread = new Thread(() -> {
                 while(true){
                     try {
-                        Thread.sleep(120000);
+                        Thread.sleep(60000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    Main.sendMessage("");
+                    Main.sendMessage(" ");
                 }
             });
             thread.start();
