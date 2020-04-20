@@ -176,6 +176,17 @@ public class Main {
             allowRequests = true;
             doImage = true;
             Main.sendMessage("Thank you for using GDBoard by Alphalaneous and TreeHouseFalcon! Type !help for list of commands!");
+            Thread thread = new Thread(() -> {
+                while(true){
+                    try {
+                        Thread.sleep(120000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Main.sendMessage("");
+                }
+            });
+            thread.start();
 
         } catch (Exception e) {
             e.printStackTrace();
