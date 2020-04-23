@@ -141,6 +141,7 @@ public class Main {
 
                     GlobalScreen.registerNativeHook();
                     GlobalScreen.addNativeKeyListener(new KeyListener());
+
                     Overlay.refreshUI(true);
                     if (Settings.windowedMode) {
                         Windowed.frame.setVisible(true);

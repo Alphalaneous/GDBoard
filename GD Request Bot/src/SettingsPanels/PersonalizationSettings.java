@@ -11,10 +11,10 @@ import java.awt.event.MouseEvent;
 public class PersonalizationSettings {
 	private static CurvedButton windowedButton = new CurvedButton("Switch to Windowed Mode (Requires Restart)");
 	private static JButtonUI defaultUI = new JButtonUI();
+	private static JPanel panel = new JPanel(null);
 
 
 	public static JPanel createPanel() {
-		JPanel panel = new JPanel(null);
 		panel.setDoubleBuffered(true);
 		panel.setBounds(0, 0, 415, 622);
 		panel.setBackground(Defaults.SUB_MAIN);
@@ -81,5 +81,31 @@ public class PersonalizationSettings {
 		panel.add(windowedButton);
 		return panel;
 		
+	}
+	public static void refreshUI() {
+		defaultUI.setBackground(Defaults.BUTTON);
+		defaultUI.setHover(Defaults.BUTTON_HOVER);
+		defaultUI.setSelect(Defaults.SELECT);
+
+		panel.setBackground(Defaults.SUB_MAIN);
+		for (Component component : panel.getComponents()) {
+			if (component instanceof JButton) {
+				for (Component component2 : ((JButton) component).getComponents()) {
+					if (component2 instanceof JLabel) {
+						component2.setForeground(Defaults.FOREGROUND);
+					}
+				}
+				component.setBackground(Defaults.BUTTON);
+			}
+			if (component instanceof JLabel) {
+				component.setForeground(Defaults.FOREGROUND);
+			}
+			if(component instanceof JTextArea){
+				((FancyTextArea) component).refreshAll();
+			}
+			if(component instanceof CheckboxButton){
+				((CheckboxButton) component).refresh();
+			}
+		}
 	}
 }

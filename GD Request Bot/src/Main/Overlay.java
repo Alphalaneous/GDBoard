@@ -110,6 +110,7 @@ public class Overlay {
         LevelsWindow.refreshUI();
         InfoWindow.refreshUI();
         AccountSettings.refreshUI();
+        PersonalizationSettings.refreshUI();
         BlockedSettings.refreshUI();
         BlockedUserSettings.refreshUI();
         GeneralSettings.refreshUI();
