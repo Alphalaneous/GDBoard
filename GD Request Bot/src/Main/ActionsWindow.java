@@ -26,6 +26,7 @@ public class ActionsWindow {
 
             defaultUI.setBackground(Defaults.BUTTON);
             defaultUI.setHover(Defaults.BUTTON_HOVER);
+            defaultUI.setSelect(Defaults.SELECT);
 
             panel.setPreferredSize(new Dimension(width - 25, height));
             panel.setBounds(10, 5, width - 20, height - 10);

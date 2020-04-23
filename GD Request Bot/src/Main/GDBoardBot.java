@@ -5,9 +5,7 @@ import org.json.JSONObject;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,16 +19,43 @@ class GDBoardBot {
     private static PrintWriter out;
     private static BufferedReader in;
     private static Socket clientSocket;
-    static boolean ready = false;
     private static JDialog dialog = new JDialog();
     private static JPanel panel = new JPanel();
-    private static JLabel tf = new JLabel("Connecting...");
-    static void start() throws IOException {
+    private static JLabel tf = new JLabel("Connecting...  ");
+    private static JButtonUI defaultUI = new JButtonUI();
+    private static RoundedJButton button = new RoundedJButton("\uE72C");
 
+    private static int attempts = 0;
+    static void start() throws IOException {
+        attempts++;
+        if(attempts == 5){
+            TwitchAPI.setOauth();
+            start();
+            attempts = 0;
+            return;
+        }
         dialog.setSize(new Dimension(200,100));
         tf.setForeground(Color.WHITE);
         tf.setFont(new Font("bahnschrift", Font.BOLD, 20));
+        defaultUI.setBackground(new Color(50, 50, 50));
+        defaultUI.setHover( new Color(80, 80, 80));
+        defaultUI.setSelect( new Color(70, 70, 70));
+
+        button.setPreferredSize(new Dimension(50, 50));
+        button.setUI(defaultUI);
+        button.setBackground(new Color(50, 50, 50));
+        button.setForeground(Color.WHITE);
+        button.setBorder(BorderFactory.createEmptyBorder());
+        button.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                TwitchAPI.setOauth();
+                attempts = 0;
+            }
+        });
         panel.add(tf);
+        panel.add(button);
         panel.setBackground(new Color(31, 31, 31));
         panel.setLayout(new GridBagLayout());
         dialog.add(panel);

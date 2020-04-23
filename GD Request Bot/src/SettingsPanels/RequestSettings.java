@@ -32,6 +32,7 @@ public class RequestSettings {
     private static CheckboxButton rated = createButton("Rated Levels Only", 15);
     private static CheckboxButton unrated = createButton("Unrated Levels Only", 45);
     private static CheckboxButton disableDifficulties = createButton("Disable selected difficulties", 75);
+    private static JPanel difficultyPanel = new JPanel(null);
 
     private static JPanel panel = new JPanel();
     public static ArrayList<String> excludedDifficulties = new ArrayList<>();
@@ -211,7 +212,6 @@ public class RequestSettings {
             }
         });
 
-        JPanel difficultyPanel = new JPanel(null);
         difficultyPanel.setBounds(0,110, 415, 370);
         difficultyPanel.setBackground(Defaults.TOP);
         panel.add(rated);
@@ -317,9 +317,29 @@ public class RequestSettings {
         defaultUI.setBackground(Defaults.MAIN);
         defaultUI.setHover(Defaults.BUTTON_HOVER);
         defaultUI.setSelect(Defaults.SELECT);
-
+        difficultyPanel.setBackground(Defaults.TOP);
         panel.setBackground(Defaults.SUB_MAIN);
         for (Component component : panel.getComponents()) {
+            if (component instanceof JButton) {
+                for (Component component2 : ((JButton) component).getComponents()) {
+                    if (component2 instanceof JLabel) {
+                        component2.setForeground(Defaults.FOREGROUND);
+                    }
+                }
+                component.setBackground(Defaults.MAIN);
+            }
+            if (component instanceof JLabel) {
+                component.setForeground(Defaults.FOREGROUND);
+
+            }
+            if (component instanceof JTextArea) {
+                ((FancyTextArea) component).refreshAll();
+            }
+            if (component instanceof CheckboxButton) {
+                ((CheckboxButton) component).refresh();
+            }
+        }
+        for (Component component : difficultyPanel.getComponents()) {
             if (component instanceof JButton) {
                 for (Component component2 : ((JButton) component).getComponents()) {
                     if (component2 instanceof JLabel) {
