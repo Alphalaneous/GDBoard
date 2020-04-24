@@ -102,7 +102,15 @@ public class Main {
                     }
                     MouseLock.startLock();
                     Thread.sleep(1000);
-
+                    JSONObject authObj = new JSONObject();
+                    authObj.put("request_type", "connect");
+                    authObj.put("oauth", Settings.oauth);
+                    GDBoardBot.sendMessage(authObj.toString());
+                    Thread.sleep(1000);
+                    while(!GDBoardBot.connected){
+                        GDBoardBot.sendMessage(authObj.toString());
+                        Thread.sleep(15000);
+                    }
                     if (GDBoardBot.failed) {
                         TwitchAPI.setOauth();
                     }
@@ -117,6 +125,7 @@ public class Main {
                     CommentsWindow.createPanel();       //Creates the Comment Window containing the comments of the selected level
                     SongWindow.createPanel();           //Creates the Song Window allowing you to play the song of the selected level
                     SettingsWindow.createPanel();
+                    //Randomizer.createPanel();
                     if (Settings.windowedMode) {
                         Windowed.createPanel();
                     }
@@ -172,7 +181,7 @@ public class Main {
             Thread thread = new Thread(() -> {
                 while(true){
                     try {
-                        Thread.sleep(120000);
+                        Thread.sleep(60000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

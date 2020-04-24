@@ -106,6 +106,7 @@ public class Overlay {
             ActionsWindow.refreshUI();
             SongWindow.refreshUI();
             MainBar.refreshUI(color);
+            Randomizer.refreshUI();
         }
         LevelsWindow.refreshUI();
         InfoWindow.refreshUI();
@@ -131,6 +132,7 @@ public class Overlay {
         SongWindow.setInvisible();
         SettingsWindow.setInvisible();
         MainBar.setInvisible();
+        Randomizer.setInvisible();
         frame.invalidate();
         frame.validate();
         frame.repaint();
@@ -146,6 +148,7 @@ public class Overlay {
         SongWindow.setVisible();
         SettingsWindow.setVisible();
         MainBar.setVisible();
+        Randomizer.setVisible();
         frame.invalidate();
         frame.validate();
         frame.repaint();
