@@ -29,6 +29,22 @@ class Requests {
 
     static void addRequest(String ID, String requester) {
         OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
+        try {
+            Path blockedUser = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blockedUsers.txt");
+            if (Files.exists(blockedUser)) {
+                Scanner sc = new Scanner(blockedUser.toFile());
+                while (sc.hasNextLine()) {
+                    if (requester.equalsIgnoreCase(sc.nextLine())) {
+                        sc.close();
+                        return;
+                    }
+                }
+                sc.close();
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         if (MainBar.requests) {
             Path blocked = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
             try {
@@ -44,17 +60,7 @@ class Requests {
                     }
                     sc.close();
                 }
-                Path blockedUser = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blockedUsers.txt");
-                if (Files.exists(blockedUser)) {
-                    Scanner sc = new Scanner(blockedUser.toFile());
-                    while (sc.hasNextLine()) {
-                        if (requester.equalsIgnoreCase(sc.nextLine())) {
-                            sc.close();
-                            return;
-                        }
-                    }
-                    sc.close();
-                }
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
