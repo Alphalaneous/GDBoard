@@ -117,7 +117,7 @@ public class TwitchAPI {
                     AccountSettings.refreshChannel();
                     success.set(true);
                     try {
-                        GDBoardBot.restart();
+                        GDBoardBot.start();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

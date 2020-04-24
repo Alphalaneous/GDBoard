@@ -166,22 +166,4 @@ class GDBoardBot {
     static void sendMessage(String message){
         out.println(message);
     }
-    static void restart() throws IOException {
-        if(clientSocket != null) {
-            clientSocket.close();
-        }
-        clientSocket = new Socket("165.227.53.200", 2963);
-        out = new PrintWriter(clientSocket.getOutputStream(), true);
-        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        start();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        JSONObject authObj = new JSONObject();
-        authObj.put("request_type", "connect");
-        authObj.put("oauth", Settings.oauth);
-        GDBoardBot.sendMessage(authObj.toString());
-    }
 }
