@@ -24,12 +24,12 @@ public class Windowed {
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static JButtonUI selectUI = new JButtonUI();
 	public static boolean run = true;
-	public static JFrame frame = new JFrame();
+	static JFrame frame = new JFrame();
 	public static void setOnTop(boolean onTop){
 		frame.setAlwaysOnTop(onTop);
 		frame.setFocusableWindowState(!onTop);
 	}
-	public static void createPanel() {
+	static void createPanel() {
 		if(WindowedSettings.onTopOption){
 			setOnTop(true);
 		}

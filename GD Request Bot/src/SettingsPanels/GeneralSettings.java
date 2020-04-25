@@ -213,7 +213,7 @@ public class GeneralSettings {
 		});
 
 
-		panel.add(followers);
+		//panel.add(followers);
 		panel.add(subOnly);
 		panel.add(nowPlaying);
 		panel.add(repeated);
@@ -232,7 +232,7 @@ public class GeneralSettings {
 
 	public static void loadSettings(){
 		try {
-			followersOption = Boolean.parseBoolean(Settings.getSettings("followers"));
+			//followersOption = Boolean.parseBoolean(Settings.getSettings("followers"));
 			subsOption = Boolean.parseBoolean(Settings.getSettings("subscribers"));
 			nowPlayingOption = Boolean.parseBoolean(Settings.getSettings("disableNP"));
 			repeatedOption = Boolean.parseBoolean(Settings.getSettings("repeatedRequests"));
@@ -253,7 +253,7 @@ public class GeneralSettings {
 				userLimitStream = Integer.parseInt(Settings.getSettings("userLimitStream"));
 				userLimitStreamInput.setText(String.valueOf(userLimitStream));
 			}
-			followers.setChecked(followersOption);
+			//followers.setChecked(followersOption);
 			nowPlaying.setChecked(nowPlayingOption);
 			subOnly.setChecked(subsOption);
 			repeated.setChecked(repeatedOption);
@@ -286,7 +286,7 @@ public class GeneralSettings {
 	}
 	public static void setSettings(){
 		try {
-			Settings.writeSettings("followers", String.valueOf(followersOption));
+			//Settings.writeSettings("followers", String.valueOf(followersOption));
 			Settings.writeSettings("subscribers", String.valueOf(subsOption));
 			Settings.writeSettings("disableNP", String.valueOf(nowPlayingOption));
 			Settings.writeSettings("autoDL", String.valueOf(autoDownloadOption));

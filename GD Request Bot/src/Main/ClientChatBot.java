@@ -1,6 +1,6 @@
 package Main;
 
-/*import SettingsPanels.BlockedSettings;
+import SettingsPanels.BlockedSettings;
 import SettingsPanels.BlockedUserSettings;
 import SettingsPanels.GeneralSettings;
 import com.cavariux.twitchirc.Chat.Channel;
@@ -109,7 +109,7 @@ public class ClientChatBot extends TwitchBot {
                     e.printStackTrace();
                 }
             }
-        }
+        }*/
     }
 
     public boolean checkMod(String user) {
@@ -126,7 +126,7 @@ public class ClientChatBot extends TwitchBot {
         }
         if (disabledCommands.contains(command)) {
             return;
-        }
+        }*/
 
         int intArg = 1;
         if (arguments.length > 1 && NumberUtils.isParsable(arguments[1])) {
@@ -604,9 +604,9 @@ public class ClientChatBot extends TwitchBot {
             /*if(whisperCommand.contains(command)){
                 Main.sendMessage("/w " + user + " " + response);
             }
-            else {
+            else {*/
             Main.sendMessage(response);
             //}
         }
     }
-}*/
+}

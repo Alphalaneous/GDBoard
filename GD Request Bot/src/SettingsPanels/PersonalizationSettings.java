@@ -42,11 +42,6 @@ public class PersonalizationSettings {
 						"Close? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 				if (n == 0) {
-					/*if(!Settings.windowedMode) {
-						Windowed.createPanel();
-						Windowed.frame.setVisible(true);
-						Overlay.setInvisible();
-					}*/
 					try {
 						if (Settings.windowedMode) {
 							SettingsWindow.setSettings();

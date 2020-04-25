@@ -39,23 +39,21 @@ public class ServerChatBot {
         try {
             String command = message.split(" ")[0];
             String[] arguments = message.split(" ");
-            boolean isFollowing = TwitchAPI.isFollowing(user);
-
             if (command.startsWith("!")) {
                 //if (messageCommands.contains(command)) {
                 if (command.equalsIgnoreCase("!sudo") && (isMod || user.equalsIgnoreCase("Alphalaneous"))) {
                     if (arguments[2].startsWith("!")) {
-                        doCommand(arguments[1], arguments[2], Arrays.copyOfRange(arguments, 2, arguments.length), true, true, true);
+                        doCommand(arguments[1], arguments[2], Arrays.copyOfRange(arguments, 2, arguments.length), true, true);
                     }
                 }
-                doCommand(String.valueOf(user), command, arguments, isMod, isSub, isFollowing);
+                doCommand(String.valueOf(user), command, arguments, isMod, isSub);
 
             } else {
                 Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(message);
                 if (m.find()) {
                     if (GeneralSettings.followersOption) {
-                        if (!isFollowing) {
-                            if (!isMod) {
+                        if (TwitchAPI.isNotFollowing(String.valueOf(user)) && isMod) {
+                            if (!(("#" + user).equalsIgnoreCase(String.valueOf(Settings.channel)) || !isMod)) {
                                 Main.sendMessage("@" + user + " Please follow to request levels!");
                                 return;
                             }
@@ -85,7 +83,7 @@ public class ServerChatBot {
         }
     }
 
-    static void doCommand(String user, String command, String[] arguments, boolean isMod, boolean isSub, boolean isFollowing) {
+    static void doCommand(String user, String command, String[] arguments, boolean isMod, boolean isSub) {
         try {
             String response = null;
         /*if (!isMod) {
@@ -519,7 +517,7 @@ public class ServerChatBot {
                     command.equalsIgnoreCase("!play")) {
                 Matcher m = null;
                 if (GeneralSettings.followersOption) {
-                    if (!isFollowing) {
+                    if (TwitchAPI.isNotFollowing(user)) {
                         if (!isMod) {
                             response = "@" + user + " Please follow to request levels!";
                             Main.sendMessage(response);
