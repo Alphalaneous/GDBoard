@@ -76,11 +76,15 @@ public class Overlay {
         mainFrame.setLayer(component, 2);
     }
 
-    static void setVisible() {
+    public static void setVisible() {
         frame.setVisible(true);
         MainBar.setTooltips();
         frame.setAlwaysOnTop(true);
         SettingsWindow.toFront();
+    }
+    public static void setInvisible() {
+        frame.setVisible(false);
+        frame.setAlwaysOnTop(false);
     }
 
     static void refreshUI(boolean color) {

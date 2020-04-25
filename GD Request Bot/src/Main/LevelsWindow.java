@@ -321,7 +321,20 @@ public class LevelsWindow {
                 request.setUI(selectUI);
                 Thread thread = new Thread(() -> {
                     CommentsWindow.unloadComments(true);
-                    CommentsWindow.loadComments(0, false);
+                    while(true) {
+                        try {
+                            CommentsWindow.loadComments(0, false);
+                            break;
+                        }
+                        catch (NullPointerException e){
+                            e.printStackTrace();
+                        }
+                        try {
+                            Thread.sleep(50);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 });
                 thread.start();
             }

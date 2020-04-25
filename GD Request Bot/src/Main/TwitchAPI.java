@@ -17,22 +17,23 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class TwitchAPI {
 
-    static boolean isNotFollowing(String user) {
+    static boolean isFollowing(String user) {
 
 
-        JsonObject isFollowing = null;
+        JsonObject isFollowing;
         try {
             isFollowing = twitchAPI("https://api.twitch.tv/helix/users/follows?from_id=" + getIDs(user) + "&to_id=" + getIDs(Settings.getSettings("channel")));
+            //System.out.println(isFollowing.toString());
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
+        String str = null;
         if (isFollowing != null) {
-            String str = isFollowing.get("total").toString();
-            System.out.println(str);
-            return !str.equalsIgnoreCase("1");
-        } else {
-            return true;
+            str = isFollowing.get("total").toString();
         }
+        System.out.println("Following: " + str);
+        return (str != null && str.equalsIgnoreCase("1"));
     }
 
     static String getChannel() {
