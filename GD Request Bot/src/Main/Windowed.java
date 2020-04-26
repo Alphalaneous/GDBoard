@@ -39,7 +39,7 @@ public class Windowed {
 		frame.setIconImage(newIcon);
 		frame.setTitle("GDBoard");
 		frame.setUndecorated(true);
-		frame.setSize(width,height+32);
+		frame.setSize(width + 200,height+32 + 200);
 		frame.setLayout(null);
 		frame.setBackground(new Color(255, 255, 255, 0));
 

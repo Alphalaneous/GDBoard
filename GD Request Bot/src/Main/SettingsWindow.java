@@ -38,7 +38,7 @@ public class SettingsWindow {
 		frame.setAlwaysOnTop(true);
 
 		frame.setUndecorated(true);
-		frame.setSize(width,height+32);
+		frame.setSize(width + 200,height+32 + 200);
 		frame.setLayout(null);
 		frame.setBackground(new Color(255, 255, 255, 0));
 		blankSpace.setBounds(1, 31, 208, 20);
