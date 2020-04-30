@@ -30,6 +30,8 @@ public class SettingsWindow {
 	private static JPanel personalization = SettingsPanels.PersonalizationSettings.createPanel();
 	private static JPanel blocked = SettingsPanels.BlockedSettings.createPanel();
 	private static JPanel blockedUsers = SettingsPanels.BlockedUserSettings.createPanel();
+	private static JPanel loggedIDs = SettingsPanels.RequestsLog.createPanel();
+
 	private static JPanel windowed = SettingsPanels.WindowedSettings.createPanel();
 
 	public static boolean run = true;
@@ -60,6 +62,7 @@ public class SettingsWindow {
 		content.add(personalization);
 		content.add(blocked);
 		content.add(blockedUsers);
+		content.add(loggedIDs);
 		content.add(windowed);
 
 		general.setVisible(true);
@@ -85,6 +88,7 @@ public class SettingsWindow {
 		JButton personalization = createButton("Personalization");
 		JButton blocked = createButton("Blocked IDs");
 		JButton blockedUsers = createButton("Blocked Users");
+		JButton loggedIDs = createButton("Logged IDs");
 		JButton windowed = createButton("Windowed");
 
 
@@ -97,6 +101,7 @@ public class SettingsWindow {
 		buttons.add(personalization);
 		buttons.add(blocked);
 		buttons.add(blockedUsers);
+		buttons.add(loggedIDs);
 		if(Settings.windowedMode){
 			buttons.add(windowed);
 		}
@@ -221,6 +226,9 @@ public class SettingsWindow {
 								break;
 							case "Windowed":
 								windowed.setVisible(true);
+								break;
+							case "Logged IDs":
+								loggedIDs.setVisible(true);
 								break;
 						}
 						break;

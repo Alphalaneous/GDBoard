@@ -48,7 +48,7 @@ public class ClientChatBot extends TwitchBot {
             Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(message);
             if (m.find()) {
                 if (GeneralSettings.followersOption) {
-                    if (TwitchAPI.isNotFollowing(String.valueOf(user)) && !checkMod(String.valueOf(user))) {
+                    if (APIs.isNotFollowing(String.valueOf(user)) && !checkMod(String.valueOf(user))) {
                         if (!(("#" + user).equalsIgnoreCase(String.valueOf(Settings.channel)) || Main.mods.contains(user))) {
                             Main.sendMessage("@" + user + " Please follow to request levels!");
                             return;
@@ -85,7 +85,7 @@ public class ClientChatBot extends TwitchBot {
             Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(message);
             if (m.find()) {
                 if (GeneralSettings.followersOption) {
-                    if (TwitchAPI.isNotFollowing(user)) {
+                    if (APIs.isNotFollowing(user)) {
                         if (!(("#" + user).equalsIgnoreCase(String.valueOf(Settings.channel)) || Main.mods.contains(user))) {
                             Main.sendMessage("@" + user + " Please follow to request levels!");
                             return;
@@ -530,7 +530,7 @@ public class ClientChatBot extends TwitchBot {
                 command.equalsIgnoreCase("!send")) {
             Matcher m = null;
             if (GeneralSettings.followersOption) {
-                if (TwitchAPI.isNotFollowing(user)) {
+                if (APIs.isNotFollowing(user)) {
                     if (!isMod) {
                         response = "@" + user + " Please follow to request levels!";
                         return;

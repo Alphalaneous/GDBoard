@@ -208,7 +208,7 @@ public class BlockedSettings {
             public void mousePressed(MouseEvent e) {
                 Object[] options = {"Yes", "No"};
                 SettingsWindow.run = false;
-                int n = JOptionPane.showOptionDialog(Overlay.frame,
+                int n = JOptionPane.showOptionDialog(SettingsWindow.frame,
                         "Unblock " + button.getLText() + "?",
                         "Unblock ID? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
                         JOptionPane.QUESTION_MESSAGE, null, options, options[1]);

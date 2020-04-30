@@ -103,6 +103,14 @@ class LevelData {
 
 	double getVersion() { return version; }
 
+	String getVideoTitle() {return videoTitle;}
+
+	String getVideoURL() { return videoURL;}
+
+	String getChannelName() { return channelName;}
+
+	String getThumbnailURL() { return thumbnailURL; }
+
 	private String requester;
 	private String author;
 	private String name;
@@ -111,6 +119,10 @@ class LevelData {
 	private String likes;
 	private String downloads;
 	private String levelID;
+	private String videoTitle;
+	private String videoURL;
+	private String channelName;
+	private String thumbnailURL;
 	//private int coins;
 	//private boolean verifiedCoins;
 	private boolean featured;
@@ -129,7 +141,14 @@ class LevelData {
 	private String length;
 	private boolean persist;
 	private double version;
-	
+
+	void setVideoInfo(String title, String ID, String channel, String thumbnail){
+		this.videoTitle = title;
+		this.videoURL = "https://www.youtube.com/watch?v" + ID;
+		this.channelName = channel;
+		this.thumbnailURL = thumbnail;
+	}
+
 	void setStars(int stars) {
 		this.stars = stars;
 	}

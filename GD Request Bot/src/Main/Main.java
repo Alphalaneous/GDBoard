@@ -33,6 +33,7 @@ public class Main {
         Defaults.loaded.set(false);
         //TODO Use nio everywhere
         try {
+
             Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
             logger.setLevel(Level.OFF);
             logger.setUseParentHandlers(false);
@@ -112,7 +113,7 @@ public class Main {
                         Thread.sleep(15000);
                     }
                     if (GDBoardBot.failed) {
-                        TwitchAPI.setOauth();
+                        APIs.setOauth();
                     }
                     if (!Settings.windowedMode) {
                         Overlay.setFrame();                //Creates the JFrame that contains everything

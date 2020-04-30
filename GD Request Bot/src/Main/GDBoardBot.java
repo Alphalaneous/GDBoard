@@ -29,7 +29,7 @@ class GDBoardBot {
     static void start() throws IOException {
         attempts++;
         if(attempts == 5){
-            TwitchAPI.setOauth();
+            APIs.setOauth();
             start();
             attempts = 0;
             return;
@@ -50,7 +50,7 @@ class GDBoardBot {
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                TwitchAPI.setOauth();
+                APIs.setOauth();
                 attempts = 0;
             }
         });

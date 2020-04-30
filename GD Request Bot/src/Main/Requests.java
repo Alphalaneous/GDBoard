@@ -3,11 +3,13 @@ package Main;
 import SettingsPanels.GeneralSettings;
 import SettingsPanels.OutputSettings;
 import SettingsPanels.RequestSettings;
+import SettingsPanels.RequestsLog;
 import com.github.alex1304.jdash.client.AnonymousGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.entity.GDLevel;
 import com.github.alex1304.jdash.exception.MissingAccessException;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -18,6 +20,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.util.zip.GZIPInputStream;
 
@@ -47,6 +50,8 @@ class Requests {
         }
         if (MainBar.requests) {
             Path blocked = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
+            Path logged = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\requestsLog.txt");
+
             try {
                 if (Files.exists(blocked)) {
                     Scanner sc = new Scanner(blocked.toFile());
@@ -54,13 +59,22 @@ class Requests {
                         if (ID.equals(sc.nextLine())) {
                             sc.close();
                             Main.sendMessage("@" + requester + " That Level is Blocked!");
-                            System.out.println("Blocked ID");
                             return;
                         }
                     }
                     sc.close();
                 }
-
+                if(Files.exists(logged) && GeneralSettings.repeatedOptionAll){
+                    Scanner sc = new Scanner(logged.toFile());
+                    while (sc.hasNextLine()) {
+                        if (ID.equals(sc.nextLine())) {
+                            sc.close();
+                            Main.sendMessage("@" + requester + " That level has been requested before!");
+                            return;
+                        }
+                    }
+                    sc.close();
+                }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -149,6 +163,12 @@ class Requests {
             levelData.setSongName(Objects.requireNonNull(level.getSong().block()).getSongTitle());
             levelData.setSongAuthor(Objects.requireNonNull(level.getSong().block()).getSongAuthorName());
 
+            //String[] videoInfo = APIs.getYTVideo(ID);
+
+            /*if(videoInfo.length != 0) {
+                levelData.setVideoInfo(videoInfo[0], videoInfo[1], videoInfo[2], videoInfo[3]);
+            }*/
+
             if (level.getFeaturedScore() > 0) {
                 levelData.setFeatured();
             }
@@ -213,6 +233,34 @@ class Requests {
             }
             OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
             addedLevels.add(ID);
+            Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\requestsLog.txt");
+            try {
+                boolean exists = false;
+                if (!Files.exists(file)) {
+                    Files.createFile(file);
+                }
+                if(Files.exists(logged)){
+                    Scanner sc = new Scanner(logged.toFile());
+                    while (sc.hasNextLine()) {
+                        if (ID.equals(sc.nextLine())) {
+                            sc.close();
+                            exists = true;
+                            break;
+                        }
+                    }
+                    sc.close();
+                }
+                if(!exists) {
+                    Files.write(
+                            file,
+                            (ID + "\n").getBytes(),
+                            StandardOpenOption.APPEND);
+                    RequestsLog.addButton(ID);
+
+                }
+            } catch (IOException e1) {
+                JOptionPane.showMessageDialog(null, "There was an error writing to the file!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
             LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester(), levelData.getVersion());
 
         } else {

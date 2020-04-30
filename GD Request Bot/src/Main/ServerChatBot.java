@@ -52,7 +52,7 @@ public class ServerChatBot {
                 Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(message);
                 if (m.find()) {
                     if (GeneralSettings.followersOption) {
-                        if (TwitchAPI.isNotFollowing(String.valueOf(user)) && isMod) {
+                        if (APIs.isNotFollowing(String.valueOf(user)) && isMod) {
                             if (!(("#" + user).equalsIgnoreCase(String.valueOf(Settings.channel)) || !isMod)) {
                                 Main.sendMessage("@" + user + " Please follow to request levels!");
                                 return;
@@ -517,7 +517,7 @@ public class ServerChatBot {
                     command.equalsIgnoreCase("!play")) {
                 Matcher m = null;
                 if (GeneralSettings.followersOption) {
-                    if (TwitchAPI.isNotFollowing(user)) {
+                    if (APIs.isNotFollowing(user)) {
                         if (!isMod) {
                             response = "@" + user + " Please follow to request levels!";
                             Main.sendMessage(response);

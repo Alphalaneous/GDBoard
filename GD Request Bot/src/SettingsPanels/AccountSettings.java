@@ -1,12 +1,6 @@
 package SettingsPanels;
 
-import Main.Defaults;
-import Main.FancyTextArea;
-import Main.JButtonUI;
-import Main.Settings;
-import Main.TwitchAPI;
-import Main.CurvedButton;
-import Main.CheckboxButton;
+import Main.*;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -56,7 +50,7 @@ public class AccountSettings {
 			public void mousePressed(MouseEvent e) {
 				Thread thread = new Thread(() -> {
 					try {
-						TwitchAPI.setOauth();
+						APIs.setOauth();
 					}
 					catch (Exception ignored){
 					}

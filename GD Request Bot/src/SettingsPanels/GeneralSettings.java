@@ -14,6 +14,7 @@ public class GeneralSettings {
 	public static boolean followersOption = false;
 	public static boolean subsOption = false;
 	public static boolean repeatedOption = false;
+	public static boolean repeatedOptionAll = false;
 	public static boolean nowPlayingOption = false;
 	public static boolean autoDownloadOption = false;
 	public static boolean queueLimitBoolean = false;
@@ -23,12 +24,14 @@ public class GeneralSettings {
 	private static CheckboxButton followers = createButton("Followers Only", 50);
 	private static CheckboxButton nowPlaying = createButton("Disable Now Playing Message", 110);
 	private static CheckboxButton repeated = createButton("Disable Repeated Requests", 140);
+	private static CheckboxButton repeatedAll = createButton("Disable Repeated Requests All Time", 170);
+
 	//private static CheckboxButton autoDownload = createButton("Automatically download Music (Experimental)", 110);
 	private static CheckboxButton subOnly = createButton("Subscribers Only", 80);
 
-	private static CheckboxButton queueLimitText = createButton("Maximum Queue Size: ", 170);
-	private static CheckboxButton userLimitText = createButton("In Queue Request Limit: ", 245);
-	private static CheckboxButton userLimitStreamText = createButton("All Stream Request Limit: ", 320);
+	private static CheckboxButton queueLimitText = createButton("Maximum Queue Size: ", 200);
+	private static CheckboxButton userLimitText = createButton("In Queue Request Limit: ", 275);
+	private static CheckboxButton userLimitStreamText = createButton("All Stream Request Limit: ", 350);
 	private static JLabel donation = new JLabel();
 	private static CurvedButton donationButton = new CurvedButton("Donate");
 
@@ -108,6 +111,14 @@ public class GeneralSettings {
 			}
 		});
 
+		repeatedAll.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				repeatedOptionAll = repeatedAll.getSelectedState();
+			}
+		});
+
+
 		/*autoDownload.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -128,7 +139,7 @@ public class GeneralSettings {
 			}
 		});
 		queueSizeInput.setEditable(false);
-		queueSizeInput.setBounds(25,203,365, 32);
+		queueSizeInput.setBounds(25,233,365, 32);
 		queueSizeInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		queueSizeInput.addKeyListener(new KeyListener() {
 			@Override
@@ -161,7 +172,7 @@ public class GeneralSettings {
 		});
 
 		userLimitInput.setEditable(false);
-		userLimitInput.setBounds(25,275,365, 32);
+		userLimitInput.setBounds(25,305,365, 32);
 		userLimitInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		userLimitInput.addKeyListener(new KeyListener() {
 			@Override
@@ -194,7 +205,7 @@ public class GeneralSettings {
 		});
 
 		userLimitStreamInput.setEditable(false);
-		userLimitStreamInput.setBounds(25,350,365, 32);
+		userLimitStreamInput.setBounds(25,380,365, 32);
 		userLimitStreamInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		userLimitStreamInput.addKeyListener(new KeyListener() {
 			@Override
@@ -217,6 +228,7 @@ public class GeneralSettings {
 		panel.add(subOnly);
 		panel.add(nowPlaying);
 		panel.add(repeated);
+		panel.add(repeatedAll);
 		//panel.add(autoDownload);
 		panel.add(versionLabel);
 		panel.add(queueLimitText);

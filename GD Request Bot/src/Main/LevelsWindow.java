@@ -304,8 +304,20 @@ public class LevelsWindow {
                     }
                     if (selectedID != prevSelectedID) {
                         Thread thread = new Thread(() -> {
-                            CommentsWindow.unloadComments(true);
-                            CommentsWindow.loadComments(0, false);
+                            while(true) {
+                                try {
+                                    CommentsWindow.unloadComments(true);
+                                    CommentsWindow.loadComments(0, false);
+                                    break;
+                                } catch (Exception f) {
+                                    f.printStackTrace();
+                                }
+                                try {
+                                    Thread.sleep(50);
+                                } catch (InterruptedException e1) {
+                                    e1.printStackTrace();
+                                }
+                            }
                         });
                         thread.start();
 

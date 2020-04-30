@@ -114,9 +114,9 @@ public class Onboarding {
             public void mousePressed(MouseEvent e) {
                 try {
                     moveOn.setVisible(true);
-                    TwitchAPI.setOauth();
+                    APIs.setOauth();
                     Thread thread = new Thread(() -> {
-                        while (!TwitchAPI.success.get()) {
+                        while (!APIs.success.get()) {
                             try {
                                 Thread.sleep(100);
                             } catch (InterruptedException e1) {
