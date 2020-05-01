@@ -47,7 +47,7 @@ public class ShortcutSettings {
         panel.add(copyPanel);
         panel.add(blockPanel);
         panel.add(clearPanel);
-        panel.add(lockPanel);
+        //panel.add(lockPanel);
 
         return panel;
 

@@ -32,10 +32,13 @@ import java.util.regex.Pattern;
 public class ServerChatBot {
 
     static Thread rickThread = null;
+    static boolean processing = false;
+    static boolean runQueue = true;
     //region ChatBor Constructor
 
     //endregion
     public static void onMessage(String user, String message, boolean isMod, boolean isSub) {
+        processing = true;
         try {
             String command = message.split(" ")[0];
             String[] arguments = message.split(" ");
@@ -81,6 +84,8 @@ public class ServerChatBot {
         catch (Exception e){
             e.printStackTrace();
         }
+
+        processing = false;
     }
 
     static void doCommand(String user, String command, String[] arguments, boolean isMod, boolean isSub) {
@@ -243,34 +248,48 @@ public class ServerChatBot {
                     command.equalsIgnoreCase("!requests") ||
                     command.equalsIgnoreCase("!page")) {
                 //if (Main.mods.contains(user) || isBroadcaster) {
-
-                StringBuilder message = new StringBuilder();
-                int page = 1;
-                try {
-                    page = Integer.parseInt(arguments[1]);
-                } catch (Exception ignored) {
-                }
-                int pages = (Requests.levels.size() - 1) / 10;
-                message.append("Page ").append(page).append(" of ").append(pages + 1).append(" of the queue | ");
-                for (int i = (page - 1) * 10; i < page * 10; i++) {
-                    if (i == Requests.levels.size() - 1 && message.length() >= 2) {
-                        message.append(i + 1).append(": ").append(Requests.levels.get(i).getName()).append(" (").append(Requests.levels.get(i).getLevelID()).append("), ");
-                        message.delete(message.length() - 2, message.length());
-                        break;
-                    }
-
+                if(runQueue) {
+                    runQueue = false;
+                    StringBuilder message = new StringBuilder();
+                    int page = 1;
                     try {
-                        message.append(i + 1).append(": ").append(Requests.levels.get(i).getName()).append(" (").append(Requests.levels.get(i).getLevelID()).append("), ");
-                    } catch (IndexOutOfBoundsException e) {
-                        message.delete(0, message.length());
-                        response = "@" + user + " No levels on page " + page;
-                        break;
+                        page = Integer.parseInt(arguments[1]);
+                    } catch (Exception ignored) {
                     }
+                    int pages = (Requests.levels.size() - 1) / 10;
+                    message.append("Page ").append(page).append(" of ").append(pages + 1).append(" of the queue | ");
+                    for (int i = (page - 1) * 10; i < page * 10; i++) {
+                        if (i == Requests.levels.size() - 1 && message.length() >= 2) {
+                            message.append(i + 1).append(": ").append(Requests.levels.get(i).getName()).append(" (").append(Requests.levels.get(i).getLevelID()).append("), ");
+                            message.delete(message.length() - 2, message.length());
+                            break;
+                        }
+
+                        try {
+                            message.append(i + 1).append(": ").append(Requests.levels.get(i).getName()).append(" (").append(Requests.levels.get(i).getLevelID()).append("), ");
+                        } catch (IndexOutOfBoundsException e) {
+                            message.delete(0, message.length());
+                            response = "@" + user + " No levels on page " + page;
+                            break;
+                        }
+                    }
+                    response = message.toString();
+                    //} else {
+                    //sendMessage("This command is for mods, use !where or !position to find your position in the queue!", channel);
+                    //}
+                    Thread thread = new Thread(() -> {
+                        try {
+                            Thread.sleep(10000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        runQueue = true;
+                    });
+                    thread.start();
                 }
-                response = message.toString();
-                //} else {
-                //sendMessage("This command is for mods, use !where or !position to find your position in the queue!", channel);
-                //}
+                else{
+                    response = "/w " + user + " That command is on a cooldown";
+                }
             }
             //endregion
 

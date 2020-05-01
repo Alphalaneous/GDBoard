@@ -126,6 +126,9 @@ class GDBoardBot {
                         boolean sub = object.get("sub").asBoolean();
                         Thread thread1 = new Thread(() -> {
                             try {
+                                while(ServerChatBot.processing){
+                                    Thread.sleep(50);
+                                }
                                 ServerChatBot.onMessage(sender, message, mod, sub);
                             } catch (Exception e) {
                                 e.printStackTrace();
