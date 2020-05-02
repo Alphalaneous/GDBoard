@@ -157,29 +157,6 @@ class MainBar {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-                ActionsWindow.setSettings();
-                CommentsWindow.setSettings();
-                InfoWindow.setSettings();
-                LevelsWindow.setSettings();
-                SongWindow.setSettings();
-                SettingsWindow.setSettings();
-                Windowed.setSettings();
-
-                try {
-                    Settings.writeLocation();
-                    Settings.writeSettings("monitor", String.valueOf(Defaults.screenNum));
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-                GeneralSettings.setSettings();
-                RequestSettings.setSettings();
-                ShortcutSettings.setSettings();
-                OutputSettings.setSettings();
-                try {
-                    GlobalScreen.unregisterNativeHook();
-                } catch (NativeHookException f) {
-                    f.printStackTrace();
-                }
                 System.exit(0);
             }
 

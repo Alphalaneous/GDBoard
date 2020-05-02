@@ -3,6 +3,7 @@ package Main;
 import SettingsPanels.*;
 import com.cavariux.twitchirc.Chat.User;
 import org.jnativehook.GlobalScreen;
+import org.jnativehook.NativeHookException;
 import org.json.JSONObject;
 
 import javax.swing.*;
@@ -13,6 +14,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -33,7 +35,51 @@ public class Main {
         Defaults.loaded.set(false);
         //TODO Use nio everywhere
         try {
+            Thread printingHook = new Thread(() -> {
+                if(!Settings.onboarding) {
+                    if (!Settings.windowedMode) {
+                        ActionsWindow.setSettings();
+                        CommentsWindow.setSettings();
+                        InfoWindow.setSettings();
+                        LevelsWindow.setSettings();
+                        SongWindow.setSettings();
+                        SettingsWindow.setSettings();
+                        Windowed.setSettings();
 
+                        try {
+                            Settings.writeLocation();
+                            Settings.writeSettings("monitor", String.valueOf(Defaults.screenNum));
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                        GeneralSettings.setSettings();
+                        RequestSettings.setSettings();
+                        ShortcutSettings.setSettings();
+                        OutputSettings.setSettings();
+
+                    } else {
+                        Windowed.frame.setVisible(false);
+                        SettingsWindow.setSettings();
+                        Windowed.setSettings();
+                        try {
+                            Settings.writeLocation();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        WindowedSettings.setSettings();
+                    }
+                    GeneralSettings.setSettings();
+                    RequestSettings.setSettings();
+                    ShortcutSettings.setSettings();
+                    OutputSettings.setSettings();
+                    try {
+                        GlobalScreen.unregisterNativeHook();
+                    } catch (NativeHookException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            Runtime.getRuntime().addShutdownHook(printingHook);
             Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
             logger.setLevel(Level.OFF);
             logger.setUseParentHandlers(false);
@@ -94,6 +140,7 @@ public class Main {
             while(true) {
                 if (!starting) {
                     Settings.loadSettings(true);
+
                     GDBoardBot.start();
                     if (!Settings.hasWindowed) {
                         Settings.writeSettings("windowed", "false");

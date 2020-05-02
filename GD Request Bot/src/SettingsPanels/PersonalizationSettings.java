@@ -44,33 +44,13 @@ public class PersonalizationSettings {
 				if (n == 0) {
 					try {
 						if (Settings.windowedMode) {
-							SettingsWindow.setSettings();
-							Windowed.setSettings();
-							Settings.writeLocation();
-							GeneralSettings.setSettings();
-							WindowedSettings.setSettings();
-							RequestSettings.setSettings();
-							ShortcutSettings.setSettings();
-							OutputSettings.setSettings();
+
 							Settings.writeSettings("windowed", "false");
 						} else {
-							ActionsWindow.setSettings();
-							CommentsWindow.setSettings();
-							InfoWindow.setSettings();
-							LevelsWindow.setSettings();
-							SongWindow.setSettings();
-							SettingsWindow.setSettings();
-							Windowed.setSettings();
-							Settings.writeLocation();
-							Settings.writeSettings("monitor", String.valueOf(Defaults.screenNum));
-							GeneralSettings.setSettings();
-							RequestSettings.setSettings();
-							ShortcutSettings.setSettings();
-							OutputSettings.setSettings();
 							Settings.writeSettings("windowed", "true");
 						}
-						GlobalScreen.unregisterNativeHook();
 						Thread.sleep(100);
+						System.exit(0);
 					}
 					catch (Exception ignored){
 					}

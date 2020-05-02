@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ConnectException;
+import java.net.NoRouteToHostException;
 import java.net.Socket;
 
 class GDBoardBot {
@@ -73,21 +74,20 @@ class GDBoardBot {
         dialog.setTitle("Connecting to GDBoard");
         dialog.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - dialog.getWidth()/2, Toolkit.getDefaultToolkit().getScreenSize().height/2 - dialog.getHeight()/2);
         dialog.setVisible(true);
-
-        try {
-            clientSocket = new Socket("165.227.53.200", 2963);
-            //clientSocket = new Socket("localhost", 2963);
-        }
-        catch (ConnectException e){
-            System.out.println("failed");
             try {
-                Thread.sleep(15000);
-            } catch (InterruptedException e1) {
-                e1.printStackTrace();
+                clientSocket = new Socket("165.227.53.200", 2963);
+                //clientSocket = new Socket("localhost", 2963);
+            } catch (ConnectException | NoRouteToHostException e) {
+                System.out.println("failed");
+                try {
+                    Thread.sleep(15000);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+                start();
+                return;
             }
-            start();
-            return;
-        }
+
         out = new PrintWriter(clientSocket.getOutputStream(), true);
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 

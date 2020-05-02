@@ -635,24 +635,6 @@ class InnerWindow extends ResizablePanel {
                     System.exit(0);
                 }
                 if(title.equalsIgnoreCase("GDBoard")){
-                    Windowed.frame.setVisible(false);
-                    SettingsWindow.setSettings();
-                    Windowed.setSettings();
-                    try {
-                        Settings.writeLocation();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    GeneralSettings.setSettings();
-                    WindowedSettings.setSettings();
-                    RequestSettings.setSettings();
-                    ShortcutSettings.setSettings();
-                    OutputSettings.setSettings();
-                    try {
-                        GlobalScreen.unregisterNativeHook();
-                    } catch (NativeHookException e) {
-                        e.printStackTrace();
-                    }
                     System.exit(0);
                 }
             }
