@@ -208,7 +208,7 @@ public class Main {
         }
     }
     public static void close(){
-        if(!Settings.onboarding) {
+        if(!Settings.onboarding && !starting) {
             if (!Settings.windowedMode) {
                 ActionsWindow.setSettings();
                 CommentsWindow.setSettings();
