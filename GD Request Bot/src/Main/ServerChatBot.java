@@ -1,5 +1,8 @@
 package Main;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
@@ -28,6 +31,10 @@ class ServerChatBot {
                         isSub = true;
                     }
                 }
+
+
+
+
                 boolean aliasesExist = false;
                 if(Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/aliases.txt"))) {
                     Scanner sc2 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/aliases.txt").toFile());
@@ -43,17 +50,22 @@ class ServerChatBot {
                     sc2.close();
                 }
                 if(!aliasesExist) {
-                    Scanner sc = new Scanner(Objects.requireNonNull(Main.class.getClassLoader()
-                            .getResourceAsStream("Resources/Commands/aliases.txt")));
-                    while (sc.hasNextLine()) {
-                        String line = sc.nextLine();
+                    InputStream is = Main.class
+                            .getClassLoader().getResourceAsStream("Resources/Commands/aliases.txt");
+                    assert is != null;
+                    InputStreamReader isr = new InputStreamReader(is);
+                    BufferedReader br = new BufferedReader(isr);
+                    String line;
+                    while ((line = br.readLine()) != null) {
                         System.out.println(line);
                         if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(com)) {
                             com = line.split("=")[1].replace(" ", "");
                             break;
                         }
                     }
-                    sc.close();
+                    is.close();
+                    isr.close();
+                    br.close();
                 }
                 if(comCooldown.contains(com)){
                     System.out.println("cooldown");
@@ -76,17 +88,22 @@ class ServerChatBot {
                     sc3.close();
                 }
                 if(!coolExists) {
-                    Scanner sc1 = new Scanner(Objects.requireNonNull(Main.class.getClassLoader()
-                            .getResourceAsStream("Resources/Commands/cooldown.txt")));
-                    while (sc1.hasNextLine()) {
-                        String line = sc1.nextLine();
+                    InputStream is = Main.class
+                            .getClassLoader().getResourceAsStream("Resources/Commands/cooldown.txt");
+                    assert is != null;
+                    InputStreamReader isr = new InputStreamReader(is);
+                    BufferedReader br = new BufferedReader(isr);
+                    String line;
+                    while ((line = br.readLine()) != null) {
                         System.out.println(line);
                         if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(com)) {
                             cooldown = Integer.parseInt(line.split("=")[1].replace(" ", ""));
                             break;
                         }
                     }
-                    sc1.close();
+                    is.close();
+                    isr.close();
+                    br.close();
                 }
                 if(cooldown > 0){
                     String finalCom = com;
@@ -133,11 +150,26 @@ class ServerChatBot {
                     Stream<Path> walk = Files.walk(myPath, 1);
                     for (Iterator<Path> it = walk.iterator(); it.hasNext(); ) {
                         Path path = it.next();
-                        String[] file = path.toString().split("\\\\");
+                        String[] file = path.toString().split("/");
                         String fileName = file[file.length - 1];
+                        System.out.println(path.toString());
                         if (fileName.equalsIgnoreCase(com + ".js")) {
-                            response = Command.run(user, isMod, isSub, arguments, Files.readString(path, StandardCharsets.UTF_8));
 
+                            InputStream is = Main.class
+                                    .getClassLoader().getResourceAsStream(path.toString().substring(1));
+                            assert is != null;
+                            InputStreamReader isr = new InputStreamReader(is);
+                            BufferedReader br = new BufferedReader(isr);
+                            StringBuilder function = new StringBuilder();
+                            String line;
+                            while ((line = br.readLine()) != null) {
+                                function.append(line);
+                            }
+                            is.close();
+                            isr.close();
+                            br.close();
+                            response = Command.run(user, isMod, isSub, arguments, function.toString());
+                            break;
                         }
                     }
                     if (fileSystem != null) {
