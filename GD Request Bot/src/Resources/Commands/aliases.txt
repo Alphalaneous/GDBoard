@@ -1,0 +1,17 @@
+!name = !id
+!level = !id
+!r = !request
+!req = !request
+!add = !request
+!play = !request
+!send = !request
+!join = !request
+!p = !position
+!where = !position
+!q = !queue
+!levels = !queue
+!levelList = !queue
+!requests = !queue
+!page = !queue
+!list = !queue
+!nextLevel = !next

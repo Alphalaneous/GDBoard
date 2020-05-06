@@ -42,7 +42,7 @@ public class Windowed {
 		frame.setSize(width + 200,height+32 + 200);
 		frame.setLayout(null);
 		frame.setBackground(new Color(255, 255, 255, 0));
-
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		content.setBounds(1, 31, width-2, height);
 		content.setBackground(Defaults.SUB_MAIN);
 		content.setLayout(null);

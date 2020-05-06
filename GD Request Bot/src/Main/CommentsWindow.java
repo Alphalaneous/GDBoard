@@ -258,6 +258,7 @@ public class CommentsWindow {
         int panelHeight = 0;
         URL gdAPI;
         String message = null;
+        boolean go = true;
         try {
             if (top) {
                 gdAPI = new URL("https://gdbrowser.com/api/comments/" + Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "?page=" + page + "&top");
@@ -270,115 +271,117 @@ public class CommentsWindow {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             message = "{\"Comments\" : " + IOUtils.toString(br) + "}";
         }
-        catch (IOException ignored){
+        catch (Exception ignored){
+            go = false;
         }
-        assert message != null;
-        JSONObject obj = new JSONObject(message);
-        JSONArray arr;
-        try {
-            arr = obj.getJSONArray("Comments");
+        if(go) {
+            assert message != null;
+            JSONObject obj = new JSONObject(message);
+            JSONArray arr;
+            try {
+                arr = obj.getJSONArray("Comments");
 
-            assert arr != null;
-            for (int i = 0; i < arr.length(); i++) {
-                String percent;
-                try {
-                    percent = StringEscapeUtils.unescapeHtml4(arr.getJSONObject(i).getString("percent") + "%");
-                } catch (Exception e) {
-                    percent = "";
-                }
-                JPanel cmtPanel = new JPanel(null);
-                cmtPanel.setBackground(Defaults.MAIN);
+                assert arr != null;
+                for (int i = 0; i < arr.length(); i++) {
+                    String percent;
+                    try {
+                        percent = StringEscapeUtils.unescapeHtml4(arr.getJSONObject(i).getString("percent") + "%");
+                    } catch (Exception e) {
+                        percent = "";
+                    }
+                    JPanel cmtPanel = new JPanel(null);
+                    cmtPanel.setBackground(Defaults.MAIN);
 
-                JLabel commenter = new JLabel();
-                commenter.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-                int finalI = i;
-                commenter.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        super.mouseClicked(e);
-                        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-                            try {
-                                Runtime rt = Runtime.getRuntime();
-                                rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://www.gdbrowser.com/profile/" + arr.getJSONObject(finalI).getString("username"));
-                            } catch (IOException ex) {
-                                ex.printStackTrace();
+                    JLabel commenter = new JLabel();
+                    commenter.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                    int finalI = i;
+                    commenter.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            super.mouseClicked(e);
+                            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                                try {
+                                    Runtime rt = Runtime.getRuntime();
+                                    rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://www.gdbrowser.com/profile/" + arr.getJSONObject(finalI).getString("username"));
+                                } catch (IOException ex) {
+                                    ex.printStackTrace();
+                                }
                             }
                         }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+                            super.mouseEntered(e);
+                            commenter.setFont(new Font("bahnschrift", Font.BOLD, 15));
+                            commenter.setBounds(7, 4, commenter.getPreferredSize().width + 5, 18);
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+                            super.mouseExited(e);
+                            commenter.setFont(new Font("bahnschrift", Font.BOLD, 14));
+                            commenter.setBounds(9, 4, commenter.getPreferredSize().width, 18);
+                        }
+                    });
+                    commenter.setFont(new Font("bahnschrift", Font.BOLD, 14));
+                    JLabel percentLabel = new JLabel();
+                    percentLabel.setFont(new Font("bahnschrift", Font.BOLD, 14));
+                    JLabel likeIcon = new JLabel();
+                    if (Integer.parseInt(arr.getJSONObject(i).getString("likes")) < 0) {
+                        likeIcon.setText("\uE8E0");
+                    } else {
+                        likeIcon.setText("\uE8E1");
                     }
 
-                    @Override
-                    public void mouseEntered(MouseEvent e) {
-                        super.mouseEntered(e);
-                        commenter.setFont(new Font("bahnschrift", Font.BOLD, 15));
-                        commenter.setBounds(7, 4, commenter.getPreferredSize().width + 5, 18);
+                    likeIcon.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 14));
+                    likeIcon.setBounds(width - 20, 4, (int) (width * 0.5), 18);
+
+                    JLabel likesLabel = new JLabel();
+                    likesLabel.setFont(new Font("bahnschrift", Font.BOLD, 10));
+
+                    JLabel comment = new JLabel();
+                    comment.setFont(new Font("bahnschrift", Font.PLAIN, 12));
+                    comment.setBounds(9, 24, width - 6, 60);
+
+                    cmtPanel.add(commenter);
+                    cmtPanel.add(comment);
+                    cmtPanel.add(percentLabel);
+                    cmtPanel.add(likesLabel);
+                    cmtPanel.add(likeIcon);
+
+                    commenter.setForeground(Defaults.FOREGROUND);
+                    percentLabel.setForeground(Defaults.FOREGROUND2);
+                    likesLabel.setForeground(Defaults.FOREGROUND);
+                    likeIcon.setForeground(Defaults.FOREGROUND);
+
+                    comment.setOpaque(false);
+                    String commentTextFormat = String.format("<html><div WIDTH=%d>%s</div></html>", width - 8, StringEscapeUtils.unescapeHtml4(arr.getJSONObject(i).getString("content")));
+                    comment.setForeground(Defaults.FOREGROUND);
+                    comment.setText(commentTextFormat);
+                    if (arr.getJSONObject(i).getString("username").equalsIgnoreCase(Requests.levels.get(LevelsWindow.getSelectedID()).getAuthor())) {
+                        commenter.setForeground(new Color(16, 164, 0));
                     }
+                    commenter.setText(arr.getJSONObject(i).getString("username"));
+                    percentLabel.setText(percent);
+                    percentLabel.setBounds(commenter.getPreferredSize().width + 20, 4, percentLabel.getPreferredSize().width + 5, 18);
+                    likesLabel.setText(arr.getJSONObject(i).getString("likes"));
+                    likesLabel.setBounds(width - likesLabel.getPreferredSize().width - 26, 6, likesLabel.getPreferredSize().width + 5, 18);
+                    comment.setBounds(9, 24, width - 8, comment.getPreferredSize().height);
+                    commenter.setBounds(9, 4, commenter.getPreferredSize().width, 18);
+                    panel.add(cmtPanel);
+                    panelHeight = panelHeight + 32 + comment.getPreferredSize().height;
+                    cmtPanel.setPreferredSize(new Dimension(width, 28 + comment.getPreferredSize().height));
 
-                    @Override
-                    public void mouseExited(MouseEvent e) {
-                        super.mouseExited(e);
-                        commenter.setFont(new Font("bahnschrift", Font.BOLD, 14));
-                        commenter.setBounds(9, 4, commenter.getPreferredSize().width, 18);
-                    }
-                });
-                commenter.setFont(new Font("bahnschrift", Font.BOLD, 14));
-                JLabel percentLabel = new JLabel();
-                percentLabel.setFont(new Font("bahnschrift", Font.BOLD, 14));
-                JLabel likeIcon = new JLabel();
-                if(Integer.parseInt(arr.getJSONObject(i).getString("likes")) < 0){
-                    likeIcon.setText("\uE8E0");
                 }
-                else{
-                    likeIcon.setText("\uE8E1");
-                }
-
-                likeIcon.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 14));
-                likeIcon.setBounds(width - 20, 4, (int) (width * 0.5), 18);
-
-                JLabel likesLabel = new JLabel();
-                likesLabel.setFont(new Font("bahnschrift", Font.BOLD, 10));
-
-                JLabel comment = new JLabel();
-                comment.setFont(new Font("bahnschrift", Font.PLAIN, 12));
-                comment.setBounds(9, 24, width - 6, 60);
-
-                cmtPanel.add(commenter);
-                cmtPanel.add(comment);
-                cmtPanel.add(percentLabel);
-                cmtPanel.add(likesLabel);
-                cmtPanel.add(likeIcon);
-
-                commenter.setForeground(Defaults.FOREGROUND);
-                percentLabel.setForeground(Defaults.FOREGROUND2);
-                likesLabel.setForeground(Defaults.FOREGROUND);
-                likeIcon.setForeground(Defaults.FOREGROUND);
-
-                comment.setOpaque(false);
-                String commentTextFormat = String.format("<html><div WIDTH=%d>%s</div></html>", width-8, StringEscapeUtils.unescapeHtml4(arr.getJSONObject(i).getString("content")));
-                comment.setForeground(Defaults.FOREGROUND);
-                comment.setText(commentTextFormat);
-                if(arr.getJSONObject(i).getString("username").equalsIgnoreCase(Requests.levels.get(LevelsWindow.getSelectedID()).getAuthor())){
-                    commenter.setForeground(new Color(16, 164,0));
-                }
-                commenter.setText(arr.getJSONObject(i).getString("username"));
-                percentLabel.setText(percent);
-                percentLabel.setBounds(commenter.getPreferredSize().width + 20, 4, percentLabel.getPreferredSize().width + 5, 18);
-                likesLabel.setText(arr.getJSONObject(i).getString("likes"));
-                likesLabel.setBounds(width - likesLabel.getPreferredSize().width - 26, 6, likesLabel.getPreferredSize().width + 5, 18);
-                comment.setBounds(9, 24, width - 8, comment.getPreferredSize().height);
-                commenter.setBounds(9, 4, commenter.getPreferredSize().width, 18);
-                panel.add(cmtPanel);
-                panelHeight = panelHeight + 32 + comment.getPreferredSize().height;
-                cmtPanel.setPreferredSize(new Dimension(width, 28 + comment.getPreferredSize().height));
-
+                ((InnerWindow) window).refreshListener();
+                panel.setPreferredSize(new Dimension(width, panelHeight));
+                panel.updateUI();
+                panel.setVisible(true);
+                scrollPane.getVerticalScrollBar().setValue(0);
+                SwingUtilities.invokeLater(() -> scrollPane.getVerticalScrollBar().setValue(0));
+            } catch (Exception e) {
+                return false;
             }
-            ((InnerWindow)window).refreshListener();
-            panel.setPreferredSize(new Dimension(width, panelHeight));
-            panel.updateUI();
-            panel.setVisible(true);
-            scrollPane.getVerticalScrollBar().setValue(0);
-            SwingUtilities.invokeLater(() -> scrollPane.getVerticalScrollBar().setValue(0));
-        } catch (Exception e) {
-            return false;
         }
         return true;
     }

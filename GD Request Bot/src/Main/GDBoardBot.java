@@ -67,7 +67,7 @@ class GDBoardBot {
         dialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                System.exit(0);
+                Main.close();
             }
         });
         dialog.setResizable(false);

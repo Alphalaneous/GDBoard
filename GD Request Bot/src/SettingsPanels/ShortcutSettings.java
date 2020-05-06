@@ -64,7 +64,8 @@ public class ShortcutSettings {
         input.addKeyListener(new SwingKeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == 8 || e.getKeyCode() == 16 || e.getKeyCode() == 17 || e.getKeyCode() == 18) {
+                if (e.getKeyCode() == 8 || e.getKeyCode() == 16 || e.getKeyCode() == 17 || e.getKeyCode() == 18 || e.getKeyCode() == 10) {
+
                     if (text.equalsIgnoreCase("Open")) {
                         input.setText("Home");
                         try {

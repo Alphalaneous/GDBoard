@@ -35,51 +35,7 @@ public class Main {
         Defaults.loaded.set(false);
         //TODO Use nio everywhere
         try {
-            Thread printingHook = new Thread(() -> {
-                if(!Settings.onboarding) {
-                    if (!Settings.windowedMode) {
-                        ActionsWindow.setSettings();
-                        CommentsWindow.setSettings();
-                        InfoWindow.setSettings();
-                        LevelsWindow.setSettings();
-                        SongWindow.setSettings();
-                        SettingsWindow.setSettings();
-                        Windowed.setSettings();
 
-                        try {
-                            Settings.writeLocation();
-                            Settings.writeSettings("monitor", String.valueOf(Defaults.screenNum));
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
-                        GeneralSettings.setSettings();
-                        RequestSettings.setSettings();
-                        ShortcutSettings.setSettings();
-                        OutputSettings.setSettings();
-
-                    } else {
-                        Windowed.frame.setVisible(false);
-                        SettingsWindow.setSettings();
-                        Windowed.setSettings();
-                        try {
-                            Settings.writeLocation();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        WindowedSettings.setSettings();
-                    }
-                    GeneralSettings.setSettings();
-                    RequestSettings.setSettings();
-                    ShortcutSettings.setSettings();
-                    OutputSettings.setSettings();
-                    try {
-                        GlobalScreen.unregisterNativeHook();
-                    } catch (NativeHookException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-            Runtime.getRuntime().addShutdownHook(printingHook);
             Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
             logger.setLevel(Level.OFF);
             logger.setUseParentHandlers(false);
@@ -140,7 +96,6 @@ public class Main {
             while(true) {
                 if (!starting) {
                     Settings.loadSettings(true);
-
                     GDBoardBot.start();
                     if (!Settings.hasWindowed) {
                         Settings.writeSettings("windowed", "false");
@@ -245,9 +200,56 @@ public class Main {
     }
 
     static void sendMessage(String message) {
-        JSONObject messageObj = new JSONObject();
-        messageObj.put("request_type", "send_message");
-        messageObj.put("message", message);
-        GDBoardBot.sendMessage(messageObj.toString());
+        if(!message.equalsIgnoreCase("")) {
+            JSONObject messageObj = new JSONObject();
+            messageObj.put("request_type", "send_message");
+            messageObj.put("message", message);
+            GDBoardBot.sendMessage(messageObj.toString());
+        }
+    }
+    public static void close(){
+        if(!Settings.onboarding) {
+            if (!Settings.windowedMode) {
+                ActionsWindow.setSettings();
+                CommentsWindow.setSettings();
+                InfoWindow.setSettings();
+                LevelsWindow.setSettings();
+                SongWindow.setSettings();
+                SettingsWindow.setSettings();
+                Windowed.setSettings();
+
+                try {
+                    Settings.writeLocation();
+                    Settings.writeSettings("monitor", String.valueOf(Defaults.screenNum));
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                GeneralSettings.setSettings();
+                RequestSettings.setSettings();
+                ShortcutSettings.setSettings();
+                OutputSettings.setSettings();
+
+            } else {
+                Windowed.frame.setVisible(false);
+                SettingsWindow.setSettings();
+                Windowed.setSettings();
+                try {
+                    Settings.writeLocation();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                WindowedSettings.setSettings();
+            }
+            GeneralSettings.setSettings();
+            RequestSettings.setSettings();
+            ShortcutSettings.setSettings();
+            OutputSettings.setSettings();
+            try {
+                GlobalScreen.unregisterNativeHook();
+            } catch (NativeHookException e) {
+                e.printStackTrace();
+            }
+        }
+        System.exit(0);
     }
 }

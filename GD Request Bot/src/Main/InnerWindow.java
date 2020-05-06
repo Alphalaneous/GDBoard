@@ -607,7 +607,7 @@ class InnerWindow extends ResizablePanel {
                 }
                 if(title.equalsIgnoreCase("GDBoard")){
                     Windowed.frame.setVisible(false);
-                    System.exit(0);
+                    Main.close();
                 }
                 if(title.equalsIgnoreCase("Startup")){
                     Onboarding.frame.setVisible(false);
@@ -632,10 +632,10 @@ class InnerWindow extends ResizablePanel {
                 }
                 if(title.equalsIgnoreCase("Startup")){
                     Onboarding.frame.setVisible(false);
-                    System.exit(0);
+                    Main.close();
                 }
                 if(title.equalsIgnoreCase("GDBoard")){
-                    System.exit(0);
+                    Main.close();
                 }
             }
             toggleState = false;

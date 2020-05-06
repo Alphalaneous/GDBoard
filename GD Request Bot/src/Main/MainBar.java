@@ -157,7 +157,7 @@ class MainBar {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-                System.exit(0);
+                Main.close();
             }
 
             @Override

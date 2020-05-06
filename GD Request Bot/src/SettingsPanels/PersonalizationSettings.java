@@ -50,11 +50,11 @@ public class PersonalizationSettings {
 							Settings.writeSettings("windowed", "true");
 						}
 						Thread.sleep(100);
-						System.exit(0);
+						Main.close();
 					}
 					catch (Exception ignored){
 					}
-					System.exit(0);
+					Main.close();
 				}
 			}
 		});

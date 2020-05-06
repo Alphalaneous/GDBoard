@@ -1,13 +1,13 @@
 package Main;
 
-import SettingsPanels.GeneralSettings;
-import SettingsPanels.OutputSettings;
-import SettingsPanels.RequestSettings;
-import SettingsPanels.RequestsLog;
+import SettingsPanels.*;
 import com.github.alex1304.jdash.client.AnonymousGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.entity.GDLevel;
 import com.github.alex1304.jdash.exception.MissingAccessException;
+import com.github.alex1304.jdash.util.LevelSearchFilters;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,14 +17,13 @@ import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.nio.file.*;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
 
-class Requests {
+public class Requests {
 
     static ArrayList<LevelData> levels = new ArrayList<>();
     static ArrayList<String> addedLevels = new ArrayList<>();
@@ -267,8 +266,353 @@ class Requests {
             Main.sendMessage("@" + requester + " Requests are off!");
         }
     }
+    public static String getLevel(int level, String attribute) {
 
+        String result = "";
+        try {
+            if (attribute.equals("name")) {
+                result = levels.get(level).getName();
+            }
+            if (attribute.equals("id")) {
+                result = levels.get(level).getLevelID();
+            }
+            if (attribute.equals("author")) {
+                result = levels.get(level).getAuthor();
+            }
+            if (attribute.equals("requester")) {
+                result = levels.get(level).getRequester();
+            }
+            if (attribute.equals("difficulty")) {
+                result = levels.get(level).getDifficulty();
+            }
+            if (attribute.equals("likes")) {
+                result = levels.get(level).getLikes();
+            }
+            if (attribute.equals("downloads")) {
+                result = levels.get(level).getDownloads();
+            }
+            if (attribute.equals("description")) {
+                result = levels.get(level).getDescription();
+            }
+            if (attribute.equals("songName")) {
+                result = levels.get(level).getSongName();
+            }
+            if (attribute.equals("songID")) {
+                result = levels.get(level).getSongID();
+            }
+            if (attribute.equals("songAuthor")) {
+                result = levels.get(level).getSongAuthor();
+            }
+            if (attribute.equals("songURL")) {
+                result = levels.get(level).getSongURL();
+            }
+            if (attribute.equals("stars")) {
+                result = String.valueOf(levels.get(level).getStars());
+            }
+            if (attribute.equals("epic")) {
+                result = String.valueOf(levels.get(level).getEpic());
+            }
+            if (attribute.equals("featured")) {
+                result = String.valueOf(levels.get(level).getFeatured());
+            }
+            if (attribute.equals("version")) {
+                result = String.valueOf(levels.get(level).getVersion());
+            }
+            if (attribute.equals("length")) {
+                result = levels.get(level).getLength();
+            }
+        }
+        catch (Exception e){
+            Main.sendMessage("Exception: " + e.toString());
+        }
+        return result;
+    }
+    public static int getSize(){
+        return levels.size();
+    }
+    public static void clear(){
+        for (int i = 0; i < Requests.levels.size(); i++) {
+            LevelsWindow.removeButton();
+        }
+        Requests.levels.clear();
+        Functions.saveFunction();
 
+        SongWindow.refreshInfo();
+        InfoWindow.refreshInfo();
+        CommentsWindow.unloadComments(true);
+    }
+    public static String remove(String user, boolean isMod, int intArg){
+        String response = "";
+        for (int i = 0; i < Requests.levels.size(); i++) {
+            try {
+                if (Requests.levels.get(i).getLevelID().equals(Requests.levels.get(intArg - 1).getLevelID())
+                        && (isMod || String.valueOf(user).equalsIgnoreCase(Requests.levels.get(i).getRequester()))) {
+                    response = "@" + user + ", " + Requests.levels.get(i).getName()+ " (" + Requests.levels.get(i).getLevelID() + ") has been removed!";
+                    LevelsWindow.removeButton(i);
+                    Requests.levels.remove(i);
+                    Functions.saveFunction();
+                    SongWindow.refreshInfo();
+                    InfoWindow.refreshInfo();
+                    Thread thread = new Thread(() -> {
+                        CommentsWindow.unloadComments(true);
+                        CommentsWindow.loadComments(0, false);
+                    });
+                    LevelsWindow.setOneSelect();
+                    thread.start();
+                    if (i == 0) {
+                        StringSelection selection = new StringSelection(
+                                Requests.levels.get(0).getLevelID());
+                        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                        clipboard.setContents(selection, selection);
+                    }
+                }
+            } catch (Exception ignored) {
+            }
+        }
+        return response;
+    }
+    private static Thread rickThread = null;
+
+    public static void rick(){
+        System.out.println("ricked");
+        if (rickThread != null) {
+            rickThread.stop();
+        }
+        rickThread = new Thread(() -> {
+            try {
+                BufferedInputStream inp = new BufferedInputStream(ServerChatBot.class
+                        .getResource("/Resources/rick.mp3").openStream());
+                Player mp3player = new Player(inp);
+                mp3player.play();
+            } catch (JavaLayerException | NullPointerException | IOException f) {
+                f.printStackTrace();
+                JOptionPane.showMessageDialog(null, "There was an error playing the music!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        rickThread.start();
+    }
+    public static void stopRick(){
+        if (rickThread != null && rickThread.isAlive()) {
+            rickThread.stop();
+        }
+    }
+    public static String block(String user, String[] arguments){
+        String response;
+        try {
+            int blockedID = Integer.parseInt(arguments[1]);
+            boolean goThrough = true;
+            Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
+            if (!Files.exists(file)) {
+                Files.createFile(file);
+            }
+            Scanner sc = new Scanner(file.toFile());
+            while (sc.hasNextLine()) {
+                if (String.valueOf(blockedID).equals(sc.nextLine())) {
+                    sc.close();
+                    return "@" + user + " ID Already Blocked!";
+                }
+            }
+            sc.close();
+
+            try {
+                Files.write(file, (blockedID + "\n").getBytes(), StandardOpenOption.APPEND);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            response = "@" + user + " Successfully blocked " + arguments[1];
+            BlockedSettings.addButton(arguments[1]);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response = "@" + user + " Block failed!";
+        }
+       return response;
+    }
+    public static String unblock(String user, String[] arguments){
+        String unblocked = arguments[1];
+        String response = "";
+        try {
+            boolean exists = false;
+            Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
+            if (Files.exists(file)) {
+                Scanner sc = new Scanner(file);
+                while (sc.hasNextLine()) {
+                    if (String.valueOf(unblocked).equals(sc.nextLine())) {
+                        exists = true;
+                        break;
+                    }
+                }
+                sc.close();
+
+                if (exists) {
+                    Path temp = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\_temp_");
+                    PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
+                    Files.lines(file)
+                            .filter(line -> !line.contains(unblocked))
+                            .forEach(out::println);
+                    out.flush();
+                    out.close();
+                    Files.delete(file);
+                    Files.move(temp, temp.resolveSibling(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt"), StandardCopyOption.REPLACE_EXISTING);
+                    BlockedSettings.removeID(arguments[1]);
+                    response = "@" + user + " Successfully unblocked " + arguments[1];
+                    BlockedSettings.removeID(unblocked);
+                } else {
+                    response = "@" + user + " That level isn't blocked!";
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            response = "@" + user + " unblock failed!";
+        }
+        return response;
+    }
+    public static String blockUser(String user, String[] arguments){
+        String response;
+        try {
+            String blockedUser = arguments[1];
+            Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blockedUsers.txt");
+            if (!Files.exists(file)) {
+                Files.createFile(file);
+            }
+            Scanner sc = new Scanner(file.toFile());
+            while (sc.hasNextLine()) {
+                if (String.valueOf(blockedUser).equals(sc.nextLine())) {
+                    sc.close();
+                    return "@" + user + " User Already Blocked!";
+                }
+            }
+            sc.close();
+            try {
+                Files.write(file, (blockedUser + "\n").getBytes(), StandardOpenOption.APPEND);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            response = "@" + user + " Successfully blocked " + arguments[1];
+            BlockedUserSettings.addButton(arguments[1]);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            response = "@" + user + " Block failed!";
+        }
+        return response;
+    }
+    public static String unblockUser(String user, String[] arguments){
+        String response = "";
+        String unblocked = arguments[1];
+
+        try {
+            boolean exists = false;
+            Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blockedUsers.txt");
+            if (Files.exists(file)) {
+                Scanner sc = new Scanner(file);
+                while (sc.hasNextLine()) {
+                    if (String.valueOf(unblocked).equals(sc.nextLine())) {
+                        exists = true;
+                        break;
+                    }
+                }
+                sc.close();
+                if (exists) {
+                    Path temp = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\_temp_");
+                    PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
+                    Files.lines(file)
+                            .filter(line -> !line.contains(unblocked))
+                            .forEach(out::println);
+                    out.flush();
+                    out.close();
+                    Files.delete(file);
+                    Files.move(temp, temp.resolveSibling(System.getenv("APPDATA") + "\\GDBoard\\blockedUsers.txt"), StandardCopyOption.REPLACE_EXISTING);
+                    BlockedSettings.removeID(arguments[1]);
+                    response = "@" + user + " Successfully unblocked " + arguments[1];
+                    BlockedUserSettings.removeUser(unblocked);
+                } else {
+                    response = "@" + user + " That user isn't blocked!";
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            response = "@" + user + " unblock failed!";
+        }
+        return response;
+    }
+
+    public static String request(String user, boolean isMod, boolean isSub, String[] arguments){
+        String response = "";
+        Matcher m = null;
+        if (GeneralSettings.subsOption) {
+            if (!isSub) {
+                if (!isMod) {
+                    return  "@" + user + " Please subscribe to request levels!";
+                }
+            }
+        }
+        if (arguments.length > 1) {
+            try {
+                m = Pattern.compile("(\\d+)").matcher(arguments[1]);
+            } catch (Exception ignored) {
+            }
+            assert m != null;
+            if (m.matches() && arguments.length <= 2) {
+                try {
+                    Requests.addRequest(m.group(1), String.valueOf(user));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                StringBuilder message = new StringBuilder();
+                for (int i = 1; i < arguments.length; i++) {
+                    if (arguments.length - 1 == i) {
+                        message.append(arguments[i]);
+                    } else {
+                        message.append(arguments[i]).append(" ");
+                    }
+                }
+                if (message.toString().contains(" by ")) {
+                    String level1 = message.toString().split("by ")[0].toUpperCase();
+                    String username = message.toString().split("by ")[1];
+                    AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
+                    try {
+                        outerLoop:
+                        for (int j = 0; j < 10; j++) {
+                            Object[] levelPage = Objects.requireNonNull(client.getLevelsByUser(Objects.requireNonNull(client.searchUser(username).block()), j)
+                                    .block()).asList().toArray();
+                            for (int i = 0; i < 10; i++) {
+                                if (((GDLevel) levelPage[i]).getName().toUpperCase()
+                                        .startsWith(level1.substring(0, level1.length() - 1))) {
+                                    Requests.addRequest(String.valueOf(((GDLevel) levelPage[i]).getId()),
+                                            String.valueOf(user));
+                                    break outerLoop;
+                                }
+                            }
+                        }
+
+                    } catch (IndexOutOfBoundsException ignored) {
+                    } catch (MissingAccessException e) {
+                        response = "@" + user + " That level or user doesn't exist!";
+                        e.printStackTrace();
+                    }
+                } else {
+
+                    AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
+                    try {
+                        Requests.addRequest(String
+                                        .valueOf(Objects.requireNonNull(client.searchLevels(message.toString(), LevelSearchFilters.create(), 0)
+                                                .block()).asList().get(0).getId()),
+                                String.valueOf(user));
+                    } catch (MissingAccessException e) {
+                        response = "@" + user + " That level doesn't exist!";
+                    } catch (Exception e){
+                        response = "@" + user + " An unknown error occured";
+
+                    }
+                }
+            }
+        } else {
+            response = "@" + user + " Please specify an ID!!";
+        }
+        return response;
+        //}
+    }
     private static ArrayList<LevelData> getLevelData() {
         return levels;
     }
