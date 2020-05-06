@@ -24,6 +24,7 @@ public class WindowedSettings {
             public void mouseReleased(MouseEvent e) {
                 onTopOption = onTop.getSelectedState();
                 Windowed.setOnTop(onTop.getSelectedState());
+                ((InnerWindow) Windowed.window).setMinimize(!onTopOption);
             }
         });
         JPanel panel = new JPanel();
@@ -40,6 +41,7 @@ public class WindowedSettings {
                 onTopOption = Boolean.parseBoolean(Settings.getSettings("onTop"));
                 onTop.setChecked(onTopOption);
                 Windowed.setOnTop(onTopOption);
+                ((InnerWindow) Windowed.window).setMinimize(!onTopOption);
             }
         } catch (IOException e) {
             e.printStackTrace();

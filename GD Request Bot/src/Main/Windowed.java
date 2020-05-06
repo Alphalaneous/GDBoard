@@ -17,7 +17,7 @@ import java.net.URL;
 public class Windowed {
 	private static int width = 465;
 	private static int height = 512;
-	private static ResizablePanel window = new InnerWindow("GDBoard", Settings.getWindowWLoc().x, Settings.getWindowWLoc().y, width-2, height,
+	public static ResizablePanel window = new InnerWindow("GDBoard", Settings.getWindowWLoc().x, Settings.getWindowWLoc().y, width-2, height,
 			"\uF137", true).createPanel();
 	private static JPanel content = new JPanel(null);
 	private static JPanel buttonPanel = new JPanel();
@@ -142,6 +142,7 @@ public class Windowed {
 		content.add(buttonPanel);
 		window.add(content);
 		((InnerWindow) window).setPinVisible();
+		((InnerWindow) window).setMinimize(true);
 		((InnerWindow) window).refreshListener();
 		frame.add(window);
 	}

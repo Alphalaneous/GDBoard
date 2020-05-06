@@ -13,7 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
-class InnerWindow extends ResizablePanel {
+public class InnerWindow extends ResizablePanel {
 
     private static final long serialVersionUID = 1L;
     private final String title;
@@ -28,6 +28,7 @@ class InnerWindow extends ResizablePanel {
     public boolean toggleState = true;
     private JButton closeButton = new JButton("\uE894");
     private JButton pinButton = new JButton("\uE840");
+    private JButton minimizeButton = new JButton("\uE921");
     private JLabel pinButtonFill = new JLabel("  \uE842");
     private JPanel topBar = new JPanel(null);
     private JLabel windowIcon = new JLabel();
@@ -375,14 +376,40 @@ class InnerWindow extends ResizablePanel {
 
         //region Pin Button Attributes
 
+        minimizeButton.setBounds(width - 60, 0, 30, 30);
+        minimizeButton.setMargin(new Insets(0, 0, 0, 0));
+        minimizeButton.setBorder(BorderFactory.createEmptyBorder());
+        minimizeButton.setBackground(Defaults.TOP);
+        minimizeButton.setForeground(Defaults.FOREGROUND);
+        minimizeButton.setUI(defaultUI);
+        minimizeButton.addMouseListener(topScreenIA);
+        minimizeButton.addMouseMotionListener(topScreenIA);
+        minimizeButton.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 14));
+        minimizeButton.setVisible(false);
+        topBar.add(minimizeButton);
+        //endregion
+
+        //region Pin Switching
+
+        minimizeButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if(SwingUtilities.isLeftMouseButton(e)) {
+                    if(!WindowedSettings.onTopOption) {
+                        Windowed.frame.setState(Frame.ICONIFIED);
+                    }
+                }
+            }
+        });
+        //endregion
         pinButton.setBounds(width - 60, 0, 30, 30);
         pinButton.setMargin(new Insets(0, 0, 0, 0));
         pinButton.setBorder(BorderFactory.createEmptyBorder());
         pinButton.setBackground(Defaults.TOP);
         pinButton.setForeground(Defaults.FOREGROUND);
         pinButton.setUI(defaultUI);
-		pinButton.addMouseListener(topScreenIA);
-		pinButton.addMouseMotionListener(topScreenIA);
+        pinButton.addMouseListener(topScreenIA);
+        pinButton.addMouseMotionListener(topScreenIA);
         pinButton.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 14));
         pinButtonFill.setBounds(width - 60, 0, 30, 30);
         pinButtonFill.setBorder(BorderFactory.createEmptyBorder());
@@ -420,8 +447,6 @@ class InnerWindow extends ResizablePanel {
                 }
             }
         });
-        //endregion
-
         //region TopBar attributes
         topBar.setBackground(Defaults.TOP);
         topBar.setBounds(1, 1, width, 30);
@@ -666,6 +691,10 @@ class InnerWindow extends ResizablePanel {
     void setPinVisible() {
         pinButton.setVisible(false);
     }
+    public void setMinimize(boolean option) {
+        minimizeButton.setVisible(option);
+    }
+
     void setCloseVisible() {
         closeButton.setVisible(false);
     }
