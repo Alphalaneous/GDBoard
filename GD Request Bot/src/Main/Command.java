@@ -22,7 +22,7 @@ public class Command {
             if(obj != null) {
                 result = obj.toString();
             }
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return result;

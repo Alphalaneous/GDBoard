@@ -398,6 +398,30 @@ public class Requests {
             rickThread.stop();
         }
     }
+    private static Thread knockThread = null;
+
+    public static void knock(){
+        if (knockThread != null) {
+            knockThread.stop();
+        }
+        knockThread = new Thread(() -> {
+            try {
+                BufferedInputStream inp = new BufferedInputStream(ServerChatBot.class
+                        .getResource("/Resources/knock.mp3").openStream());
+                Player mp3player = new Player(inp);
+                mp3player.play();
+            } catch (JavaLayerException | NullPointerException | IOException f) {
+                f.printStackTrace();
+                JOptionPane.showMessageDialog(null, "There was an error playing the music!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        knockThread.start();
+    }
+    public static void stopKnock(){
+        if (knockThread != null && knockThread.isAlive()) {
+            knockThread.stop();
+        }
+    }
     public static String block(String user, String[] arguments){
         String response;
         try {
