@@ -89,7 +89,9 @@ public class Requests {
             }
             if (GeneralSettings.queueLimitBoolean && (levels.size() >= GeneralSettings.queueLimit)) {
                 System.out.println(GeneralSettings.queueLimit + ", " + (levels.size()));
-                Main.sendMessage("@" + requester + " The queue is full!");
+                if(!GeneralSettings.queueFullOption) {
+                    Main.sendMessage("@" + requester + " The queue is full!");
+                }
                 return;
             }
             if (GeneralSettings.userLimitOption) {
@@ -535,7 +537,12 @@ public class Requests {
         }
         return response;
     }
-
+    public static String getOAuth(){
+        return Settings.oauth;
+    }
+    public static String getClientID(){
+        return "fzwze6vc6d2f7qodgkpq2w8nnsz3rl";
+    }
     public static String request(String user, boolean isMod, boolean isSub, String[] arguments){
         String response = "";
         Matcher m = null;
