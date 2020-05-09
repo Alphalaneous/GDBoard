@@ -16,13 +16,13 @@ public class ChatReader extends TwitchBot {
     @Override
     public void onMessage(User user, Channel channel, String message) {
         Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(message);
-        if(!message.startsWith("!") || !m.find() && !String.valueOf(user).equalsIgnoreCase("gdboard")) {
+        if(!message.startsWith("!") && !m.find() && !String.valueOf(user).equalsIgnoreCase("gdboard")) {
             Thread thread1 = new Thread(() -> {
                 try {
                     while (ServerChatBot.processing) {
                         Thread.sleep(50);
                     }
-                    ServerChatBot.onMessage(String.valueOf(user), message, user.isMod(channel), false);
+                    //ServerChatBot.onMessage(String.valueOf(user), message, user.isMod(channel), false);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
