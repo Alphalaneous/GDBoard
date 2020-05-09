@@ -97,6 +97,7 @@ public class Main {
                 if (!starting) {
                     Settings.loadSettings(true);
                     GDBoardBot.start();
+
                     if (!Settings.hasWindowed) {
                         Settings.writeSettings("windowed", "false");
                     }
@@ -121,7 +122,17 @@ public class Main {
                         Overlay.setFrame();                //Creates the JFrame that contains everything
                         MainBar.createBar();            //Creates the main "Game Bar" in the top center
                     }
-
+                    ChatReader chatReader = new ChatReader();
+                    Thread thread = new Thread(() -> {
+                        chatReader.connect();
+                        try {
+                            chatReader.joinChannel(Settings.getSettings("channel"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        chatReader.start();
+                    });
+                    thread.start();
                     LevelsWindow.createPanel();         //Creates the Levels Window containing all the requests in the level queue
                     ActionsWindow.createPanel();        //Creates the Action Window containing buttons that do specific actions
                     InfoWindow.createPanel();           //Creates the Info Window containing the information of the selected level

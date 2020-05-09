@@ -19,8 +19,26 @@ class ServerChatBot {
         String com = message.split(" ")[0];
         String[] arguments = message.split(" ");
         String response = "";
+        Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(message);
+        if (m.find()) {
+            try {
+                String[] msgs = message.split(" ");
+                String mention = "";
+                for (String s : msgs) {
+                    if (s.contains("@")) {
+                        mention = s;
+                        break;
+                    }
+                }
+                if (!mention.contains(m.group(1))) {
+                    Requests.addRequest(m.group(1), String.valueOf(user));
+                }
 
-        if (com.startsWith("!")) {
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else {
             try {
                 if (com.equalsIgnoreCase("!sudo") && (isMod || user.equalsIgnoreCase("Alphalaneous"))) {
                     if (arguments[2].startsWith("!")) {
@@ -33,10 +51,8 @@ class ServerChatBot {
                 }
 
 
-
-
                 boolean aliasesExist = false;
-                if(Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/aliases.txt"))) {
+                if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/aliases.txt"))) {
                     Scanner sc2 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/aliases.txt").toFile());
                     while (sc2.hasNextLine()) {
                         String line = sc2.nextLine();
@@ -49,7 +65,7 @@ class ServerChatBot {
                     }
                     sc2.close();
                 }
-                if(!aliasesExist) {
+                if (!aliasesExist) {
                     InputStream is = Main.class
                             .getClassLoader().getResourceAsStream("Resources/Commands/aliases.txt");
                     assert is != null;
@@ -67,14 +83,14 @@ class ServerChatBot {
                     isr.close();
                     br.close();
                 }
-                if(comCooldown.contains(com)){
+                if (comCooldown.contains(com)) {
                     System.out.println("cooldown");
                     processing = false;
                     return;
                 }
                 int cooldown = 0;
                 boolean coolExists = false;
-                if(Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/cooldown.txt"))) {
+                if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/cooldown.txt"))) {
                     Scanner sc3 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/cooldown.txt").toFile());
                     while (sc3.hasNextLine()) {
                         String line = sc3.nextLine();
@@ -87,7 +103,7 @@ class ServerChatBot {
                     }
                     sc3.close();
                 }
-                if(!coolExists) {
+                if (!coolExists) {
                     InputStream is = Main.class
                             .getClassLoader().getResourceAsStream("Resources/Commands/cooldown.txt");
                     assert is != null;
@@ -105,7 +121,7 @@ class ServerChatBot {
                     isr.close();
                     br.close();
                 }
-                if(cooldown > 0){
+                if (cooldown > 0) {
                     String finalCom = com;
                     int finalCooldown = cooldown;
                     Thread thread = new Thread(() -> {
@@ -137,7 +153,7 @@ class ServerChatBot {
                     }
                 }
 
-                if(!comExists) {
+                if (!comExists) {
                     URI uri = Main.class.getResource("/Resources/Commands/").toURI();
                     Path myPath;
                     FileSystem fileSystem = null;
@@ -176,34 +192,14 @@ class ServerChatBot {
                         fileSystem.close();
                     }
                 }
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            if(response != null){
+            if (response != null) {
                 Main.sendMessage(response);
             }
-        }
-        else {
-            Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(message);
-            if (m.find()) {
-                try {
-                    String[] msgs = message.split(" ");
-                    String mention = "";
-                    for (String s : msgs) {
-                        if (s.contains("@")) {
-                            mention = s;
-                            break;
-                        }
-                    }
-                    if (!mention.contains(m.group(1))) {
-                        Requests.addRequest(m.group(1), String.valueOf(user));
-                    }
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+
         }
         processing = false;
     }
