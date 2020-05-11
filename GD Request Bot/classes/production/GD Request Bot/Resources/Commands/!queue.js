@@ -3,7 +3,7 @@ function command(){
     if(isNaN(intArg) || args.length == 1){
     	intArg = 1;
     }
-    var pages = ((Levels.getSize()/10) + 1)|0;
+    var pages = ((Levels.getSize()-1/10) + 1)|0;
 
     if(intArg > pages){
         return '@' + user + ' No levels on page ' + intArg;
