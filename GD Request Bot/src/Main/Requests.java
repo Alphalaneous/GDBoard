@@ -332,6 +332,15 @@ public class Requests {
     public static int getSize(){
         return levels.size();
     }
+    public static String toggleRequests(String user){
+        Functions.requestsToggleFunction();
+        if(MainBar.requests) {
+            return "@" + user + " requests are now on";
+        }
+        else{
+            return "@" + user + " requests are now on";
+        }
+    }
     public static void clear(){
         for (int i = 0; i < Requests.levels.size(); i++) {
             LevelsWindow.removeButton();
