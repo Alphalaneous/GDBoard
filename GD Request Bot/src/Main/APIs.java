@@ -102,7 +102,7 @@ public class APIs {
         }
     }
 
-    private static String getIDs(String username) {
+    static String getIDs(String username) {
         JsonObject userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + username.toLowerCase());
         assert userID != null;
         return userID.get("data").asArray().get(0).asObject().get("id").toString().replaceAll("\"", "");

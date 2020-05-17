@@ -62,7 +62,15 @@ public class Overlay {
         // Add components to JFrame from elsewhere
 
         mainFrame.add(component, 0);
-        mainFrame.updateUI();
+
+        // --------------------
+    }
+    static void removeFromFrame(JComponent component) {
+
+        // --------------------
+        // Add components to JFrame from elsewhere
+
+        mainFrame.remove(component);
 
         // --------------------
     }
@@ -78,7 +86,6 @@ public class Overlay {
 
     static void setVisible() {
         frame.setVisible(true);
-        MainBar.setTooltips();
         frame.setAlwaysOnTop(true);
         SettingsWindow.toFront();
     }

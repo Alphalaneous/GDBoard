@@ -36,7 +36,6 @@ public class Main {
         Defaults.loaded.set(false);
         //TODO Use nio everywhere
         try {
-
             Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
             logger.setLevel(Level.OFF);
             logger.setUseParentHandlers(false);
@@ -211,6 +210,8 @@ public class Main {
             });
             thread.start();
             loaded = true;
+            System.out.println(APIs.getIDs("GDBoard"));
+
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);

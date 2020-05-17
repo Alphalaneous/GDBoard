@@ -2,8 +2,6 @@ package Main;
 
 import SettingsPanels.*;
 import com.jidesoft.swing.ResizablePanel;
-import org.jnativehook.GlobalScreen;
-import org.jnativehook.NativeHookException;
 
 import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
@@ -11,7 +9,6 @@ import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 
 public class InnerWindow extends ResizablePanel {
 
@@ -25,7 +22,7 @@ public class InnerWindow extends ResizablePanel {
     private boolean floating;
 
     private boolean isPinPressed = false;
-    public boolean toggleState = true;
+    private boolean toggleState = true;
     private JButton closeButton = new JButton("\uE894");
     private JButton pinButton = new JButton("\uE840");
     private JButton minimizeButton = new JButton("\uE921");
@@ -607,6 +604,7 @@ public class InnerWindow extends ResizablePanel {
         if (toggleState) {
             if(!floating) {
                 setVisible(true);
+                Overlay.addToFrame(this);
             }
             else {
                 if(title.equalsIgnoreCase("Settings")) {
@@ -625,6 +623,7 @@ public class InnerWindow extends ResizablePanel {
         if (!isPinPressed) {
             if(!floating) {
                 setVisible(false);
+                Overlay.removeFromFrame(this);
             }
             else {
                 if(title.equalsIgnoreCase("Settings")) {
@@ -650,6 +649,7 @@ public class InnerWindow extends ResizablePanel {
         if (toggleState) {
             if(!floating) {
                 setVisible(false);
+                Overlay.removeFromFrame(this);
             }
             else {
                 if(title.equalsIgnoreCase("Settings")) {
@@ -667,6 +667,7 @@ public class InnerWindow extends ResizablePanel {
         } else {
             if(!floating) {
                 setVisible(true);
+                Overlay.addToFrame(this);
             }
             else {
                 if(title.equalsIgnoreCase("Settings")) {
@@ -693,10 +694,6 @@ public class InnerWindow extends ResizablePanel {
     }
     public void setMinimize(boolean option) {
         minimizeButton.setVisible(option);
-    }
-
-    void setCloseVisible() {
-        closeButton.setVisible(false);
     }
     //endregion
 }

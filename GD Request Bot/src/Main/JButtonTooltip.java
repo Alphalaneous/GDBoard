@@ -57,18 +57,17 @@ public class JButtonTooltip extends JButton {
         panel.setForeground(Defaults.OUTLINE);
         addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
+                panel.setBounds(getLocationOnScreen().x - Defaults.screenSize.x -  (tooltipLabel.getPreferredSize().width + 22)/2  + (getWidth() / 2) , 70 + 30, tooltipLabel.getPreferredSize().width + 22, tooltipLabel.getPreferredSize().height + 20);
                 panel.setVisible(true);
+                Overlay.addToFrame(panel);
             }
             public void mouseExited(MouseEvent e) {
                 panel.setVisible(false);
+                Overlay.removeFromFrame(panel);
             }
         });
         this.setUI(ui);
         this.setText(text);
-        Overlay.addToFrame(panel);
-    }
-    void setTooltipLocation(int x){
-        panel.setBounds(x -  (tooltipLabel.getPreferredSize().width + 22)/2 , 70 + 30, tooltipLabel.getPreferredSize().width + 22, tooltipLabel.getPreferredSize().height + 20);
     }
     public void refreshUI(){
         panel.setBackground(Defaults.TOP);

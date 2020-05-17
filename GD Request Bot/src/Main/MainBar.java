@@ -1,11 +1,5 @@
 package Main;
 
-import SettingsPanels.GeneralSettings;
-import SettingsPanels.OutputSettings;
-import SettingsPanels.RequestSettings;
-import SettingsPanels.ShortcutSettings;
-import org.jnativehook.GlobalScreen;
-import org.jnativehook.NativeHookException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -15,12 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -40,7 +29,7 @@ class MainBar {
     private static JButton toggleInfo = createButton("\uE946", "Info");
     private static JButton toggleLevels = createButton("\uE179", "Requests");
     private static JButton toggleActions = createButton("\uE7C9", "Actions");
-    public static JButton stopReqs = createSubButton("\uE71A", "Toggle Requests");
+    static JButton stopReqs = createSubButton("\uE71A", "Toggle Requests");
     private static JButton toggleSettings = createSubButton("\uE713", "Settings");
     private static JButton close = createSubButton("\uE10A", "Close");
 
@@ -210,28 +199,6 @@ class MainBar {
         icon.updateUI();
         mainPanel.add(icon);
         Overlay.addToFrame(barPanel);
-    }
-
-    static void setTooltips() {
-        Thread thread = new Thread(() -> {
-            if(!Settings.windowedMode) {
-                while (true) {
-                    if (Overlay.getWindow().isVisible() && !Settings.windowedMode) {
-                        ((JButtonTooltip) toggleComments).setTooltipLocation(toggleComments.getLocationOnScreen().x - Defaults.screenSize.x + (toggleComments.getWidth() / 2));
-                        ((JButtonTooltip) toggleActions).setTooltipLocation(toggleActions.getLocationOnScreen().x - Defaults.screenSize.x + (toggleActions.getWidth() / 2));
-                        ((JButtonTooltip) toggleInfo).setTooltipLocation(toggleInfo.getLocationOnScreen().x - Defaults.screenSize.x + (toggleInfo.getWidth() / 2));
-                        ((JButtonTooltip) toggleSong).setTooltipLocation(toggleSong.getLocationOnScreen().x - Defaults.screenSize.x + (toggleSong.getWidth() / 2));
-                        ((JButtonTooltip) toggleLevels).setTooltipLocation(toggleLevels.getLocationOnScreen().x - Defaults.screenSize.x + (toggleLevels.getWidth() / 2));
-                        ((JButtonTooltip) stopReqs).setTooltipLocation(stopReqs.getLocationOnScreen().x - Defaults.screenSize.x + (stopReqs.getWidth() / 2));
-                        ((JButtonTooltip) toggleSettings).setTooltipLocation(toggleSettings.getLocationOnScreen().x - Defaults.screenSize.x + (toggleSettings.getWidth() / 2));
-                        ((JButtonTooltip) close).setTooltipLocation(close.getLocationOnScreen().x - Defaults.screenSize.x + (close.getWidth() / 2));
-
-                        break;
-                    }
-                }
-            }
-        });
-        thread.start();
     }
 
     static JPanel getMainBar() {
