@@ -36,8 +36,6 @@ public class Randomizer {
 
             panel.setLayout(new GridLayout(1, 5, 10, 10));
 
-            //TODO make custom Yes/No dialog
-
             //region Create Skip Button
             JButton skip = createButton("\uE101");
             skip.addMouseListener(new MouseAdapter() {

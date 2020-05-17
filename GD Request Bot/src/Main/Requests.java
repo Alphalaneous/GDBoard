@@ -8,6 +8,7 @@ import com.github.alex1304.jdash.exception.MissingAccessException;
 import com.github.alex1304.jdash.util.LevelSearchFilters;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
+import org.apache.commons.io.IOUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,12 +17,14 @@ import java.awt.datatransfer.StringSelection;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
+
 
 public class Requests {
 
@@ -331,6 +334,37 @@ public class Requests {
     }
     public static int getSize(){
         return levels.size();
+    }
+    public static void kill(){
+        String PID = null;
+        try {
+            ProcessBuilder pb = new ProcessBuilder("tasklist", "/fi", "\"IMAGENAME eq GeometryDash.exe\"", "/fo", "CSV").redirectErrorStream(true);
+            Process process = pb.start();
+
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                while (true) {
+                    String line = in.readLine();
+                    if (line == null) {
+                        break;
+                    }
+                    if(line.contains("GeometryDash.exe")){
+                        PID = line.split(",")[1].replaceAll("\"","");
+                    }
+                    System.out.println(line);
+                }
+            }
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        System.out.println(PID);
+        try {
+            ProcessBuilder pb = new ProcessBuilder("D:\\Ashton\\Downloads\\gdkill.exe", PID).redirectErrorStream(true);
+            pb.start();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
     public static String toggleRequests(String user){
         Functions.requestsToggleFunction();

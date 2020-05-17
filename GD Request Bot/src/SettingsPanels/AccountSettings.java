@@ -15,7 +15,6 @@ public class AccountSettings {
 	private static JPanel panel = new JPanel();
 
 	public static JPanel createPanel() {
-		//TODO update channel when reauthenticating, restart connection to GDBoard servers
 
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
@@ -64,19 +63,13 @@ public class AccountSettings {
 		return panel;
 
 	}
-	public static void refreshChannel(){
-		channelText.setText("Connected to: " + Settings.channel.replaceAll("#", ""));
+	public static void refreshChannel(String channel){
+			channelText.setText("Connected to: " + channel);
+			System.out.println("Set " + channel);
+
+
 		channelText.setBounds(25,20,channelText.getPreferredSize().width+5,channelText.getPreferredSize().height+5);
 
-	}
-	public static void loadSettings(){
-		try {
-			if(!Settings.getSettings("channel").equalsIgnoreCase("")) {
-				String channel = Settings.getSettings("channel");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 	public static void refreshUI() {
 		defaultUI.setBackground(Defaults.BUTTON);

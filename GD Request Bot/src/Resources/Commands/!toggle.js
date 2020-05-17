@@ -1,5 +1,5 @@
 function command(){
 if(isMod){
-    return Levels.toggleRequests;
+    return Levels.toggleRequests(user);
     }
 }

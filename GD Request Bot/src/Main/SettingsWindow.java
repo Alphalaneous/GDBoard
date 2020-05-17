@@ -75,6 +75,7 @@ public class SettingsWindow {
 		blocked.setVisible(false);
 		blockedUsers.setVisible(false);
 		windowed.setVisible(false);
+		loggedIDs.setVisible(false);
 
 
 		JButton general = createButton("General");

@@ -260,6 +260,8 @@ public class GeneralSettings {
 			queueFullOption = Boolean.parseBoolean(Settings.getSettings("disableQF"));
 
 			repeatedOption = Boolean.parseBoolean(Settings.getSettings("repeatedRequests"));
+			repeatedOptionAll = Boolean.parseBoolean(Settings.getSettings("repeatedRequestsAll"));
+
 			//autoDownloadOption = Boolean.parseBoolean(Settings.getSettings("autoDL"));
 			autoDownloadOption = false;
 			queueLimitBoolean = Boolean.parseBoolean(Settings.getSettings("queueLimitEnabled"));
@@ -283,6 +285,7 @@ public class GeneralSettings {
 
 			subOnly.setChecked(subsOption);
 			repeated.setChecked(repeatedOption);
+			repeatedAll.setChecked(repeatedOptionAll);
 			//autoDownload.setChecked(autoDownloadOption);
 			queueLimitText.setChecked(queueLimitBoolean);
 			userLimitText.setChecked(userLimitOption);
@@ -324,6 +327,8 @@ public class GeneralSettings {
 			Settings.writeSettings("userLimitStreamEnabled", String.valueOf(userLimitStreamOption));
 			Settings.writeSettings("userLimitStream", String.valueOf(userLimitStream));
 			Settings.writeSettings("repeatedRequests", String.valueOf(repeatedOption));
+			Settings.writeSettings("repeatedRequestsAll", String.valueOf(repeatedOptionAll));
+
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "There was an error writing to the file!", "Error",  JOptionPane.ERROR_MESSAGE);
 		}

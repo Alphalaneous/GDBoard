@@ -296,7 +296,6 @@ public class Settings {
     //static boolean hasClientID = false;
 
     //TODO Save window sizes
-    //TODO Sub Only Setting
     //TODO Cheer Only Setting
 
     /*static void setWindowedMode(boolean mode) {

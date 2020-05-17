@@ -64,9 +64,9 @@ public class APIs {
     }
 
     static String getChannel() {
-        JsonObject nameObj = twitchAPI("https://api.twitch.tv/kraken/channel", true);
+        JsonObject nameObj = twitchAPI("https://api.twitch.tv/kraken/user", true);
         assert nameObj != null;
-        return String.valueOf(nameObj.get("name")).replaceAll("\"", "");
+        return String.valueOf(nameObj.get("display_name")).replaceAll("\"", "");
     }
 
     private static JsonObject twitchAPI(String URL) {
@@ -132,17 +132,16 @@ public class APIs {
                 twitch.setClientId("fzwze6vc6d2f7qodgkpq2w8nnsz3rl");
                 URI authUrl = new URI(twitch.auth().getAuthenticationUrl(
                         twitch.getClientId(), callbackUri, Scopes.USER_READ
-                ) + "chat:edit+chat:read+whispers:read+whispers:edit+channel_read&force_verify=true");
+                ) + "chat:edit+chat:read+whispers:read+whispers:edit+user_read&force_verify=true");
                 Runtime rt = Runtime.getRuntime();
                 rt.exec("rundll32 url.dll,FileProtocolHandler " + authUrl);
                 if (twitch.auth().awaitAccessToken()) {
-                    Settings.setOAuth(twitch.auth().getAccessToken());
+                    Settings.oauth = twitch.auth().getAccessToken();
                     Settings.writeSettings("oauth", twitch.auth().getAccessToken());
                     String channel = APIs.getChannel();
                     Settings.channel = channel;
-                    Settings.setChannel(channel);
                     Settings.writeSettings("channel", channel);
-                    AccountSettings.refreshChannel();
+                    AccountSettings.refreshChannel(channel);
                     success.set(true);
                     try {
                         GDBoardBot.restart();

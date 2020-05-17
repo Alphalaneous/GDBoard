@@ -270,12 +270,12 @@ public class CommentsWindow {
             InputStream is = con.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             message = "{\"Comments\" : " + IOUtils.toString(br) + "}";
+            System.out.println(message);
         }
         catch (Exception ignored){
             go = false;
         }
         if(go) {
-            assert message != null;
             JSONObject obj = new JSONObject(message);
             JSONArray arr;
             try {
@@ -283,6 +283,7 @@ public class CommentsWindow {
 
                 assert arr != null;
                 for (int i = 0; i < arr.length(); i++) {
+                    System.out.println(i);
                     String percent;
                     try {
                         percent = StringEscapeUtils.unescapeHtml4(arr.getJSONObject(i).getString("percent") + "%");

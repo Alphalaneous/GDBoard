@@ -246,7 +246,7 @@ public class RequestSettings {
             }
             disableDifficulties.setChecked(disableOption);
             if(!Settings.getSettings("difficultyFilter").equalsIgnoreCase("")) {
-                excludedDifficulties = new ArrayList<>(Arrays.asList(Settings.getSettings("difficultyFilter").split(",")));
+                excludedDifficulties = new ArrayList<>(Arrays.asList(Settings.getSettings("difficultyFilter").split(", ")));
             }
             if(excludedDifficulties.contains("na")){
                 na.setChecked(true);

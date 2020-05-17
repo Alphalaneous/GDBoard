@@ -25,6 +25,7 @@ public class Main {
 
     static List<User> mods = new ArrayList<>();
     static boolean starting = true;
+    static boolean loaded = false;
     static boolean allowRequests = false;
     static boolean doMessage  = false;
     static boolean doImage  = false;
@@ -54,10 +55,12 @@ public class Main {
             dialog.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent e) {
-                    System.exit(0);
+                    close();
                 }
             });
             dialog.setResizable(false);
+            dialog.setFocusable(false);
+            dialog.setFocusableWindowState(false);
             dialog.setTitle("Starting GDBoard");
             dialog.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - dialog.getWidth()/2, Toolkit.getDefaultToolkit().getScreenSize().height/2 - dialog.getHeight()/2);
             dialog.setVisible(true);
@@ -150,7 +153,6 @@ public class Main {
                     WindowedSettings.loadSettings();
                     OutputSettings.loadSettings();
                     RequestSettings.loadSettings();
-                    AccountSettings.loadSettings();
                     ShortcutSettings.loadSettings();
                     ControllerListener.hook();         //Starts Controller Listener
 
@@ -183,7 +185,12 @@ public class Main {
                 assert sc != null;
                 while (sc.hasNextLine()) {
                     String[] level = sc.nextLine().split(",");
-                    Requests.addRequest(level[0], level[1]);
+                    try {
+                        Requests.addRequest(level[0], level[1]);
+                    }
+                    catch (Exception e){
+                        Requests.levels.clear();
+                    }
                 }
                 sc.close();
             }
@@ -195,7 +202,7 @@ public class Main {
             Thread thread = new Thread(() -> {
                 while(true){
                     try {
-                        Thread.sleep(60000);
+                        Thread.sleep(120000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -203,7 +210,7 @@ public class Main {
                 }
             });
             thread.start();
-
+            loaded = true;
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
@@ -219,7 +226,7 @@ public class Main {
         }
     }
     public static void close(){
-        if(!Settings.onboarding && !starting) {
+        if(!Settings.onboarding && loaded) {
             if (!Settings.windowedMode) {
                 ActionsWindow.setSettings();
                 CommentsWindow.setSettings();
@@ -235,10 +242,6 @@ public class Main {
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
-                GeneralSettings.setSettings();
-                RequestSettings.setSettings();
-                ShortcutSettings.setSettings();
-                OutputSettings.setSettings();
 
             } else {
                 Windowed.frame.setVisible(false);

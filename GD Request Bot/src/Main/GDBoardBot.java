@@ -71,9 +71,12 @@ class GDBoardBot {
             }
         });
         dialog.setResizable(false);
+        dialog.setFocusable(false);
+        dialog.setFocusableWindowState(false);
         dialog.setTitle("Connecting to GDBoard");
         dialog.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - dialog.getWidth()/2, Toolkit.getDefaultToolkit().getScreenSize().height/2 - dialog.getHeight()/2);
         dialog.setVisible(true);
+
             try {
                 clientSocket = new Socket("165.227.53.200", 2963);
                 //clientSocket = new Socket("localhost", 2963);
@@ -129,7 +132,26 @@ class GDBoardBot {
                                 while(ServerChatBot.processing){
                                     Thread.sleep(50);
                                 }
-                                ServerChatBot.onMessage(sender, message, mod, sub);
+                                ServerChatBot.onMessage(sender, message, mod, sub, 0);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        });
+                        thread1.start();
+                    }
+                    if ((event.equalsIgnoreCase("cheer") && Main.allowRequests)) {
+                        String sender = object.get("sender").toString().replaceAll("\"", "");
+                        String message = object.get("message").toString().replaceAll("\"", "");
+                        int bits = Integer.parseInt(object.get("bits").toString().replaceAll("\"", ""));
+
+                        boolean mod = object.get("mod").asBoolean();
+                        boolean sub = object.get("sub").asBoolean();
+                        Thread thread1 = new Thread(() -> {
+                            try {
+                                while(ServerChatBot.processing){
+                                    Thread.sleep(50);
+                                }
+                                ServerChatBot.onMessage(sender, message, mod, sub, bits);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

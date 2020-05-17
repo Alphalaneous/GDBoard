@@ -14,13 +14,13 @@ import java.util.stream.Stream;
 class ServerChatBot {
     static boolean processing = false;
     private static ArrayList<String> comCooldown = new ArrayList<>();
-    static void onMessage(String user, String message, boolean isMod, boolean isSub) {
+    static void onMessage(String user, String message, boolean isMod, boolean isSub, int cheer) {
         processing = true;
         String com = message.split(" ")[0];
         String[] arguments = message.split(" ");
         String response = "";
         Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(message);
-        if (m.find()) {
+        if (m.find() && !message.startsWith("!")) {
             try {
                 String[] msgs = message.split(" ");
                 String mention = "";
@@ -147,7 +147,7 @@ class ServerChatBot {
                         String fileName = file[file.length - 1];
                         if (fileName.equalsIgnoreCase(com + ".js")) {
                             comExists = true;
-                            response = Command.run(user, isMod, isSub, arguments, Files.readString(path, StandardCharsets.UTF_8));
+                            response = Command.run(user, isMod, isSub, arguments, Files.readString(path, StandardCharsets.UTF_8), cheer);
 
                         }
                     }
@@ -184,7 +184,7 @@ class ServerChatBot {
                             is.close();
                             isr.close();
                             br.close();
-                            response = Command.run(user, isMod, isSub, arguments, function.toString());
+                            response = Command.run(user, isMod, isSub, arguments, function.toString(), cheer);
                             break;
                         }
                     }
