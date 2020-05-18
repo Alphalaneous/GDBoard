@@ -19,6 +19,7 @@ public class Defaults {
             .getLocalGraphicsEnvironment()
             .getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();
 
+    public static Color ACCENT;
     public static Color MAIN;
     public static Color BUTTON;
     public static Color HOVER;
@@ -114,12 +115,18 @@ public class Defaults {
     static void startMainThread() {
         RegistryKey personalizeStart = new RegistryKey(
                 "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
+        RegistryKey systemColorStart = new RegistryKey(
+                "Software\\Microsoft\\Windows\\DWM");
 
         final int[] prevTheme = new int[1];
+        final Integer[] prevColor = new Integer[1];
         try {
             prevTheme[0] = ((RegDWORDValue) personalizeStart.getValue("AppsUseLightTheme")).getIntValue();
+            prevColor[0] = ((RegDWORDValue) systemColorStart.getValue("ColorizationColor")).getValue();
+            ACCENT = Color.decode(String.valueOf(prevColor[0]));
         } catch (NullPointerException e) {
             prevTheme[0] = 1;
+            prevColor[0] = 0;
         }
         if (prevTheme[0] == 0) {
             Defaults.setDark();
@@ -151,10 +158,20 @@ public class Defaults {
                 MainBar.setTime(hour + ":" + String.format("%02d", minute) + " " + half);
                 RegistryKey personalize = new RegistryKey(
                         "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
+                RegistryKey systemColor = new RegistryKey(
+                        "Software\\Microsoft\\Windows\\DWM");
 
                 int theme = 0;
+                Integer color;
                 try {
                     theme = ((RegDWORDValue) personalize.getValue("AppsUseLightTheme")).getIntValue();
+                    color = ((RegDWORDValue) systemColor.getValue("ColorizationColor")).getValue();
+                    if(!ACCENT.equals(Color.decode(String.valueOf(color)))) {
+                        ACCENT = Color.decode(String.valueOf(color));
+                        Overlay.refreshUI(false);
+                    }
+
+                    System.out.println(Color.decode(String.valueOf(color)).getRed());
                 } catch (NullPointerException ignored) {
                 }
                 if (theme == 0 && prevTheme[0] == 1) {

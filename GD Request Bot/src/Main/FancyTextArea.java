@@ -19,7 +19,7 @@ public class FancyTextArea extends JTextArea {
         addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(0, 127, 230)),
+                setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Defaults.ACCENT),
                         BorderFactory.createEmptyBorder(8, 8, 8, 8)));
             }
 

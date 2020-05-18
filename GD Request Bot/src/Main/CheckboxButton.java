@@ -47,7 +47,7 @@ public class CheckboxButton extends JButton {
 						isChecked = false;
 					} else {
 						check.setText("\uE73B");
-						check.setForeground(new Color(75, 155, 240));
+						check.setForeground(Defaults.ACCENT);
 						checkSymbol.setVisible(true);
 						isChecked = true;
 					}
@@ -65,7 +65,7 @@ public class CheckboxButton extends JButton {
 				}
 				else {
 					check.setText("\uE73B");
-					check.setForeground(new Color(75, 155, 240));
+					check.setForeground(Defaults.ACCENT);
 					checkSymbol.setVisible(true);
 				}
 				hover.setVisible(false);
@@ -84,7 +84,7 @@ public class CheckboxButton extends JButton {
 		}
 		else {
 			check.setText("\uE73B");
-			check.setForeground(new Color(75, 155, 240));
+			check.setForeground(Defaults.ACCENT);
 			checkSymbol.setVisible(true);
 		}
 	}
@@ -97,7 +97,7 @@ public class CheckboxButton extends JButton {
 			check.setForeground(Color.LIGHT_GRAY);
 		}
 		else{
-			check.setForeground(new Color(75, 155, 240));
+			check.setForeground(Defaults.ACCENT);
 		}
 		text.setForeground(Defaults.FOREGROUND);
 		text.setFont(getFont());

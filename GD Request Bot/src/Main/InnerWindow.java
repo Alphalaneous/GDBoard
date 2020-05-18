@@ -20,7 +20,7 @@ public class InnerWindow extends ResizablePanel {
     private int height;
     private final String icon;
     private boolean floating;
-
+    private Color alphaBorder = new Color(Defaults.ACCENT.getRed(), Defaults.ACCENT.getGreen(), Defaults.ACCENT.getBlue(), 100);
     private boolean isPinPressed = false;
     private boolean toggleState = true;
     private JButton closeButton = new JButton("\uE894");
@@ -127,7 +127,7 @@ public class InnerWindow extends ResizablePanel {
             }
         }
         setOpaque(false);
-        setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 50)));
+        setBorder(BorderFactory.createLineBorder(alphaBorder));
 
         //endregion
 
@@ -516,6 +516,9 @@ public class InnerWindow extends ResizablePanel {
         windowIcon.setForeground(Defaults.FOREGROUND);
         pinButton.setForeground(Defaults.FOREGROUND);
         pinButtonFill.setForeground(Defaults.FOREGROUND);
+        alphaBorder = new Color(Defaults.ACCENT.getRed(), Defaults.ACCENT.getGreen(), Defaults.ACCENT.getBlue(), 100);
+        setBorder(BorderFactory.createLineBorder(alphaBorder));
+
         for (Component component : topBar.getComponents()) {
             if (component instanceof JButton) {
                 component.setBackground(Defaults.TOP);
@@ -600,7 +603,7 @@ public class InnerWindow extends ResizablePanel {
     //region Set InnerWindow visible
     void setVisible() {
         topBar.setVisible(true);
-        setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 50)));
+        setBorder(BorderFactory.createLineBorder(alphaBorder));
         if (toggleState) {
             if(!floating) {
                 setVisible(true);

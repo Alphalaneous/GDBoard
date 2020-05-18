@@ -32,6 +32,7 @@ class MainBar {
     static JButton stopReqs = createSubButton("\uE71A", "Toggle Requests");
     private static JButton toggleSettings = createSubButton("\uE713", "Settings");
     private static JButton close = createSubButton("\uE10A", "Close");
+    private static Color alphaBorder = new Color(Defaults.ACCENT.getRed(), Defaults.ACCENT.getGreen(), Defaults.ACCENT.getBlue(), 100);
 
     static void createBar() {
 
@@ -42,7 +43,7 @@ class MainBar {
         barPanel.setSize(580, 65);
         barPanel.setLocation((int) (670 / ratio), 30);
         barPanel.setLayout(null);
-        barPanel.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 50)));
+        barPanel.setBorder(BorderFactory.createLineBorder(alphaBorder));
         MouseInputAdapter mia = new MouseInputAdapter() {
             Point pressed;
 
@@ -237,6 +238,8 @@ class MainBar {
     }
 
     static void refreshUI(boolean color) {
+        alphaBorder = new Color(Defaults.ACCENT.getRed(), Defaults.ACCENT.getGreen(), Defaults.ACCENT.getBlue(), 100);
+        barPanel.setBorder(BorderFactory.createLineBorder(alphaBorder));
         if (color) {
             BufferedImage img = null;
             if(Main.doImage) {
@@ -260,7 +263,6 @@ class MainBar {
                 icon.setIcon(imgNew);
             }
             icon.setBounds(20, -1, 64, 64);
-
             mainPanel.setBackground(Defaults.TOP);
             buttonPanel.setBackground(Defaults.TOP);
             defaultUI.setBackground(Defaults.MAIN);

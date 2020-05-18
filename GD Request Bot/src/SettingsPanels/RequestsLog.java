@@ -20,7 +20,7 @@ public class RequestsLog {
     private static JPanel blockedListPanel = new JPanel();
     private static JScrollPane scrollPane = new JScrollPane(blockedListPanel);
     private static int i = 0;
-    private static int height = 0;
+    private static double height = 0;
 
     public static JPanel createPanel() {
 
@@ -126,9 +126,9 @@ public class RequestsLog {
     public static void removeID(String ID) {
         i--;
         if (i % 5 == 0 && i !=0) {
-            height = height - 36;
-            blockedListPanel.setBounds(0, 0, 415, height + 4);
-            blockedListPanel.setPreferredSize(new Dimension(415, height + 4));
+            height = height - 36.7;
+            blockedListPanel.setBounds(0, 0, 415, (int) (height + 4));
+            blockedListPanel.setPreferredSize(new Dimension(415, (int) (height + 4)));
             scrollPane.updateUI();
         }
         for (Component component : blockedListPanel.getComponents()) {
@@ -145,9 +145,9 @@ public class RequestsLog {
     public static void addButton(String ID) {
         i++;
         if (i % 5 == 0) {
-            height = height + 36;
-            blockedListPanel.setBounds(0, 0, 415, height + 4);
-            blockedListPanel.setPreferredSize(new Dimension(415, height + 4));
+            height = height + 36.7;
+            blockedListPanel.setBounds(0, 0, 415, (int) (height + 4));
+            blockedListPanel.setPreferredSize(new Dimension(415, (int) (height + 4)));
             scrollPane.updateUI();
         }
         Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\requestsLog.txt");

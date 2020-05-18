@@ -105,7 +105,6 @@ public class Overlay {
         frame.invalidate();
         frame.revalidate();
         if(Settings.windowedMode) {
-            SettingsWindow.refreshUI();
             Windowed.refreshUI();
         }
         else {
@@ -113,8 +112,9 @@ public class Overlay {
             ActionsWindow.refreshUI();
             SongWindow.refreshUI();
             MainBar.refreshUI(color);
-            Randomizer.refreshUI();
+            //Randomizer.refreshUI();
         }
+        SettingsWindow.refreshUI();
         LevelsWindow.refreshUI();
         InfoWindow.refreshUI();
         AccountSettings.refreshUI();
@@ -139,7 +139,7 @@ public class Overlay {
         SongWindow.setInvisible();
         SettingsWindow.setInvisible();
         MainBar.setInvisible();
-        Randomizer.setInvisible();
+        //Randomizer.setInvisible();
         frame.invalidate();
         frame.validate();
         frame.repaint();
@@ -155,7 +155,7 @@ public class Overlay {
         SongWindow.setVisible();
         SettingsWindow.setVisible();
         MainBar.setVisible();
-        Randomizer.setVisible();
+        //Randomizer.setVisible();
         frame.invalidate();
         frame.validate();
         frame.repaint();

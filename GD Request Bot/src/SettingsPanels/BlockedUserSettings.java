@@ -169,7 +169,7 @@ public class BlockedUserSettings {
     public static void removeUser(String user) {
         i--;
         if (i % 2 == 0) {
-            height = height - 38.5;
+            height = height - 36.7;
             blockedListPanel.setBounds(0, 0, 415, (int) (height + 4));
             blockedListPanel.setPreferredSize(new Dimension(415, (int) (height + 4)));
             scrollPane.updateUI();
@@ -189,7 +189,7 @@ public class BlockedUserSettings {
         i++;
         System.out.println(height);
         if (i % 2 == 0) {
-            height = height + 38;
+            height = height + 36.7;
 
             blockedListPanel.setBounds(0, 0, 415, (int) (height + 4));
             blockedListPanel.setPreferredSize(new Dimension(415, (int) (height + 4)));
