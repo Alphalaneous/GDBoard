@@ -445,6 +445,12 @@ public class Requests {
             rickThread.stop();
         }
     }
+    static boolean bwomp = false;
+    public static void bwomp(){
+        bwomp = !bwomp;
+
+    }
+
     private static Thread knockThread = null;
 
     public static void knock(){

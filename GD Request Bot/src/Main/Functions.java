@@ -3,11 +3,14 @@ package Main;
 import SettingsPanels.BlockedSettings;
 import SettingsPanels.GeneralSettings;
 import SettingsPanels.OutputSettings;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,7 +20,23 @@ import java.util.Random;
 public class Functions {
 
     public static void skipFunction() {
+        if(Requests.bwomp){
+            Thread bwompThread;
 
+            System.out.println("bwomped");
+            bwompThread = new Thread(() -> {
+                try {
+                    BufferedInputStream inp = new BufferedInputStream(ServerChatBot.class
+                            .getResource("/Resources/bwomp.mp3").openStream());
+                    Player mp3player = new Player(inp);
+                    mp3player.play();
+                } catch (JavaLayerException | NullPointerException | IOException f) {
+                    f.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "There was an error playing the music!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+            bwompThread.start();
+        }
         if (Requests.levels.size() != 0) {
             if (!(Requests.levels.size() <= 1) && LevelsWindow.getSelectedID() == 0) {
                 StringSelection selection = new StringSelection(
