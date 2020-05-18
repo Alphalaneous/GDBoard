@@ -16,8 +16,12 @@ public class Command {
         sandbox.inject("cheer", cheer);
 
         sandbox.allow(Requests.class);
-        sandbox.eval("var Levels = Java.type('Main.Requests');" + function);
-
+        try {
+            sandbox.eval("var Levels = Java.type('Main.Requests');" + function);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         String result = "";
         try {
             Object obj = sandbox.eval("command();");
