@@ -2,6 +2,7 @@ package Main;
 
 import SettingsPanels.*;
 import com.cavariux.twitchirc.Chat.User;
+import org.apache.commons.io.FileUtils;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.json.JSONObject;
@@ -12,9 +13,11 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -209,8 +212,13 @@ public class Main {
                 }
             });
             thread.start();
+            Path path = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\bin\\gdkill.exe");
+            if(!Files.exists(path)){
+                URL inputUrl = Main.class.getResource("/Resources/gdkill.exe");
+                FileUtils.copyURLToFile(inputUrl, path.toFile());
+            }
+
             loaded = true;
-            System.out.println(APIs.getIDs("GDBoard"));
 
         } catch (Exception e) {
             e.printStackTrace();

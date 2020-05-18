@@ -22,7 +22,7 @@ public class ChatReader extends TwitchBot {
                     while (ServerChatBot.processing) {
                         Thread.sleep(50);
                     }
-                    //ServerChatBot.onMessage(String.valueOf(user), message, user.isMod(channel), false);
+                    ServerChatBot.onMessage(String.valueOf(user), message, user.isMod(channel), false, 0);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

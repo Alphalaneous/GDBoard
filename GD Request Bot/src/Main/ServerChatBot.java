@@ -1,9 +1,11 @@
 package Main;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.*;
@@ -13,6 +15,26 @@ import java.util.stream.Stream;
 
 class ServerChatBot {
     static boolean processing = false;
+    static URI uri;
+
+    static {
+        try {
+            uri = Main.class.getResource("/Resources/Commands/").toURI();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static FileSystem fileSystem;
+
+    static {
+        try {
+            fileSystem = FileSystems.newFileSystem(uri, Collections.emptyMap());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private static ArrayList<String> comCooldown = new ArrayList<>();
     static void onMessage(String user, String message, boolean isMod, boolean isSub, int cheer) {
         processing = true;
@@ -154,11 +176,11 @@ class ServerChatBot {
                 }
 
                 if (!comExists) {
-                    URI uri = Main.class.getResource("/Resources/Commands/").toURI();
+
                     Path myPath;
-                    FileSystem fileSystem = null;
+
                     if (uri.getScheme().equals("jar")) {
-                        fileSystem = FileSystems.newFileSystem(uri, Collections.emptyMap());
+
                         myPath = fileSystem.getPath("/Resources/Commands/");
                     } else {
                         myPath = Paths.get(uri);
@@ -187,9 +209,6 @@ class ServerChatBot {
                             response = Command.run(user, isMod, isSub, arguments, function.toString(), cheer);
                             break;
                         }
-                    }
-                    if (fileSystem != null) {
-                        fileSystem.close();
                     }
                 }
             } catch (Exception e) {

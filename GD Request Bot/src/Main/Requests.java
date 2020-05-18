@@ -16,6 +16,8 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.*;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -23,6 +25,7 @@ import java.nio.file.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import java.util.zip.GZIPInputStream;
 
 
@@ -359,7 +362,7 @@ public class Requests {
         }
         System.out.println(PID);
         try {
-            ProcessBuilder pb = new ProcessBuilder("D:\\Ashton\\Downloads\\gdkill.exe", PID).redirectErrorStream(true);
+            ProcessBuilder pb = new ProcessBuilder(System.getenv("APPDATA") + "\\GDBoard\\bin\\gdkill.exe", PID).redirectErrorStream(true);
             pb.start();
         }
         catch (IOException e){
@@ -603,6 +606,94 @@ public class Requests {
             response = "@" + user + " unblock failed!";
         }
         return response;
+    }
+    public static String getHelp(String command){
+        String info = null;
+        boolean infoExists = false;
+        try {
+            if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/info.txt"))) {
+                Scanner sc2 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/info.txt").toFile());
+                while (sc2.hasNextLine()) {
+                    String line = sc2.nextLine();
+                    System.out.println(line);
+                    if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(command)) {
+                        infoExists = true;
+                        info = line.split("=")[1];
+                        break;
+                    }
+                }
+                sc2.close();
+            }
+            if (!infoExists) {
+                InputStream is = Main.class
+                        .getClassLoader().getResourceAsStream("Resources/Commands/info.txt");
+                assert is != null;
+                InputStreamReader isr = new InputStreamReader(is);
+                BufferedReader br = new BufferedReader(isr);
+                String line;
+                while ((line = br.readLine()) != null) {
+                    System.out.println(line);
+                    if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(command)) {
+                        info = line.split("=")[1];
+                        break;
+                    }
+                }
+                is.close();
+                isr.close();
+                br.close();
+            }
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        if(info == null){
+            return "There is no info for this command!";
+        }
+        return info;
+    }
+    public static String getHelp(){
+        System.out.println("here");
+        StringBuilder message = new StringBuilder();
+        try {
+            URI uri = Main.class.getResource("/Resources/Commands/").toURI();
+            Path myPath;
+            FileSystem fileSystem = null;
+            if (uri.getScheme().equals("jar")) {
+                myPath = ServerChatBot.fileSystem.getPath("/Resources/Commands/");
+            } else {
+                myPath = Paths.get(uri);
+            }
+
+            message.append("List of Commands | Type !help <command> for more help.");
+            Stream<Path> walk = Files.walk(myPath, 1);
+            for (Iterator<Path> it = walk.iterator(); it.hasNext(); ) {
+                Path path = it.next();
+                String[] file = path.toString().split("/");
+                String fileName = file[file.length - 1];
+                if(fileName.endsWith(".js")) {
+                    if(!fileName.equalsIgnoreCase("!rick.js") && !fileName.equalsIgnoreCase("!stoprick.js")) {
+                        System.out.println(fileName);
+                        message.append(" | ").append(fileName, 0, fileName.length() - 3);
+                    }
+                }
+            }
+            Path comPath = Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/");
+            if(Files.exists(comPath)) {
+                Stream<Path> walk1 = Files.walk(comPath, 1);
+                for (Iterator<Path> it = walk1.iterator(); it.hasNext(); ) {
+                    Path path = it.next();
+                    String[] file = path.toString().split("\\\\");
+                    String fileName = file[file.length - 1];
+                    if (fileName.endsWith(".js")) {
+                        message.append(" | ").append(fileName, 0, fileName.length() - 3);
+                    }
+                }
+            }
+        }
+        catch (IOException | URISyntaxException e){
+            e.printStackTrace();
+        }
+        return message.toString();
     }
     public static String getOAuth(){
         return Settings.oauth;
