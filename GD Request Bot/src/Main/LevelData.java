@@ -3,6 +3,9 @@ package Main;
 class LevelData {
 
 
+	String getPassword() {
+		return password;
+	}
 
 
 	String getRequester() {
@@ -112,6 +115,7 @@ class LevelData {
 	String getThumbnailURL() { return thumbnailURL; }
 
 	private String requester;
+	private String password;
 	private String author;
 	private String name;
 	private String difficulty;
@@ -183,6 +187,11 @@ class LevelData {
 	void setName(String name) {
 		this.name = name;
 	}
+
+	void setPassword(String password) {
+		this.password = password;
+	}
+
 
 	void setDifficulty(String difficulty) {
 		this.difficulty = difficulty;

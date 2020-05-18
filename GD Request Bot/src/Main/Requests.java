@@ -4,6 +4,7 @@ import SettingsPanels.*;
 import com.github.alex1304.jdash.client.AnonymousGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.entity.GDLevel;
+import com.github.alex1304.jdash.entity.GDLevelData;
 import com.github.alex1304.jdash.exception.MissingAccessException;
 import com.github.alex1304.jdash.util.LevelSearchFilters;
 import javazoom.jl.decoder.JavaLayerException;
@@ -210,13 +211,13 @@ public class Requests {
             }
 
             parse = new Thread(() -> {
+                Object object = Objects.requireNonNull(client.getLevelById(Long.parseLong(ID)).block()).download().block();
                 if (!(level.getStars() > 0) && level.getGameVersion() / 10 >= 2) {
-                    parse(Objects.requireNonNull(Objects
-                            .requireNonNull(client.getLevelById(Long.parseLong(ID)).block()).download().block())
-                            .getData(), ID
-                    );
+                    parse(((GDLevelData) Objects.requireNonNull(object)).getData(), ID);
                     LevelsWindow.updateUI(levelData.getLevelID(), levelData.getContainsVulgar(), levelData.getContainsImage(), levelData.getAnalyzed());
                 }
+                levelData.setPassword(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getPass()));
+
             });
             parse.start();
 

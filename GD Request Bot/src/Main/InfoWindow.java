@@ -16,6 +16,8 @@ public class InfoWindow {
 	private static JLabel likes = new JLabel();
 	private static JLabel downloads = new JLabel();
 	private static JLabel length = new JLabel();
+	private static JLabel password = new JLabel();
+
 	private static JTextPane description = new JTextPane();
 	private static JPanel window = new InnerWindow("Information", Settings.getInfoWLoc().x, Settings.getInfoWLoc().y, width, height, "\uE946", false).createPanel();
 
@@ -35,6 +37,8 @@ public class InfoWindow {
 		likes = createLabel("LIKES: N/A", 10, width/2);
 		downloads = createLabel("DOWNLOADS: N/A", 32, width/2);
 		length = createLabel("LENGTH: NA", 54, width/2);
+		password = createLabel("PASSWORD: NA", 76, width/2);
+
 		description.setText("N/A");
 		StyledDocument doc = description.getStyledDocument();
 		SimpleAttributeSet center = new SimpleAttributeSet();
@@ -50,6 +54,7 @@ public class InfoWindow {
 		panel.add(likes);
 		panel.add(downloads);
 		panel.add(length);
+		panel.add(password);
 		descPanel.add(description);
 		fullPanel.setBounds(1,31,400,110);
 		fullPanel.add(panel);
@@ -69,11 +74,28 @@ public class InfoWindow {
 			likes.setText("LIKES: N/A");
 			description.setText("N/A");
 			length.setText("LENGTH: NA");
+			password.setText("PASSWORD: NA");
+
 			downloads.setText("DOWNLOADS: N/A");
 		} else {
 			likes.setText("LIKES: " + Requests.levels.get(LevelsWindow.getSelectedID()).getLikes());
 			description.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getDescription());
 			length.setText("LENGTH: " + Requests.levels.get(LevelsWindow.getSelectedID()).getLength());
+			String pass = null;
+			if((pass = Requests.levels.get(LevelsWindow.getSelectedID()).getPassword()) != null) {
+				if (pass.equalsIgnoreCase("-2")) {
+					password.setText("FREE COPY");
+				}
+				else if (pass.equalsIgnoreCase("-1")) {
+					password.setText("NO COPY");
+				}else {
+					password.setText("PASSWORD: " + pass);
+				}
+			}
+			else {
+				password.setText("NO COPY");
+
+			}
 			downloads.setText("DOWNLOADS: " + Requests.levels.get(LevelsWindow.getSelectedID()).getDownloads());
 		}
 	}
@@ -83,6 +105,7 @@ public class InfoWindow {
 		descPanel.setBackground(Defaults.SUB_MAIN);
 		likes.setForeground(Defaults.FOREGROUND);
 		length.setForeground(Defaults.FOREGROUND);
+		password.setForeground(Defaults.FOREGROUND);
 		downloads.setForeground(Defaults.FOREGROUND);
 		description.setForeground(Defaults.FOREGROUND);
 	}
