@@ -671,7 +671,7 @@ public class Requests {
                 String[] file = path.toString().split("/");
                 String fileName = file[file.length - 1];
                 if(fileName.endsWith(".js")) {
-                    if(!fileName.equalsIgnoreCase("!rick.js") && !fileName.equalsIgnoreCase("!stoprick.js")) {
+                    if(!fileName.equalsIgnoreCase("!rick.js") && !fileName.equalsIgnoreCase("!stoprick.js") && !fileName.equalsIgnoreCase("!kill.js")) {
                         System.out.println(fileName);
                         message.append(" | ").append(fileName, 0, fileName.length() - 3);
                     }
