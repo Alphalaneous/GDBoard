@@ -21,7 +21,7 @@ public class Defaults {
             .getLocalGraphicsEnvironment()
             .getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();
 
-    public static Color ACCENT;
+    public static Color ACCENT = new Color(0, 108, 230);
     public static Color MAIN;
     public static Color BUTTON;
     public static Color HOVER;
@@ -151,6 +151,7 @@ public class Defaults {
         } catch (NullPointerException e) {
             prevTheme[0] = 1;
             prevColor[0] = 0;
+            ACCENT =  new Color(0, 108, 230);
         }
         if (prevTheme[0] == 0) {
             Defaults.setDark();
