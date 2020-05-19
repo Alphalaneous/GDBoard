@@ -62,7 +62,7 @@ public class WindowedSettings {
         button.setUI(defaultUI);
         button.setForeground(Defaults.FOREGROUND);
         button.setBorder(BorderFactory.createEmptyBorder());
-        button.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+        button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
         button.refresh();
         return button;
     }

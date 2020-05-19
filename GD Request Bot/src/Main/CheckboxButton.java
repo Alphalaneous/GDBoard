@@ -17,11 +17,11 @@ public class CheckboxButton extends JButton {
 		setLayout(null);
 		text.setText(label);
 		text.setForeground(getForeground());
-		check.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 16));
+		check.setFont(Defaults.SYMBOLS.deriveFont(16f));
 		checkSymbol.setForeground(getForeground());
-		checkSymbol.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 16));
+		checkSymbol.setFont(Defaults.SYMBOLS.deriveFont(16f));
 		hover.setForeground(getForeground());
-		hover.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 16));
+		hover.setFont(Defaults.SYMBOLS.deriveFont(16f));
 		checkSymbol.setVisible(false);
 		hover.setVisible(false);
 		add(hover);

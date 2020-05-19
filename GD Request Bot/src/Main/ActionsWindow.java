@@ -39,7 +39,7 @@ public class ActionsWindow {
             //TODO make custom Yes/No dialog
 
             //region Create Skip Button
-            JButton skip = createButton("\uE101");
+            JButton skip = createButton("\uEB9D");
             skip.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
@@ -120,7 +120,7 @@ public class ActionsWindow {
         button.setBackground(Defaults.BUTTON);
         button.setForeground(Defaults.FOREGROUND);
         button.setBorder(BorderFactory.createEmptyBorder());
-        button.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
+        button.setFont(Defaults.SYMBOLS.deriveFont(20f));
         return button;
     }
     //endregion

@@ -313,20 +313,20 @@ public class CommentsWindow {
                         @Override
                         public void mouseEntered(MouseEvent e) {
                             super.mouseEntered(e);
-                            commenter.setFont(new Font("bahnschrift", Font.BOLD, 15));
+                            commenter.setFont(Defaults.MAIN_FONT.deriveFont(15f));
                             commenter.setBounds(7, 4, commenter.getPreferredSize().width + 5, 18);
                         }
 
                         @Override
                         public void mouseExited(MouseEvent e) {
                             super.mouseExited(e);
-                            commenter.setFont(new Font("bahnschrift", Font.BOLD, 14));
+                            commenter.setFont(Defaults.MAIN_FONT.deriveFont(14f));
                             commenter.setBounds(9, 4, commenter.getPreferredSize().width, 18);
                         }
                     });
-                    commenter.setFont(new Font("bahnschrift", Font.BOLD, 14));
+                    commenter.setFont(Defaults.MAIN_FONT.deriveFont(14f));
                     JLabel percentLabel = new JLabel();
-                    percentLabel.setFont(new Font("bahnschrift", Font.BOLD, 14));
+                    percentLabel.setFont(Defaults.MAIN_FONT.deriveFont(14f));
                     JLabel likeIcon = new JLabel();
                     if (Integer.parseInt(arr.getJSONObject(i).getString("likes")) < 0) {
                         likeIcon.setText("\uE8E0");
@@ -334,14 +334,14 @@ public class CommentsWindow {
                         likeIcon.setText("\uE8E1");
                     }
 
-                    likeIcon.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 14));
+                    likeIcon.setFont(Defaults.SYMBOLS.deriveFont(14f));
                     likeIcon.setBounds(width - 20, 4, (int) (width * 0.5), 18);
 
                     JLabel likesLabel = new JLabel();
-                    likesLabel.setFont(new Font("bahnschrift", Font.BOLD, 10));
+                    likesLabel.setFont(Defaults.MAIN_FONT.deriveFont(10f));
 
                     JLabel comment = new JLabel();
-                    comment.setFont(new Font("bahnschrift", Font.PLAIN, 12));
+                    comment.setFont(Defaults.MAIN_FONT.deriveFont(12f));
                     comment.setBounds(9, 24, width - 6, 60);
 
                     cmtPanel.add(commenter);
@@ -397,7 +397,7 @@ public class CommentsWindow {
     //region CreateButton
     private static JButton createButton(String icon, int x){
         JButton button = new JButton(icon);
-        button.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
+        button.setFont(Defaults.SYMBOLS.deriveFont(20f));
         button.setMargin(new Insets(0, 0, 0, 0));
         button.setBorder(BorderFactory.createEmptyBorder());
         button.setForeground(Defaults.FOREGROUND);

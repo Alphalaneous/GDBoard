@@ -255,6 +255,7 @@ public class Requests {
                             exists = true;
                             break;
                         }
+                        Thread.sleep(5);
                     }
                     sc.close();
                 }
@@ -268,6 +269,8 @@ public class Requests {
                 }
             } catch (IOException e1) {
                 JOptionPane.showMessageDialog(null, "There was an error writing to the file!", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
             LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester(), levelData.getVersion());
 
@@ -792,6 +795,11 @@ public class Requests {
     private static void parse(byte[] level, String levelID) {
         all:
         for (int k = 0; k < Requests.getLevelData().size(); k++) {
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             if (Requests.getLevelData().get(k).getLevelID().equalsIgnoreCase(levelID)) {
                 String decompressed = null;
                 try {

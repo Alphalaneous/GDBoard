@@ -32,7 +32,7 @@ public class AccountSettings {
 			e.printStackTrace();
 		}
 		channelText.setForeground(Defaults.FOREGROUND);
-		channelText.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		channelText.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		channelText.setBounds(25,20,channelText.getPreferredSize().width+5,channelText.getPreferredSize().height+5);
 
 		CurvedButton button = new CurvedButton("Refresh Login with Twitch");
@@ -43,7 +43,7 @@ public class AccountSettings {
 		button.setUI(defaultUI);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
-		button.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {

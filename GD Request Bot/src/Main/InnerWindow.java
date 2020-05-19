@@ -9,6 +9,8 @@ import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.util.Objects;
 
 public class InnerWindow extends ResizablePanel {
 
@@ -323,20 +325,20 @@ public class InnerWindow extends ResizablePanel {
         windowIcon.setForeground(Defaults.FOREGROUND);
         windowIcon.setText(icon);
         windowIcon.setBounds(10, 0, 30, 30);
-        windowIcon.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 14));
+        windowIcon.setFont(Defaults.SYMBOLS.deriveFont(14f));
         topBar.add(windowIcon);
         //endregion
 
         //region TitleText attributes and initialization
         JLabel titleText = new JLabel(title);
-        titleText.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+        titleText.setFont(Defaults.MAIN_FONT.deriveFont(14f));
         titleText.setBounds(35, 2, width - 60, 30);
         titleText.setForeground(Defaults.FOREGROUND);
         topBar.add(titleText);
         //endregion
 
         //region CloseButton attributes
-        closeButton.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 14));
+        closeButton.setFont(Defaults.SYMBOLS.deriveFont(14f));
         closeButton.setBounds(width - 30, 0, 30, 30);
         closeButton.setMargin(new Insets(0, 0, 0, 0));
         closeButton.setForeground(Defaults.FOREGROUND);
@@ -381,7 +383,7 @@ public class InnerWindow extends ResizablePanel {
         minimizeButton.setUI(defaultUI);
         minimizeButton.addMouseListener(topScreenIA);
         minimizeButton.addMouseMotionListener(topScreenIA);
-        minimizeButton.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 14));
+        minimizeButton.setFont(Defaults.SYMBOLS.deriveFont(14f));
         minimizeButton.setVisible(false);
         topBar.add(minimizeButton);
         //endregion
@@ -407,12 +409,12 @@ public class InnerWindow extends ResizablePanel {
         pinButton.setUI(defaultUI);
         pinButton.addMouseListener(topScreenIA);
         pinButton.addMouseMotionListener(topScreenIA);
-        pinButton.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 14));
+        pinButton.setFont(Defaults.SYMBOLS.deriveFont(14f));
         pinButtonFill.setBounds(width - 60, 0, 30, 30);
         pinButtonFill.setBorder(BorderFactory.createEmptyBorder());
         pinButtonFill.setForeground(Defaults.FOREGROUND);
         pinButtonFill.setBackground(new Color(0, 0, 0, 0));
-        pinButtonFill.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 14));
+        pinButtonFill.setFont(Defaults.SYMBOLS.deriveFont(14f));
         pinButtonFill.setVisible(false);
         topBar.add(pinButton);
         pinButton.add(pinButtonFill);

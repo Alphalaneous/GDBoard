@@ -55,7 +55,7 @@ public class Windowed {
 
 		buttonPanel.setBounds(levelsWindow.getWidth()+5, 0, 50, 512);
 		buttonPanel.setBackground(Defaults.SUB_MAIN);
-		JButton skip = createButton("\uE101");
+		JButton skip = createButton("\uEB9D");
 		skip.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -193,7 +193,7 @@ public class Windowed {
 		}
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
-		button.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
+		button.setFont(Defaults.SYMBOLS.deriveFont(20f));
 		return button;
 	}
 

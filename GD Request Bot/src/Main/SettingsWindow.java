@@ -174,7 +174,7 @@ public class SettingsWindow {
 
 		label.setBounds(20, 9, 208, 20);
 		label.setForeground(Defaults.FOREGROUND);
-		label.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		label.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 
 		button.setLayout(null);
 		button.add(label);

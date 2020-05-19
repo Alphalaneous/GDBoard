@@ -211,20 +211,20 @@ public class LevelsWindow {
             request.setLayout(null);
 
 
-            lName.setFont(new Font("bahnschrift", Font.PLAIN, 20));
+            lName.setFont(Defaults.MAIN_FONT.deriveFont(20f));
             lName.setBounds(60, 2, (int) lName.getPreferredSize().getWidth() + 5, 30);
-            lAuthorID.setFont(new Font("bahnschrift", Font.PLAIN, 12));
+            lAuthorID.setFont(Defaults.MAIN_FONT.deriveFont(12f));
             lAuthorID.setBounds(60, 28, (int) lAuthorID.getPreferredSize().getWidth() + 5, 20);
-            lAuthor.setFont(new Font("bahnschrift", Font.PLAIN, 12));
+            lAuthor.setFont(Defaults.MAIN_FONT.deriveFont(12f));
             lAuthor.setBounds((int) (400 - lAuthor.getPreferredSize().getWidth()) - 10, 3,
                     (int) lAuthor.getPreferredSize().getWidth() + 5, 20);
-            lStarCount.setFont(new Font("bahnschrift", Font.PLAIN, 18));
+            lStarCount.setFont(Defaults.MAIN_FONT.deriveFont(18f));
             lStarCount.setBounds(((int) (400 - lStarCount.getPreferredSize().getWidth()) - 30), 28,
                     (int) lStarCount.getPreferredSize().getWidth() + 5, 20);
-            lStar.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 16));
+            lStar.setFont(Defaults.SYMBOLS.deriveFont(16f));
             lStar.setBounds((int) (400 - lStar.getPreferredSize().getWidth()) - 10, 25,
                     (int) lStar.getPreferredSize().getWidth() + 5, 20);
-            lAnalyzed.setFont(new Font("bahnschrift", Font.PLAIN, 12));
+            lAnalyzed.setFont(Defaults.MAIN_FONT.deriveFont(12f));
 
             lName.setForeground(Defaults.FOREGROUND);
             lAuthor.setForeground(Defaults.FOREGROUND);

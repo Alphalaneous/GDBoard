@@ -45,7 +45,7 @@ public class Main {
 
             dialog.setSize(new Dimension(200,100));
             tf.setForeground(Color.WHITE);
-            tf.setFont(new Font("bahnschrift", Font.BOLD, 20));
+            tf.setFont(Defaults.MAIN_FONT.deriveFont(20f));
             panel.add(tf);
             panel.setBackground(new Color(31, 31, 31));
             panel.setLayout(new GridBagLayout());

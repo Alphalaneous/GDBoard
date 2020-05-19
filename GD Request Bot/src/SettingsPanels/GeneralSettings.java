@@ -71,17 +71,17 @@ public class GeneralSettings {
 		}
 
 		versionLabel.setForeground(Defaults.FOREGROUND2);
-		versionLabel.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		versionLabel.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		versionLabel.setBounds(25,20,versionLabel.getPreferredSize().width+5,versionLabel.getPreferredSize().height+5);
 
 		donation.setForeground(Defaults.FOREGROUND);
-		donation.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		donation.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		donation.setText("It would be highly appreciated if you donate!");
 		donation.setBounds(25 + 365/2 - donation.getPreferredSize().width/2,510,donation.getPreferredSize().width+5,donation.getPreferredSize().height+5);
 
 		donationButton.setBounds(25,540, 365,60);
 		donationButton.setPreferredSize(new Dimension(365,60));
-		donationButton.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		donationButton.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		donationButton.setUI(defaultUI);
 		donationButton.setForeground(Defaults.FOREGROUND);
 		donationButton.setBackground(Defaults.BUTTON);
@@ -335,7 +335,7 @@ public class GeneralSettings {
 	}
 	private static JLabel createLabel(String text, int y){
 		JLabel label = new JLabel(text);
-		label.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		label.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		label.setBounds(25,y,label.getPreferredSize().width + 5,30);
 		label.setForeground(Defaults.FOREGROUND);
 
@@ -348,7 +348,7 @@ public class GeneralSettings {
 		button.setUI(defaultUI);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
-		button.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		button.refresh();
 		return button;
 	}

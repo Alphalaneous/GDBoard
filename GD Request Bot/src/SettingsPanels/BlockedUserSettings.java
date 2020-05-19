@@ -35,7 +35,7 @@ public class BlockedUserSettings {
 
         JLabel label = new JLabel("Blocked Users:");
         label.setForeground(Defaults.FOREGROUND);
-        label.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+        label.setFont(Defaults.MAIN_FONT.deriveFont(14f));
         label.setBounds(25, 20, label.getPreferredSize().width + 5, label.getPreferredSize().height + 5);
 
         blockedInput.setBounds(160, 15, 200, 32);
@@ -202,7 +202,7 @@ public class BlockedUserSettings {
         button.setUI(defaultUI);
         button.setForeground(Defaults.FOREGROUND);
         button.setBorder(BorderFactory.createEmptyBorder());
-        button.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+        button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
         button.setPreferredSize(new Dimension(187, 30));
         button.addMouseListener(new MouseAdapter() {
             @Override

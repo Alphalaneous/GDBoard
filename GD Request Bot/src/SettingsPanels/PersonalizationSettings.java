@@ -27,7 +27,7 @@ public class PersonalizationSettings {
 		}
 		windowedButton.setBounds(25,25, 365,30);
 		windowedButton.setPreferredSize(new Dimension(365,30));
-		windowedButton.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		windowedButton.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		windowedButton.setUI(defaultUI);
 		windowedButton.setForeground(Defaults.FOREGROUND);
 		windowedButton.setBackground(Defaults.BUTTON);

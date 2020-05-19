@@ -122,7 +122,7 @@ public class ShortcutSettings {
         input.setDocument(doc);
 
         JLabel keybindButton = new JLabel(text);
-        keybindButton.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+        keybindButton.setFont(Defaults.MAIN_FONT.deriveFont(14f));
         keybindButton.setBounds(25, 3, keybindButton.getPreferredSize().width + 5, keybindButton.getPreferredSize().height + 5);
         keybindButton.setForeground(Defaults.FOREGROUND);
 
@@ -141,7 +141,7 @@ public class ShortcutSettings {
         button.setUI(defaultUI);
         button.setForeground(Defaults.FOREGROUND);
         button.setBorder(BorderFactory.createEmptyBorder());
-        button.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+        button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
         button.refresh();
         return button;
     }

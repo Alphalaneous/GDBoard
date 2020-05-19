@@ -15,7 +15,7 @@ public class FancyTextArea extends JTextArea {
                 BorderFactory.createEmptyBorder(8, 8, 8, 8)));
         setCaret(new MyCaret());
         setCaretColor(Defaults.FOREGROUND);
-        setFont(new Font("bahnschrift", Font.PLAIN, 14));
+        setFont(Defaults.MAIN_FONT.deriveFont(14f));
         addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {

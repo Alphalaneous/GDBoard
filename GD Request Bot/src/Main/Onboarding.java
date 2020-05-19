@@ -58,10 +58,10 @@ public class Onboarding {
         mainText.setEditable(false);
         mainText.setForeground(Defaults.FOREGROUND);
         mainText.setBackground(new Color(0, 0, 0, 0));
-        mainText.setFont(new Font("bahnschrift", Font.PLAIN, 18));
+        mainText.setFont(Defaults.MAIN_FONT.deriveFont(18f));
 
         JLabel keybindInfo = new JLabel("Set the keybind to open the GDBoard Overlay here!");
-        keybindInfo.setFont(new Font("bahnschrift", Font.PLAIN, 12));
+        keybindInfo.setFont(Defaults.MAIN_FONT.deriveFont(12f));
         keybindInfo.setBounds(25, 90, width - 50, keybindInfo.getPreferredSize().height + 5);
         keybindInfo.setForeground(Defaults.FOREGROUND);
         defaultUI.setBackground(Defaults.BUTTON);
@@ -69,7 +69,7 @@ public class Onboarding {
         defaultUI.setSelect(Defaults.SELECT);
 
         JLabel authInfo = new JLabel("Press Next to Log In with Twitch and start GDBoard!");
-        authInfo.setFont(new Font("bahnschrift", Font.PLAIN, 12));
+        authInfo.setFont(Defaults.MAIN_FONT.deriveFont(12f));
         authInfo.setBounds(25, height - 80, width - 50, authInfo.getPreferredSize().height + 5);
         authInfo.setForeground(Defaults.FOREGROUND);
         CurvedButton moveOn = new CurvedButton("Click here if Success and GDBoard hasn't moved on");
@@ -79,7 +79,7 @@ public class Onboarding {
         moveOn.setUI(defaultUI);
         moveOn.setForeground(Defaults.FOREGROUND);
         moveOn.setBorder(BorderFactory.createEmptyBorder());
-        moveOn.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+        moveOn.setFont(Defaults.MAIN_FONT.deriveFont(14f));
         moveOn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -108,7 +108,7 @@ public class Onboarding {
         button.setUI(defaultUI);
         button.setForeground(Defaults.FOREGROUND);
         button.setBorder(BorderFactory.createEmptyBorder());
-        button.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+        button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -193,7 +193,7 @@ public class Onboarding {
         }
         button.setForeground(Defaults.FOREGROUND);
         button.setBorder(BorderFactory.createEmptyBorder());
-        button.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
+        button.setFont(Defaults.MAIN_FONT.deriveFont(20f));
         return button;
     }
 
@@ -241,7 +241,7 @@ public class Onboarding {
         input.setDocument(doc);
 
         JLabel keybindButton = new JLabel(text);
-        keybindButton.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+        keybindButton.setFont(Defaults.MAIN_FONT.deriveFont(14f));
         keybindButton.setBounds(25, 3, keybindButton.getPreferredSize().width + 5, keybindButton.getPreferredSize().height + 5);
         keybindButton.setForeground(Defaults.FOREGROUND);
         panel.add(keybindButton);

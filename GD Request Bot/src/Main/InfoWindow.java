@@ -44,7 +44,7 @@ public class InfoWindow {
 		SimpleAttributeSet center = new SimpleAttributeSet();
 		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
 		doc.setParagraphAttributes(0, doc.getLength(), center, false);
-		description.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		description.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		description.setOpaque(false);
 		description.setEditable(false);
 		description.setForeground(Defaults.FOREGROUND);
@@ -111,7 +111,7 @@ public class InfoWindow {
 	}
 	private static JLabel createLabel(String text, int y, int width){
 		JLabel label = new JLabel(text);
-		label.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		label.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		label.setBounds(10, y, width, 20);
 		label.setForeground(Defaults.FOREGROUND);
 		return label;

@@ -4,9 +4,11 @@ import com.registry.RegDWORDValue;
 import com.registry.RegistryKey;
 
 import java.awt.*;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Defaults {
@@ -31,6 +33,28 @@ public class Defaults {
     public static Color OUTLINE = new Color(70, 70, 70);
     public static Color BUTTON_HOVER;
     public static Color TEXT_BOX;
+    public static Font MAIN_FONT;
+    public static Font SYMBOLS;
+
+
+
+    static {
+        try {
+            MAIN_FONT = Font.createFont(Font.TRUETYPE_FONT,
+                        Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream("Resources/Fonts/bahnschrift.ttf")));
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+    static {
+        try {
+            SYMBOLS = Font.createFont(Font.TRUETYPE_FONT,
+                    Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream("Resources/Fonts/SegMDL2.ttf")));
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     static AtomicBoolean dark = new AtomicBoolean();
     static AtomicBoolean loaded = new AtomicBoolean();
     static AtomicBoolean colorsLoaded = new AtomicBoolean();

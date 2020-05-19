@@ -172,7 +172,7 @@ class MainBar {
 
         Map<TextAttribute, Object> attributes = new HashMap<>();
         attributes.put(TextAttribute.TRACKING, 0.02);
-        Font font = new Font("bahnschrift", Font.BOLD, 23).deriveFont(attributes);
+        Font font = Defaults.MAIN_FONT.deriveFont(attributes).deriveFont(23f);
 
         time.setFont(font);
         time.setForeground(Defaults.FOREGROUND);
@@ -215,7 +215,7 @@ class MainBar {
         button.setUI(defaultUI);
         button.setForeground(Defaults.FOREGROUND);
         button.setBorder(BorderFactory.createEmptyBorder());
-        button.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
+        button.setFont(Defaults.SYMBOLS.deriveFont(20f));
         return button;
     }
 
@@ -228,7 +228,7 @@ class MainBar {
         button.setUI(subUI);
         button.setForeground(Defaults.FOREGROUND);
         button.setBorder(BorderFactory.createEmptyBorder());
-        button.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
+        button.setFont(Defaults.SYMBOLS.deriveFont(20f));
         return button;
     }
 

@@ -35,7 +35,7 @@ public class SongWindow {
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
 
-		play = createButton("\uF5B0", 110);
+		play = createButton("\uE768", 110);
 		play.addMouseListener(new MouseAdapter() {
 			@Override
 			@SuppressWarnings("deprecation")
@@ -63,7 +63,7 @@ public class SongWindow {
 			}
 		});
 
-		stop = createButton("\uE009", 55);
+		stop = createButton("\uE15B", 55);
 		stop.addMouseListener(new MouseAdapter() {
 			@SuppressWarnings("deprecation")
 			@Override
@@ -92,15 +92,15 @@ public class SongWindow {
 		persist.setUI(defaultUI);
 		persist.setForeground(Defaults.FOREGROUND);
 		persist.setBorder(BorderFactory.createEmptyBorder());
-		persist.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		persist.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		persist.refresh();
 		persist.setVisible(false);
 
-		songName.setFont(new Font("bahnschrift", Font.PLAIN, 20));
+		songName.setFont(Defaults.MAIN_FONT.deriveFont(20f));
 		songName.setBounds(10, 7, width, 30);
 		songName.setForeground(Defaults.FOREGROUND);
 
-		songAuthorID.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		songAuthorID.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		songAuthorID.setBounds(10, height - 28, width/2, 20);
 		songAuthorID.setForeground(Defaults.FOREGROUND);
 		
@@ -126,7 +126,7 @@ public class SongWindow {
 		button.setBackground(Defaults.BUTTON);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
-		button.setFont(new Font("Segoe MDL2 Assets", Font.PLAIN, 20));
+		button.setFont(Defaults.SYMBOLS.deriveFont(20f));
 		return button;
 	}
 

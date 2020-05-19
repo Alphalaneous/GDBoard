@@ -30,7 +30,7 @@ public class OutputSettings {
 		panel.setBackground(Main.Defaults.SUB_MAIN);
 		panel.setLayout(null);
 		JLabel outputText = new JLabel("Output Text:");
-		outputText.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		outputText.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		outputText.setBounds(25,20,outputText.getPreferredSize().width+5,outputText.getPreferredSize().height+5);
 		outputText.setForeground(Defaults.FOREGROUND);
 		outputStringInput.setBounds(25,45,365, 200);
@@ -50,7 +50,7 @@ public class OutputSettings {
 		});
 
 		JLabel noLevelsText = new JLabel("No Levels Text:");
-		noLevelsText.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		noLevelsText.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		noLevelsText.setBounds(25,265,noLevelsText.getPreferredSize().width+5,noLevelsText.getPreferredSize().height+5);
 		noLevelsText.setForeground(Defaults.FOREGROUND);
 		noLevelsStringInput.setBounds(25,290,365, 200);
@@ -70,7 +70,7 @@ public class OutputSettings {
 		});
 
 		JLabel fileLocationText = new JLabel("File location:");
-		fileLocationText.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		fileLocationText.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		fileLocationText.setBounds(25,510,fileLocationText.getPreferredSize().width+5,fileLocationText.getPreferredSize().height+5);
 		fileLocationText.setForeground(Defaults.FOREGROUND);
 		fileLocationInput.setBounds(25,535,365, 64);

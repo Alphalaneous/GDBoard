@@ -45,9 +45,8 @@ public class JButtonTooltip extends JButton {
 
         tooltipLabel.setText(tooltip);
         tooltipLabel.setForeground(Defaults.FOREGROUND);
-        Font font = new Font("Segoe UI Semilight", Font.PLAIN, 14);
-        tooltipLabel.setFont(font);
-        tooltipLabel.setBounds(11,13,tooltipLabel.getPreferredSize().width, tooltipLabel.getPreferredSize().height);
+        tooltipLabel.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+        tooltipLabel.setBounds(11,13,tooltipLabel.getPreferredSize().width+ 5, tooltipLabel.getPreferredSize().height + 5);
         panel.setBounds(0, y + 30, tooltipLabel.getPreferredSize().width + 22, tooltipLabel.getPreferredSize().height + 20);
         panel.add(tooltipLabel);
         panel.setLayout(null);
