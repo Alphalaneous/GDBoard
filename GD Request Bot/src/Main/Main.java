@@ -140,33 +140,39 @@ public class Main {
                     });
                     thread.start();
 
-
-                    Reflections reflections = new Reflections("Main.InnerWindows", new SubTypesScanner(false));
-                    Set<Class<?>> allClasses =
-                            reflections.getSubTypesOf(Object.class);
-                    for (Class<?> Class : allClasses) {
+                    Reflections innerReflections = new Reflections("Main.InnerWindows", new SubTypesScanner(false));
+                    Set<Class<?>> innerClasses =
+                            innerReflections.getSubTypesOf(Object.class);
+                    for (Class<?> Class : innerClasses) {
                         Method method = Class.getMethod("createPanel");
                         method.invoke(null);
-                        System.out.println(Class.getName());
                     }
 
                     SettingsWindow.createPanel();
-                    //Randomizer.createPanel();
                     if (Settings.windowedMode) {
                         Windowed.createPanel();
                     }
-                    InfoWindow.refreshInfo();            //Refreshes the information shown on the Info Window for the first time
-                    SongWindow.refreshInfo();            //Refreshes the information shown on the Song Window for the first time
                     Settings.loadSettings(false);
-                    GeneralSettings.loadSettings();
-                    WindowedSettings.loadSettings();
-                    OutputSettings.loadSettings();
-                    RequestSettings.loadSettings();
-                    ShortcutSettings.loadSettings();
+
+                    Reflections settingsReflections = new Reflections("Main.SettingsPanels", new SubTypesScanner(false));
+                    Set<Class<?>> settingsClasses =
+                            settingsReflections.getSubTypesOf(Object.class);
+                    for (Class<?> Class : settingsClasses) {
+                        try {
+                            Method method = Class.getMethod("loadSettings");
+                            method.invoke(null);
+                        }
+                        catch (NoSuchMethodException ignored){
+                        }
+                    }
+
                     ControllerListener.hook();         //Starts Controller Listener
 
-                    GlobalScreen.registerNativeHook();
-                    GlobalScreen.addNativeKeyListener(new KeyListener());
+                    Thread thread1 = new Thread(() -> {
+                        runKeyboardHook();
+                    });
+                    thread1.start();
+
 
                     Overlay.refreshUI(true);
                     if (Settings.windowedMode) {
@@ -240,6 +246,41 @@ public class Main {
             messageObj.put("message", message);
             GDBoardBot.sendMessage(messageObj.toString());
         }
+    }
+    private static boolean failed = false;
+    static Thread thread;
+    private static void runKeyboardHook() {
+        if(thread != null) {
+            if (thread.isAlive()) {
+                thread.stop();
+            }
+        }
+        try {
+            if (GlobalScreen.isNativeHookRegistered()) {
+                GlobalScreen.unregisterNativeHook();
+            }
+            GlobalScreen.registerNativeHook();
+            GlobalScreen.addNativeKeyListener(new KeyListener());
+            while (GlobalScreen.isNativeHookRegistered()) {
+                Thread.sleep(100);
+            }
+        }
+        catch (Exception e){
+            try {
+                GlobalScreen.unregisterNativeHook();
+            } catch (NativeHookException e1) {
+                e1.printStackTrace();
+            }
+            failed = true;
+        }
+        thread = new Thread(() -> {
+            while(true){
+                if (failed){
+                    runKeyboardHook();
+                }
+            }
+        });
+        thread.start();
     }
     public static void close(){
         if(!Settings.onboarding && loaded) {

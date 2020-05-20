@@ -15,38 +15,44 @@ class ControllerListener {
 
         Robot r = new Robot();
         Thread thread = new Thread(() -> {
-            ControllerManager controllers = new ControllerManager();
-            controllers.initSDLGamepad();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            while (true) {
-                ControllerState currState = controllers.getState(0);
-                if (currState.leftStickClick) {
-                    if (Overlay.isVisible) {
-                        if (!Settings.windowedMode) {
-                            Overlay.setWindowsInvisible();
+            while(true) {
+                try {
+                    ControllerManager controllers = new ControllerManager();
+                    controllers.initSDLGamepad();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    while (true) {
+                        ControllerState currState = controllers.getState(0);
+                        if (currState.leftStickClick) {
+                            if (Overlay.isVisible) {
+                                if (!Settings.windowedMode) {
+                                    Overlay.setWindowsInvisible();
+                                }
+                            } else {
+                                if (!Settings.windowedMode) {
+                                    Overlay.setWindowsVisible();
+                                }
+                                Overlay.frame.toFront();
+                            }
                         }
-                    } else {
-                        if (!Settings.windowedMode) {
-                            Overlay.setWindowsVisible();
+                        if (currState.rightStickClick) {
+                            r.keyPress(KeyEvent.VK_CONTROL);
+                            r.keyPress(KeyEvent.VK_V);
+
+                            r.keyRelease(KeyEvent.VK_V);
+                            r.keyRelease(KeyEvent.VK_CONTROL);
                         }
-                        Overlay.frame.toFront();
+                        try {
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-                if (currState.rightStickClick) {
-                    r.keyPress(KeyEvent.VK_CONTROL);
-                    r.keyPress(KeyEvent.VK_V);
-
-                    r.keyRelease(KeyEvent.VK_V);
-                    r.keyRelease(KeyEvent.VK_CONTROL);
-                }
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                catch (Exception ignored){
                 }
             }
         });

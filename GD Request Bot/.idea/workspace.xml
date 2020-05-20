@@ -12,188 +12,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GD Request Bot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GD Request Bot.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/APIs.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/APIs.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/ActionsWindow$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/ActionsWindow$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/ActionsWindow$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/ActionsWindow$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/ActionsWindow$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/ActionsWindow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/ClientChatBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/ClientChatBot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Command.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Command.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/CommentsWindow$1$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/CommentsWindow$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/CommentsWindow$2$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/CommentsWindow$2$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/CommentsWindow$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/CommentsWindow$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/CommentsWindow$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/CommentsWindow$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/CommentsWindow$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/CommentsWindow$7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/CommentsWindow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/CurvedButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/CurvedButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Defaults.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Defaults.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FloatingInnerWindow$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FloatingInnerWindow$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Functions.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Functions.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InfoWindow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/KeyListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/KeyListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/LevelData.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/LevelData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/LevelsWindow$1$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/LevelsWindow$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/LevelsWindow$2$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/LevelsWindow$2$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/LevelsWindow$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/LevelsWindow$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/LevelsWindow.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/ControllerListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/ControllerListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/InfoWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/InfoWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/SongWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/SongWindow.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Main$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Main$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Main$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MainBar$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MainBar$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MainBar$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MainBar$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MainBar$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MainBar$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MainBar$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MainBar$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MainBar$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MainBar$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MainBar$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MainBar$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MainBar$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MainBar$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MainBar$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MainBar$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MainBar$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MainBar$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MainBar.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MainBar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MouseLock.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/MouseLock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Onboarding$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Onboarding$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Onboarding$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Onboarding$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Onboarding$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Onboarding$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Onboarding.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Onboarding.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Overlay$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Overlay$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Overlay.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Overlay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Requests.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Requests.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/ServerChatBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/ServerChatBot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Settings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsWindow$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SongWindow$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SongWindow$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SongWindow$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SongWindow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/AccountSettings$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/AccountSettings.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/BlockedSettings$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/BlockedSettings$2$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/BlockedSettings$2$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/BlockedSettings$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/BlockedSettings$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/BlockedSettings.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/BlockedUserSettings$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/BlockedUserSettings$2$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/BlockedUserSettings$2$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/BlockedUserSettings$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/BlockedUserSettings$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/BlockedUserSettings.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/CommandSettings.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/GeneralSettings$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/GeneralSettings$10.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/GeneralSettings$11.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/GeneralSettings$12.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/GeneralSettings$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/GeneralSettings$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/GeneralSettings$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/GeneralSettings$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/GeneralSettings$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/GeneralSettings$7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/GeneralSettings$8.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/GeneralSettings$9.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/GeneralSettings.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/OutputSettings$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/OutputSettings$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/OutputSettings$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/OutputSettings.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/PersonalizationSettings$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/PersonalizationSettings.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestSettings$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestSettings$10.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestSettings$11.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestSettings$12.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestSettings$13.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestSettings$14.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestSettings$15.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestSettings$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestSettings$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestSettings$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestSettings$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestSettings$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestSettings$7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestSettings$8.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestSettings$9.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestSettings.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestsLog$1$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestsLog$1$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestsLog$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestsLog$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/RequestsLog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/ShortcutSettings$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/ShortcutSettings.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/WindowedSettings$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/SettingsPanels/WindowedSettings.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Randomizer$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Randomizer$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Randomizer$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Randomizer$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Randomizer$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Randomizer.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/APIs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/APIs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/ActionsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/InnerWindows/ActionsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/ClientChatBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/ClientChatBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/CommentsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/InnerWindows/CommentsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/CurvedButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/CurvedButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Defaults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Defaults.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/FloatingInnerWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/FloatingInnerWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Functions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Functions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/InfoWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/InnerWindows/InfoWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/InnerWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/InnerWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/KeyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/KeyListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/LevelData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/LevelData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/LevelsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/InnerWindows/LevelsWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/ControllerListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/ControllerListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/InnerWindows/InfoWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/InnerWindows/InfoWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/InnerWindows/SongWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/InnerWindows/SongWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/MainBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/MainBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/MouseLock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/MouseLock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Onboarding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Onboarding.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Overlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Overlay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Requests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Requests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/ServerChatBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/ServerChatBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/SettingsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/SongWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/InnerWindows/SongWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Windowed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Windowed.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SettingsPanels/AccountSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/AccountSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SettingsPanels/BlockedSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SettingsPanels/BlockedUserSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedUserSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SettingsPanels/CommandSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SettingsPanels/GeneralSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/GeneralSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SettingsPanels/OutputSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/OutputSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SettingsPanels/PersonalizationSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SettingsPanels/RequestSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/RequestSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SettingsPanels/RequestsLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/RequestsLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SettingsPanels/ShortcutSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/ShortcutSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SettingsPanels/WindowedSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/WindowedSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/Randomizer.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -227,6 +65,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="171" selection-start-line="171" selection-end-line="171" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/.version">
           <provider selected="true" editor-type-id="text-editor">
@@ -237,10 +87,23 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/KeyListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="915" column="30" selection-start-line="915" selection-start-column="30" selection-end-line="915" selection-end-column="30" />
+            <state relative-caret-position="34">
+              <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2707#2708#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/InnerWindow.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="219">
+              <caret line="173" selection-start-line="173" selection-end-line="173" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -249,10 +112,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/InnerWindows/LevelsWindow.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/ControllerListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-446">
-              <caret line="460" column="63" lean-forward="true" selection-start-line="460" selection-start-column="63" selection-end-line="460" selection-end-column="63" />
+            <state relative-caret-position="68">
+              <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/InnerWindows/InfoWindow.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1020">
+              <caret line="66" column="22" selection-start-line="66" selection-start-column="22" selection-end-line="66" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -261,70 +133,43 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/OutputSettings.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/AccountSettings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+            <state relative-caret-position="646">
+              <caret line="45" column="57" selection-start-line="45" selection-start-column="57" selection-end-line="45" selection-end-column="57" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/InnerWindows/SongWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="29" column="40" selection-start-line="29" selection-start-column="40" selection-end-line="29" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/RequestSettings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="310" column="57" selection-start-line="310" selection-start-column="57" selection-end-line="310" selection-end-column="57" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/RequestsLog.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="125" column="4" selection-start-line="125" selection-start-column="4" selection-end-line="125" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/ShortcutSettings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="427">
-              <caret line="131" selection-start-line="131" selection-end-line="131" />
-              <folding>
-                <element signature="e#4888#4915#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/WindowedSettings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="618">
-              <caret line="64" column="25" lean-forward="true" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="143" selection-start-line="143" selection-end-line="143" />
+            <state relative-caret-position="1785">
+              <caret line="117" column="22" selection-start-line="117" selection-start-column="22" selection-end-line="117" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/MainBar.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1224">
+              <caret line="87" selection-start-line="87" selection-end-line="87" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/Settings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1649">
+              <caret line="101" column="99" selection-start-line="101" selection-start-column="62" selection-end-line="101" selection-end-column="99" />
             </state>
           </provider>
         </entry>
@@ -372,8 +217,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Resources/Commands/info.txt" />
-        <option value="$PROJECT_DIR$/src/Resources/Commands/!help.js" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/cooldown.txt" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/!kill.js" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/!song.js" />
@@ -402,7 +245,6 @@
         <option value="$PROJECT_DIR$/src/Main/InnerWindows/CommentsWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/SongWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/InnerWindows/LevelsWindow.java" />
-        <option value="$PROJECT_DIR$/src/Main/InnerWindows/SongWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/Requests.java" />
         <option value="$PROJECT_DIR$/src/Main/Windowed.java" />
@@ -410,18 +252,21 @@
         <option value="$PROJECT_DIR$/src/Main/ServerChatBot.java" />
         <option value="$PROJECT_DIR$/src/Main/Onboarding.java" />
         <option value="$PROJECT_DIR$/src/Main/MouseLock.java" />
-        <option value="$PROJECT_DIR$/src/Main/Main.java" />
         <option value="$PROJECT_DIR$/src/Main/LevelData.java" />
         <option value="$PROJECT_DIR$/src/Main/Functions.java" />
         <option value="$PROJECT_DIR$/src/Main/Defaults.java" />
         <option value="$PROJECT_DIR$/src/Main/CurvedButton.java" />
         <option value="$PROJECT_DIR$/src/Main/Command.java" />
         <option value="$PROJECT_DIR$/src/Main/APIs.java" />
-        <option value="$PROJECT_DIR$/src/Main/InnerWindows/InfoWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/GeneralSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/OutputSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/RequestsLog.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/ShortcutSettings.java" />
+        <option value="$PROJECT_DIR$/src/Main/InnerWindows/InfoWindow.java" />
+        <option value="$PROJECT_DIR$/src/Main/InnerWindows/SongWindow.java" />
+        <option value="$PROJECT_DIR$/src/Main/ControllerListener.java" />
+        <option value="$PROJECT_DIR$/src/Main/KeyListener.java" />
+        <option value="$PROJECT_DIR$/src/Main/Main.java" />
         <option value="$PROJECT_DIR$/src/.version" />
       </list>
     </option>
@@ -433,8 +278,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="446" />
-    <option name="y" value="-8" />
+    <option name="x" value="370" />
+    <option name="y" value="7" />
     <option name="width" value="1138" />
     <option name="height" value="1010" />
   </component>
@@ -446,66 +291,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
-              <item name="GD_Request_Bot_jar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Main" type="462c0819:PsiDirectoryNode" />
-              <item name="SettingsPanels" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Resources" type="462c0819:PsiDirectoryNode" />
-              <item name="Fonts" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -546,6 +331,59 @@
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+              <item name="GD_Request_Bot_jar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+              <item name="Fonts" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -558,7 +396,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1589938063745" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1589953292489" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../GDBoard Dependencies/javassist.jar!/" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -600,7 +438,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JAR Application.GD Request Bot.jar">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -721,7 +559,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23667377" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24200426" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -909,29 +747,8 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Resources/Commands/info.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="74" selection-start-line="4" selection-start-column="74" selection-end-line="4" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Resources/Commands/!clear.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="5" selection-start-line="1" selection-start-column="10" selection-end-line="4" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Resources/Montserrat-SemiBold.ttf" />
     <entry file="file://$PROJECT_DIR$/src/Resources/Fonts/Montserrat-SemiBold.ttf" />
-    <entry file="file://$PROJECT_DIR$/src/Main/ControllerListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/YouTubeBot.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -960,23 +777,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Settings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="297" lean-forward="true" selection-start-line="297" selection-end-line="297" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/ServerChatBot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/RoundedJButton.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -984,7 +784,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Randomizer.java">
+    <entry file="file://$PROJECT_DIR$/../../../Java Stuff/plugin test/src/Randomizer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="692">
           <caret line="157" column="23" selection-start-line="157" selection-start-column="23" selection-end-line="157" selection-end-column="23" />
@@ -1019,16 +819,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/MainBar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="174" column="64" lean-forward="true" selection-start-line="174" selection-start-column="64" selection-end-line="174" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/LevelData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2448">
@@ -1039,13 +829,6 @@
             <element signature="e#393#394#0" expanded="true" />
             <element signature="e#412#413#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/KeyListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1060,16 +843,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="604">
           <caret line="47" column="47" selection-start-line="47" selection-start-column="47" selection-end-line="47" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/InnerWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="591" column="11" selection-start-line="591" selection-start-column="11" selection-end-line="591" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1118,23 +891,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Command.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="47" selection-start-line="3" selection-start-column="47" selection-end-line="3" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/ClientChatBot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="248" column="38" selection-start-line="248" selection-start-column="38" selection-end-line="248" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/CheckboxButton.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -1162,26 +918,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/InnerWindows/SongWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="133" column="23" selection-start-line="133" selection-start-column="23" selection-end-line="133" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/InnerWindows/InfoWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-808">
-          <caret line="38" column="37" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/InnerWindows/CommentsWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
@@ -1199,13 +935,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/AccountSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="45" column="57" selection-start-line="45" selection-start-column="57" selection-end-line="45" selection-end-column="57" />
         </state>
       </provider>
     </entry>
@@ -1289,17 +1018,7 @@
     <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/WindowedSettings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="618">
-          <caret line="64" column="25" lean-forward="true" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="143" selection-start-line="143" selection-end-line="143" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="64" column="25" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -1316,7 +1035,130 @@
     <entry file="file://$PROJECT_DIR$/src/Main/InnerWindows/LevelsWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-446">
-          <caret line="460" column="63" lean-forward="true" selection-start-line="460" selection-start-column="63" selection-end-line="460" selection-end-column="63" />
+          <caret line="460" column="63" selection-start-line="460" selection-start-column="63" selection-end-line="460" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../../GDBoard Dependencies/jnativehook-2.1.0.jar!/org/jnativehook/GlobalScreen.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="100" column="23" selection-start-line="100" selection-start-column="23" selection-end-line="100" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/ServerChatBot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2635">
+          <caret line="166" column="22" selection-start-line="163" selection-start-column="16" selection-end-line="175" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Command.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/ClientChatBot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3774">
+          <caret line="248" column="38" selection-start-line="248" selection-start-column="38" selection-end-line="248" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/InnerWindows/InfoWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="66" column="22" selection-start-line="66" selection-start-column="22" selection-end-line="66" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/AccountSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="45" column="57" selection-start-line="45" selection-start-column="57" selection-end-line="45" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/InnerWindows/SongWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1785">
+          <caret line="117" column="22" selection-start-line="117" selection-start-column="22" selection-end-line="117" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/MainBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1224">
+          <caret line="87" selection-start-line="87" selection-end-line="87" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Settings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1649">
+          <caret line="101" column="99" selection-start-line="101" selection-start-column="62" selection-end-line="101" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/ControllerListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/InnerWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="173" selection-start-line="173" selection-end-line="173" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../../GDBoard Dependencies/jnativehook-2.1.0.jar!/org/jnativehook/keyboard/SwingKeyAdapter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-102">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/KeyListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2707#2708#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="171" selection-start-line="171" selection-end-line="171" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

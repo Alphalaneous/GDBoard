@@ -115,6 +115,7 @@ public class SongWindow {
 		
 		
 		Overlay.addToFrame(window);
+		refreshInfo();
 	}
 	public static void setPin(boolean pin){
 		((InnerWindow) window).setPin(pin);
