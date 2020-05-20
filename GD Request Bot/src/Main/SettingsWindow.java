@@ -1,14 +1,12 @@
 package Main;
 
-import SettingsPanels.OutputSettings;
-import SettingsPanels.PersonalizationSettings;
 import com.jidesoft.swing.ResizablePanel;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.*;
+import Main.SettingsPanels.*;
 
 public class SettingsWindow {
 	private static int width = 622;
@@ -21,18 +19,18 @@ public class SettingsWindow {
 
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static JButtonUI selectUI = new JButtonUI();
-	private static JPanel general = SettingsPanels.GeneralSettings.createPanel();
+	private static JPanel general = GeneralSettings.createPanel();
 	private static JPanel overlay = OutputSettings.createPanel();
-	private static JPanel accounts = SettingsPanels.AccountSettings.createPanel();
-	private static JPanel commands = SettingsPanels.CommandSettings.createPanel();
-	private static JPanel requests = SettingsPanels.RequestSettings.createPanel();
-	private static JPanel shortcuts = SettingsPanels.ShortcutSettings.createPanel();
-	private static JPanel personalization = SettingsPanels.PersonalizationSettings.createPanel();
-	private static JPanel blocked = SettingsPanels.BlockedSettings.createPanel();
-	private static JPanel blockedUsers = SettingsPanels.BlockedUserSettings.createPanel();
-	private static JPanel loggedIDs = SettingsPanels.RequestsLog.createPanel();
+	private static JPanel accounts = AccountSettings.createPanel();
+	private static JPanel commands = CommandSettings.createPanel();
+	private static JPanel requests = RequestSettings.createPanel();
+	private static JPanel shortcuts = ShortcutSettings.createPanel();
+	private static JPanel personalization = PersonalizationSettings.createPanel();
+	private static JPanel blocked = BlockedSettings.createPanel();
+	private static JPanel blockedUsers = BlockedUserSettings.createPanel();
+	private static JPanel loggedIDs = RequestsLog.createPanel();
 
-	private static JPanel windowed = SettingsPanels.WindowedSettings.createPanel();
+	private static JPanel windowed = WindowedSettings.createPanel();
 
 	public static boolean run = true;
 	public static JDialog frame = new JDialog();

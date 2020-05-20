@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 class ServerChatBot {
     static boolean processing = false;
-    static URI uri;
+    private static URI uri;
 
     static {
         try {

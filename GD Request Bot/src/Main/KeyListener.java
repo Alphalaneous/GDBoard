@@ -1,6 +1,6 @@
 package Main;
 
-import SettingsPanels.ShortcutSettings;
+import Main.SettingsPanels.ShortcutSettings;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.SwingKeyAdapter;
 

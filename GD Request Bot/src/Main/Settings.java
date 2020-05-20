@@ -1,5 +1,7 @@
 package Main;
 
+import Main.InnerWindows.*;
+
 import java.awt.*;
 import java.io.*;
 import java.util.Properties;
@@ -75,7 +77,7 @@ public class Settings {
         }
     }
 
-    public static void writeLocation() throws IOException {
+    static void writeLocation() throws IOException {
         writeSettings("song", songWLoc.x + "," + songWLoc.y + "," + songPin + "," + songX);
         writeSettings("actions", actionsWLoc.x + "," + actionsWLoc.y + "," + actPin + "," + actX);
         writeSettings("info", infoWLoc.x + "," + infoWLoc.y + "," + infoPin + "," + infoX);
@@ -127,15 +129,9 @@ public class Settings {
         gfg.load(in);
         if(gfg.containsKey("oauth") ) {
             oauth = gfg.get("oauth").toString();
-            hasOauth = true;
         }
-        /*if(gfg.containsKey("clientID") ) {
-            clientID = gfg.get("clientID").toString();
-            hasClientID = true;
-        }*/
         if(gfg.containsKey("channel")) {
             channel = gfg.get("channel").toString().toLowerCase();
-            hasChannel = true;
         }
         if(gfg.containsKey("windowed")) {
             windowedMode = Boolean.parseBoolean(gfg.get("windowed").toString());
@@ -276,11 +272,9 @@ public class Settings {
     private static Point settingsWLoc = new Point(1920 / 2 - 250, 1080 / 2 - 300);
     private static Point windowWLoc = new Point(0, 0);
     static int monitor;
-    public static String channel;
+    static String channel;
     static boolean hasMonitor = false;
     public static boolean onboarding = true;
-    static boolean hasOauth = false;
-    static boolean hasChannel = false;
     static boolean hasWindowed = false;
     private static boolean songPin = false;
     private static boolean infoPin = false;
@@ -302,15 +296,7 @@ public class Settings {
         Settings.windowedMode = mode;
     }*/
 
-    public static void setOAuth(String oauth) {
-        Settings.oauth = oauth;
-    }
-
-    public static void setChannel(String channel) {
-        Settings.channel = "#" + channel.toLowerCase();
-    }
-
-    static Point getRequestsWLoc() {
+    public static Point getRequestsWLoc() {
         if (Settings.windowedMode) {
             requestsWLoc = new Point(0, 0);
         }
@@ -323,28 +309,28 @@ public class Settings {
         return settingsWLoc;
     }
 
-    static Point getInfoWLoc() {
+    public static Point getInfoWLoc() {
         if (Settings.windowedMode) {
             infoWLoc = new Point(0, 402);
         }
         return infoWLoc;
     }
 
-    static Point getCommentWLoc() {
+    public static Point getCommentWLoc() {
         if (Settings.windowedMode) {
             commentWLoc = new Point(402, 98);
         }
         return commentWLoc;
     }
 
-    static Point getSongWLoc() {
+    public static Point getSongWLoc() {
         if (Settings.windowedMode) {
             songWLoc = new Point(402, 422);
         }
         return songWLoc;
     }
 
-    static Point getActionsWLoc() {
+    public static Point getActionsWLoc() {
         if (Settings.windowedMode) {
             actionsWLoc = new Point(402, 20);
         }

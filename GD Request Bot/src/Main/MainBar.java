@@ -1,6 +1,8 @@
 package Main;
 
 
+import Main.InnerWindows.*;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;

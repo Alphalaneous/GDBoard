@@ -1,17 +1,13 @@
 package Main;
 
-import SettingsPanels.*;
+import Main.InnerWindows.*;
+import Main.SettingsPanels.*;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Objects;
-import java.util.Set;
 
 public class Overlay {
 
@@ -56,7 +52,7 @@ public class Overlay {
 
     }
 
-    static void addToFrame(JComponent component) {
+    public static void addToFrame(JComponent component) {
 
         // --------------------
         // Add components to JFrame from elsewhere

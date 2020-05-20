@@ -1,8 +1,12 @@
 package Main;
 
-import SettingsPanels.BlockedSettings;
-import SettingsPanels.BlockedUserSettings;
-import SettingsPanels.GeneralSettings;
+import Main.InnerWindows.CommentsWindow;
+import Main.InnerWindows.InfoWindow;
+import Main.InnerWindows.LevelsWindow;
+import Main.InnerWindows.SongWindow;
+import Main.SettingsPanels.BlockedSettings;
+import Main.SettingsPanels.BlockedUserSettings;
+import Main.SettingsPanels.GeneralSettings;
 import com.cavariux.twitchirc.Chat.Channel;
 import com.cavariux.twitchirc.Chat.User;
 import com.cavariux.twitchirc.Core.TwitchBot;

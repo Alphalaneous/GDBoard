@@ -1,6 +1,6 @@
 package Main;
 
-import SettingsPanels.*;
+import Main.SettingsPanels.*;
 
 import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;

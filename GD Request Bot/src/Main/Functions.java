@@ -1,8 +1,12 @@
 package Main;
 
-import SettingsPanels.BlockedSettings;
-import SettingsPanels.GeneralSettings;
-import SettingsPanels.OutputSettings;
+import Main.InnerWindows.CommentsWindow;
+import Main.InnerWindows.InfoWindow;
+import Main.InnerWindows.LevelsWindow;
+import Main.InnerWindows.SongWindow;
+import Main.SettingsPanels.BlockedSettings;
+import Main.SettingsPanels.GeneralSettings;
+import Main.SettingsPanels.OutputSettings;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
@@ -11,7 +15,6 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.*;
@@ -237,7 +240,7 @@ public class Functions {
         }
     }
 
-    public static void requestsToggleFunction() {
+    static void requestsToggleFunction() {
         if (MainBar.requests) {
             MainBar.stopReqs.setText("\uE768");
             MainBar.requests = false;

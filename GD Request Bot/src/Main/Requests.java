@@ -1,6 +1,10 @@
 package Main;
 
-import SettingsPanels.*;
+import Main.InnerWindows.CommentsWindow;
+import Main.InnerWindows.InfoWindow;
+import Main.InnerWindows.LevelsWindow;
+import Main.InnerWindows.SongWindow;
+import Main.SettingsPanels.*;
 import com.github.alex1304.jdash.client.AnonymousGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.entity.GDLevel;
@@ -9,7 +13,6 @@ import com.github.alex1304.jdash.exception.MissingAccessException;
 import com.github.alex1304.jdash.util.LevelSearchFilters;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
-import org.apache.commons.io.IOUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +23,6 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.*;
@@ -32,7 +34,7 @@ import java.util.zip.GZIPInputStream;
 
 public class Requests {
 
-    static ArrayList<LevelData> levels = new ArrayList<>();
+    public static ArrayList<LevelData> levels = new ArrayList<>();
     static ArrayList<String> addedLevels = new ArrayList<>();
     private static HashMap<String, Integer> userStreamLimitMap = new HashMap<>();
 
@@ -70,7 +72,7 @@ public class Requests {
                     }
                     sc.close();
                 }
-                if(Files.exists(logged) && GeneralSettings.repeatedOptionAll){
+                if(Files.exists(logged) && GeneralSettings.repeatedOptionAll && Main.loaded){
                     Scanner sc = new Scanner(logged.toFile());
                     while (sc.hasNextLine()) {
                         if (ID.equals(sc.nextLine())) {
@@ -278,6 +280,8 @@ public class Requests {
             Main.sendMessage("@" + requester + " Requests are off!");
         }
     }
+
+    @SuppressWarnings("unused")
     public static String getLevel(int level, String attribute) {
 
         String result = "";
@@ -342,6 +346,8 @@ public class Requests {
     public static int getSize(){
         return levels.size();
     }
+
+    @SuppressWarnings("unused")
     public static void kill(){
         String PID = null;
         try {
@@ -373,6 +379,8 @@ public class Requests {
             e.printStackTrace();
         }
     }
+
+    @SuppressWarnings("unused")
     public static String toggleRequests(String user){
         Functions.requestsToggleFunction();
         if(MainBar.requests) {
@@ -382,6 +390,8 @@ public class Requests {
             return "@" + user + " requests are now on";
         }
     }
+
+    @SuppressWarnings("unused")
     public static void clear(){
         for (int i = 0; i < Requests.levels.size(); i++) {
             LevelsWindow.removeButton();
@@ -425,6 +435,7 @@ public class Requests {
     }
     private static Thread rickThread = null;
 
+    @SuppressWarnings("unused")
     public static void rick(){
         System.out.println("ricked");
         if (rickThread != null) {
@@ -443,19 +454,23 @@ public class Requests {
         });
         rickThread.start();
     }
+
+    @SuppressWarnings("unused")
     public static void stopRick(){
         if (rickThread != null && rickThread.isAlive()) {
             rickThread.stop();
         }
     }
     static boolean bwomp = false;
+
+    @SuppressWarnings("unused")
     public static void bwomp(){
         bwomp = !bwomp;
-
     }
 
     private static Thread knockThread = null;
 
+    @SuppressWarnings("unused")
     public static void knock(){
         if (knockThread != null) {
             knockThread.stop();
@@ -473,16 +488,19 @@ public class Requests {
         });
         knockThread.start();
     }
+
+    @SuppressWarnings("unused")
     public static void stopKnock(){
         if (knockThread != null && knockThread.isAlive()) {
             knockThread.stop();
         }
     }
+
+    @SuppressWarnings("unused")
     public static String block(String user, String[] arguments){
         String response;
         try {
             int blockedID = Integer.parseInt(arguments[1]);
-            boolean goThrough = true;
             Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
             if (!Files.exists(file)) {
                 Files.createFile(file);
@@ -509,6 +527,8 @@ public class Requests {
         }
        return response;
     }
+
+    @SuppressWarnings("unused")
     public static String unblock(String user, String[] arguments){
         String unblocked = arguments[1];
         String response = "";
@@ -548,6 +568,8 @@ public class Requests {
         }
         return response;
     }
+
+    @SuppressWarnings("unused")
     public static String blockUser(String user, String[] arguments){
         String response;
         try {
@@ -578,6 +600,8 @@ public class Requests {
         }
         return response;
     }
+
+    @SuppressWarnings("unused")
     public static String unblockUser(String user, String[] arguments){
         String response = "";
         String unblocked = arguments[1];
@@ -617,6 +641,9 @@ public class Requests {
         }
         return response;
     }
+
+    @SuppressWarnings("unused")
+
     public static String getHelp(String command){
         String info = null;
         boolean infoExists = false;
@@ -661,6 +688,8 @@ public class Requests {
         }
         return info;
     }
+
+    @SuppressWarnings("unused")
     public static String getHelp(){
         System.out.println("here");
         StringBuilder message = new StringBuilder();
@@ -705,12 +734,18 @@ public class Requests {
         }
         return message.toString();
     }
+
+    @SuppressWarnings("unused")
     public static String getOAuth(){
         return Settings.oauth;
     }
+
+    @SuppressWarnings("unused")
     public static String getClientID(){
         return "fzwze6vc6d2f7qodgkpq2w8nnsz3rl";
     }
+
+    @SuppressWarnings("unused")
     public static String request(String user, boolean isMod, boolean isSub, String[] arguments){
         String response = "";
         Matcher m = null;
@@ -795,11 +830,6 @@ public class Requests {
     private static void parse(byte[] level, String levelID) {
         all:
         for (int k = 0; k < Requests.getLevelData().size(); k++) {
-            try {
-                Thread.sleep(5);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             if (Requests.getLevelData().get(k).getLevelID().equalsIgnoreCase(levelID)) {
                 String decompressed = null;
                 try {
@@ -924,10 +954,9 @@ public class Requests {
         }
     }
 
-    public static boolean isValidURL(String url) {
-
+    private static boolean isValidURL(String url) {
         try {
-            URL url1 = new URL(url);
+            new URL(url);
             return true;
         } catch (MalformedURLException e) {
             return false;

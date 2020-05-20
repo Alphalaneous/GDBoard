@@ -1,17 +1,14 @@
 package Main;
 
-import SettingsPanels.OutputSettings;
-import SettingsPanels.WindowedSettings;
+import Main.InnerWindows.InfoWindow;
+import Main.InnerWindows.LevelsWindow;
+import Main.SettingsPanels.WindowedSettings;
 import com.jidesoft.swing.ResizablePanel;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 
 public class Windowed {
@@ -23,7 +20,6 @@ public class Windowed {
 	private static JPanel buttonPanel = new JPanel();
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static JButtonUI selectUI = new JButtonUI();
-	public static boolean run = true;
 	static JFrame frame = new JFrame();
 	public static void setOnTop(boolean onTop){
 		frame.setAlwaysOnTop(onTop);
@@ -172,10 +168,6 @@ public class Windowed {
 	static void toggleVisible() {
 
 		((InnerWindow) window).toggle();
-	}
-
-	static void setInvisible() {
-		((InnerWindow) window).setInvisible();
 	}
 
 	static void setVisible() {

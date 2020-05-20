@@ -1,6 +1,6 @@
 package Main;
 
-import SettingsPanels.*;
+import Main.SettingsPanels.*;
 import com.jidesoft.swing.ResizablePanel;
 
 import javax.swing.*;
@@ -9,8 +9,6 @@ import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.util.Objects;
 
 public class InnerWindow extends ResizablePanel {
 
@@ -34,7 +32,7 @@ public class InnerWindow extends ResizablePanel {
     private JButtonUI defaultUI = new JButtonUI();
 
     //region Constructor for InnerWindow
-    InnerWindow(final String title, final int x, final int y, final int width, final int height, final String icon, boolean floating) {
+    public InnerWindow(final String title, final int x, final int y, final int width, final int height, final String icon, boolean floating) {
         double y1;
         double x1;
         double ratio = 1920 / Defaults.screenSize.getWidth();
@@ -90,7 +88,7 @@ public class InnerWindow extends ResizablePanel {
     //endregion
 
     //region Create InnerWindow
-    ResizablePanel createPanel() {
+    public ResizablePanel createPanel() {
 
         //region No Click Through listener
         setDoubleBuffered(true);
@@ -459,7 +457,7 @@ public class InnerWindow extends ResizablePanel {
     //endregion
 
     //region SetPin
-    void setPin(boolean pin){
+    public void setPin(boolean pin){
         isPinPressed = pin;
         if (!isPinPressed) {
             pinButtonFill.setVisible(false);
@@ -472,7 +470,7 @@ public class InnerWindow extends ResizablePanel {
     //endregion
 
     //region Mouse Listener Refresh for Moving Window to Top
-    void refreshListener() {
+    public void refreshListener() {
         for (Component component : getComponents()) {
             if(component instanceof JPanel && !component.equals(topBar)) {
                 for (Component component1 : ((JPanel) component).getComponents()) {
@@ -507,7 +505,7 @@ public class InnerWindow extends ResizablePanel {
     //endregion
 
     //region Refresh UI
-    void refreshUI() {
+    public void refreshUI() {
 
 
         defaultUI.setBackground(Defaults.TOP);
@@ -591,19 +589,19 @@ public class InnerWindow extends ResizablePanel {
     //endregion
 
     //region Refresh dimensions (for when resized)
-    void resetDimensions(int width, int height) {
+    public void resetDimensions(int width, int height) {
         this.height = height;
         this.width = width;
 
     }
     //endregion
 
-    void setSettings(){
+    public void setSettings(){
         Settings.setWindowSettings(title, getX() + "," + getY() + "," + isPinPressed + "," + isVisible());
     }
 
     //region Set InnerWindow visible
-    void setVisible() {
+    public void setVisible() {
         topBar.setVisible(true);
         setBorder(BorderFactory.createLineBorder(alphaBorder));
         if (toggleState) {
@@ -624,7 +622,7 @@ public class InnerWindow extends ResizablePanel {
     //endregion
 
     //region Set InnerWindow invisible
-    void setInvisible() {
+    public void setInvisible() {
         if (!isPinPressed) {
             if(!floating) {
                 setVisible(false);
@@ -650,7 +648,7 @@ public class InnerWindow extends ResizablePanel {
     //endregion
 
     //region Toggle Visibility of InnerWindow
-    void toggle() {
+    public void toggle() {
         if (toggleState) {
             if(!floating) {
                 setVisible(false);
@@ -688,7 +686,7 @@ public class InnerWindow extends ResizablePanel {
     //endregion
 
     //region Move InnerWindow to front
-    void moveToFront() {
+    public void moveToFront() {
         Overlay.moveToFront(this);
     }
     //endregion

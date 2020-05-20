@@ -1,6 +1,6 @@
 package Main;
 
-import SettingsPanels.AccountSettings;
+import Main.SettingsPanels.AccountSettings;
 import com.cavariux.twitchirc.Json.JsonObject;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
@@ -8,15 +8,13 @@ import com.mb3364.twitch.api.auth.Scopes;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class APIs {
-
+/*
     static String[] getYTVideo(String query){
         JsonObject videoInfo;
         String[] info = new String[0];
@@ -43,7 +41,7 @@ public class APIs {
         }
 
         return info;
-    }
+    }*/
 
     static boolean isNotFollowing(String user) {
 
@@ -63,7 +61,7 @@ public class APIs {
         }
     }
 
-    static String getChannel() {
+    private static String getChannel() {
         JsonObject nameObj = twitchAPI("https://api.twitch.tv/kraken/user", true);
         assert nameObj != null;
         return String.valueOf(nameObj.get("display_name")).replaceAll("\"", "");
@@ -102,12 +100,12 @@ public class APIs {
         }
     }
 
-    static String getIDs(String username) {
+    private static String getIDs(String username) {
         JsonObject userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + username.toLowerCase());
         assert userID != null;
         return userID.get("data").asArray().get(0).asObject().get("id").toString().replaceAll("\"", "");
     }
-
+    @SuppressWarnings("unused")
     public static String getClientID() {
         try {
             URL url = new URL("https://id.twitch.tv/oauth2/validate");

@@ -1,11 +1,14 @@
 package Main;
 
-import SettingsPanels.*;
+import Main.InnerWindows.*;
+import Main.SettingsPanels.*;
 import com.cavariux.twitchirc.Chat.User;
 import org.apache.commons.io.FileUtils;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.json.JSONObject;
+import org.reflections.Reflections;
+import org.reflections.scanners.SubTypesScanner;
 
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
@@ -14,13 +17,13 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.*;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -81,11 +84,9 @@ public class Main {
                 i++;
             }
             Thread.sleep(500);
-            int j = 0;
             while(!Defaults.colorsLoaded.get()){
                 System.out.println("Loading Colors... " + i);
                 Thread.sleep(10);
-                j++;
             }
             dialog.setVisible(false);
             Thread.sleep(500);
@@ -138,11 +139,17 @@ public class Main {
                         chatReader.start();
                     });
                     thread.start();
-                    LevelsWindow.createPanel();         //Creates the Levels Window containing all the requests in the level queue
-                    ActionsWindow.createPanel();        //Creates the Action Window containing buttons that do specific actions
-                    InfoWindow.createPanel();           //Creates the Info Window containing the information of the selected level
-                    CommentsWindow.createPanel();       //Creates the Comment Window containing the comments of the selected level
-                    SongWindow.createPanel();           //Creates the Song Window allowing you to play the song of the selected level
+
+
+                    Reflections reflections = new Reflections("Main.InnerWindows", new SubTypesScanner(false));
+                    Set<Class<?>> allClasses =
+                            reflections.getSubTypesOf(Object.class);
+                    for (Class<?> Class : allClasses) {
+                        Method method = Class.getMethod("createPanel");
+                        method.invoke(null);
+                        System.out.println(Class.getName());
+                    }
+
                     SettingsWindow.createPanel();
                     //Randomizer.createPanel();
                     if (Settings.windowedMode) {

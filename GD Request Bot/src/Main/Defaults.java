@@ -13,15 +13,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Defaults {
 
-    public static int screenNum = Settings.monitor;
+    static int screenNum = Settings.monitor;
     static Rectangle screenSize = GraphicsEnvironment
             .getLocalGraphicsEnvironment()
             .getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();
-    static Rectangle prevScreenSize = GraphicsEnvironment
+    private static Rectangle prevScreenSize = GraphicsEnvironment
             .getLocalGraphicsEnvironment()
             .getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();
 
-    public static Color ACCENT = new Color(0, 108, 230);
+    static Color ACCENT = new Color(0, 108, 230);
     public static Color MAIN;
     public static Color BUTTON;
     public static Color HOVER;
@@ -30,9 +30,9 @@ public class Defaults {
     public static Color TOP;
     public static Color FOREGROUND;
     public static Color FOREGROUND2;
-    public static Color OUTLINE = new Color(70, 70, 70);
+    static Color OUTLINE = new Color(70, 70, 70);
     public static Color BUTTON_HOVER;
-    public static Color TEXT_BOX;
+    static Color TEXT_BOX;
     public static Font MAIN_FONT;
     public static Font SYMBOLS;
 
@@ -195,8 +195,6 @@ public class Defaults {
                         ACCENT = Color.decode(String.valueOf(color));
                         Overlay.refreshUI(false);
                     }
-
-                    System.out.println(Color.decode(String.valueOf(color)).getRed());
                 } catch (NullPointerException ignored) {
                 }
                 if (theme == 0 && prevTheme[0] == 1) {

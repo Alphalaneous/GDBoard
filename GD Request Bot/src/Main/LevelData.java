@@ -1,42 +1,43 @@
 package Main;
 
-class LevelData {
+/** @noinspection WeakerAccess*/
+public class LevelData {
 
 
-	String getPassword() {
+	public String getPassword() {
 		return password;
 	}
 
 
-	String getRequester() {
+	public String getRequester() {
 		return requester;
 	}
 
-	String getAuthor() {
+	public String getAuthor() {
 		return author;
 	}
 
-	String getName() {
+	public String getName() {
 		return name;
 	}
 
-	String getDifficulty() {
+	public String getDifficulty() {
 		return difficulty;
 	}
 
-	String getDescription() {
+	public String getDescription() {
 		return description;
 	}
 
-	String getLikes() {
+	public String getLikes() {
 		return likes;
 	}
 
-	String getDownloads() {
+	public String getDownloads() {
 		return downloads;
 	}
 
-	String getLevelID() {
+	public String getLevelID() {
 		return levelID;
 	}
 
@@ -48,23 +49,23 @@ class LevelData {
 	//	return verifiedCoins;
 	//}
 
-	boolean getFeatured() {
+	public boolean getFeatured() {
 		return featured;
 	}
 
-	boolean getEpic() {
+	public boolean getEpic() {
 		return epic;
 	}
 
-	String getSongName() {
+	public String getSongName() {
 		return songName;
 	}
 
-	String getSongAuthor() {
+	public String getSongAuthor() {
 		return songAuthor;
 	}
 
-	String getSongID() {
+	public String getSongID() {
 		return songID;
 	}
 
@@ -75,44 +76,44 @@ class LevelData {
 	//ArrayList<GDObject> getLevelData(){
 	//	return levelData;
 	//}
-	
-	boolean getContainsVulgar() {
+
+	public boolean getContainsVulgar() {
 		return containsVulgar;
 	}
-	
-	boolean getContainsImage() {
+
+	public boolean getContainsImage() {
 		return containsImage;
 	}
-	
-	boolean getAnalyzed() {
+
+	public boolean getAnalyzed() {
 		return analyzed;
 	}
-	
-	int getStars() {
+
+	public int getStars() {
 		return stars;
 	}
 
-	String getSongURL(){
+	public String getSongURL(){
 		return downloadURL;
 	}
 
-	String getLength(){
+	public String getLength(){
 		return length;
 	}
 
-	boolean getNotPersist(){
+	public boolean getNotPersist(){
 		return !persist;
 	}
 
-	double getVersion() { return version; }
+	public double getVersion() { return version; }
 
-	String getVideoTitle() {return videoTitle;}
+	public String getVideoTitle() {return videoTitle;}
 
-	String getVideoURL() { return videoURL;}
+	public String getVideoURL() { return videoURL;}
 
-	String getChannelName() { return channelName;}
+	public String getChannelName() { return channelName;}
 
-	String getThumbnailURL() { return thumbnailURL; }
+	public String getThumbnailURL() { return thumbnailURL; }
 
 	private String requester;
 	private String password;
@@ -146,74 +147,74 @@ class LevelData {
 	private boolean persist;
 	private double version;
 
-	void setVideoInfo(String title, String ID, String channel, String thumbnail){
+	public void setVideoInfo(String title, String ID, String channel, String thumbnail){
 		this.videoTitle = title;
 		this.videoURL = "https://www.youtube.com/watch?v" + ID;
 		this.channelName = channel;
 		this.thumbnailURL = thumbnail;
 	}
 
-	void setStars(int stars) {
+	public void setStars(int stars) {
 		this.stars = stars;
 	}
-	
-	void setAnalyzed() {
+
+	public void setAnalyzed() {
 		this.analyzed = true;
 	}
-	
-	void setContainsVulgar() {
+
+	public void setContainsVulgar() {
 		this.containsVulgar = true;
 	}
-	
-	void setContainsImage() {
+
+	public void setContainsImage() {
 		this.containsImage = true;
 	}
 
 	//void setLevelData(ArrayList<GDObject> levelData) {
 	//	this.levelData = levelData;
 	//}
-	void setPersist(boolean persist){
+	public void setPersist(boolean persist){
 		this.persist = persist;
 	}
 
-	void setRequester(String requester) {
+	public void setRequester(String requester) {
 		this.requester = requester;
 	}
 
-	void setAuthor(String author) {
+	public void setAuthor(String author) {
 		this.author = author;
 	}
 
-	void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	void setPassword(String password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
 
-	void setDifficulty(String difficulty) {
+	public void setDifficulty(String difficulty) {
 		this.difficulty = difficulty;
 	}
 
-	void setDescription(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	void setLikes(String likes) {
+	public void setLikes(String likes) {
 		this.likes = likes;
 	}
 
-	void setDownloads(String downloads) {
+	public void setDownloads(String downloads) {
 		this.downloads = downloads;
 	}
 
-	void setLevelID(String levelID) {
+	public void setLevelID(String levelID) {
 		this.levelID = levelID;
 	}
 
-	void setVersion(double version) {this.version = version; }
+	public void setVersion(double version) {this.version = version; }
 	//void setCoins(String coins) {
 	//	this.coins = Integer.parseInt(coins);
 	//}
@@ -222,31 +223,31 @@ class LevelData {
 	//	this.verifiedCoins = verifiedCoins;
 	//}
 
-	void setFeatured() {
+	public void setFeatured() {
 		this.featured = true;
 	}
 
-	void setEpic(boolean epic) {
+	public void setEpic(boolean epic) {
 		this.epic = epic;
 	}
 
-	void setSongName(String songName) {
+	public void setSongName(String songName) {
 		this.songName = songName;
 	}
 
-	void setSongAuthor(String songAuthor) {
+	public void setSongAuthor(String songAuthor) {
 		this.songAuthor = songAuthor;
 	}
 
-	void setSongID(String songID) {
+	public void setSongID(String songID) {
 		this.songID = songID;
 	}
 
-    void setSongURL(String downloadURL) {
+	public void setSongURL(String downloadURL) {
 		this.downloadURL = downloadURL;
     }
 
-    void setLength(String length) {
+	public void setLength(String length) {
 		this.length = length;
     }
 

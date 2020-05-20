@@ -12,5 +12,7 @@
     <orderEntry type="library" name="jna-5.5.0" level="project" />
     <orderEntry type="library" name="jna-platform-5.5.0" level="project" />
     <orderEntry type="library" name="delight-nashorn-sandbox-0.0.6-distribution" level="project" />
+    <orderEntry type="library" name="reflections-0.9.12" level="project" />
+    <orderEntry type="library" name="javassist" level="project" />
   </component>
 </module>

@@ -4,7 +4,7 @@ import com.sun.jna.platform.WindowUtils;
 
 import java.awt.*;
 
-public class MouseLock {
+class MouseLock {
     static boolean doLock = false;
 
     static void startLock() {

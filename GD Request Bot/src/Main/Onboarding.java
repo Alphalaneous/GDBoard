@@ -1,6 +1,6 @@
 package Main;
 
-import SettingsPanels.ShortcutSettings;
+import Main.SettingsPanels.ShortcutSettings;
 import com.jidesoft.swing.ResizablePanel;
 import org.jnativehook.keyboard.SwingKeyAdapter;
 
@@ -156,10 +156,6 @@ public class Onboarding {
         frame.add(window);
     }
 
-    static void toFront() {
-        frame.toFront();
-    }
-
     static void refreshUI() {
         ((InnerWindow) window).refreshUI();
         defaultUI.setBackground(Defaults.BUTTON);
@@ -173,7 +169,7 @@ public class Onboarding {
         ((InnerWindow) window).toggle();
     }
 
-    static void setInvisible() {
+    private static void setInvisible() {
         ((InnerWindow) window).setInvisible();
     }
 
@@ -182,6 +178,7 @@ public class Onboarding {
 
     }
 
+    @SuppressWarnings("unused")
     private static JButton createButton(String icon) {
         JButton button = new RoundedJButton(icon);
         button.setPreferredSize(new Dimension(50, 50));
@@ -202,7 +199,7 @@ public class Onboarding {
         frame.setLocation(point);
     }
 
-    //endregion
+    /** @noinspection SameParameterValue*/ //endregion
     private static JPanel createKeybindButton(int y, String text, String setting) {
         JPanel panel = new JPanel(null);
         panel.setBounds(0, y, width, 36);

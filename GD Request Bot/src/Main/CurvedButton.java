@@ -7,7 +7,7 @@ import javax.swing.*;
 
 public class CurvedButton extends JButton {
 
-    JLabel text = new JLabel();
+    private JLabel text = new JLabel();
 
     public CurvedButton(String label) {
         setLayout(null);

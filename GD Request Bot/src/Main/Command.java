@@ -3,12 +3,10 @@ package Main;
 import delight.nashornsandbox.NashornSandbox;
 import delight.nashornsandbox.NashornSandboxes;
 
-import javax.script.ScriptException;
-
 public class Command {
 
     private static NashornSandbox sandbox = NashornSandboxes.create();
-    public static String run(String user, boolean isMod, boolean isSub, String[] args, String function, int cheer) throws ScriptException {
+    public static String run(String user, boolean isMod, boolean isSub, String[] args, String function, int cheer) {
         sandbox.inject("isMod", isMod);
         sandbox.inject("isSub", isSub);
         sandbox.inject("user", user);
