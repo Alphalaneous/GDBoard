@@ -16,11 +16,11 @@ import java.util.stream.Stream;
 class ServerChatBot {
     static boolean processing = false;
     private static URI uri;
-
+    static Path myPath;
     static {
         try {
             uri = Main.class.getResource("/Resources/Commands/").toURI();
-        } catch (URISyntaxException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -30,9 +30,15 @@ class ServerChatBot {
     static {
         try {
             fileSystem = FileSystems.newFileSystem(uri, Collections.emptyMap());
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        if (uri.getScheme().equals("jar")) {
+            myPath = fileSystem.getPath("/Resources/Commands/");
+        } else {
+            myPath = Paths.get(uri);
+        }
+
     }
 
     private static ArrayList<String> comCooldown = new ArrayList<>();
@@ -177,14 +183,7 @@ class ServerChatBot {
 
                 if (!comExists) {
 
-                    Path myPath;
 
-                    if (uri.getScheme().equals("jar")) {
-
-                        myPath = fileSystem.getPath("/Resources/Commands/");
-                    } else {
-                        myPath = Paths.get(uri);
-                    }
                     Stream<Path> walk = Files.walk(myPath, 1);
                     for (Iterator<Path> it = walk.iterator(); it.hasNext(); ) {
                         Path path = it.next();
