@@ -353,6 +353,7 @@ public class CommandSettings {
 
 	}
 	private static void showCommandPanel(String command, Path path){
+		codeInput.discardAllEdits();
 		CommandSettings.command = command;
 		commandLabel.setText(command);
 		commandLabel.setBounds(50,15,commandLabel.getPreferredSize().width+5, commandLabel.getPreferredSize().height + 5);
@@ -434,7 +435,7 @@ public class CommandSettings {
 
 
 
-		//codeInput.setEditable(false);
+		codeInput.setEditable(false);
 		codeInput.setCaretPosition(0);
 		codePanel.getVerticalScrollBar().setValue(0);
 		scrollPane.setVisible(false);
