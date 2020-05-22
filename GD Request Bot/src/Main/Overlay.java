@@ -118,6 +118,8 @@ public class Overlay {
 		BlockedSettings.refreshUI();
 		BlockedUserSettings.refreshUI();
 		GeneralSettings.refreshUI();
+		CommandSettings.refreshUI();
+
 		ShortcutSettings.refreshUI();
 		RequestSettings.refreshUI();
 		OutputSettings.refreshUI();

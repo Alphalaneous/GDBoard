@@ -14,5 +14,6 @@
     <orderEntry type="library" name="delight-nashorn-sandbox-0.0.6-distribution" level="project" />
     <orderEntry type="library" name="reflections-0.9.12" level="project" />
     <orderEntry type="library" name="javassist" level="project" />
+    <orderEntry type="library" name="rsyntaxtextarea-3.1.1" level="project" />
   </component>
 </module>

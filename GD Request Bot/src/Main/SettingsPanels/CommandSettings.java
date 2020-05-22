@@ -1,8 +1,8 @@
 package Main.SettingsPanels;
 
 import Main.*;
-import Main.InnerWindows.LevelsWindow;
-
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
@@ -29,14 +29,18 @@ public class CommandSettings {
 	private static JScrollPane scrollPane = new JScrollPane(commandsPanel);
 	private static JPanel panel = new JPanel();
 	private static JPanel commandPanelView = new JPanel(null);
-	private static JTextArea codeInput = new JTextArea();
+	private static JPanel titlePanel = new JPanel();
+	private static RSyntaxTextArea codeInput = new RSyntaxTextArea();
 	private static JScrollPane codePanel = new JScrollPane(codeInput);
 	private static CheckboxButton disable = createButton("Disable Command", 290);
 	private static CheckboxButton modOnly = createButton("Mod Only", 320);
 	private static CheckboxButton whisper = createButton("Send as Whisper", 350);
-	public static JPanel createPanel() {
+	private static RoundedJButton backButton = new RoundedJButton("\uE112");
 
-		JPanel titlePanel = new JPanel();
+	public static JPanel createPanel() {
+		codeInput.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
+
+		codeInput.setCurrentLineHighlightColor(Defaults.BUTTON);
 		titlePanel.setBounds(0, 0, 415, 50);
 		titlePanel.setLayout(null);
 		titlePanel.setDoubleBuffered(true);
@@ -58,7 +62,6 @@ public class CommandSettings {
 		commandLabel.setBounds(50,17,commandLabel.getPreferredSize().width+5, commandLabel.getPreferredSize().height + 5);
 		titlePanel.add(commandLabel);
 
-		RoundedJButton backButton = new RoundedJButton("\uE112");
 		backButton.setBackground(Defaults.BUTTON);
 		backButton.setBounds(10, 10, 30, 30);
 		backButton.setFont(Defaults.SYMBOLS.deriveFont(15f));
@@ -232,7 +235,7 @@ public class CommandSettings {
 
 
 		defaultUI.setBackground(Defaults.BUTTON);
-		defaultUI.setHover(Defaults.HOVER);
+		defaultUI.setHover(Defaults.BUTTON_HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
 		panel.setLayout(null);
 		panel.setDoubleBuffered(true);
@@ -344,15 +347,12 @@ public class CommandSettings {
 		panel.add(commandPanelView);
 		return panel;
 	}
-	public static void loadSettings(){
-
-	}
-	public static void showMainPanel(){
+	private static void showMainPanel(){
 		commandPanelView.setVisible(false);
 		scrollPane.setVisible(true);
 
 	}
-	public static void showCommandPanel(String command, Path path){
+	private static void showCommandPanel(String command, Path path){
 		CommandSettings.command = command;
 		commandLabel.setText(command);
 		commandLabel.setBounds(50,15,commandLabel.getPreferredSize().width+5, commandLabel.getPreferredSize().height + 5);
@@ -434,13 +434,13 @@ public class CommandSettings {
 
 
 
-		codeInput.setEditable(false);
+		//codeInput.setEditable(false);
 		codeInput.setCaretPosition(0);
 		codePanel.getVerticalScrollBar().setValue(0);
 		scrollPane.setVisible(false);
 		commandPanelView.setVisible(true);
 	}
-	public static void addButton(String command, Path path) {
+	private static void addButton(String command, Path path) {
 		i++;
 		System.out.println(height);
 		if (i % 2 == 0) {
@@ -450,7 +450,6 @@ public class CommandSettings {
 			commandsPanel.setPreferredSize(new Dimension(415, (int) (height + 4)));
 			scrollPane.updateUI();
 		}
-		Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blockedUsers.txt");
 		CurvedButton button = new CurvedButton(command);
 		button.setBackground(Defaults.BUTTON);
 		button.setUI(defaultUI);
@@ -470,10 +469,6 @@ public class CommandSettings {
 
 	}
 
-	public static void setSettings(){
-
-	}
-
 	private static CheckboxButton createButton(String text, int y){
 		CheckboxButton button = new CheckboxButton(text);
 		button.setBounds(25,y,365,30);
@@ -484,5 +479,55 @@ public class CommandSettings {
 		button.refresh();
 		return button;
 	}
+	public static void refreshUI(){
+		panel.setBackground(Defaults.SUB_MAIN);
+		titlePanel.setBackground(Defaults.TOP);
+		defaultUI.setBackground(Defaults.BUTTON);
+		defaultUI.setHover(Defaults.BUTTON_HOVER);
+		defaultUI.setSelect(Defaults.SELECT);
+		commandLabel.setForeground(Defaults.FOREGROUND);
+		commandsPanel.setBackground(Defaults.SUB_MAIN);
+		commandPanelView.setBackground(Defaults.SUB_MAIN);
+		codeInput.setForeground(Defaults.FOREGROUND);
+		codeInput.setBackground(Defaults.MAIN);
+		codeInput.setCurrentLineHighlightColor(Defaults.BUTTON);
+		codePanel.getVerticalScrollBar().setUI(new ScrollbarUI());
+		codePanel.getHorizontalScrollBar().setUI(new ScrollbarUI());
+		backButton.setBackground(Defaults.BUTTON);
+		backButton.setForeground(Defaults.FOREGROUND);
+		for (Component component : commandsPanel.getComponents()) {
+			if (component instanceof JButton) {
+				for (Component component2 : ((JButton) component).getComponents()) {
+					if (component2 instanceof JLabel) {
+						component2.setForeground(Defaults.FOREGROUND);
+					}
+				}
+				component.setBackground(Defaults.BUTTON);
+			}
+			if (component instanceof JLabel) {
+				component.setForeground(Defaults.FOREGROUND);
 
+			}
+			if(component instanceof CheckboxButton){
+				((CheckboxButton) component).refresh();
+			}
+		}
+		for (Component component : commandPanelView.getComponents()) {
+			if (component instanceof JButton) {
+				for (Component component2 : ((JButton) component).getComponents()) {
+					if (component2 instanceof JLabel) {
+						component2.setForeground(Defaults.FOREGROUND);
+					}
+				}
+				component.setBackground(Defaults.BUTTON);
+			}
+			if (component instanceof JLabel) {
+				component.setForeground(Defaults.FOREGROUND);
+
+			}
+			if(component instanceof CheckboxButton){
+				((CheckboxButton) component).refresh();
+			}
+		}
+	}
 }
