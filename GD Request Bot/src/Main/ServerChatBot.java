@@ -186,8 +186,8 @@ public class ServerChatBot {
                 }
                 int cooldown = 0;
                 boolean coolExists = false;
-                if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/cooldown.txt"))) {
-                    Scanner sc3 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/cooldown.txt").toFile());
+                if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/cooldown.txt"))) {
+                    Scanner sc3 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/cooldown.txt").toFile());
                     while (sc3.hasNextLine()) {
                         String line = sc3.nextLine();
                         if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(com)) {
@@ -217,7 +217,7 @@ public class ServerChatBot {
                 }
                 if (cooldown > 0) {
                     String finalCom = com;
-                    int finalCooldown = cooldown;
+                    int finalCooldown = cooldown * 1000;
                     Thread thread = new Thread(() -> {
                         comCooldown.add(finalCom);
                         try {

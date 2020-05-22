@@ -1,2 +1,2 @@
-!queue = 20000
-!help = 10000
+!queue = 20
+!help = 10

@@ -4,6 +4,8 @@ import Main.*;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -25,6 +27,7 @@ public class CommandSettings {
 	private static double height = 0;
 	private static String command;
 	private static JLabel commandLabel = new JLabel();
+	private static JLabel sliderValue = new JLabel();
 	private static JPanel commandsPanel = new JPanel();
 	private static JScrollPane scrollPane = new JScrollPane(commandsPanel);
 	private static JPanel panel = new JPanel();
@@ -36,7 +39,7 @@ public class CommandSettings {
 	private static CheckboxButton modOnly = createButton("Mod Only", 320);
 	private static CheckboxButton whisper = createButton("Send as Whisper", 350);
 	private static RoundedJButton backButton = new RoundedJButton("\uE112");
-
+	private static JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 60, 0);
 	public static JPanel createPanel() {
 		codeInput.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
 
@@ -75,8 +78,95 @@ public class CommandSettings {
 		});
 		titlePanel.add(backButton);
 
+		sliderValue.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		sliderValue.setText("Cooldown: 0");
+		sliderValue.setForeground(Defaults.FOREGROUND);
+		sliderValue.setBounds(25,390,sliderValue.getPreferredSize().width+5, sliderValue.getPreferredSize().height + 5);
 
+		UIDefaults sliderDefaults = new UIDefaults();
 
+		sliderDefaults.put("Slider.thumbWidth", 20);
+		sliderDefaults.put("Slider.thumbHeight", 20);
+		sliderDefaults.put("Slider:SliderThumb.backgroundPainter", (Painter<JComponent>) (g, c, w, h) -> {
+			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			g.setStroke(new BasicStroke(2f));
+			g.setColor(Defaults.ACCENT);
+			g.fillOval(1, 1, w-3, h-3);
+			g.setColor(Defaults.MAIN);
+			g.drawOval(1, 1, w-4, h-4);
+		});
+		sliderDefaults.put("Slider:SliderTrack.backgroundPainter", (Painter<JComponent>) (g, c, w, h) -> {
+			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			g.setStroke(new BasicStroke(2f));
+			g.setColor(Defaults.BUTTON);
+			g.fillRoundRect(0, 6, w-1, 8, 8, 8);
+		});
+		sliderDefaults.put("Slider:SliderThumb[MouseOver].backgroundPainter", (Painter<JComponent>) (g, c, w, h) -> {
+			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			g.setStroke(new BasicStroke(2f));
+			g.setColor(Defaults.ACCENT);
+			g.fillOval(1, 1, w-3, h-3);
+			g.setColor(Defaults.TOP);
+			g.drawOval(1, 1, w-4, h-4);
+		});
+
+		slider.setMinorTickSpacing(1);
+		slider.setMinorTickSpacing(10);
+		slider.putClientProperty("Nimbus.Overrides",sliderDefaults);
+		slider.putClientProperty("Nimbus.Overrides.InheritDefaults",false);
+		slider.setBounds(25,410, 365,30);
+		slider.setBackground(Defaults.SUB_MAIN);
+		slider.setBorder(BorderFactory.createEmptyBorder());
+		slider.addChangeListener(e -> {
+			sliderValue.setText("Cooldown: " + slider.getValue());
+			sliderValue.setBounds(25,390,sliderValue.getPreferredSize().width+5, sliderValue.getPreferredSize().height + 5);
+		});
+		slider.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				try {
+					int cooldown = -1;
+					if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/cooldown.txt"))) {
+						Scanner sc3 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/cooldown.txt").toFile());
+						while (sc3.hasNextLine()) {
+							String line = sc3.nextLine();
+							if (line.split(" = ")[0].replace(" ", "").equalsIgnoreCase(command)) {
+								cooldown = Integer.parseInt(line.split("=")[1].replace(" ", ""));
+								break;
+							}
+						}
+						sc3.close();
+					}
+					else{
+						Files.createFile(Paths.get(System.getenv("APPDATA") + "/GDBoard/cooldown.txt"));
+					}
+					if(cooldown != -1) {
+						BufferedReader file = new BufferedReader(new FileReader(System.getenv("APPDATA") + "\\GDBoard\\cooldown.txt"));
+						StringBuilder inputBuffer = new StringBuilder();
+						String line;
+						while ((line = file.readLine()) != null) {
+							inputBuffer.append(line);
+							inputBuffer.append('\n');
+						}
+						file.close();
+
+						FileOutputStream fileOut = new FileOutputStream(System.getenv("APPDATA") + "\\GDBoard\\cooldown.txt");
+						fileOut.write(inputBuffer.toString().replace(command + " = " + cooldown, command + " = " + slider.getValue()).getBytes());
+						fileOut.close();
+					}
+					else{
+						BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(System.getenv("APPDATA") + "/GDBoard/cooldown.txt").toFile(), true));
+						writer.newLine();
+						writer.write((command + " = " + slider.getValue()));
+						writer.close();
+
+					}
+				}
+				catch (Exception f){
+					f.printStackTrace();
+				}
+			}
+		});
 		disable.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -229,7 +319,9 @@ public class CommandSettings {
 		commandPanelView.add(whisper);
 		commandPanelView.setBounds(0, 0, 415, 622);
 		commandPanelView.add(titlePanel);
+		commandPanelView.add(sliderValue);
 		commandPanelView.add(codePanel);
+		commandPanelView.add(slider);
 		commandPanelView.setBackground(Defaults.SUB_MAIN);
 		commandPanelView.setVisible(false);
 
@@ -428,6 +520,39 @@ public class CommandSettings {
 				}
 				sc.close();
 			}
+			int cooldown = 0;
+			boolean coolExists = false;
+			if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/cooldown.txt"))) {
+				Scanner sc3 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/cooldown.txt").toFile());
+				while (sc3.hasNextLine()) {
+					String line = sc3.nextLine();
+					if (line.split(" = ")[0].replace(" ", "").equalsIgnoreCase(command)) {
+						coolExists = true;
+						cooldown = Integer.parseInt(line.split(" = ")[1].replace(" ", ""));
+						break;
+					}
+				}
+				sc3.close();
+			}
+			if(!coolExists){
+				InputStream is = Main.class
+						.getClassLoader().getResourceAsStream("Resources/Commands/cooldown.txt");
+				assert is != null;
+				InputStreamReader isr = new InputStreamReader(is);
+				BufferedReader br = new BufferedReader(isr);
+				String line;
+				while ((line = br.readLine()) != null) {
+					if (line.split(" = ")[0].replace(" ", "").equalsIgnoreCase(command)) {
+						cooldown = Integer.parseInt(line.split( " = ")[1].replace(" ", ""));
+						break;
+					}
+				}
+				is.close();
+				isr.close();
+				br.close();
+			}
+
+			slider.setValue(cooldown);
 		}
 		catch (Exception f){
 			f.printStackTrace();
@@ -487,6 +612,7 @@ public class CommandSettings {
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
 		commandLabel.setForeground(Defaults.FOREGROUND);
+		sliderValue.setForeground(Defaults.FOREGROUND);
 		commandsPanel.setBackground(Defaults.SUB_MAIN);
 		commandPanelView.setBackground(Defaults.SUB_MAIN);
 		codeInput.setForeground(Defaults.FOREGROUND);
