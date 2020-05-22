@@ -119,7 +119,12 @@ public class InfoWindow {
 		label.setForeground(Defaults.FOREGROUND);
 		return label;
 	}
-	
+	public String getName(){
+		return "Information";
+	}
+	public String getIcon(){
+		return "\uE946";
+	}
 	public static void toggleVisible() {
 		((InnerWindow) window).toggle();
 	}

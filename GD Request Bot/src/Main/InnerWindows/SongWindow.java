@@ -131,7 +131,12 @@ public class SongWindow {
 		button.setFont(Defaults.SYMBOLS.deriveFont(20f));
 		return button;
 	}
-
+	public String getName(){
+		return "Music";
+	}
+	public String getIcon(){
+		return "\uEC4F";
+	}
 	public static void refreshInfo() {
 		if (Requests.levels.size() == 0) {
 			songName.setText("N/A");

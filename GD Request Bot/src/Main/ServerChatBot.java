@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-class ServerChatBot {
+public class ServerChatBot {
     static boolean processing = false;
     private static URI uri;
     static Path myPath;
@@ -25,7 +25,7 @@ class ServerChatBot {
         }
     }
 
-    static FileSystem fileSystem;
+    public static FileSystem fileSystem;
 
     static {
         try {
@@ -43,6 +43,7 @@ class ServerChatBot {
 
     private static ArrayList<String> comCooldown = new ArrayList<>();
     static void onMessage(String user, String message, boolean isMod, boolean isSub, int cheer) {
+        boolean whisper = false;
         processing = true;
         String com = message.split(" ")[0];
         String[] arguments = message.split(" ");
@@ -70,21 +71,89 @@ class ServerChatBot {
             try {
                 if (com.equalsIgnoreCase("!sudo") && (isMod || user.equalsIgnoreCase("Alphalaneous"))) {
                     if (arguments[2].startsWith("!")) {
-                        user = arguments[1];
+                        user = arguments[1].toLowerCase();
                         com = arguments[2];
                         arguments = Arrays.copyOfRange(arguments, 2, arguments.length);
                         isMod = true;
                         isSub = true;
                     }
                 }
-
-
+                if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/disable.txt"))) {
+                    Scanner sc2 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/disable.txt").toFile());
+                    while (sc2.hasNextLine()) {
+                        String line = sc2.nextLine();
+                        if (line.equalsIgnoreCase(com)) {
+							sc2.close();
+                            return;
+                        }
+                    }
+                    sc2.close();
+                }
+                if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/mod.txt"))) {
+                    Scanner sc2 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/mod.txt").toFile());
+                    while (sc2.hasNextLine()) {
+                        String line = sc2.nextLine();
+                        if (line.equalsIgnoreCase(com) && !isMod) {
+							sc2.close();
+							return;
+                        }
+                    }
+                    sc2.close();
+                }
+                else {
+                    InputStream is = Main.class
+                            .getClassLoader().getResourceAsStream("Resources/Commands/mod.txt");
+                    assert is != null;
+                    InputStreamReader isr = new InputStreamReader(is);
+                    BufferedReader br = new BufferedReader(isr);
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        if (line.equalsIgnoreCase(com) && !isMod) {
+							is.close();
+							isr.close();
+							br.close();
+                            return;
+                        }
+                    }
+					is.close();
+					isr.close();
+					br.close();
+                }
+                boolean whisperExists = false;
+                if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/whisper.txt"))) {
+                    Scanner sc2 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/whisper.txt").toFile());
+                    while (sc2.hasNextLine()) {
+                        String line = sc2.nextLine();
+                        if (line.equalsIgnoreCase(com)) {
+                            whisperExists = true;
+                            whisper = true;
+                            break;
+                        }
+                    }
+                    sc2.close();
+                }
+                if (!whisperExists) {
+                    InputStream is = Main.class
+                            .getClassLoader().getResourceAsStream("Resources/Commands/whisper.txt");
+                    assert is != null;
+                    InputStreamReader isr = new InputStreamReader(is);
+                    BufferedReader br = new BufferedReader(isr);
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        if (line.equalsIgnoreCase(com)) {
+                            whisper = true;
+                            break;
+                        }
+                    }
+                    is.close();
+                    isr.close();
+                    br.close();
+                }
                 boolean aliasesExist = false;
                 if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/aliases.txt"))) {
                     Scanner sc2 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/aliases.txt").toFile());
                     while (sc2.hasNextLine()) {
                         String line = sc2.nextLine();
-                        System.out.println(line);
                         if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(com)) {
                             aliasesExist = true;
                             com = line.split("=")[1].replace(" ", "");
@@ -101,7 +170,6 @@ class ServerChatBot {
                     BufferedReader br = new BufferedReader(isr);
                     String line;
                     while ((line = br.readLine()) != null) {
-                        System.out.println(line);
                         if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(com)) {
                             com = line.split("=")[1].replace(" ", "");
                             break;
@@ -122,7 +190,6 @@ class ServerChatBot {
                     Scanner sc3 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/cooldown.txt").toFile());
                     while (sc3.hasNextLine()) {
                         String line = sc3.nextLine();
-                        System.out.println(line);
                         if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(com)) {
                             coolExists = true;
                             cooldown = Integer.parseInt(line.split("=")[1].replace(" ", ""));
@@ -139,7 +206,6 @@ class ServerChatBot {
                     BufferedReader br = new BufferedReader(isr);
                     String line;
                     while ((line = br.readLine()) != null) {
-                        System.out.println(line);
                         if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(com)) {
                             cooldown = Integer.parseInt(line.split("=")[1].replace(" ", ""));
                             break;
@@ -183,7 +249,6 @@ class ServerChatBot {
 
                 if (!comExists) {
 
-
                     Stream<Path> walk = Files.walk(myPath, 1);
                     for (Iterator<Path> it = walk.iterator(); it.hasNext(); ) {
                         Path path = it.next();
@@ -214,7 +279,7 @@ class ServerChatBot {
                 e.printStackTrace();
             }
             if (response != null) {
-                Main.sendMessage(response);
+                Main.sendMessage(response, whisper, user);
             }
 
 

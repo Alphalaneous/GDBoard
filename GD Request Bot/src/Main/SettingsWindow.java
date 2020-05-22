@@ -5,8 +5,13 @@ import com.jidesoft.swing.ResizablePanel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Set;
 import javax.swing.*;
 import Main.SettingsPanels.*;
+import org.reflections.Reflections;
+import org.reflections.scanners.SubTypesScanner;
 
 public class SettingsWindow {
 	private static int width = 622;
@@ -81,7 +86,7 @@ public class SettingsWindow {
 		general.setUI(selectUI);
 		JButton outputs = createButton("Outputs");
 		JButton accounts = createButton("Accounts");
-		//JButton commands = createButton("Commands");
+		JButton commands = createButton("Commands");
 		JButton requests = createButton("Requests");
 		JButton shortcuts = createButton("Shortcuts");
 		JButton personalization = createButton("Personalization");
@@ -94,7 +99,7 @@ public class SettingsWindow {
 		buttons.add(general);
 		buttons.add(outputs);
 		buttons.add(accounts);
-		//buttons.add(commands);
+		buttons.add(commands);
 		buttons.add(requests);
 		buttons.add(shortcuts);
 		buttons.add(personalization);
@@ -241,6 +246,7 @@ public class SettingsWindow {
 						
 					}
 				}
+
 				button.setUI(selectUI);
 				button.setBackground(Defaults.SELECT);
 			}
