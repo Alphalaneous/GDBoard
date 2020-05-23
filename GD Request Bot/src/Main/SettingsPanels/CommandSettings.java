@@ -79,7 +79,7 @@ public class CommandSettings {
 		titlePanel.add(backButton);
 
 		sliderValue.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-		sliderValue.setText("Cooldown: 0");
+		sliderValue.setText("Cooldown: 0 seconds");
 		sliderValue.setForeground(Defaults.FOREGROUND);
 		sliderValue.setBounds(25,390,sliderValue.getPreferredSize().width+5, sliderValue.getPreferredSize().height + 5);
 
@@ -118,8 +118,15 @@ public class CommandSettings {
 		slider.setBackground(Defaults.SUB_MAIN);
 		slider.setBorder(BorderFactory.createEmptyBorder());
 		slider.addChangeListener(e -> {
-			sliderValue.setText("Cooldown: " + slider.getValue());
-			sliderValue.setBounds(25,390,sliderValue.getPreferredSize().width+5, sliderValue.getPreferredSize().height + 5);
+			if(slider.getValue() == 1){
+				sliderValue.setText("Cooldown: " + slider.getValue() + " second");
+
+			}
+			else {
+				sliderValue.setText("Cooldown: " + slider.getValue() + " seconds");
+			}
+			sliderValue.setBounds(25, 390, sliderValue.getPreferredSize().width + 5, sliderValue.getPreferredSize().height + 5);
+
 		});
 		slider.addMouseListener(new MouseAdapter() {
 			@Override

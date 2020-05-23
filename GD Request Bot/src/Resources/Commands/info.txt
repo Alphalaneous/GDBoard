@@ -1,7 +1,7 @@
 !request = Used to send requests | Usage: "!request <Level ID>" to send via level ID | "!request <Level Name>" to send via level name | "!request <Level Name> by <User>" to send via level name by a user.
 !position = Used to find your position in the queue | Usage: "!position" to get closest in the queue | "!position <Number>" to get a specific position
 !id = Used to find the current level's ID | Usage: "!ID"
-!difficulty = Used to find the current level's difficulty Usage: \"!difficulty\"
+!difficulty = Used to find the current level's difficulty Usage: "!difficulty"
 !song = Used to find the current level's song information | Usage: "!song"
 !likes = Used to find the current level's like count | Usage: "!likes"
 !downloads = Used to find the current level's download count | Usage: "!count"
@@ -12,3 +12,4 @@
 !clear = Used to clear the queue | Usage: "!clear"
 !unblock = Used to unblock a level ID | Usage: "!unblock <Level ID>" to unblock a specific ID
 !unblockUser = Used to unblock a user | Usage: "!unblockuser <Username>" to unblock a specific user
+!help = Used to get help | Usage: "!help" to get help | "!help <command>" to get command help

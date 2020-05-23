@@ -211,7 +211,7 @@ public class Main {
 			doMessage = true;
 			allowRequests = true;
 			doImage = true;
-			Main.sendMessage("Thank you for using GDBoard by Alphalaneous and TreeHouseFalcon! Type !help for list of commands!");
+			Main.sendMessage("Thank you for using GDBoard by Alphalaneous and TreehouseFalcon! It is suggested to VIP or Mod GDBoard to prevent chat limits from occurring.");
 			Thread thread = new Thread(() -> {
 				while(true){
 					try {
