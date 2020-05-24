@@ -13,7 +13,7 @@ import java.awt.event.MouseEvent;
 public class InnerWindow extends ResizablePanel {
 
 	private static final long serialVersionUID = 1L;
-	private final String title;
+	private String title;
 	private double x;
 	private double y;
 	private int width;
@@ -30,6 +30,8 @@ public class InnerWindow extends ResizablePanel {
 	private JPanel topBar = new JPanel(null);
 	private JLabel windowIcon = new JLabel();
 	private JButtonUI defaultUI = new JButtonUI();
+	private JLabel titleText = new JLabel();
+
 
 	//region Constructor for InnerWindow
 	public InnerWindow(final String title, final int x, final int y, final int width, final int height, final String icon, boolean floating) {
@@ -123,7 +125,7 @@ public class InnerWindow extends ResizablePanel {
 				if(title.equalsIgnoreCase("Settings")) {
 					SettingsWindow.frame.setLocation((int) x, (int) y);
 				}
-				if(title.equalsIgnoreCase("GDBoard")){
+				if(title.startsWith("GDBoard")){
 					Windowed.frame.setLocation((int) x, (int) y);
 				}
 				if(title.equalsIgnoreCase("Startup")){
@@ -201,7 +203,7 @@ public class InnerWindow extends ResizablePanel {
 					if(title.equalsIgnoreCase("Settings")) {
 						location = SettingsWindow.frame.getLocation();
 					}
-					if(title.equalsIgnoreCase("GDBoard")){
+					if(title.startsWith("GDBoard")){
 						location = Windowed.frame.getLocation();
 					}
 					if(title.equalsIgnoreCase("Startup")){
@@ -284,7 +286,7 @@ public class InnerWindow extends ResizablePanel {
 					if(title.equalsIgnoreCase("Settings")) {
 						SettingsWindow.frame.setLocation(p);
 					}
-					if(title.equalsIgnoreCase("GDBoard")){
+					if(title.startsWith("GDBoard")){
 						Windowed.frame.setLocation(p);
 					}
 					if(title.equalsIgnoreCase("Startup")){
@@ -333,7 +335,7 @@ public class InnerWindow extends ResizablePanel {
 		//endregion
 
 		//region TitleText attributes and initialization
-		JLabel titleText = new JLabel(title);
+		titleText.setText(title);
 		titleText.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		titleText.setBounds(35, 2, width - 60, 30);
 		titleText.setForeground(Defaults.FOREGROUND);
@@ -362,7 +364,7 @@ public class InnerWindow extends ResizablePanel {
 					if(title.equalsIgnoreCase("Settings")) {
 						SettingsWindow.toggleVisible();
 					}
-					if(title.equalsIgnoreCase("GDBoard")){
+					if(title.startsWith("GDBoard")){
 						Windowed.toggleVisible();
 					}
 					if(title.equalsIgnoreCase("Startup")){
@@ -473,7 +475,11 @@ public class InnerWindow extends ResizablePanel {
 		}
 	}
 	//endregion
-
+	public void setTitle(String name){
+		this.title = name;
+		titleText.setText(name);
+		topBar.updateUI();
+	}
 	//region Mouse Listener Refresh for Moving Window to Top
 	public void refreshListener() {
 		for (Component component : getComponents()) {
@@ -637,7 +643,7 @@ public class InnerWindow extends ResizablePanel {
 				if(title.equalsIgnoreCase("Settings")) {
 					SettingsWindow.frame.setVisible(false);
 				}
-				if(title.equalsIgnoreCase("GDBoard")){
+				if(title.startsWith("GDBoard")){
 					Windowed.frame.setVisible(false);
 					Main.close();
 				}
@@ -667,7 +673,7 @@ public class InnerWindow extends ResizablePanel {
 					Onboarding.frame.setVisible(false);
 					Main.close();
 				}
-				if(title.equalsIgnoreCase("GDBoard")){
+				if(title.startsWith("GDBoard")){
 					Main.close();
 				}
 			}

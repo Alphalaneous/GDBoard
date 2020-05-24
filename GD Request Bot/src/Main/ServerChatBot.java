@@ -78,6 +78,36 @@ public class ServerChatBot {
                         isSub = true;
                     }
                 }
+                boolean aliasesExist = false;
+                if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/aliases.txt"))) {
+                    Scanner sc2 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/aliases.txt").toFile());
+                    while (sc2.hasNextLine()) {
+                        String line = sc2.nextLine();
+                        if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(com)) {
+                            aliasesExist = true;
+                            com = line.split("=")[1].replace(" ", "");
+                            break;
+                        }
+                    }
+                    sc2.close();
+                }
+                if (!aliasesExist) {
+                    InputStream is = Main.class
+                            .getClassLoader().getResourceAsStream("Resources/Commands/aliases.txt");
+                    assert is != null;
+                    InputStreamReader isr = new InputStreamReader(is);
+                    BufferedReader br = new BufferedReader(isr);
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(com)) {
+                            com = line.split("=")[1].replace(" ", "");
+                            break;
+                        }
+                    }
+                    is.close();
+                    isr.close();
+                    br.close();
+                }
                 if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/disable.txt"))) {
                     Scanner sc2 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/disable.txt").toFile());
                     while (sc2.hasNextLine()) {
@@ -149,36 +179,7 @@ public class ServerChatBot {
                     isr.close();
                     br.close();
                 }
-                boolean aliasesExist = false;
-                if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/aliases.txt"))) {
-                    Scanner sc2 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/aliases.txt").toFile());
-                    while (sc2.hasNextLine()) {
-                        String line = sc2.nextLine();
-                        if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(com)) {
-                            aliasesExist = true;
-                            com = line.split("=")[1].replace(" ", "");
-                            break;
-                        }
-                    }
-                    sc2.close();
-                }
-                if (!aliasesExist) {
-                    InputStream is = Main.class
-                            .getClassLoader().getResourceAsStream("Resources/Commands/aliases.txt");
-                    assert is != null;
-                    InputStreamReader isr = new InputStreamReader(is);
-                    BufferedReader br = new BufferedReader(isr);
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(com)) {
-                            com = line.split("=")[1].replace(" ", "");
-                            break;
-                        }
-                    }
-                    is.close();
-                    isr.close();
-                    br.close();
-                }
+
                 if (comCooldown.contains(com)) {
                     System.out.println("cooldown");
                     processing = false;

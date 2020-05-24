@@ -275,7 +275,7 @@ public class Requests {
 				e.printStackTrace();
 			}
 			LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester(), levelData.getVersion());
-
+			LevelsWindow.setName(Requests.levels.size());
 		} else {
 			Main.sendMessage("@" + requester + " Requests are off!");
 		}

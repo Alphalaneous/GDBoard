@@ -139,6 +139,14 @@ public class LevelsWindow {
 			setOneSelect();
 		}
 	}
+	public static void setName(int count){
+		if(Settings.windowedMode){
+			((InnerWindow) Windowed.window).setTitle("GDBoard - " + count);
+		}
+		else {
+			((InnerWindow) window).setTitle("Requests - " + count);
+		}
+	}
 	public static class LevelButton extends JButton{
 
 		String name;
@@ -366,6 +374,7 @@ public class LevelsWindow {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
+
 		public String getID(){
 			return ID;
 		}
