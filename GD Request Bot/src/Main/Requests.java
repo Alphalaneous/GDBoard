@@ -379,6 +379,16 @@ public class Requests {
 			e.printStackTrace();
 		}
 	}
+	public static void crash(){
+		try {
+			ProcessBuilder pb = new ProcessBuilder("taskkill", "/IM", "GeometryDash.exe", "/F").redirectErrorStream(true);
+			pb.start();
+
+		}
+		catch (IOException e){
+			e.printStackTrace();
+		}
+	}
 
 	@SuppressWarnings("unused")
 	public static void toggleRequests(){
