@@ -72,6 +72,7 @@ public class Functions {
 
 		SongWindow.refreshInfo();
 		InfoWindow.refreshInfo();
+		LevelsWindow.setName(Requests.levels.size());
 	}
 
 	public static void randomFunction(){
@@ -118,6 +119,7 @@ public class Functions {
 		OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, num));
 		SongWindow.refreshInfo();
 		InfoWindow.refreshInfo();
+		LevelsWindow.setName(Requests.levels.size());
 	}
 
 	public static void copyFunction() {
@@ -196,6 +198,7 @@ public class Functions {
 			SettingsWindow.run = true;
 		}
 		LevelsWindow.setOneSelect();
+		LevelsWindow.setName(Requests.levels.size());
 	}
 
 	public static void clearFunction() {
@@ -238,6 +241,7 @@ public class Functions {
 			LevelsWindow.setOneSelect();
 			SettingsWindow.run = true;
 		}
+		LevelsWindow.setName(Requests.levels.size());
 	}
 
 	static void requestsToggleFunction() {

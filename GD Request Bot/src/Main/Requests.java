@@ -381,14 +381,8 @@ public class Requests {
 	}
 
 	@SuppressWarnings("unused")
-	public static String toggleRequests(String user){
+	public static void toggleRequests(){
 		Functions.requestsToggleFunction();
-		if(MainBar.requests) {
-			return "@" + user + " requests are now on";
-		}
-		else{
-			return "@" + user + " requests are now on";
-		}
 	}
 
 	@SuppressWarnings("unused")
@@ -402,6 +396,7 @@ public class Requests {
 		SongWindow.refreshInfo();
 		InfoWindow.refreshInfo();
 		CommentsWindow.unloadComments(true);
+		LevelsWindow.setName(Requests.levels.size());
 	}
 	public static String remove(String user, boolean isMod, int intArg){
 		String response = "";
@@ -431,6 +426,7 @@ public class Requests {
 			} catch (Exception ignored) {
 			}
 		}
+		LevelsWindow.setName(Requests.levels.size());
 		return response;
 	}
 	private static Thread rickThread = null;
