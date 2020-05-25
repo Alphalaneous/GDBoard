@@ -216,7 +216,6 @@ public class Requests {
 				Object object = Objects.requireNonNull(client.getLevelById(Long.parseLong(ID)).block()).download().block();
 				if (!(level.getStars() > 0) && level.getGameVersion() / 10 >= 2) {
 					parse(((GDLevelData) Objects.requireNonNull(object)).getData(), ID);
-					LevelsWindow.updateUI(levelData.getLevelID(), levelData.getContainsVulgar(), levelData.getContainsImage(), levelData.getAnalyzed());
 				}
 				levelData.setPassword(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getPass()));
 
@@ -224,6 +223,8 @@ public class Requests {
 			parse.start();
 
 			levels.add(levelData);
+			LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester(), levelData.getVersion());
+			LevelsWindow.setName(Requests.levels.size());
 			Functions.saveFunction();
 			if(Main.doMessage) {
 				Main.sendMessage("@" + levelData.getRequester() + " " + levelData.getName() + " ("
@@ -274,8 +275,7 @@ public class Requests {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester(), levelData.getVersion());
-			LevelsWindow.setName(Requests.levels.size());
+
 		} else {
 			Main.sendMessage("@" + requester + " Requests are off!");
 		}
@@ -907,18 +907,21 @@ public class Requests {
 							color = tempColor;
 						} catch (IOException e) {
 							e.printStackTrace();
-							LevelsWindow.updateUI(Requests.getLevelData().get(k).getLevelID(), Requests.getLevelData().get(k).getContainsVulgar(), Requests.getLevelData().get(k).getContainsImage(), false);
 							break all;
 						}
 					}
 				}
-				Requests.getLevelData().get(k).setAnalyzed();
+				try {
+					Requests.getLevelData().get(k).setAnalyzed();
+					LevelsWindow.updateUI(Requests.getLevelData().get(k).getLevelID(), Requests.getLevelData().get(k).getContainsVulgar(), Requests.getLevelData().get(k).getContainsImage(), true);
+				}
+				catch (IndexOutOfBoundsException ignored){
+				}
 				try {
 					Thread.sleep(250);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				LevelsWindow.updateUI(Requests.getLevelData().get(k).getLevelID(), Requests.getLevelData().get(k).getContainsVulgar(), Requests.getLevelData().get(k).getContainsImage(), true);
 				System.out.println("Analyzed " + k);
 			}
 		}

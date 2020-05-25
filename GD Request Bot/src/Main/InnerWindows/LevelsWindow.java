@@ -411,7 +411,7 @@ public class LevelsWindow {
 			else if(analyzed) {
 				lAnalyzed.setText("Analyzed");
 			}
-			else {
+			else{
 				lAnalyzed.setText("Failed Analyzing");
 			}
 			lAnalyzed.setBounds((int) (400 - lAnalyzed.getPreferredSize().getWidth()) - 10, 28,
@@ -447,7 +447,7 @@ public class LevelsWindow {
 				setUI(defaultUI);
 			}
 		}
-		public void refresh(boolean analyzed, boolean image, boolean vulgar){
+		public void refresh(boolean image, boolean vulgar){
 			for (Component component : getComponents()) {
 				if (component instanceof JLabel) {
 					component.setForeground(Defaults.FOREGROUND);
@@ -465,6 +465,7 @@ public class LevelsWindow {
 					setBackground(Defaults.MAIN);
 					setUI(selectUI);
 				}
+				select();
 			}
 			else {
 				if (image) {
@@ -498,6 +499,7 @@ public class LevelsWindow {
 					setBackground(Defaults.MAIN);
 					setUI(selectUI);
 				}
+				select();
 			}
 			else {
 				if (image) {
@@ -597,13 +599,13 @@ public class LevelsWindow {
 	}
 
 	public static void updateUI(String ID, boolean vulgar, boolean image, boolean analyzed) {
-		for(int i = 0; i < 10; i++) {
+		out: while(true){
 			for (Component component : mainPanel.getComponents()) {
 				if (component instanceof LevelButton) {
 					if (((LevelButton) component).ID.equalsIgnoreCase(ID)) {
 						((LevelButton) component).setAnalyzed(analyzed, image, vulgar);
-						((LevelButton) component).refresh(analyzed, image, vulgar);
-						break;
+						((LevelButton) component).refresh(image, vulgar);
+						break out;
 					}
 				}
 			}
