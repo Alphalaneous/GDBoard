@@ -14,7 +14,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/ServerChatBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/ServerChatBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -58,22 +58,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/SettingsWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="14994">
-              <caret line="923" column="17" selection-start-line="923" selection-start-column="17" selection-end-line="923" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/InnerWindows/CommentsWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3825">
-              <caret line="254" column="5" selection-start-line="249" selection-start-column="4" selection-end-line="254" selection-end-column="5" />
+            <state relative-caret-position="229">
+              <caret line="199" column="61" selection-start-line="199" selection-start-column="61" selection-end-line="199" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -93,8 +81,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/ServerChatBot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="282" column="69" lean-forward="true" selection-start-line="282" selection-start-column="69" selection-end-line="282" selection-end-column="69" />
+            <state relative-caret-position="233">
+              <caret line="126" column="59" selection-start-line="126" selection-start-column="59" selection-end-line="126" selection-end-column="59" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-560">
+              <caret line="227" column="27" selection-start-line="227" selection-start-column="27" selection-end-line="227" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -243,7 +243,6 @@
         <option value="$PROJECT_DIR$/src/Resources/Commands/cooldown.txt" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/info.txt" />
         <option value="$PROJECT_DIR$/src/Main/Main.java" />
-        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/InnerWindow.java" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/!toggle.js" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/!kill.js" />
@@ -251,6 +250,7 @@
         <option value="$PROJECT_DIR$/src/Main/Functions.java" />
         <option value="$PROJECT_DIR$/src/Main/Requests.java" />
         <option value="$PROJECT_DIR$/src/Main/ServerChatBot.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java" />
         <option value="$PROJECT_DIR$/src/.version" />
       </list>
     </option>
@@ -776,16 +776,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="199" column="61" selection-start-line="199" selection-start-column="61" selection-end-line="199" selection-end-column="61" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/BlockedSettings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="121">
@@ -951,16 +941,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1700">
-          <caret line="121" column="79" selection-start-line="121" selection-start-column="79" selection-end-line="121" selection-end-column="79" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Resources/Commands/cooldown.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -1088,10 +1068,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="199" column="61" selection-start-line="199" selection-start-column="61" selection-end-line="199" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/ServerChatBot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="282" column="69" lean-forward="true" selection-start-line="282" selection-start-column="69" selection-end-line="282" selection-end-column="69" />
+        <state relative-caret-position="233">
+          <caret line="126" column="59" selection-start-line="126" selection-start-column="59" selection-end-line="126" selection-end-column="59" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-560">
+          <caret line="227" column="27" selection-start-line="227" selection-start-column="27" selection-end-line="227" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

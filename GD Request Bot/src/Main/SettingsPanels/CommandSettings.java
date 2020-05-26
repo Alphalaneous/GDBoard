@@ -225,7 +225,7 @@ public class CommandSettings {
 		modOnly.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (disable.getSelectedState()) {
+				if (modOnly.getSelectedState()) {
 					Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\mod.txt");
 					try {
 						if (!Files.exists(file)) {
