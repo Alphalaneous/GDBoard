@@ -45,6 +45,7 @@ public class ServerChatBot {
     static void onMessage(String user, String message, boolean isMod, boolean isSub, int cheer) {
         boolean whisper = false;
         processing = true;
+        boolean goThrough = true;
         String com = message.split(" ")[0];
         String[] arguments = message.split(" ");
         String response = "";
@@ -113,8 +114,8 @@ public class ServerChatBot {
                     while (sc2.hasNextLine()) {
                         String line = sc2.nextLine();
                         if (line.equalsIgnoreCase(com)) {
-							sc2.close();
-                            return;
+                            goThrough = false;
+                            break;
                         }
                     }
                     sc2.close();
@@ -124,9 +125,8 @@ public class ServerChatBot {
                     while (sc2.hasNextLine()) {
                         String line = sc2.nextLine();
                         if (line.equalsIgnoreCase(com) && !isMod) {
-							sc2.close();
-                            processing = false;
-                            return;
+                            goThrough = false;
+                            break;
                         }
                     }
                     sc2.close();
@@ -140,152 +140,149 @@ public class ServerChatBot {
                     String line;
                     while ((line = br.readLine()) != null) {
                         if (line.equalsIgnoreCase(com) && !isMod) {
-							is.close();
-							isr.close();
-							br.close();
-                            processing = false;
-                            return;
+                            goThrough = false;
+                            break;
                         }
                     }
 					is.close();
 					isr.close();
 					br.close();
                 }
-                boolean whisperExists = false;
-                if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/whisper.txt"))) {
-                    Scanner sc2 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/whisper.txt").toFile());
-                    while (sc2.hasNextLine()) {
-                        String line = sc2.nextLine();
-                        if (line.equalsIgnoreCase(com)) {
-                            whisperExists = true;
-                            whisper = true;
-                            break;
-                        }
-                    }
-                    sc2.close();
-                }
-                if (!whisperExists) {
-                    InputStream is = Main.class
-                            .getClassLoader().getResourceAsStream("Resources/Commands/whisper.txt");
-                    assert is != null;
-                    InputStreamReader isr = new InputStreamReader(is);
-                    BufferedReader br = new BufferedReader(isr);
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        if (line.equalsIgnoreCase(com)) {
-                            whisper = true;
-                            break;
-                        }
-                    }
-                    is.close();
-                    isr.close();
-                    br.close();
-                }
-
-                if (comCooldown.contains(com)) {
-                    System.out.println("cooldown");
-                    processing = false;
-                    return;
-                }
-                int cooldown = 0;
-                boolean coolExists = false;
-                if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/cooldown.txt"))) {
-                    Scanner sc3 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/cooldown.txt").toFile());
-                    while (sc3.hasNextLine()) {
-                        String line = sc3.nextLine();
-                        if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(com)) {
-                            coolExists = true;
-                            cooldown = Integer.parseInt(line.split("=")[1].replace(" ", ""));
-                            break;
-                        }
-                    }
-                    sc3.close();
-                }
-                if (!coolExists) {
-                    InputStream is = Main.class
-                            .getClassLoader().getResourceAsStream("Resources/Commands/cooldown.txt");
-                    assert is != null;
-                    InputStreamReader isr = new InputStreamReader(is);
-                    BufferedReader br = new BufferedReader(isr);
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(com)) {
-                            cooldown = Integer.parseInt(line.split("=")[1].replace(" ", ""));
-                            break;
-                        }
-                    }
-                    is.close();
-                    isr.close();
-                    br.close();
-                }
-                if (cooldown > 0) {
-                    String finalCom = com;
-                    int finalCooldown = cooldown * 1000;
-                    Thread thread = new Thread(() -> {
-                        comCooldown.add(finalCom);
-                        try {
-                            Thread.sleep(finalCooldown);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        comCooldown.remove(finalCom);
-                    });
-                    thread.start();
-                }
-                boolean comExists = false;
-
-
-                Path comPath = Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/");
-                if (Files.exists(comPath)) {
-                    Stream<Path> walk1 = Files.walk(comPath, 1);
-                    for (Iterator<Path> it = walk1.iterator(); it.hasNext(); ) {
-                        Path path = it.next();
-                        String[] file = path.toString().split("\\\\");
-                        String fileName = file[file.length - 1];
-                        if (fileName.equalsIgnoreCase(com + ".js")) {
-                            comExists = true;
-                            response = Command.run(user, isMod, isSub, arguments, Files.readString(path, StandardCharsets.UTF_8), cheer);
-
-                        }
-                    }
-                }
-
-                if (!comExists) {
-
-                    Stream<Path> walk = Files.walk(myPath, 1);
-                    for (Iterator<Path> it = walk.iterator(); it.hasNext(); ) {
-                        Path path = it.next();
-                        String[] file = path.toString().split("/");
-                        String fileName = file[file.length - 1];
-                        System.out.println(path.toString());
-                        if (fileName.equalsIgnoreCase(com + ".js")) {
-
-                            InputStream is = Main.class
-                                    .getClassLoader().getResourceAsStream(path.toString().substring(1));
-                            assert is != null;
-                            InputStreamReader isr = new InputStreamReader(is);
-                            BufferedReader br = new BufferedReader(isr);
-                            StringBuilder function = new StringBuilder();
-                            String line;
-                            while ((line = br.readLine()) != null) {
-                                function.append(line);
+                if(goThrough) {
+                    boolean whisperExists = false;
+                    if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/whisper.txt"))) {
+                        Scanner sc2 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/whisper.txt").toFile());
+                        while (sc2.hasNextLine()) {
+                            String line = sc2.nextLine();
+                            if (line.equalsIgnoreCase(com)) {
+                                whisperExists = true;
+                                whisper = true;
+                                break;
                             }
-                            is.close();
-                            isr.close();
-                            br.close();
-                            response = Command.run(user, isMod, isSub, arguments, function.toString(), cheer);
-                            break;
+                        }
+                        sc2.close();
+                    }
+                    if (!whisperExists) {
+                        InputStream is = Main.class
+                                .getClassLoader().getResourceAsStream("Resources/Commands/whisper.txt");
+                        assert is != null;
+                        InputStreamReader isr = new InputStreamReader(is);
+                        BufferedReader br = new BufferedReader(isr);
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            if (line.equalsIgnoreCase(com)) {
+                                whisper = true;
+                                break;
+                            }
+                        }
+                        is.close();
+                        isr.close();
+                        br.close();
+                    }
+
+                    if (comCooldown.contains(com)) {
+                        System.out.println("cooldown");
+                        processing = false;
+                        return;
+                    }
+                    int cooldown = 0;
+                    boolean coolExists = false;
+                    if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/cooldown.txt"))) {
+                        Scanner sc3 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/cooldown.txt").toFile());
+                        while (sc3.hasNextLine()) {
+                            String line = sc3.nextLine();
+                            if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(com)) {
+                                coolExists = true;
+                                cooldown = Integer.parseInt(line.split("=")[1].replace(" ", ""));
+                                break;
+                            }
+                        }
+                        sc3.close();
+                    }
+                    if (!coolExists) {
+                        InputStream is = Main.class
+                                .getClassLoader().getResourceAsStream("Resources/Commands/cooldown.txt");
+                        assert is != null;
+                        InputStreamReader isr = new InputStreamReader(is);
+                        BufferedReader br = new BufferedReader(isr);
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(com)) {
+                                cooldown = Integer.parseInt(line.split("=")[1].replace(" ", ""));
+                                break;
+                            }
+                        }
+                        is.close();
+                        isr.close();
+                        br.close();
+                    }
+                    if (cooldown > 0) {
+                        String finalCom = com;
+                        int finalCooldown = cooldown * 1000;
+                        Thread thread = new Thread(() -> {
+                            comCooldown.add(finalCom);
+                            try {
+                                Thread.sleep(finalCooldown);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            comCooldown.remove(finalCom);
+                        });
+                        thread.start();
+                    }
+                    boolean comExists = false;
+
+
+                    Path comPath = Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/");
+                    if (Files.exists(comPath)) {
+                        Stream<Path> walk1 = Files.walk(comPath, 1);
+                        for (Iterator<Path> it = walk1.iterator(); it.hasNext(); ) {
+                            Path path = it.next();
+                            String[] file = path.toString().split("\\\\");
+                            String fileName = file[file.length - 1];
+                            if (fileName.equalsIgnoreCase(com + ".js")) {
+                                comExists = true;
+                                response = Command.run(user, isMod, isSub, arguments, Files.readString(path, StandardCharsets.UTF_8), cheer);
+
+                            }
+                        }
+                    }
+
+                    if (!comExists) {
+
+                        Stream<Path> walk = Files.walk(myPath, 1);
+                        for (Iterator<Path> it = walk.iterator(); it.hasNext(); ) {
+                            Path path = it.next();
+                            String[] file = path.toString().split("/");
+                            String fileName = file[file.length - 1];
+                            System.out.println(path.toString());
+                            if (fileName.equalsIgnoreCase(com + ".js")) {
+
+                                InputStream is = Main.class
+                                        .getClassLoader().getResourceAsStream(path.toString().substring(1));
+                                assert is != null;
+                                InputStreamReader isr = new InputStreamReader(is);
+                                BufferedReader br = new BufferedReader(isr);
+                                StringBuilder function = new StringBuilder();
+                                String line;
+                                while ((line = br.readLine()) != null) {
+                                    function.append(line);
+                                }
+                                is.close();
+                                isr.close();
+                                br.close();
+                                response = Command.run(user, isMod, isSub, arguments, function.toString(), cheer);
+                                break;
+                            }
                         }
                     }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (response != null) {
+            if (response != null && !response.equalsIgnoreCase("")) {
                 Main.sendMessage(response, whisper, user);
             }
-
-
         }
         processing = false;
     }
