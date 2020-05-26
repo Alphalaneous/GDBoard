@@ -125,7 +125,8 @@ public class ServerChatBot {
                         String line = sc2.nextLine();
                         if (line.equalsIgnoreCase(com) && !isMod) {
 							sc2.close();
-							return;
+                            processing = false;
+                            return;
                         }
                     }
                     sc2.close();
@@ -142,6 +143,7 @@ public class ServerChatBot {
 							is.close();
 							isr.close();
 							br.close();
+                            processing = false;
                             return;
                         }
                     }
