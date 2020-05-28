@@ -20,7 +20,6 @@ public class Defaults {
 			screenNum = Integer.parseInt(Settings.getSettings("monitor"));
 		} catch (Exception e) {
 			screenNum = 0;
-			e.printStackTrace();
 		}
 	}
 
