@@ -1,6 +1,8 @@
 package Main;
 
+import Main.InnerWindows.LevelsWindow;
 import Main.SettingsPanels.AccountSettings;
+import com.cavariux.twitchirc.Json.JsonArray;
 import com.cavariux.twitchirc.Json.JsonObject;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
@@ -11,6 +13,7 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class APIs {
@@ -42,7 +45,49 @@ public class APIs {
 
         return info;
     }*/
+	static void getViewers(){
+		Thread thread = new Thread(() -> {
+			while(true) {
+				try {
+					URL url = new URL("https://tmi.twitch.tv/group/user/" + Settings.getSettings("channel").toLowerCase() + "/chatters");
+					URLConnection conn = url.openConnection();
+					BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+					StringBuilder builder = new StringBuilder();
+					String x;
+					while ((x = br.readLine()) != null) {
+						builder.append(x).append("\n");
+					}
+					JsonObject viewers = JsonObject.readFrom(builder.toString());
+					String[] types = {"broadcaster", "vips", "staff", "moderators", "admins", "global_mods", "viewers"};
+					for(int i = 0; i < Requests.levels.size(); i++){
+						LevelsWindow.getButton(i).setViewership(false);
+					}
+					for (String type : types) {
+						JsonArray viewerList = viewers.get("chatters").asObject().get(type).asArray();
+						for (int i = 0; i < viewerList.size(); i++) {
+							String viewer = viewerList.get(i).asString().replaceAll("\"", "");
+							System.out.println(viewer);
 
+							for(int k = 0; k < Requests.levels.size(); k++) {
+								System.out.println("R: " + LevelsWindow.getButton(k).getRequester());
+								if (LevelsWindow.getButton(k).getRequester().equalsIgnoreCase(viewer)){
+									LevelsWindow.getButton(k).setViewership(true);
+								}
+							}
+						}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				try {
+					Thread.sleep(120000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		thread.start();
+	}
 	static boolean isNotFollowing(String user) {
 
 

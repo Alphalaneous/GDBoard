@@ -64,7 +64,7 @@ public class Windowed {
 
 		//region Create Random Button
 
-		JButton randNext = createButton("\uE897");
+		JButton randNext = createButton("\uF158");
 		randNext.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {

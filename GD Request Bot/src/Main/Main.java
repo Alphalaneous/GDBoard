@@ -208,6 +208,7 @@ public class Main {
 				sc.close();
 			}
 			Requests.addedLevels.clear();
+			APIs.getViewers();
 			doMessage = true;
 			allowRequests = true;
 			doImage = true;

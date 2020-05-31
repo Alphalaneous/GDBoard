@@ -147,6 +147,11 @@ public class LevelsWindow {
 			((InnerWindow) window).setTitle("Requests - " + count);
 		}
 	}
+
+	public static LevelButton getButton(int i) {
+		return ((LevelButton) mainPanel.getComponent(i));
+	}
+
 	public static class LevelButton extends JButton{
 
 		String name;
@@ -374,7 +379,8 @@ public class LevelsWindow {
 				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
-
+		public boolean viewership = false;
+		public int gonePoints = 3;
 		public String getID(){
 			return ID;
 		}
@@ -382,7 +388,7 @@ public class LevelsWindow {
 			return name;
 		}
 		public String getRequester(){
-			return name;
+			return requester;
 		}
 		public boolean getAnalyzed(){
 			return analyzed;
@@ -392,6 +398,21 @@ public class LevelsWindow {
 		}
 		public boolean getVulgar(){
 			return vulgar;
+		}
+		public void setViewership(boolean viewer){
+			if(viewer){
+				lRequester.setForeground(Defaults.FOREGROUND);
+				viewership = true;
+				gonePoints = 3;
+			}
+			else{
+				gonePoints = gonePoints - 1;
+				if(gonePoints == 0){
+					lRequester.setForeground(Color.RED);
+					viewership = false;
+					gonePoints = 0;
+				}
+			}
 		}
 		public void setAnalyzed(boolean analyzed, boolean image, boolean vulgar){
 			this.analyzed = analyzed;
