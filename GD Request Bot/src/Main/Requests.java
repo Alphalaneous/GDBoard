@@ -59,71 +59,72 @@ public class Requests {
 		if (MainBar.requests) {
 			Path blocked = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
 			Path logged = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\requestsLog.txt");
-
-			try {
-				if (Files.exists(blocked)) {
-					Scanner sc = new Scanner(blocked.toFile());
-					while (sc.hasNextLine()) {
-						if (ID.equals(sc.nextLine())) {
-							sc.close();
-							Main.sendMessage("@" + requester + " That Level is Blocked!");
-							return;
+			if(Main.loaded) {
+				try {
+					if (Files.exists(blocked)) {
+						Scanner sc = new Scanner(blocked.toFile());
+						while (sc.hasNextLine()) {
+							if (ID.equals(sc.nextLine())) {
+								sc.close();
+								Main.sendMessage("@" + requester + " That Level is Blocked!");
+								return;
+							}
 						}
+						sc.close();
 					}
-					sc.close();
-				}
-				if(Files.exists(logged) && GeneralSettings.repeatedOptionAll && Main.loaded){
-					Scanner sc = new Scanner(logged.toFile());
-					while (sc.hasNextLine()) {
-						if (ID.equals(sc.nextLine())) {
-							sc.close();
-							Main.sendMessage("@" + requester + " That level has been requested before!");
-							return;
+					if (Files.exists(logged) && GeneralSettings.repeatedOptionAll && Main.loaded) {
+						Scanner sc = new Scanner(logged.toFile());
+						while (sc.hasNextLine()) {
+							if (ID.equals(sc.nextLine())) {
+								sc.close();
+								Main.sendMessage("@" + requester + " That level has been requested before!");
+								return;
+							}
 						}
+						sc.close();
 					}
-					sc.close();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
 				}
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			for (int k = 0; k < levels.size(); k++) {
+				for (int k = 0; k < levels.size(); k++) {
 
-				if (ID.equals(levels.get(k).getLevelID())) {
-					int j = k + 1;
-					Main.sendMessage(
-							"@" + requester + " Level is already in the queue at position " + j + "!");
-					System.out.println("Level Already Exists");
-					return;
-				}
-			}
-			if (GeneralSettings.queueLimitBoolean && (levels.size() >= GeneralSettings.queueLimit)) {
-				System.out.println(GeneralSettings.queueLimit + ", " + (levels.size()));
-				if(!GeneralSettings.queueFullOption) {
-					Main.sendMessage("@" + requester + " The queue is full!");
-				}
-				return;
-			}
-			if (GeneralSettings.userLimitOption) {
-				int size = 0;
-				for (LevelData level : levels) {
-					if (level.getRequester().equalsIgnoreCase(requester)) {
-						size++;
-					}
-				}
-				if (size >= GeneralSettings.userLimit) {
-					Main.sendMessage("@" + requester + " You have the maximum amount of levels in the queue!");
-					return;
-				}
-			}
-			if(addedLevels.contains(ID) && GeneralSettings.repeatedOption){
-				Main.sendMessage("@" + requester + " That level has been requested before!");
-				return;
-			}
-			if (GeneralSettings.userLimitStreamOption) {
-				if (userStreamLimitMap.containsKey(requester)) {
-					if (userStreamLimitMap.get(requester) >= GeneralSettings.userLimitStream) {
-						Main.sendMessage("@" + requester + " You've reached the maximum amount of levels for the stream!");
+					if (ID.equals(levels.get(k).getLevelID())) {
+						int j = k + 1;
+						Main.sendMessage(
+								"@" + requester + " Level is already in the queue at position " + j + "!");
+						System.out.println("Level Already Exists");
 						return;
+					}
+				}
+				if (GeneralSettings.queueLimitBoolean && (levels.size() >= GeneralSettings.queueLimit)) {
+					System.out.println(GeneralSettings.queueLimit + ", " + (levels.size()));
+					if (!GeneralSettings.queueFullOption) {
+						Main.sendMessage("@" + requester + " The queue is full!");
+					}
+					return;
+				}
+				if (GeneralSettings.userLimitOption) {
+					int size = 0;
+					for (LevelData level : levels) {
+						if (level.getRequester().equalsIgnoreCase(requester)) {
+							size++;
+						}
+					}
+					if (size >= GeneralSettings.userLimit) {
+						Main.sendMessage("@" + requester + " You have the maximum amount of levels in the queue!");
+						return;
+					}
+				}
+				if (addedLevels.contains(ID) && GeneralSettings.repeatedOption) {
+					Main.sendMessage("@" + requester + " That level has been requested before!");
+					return;
+				}
+				if (GeneralSettings.userLimitStreamOption) {
+					if (userStreamLimitMap.containsKey(requester)) {
+						if (userStreamLimitMap.get(requester) >= GeneralSettings.userLimitStream) {
+							Main.sendMessage("@" + requester + " You've reached the maximum amount of levels for the stream!");
+							return;
+						}
 					}
 				}
 			}
@@ -148,13 +149,15 @@ public class Requests {
 			LevelData levelData = new LevelData();
 			// --------------------
 			Thread parse;
-			if (level != null && RequestSettings.ratedOption && !(level.getStars() > 0)) {
-				Main.sendMessage("@" + requester + " Please send star rated levels only!");
-				return;
-			}
-			if (level != null && RequestSettings.unratedOption && level.getStars() > 0) {
-				Main.sendMessage("@" + requester + " Please send unrated levels only!");
-				return;
+			if(Main.loaded) {
+				if (level != null && RequestSettings.ratedOption && !(level.getStars() > 0)) {
+					Main.sendMessage("@" + requester + " Please send star rated levels only!");
+					return;
+				}
+				if (level != null && RequestSettings.unratedOption && level.getStars() > 0) {
+					Main.sendMessage("@" + requester + " Please send unrated levels only!");
+					return;
+				}
 			}
 			levelData.setRequester(requester);
 			levelData.setAuthor(Objects.requireNonNull(level).getCreatorName());
@@ -197,11 +200,12 @@ public class Requests {
 				}
 			}
 			System.out.println(levelData.getDifficulty());
-			if(RequestSettings.excludedDifficulties.contains(levelData.getDifficulty().toLowerCase()) && RequestSettings.disableOption){
-				Main.sendMessage("@" + requester + " That difficulty is disabled!");
-				return;
+			if(Main.loaded) {
+				if (RequestSettings.excludedDifficulties.contains(levelData.getDifficulty().toLowerCase()) && RequestSettings.disableOption) {
+					Main.sendMessage("@" + requester + " That difficulty is disabled!");
+					return;
+				}
 			}
-
 
 			if (levelData.getDescription().toLowerCase().contains("nong")) {
 				String[] words = levelData.getDescription().split(" ");

@@ -253,18 +253,19 @@ public class Functions {
 	}
 
 	static void requestsToggleFunction() {
-		if (MainBar.requests) {
-			MainBar.stopReqs.setText("\uE768");
-			MainBar.requests = false;
-			Main.sendMessage("/me Requests are now off!");
+		if (Main.loaded) {
+			if (MainBar.requests) {
+				MainBar.stopReqs.setText("\uE768");
+				MainBar.requests = false;
+				Main.sendMessage("/me Requests are now off!");
 
-		} else {
-			MainBar.stopReqs.setText("\uE71A");
-			MainBar.requests = true;
-			Main.sendMessage("/me Requests are now on!");
+			} else {
+				MainBar.stopReqs.setText("\uE71A");
+				MainBar.requests = true;
+				Main.sendMessage("/me Requests are now on!");
 
 
+			}
 		}
 	}
-
 }
