@@ -40,7 +40,7 @@ public class ActionsWindow {
 			//TODO make custom Yes/No dialog
 
 			//region Create Skip Button
-			JButton skip = createButton("\uEB9D");
+			JButton skip = createButton("\uEB9D", "Next/Skip Level");
 			skip.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
@@ -53,7 +53,7 @@ public class ActionsWindow {
 
 			//region Create Random Button
 
-			JButton randNext = createButton("\uF158");
+			JButton randNext = createButton("\uF158", "Next Random Level");
 			randNext.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
@@ -66,7 +66,7 @@ public class ActionsWindow {
 			//endregion
 
 			//region Create Copy Button
-			JButton copy = createButton("\uF0E3");
+			JButton copy = createButton("\uF0E3", "Copy to Clipboard");
 			copy.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
@@ -79,7 +79,7 @@ public class ActionsWindow {
 			//endregion
 
 			//region Create Block Button
-			JButton block = createButton("\uE8F8");
+			JButton block = createButton("\uF140", "Block Level");
 			block.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
@@ -91,7 +91,7 @@ public class ActionsWindow {
 			//endregion
 
 			//region Create Clear Button
-			JButton clear = createButton("\uE107");
+			JButton clear = createButton("\uE107", "Clear Queue");
 			clear.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
@@ -119,8 +119,8 @@ public class ActionsWindow {
 		return "\uE7C9";
 	}
 	//region Create Button
-	private static JButton createButton(String icon) {
-		JButton button = new RoundedJButton(icon);
+	private static JButton createButton(String icon, String tooltip) {
+		JButton button = new RoundedJButton(icon, tooltip);
 		button.setPreferredSize(new Dimension(50, 50));
 		button.setUI(defaultUI);
 		button.setBackground(Defaults.BUTTON);

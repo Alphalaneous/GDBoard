@@ -36,7 +36,7 @@ public class SongWindow {
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
 
-		play = createButton("\uE768", 110);
+		play = createButton("\uE768", 110, "Play");
 		play.addMouseListener(new MouseAdapter() {
 			@Override
 			@SuppressWarnings("deprecation")
@@ -64,7 +64,7 @@ public class SongWindow {
 			}
 		});
 
-		stop = createButton("\uE15B", 55);
+		stop = createButton("\uE15B", 55, "Stop");
 		stop.addMouseListener(new MouseAdapter() {
 			@SuppressWarnings("deprecation")
 			@Override
@@ -120,8 +120,8 @@ public class SongWindow {
 	public static void setPin(boolean pin){
 		((InnerWindow) window).setPin(pin);
 	}
-	private static RoundedJButton createButton(String icon, int i) {
-		RoundedJButton button = new RoundedJButton(icon);
+	private static RoundedJButton createButton(String icon, int i, String tooltip) {
+		RoundedJButton button = new RoundedJButton(icon, tooltip);
 		button.setPreferredSize(new Dimension(50, 50));
 		button.setUI(defaultUI);
 		button.setBounds(width - i, height - 55, 50, 50);
@@ -138,26 +138,27 @@ public class SongWindow {
 		return "\uEC4F";
 	}
 	public static void refreshInfo() {
-		if (Requests.levels.size() == 0) {
-			songName.setText("N/A");
-			songAuthorID.setText("N/A");
-			stop.setVisible(false);
-			play.setVisible(false);
-			persist.setVisible(false);
-		} else {
-			songName.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getSongName());
-
-			if(songName.getText().equalsIgnoreCase("Custom") && Requests.levels.get(LevelsWindow.getSelectedID()).getSongAuthor().equalsIgnoreCase("")){
-				songAuthorID.setText("");
+		if(!Settings.windowedMode) {
+			if (Requests.levels.size() == 0) {
+				songName.setText("N/A");
+				songAuthorID.setText("N/A");
 				stop.setVisible(false);
 				play.setVisible(false);
-				persist.setVisible(true);
-			}
-			else{
-				songAuthorID.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getSongAuthor() + " (" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ")");
-				play.setVisible(true);
-				stop.setVisible(true);
 				persist.setVisible(false);
+			} else {
+				songName.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getSongName());
+
+				if (songName.getText().equalsIgnoreCase("Custom") && Requests.levels.get(LevelsWindow.getSelectedID()).getSongAuthor().equalsIgnoreCase("")) {
+					songAuthorID.setText("");
+					stop.setVisible(false);
+					play.setVisible(false);
+					persist.setVisible(true);
+				} else {
+					songAuthorID.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getSongAuthor() + " (" + Requests.levels.get(LevelsWindow.getSelectedID()).getSongID() + ")");
+					play.setVisible(true);
+					stop.setVisible(true);
+					persist.setVisible(false);
+				}
 			}
 		}
 	}

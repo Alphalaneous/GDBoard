@@ -28,7 +28,6 @@ public class Overlay {
 		frame.setUndecorated(true);
 		if(!Settings.windowedMode) {
 			frame.setBackground(new Color(0, 0, 0, 100));
-			frame.setBounds(Defaults.screenSize);
 			frame.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent e) {
@@ -42,6 +41,7 @@ public class Overlay {
 			frame.setBackground(new Color(0, 0, 0, 0));
 
 		}
+		frame.setBounds(Defaults.screenSize);
 		frame.setLayout(null);
 		mainFrame.setDoubleBuffered(true);
 		mainFrame.setBounds(0, 0, Defaults.screenSize.width, Defaults.screenSize.height);
@@ -49,6 +49,7 @@ public class Overlay {
 		mainFrame.setLayout(null);
 		frame.toBack();
 		frame.add(mainFrame);
+
 
 	}
 

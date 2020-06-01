@@ -21,6 +21,7 @@ public class Windowed {
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static JButtonUI selectUI = new JButtonUI();
 	static JFrame frame = new JFrame();
+	private static JLayeredPane mainFrame = new JLayeredPane();
 	public static void setOnTop(boolean onTop){
 		frame.setAlwaysOnTop(onTop);
 		frame.setFocusableWindowState(!onTop);
@@ -39,7 +40,11 @@ public class Windowed {
 		frame.setLayout(null);
 		frame.setBackground(new Color(255, 255, 255, 0));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		content.setBounds(1, 31, width-2, height);
+		mainFrame.setBounds(0, 0, width+200, height+32 + 200);
+		mainFrame.setLayout(null);
+		mainFrame.setDoubleBuffered(true);
+		mainFrame.setBackground(new Color(0, 0, 0));
+		content.setBounds(1,31,width-2, height);
 		content.setBackground(Defaults.SUB_MAIN);
 		content.setLayout(null);
 
@@ -51,7 +56,7 @@ public class Windowed {
 
 		buttonPanel.setBounds(levelsWindow.getWidth()+5, 0, 50, 512);
 		buttonPanel.setBackground(Defaults.SUB_MAIN);
-		JButton skip = createButton("\uEB9D");
+		JButton skip = createButton("\uEB9D", "Next/Skip Level");
 		skip.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -64,7 +69,7 @@ public class Windowed {
 
 		//region Create Random Button
 
-		JButton randNext = createButton("\uF158");
+		JButton randNext = createButton("\uF158", "Next Random Level");
 		randNext.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -77,7 +82,7 @@ public class Windowed {
 		//endregion
 
 		//region Create Copy Button
-		JButton copy = createButton("\uF0E3");
+		JButton copy = createButton("\uF0E3", "Copy to Clipboard");
 		copy.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -90,7 +95,7 @@ public class Windowed {
 		//endregion
 
 		//region Create Block Button
-		JButton block = createButton("\uE8F8");
+		JButton block = createButton("\uF140", "Block Level");
 		block.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -102,7 +107,7 @@ public class Windowed {
 		//endregion
 
 		//region Create Clear Button
-		JButton clear = createButton("\uE107");
+		JButton clear = createButton("\uE107", "Clear Queue");
 		clear.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -112,7 +117,7 @@ public class Windowed {
 			}
 		});
 		buttonPanel.add(clear);
-		JButton toggleRequests = createButton("\uE71A");
+		JButton toggleRequests = createButton("\uE71A", "Toggle Requests");
 		toggleRequests.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -123,7 +128,7 @@ public class Windowed {
 			}
 		});
 		buttonPanel.add(toggleRequests);
-		JButton settings = createButton("\uE713");
+		JButton settings = createButton("\uE713", "Settings");
 		settings.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -140,7 +145,8 @@ public class Windowed {
 		((InnerWindow) window).setPinVisible();
 		((InnerWindow) window).setMinimize(true);
 		((InnerWindow) window).refreshListener();
-		frame.add(window);
+		mainFrame.add(window, 1);
+		frame.add(mainFrame);
 	}
 	static void refreshUI() {
 		((InnerWindow) window).refreshUI();
@@ -164,7 +170,24 @@ public class Windowed {
 		}
 
 	}
+	public static void addToFrame(JComponent component) {
 
+		// --------------------
+		// Add components to JFrame from elsewhere
+
+		mainFrame.add(component, 0);
+
+		// --------------------
+	}
+	static void removeFromFrame(JComponent component) {
+
+		// --------------------
+		// Add components to JFrame from elsewhere
+
+		mainFrame.remove(component);
+
+		// --------------------
+	}
 	static void toggleVisible() {
 
 		((InnerWindow) window).toggle();
@@ -174,8 +197,8 @@ public class Windowed {
 		((InnerWindow) window).setVisible();
 
 	}
-	private static JButton createButton(String icon) {
-		JButton button = new RoundedJButton(icon);
+	private static JButton createButton(String icon, String tooltip) {
+		JButton button = new RoundedJButton(icon, tooltip);
 		button.setPreferredSize(new Dimension(50, 50));
 		button.setUI(defaultUI);
 		if (!Settings.windowedMode) {

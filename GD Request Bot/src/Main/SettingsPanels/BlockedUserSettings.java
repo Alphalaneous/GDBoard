@@ -20,7 +20,7 @@ public class BlockedUserSettings {
 	private static JPanel blockedListPanel = new JPanel();
 	private static JScrollPane scrollPane = new JScrollPane(blockedListPanel);
 	private static FancyTextArea blockedInput = new FancyTextArea(false);
-	private static RoundedJButton addID = new RoundedJButton("\uECC8");
+	private static RoundedJButton addID = new RoundedJButton("\uECC8", "Add ID");
 	private static int i = 0;
 	private static double height = 0;
 

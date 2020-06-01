@@ -24,7 +24,7 @@ class GDBoardBot {
 	private static JPanel panel = new JPanel();
 	private static JLabel tf = new JLabel("Connecting...  ");
 	private static JButtonUI defaultUI = new JButtonUI();
-	private static RoundedJButton button = new RoundedJButton("\uE72C");
+	private static RoundedJButton button = new RoundedJButton("\uE72C", "Refresh");
 
 	private static int attempts = 0;
 	static void start() throws IOException {

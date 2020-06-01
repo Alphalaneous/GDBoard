@@ -527,6 +527,7 @@ public class InnerWindow extends ResizablePanel {
 		windowIcon.setForeground(Defaults.FOREGROUND);
 		pinButton.setForeground(Defaults.FOREGROUND);
 		pinButtonFill.setForeground(Defaults.FOREGROUND);
+		minimizeButton.setForeground(Defaults.FOREGROUND);
 		alphaBorder = new Color(Defaults.ACCENT.getRed(), Defaults.ACCENT.getGreen(), Defaults.ACCENT.getBlue(), 100);
 		setBorder(BorderFactory.createLineBorder(alphaBorder));
 

@@ -38,7 +38,7 @@ public class CommandSettings {
 	private static CheckboxButton disable = createButton("Disable Command", 290);
 	private static CheckboxButton modOnly = createButton("Mod Only", 320);
 	private static CheckboxButton whisper = createButton("Send as Whisper", 350);
-	private static RoundedJButton backButton = new RoundedJButton("\uE112");
+	private static RoundedJButton backButton = new RoundedJButton("\uE112", "Back");
 	private static JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 60, 0);
 	public static JPanel createPanel() {
 		codeInput.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);

@@ -63,7 +63,9 @@ public class InfoWindow {
 		fullPanel.add(descPanel);
 		window.add(fullPanel);
 		((InnerWindow)window).refreshListener();
-		Overlay.addToFrame(window);
+		if(!Settings.windowedMode) {
+			Overlay.addToFrame(window);
+		}
 		refreshInfo();
 	}
 	public static JPanel getInfoWindow(){

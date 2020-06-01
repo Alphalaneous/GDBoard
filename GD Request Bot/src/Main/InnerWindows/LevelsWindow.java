@@ -127,7 +127,9 @@ public class LevelsWindow {
 		});
 		window.add(scrollPane);
 		((InnerWindow) window).refreshListener();
-		Overlay.addToFrame(window);
+		if(!Settings.windowedMode) {
+			Overlay.addToFrame(window);
+		}
 	}
 	public static JScrollPane getReqWindow(){
 		return scrollPane;

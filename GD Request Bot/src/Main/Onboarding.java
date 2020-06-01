@@ -179,8 +179,8 @@ public class Onboarding {
 	}
 
 	@SuppressWarnings("unused")
-	private static JButton createButton(String icon) {
-		JButton button = new RoundedJButton(icon);
+	private static JButton createButton(String icon, String tooltip) {
+		JButton button = new RoundedJButton(icon, tooltip);
 		button.setPreferredSize(new Dimension(50, 50));
 		button.setUI(defaultUI);
 		if (!Settings.windowedMode) {

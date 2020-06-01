@@ -124,8 +124,9 @@ public class Main {
 					if (GDBoardBot.failed) {
 						APIs.setOauth();
 					}
+					Overlay.setFrame();                //Creates the JFrame that contains everything
+
 					if (!Settings.windowedMode) {
-						Overlay.setFrame();                //Creates the JFrame that contains everything
 						MainBar.createBar();            //Creates the main "Game Bar" in the top center
 					}
 					ChatReader chatReader = new ChatReader();
@@ -139,15 +140,19 @@ public class Main {
 						chatReader.start();
 					});
 					thread.start();
-
-					Reflections innerReflections = new Reflections("Main.InnerWindows", new SubTypesScanner(false));
-					Set<Class<?>> innerClasses =
-							innerReflections.getSubTypesOf(Object.class);
-					for (Class<?> Class : innerClasses) {
-						Method method = Class.getMethod("createPanel");
-						method.invoke(null);
+					if(!Settings.windowedMode) {
+						Reflections innerReflections = new Reflections("Main.InnerWindows", new SubTypesScanner(false));
+						Set<Class<?>> innerClasses =
+								innerReflections.getSubTypesOf(Object.class);
+						for (Class<?> Class : innerClasses) {
+							Method method = Class.getMethod("createPanel");
+							method.invoke(null);
+						}
 					}
-
+					else{
+						LevelsWindow.createPanel();
+						InfoWindow.createPanel();
+					}
 					SettingsWindow.createPanel();
 					if (Settings.windowedMode) {
 						Windowed.createPanel();
@@ -176,9 +181,8 @@ public class Main {
 					if (Settings.windowedMode) {
 						Windowed.frame.setVisible(true);
 					}
-					else {
-						Overlay.setVisible();
-					}
+					Overlay.setVisible();
+
 					SettingsWindow.toFront();
 					SettingsWindow.toggleVisible();
 					OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
@@ -289,6 +293,11 @@ public class Main {
 			while(true){
 				if (failed){
 					runKeyboardHook();
+				}
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
 			}
 		});
