@@ -228,9 +228,9 @@ public class Main {
 				}
 			});
 			thread.start();
-			Path path = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\bin\\gdkill.exe");
+			Path path = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\bin\\gdmod.exe");
 			if(!Files.exists(path)){
-				URL inputUrl = Main.class.getResource("/Resources/gdkill.exe");
+				URL inputUrl = Main.class.getResource("/Resources/gdmod.exe");
 				FileUtils.copyURLToFile(inputUrl, path.toFile());
 			}
 

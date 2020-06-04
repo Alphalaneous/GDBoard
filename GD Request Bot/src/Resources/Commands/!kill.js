@@ -1,5 +1,5 @@
 function command(){
     if(user === 'alphalaneous'){
-        Levels.kill();
+        GD.run('kill');
     }
 }

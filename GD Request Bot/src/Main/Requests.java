@@ -13,6 +13,7 @@ import com.github.alex1304.jdash.exception.MissingAccessException;
 import com.github.alex1304.jdash.util.LevelSearchFilters;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
+import org.apache.commons.lang3.ArrayUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -353,35 +354,7 @@ public class Requests {
 
 	@SuppressWarnings("unused")
 	public static void kill(){
-		String PID = null;
-		try {
-			ProcessBuilder pb = new ProcessBuilder("tasklist", "/fi", "\"IMAGENAME eq GeometryDash.exe\"", "/fo", "CSV").redirectErrorStream(true);
-			Process process = pb.start();
-
-			try (BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
-				while (true) {
-					String line = in.readLine();
-					if (line == null) {
-						break;
-					}
-					if(line.contains("GeometryDash.exe")){
-						PID = line.split(",")[1].replaceAll("\"","");
-					}
-					System.out.println(line);
-				}
-			}
-		}
-		catch (IOException e){
-			e.printStackTrace();
-		}
-		System.out.println(PID);
-		try {
-			ProcessBuilder pb = new ProcessBuilder(System.getenv("APPDATA") + "\\GDBoard\\bin\\gdkill.exe", PID).redirectErrorStream(true);
-			pb.start();
-		}
-		catch (IOException e){
-			e.printStackTrace();
-		}
+		GDMod.run("kill");
 	}
 	public static void crash(){
 		try {

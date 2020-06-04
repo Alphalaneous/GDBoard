@@ -458,7 +458,7 @@ public class CommandSettings {
 		commandLabel.setBounds(50,15,commandLabel.getPreferredSize().width+5, commandLabel.getPreferredSize().height + 5);
 		StringBuilder function = new StringBuilder();
 		try {
-			Path comPath = Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/" + command + ".js");
+			Path comPath = Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/" + command.split("\\\\")[command.split("\\\\").length-1] + ".js");
 			if (Files.exists(comPath)) {
 				codeInput.setText(String.valueOf(Files.readString(comPath, StandardCharsets.UTF_8)));
 			}

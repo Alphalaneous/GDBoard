@@ -15,5 +15,6 @@
     <orderEntry type="library" name="reflections-0.9.12" level="project" />
     <orderEntry type="library" name="javassist" level="project" />
     <orderEntry type="library" name="rsyntaxtextarea-3.1.1" level="project" />
+    <orderEntry type="library" name="javafx.web" level="project" />
   </component>
 </module>
