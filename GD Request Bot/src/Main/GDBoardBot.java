@@ -26,15 +26,7 @@ class GDBoardBot {
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static RoundedJButton button = new RoundedJButton("\uE72C", "Refresh");
 
-	private static int attempts = 0;
 	static void start() throws IOException {
-		attempts++;
-		if(attempts == 5){
-			APIs.setOauth();
-			start();
-			attempts = 0;
-			return;
-		}
 		dialog.setSize(new Dimension(200,100));
 		tf.setForeground(Color.WHITE);
 		tf.setFont(new Font("bahnschrift", Font.BOLD, 20));
@@ -52,7 +44,6 @@ class GDBoardBot {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				APIs.setOauth();
-				attempts = 0;
 			}
 		});
 		panel.add(tf);

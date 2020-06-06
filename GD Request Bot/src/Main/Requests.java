@@ -61,32 +61,7 @@ public class Requests {
 			Path blocked = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
 			Path logged = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\requestsLog.txt");
 			if(Main.loaded) {
-				try {
-					if (Files.exists(blocked)) {
-						Scanner sc = new Scanner(blocked.toFile());
-						while (sc.hasNextLine()) {
-							if (ID.equals(sc.nextLine())) {
-								sc.close();
-								Main.sendMessage("@" + requester + " That Level is Blocked!");
-								return;
-							}
-						}
-						sc.close();
-					}
-					if (Files.exists(logged) && GeneralSettings.repeatedOptionAll && Main.loaded) {
-						Scanner sc = new Scanner(logged.toFile());
-						while (sc.hasNextLine()) {
-							if (ID.equals(sc.nextLine())) {
-								sc.close();
-								Main.sendMessage("@" + requester + " That level has been requested before!");
-								return;
-							}
-						}
-						sc.close();
-					}
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
+
 				for (int k = 0; k < levels.size(); k++) {
 
 					if (ID.equals(levels.get(k).getLevelID())) {
@@ -104,6 +79,7 @@ public class Requests {
 					}
 					return;
 				}
+
 				if (GeneralSettings.userLimitOption) {
 					int size = 0;
 					for (LevelData level : levels) {
@@ -116,10 +92,6 @@ public class Requests {
 						return;
 					}
 				}
-				if (addedLevels.contains(ID) && GeneralSettings.repeatedOption) {
-					Main.sendMessage("@" + requester + " That level has been requested before!");
-					return;
-				}
 				if (GeneralSettings.userLimitStreamOption) {
 					if (userStreamLimitMap.containsKey(requester)) {
 						if (userStreamLimitMap.get(requester) >= GeneralSettings.userLimitStream) {
@@ -128,6 +100,44 @@ public class Requests {
 						}
 					}
 				}
+				if (Files.exists(logged) && GeneralSettings.repeatedOptionAll && Main.loaded) {
+					Scanner sc = null;
+					try {
+						sc = new Scanner(logged.toFile());
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					}
+					while (sc.hasNextLine()) {
+						if (ID.equals(sc.nextLine())) {
+							sc.close();
+							Main.sendMessage("@" + requester + " That level has been requested before!");
+							return;
+						}
+					}
+					sc.close();
+				}
+				if (addedLevels.contains(ID) && GeneralSettings.repeatedOption) {
+					Main.sendMessage("@" + requester + " That level has been requested before!");
+					return;
+				}
+
+				if (Files.exists(blocked)) {
+					Scanner sc = null;
+					try {
+						sc = new Scanner(blocked.toFile());
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					}
+					while (sc.hasNextLine()) {
+						if (ID.equals(sc.nextLine())) {
+							sc.close();
+							Main.sendMessage("@" + requester + " That Level is Blocked!");
+							return;
+						}
+					}
+					sc.close();
+				}
+
 			}
 			if (userStreamLimitMap.containsKey(requester)) {
 				userStreamLimitMap.put(requester, userStreamLimitMap.get(requester) + 1);
