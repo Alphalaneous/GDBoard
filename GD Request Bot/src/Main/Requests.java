@@ -815,14 +815,11 @@ public class Requests {
 		return response;
 		//}
 	}
-	private static ArrayList<LevelData> getLevelData() {
-		return levels;
-	}
 
 	private static void parse(byte[] level, String levelID) {
 		all:
-		for (int k = 0; k < Requests.getLevelData().size(); k++) {
-			if (Requests.getLevelData().get(k).getLevelID().equalsIgnoreCase(levelID)) {
+		for (int k = 0; k < Requests.levels.size(); k++) {
+			if (Requests.levels.get(k).getLevelID().equalsIgnoreCase(levelID)) {
 				String decompressed = null;
 				try {
 					decompressed = decompress(level);
@@ -878,7 +875,7 @@ public class Requests {
 								for (String s : text1) {
 									if (s.equalsIgnoreCase(line)) {
 										System.out.println("Contains Vulgar");
-										Requests.getLevelData().get(k).setContainsVulgar();
+										Requests.levels.get(k).setContainsVulgar();
 										break out;
 									}
 								}
@@ -889,7 +886,7 @@ public class Requests {
 								}
 							}
 							if (imageIDCount >= 1000) {
-								Requests.getLevelData().get(k).setContainsImage();
+								Requests.levels.get(k).setContainsImage();
 							}
 							color = tempColor;
 						} catch (IOException e) {
@@ -897,19 +894,30 @@ public class Requests {
 							break all;
 						}
 					}
+					try {
+						Thread.sleep(0);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
-				try {
-					Requests.getLevelData().get(k).setAnalyzed();
-					LevelsWindow.updateUI(Requests.getLevelData().get(k).getLevelID(), Requests.getLevelData().get(k).getContainsVulgar(), Requests.getLevelData().get(k).getContainsImage(), true);
-				}
-				catch (IndexOutOfBoundsException ignored){
-				}
+
 				try {
 					Thread.sleep(250);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+				try {
+					Requests.levels.get(k).setAnalyzed();
+					LevelsWindow.updateUI(Requests.levels.get(k).getLevelID(), Requests.levels.get(k).getContainsVulgar(), Requests.levels.get(k).getContainsImage(), true);
+				}
+				catch (IndexOutOfBoundsException ignored){
+				}
 				System.out.println("Analyzed " + k);
+			}
+			try {
+				Thread.sleep(0);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
 	}

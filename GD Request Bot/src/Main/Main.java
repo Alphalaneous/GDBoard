@@ -24,6 +24,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -217,7 +218,7 @@ public class Main {
 			allowRequests = true;
 			doImage = true;
 			Main.sendMessage("Thank you for using GDBoard by Alphalaneous and TreehouseFalcon! It is suggested to VIP or Mod GDBoard to prevent chat limits from occurring.");
-			Thread thread = new Thread(() -> {
+			Thread threada = new Thread(() -> {
 				while(true){
 					try {
 						Thread.sleep(120000);
@@ -227,7 +228,7 @@ public class Main {
 					Main.sendMessage(" ");
 				}
 			});
-			thread.start();
+			threada.start();
 			Path path = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\bin\\gdmod.exe");
 			if(!Files.exists(path)){
 				URL inputUrl = Main.class.getResource("/Resources/gdmod.exe");

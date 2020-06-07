@@ -38,7 +38,8 @@ public class RoundedJButton extends JButton {
 					if(!exited[0]) {
 						tooltipPanel.setBackground(Defaults.TOP);
 						tooltipLabel.setForeground(Defaults.FOREGROUND);
-						tooltipPanel.setBounds(MouseInfo.getPointerInfo().getLocation().x - (tooltipLabel.getPreferredSize().width + 10)/2, MouseInfo.getPointerInfo().getLocation().y+20, tooltipLabel.getPreferredSize().width + 10, tooltipLabel.getPreferredSize().height + 5);
+						System.out.println("X: " + (MouseInfo.getPointerInfo().getLocation().x - (tooltipLabel.getPreferredSize().width + 10)/2) + " Y: " +  (MouseInfo.getPointerInfo().getLocation().y+20));
+						tooltipPanel.setBounds(MouseInfo.getPointerInfo().getLocation().x - (tooltipLabel.getPreferredSize().width + 10)/2 - Defaults.screenSize.x, MouseInfo.getPointerInfo().getLocation().y+20 - Defaults.screenSize.y, tooltipLabel.getPreferredSize().width + 10, tooltipLabel.getPreferredSize().height + 5);
 						tooltipPanel.setVisible(true);
 						Overlay.addToFrame(tooltipPanel);
 					}
