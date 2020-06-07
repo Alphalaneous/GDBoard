@@ -56,8 +56,9 @@ public class Main {
 			dialog.add(panel);
 
 			dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-			for ( WindowListener wl : dialog.getWindowListeners())
+			for ( WindowListener wl : dialog.getWindowListeners()) {
 				dialog.removeWindowListener(wl);
+			}
 			dialog.addWindowListener(new WindowAdapter() {
 				@Override
 				public void windowClosing(WindowEvent e) {

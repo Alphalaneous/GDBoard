@@ -422,6 +422,7 @@ public class CommandSettings {
 				if (fileName.endsWith(".js")) {
 					if (!fileName.equalsIgnoreCase("!rick.js") && !fileName.equalsIgnoreCase("!stoprick.js") && !fileName.equalsIgnoreCase("!kill.js")) {
 						addButton(fileName.substring(0, fileName.length()-3), path);
+						Thread.sleep(5);
 					}
 				}
 			}
@@ -434,6 +435,7 @@ public class CommandSettings {
 					String fileName = file[file.length - 1];
 					if (fileName.endsWith(".js")) {
 						addButton(fileName.substring(0, fileName.length()-3), path);
+						Thread.sleep(5);
 					}
 				}
 			}

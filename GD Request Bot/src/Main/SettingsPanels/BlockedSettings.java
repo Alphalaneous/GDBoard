@@ -158,6 +158,11 @@ public class BlockedSettings {
 			assert sc != null;
 			while (sc.hasNextLine()) {
 				addButton(sc.nextLine());
+				try {
+					Thread.sleep(5);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 			sc.close();
 		}
