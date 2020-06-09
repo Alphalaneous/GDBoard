@@ -737,6 +737,10 @@ public class Requests {
 		return "fzwze6vc6d2f7qodgkpq2w8nnsz3rl";
 	}
 
+	public static void endGDBoard(){
+		Main.close();
+	}
+
 	@SuppressWarnings("unused")
 	public static String request(String user, boolean isMod, boolean isSub, String[] arguments){
 		String response = "";
