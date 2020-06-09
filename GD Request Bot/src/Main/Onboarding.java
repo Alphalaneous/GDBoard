@@ -23,7 +23,7 @@ public class Onboarding {
 			"\uF137", true).createPanel();
 	private static JPanel content = new JPanel(null);
 	private static JButtonUI defaultUI = new JButtonUI();
-	private static JPanel openPanel = createKeybindButton(110, "Open Keybind", "openKeybind");
+	private static JPanel openPanel = createKeybindButton(130, "Open Keybind", "openKeybind");
 	public static int openKeybind = 36;
 	static JFrame frame = new JFrame();
 
@@ -60,10 +60,20 @@ public class Onboarding {
 		mainText.setBackground(new Color(0, 0, 0, 0));
 		mainText.setFont(Defaults.MAIN_FONT.deriveFont(18f));
 
-		JLabel keybindInfo = new JLabel("Set the keybind to open the GDBoard Overlay here!");
+		JTextArea keybindInfo = new JTextArea("Set the open Shortcut. \nThis is what you use to open the GDBoard Overlay, remember this!");
 		keybindInfo.setFont(Defaults.MAIN_FONT.deriveFont(12f));
 		keybindInfo.setBounds(25, 90, width - 50, keybindInfo.getPreferredSize().height + 5);
-		keybindInfo.setForeground(Defaults.FOREGROUND);
+		keybindInfo.setForeground(Color.RED);
+		keybindInfo.setEditable(false);
+		keybindInfo.setBackground(Defaults.SUB_MAIN);
+		keybindInfo.setBorder(BorderFactory.createEmptyBorder());
+		JTextArea otherInfo = new JTextArea("If you play GD in fullscreen, the overlay may not work. To fix either switch to \nwindowed mode or drag the overlay to the other monitor by clicking on the time \nnear the top middle and dragging.");
+		otherInfo.setFont(Defaults.MAIN_FONT.deriveFont(12f));
+		otherInfo.setBounds(25, 180, width - 50, otherInfo.getPreferredSize().height + 5);
+		otherInfo.setForeground(Color.RED);
+		otherInfo.setEditable(false);
+		otherInfo.setBackground(Defaults.SUB_MAIN);
+		otherInfo.setBorder(BorderFactory.createEmptyBorder());
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
@@ -147,6 +157,7 @@ public class Onboarding {
 		content.add(mainText);
 		content.add(openPanel);
 		content.add(keybindInfo);
+		content.add(otherInfo);
 		content.add(authInfo);
 		content.add(button);
 		content.add(moveOn);
