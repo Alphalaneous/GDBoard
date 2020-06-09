@@ -146,9 +146,6 @@ public class Overlay {
 		SettingsWindow.setInvisible();
 		MainBar.setInvisible();
 		//Randomizer.setInvisible();
-		frame.invalidate();
-		frame.validate();
-		frame.repaint();
 	}
 
 	static void setWindowsVisible() {
@@ -161,10 +158,8 @@ public class Overlay {
 		SongWindow.setVisible();
 		SettingsWindow.setVisible();
 		MainBar.setVisible();
+
 		//Randomizer.setVisible();
-		frame.invalidate();
-		frame.validate();
-		frame.repaint();
 	}
 
 }

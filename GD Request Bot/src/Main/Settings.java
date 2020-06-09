@@ -268,7 +268,7 @@ public class Settings {
 	private static Point infoWLoc = new Point(1920 - 400 - 10, 10);
 	private static Point commentWLoc = new Point(10, 500);
 	private static Point songWLoc = new Point(1920 - 300 - 10, 600);
-	private static Point actionsWLoc = new Point(1920 - 260 - 10, 200);
+	private static Point actionsWLoc = new Point(1920 - 300 - 10, 200);
 	private static Point settingsWLoc = new Point(1920 / 2 - 250, 1080 / 2 - 300);
 	private static Point windowWLoc = new Point(0, 0);
 	static int monitor;

@@ -22,7 +22,7 @@ public class LevelsWindow {
 
 	private static int width = 400;
 	private static int height = 400;
-	private static ResizablePanel window = new InnerWindow("Requests", Settings.getRequestsWLoc().x, Settings.getRequestsWLoc().y, width, height, "\uE179", false) {
+	private static ResizablePanel window = new InnerWindow("Requests - 0", Settings.getRequestsWLoc().x, Settings.getRequestsWLoc().y, width, height, "\uE179", false) {
 		@Override
 		protected Resizable createResizable() {
 			return new Resizable(this) {

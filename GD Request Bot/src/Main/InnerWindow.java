@@ -613,7 +613,7 @@ public class InnerWindow extends ResizablePanel {
 		if (toggleState) {
 			if(!floating) {
 				setVisible(true);
-				Overlay.addToFrame(this);
+				//Overlay.addToFrame(this);
 			}
 			else {
 				if(title.equalsIgnoreCase("Settings")) {
@@ -637,7 +637,7 @@ public class InnerWindow extends ResizablePanel {
 		if (!isPinPressed) {
 			if(!floating) {
 				setVisible(false);
-				Overlay.removeFromFrame(this);
+				//Overlay.removeFromFrame(this);
 			}
 			else {
 				if(title.equalsIgnoreCase("Settings")) {
