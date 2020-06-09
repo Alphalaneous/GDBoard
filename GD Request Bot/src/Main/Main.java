@@ -30,7 +30,6 @@ import java.util.logging.Logger;
 
 public class Main {
 
-	static List<User> mods = new ArrayList<>();
 	static boolean starting = true;
 	static boolean loaded = false;
 	static boolean allowRequests = false;
@@ -41,7 +40,6 @@ public class Main {
 	private static JLabel tf = new JLabel("Loading...");
 	public static void main(String[] args) {
 		Defaults.loaded.set(false);
-		//TODO Use nio everywhere
 		try {
 			Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
 			logger.setLevel(Level.OFF);
@@ -86,6 +84,7 @@ public class Main {
 				i++;
 			}
 			Thread.sleep(500);
+			i = 0;
 			while(!Defaults.colorsLoaded.get()){
 				System.out.println("Loading Colors... " + i);
 				Thread.sleep(10);
@@ -185,8 +184,6 @@ public class Main {
 					}
 					Overlay.setVisible();
 
-					SettingsWindow.toFront();
-					SettingsWindow.toggleVisible();
 					OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
 					break;
 				}

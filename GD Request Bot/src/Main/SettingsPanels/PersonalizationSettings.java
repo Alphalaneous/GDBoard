@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 public class PersonalizationSettings {
 	private static CurvedButton windowedButton = new CurvedButton("Switch to Windowed Mode (Requires Restart)");
@@ -21,8 +22,12 @@ public class PersonalizationSettings {
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
 
-		if(Settings.windowedMode){
-			windowedButton.setLText("Switch to Overlay Mode (Requires Restart)");
+		try {
+			if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
+				windowedButton.setLText("Switch to Overlay Mode (Requires Restart)");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		windowedButton.setBounds(25,25, 365,30);
 		windowedButton.setPreferredSize(new Dimension(365,30));
@@ -36,7 +41,7 @@ public class PersonalizationSettings {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				Object[] options = {"Yes", "No"};
-				int n = JOptionPane.showOptionDialog(SettingsWindow.frame,
+				int n = JOptionPane.showOptionDialog(SettingsWindow.window,
 						"Close GDBoard and Apply Changes?",
 						"Close? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, options, options[1]);

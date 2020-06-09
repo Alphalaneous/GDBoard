@@ -9,18 +9,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.net.URL;
 
 public class Windowed {
 	private static int width = 465;
 	private static int height = 512;
-	public static ResizablePanel window = new InnerWindow("GDBoard", Settings.getWindowWLoc().x, Settings.getWindowWLoc().y, width-2, height,
+	public static ResizablePanel window = new InnerWindow("GDBoard - 0", Settings.getWindowWLoc().x, Settings.getWindowWLoc().y, width-2, height,
 			"\uF137", true).createPanel();
 	private static JPanel content = new JPanel(null);
 	private static JPanel buttonPanel = new JPanel();
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static JButtonUI selectUI = new JButtonUI();
-	static JFrame frame = new JFrame();
+	public static JFrame frame = new JFrame();
 	private static JLayeredPane mainFrame = new JLayeredPane();
 	public static void setOnTop(boolean onTop){
 		frame.setAlwaysOnTop(onTop);
@@ -34,7 +36,14 @@ public class Windowed {
 		ImageIcon icon = new ImageIcon(iconURL);
 		Image newIcon = icon.getImage().getScaledInstance(120, 120,  Image.SCALE_SMOOTH);
 		frame.setIconImage(newIcon);
-		frame.setTitle("GDBoard");
+		frame.setTitle("GDBoard - 0");
+		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+
+			}
+		});
 		frame.setUndecorated(true);
 		frame.setSize(width + 200,height+32 + 200);
 		frame.setLayout(null);

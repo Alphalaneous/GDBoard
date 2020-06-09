@@ -144,6 +144,7 @@ public class LevelsWindow {
 	public static void setName(int count){
 		if(Settings.windowedMode){
 			((InnerWindow) Windowed.window).setTitle("GDBoard - " + count);
+			Windowed.frame.setTitle("GDBoard - " + count);
 		}
 		else {
 			((InnerWindow) window).setTitle("Requests - " + count);

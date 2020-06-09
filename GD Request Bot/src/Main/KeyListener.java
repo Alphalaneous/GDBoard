@@ -49,44 +49,45 @@ public class KeyListener extends SwingKeyAdapter {
 			else if(key == 45){
 				key = 155;
 			}
-			if (key == ShortcutSettings.openKeybind) {
+			if(!ShortcutSettings.focused) {
+				if (key == ShortcutSettings.openKeybind) {
 
-				if (!Overlay.frame.getBackground().equals(new Color(0, 0, 0, 0))) {
+					if (!Overlay.frame.getBackground().equals(new Color(0, 0, 0, 0))) {
 
-					if (!Settings.windowedMode) {
-						Overlay.setWindowsInvisible();
+						if (!Settings.windowedMode) {
+							Overlay.setWindowsInvisible();
+						}
+						Overlay.frame.toFront();
+						Overlay.frame.requestFocus();
+
+					} else {
+						if (!Settings.windowedMode) {
+							Overlay.setWindowsVisible();
+						}
+						Overlay.frame.toFront();
+						Overlay.frame.requestFocus();
+
+
 					}
-					Overlay.frame.toFront();
-					Overlay.frame.requestFocus();
-
-				} else {
-					if (!Settings.windowedMode) {
-						Overlay.setWindowsVisible();
-					}
-					Overlay.frame.toFront();
-					Overlay.frame.requestFocus();
-					SettingsWindow.toFront();
-
-
 				}
-			}
-			if (key == ShortcutSettings.skipKeybind) {
-				Functions.skipFunction();
-			}
-			if (key == ShortcutSettings.randKeybind) {
-				Functions.randomFunction();
-			}
-			if (key == ShortcutSettings.copyKeybind) {
-				Functions.copyFunction();
-			}
-			if (key == ShortcutSettings.blockKeybind) {
-				Functions.blockFunction();
-			}
-			if (key == ShortcutSettings.clearKeybind) {
-				Functions.clearFunction();
-			}
-			if (key == ShortcutSettings.lockKeybind) {
-				MouseLock.doLock = !MouseLock.doLock;
+				if (key == ShortcutSettings.skipKeybind) {
+					Functions.skipFunction();
+				}
+				if (key == ShortcutSettings.randKeybind) {
+					Functions.randomFunction();
+				}
+				if (key == ShortcutSettings.copyKeybind) {
+					Functions.copyFunction();
+				}
+				if (key == ShortcutSettings.blockKeybind) {
+					Functions.blockFunction();
+				}
+				if (key == ShortcutSettings.clearKeybind) {
+					Functions.clearFunction();
+				}
+				if (key == ShortcutSettings.lockKeybind) {
+					MouseLock.doLock = !MouseLock.doLock;
+				}
 			}
 			keyReleased = false;
 		}

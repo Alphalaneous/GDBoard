@@ -122,9 +122,7 @@ public class InnerWindow extends ResizablePanel {
 				setBounds((int) x, (int) y, width + 2, height + 32);
 			}
 			else {
-				if(title.equalsIgnoreCase("Settings")) {
-					SettingsWindow.frame.setLocation((int) x, (int) y);
-				}
+
 				if(title.startsWith("GDBoard")){
 					Windowed.frame.setLocation((int) x, (int) y);
 				}
@@ -200,14 +198,14 @@ public class InnerWindow extends ResizablePanel {
 					location = getLocation();
 				}
 				else{
-					if(title.equalsIgnoreCase("Settings")) {
-						location = SettingsWindow.frame.getLocation();
-					}
 					if(title.startsWith("GDBoard")){
 						location = Windowed.frame.getLocation();
 					}
 					if(title.equalsIgnoreCase("Startup")){
 						location = Onboarding.frame.getLocation();
+					}
+					if(title.equalsIgnoreCase("Settings")){
+						location = SettingsWindow.frame.getLocation();
 					}
 				}
 			}
@@ -283,18 +281,16 @@ public class InnerWindow extends ResizablePanel {
 
 						}
 					}
-					if(title.equalsIgnoreCase("Settings")) {
-						SettingsWindow.frame.setLocation(p);
-					}
 					if(title.startsWith("GDBoard")){
 						Windowed.frame.setLocation(p);
 					}
 					if(title.equalsIgnoreCase("Startup")){
 						Onboarding.frame.setLocation(p);
 					}
+					if(title.equalsIgnoreCase("Settings")){
+						SettingsWindow.frame.setLocation(p);
+					}
 				}
-
-
 			}
 
 			@Override
@@ -552,11 +548,9 @@ public class InnerWindow extends ResizablePanel {
 			}
 			else {
 				//TODO Settngs window stays at location when moving between monitors
-				x = (int) ((Defaults.screenSize.getWidth()/2 - SettingsWindow.frame.getWidth()/2) + Defaults.screenSize.x);
+				x = (int) ((Defaults.screenSize.getWidth()/2 - SettingsWindow.window.getWidth()/2) + Defaults.screenSize.x);
 				y = 150 + Defaults.screenSize.y;
-				if(title.equalsIgnoreCase("Settings")){
-					SettingsWindow.frame.setLocation(x, y);
-				}
+
 				System.out.println("Start: " + x + ", " + y);
 			}
 			x1 = x / ratioX;
@@ -623,7 +617,12 @@ public class InnerWindow extends ResizablePanel {
 			}
 			else {
 				if(title.equalsIgnoreCase("Settings")) {
-					SettingsWindow.frame.setVisible(true);
+					if(Settings.windowedMode){
+						SettingsWindow.frame.setVisible(true);
+					}
+					else {
+						SettingsWindow.window.setVisible(true);
+					}
 				}
 				if(title.equalsIgnoreCase("Startup")){
 					Onboarding.frame.setVisible(true);
@@ -642,7 +641,12 @@ public class InnerWindow extends ResizablePanel {
 			}
 			else {
 				if(title.equalsIgnoreCase("Settings")) {
-					SettingsWindow.frame.setVisible(false);
+					if(Settings.windowedMode){
+						SettingsWindow.frame.setVisible(false);
+					}
+					else {
+						SettingsWindow.window.setVisible(false);
+					}
 				}
 				if(title.startsWith("GDBoard")){
 					Windowed.frame.setVisible(false);
@@ -667,15 +671,23 @@ public class InnerWindow extends ResizablePanel {
 				Overlay.removeFromFrame(this);
 			}
 			else {
-				if(title.equalsIgnoreCase("Settings")) {
-					SettingsWindow.frame.setVisible(false);
-				}
 				if(title.equalsIgnoreCase("Startup")){
 					Onboarding.frame.setVisible(false);
 					Main.close();
 				}
 				if(title.startsWith("GDBoard")){
 					Main.close();
+				}
+			}
+			if(title.equalsIgnoreCase("Settings")) {
+				if(Settings.windowedMode){
+					SettingsWindow.frame.setVisible(false);
+				}
+				else {
+					SettingsWindow.window.setVisible(false);
+					Overlay.frame.setFocusableWindowState(false);
+					Overlay.frame.setFocusable(false);
+
 				}
 			}
 			toggleState = false;
@@ -685,11 +697,20 @@ public class InnerWindow extends ResizablePanel {
 				Overlay.addToFrame(this);
 			}
 			else {
-				if(title.equalsIgnoreCase("Settings")) {
-					SettingsWindow.frame.setVisible(true);
-				}
+
 				if(title.equalsIgnoreCase("Startup")){
 					Onboarding.frame.setVisible(true);
+				}
+			}
+			if(title.equalsIgnoreCase("Settings")) {
+				if(Settings.windowedMode){
+					SettingsWindow.frame.setVisible(true);
+				}
+				else {
+					SettingsWindow.window.setVisible(true);
+					Overlay.frame.setFocusableWindowState(true);
+					Overlay.frame.setFocusable(true);
+
 				}
 			}
 			toggleState = true;

@@ -131,7 +131,7 @@ public class RequestsLog {
 	private static void removeID(String ID) {
 		i--;
 		if (i % 5 == 0 && i !=0) {
-			height = height - 36.7;
+			height = height - 35.73333333;
 			blockedListPanel.setBounds(0, 0, 415, (int) (height + 4));
 			blockedListPanel.setPreferredSize(new Dimension(415, (int) (height + 4)));
 			scrollPane.updateUI();
@@ -150,7 +150,7 @@ public class RequestsLog {
 	public static void addButton(String ID) {
 		i++;
 		if (i % 5 == 0) {
-			height = height + 36.7;
+			height = height + 35.73333333;
 			blockedListPanel.setBounds(0, 0, 415, (int) (height + 4));
 			blockedListPanel.setPreferredSize(new Dimension(415, (int) (height + 4)));
 			scrollPane.updateUI();
@@ -169,7 +169,7 @@ public class RequestsLog {
 			public void mousePressed(MouseEvent e) {
 				Object[] options = {"Yes", "No"};
 				SettingsWindow.run = false;
-				int n = JOptionPane.showOptionDialog(SettingsWindow.frame,
+				int n = JOptionPane.showOptionDialog(SettingsWindow.window,
 						"Remove " + button.getLText() + "?",
 						"Remove logged ID? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, options, options[1]);

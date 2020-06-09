@@ -81,7 +81,7 @@ public class InfoWindow {
 			length.setText("LENGTH: NA");
 			password.setText("PASSWORD: NA");
 
-			downloads.setText("DOWNLOADS: N/A");
+			downloads.setText("DOWNLOADS: NA");
 		} else {
 			likes.setText("LIKES: " + Requests.levels.get(LevelsWindow.getSelectedID()).getLikes());
 			description.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getDescription());

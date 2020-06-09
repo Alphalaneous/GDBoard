@@ -3,6 +3,7 @@ package Main.SettingsPanels;
 import Main.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -11,6 +12,7 @@ public class WindowedSettings {
 	private static JButtonUI defaultUI = new JButtonUI();
 	public static boolean onTopOption = true;
 	private static CheckboxButton onTop = createButton("Always On Top", 20);
+ 	private static JPanel panel = new JPanel();
 
 	public static JPanel createPanel() {
 
@@ -26,7 +28,6 @@ public class WindowedSettings {
 				((InnerWindow) Windowed.window).setMinimize(!onTopOption);
 			}
 		});
-		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setDoubleBuffered(true);
 		panel.setBounds(0, 0, 415, 622);
@@ -65,5 +66,28 @@ public class WindowedSettings {
 		button.refresh();
 		return button;
 	}
+	public static void refreshUI() {
+		defaultUI.setBackground(Defaults.BUTTON);
+		defaultUI.setHover(Defaults.BUTTON_HOVER);
+		defaultUI.setSelect(Defaults.SELECT);
 
+		panel.setBackground(Defaults.SUB_MAIN);
+		for (Component component : panel.getComponents()) {
+			if (component instanceof JButton) {
+				for (Component component2 : ((JButton) component).getComponents()) {
+					if (component2 instanceof JLabel) {
+						component2.setForeground(Defaults.FOREGROUND);
+					}
+				}
+				component.setBackground(Defaults.BUTTON);
+			}
+			if(component instanceof JTextArea){
+				((FancyTextArea) component).refreshAll();
+			}
+			if(component instanceof CheckboxButton){
+				((CheckboxButton) component).refresh();
+			}
+
+		}
+	}
 }

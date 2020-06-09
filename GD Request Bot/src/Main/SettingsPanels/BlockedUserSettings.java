@@ -20,7 +20,7 @@ public class BlockedUserSettings {
 	private static JPanel blockedListPanel = new JPanel();
 	private static JScrollPane scrollPane = new JScrollPane(blockedListPanel);
 	private static FancyTextArea blockedInput = new FancyTextArea(false);
-	private static RoundedJButton addID = new RoundedJButton("\uECC8", "Add ID");
+	private static RoundedJButton addID = new RoundedJButton("\uECC8", "Add User");
 	private static int i = 0;
 	private static double height = 0;
 
@@ -192,7 +192,6 @@ public class BlockedUserSettings {
 
 	public static void addButton(String user) {
 		i++;
-		System.out.println(height);
 		if (i % 2 == 0) {
 			height = height + 36.7;
 
@@ -214,7 +213,7 @@ public class BlockedUserSettings {
 			public void mousePressed(MouseEvent e) {
 				Object[] options = {"Yes", "No"};
 				SettingsWindow.run = false;
-				int n = JOptionPane.showOptionDialog(SettingsWindow.frame,
+				int n = JOptionPane.showOptionDialog(SettingsWindow.window,
 						"Unblock " + button.getLText() + "?",
 						"Unblock User? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, options, options[1]);

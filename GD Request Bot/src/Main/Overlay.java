@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 
 public class Overlay {
 
@@ -41,6 +42,11 @@ public class Overlay {
 			frame.setBackground(new Color(0, 0, 0, 0));
 
 		}
+		URL iconURL = Windowed.class.getResource("/Resources/Icons/windowIcon.png");
+		ImageIcon icon = new ImageIcon(iconURL);
+		Image newIcon = icon.getImage().getScaledInstance(120, 120,  Image.SCALE_SMOOTH);
+		frame.setIconImage(newIcon);
+		frame.setTitle("GDBoard - Settings");
 		frame.setBounds(Defaults.screenSize);
 		frame.setLayout(null);
 		mainFrame.setDoubleBuffered(true);
@@ -84,7 +90,6 @@ public class Overlay {
 	static void setVisible() {
 		frame.setVisible(true);
 		frame.setAlwaysOnTop(true);
-		SettingsWindow.toFront();
 	}
 
 	static void refreshUI(boolean color) {
@@ -123,6 +128,8 @@ public class Overlay {
 
 		ShortcutSettings.refreshUI();
 		RequestSettings.refreshUI();
+		RequestsLog.refreshUI();
+		WindowedSettings.refreshUI();
 		OutputSettings.refreshUI();
 	}
 	public static JFrame getWindow(){

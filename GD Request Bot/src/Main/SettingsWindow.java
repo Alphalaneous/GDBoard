@@ -5,8 +5,12 @@ import com.jidesoft.swing.ResizablePanel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.util.Set;
 import javax.swing.*;
 import Main.SettingsPanels.*;
@@ -16,8 +20,22 @@ import org.reflections.scanners.SubTypesScanner;
 public class SettingsWindow {
 	private static int width = 622;
 	private static int height = 622;
-	private static ResizablePanel window = new InnerWindow("Settings", 0, 0, width-2, height,
-			"\uE713", true).createPanel();
+	public static ResizablePanel window;
+	static{
+		try {
+			if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
+				window = new InnerWindow("Settings", 0, 0, width-2, height,
+						"\uE713", true).createPanel();
+			}
+			else{
+				window = new InnerWindow("Settings", 0, 0, width-2, height,
+						"\uE713", false).createPanel();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private static JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
 	private static JPanel content = new JPanel();
 	private static JPanel blankSpace = new JPanel();
@@ -34,18 +52,29 @@ public class SettingsWindow {
 	private static JPanel blocked = BlockedSettings.createPanel();
 	private static JPanel blockedUsers = BlockedUserSettings.createPanel();
 	private static JPanel loggedIDs = RequestsLog.createPanel();
-
-	private static JPanel windowed = WindowedSettings.createPanel();
+	public static JFrame frame = new JFrame();
+	public static JPanel windowed = WindowedSettings.createPanel();
 
 	public static boolean run = true;
-	public static JDialog frame = new JDialog();
 	static void createPanel() {
-		frame.setAlwaysOnTop(true);
+		frame.setSize(800,800);
+		URL iconURL = Windowed.class.getResource("/Resources/Icons/windowIcon.png");
+		ImageIcon icon = new ImageIcon(iconURL);
+		Image newIcon = icon.getImage().getScaledInstance(120, 120,  Image.SCALE_SMOOTH);
+		frame.setIconImage(newIcon);
+		frame.setTitle("GDBoard - Settings");
+		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
 
+			}
+		});
 		frame.setUndecorated(true);
 		frame.setSize(width + 200,height+32 + 200);
 		frame.setLayout(null);
 		frame.setBackground(new Color(255, 255, 255, 0));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		blankSpace.setBounds(1, 31, 208, 20);
 		blankSpace.setBackground(Defaults.MAIN);
 
@@ -109,17 +138,18 @@ public class SettingsWindow {
 		if(Settings.windowedMode){
 			buttons.add(windowed);
 		}
-
+		toggleVisible();
 		window.add(blankSpace);
 		window.add(buttons);
 		window.add(content);
 		((InnerWindow) window).setPinVisible();
 		((InnerWindow) window).refreshListener();
-		frame.add(window);
-		frame.setLocation(Settings.getSettingsWLoc().x, Settings.getSettingsWLoc().y);
-	}
-	static void toFront(){
-		frame.toFront();
+		if(Settings.windowedMode){
+			frame.add(window);
+		}
+		else {
+			Overlay.addToFrame(window);
+		}
 	}
 	static void refreshUI() {
 		((InnerWindow) window).refreshUI();
@@ -255,12 +285,22 @@ public class SettingsWindow {
 	}
 	//region SetLocation
 	static void setLocation(Point point){
-		frame.setLocation(point);
+		if(Settings.windowedMode){
+			frame.setLocation(point);
+		}
+		else {
+			window.setLocation(point);
+		}
 	}
 	//endregion
 	//region SetSettings
 	public static void setSettings(){
-		Settings.setWindowSettings("Settings", frame.getX() + "," + frame.getY() + "," + false + "," + frame.isVisible());
+		if(Settings.windowedMode){
+			Settings.setWindowSettings("Settings", frame.getX() + "," + frame.getY() + "," + false + "," + frame.isVisible());
+		}
+		else {
+			Settings.setWindowSettings("Settings", window.getX() + "," + window.getY() + "," + false + "," + window.isVisible());
+		}
 
 	}
 	//endregion

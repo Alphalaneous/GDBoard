@@ -42,19 +42,32 @@ public class Functions {
 		}
 		if(Main.loaded) {
 			if (Requests.levels.size() != 0) {
-				if (!(Requests.levels.size() <= 1) && LevelsWindow.getSelectedID() == 0) {
+				if (Requests.levels.size() > 1 && LevelsWindow.getSelectedID() == 0) {
 					StringSelection selection = new StringSelection(
 							Requests.levels.get(LevelsWindow.getSelectedID() + 1).getLevelID());
 					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 					clipboard.setContents(selection, selection);
 				}
+				int select = LevelsWindow.getSelectedID();
 				Requests.levels.remove(LevelsWindow.getSelectedID());
 				LevelsWindow.removeButton();
-				if (LevelsWindow.getSelectedID() == 0 && Requests.levels.size() > 1) {
+				if (select == 0 && Requests.levels.size() > 0) {
 					if (!GeneralSettings.nowPlayingOption) {
-						Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
-								+ Requests.levels.get(0).getLevelID() + "). Requested by "
-								+ Requests.levels.get(0).getRequester());
+						if(Requests.levels.get(0).getContainsImage()){
+							Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
+									+ Requests.levels.get(0).getLevelID() + "). Requested by "
+									+ Requests.levels.get(0).getRequester() + " (Image Hack)");
+						}
+						else if(Requests.levels.get(0).getContainsVulgar()){
+							Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
+									+ Requests.levels.get(0).getLevelID() + "). Requested by "
+									+ Requests.levels.get(0).getRequester() + " (Vulgar Language)");
+						}
+						else{
+							Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
+									+ Requests.levels.get(0).getLevelID() + "). Requested by "
+									+ Requests.levels.get(0).getRequester());
+						}
 					}
 				}
 				Functions.saveFunction();

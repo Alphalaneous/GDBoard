@@ -19,7 +19,7 @@ public class ShortcutSettings {
 	private static JPanel blockPanel = createKeybindButton(225, "Block", "blockKeybind");
 	private static JPanel clearPanel = createKeybindButton(275, "Clear", "clearKeybind");
 	//private static JPanel lockPanel = createKeybindButton(325, "Lock Mouse to GD", "lockKeybind");
-
+	public static boolean focused = false;
 
 	public static int openKeybind = 36;
 	public static int skipKeybind = 0;
@@ -103,18 +103,18 @@ public class ShortcutSettings {
                     }
                 }
             }
-        });
+        });*/
         input.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                isFocused[0] = true;
+                focused = true;
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                isFocused[0] = false;
+                focused = false;
             }
-        });*/
+        });
 		input.setBounds(285, 1, 100, 32);
 
 		input.setDocument(doc);

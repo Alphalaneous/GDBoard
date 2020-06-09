@@ -30,18 +30,23 @@ public class RoundedJButton extends JButton {
 				exited[0] = false;
 				Thread thread = new Thread(() -> {
 					try {
-						Thread.sleep(1000);
+						Thread.sleep(500);
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
-					System.out.println(exited[0]);
 					if(!exited[0]) {
 						tooltipPanel.setBackground(Defaults.TOP);
 						tooltipLabel.setForeground(Defaults.FOREGROUND);
-						System.out.println("X: " + (MouseInfo.getPointerInfo().getLocation().x - (tooltipLabel.getPreferredSize().width + 10)/2) + " Y: " +  (MouseInfo.getPointerInfo().getLocation().y+20));
-						tooltipPanel.setBounds(MouseInfo.getPointerInfo().getLocation().x - (tooltipLabel.getPreferredSize().width + 10)/2 - Defaults.screenSize.x, MouseInfo.getPointerInfo().getLocation().y+20 - Defaults.screenSize.y, tooltipLabel.getPreferredSize().width + 10, tooltipLabel.getPreferredSize().height + 5);
+						if(Settings.windowedMode){
+							tooltipPanel.setBounds(MouseInfo.getPointerInfo().getLocation().x - (tooltipLabel.getPreferredSize().width + 10)/2 - Windowed.frame.getX(), MouseInfo.getPointerInfo().getLocation().y+20 - Windowed.frame.getY(), tooltipLabel.getPreferredSize().width + 10, tooltipLabel.getPreferredSize().height + 5);
+							Windowed.addToFrame(tooltipPanel);
+						}
+						else{
+							tooltipPanel.setBounds(MouseInfo.getPointerInfo().getLocation().x - (tooltipLabel.getPreferredSize().width + 10)/2 - Defaults.screenSize.x, MouseInfo.getPointerInfo().getLocation().y+20 - Defaults.screenSize.y, tooltipLabel.getPreferredSize().width + 10, tooltipLabel.getPreferredSize().height + 5);
+							Overlay.addToFrame(tooltipPanel);
+
+						}
 						tooltipPanel.setVisible(true);
-						Overlay.addToFrame(tooltipPanel);
 					}
 				});
 				thread.start();
