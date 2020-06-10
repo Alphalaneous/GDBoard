@@ -457,7 +457,7 @@ public class Requests {
 	static boolean bwomp = false;
 
 	@SuppressWarnings("unused")
-	public static void bwomp(){
+	public static void toggleBwomp(){
 		bwomp = !bwomp;
 	}
 
@@ -486,6 +486,33 @@ public class Requests {
 	public static void stopKnock(){
 		if (knockThread != null && knockThread.isAlive()) {
 			knockThread.stop();
+		}
+	}
+	private static Thread bwompThread = null;
+
+	@SuppressWarnings("unused")
+	public static void bwomp(){
+		if (bwompThread != null) {
+			bwompThread.stop();
+		}
+		bwompThread = new Thread(() -> {
+			try {
+				BufferedInputStream inp = new BufferedInputStream(ServerChatBot.class
+						.getResource("/Resources/bwomp.mp3").openStream());
+				Player mp3player = new Player(inp);
+				mp3player.play();
+			} catch (JavaLayerException | NullPointerException | IOException f) {
+				f.printStackTrace();
+				JOptionPane.showMessageDialog(null, "There was an error playing the music!", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		});
+		bwompThread.start();
+	}
+
+	@SuppressWarnings("unused")
+	public static void stopBwomp(){
+		if (bwompThread != null && bwompThread.isAlive()) {
+			bwompThread.stop();
 		}
 	}
 
