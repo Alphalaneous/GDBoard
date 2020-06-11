@@ -202,12 +202,24 @@ public class Requests {
 			levelData.setObjects(Objects.requireNonNull(level.getObjectCount()));
 			levelData.setOriginal(Objects.requireNonNull(level.getOriginalLevelID()));
 			levelData.setCoins(Objects.requireNonNull(level.getCoinCount()));
-			GDUser user = client.searchUser(levelData.getAuthor()).block();
 			GDUserIconSet iconSet = null;
+			GDUser user = null;
 			try {
-				iconSet = new GDUserIconSet(user, SpriteFactory.create());
-			} catch (SpriteLoadException e) {
-				e.printStackTrace();
+				user = client.searchUser(levelData.getAuthor()).block();
+
+				try {
+					iconSet = new GDUserIconSet(user, SpriteFactory.create());
+				} catch (SpriteLoadException e) {
+					e.printStackTrace();
+				}
+			}
+			catch (MissingAccessException e){
+				user = client.searchUser("RobTop").block();
+				try {
+					iconSet = new GDUserIconSet(user, SpriteFactory.create());
+				} catch (SpriteLoadException e1) {
+					e1.printStackTrace();
+				}
 			}
 			BufferedImage icon = iconSet.generateIcon(user.getMainIconType());
 			Image imgScaled = icon.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
