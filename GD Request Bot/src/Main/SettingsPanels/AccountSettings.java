@@ -50,10 +50,6 @@ public class AccountSettings {
 				Thread thread = new Thread(() -> {
 					try {
 						APIs.setOauth();
-						String channel = APIs.getChannel();
-						Settings.writeSettings("channel", channel);
-						Settings.channel = channel;
-						AccountSettings.refreshChannel(channel);
 					}
 					catch (Exception ignored){
 					}

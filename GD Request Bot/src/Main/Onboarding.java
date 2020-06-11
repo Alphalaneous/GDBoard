@@ -1,6 +1,5 @@
 package Main;
 
-import Main.SettingsPanels.AccountSettings;
 import Main.SettingsPanels.ShortcutSettings;
 import com.jidesoft.swing.ResizablePanel;
 import org.jnativehook.keyboard.SwingKeyAdapter;
@@ -124,16 +123,10 @@ public class Onboarding {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				try {
-					//moveOn.setVisible(true);
+					moveOn.setVisible(true);
 					APIs.setOauth();
 					Thread thread = new Thread(() -> {
-						while (true) {
-							try {
-								if (!(!Settings.getSettings("oauth").equalsIgnoreCase("")))
-									break;
-							} catch (IOException e1) {
-								e1.printStackTrace();
-							}
+						while (!APIs.success.get()) {
 							try {
 								Thread.sleep(100);
 							} catch (InterruptedException e1) {
@@ -143,12 +136,12 @@ public class Onboarding {
 						Onboarding.setInvisible();
 						ShortcutSettings.loadKeybind("Open", openKeybind);
 						try {
-							String channel = APIs.getChannel();
 							Settings.writeSettings("openKeybind", String.valueOf(openKeybind));
-							Settings.writeSettings("channel", channel);
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+						try {
 							Settings.writeSettings("onboarding", "false");
-							Settings.channel = channel;
-							AccountSettings.refreshChannel(channel);
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
