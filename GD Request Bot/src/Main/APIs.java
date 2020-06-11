@@ -119,7 +119,7 @@ public class APIs {
 		}
 	}
 
-	private static String getChannel() {
+	public static String getChannel() {
 		JsonObject nameObj = twitchAPI("https://api.twitch.tv/kraken/user", true);
 		assert nameObj != null;
 		return String.valueOf(nameObj.get("display_name")).replaceAll("\"", "");
@@ -195,20 +195,6 @@ public class APIs {
 					if (twitch.auth().awaitAccessToken()) {
 						Settings.oauth = twitch.auth().getAccessToken();
 						Settings.writeSettings("oauth", twitch.auth().getAccessToken());
-						String channel = "";
-						while(true) {
-							try {
-								channel = APIs.getChannel();
-								Settings.channel = channel;
-								Settings.writeSettings("channel", channel);
-								AccountSettings.refreshChannel(channel);
-								break;
-							} catch (IOException e) {
-								JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
-
-							}
-							Thread.sleep(100);
-						}
 						success.set(true);
 						try {
 							GDBoardBot.restart();

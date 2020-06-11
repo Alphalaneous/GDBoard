@@ -272,7 +272,7 @@ public class Settings {
 	private static Point settingsWLoc = new Point(1920 / 2 - 250, 1080 / 2 - 300);
 	private static Point windowWLoc = new Point(0, 0);
 	static int monitor;
-	static String channel;
+	public static String channel;
 	static boolean hasMonitor = false;
 	public static boolean onboarding = true;
 	static boolean hasWindowed = false;
