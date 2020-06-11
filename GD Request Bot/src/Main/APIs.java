@@ -194,10 +194,19 @@ public class APIs {
 				if (twitch.auth().awaitAccessToken()) {
 					Settings.oauth = twitch.auth().getAccessToken();
 					Settings.writeSettings("oauth", twitch.auth().getAccessToken());
-					String channel = APIs.getChannel();
-					Settings.channel = channel;
-					Settings.writeSettings("channel", channel);
-					AccountSettings.refreshChannel(channel);
+					String channel = "";
+					while(true){
+						if(channel.equalsIgnoreCase("")) {
+							channel = APIs.getChannel();
+							Settings.channel = channel;
+						}
+						else {
+							Settings.writeSettings("channel", channel);
+							AccountSettings.refreshChannel(channel);
+							break;
+						}
+						Thread.sleep(1000);
+					}
 					success.set(true);
 					try {
 						GDBoardBot.restart();
