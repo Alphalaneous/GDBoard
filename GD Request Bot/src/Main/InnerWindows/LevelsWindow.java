@@ -7,9 +7,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
-import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
-import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
-
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -18,9 +15,13 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.Objects;
 
+import static javax.swing.ScrollPaneConstants.*;
+
 public class LevelsWindow {
 
 	private static int width = 400;
+	private static int buttonWidth = 385;
+
 	private static int height = 400;
 	private static ResizablePanel window = new InnerWindow("Requests - 0", Settings.getRequestsWLoc().x, Settings.getRequestsWLoc().y, width, height, "\uE179", false) {
 		@Override
@@ -35,8 +36,7 @@ public class LevelsWindow {
 						}
 						setBounds(getX(), newY, getWidth(), newH);
 						resetDimensions(width, newH - 32);
-						scrollPane.setBounds(1, 31, width + 1, newH - 32);
-						scrollPane.updateUI();
+						scrollPane.setBounds(1, 31, width, newH - 32);
 					}
 				}
 			};
@@ -66,15 +66,16 @@ public class LevelsWindow {
 		scrollPane = new JScrollPane(mainPanel);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
 		scrollPane.getViewport().setBackground(Defaults.MAIN);
-		scrollPane.setBounds(1, 31, width + 1, height);
+		scrollPane.setBounds(1, 31, width , height);
 		scrollPane.setPreferredSize(new Dimension(400, height));
 		scrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(30);
-		scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(1, height));
+		//scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(1, height));
 		scrollPane.getVerticalScrollBar().setOpaque(false);
 		scrollPane.setOpaque(false);
 		scrollPane.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
+		/*scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
 
 			private final Dimension d = new Dimension();
 
@@ -124,7 +125,7 @@ public class LevelsWindow {
 				super.setThumbBounds(x, y, width, height);
 				scrollbar.repaint();
 			}
-		});
+		});*/
 		window.add(scrollPane);
 		((InnerWindow) window).refreshListener();
 		if(!Settings.windowedMode) {
@@ -136,10 +137,13 @@ public class LevelsWindow {
 	}
 
 	public static void createButton(String name, String author, String ID, String difficulty, boolean epic, boolean featured, int starCount, String requester, double version){
+		Point saved = scrollPane.getViewport().getViewPosition();
+		scrollPane.getViewport().setViewPosition( saved );
 		mainPanel.add(new LevelButton(name, author, ID, difficulty, epic, featured, starCount, requester, version));
 		if(Requests.levels.size() == 1){
 			setOneSelect();
 		}
+		scrollPane.getViewport().setViewPosition(saved);
 	}
 	public static void setName(int count){
 		if(Settings.windowedMode){
@@ -264,13 +268,13 @@ public class LevelsWindow {
 				lAuthorID.setFont(Defaults.MAIN_FONT.deriveFont(12f));
 				lAuthorID.setBounds(60, 28, (int) lAuthorID.getPreferredSize().getWidth() + 5, 20);
 				lRequester.setFont(Defaults.MAIN_FONT.deriveFont(12f));
-				lRequester.setBounds((int) (400 - lRequester.getPreferredSize().getWidth()) - 10, 3,
+				lRequester.setBounds((int) (buttonWidth - lRequester.getPreferredSize().getWidth()) - 10, 3,
 						(int) lRequester.getPreferredSize().getWidth() + 5, 20);
 				lStarCount.setFont(Defaults.MAIN_FONT.deriveFont(18f));
-				lStarCount.setBounds(((int) (400 - lStarCount.getPreferredSize().getWidth()) - 30), 28,
+				lStarCount.setBounds(((int) (buttonWidth - lStarCount.getPreferredSize().getWidth()) - 30), 28,
 						(int) lStarCount.getPreferredSize().getWidth() + 5, 20);
 				lStar.setFont(Defaults.SYMBOLS.deriveFont(16f));
-				lStar.setBounds((int) (400 - lStar.getPreferredSize().getWidth()) - 10, 25,
+				lStar.setBounds((int) (buttonWidth - lStar.getPreferredSize().getWidth()) - 10, 25,
 						(int) lStar.getPreferredSize().getWidth() + 5, 20);
 				lAnalyzed.setFont(Defaults.MAIN_FONT.deriveFont(12f));
 
@@ -292,11 +296,11 @@ public class LevelsWindow {
 					lAnalyzed.setText("Analyzing...");
 				}
 
-				lAnalyzed.setBounds((int) (400 - lAnalyzed.getPreferredSize().getWidth()) - 10, 28,
+				lAnalyzed.setBounds((int) (buttonWidth - lAnalyzed.getPreferredSize().getWidth()) - 10, 28,
 						(int) lAnalyzed.getPreferredSize().getWidth(), 20);
 
 				setBorder(BorderFactory.createEmptyBorder());
-				setPreferredSize(new Dimension(width, 50));
+				setPreferredSize(new Dimension(buttonWidth, 50));
 
 				addMouseListener(new MouseAdapter() {
 					@Override
@@ -373,7 +377,6 @@ public class LevelsWindow {
 				panelHeight = panelHeight + 50;
 				mainPanel.setBounds(0, 0, width, panelHeight);
 				mainPanel.setPreferredSize(new Dimension(width, panelHeight));
-				scrollPane.updateUI();
 				mainPanel.updateUI();
 				((InnerWindow) window).refreshListener();
 
@@ -438,7 +441,7 @@ public class LevelsWindow {
 			else{
 				lAnalyzed.setText("Failed Analyzing");
 			}
-			lAnalyzed.setBounds((int) (400 - lAnalyzed.getPreferredSize().getWidth()) - 10, 28,
+			lAnalyzed.setBounds((int) (buttonWidth - lAnalyzed.getPreferredSize().getWidth()) - 10, 28,
 					(int) lAnalyzed.getPreferredSize().getWidth(), 20);
 		}
 		public void select(){

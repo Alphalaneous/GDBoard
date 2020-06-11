@@ -181,11 +181,18 @@ public class Requests {
 			levelData.setLength(level.getLength().toString());
 			levelData.setLevelID(ID);
 			levelData.setVersion(level.getGameVersion());
+			levelData.setLevelVersion(level.getLevelVersion());
+
 			levelData.setEpic(level.isEpic());
 			levelData.setSongID(String.valueOf(Objects.requireNonNull(level.getSong().block()).getId()));
 			levelData.setStars(level.getStars());
 			levelData.setSongName(Objects.requireNonNull(level.getSong().block()).getSongTitle());
 			levelData.setSongAuthor(Objects.requireNonNull(level.getSong().block()).getSongAuthorName());
+			levelData.setObjects(Objects.requireNonNull(level.getObjectCount()));
+			levelData.setOriginal(Objects.requireNonNull(level.getOriginalLevelID()));
+			levelData.setCoins(Objects.requireNonNull(level.getCoinCount()));
+
+
 
 			//String[] videoInfo = APIs.getYTVideo(ID);
 
@@ -233,6 +240,10 @@ public class Requests {
 					parse(((GDLevelData) Objects.requireNonNull(object)).getData(), ID);
 				}
 				levelData.setPassword(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getPass()));
+				levelData.setUpload(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getUploadTimestamp()));
+				levelData.setUpdate(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getLastUpdatedTimestamp()));
+				InfoWindow.refreshInfo();
+
 
 			});
 			parse.start();

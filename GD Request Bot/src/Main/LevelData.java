@@ -4,6 +4,7 @@ package Main;
 public class LevelData {
 
 
+
 	public String getPassword() {
 		return password;
 	}
@@ -115,6 +116,29 @@ public class LevelData {
 
 	public String getThumbnailURL() { return thumbnailURL; }
 
+	public String getUpload() {
+		return upload;
+	}
+
+	public String getUpdate() {
+		return update;
+	}
+
+	public int getObjects() {
+		return objects;
+	}
+
+	public long getOriginal() {
+		return original;
+	}
+
+	public int getCoins() {
+		return coins;
+	}
+	public int getLevelVersion() {
+		return levelVersion;
+	}
+
 	private String requester;
 	private String password;
 	private String author;
@@ -128,17 +152,12 @@ public class LevelData {
 	private String videoURL;
 	private String channelName;
 	private String thumbnailURL;
-	//private int coins;
-	//private boolean verifiedCoins;
 	private boolean featured;
 	private boolean epic;
 	private String downloadURL;
-
 	private String songName;
 	private String songAuthor;
 	private String songID;
-	//private String songSize;
-	//private ArrayList<GDObject> levelData;
 	private boolean containsVulgar;
 	private boolean containsImage;
 	private boolean analyzed = false;
@@ -146,6 +165,13 @@ public class LevelData {
 	private String length;
 	private boolean persist;
 	private double version;
+	private String upload;
+	private String update;
+	private int objects;
+	private long original;
+	private int coins;
+	private int levelVersion;
+
 
 	public void setVideoInfo(String title, String ID, String channel, String thumbnail){
 		this.videoTitle = title;
@@ -251,7 +277,31 @@ public class LevelData {
 		this.length = length;
     }
 
-    //void setSongSize(String songSize) {
+	public void setUpload(String upload) {
+		this.upload = upload;
+	}
+
+	public void setUpdate(String update) {
+		this.update = update;
+	}
+
+	public void setObjects(int objects) {
+		this.objects = objects;
+	}
+
+	public void setOriginal(long original) {
+		this.original = original;
+	}
+
+	public void setCoins(int coins) {
+		this.coins = coins;
+	}
+
+	public void setLevelVersion(int levelVersion) {
+		this.levelVersion = levelVersion;
+	}
+
+	//void setSongSize(String songSize) {
 	//	this.songSize = songSize;
 	//}
 }
