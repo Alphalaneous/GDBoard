@@ -177,12 +177,15 @@ public class InfoWindow {
 	public static void refreshUI() {
 		((InnerWindow) window).refreshUI();
 		panel.setBackground(Defaults.MAIN);
+		for(Component component : panel.getComponents()){
+			if(component instanceof JLabel){
+				component.setForeground(Defaults.FOREGROUND);
+			}
+		}
 		descPanel.setBackground(Defaults.SUB_MAIN);
-		likes.setForeground(Defaults.FOREGROUND);
-		length.setForeground(Defaults.FOREGROUND);
-		password.setForeground(Defaults.FOREGROUND);
-		downloads.setForeground(Defaults.FOREGROUND);
 		description.setForeground(Defaults.FOREGROUND);
+		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
+		scrollPane.getHorizontalScrollBar().setUI(new ScrollbarUI());
 	}
 	private static JLabel createLabel(String text, int y, int width){
 		JLabel label = new JLabel(text);

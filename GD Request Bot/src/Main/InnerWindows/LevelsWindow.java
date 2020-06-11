@@ -569,6 +569,12 @@ public class LevelsWindow {
 			}
 			i++;
 		}
+		if(scrollPane != null) {
+			scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
+			scrollPane.setBackground(Defaults.MAIN);
+			scrollPane.getViewport().setBackground(Defaults.MAIN);
+
+		}
 	}
 
 	public static void setOneSelect() {
