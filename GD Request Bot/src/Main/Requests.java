@@ -7,19 +7,23 @@ import Main.InnerWindows.SongWindow;
 import Main.SettingsPanels.*;
 import com.github.alex1304.jdash.client.AnonymousGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
-import com.github.alex1304.jdash.entity.GDLevel;
-import com.github.alex1304.jdash.entity.GDLevelData;
+import com.github.alex1304.jdash.entity.*;
 import com.github.alex1304.jdash.exception.MissingAccessException;
+import com.github.alex1304.jdash.exception.SpriteLoadException;
+import com.github.alex1304.jdash.graphics.SpriteFactory;
+import com.github.alex1304.jdash.util.GDUserIconSet;
 import com.github.alex1304.jdash.util.LevelSearchFilters;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -198,9 +202,17 @@ public class Requests {
 			levelData.setObjects(Objects.requireNonNull(level.getObjectCount()));
 			levelData.setOriginal(Objects.requireNonNull(level.getOriginalLevelID()));
 			levelData.setCoins(Objects.requireNonNull(level.getCoinCount()));
-
-
-
+			GDUser user = client.searchUser(levelData.getAuthor()).block();
+			GDUserIconSet iconSet = null;
+			try {
+				iconSet = new GDUserIconSet(user, SpriteFactory.create());
+			} catch (SpriteLoadException e) {
+				e.printStackTrace();
+			}
+			BufferedImage icon = iconSet.generateIcon(user.getMainIconType());
+			Image imgScaled = icon.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+			ImageIcon imgNew = new ImageIcon(imgScaled);
+			levelData.setPlayerIcon(imgNew);
 			//String[] videoInfo = APIs.getYTVideo(ID);
 
             /*if(videoInfo.length != 0) {
@@ -228,6 +240,10 @@ public class Requests {
 			if(Main.loaded) {
 				if (RequestSettings.excludedDifficulties.contains(levelData.getDifficulty().toLowerCase()) && RequestSettings.disableOption) {
 					Main.sendMessage("@" + requester + " That difficulty is disabled!");
+					return;
+				}
+				if (RequestSettings.excludedLengths.contains(levelData.getLength().toLowerCase()) && RequestSettings.disableLengthOption) {
+					Main.sendMessage("@" + requester + " That length is disabled!");
 					return;
 				}
 			}
@@ -268,7 +284,7 @@ public class Requests {
 				songDL.start();
 			}
 			levels.add(levelData);
-			LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester(), levelData.getVersion());
+			LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester(), levelData.getVersion(), levelData.getPlayerIcon());
 			LevelsWindow.setName(Requests.levels.size());
 			Functions.saveFunction();
 			if(Main.doMessage) {

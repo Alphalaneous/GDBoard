@@ -136,10 +136,10 @@ public class LevelsWindow {
 		return scrollPane;
 	}
 
-	public static void createButton(String name, String author, String ID, String difficulty, boolean epic, boolean featured, int starCount, String requester, double version){
+	public static void createButton(String name, String author, String ID, String difficulty, boolean epic, boolean featured, int starCount, String requester, double version, ImageIcon playerIcon){
 		Point saved = scrollPane.getViewport().getViewPosition();
 		scrollPane.getViewport().setViewPosition( saved );
-		mainPanel.add(new LevelButton(name, author, ID, difficulty, epic, featured, starCount, requester, version));
+		mainPanel.add(new LevelButton(name, author, ID, difficulty, epic, featured, starCount, requester, version, playerIcon));
 		if(Requests.levels.size() == 1){
 			setOneSelect();
 		}
@@ -174,15 +174,17 @@ public class LevelsWindow {
 		boolean image;
 		boolean vulgar;
 		boolean selected;
+		ImageIcon playerIcon;
 
 		JLabel lName = new JLabel();
 		JLabel lAuthorID = new JLabel();
 		JLabel lRequester = new JLabel();
 		JLabel lAnalyzed = new JLabel();
 		JLabel lStarCount = new JLabel();
+		JLabel lPlayerIcon = new JLabel();
 		JLabel lStar = new JLabel("\uE24A");
 
-		LevelButton(String name, String author, String ID, String difficulty, boolean epic, boolean featured, int starCount, String requester, double version){
+		LevelButton(String name, String author, String ID, String difficulty, boolean epic, boolean featured, int starCount, String requester, double version, ImageIcon playerIcon){
 			this.name = name;
 			this.ID = ID;
 			this.author = author;
@@ -192,6 +194,7 @@ public class LevelsWindow {
 			this.starCount = starCount;
 			this.requester = requester;
 			this.version = version;
+			this.playerIcon = playerIcon;
 			try {
 				defaultUI.setBackground(Defaults.MAIN);
 				defaultUI.setHover(Defaults.HOVER);
@@ -254,6 +257,7 @@ public class LevelsWindow {
 				add(lAuthorID);
 				add(lRequester);
 				add(lAnalyzed);
+				add(lPlayerIcon);
 				add(reqDifficulty);
 				System.out.println(starCount);
 				if (starCount != 0) {
@@ -267,6 +271,10 @@ public class LevelsWindow {
 				lName.setBounds(60, 2, (int) lName.getPreferredSize().getWidth() + 5, 30);
 				lAuthorID.setFont(Defaults.MAIN_FONT.deriveFont(12f));
 				lAuthorID.setBounds(60, 28, (int) lAuthorID.getPreferredSize().getWidth() + 5, 20);
+				lPlayerIcon.setIcon(playerIcon);
+				lPlayerIcon.setBounds(60 + lAuthorID.getPreferredSize().width + 2, 16, 40, 40);
+
+
 				lRequester.setFont(Defaults.MAIN_FONT.deriveFont(12f));
 				lRequester.setBounds((int) (buttonWidth - lRequester.getPreferredSize().getWidth()) - 10, 3,
 						(int) lRequester.getPreferredSize().getWidth() + 5, 20);

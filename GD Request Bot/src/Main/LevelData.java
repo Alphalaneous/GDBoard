@@ -1,5 +1,6 @@
 package Main;
 
+import javax.swing.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -138,8 +139,13 @@ public class LevelData {
 	public int getCoins() {
 		return coins;
 	}
+
 	public int getLevelVersion() {
 		return levelVersion;
+	}
+
+	public ImageIcon getPlayerIcon() {
+		return playerIcon;
 	}
 
 	private String requester;
@@ -174,6 +180,7 @@ public class LevelData {
 	private long original;
 	private int coins;
 	private int levelVersion;
+	private ImageIcon playerIcon;
 
 
 	public void setVideoInfo(String title, String ID, String channel, String thumbnail){
@@ -302,6 +309,10 @@ public class LevelData {
 
 	public void setLevelVersion(int levelVersion) {
 		this.levelVersion = levelVersion;
+	}
+
+	public void setPlayerIcon(ImageIcon playerIcon) {
+		this.playerIcon = playerIcon;
 	}
 
 	//void setSongSize(String songSize) {
