@@ -1,5 +1,8 @@
 package Main;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 /** @noinspection WeakerAccess*/
 public class LevelData {
 
@@ -94,8 +97,8 @@ public class LevelData {
 		return stars;
 	}
 
-	public String getSongURL(){
-		return downloadURL;
+	public URL getSongURL() throws MalformedURLException {
+		return new URL(downloadURL);
 	}
 
 	public String getLength(){

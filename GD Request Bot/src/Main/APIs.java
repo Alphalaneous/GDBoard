@@ -7,6 +7,7 @@ import com.cavariux.twitchirc.Json.JsonObject;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -90,18 +91,30 @@ public class APIs {
 	}
 	static boolean isNotFollowing(String user) {
 
-
-		JsonObject isFollowing = null;
 		try {
-			isFollowing = twitchAPI("https://api.twitch.tv/helix/users/follows?from_id=" + getIDs(user) + "&to_id=" + getIDs(Settings.getSettings("channel")));
-		} catch (IOException e) {
-			e.printStackTrace();
+			JsonObject isFollowing = null;
+			try {
+				isFollowing = twitchAPI("https://api.twitch.tv/helix/users/follows?from_id=" + getIDs(user) + "&to_id=" + getIDs(Settings.getSettings("channel")));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (user.equalsIgnoreCase(Settings.getSettings("channel"))) {
+					return false;
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			if (isFollowing != null) {
+				String str = isFollowing.get("total").toString();
+				System.out.println(str);
+				return !str.equalsIgnoreCase("1");
+			} else {
+				return true;
+			}
 		}
-		if (isFollowing != null) {
-			String str = isFollowing.get("total").toString();
-			System.out.println(str);
-			return !str.equalsIgnoreCase("1");
-		} else {
+		catch (Exception e){
+			JOptionPane.showMessageDialog(Overlay.frame, "If this pops up turn followers only off and report it to Alphalaneous please", "Error", JOptionPane.ERROR_MESSAGE);
 			return true;
 		}
 	}

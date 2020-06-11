@@ -21,19 +21,18 @@ public class GeneralSettings {
 	public static boolean userLimitOption = false;
 	public static boolean userLimitStreamOption = false;
 	private static JLabel versionLabel = new JLabel();
-	private static CheckboxButton followers = createButton("Followers Only", 50);
+	private static CheckboxButton followers = createButton("Followers Only (Experimental)", 50);
+	private static CheckboxButton subOnly = createButton("Subscribers Only", 80);
 	private static CheckboxButton nowPlaying = createButton("Disable Now Playing Message", 110);
 	private static CheckboxButton queueFull = createButton("Disable Queue is Full Message", 140);
-
 	private static CheckboxButton repeated = createButton("Disable Repeated Requests", 170);
 	private static CheckboxButton repeatedAll = createButton("Disable Repeated Requests All Time", 200);
 
-	//private static CheckboxButton autoDownload = createButton("Automatically download Music (Experimental)", 110);
-	private static CheckboxButton subOnly = createButton("Subscribers Only", 80);
+	private static CheckboxButton autoDownload = createButton("Automatic Song Downloads (Experimental)", 230);
 
-	private static CheckboxButton queueLimitText = createButton("Maximum Queue Size: ", 230);
-	private static CheckboxButton userLimitText = createButton("In Queue Request Limit: ", 305);
-	private static CheckboxButton userLimitStreamText = createButton("All Stream Request Limit: ", 380);
+	private static CheckboxButton queueLimitText = createButton("Maximum Queue Size: ", 260);
+	private static CheckboxButton userLimitText = createButton("In Queue Request Limit: ", 335);
+	private static CheckboxButton userLimitStreamText = createButton("All Stream Request Limit: ", 410);
 	private static JLabel donation = new JLabel();
 	private static CurvedButton donationButton = new CurvedButton("Donate");
 
@@ -127,12 +126,12 @@ public class GeneralSettings {
 		});
 
 
-		/*autoDownload.addMouseListener(new MouseAdapter() {
+		autoDownload.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				autoDownloadOption = autoDownload.getSelectedState();
 			}
-		});*/
+		});
 
 		queueLimitText.addMouseListener(new MouseAdapter() {
 			@Override
@@ -147,7 +146,7 @@ public class GeneralSettings {
 			}
 		});
 		queueSizeInput.setEditable(false);
-		queueSizeInput.setBounds(25,263,365, 32);
+		queueSizeInput.setBounds(25,293,365, 32);
 		queueSizeInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		queueSizeInput.addKeyListener(new KeyListener() {
 			@Override
@@ -180,7 +179,7 @@ public class GeneralSettings {
 		});
 
 		userLimitInput.setEditable(false);
-		userLimitInput.setBounds(25,335,365, 32);
+		userLimitInput.setBounds(25,365,365, 32);
 		userLimitInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		userLimitInput.addKeyListener(new KeyListener() {
 			@Override
@@ -213,7 +212,7 @@ public class GeneralSettings {
 		});
 
 		userLimitStreamInput.setEditable(false);
-		userLimitStreamInput.setBounds(25,410,365, 32);
+		userLimitStreamInput.setBounds(25,440,365, 32);
 		userLimitStreamInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		userLimitStreamInput.addKeyListener(new KeyListener() {
 			@Override
@@ -232,13 +231,13 @@ public class GeneralSettings {
 		});
 
 
-		//panel.add(followers);
+		panel.add(followers);
 		panel.add(subOnly);
 		panel.add(nowPlaying);
 		panel.add(queueFull);
 		panel.add(repeated);
 		panel.add(repeatedAll);
-		//panel.add(autoDownload);
+		panel.add(autoDownload);
 		panel.add(versionLabel);
 		panel.add(queueLimitText);
 		panel.add(queueSizeInput);
@@ -253,7 +252,7 @@ public class GeneralSettings {
 
 	public static void loadSettings(){
 		try {
-			//followersOption = Boolean.parseBoolean(Settings.getSettings("followers"));
+			followersOption = Boolean.parseBoolean(Settings.getSettings("followers"));
 			subsOption = Boolean.parseBoolean(Settings.getSettings("subscribers"));
 			nowPlayingOption = Boolean.parseBoolean(Settings.getSettings("disableNP"));
 			queueFullOption = Boolean.parseBoolean(Settings.getSettings("disableQF"));
@@ -261,8 +260,7 @@ public class GeneralSettings {
 			repeatedOption = Boolean.parseBoolean(Settings.getSettings("repeatedRequests"));
 			repeatedOptionAll = Boolean.parseBoolean(Settings.getSettings("repeatedRequestsAll"));
 
-			//autoDownloadOption = Boolean.parseBoolean(Settings.getSettings("autoDL"));
-			autoDownloadOption = false;
+			autoDownloadOption = Boolean.parseBoolean(Settings.getSettings("autoDL"));
 			queueLimitBoolean = Boolean.parseBoolean(Settings.getSettings("queueLimitEnabled"));
 			if(!Settings.getSettings("queueLimit").equalsIgnoreCase("")) {
 				queueLimit = Integer.parseInt(Settings.getSettings("queueLimit"));
@@ -278,14 +276,14 @@ public class GeneralSettings {
 				userLimitStream = Integer.parseInt(Settings.getSettings("userLimitStream"));
 				userLimitStreamInput.setText(String.valueOf(userLimitStream));
 			}
-			//followers.setChecked(followersOption);
+			followers.setChecked(followersOption);
 			nowPlaying.setChecked(nowPlayingOption);
 			queueFull.setChecked(queueFullOption);
 
 			subOnly.setChecked(subsOption);
 			repeated.setChecked(repeatedOption);
 			repeatedAll.setChecked(repeatedOptionAll);
-			//autoDownload.setChecked(autoDownloadOption);
+			autoDownload.setChecked(autoDownloadOption);
 			queueLimitText.setChecked(queueLimitBoolean);
 			userLimitText.setChecked(userLimitOption);
 			userLimitStreamText.setChecked(userLimitStreamOption);
@@ -314,7 +312,7 @@ public class GeneralSettings {
 	}
 	public static void setSettings(){
 		try {
-			//Settings.writeSettings("followers", String.valueOf(followersOption));
+			Settings.writeSettings("followers", String.valueOf(followersOption));
 			Settings.writeSettings("subscribers", String.valueOf(subsOption));
 			Settings.writeSettings("disableNP", String.valueOf(nowPlayingOption));
 			Settings.writeSettings("disableQF", String.valueOf(queueFullOption));

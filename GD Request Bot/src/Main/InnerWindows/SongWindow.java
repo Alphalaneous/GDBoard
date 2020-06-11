@@ -52,7 +52,7 @@ public class SongWindow {
 						try {
 							Player mp3player;
 							BufferedInputStream inp;
-							inp = new BufferedInputStream(new URL(Requests.levels.get(LevelsWindow.getSelectedID()).getSongURL()).openStream());
+							inp = new BufferedInputStream(Requests.levels.get(LevelsWindow.getSelectedID()).getSongURL().openStream());
 							mp3player = new Player(inp);
 							mp3player.play();
 						} catch (IOException | JavaLayerException | NullPointerException f) {

@@ -13,6 +13,7 @@ import com.github.alex1304.jdash.exception.MissingAccessException;
 import com.github.alex1304.jdash.util.LevelSearchFilters;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
 import javax.swing.*;
@@ -41,27 +42,17 @@ public class Requests {
 
 	static void addRequest(String ID, String requester) {
 		OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
-		try {
-			Path blockedUser = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blockedUsers.txt");
-			if (Files.exists(blockedUser)) {
-				Scanner sc = new Scanner(blockedUser.toFile());
-				while (sc.hasNextLine()) {
-					if (requester.equalsIgnoreCase(sc.nextLine())) {
-						sc.close();
-						return;
-					}
-				}
-				sc.close();
-			}
-		}
-		catch (Exception e){
-			e.printStackTrace();
-		}
+
+
 		if (MainBar.requests) {
 			Path blocked = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
 			Path logged = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\requestsLog.txt");
+			Path blockedUser = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blockedUsers.txt");
 			if(Main.loaded) {
-
+				if(GeneralSettings.followersOption && APIs.isNotFollowing(requester)){
+					Main.sendMessage("@" + requester + " Please follow to send levels!");
+					return;
+				}
 				for (int k = 0; k < levels.size(); k++) {
 
 					if (ID.equals(levels.get(k).getLevelID())) {
@@ -137,6 +128,22 @@ public class Requests {
 					}
 					sc.close();
 				}
+
+					if (Files.exists(blockedUser)) {
+						Scanner sc = null;
+						try {
+							sc = new Scanner(blockedUser.toFile());
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						}
+						while (sc.hasNextLine()) {
+							if (requester.equalsIgnoreCase(sc.nextLine())) {
+								sc.close();
+								return;
+							}
+						}
+						sc.close();
+					}
 
 			}
 			if (userStreamLimitMap.containsKey(requester)) {
@@ -248,6 +255,18 @@ public class Requests {
 			});
 			parse.start();
 
+			if(GeneralSettings.autoDownloadOption) {
+				Thread songDL = new Thread(() -> {
+					Path songFile = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3");
+					if (!Files.exists(songFile)) {
+						try {
+							FileUtils.copyURLToFile(levelData.getSongURL(), songFile.toFile());
+						} catch (IOException ignored) {
+						}
+					}
+				});
+				songDL.start();
+			}
 			levels.add(levelData);
 			LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester(), levelData.getVersion());
 			LevelsWindow.setName(Requests.levels.size());
@@ -346,7 +365,7 @@ public class Requests {
 				result = levels.get(level).getSongAuthor();
 			}
 			if (attribute.equals("songURL")) {
-				result = levels.get(level).getSongURL();
+				result = String.valueOf(levels.get(level).getSongURL());
 			}
 			if (attribute.equals("stars")) {
 				result = String.valueOf(levels.get(level).getStars());
@@ -365,7 +384,7 @@ public class Requests {
 			}
 		}
 		catch (Exception e){
-			Main.sendMessage("Exception: " + e.toString());
+			result = "Exception: " + e.toString();
 		}
 		return result;
 	}
