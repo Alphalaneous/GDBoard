@@ -463,9 +463,11 @@ public class RequestSettings {
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
 		difficultyPanel.setBackground(Defaults.TOP);
+		lengthPanel.setBackground(Defaults.TOP);
 		panel.setBackground(Defaults.SUB_MAIN);
 		mainPanel.setBackground(Defaults.SUB_MAIN);
 		scrollPane.setBackground(Defaults.SUB_MAIN);
+		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
 
 		for (Component component : panel.getComponents()) {
 			if (component instanceof JButton) {
