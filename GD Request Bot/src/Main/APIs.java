@@ -204,6 +204,8 @@ public class APIs {
 								AccountSettings.refreshChannel(channel);
 								break;
 							} catch (IOException e) {
+								JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
+
 							}
 							Thread.sleep(100);
 						}

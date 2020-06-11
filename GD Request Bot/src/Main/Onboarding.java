@@ -123,7 +123,7 @@ public class Onboarding {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				try {
-					moveOn.setVisible(true);
+					//moveOn.setVisible(true);
 					APIs.setOauth();
 					Thread thread = new Thread(() -> {
 						while (!APIs.success.get()) {
