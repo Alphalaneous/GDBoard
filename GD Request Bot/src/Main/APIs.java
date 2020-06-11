@@ -181,45 +181,51 @@ public class APIs {
 	public static void setOauth() {
 
 		Thread thread = new Thread(() -> {
-			try {
-				Twitch twitch = new Twitch();
-				URI callbackUri = new URI("http://127.0.0.1:23522");
 
-				twitch.setClientId("fzwze6vc6d2f7qodgkpq2w8nnsz3rl");
-				URI authUrl = new URI(twitch.auth().getAuthenticationUrl(
-						twitch.getClientId(), callbackUri, Scopes.USER_READ
-				) + "chat:edit+chat:read+whispers:read+whispers:edit+user_read&force_verify=true");
-				Runtime rt = Runtime.getRuntime();
-				rt.exec("rundll32 url.dll,FileProtocolHandler " + authUrl);
-				if (twitch.auth().awaitAccessToken()) {
-					Settings.oauth = twitch.auth().getAccessToken();
-					Settings.writeSettings("oauth", twitch.auth().getAccessToken());
-					String channel = "";
-					while(true){
-						if(channel.equalsIgnoreCase("")) {
-							channel = APIs.getChannel();
-							Settings.channel = channel;
-						}
-						else {
-							Settings.writeSettings("channel", channel);
-							AccountSettings.refreshChannel(channel);
-							break;
-						}
-						Thread.sleep(1000);
-					}
-					success.set(true);
-					try {
-						GDBoardBot.restart();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				} else {
-					System.out.println(twitch.auth().getAuthenticationError());
+				try {
+					Twitch twitch = new Twitch();
+					URI callbackUri = new URI("http://127.0.0.1:23522");
 
+					twitch.setClientId("fzwze6vc6d2f7qodgkpq2w8nnsz3rl");
+					URI authUrl = new URI(twitch.auth().getAuthenticationUrl(
+							twitch.getClientId(), callbackUri, Scopes.USER_READ
+					) + "chat:edit+chat:read+whispers:read+whispers:edit+user_read&force_verify=true");
+					Runtime rt = Runtime.getRuntime();
+					rt.exec("rundll32 url.dll,FileProtocolHandler " + authUrl);
+					if (twitch.auth().awaitAccessToken()) {
+						Settings.oauth = twitch.auth().getAccessToken();
+						Settings.writeSettings("oauth", twitch.auth().getAccessToken());
+						String channel = "";
+						while(true) {
+							try {
+								channel = APIs.getChannel();
+								Settings.channel = channel;
+								Settings.writeSettings("channel", channel);
+								AccountSettings.refreshChannel(channel);
+								break;
+							} catch (IOException e) {
+							}
+							Thread.sleep(100);
+						}
+						success.set(true);
+						try {
+							GDBoardBot.restart();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					} else {
+						System.out.println(twitch.auth().getAuthenticationError());
+
+					}
+
+				} catch (Exception e) {
 				}
-			} catch (Exception ignored) {
-			}
 
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		});
 		thread.start();
 	}
