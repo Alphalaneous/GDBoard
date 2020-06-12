@@ -273,11 +273,14 @@ class MainBar {
 			time.setForeground(Defaults.FOREGROUND);
 			for (Component component : buttonPanel.getComponents()) {
 				if (component instanceof JButton) {
-					if (((JButton) component).getText().equalsIgnoreCase("\uE10A") || ((JButton) component).getText().equalsIgnoreCase("\uE713") || ((JButton) component).getText().equalsIgnoreCase("\uE71A")) {
-						component.setBackground(Defaults.TOP);
-					} else {
-						component.setBackground(Defaults.MAIN);
-					}
+					component.setBackground(Defaults.MAIN);
+					((JButtonTooltip) component).refreshUI();
+					component.setForeground(Defaults.FOREGROUND);
+				}
+			}
+			for (Component component : subPanel.getComponents()) {
+				if (component instanceof JButton) {
+					component.setBackground(Defaults.TOP);
 					((JButtonTooltip) component).refreshUI();
 					component.setForeground(Defaults.FOREGROUND);
 				}
