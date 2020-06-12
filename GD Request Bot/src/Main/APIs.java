@@ -163,10 +163,15 @@ public class APIs {
 	}
 
 	public static String getChannel() {
-		JsonObject nameObj = twitchAPI("https://api.twitch.tv/kraken/user", true);
-		assert nameObj != null;
-		JOptionPane.showMessageDialog(Overlay.frame, String.valueOf(nameObj.get("display_name")).replaceAll("\"", ""), "Connected", JOptionPane.INFORMATION_MESSAGE);
-		return String.valueOf(nameObj.get("display_name")).replaceAll("\"", "");
+		try {
+			JsonObject nameObj = twitchAPI("https://api.twitch.tv/kraken/user", true);
+			JOptionPane.showMessageDialog(Overlay.frame, String.valueOf(nameObj.get("display_name")).replaceAll("\"", ""), "Connected", JOptionPane.INFORMATION_MESSAGE);
+			return String.valueOf(nameObj.get("display_name")).replaceAll("\"", "");
+		}
+		catch (Exception e){
+			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
+			return "error";
+		}
 	}
 
 	private static JsonObject twitchAPI(String URL) {
