@@ -12,6 +12,7 @@ import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 import java.nio.charset.StandardCharsets;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,6 +23,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static io.netty.buffer.Unpooled.wrappedBuffer;
@@ -176,7 +178,7 @@ public class APIs {
 	private static JsonObject twitchAPI(String URL) {
 		try {
 			URL url = new URL(URL);
-			URLConnection conn = url.openConnection();
+			HttpsURLConnection conn = (HttpsURLConnection)url.openConnection();
 			conn.setRequestProperty("Client-ID", "fzwze6vc6d2f7qodgkpq2w8nnsz3rl");
 			conn.setRequestProperty("Authorization", "Bearer " + Settings.oauth);
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()), 1);
@@ -192,7 +194,7 @@ public class APIs {
 	private static JsonObject twitchAPI(String URL, boolean v5) {
 		try {
 			URL url = new URL(URL);
-			URLConnection conn = url.openConnection();
+			HttpsURLConnection conn = (HttpsURLConnection)url.openConnection();
 			conn.setRequestProperty("Client-ID", "fzwze6vc6d2f7qodgkpq2w8nnsz3rl");
 			conn.setRequestProperty("Authorization", "OAuth " + Settings.oauth);
 			if (v5) {
