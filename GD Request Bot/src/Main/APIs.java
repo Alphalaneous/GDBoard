@@ -165,7 +165,7 @@ public class APIs {
 	public static String getChannel() {
 		try {
 			JsonObject nameObj = twitchAPI("https://api.twitch.tv/helix/users");
-			return String.valueOf(nameObj.get("login")).replaceAll("\"", "");
+			return String.valueOf(nameObj.asObject().get("data").asArray().get(0).asObject().get("display_name")).replaceAll("\"", "");
 		}
 		catch (Exception e){
 			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
@@ -181,6 +181,7 @@ public class APIs {
 			conn.setRequestProperty("Authorization", "Bearer " + Settings.oauth);
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String x = br.readLine();
+			System.out.println(x);
 			return JsonObject.readFrom(x);
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
