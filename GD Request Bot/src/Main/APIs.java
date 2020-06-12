@@ -179,7 +179,7 @@ public class APIs {
 			URLConnection conn = url.openConnection();
 			conn.setRequestProperty("Client-ID", "fzwze6vc6d2f7qodgkpq2w8nnsz3rl");
 			conn.setRequestProperty("Authorization", "Bearer " + Settings.oauth);
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()), 1);
 			String x = br.readLine();
 			System.out.println(x);
 			return JsonObject.readFrom(x);
@@ -198,7 +198,7 @@ public class APIs {
 			if (v5) {
 				conn.setRequestProperty("Accept", "application/vnd.twitchtv.v5+json");
 			}
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()), 1);
 			String x = br.readLine();
 			return JsonObject.readFrom(x);
 		} catch (IOException e) {
