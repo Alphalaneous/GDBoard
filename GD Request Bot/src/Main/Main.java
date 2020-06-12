@@ -216,7 +216,7 @@ public class Main {
 				sc.close();
 			}
 			Requests.addedLevels.clear();
-			String channel = channel = APIs.getChannel();
+			String channel = APIs.getChannel();
 			Settings.channel = channel;
 			Settings.writeSettings("channel", channel);
 			AccountSettings.refreshChannel(channel);
