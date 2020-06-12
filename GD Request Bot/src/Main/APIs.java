@@ -162,7 +162,7 @@ public class APIs {
 		}
 	}
 
-	private static String getChannel() {
+	public static String getChannel() {
 		JsonObject nameObj = twitchAPI("https://api.twitch.tv/kraken/user", true);
 		assert nameObj != null;
 		return String.valueOf(nameObj.get("display_name")).replaceAll("\"", "");

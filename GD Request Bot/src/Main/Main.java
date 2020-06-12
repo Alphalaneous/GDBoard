@@ -216,10 +216,15 @@ public class Main {
 				sc.close();
 			}
 			Requests.addedLevels.clear();
+			String channel = channel = APIs.getChannel();
+			Settings.channel = channel;
+			Settings.writeSettings("channel", channel);
+			AccountSettings.refreshChannel(channel);
 			APIs.getViewers();
 			doMessage = true;
 			allowRequests = true;
 			doImage = true;
+
 			Main.sendMessage("Thank you for using GDBoard by Alphalaneous and TreehouseFalcon! It is suggested to VIP or Mod GDBoard to prevent chat limits from occurring.");
 			Thread threada = new Thread(() -> {
 				while(true){
