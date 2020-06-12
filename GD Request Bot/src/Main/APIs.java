@@ -178,7 +178,7 @@ public class APIs {
 			String x = br.readLine();
 			return JsonObject.readFrom(x);
 		} catch (IOException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
 			return null;
 		}
 	}
