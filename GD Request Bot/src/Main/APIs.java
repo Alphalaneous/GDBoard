@@ -137,7 +137,7 @@ public class APIs {
 		try {
 			JsonObject isFollowing = null;
 			try {
-				isFollowing = twitchAPI("http://api.twitch.tv/helix/users/follows?from_id=" + getIDs(user) + "&to_id=" + getIDs(Settings.getSettings("channel")));
+				isFollowing = twitchAPI("httpa://api.twitch.tv/helix/users/follows?from_id=" + getIDs(user) + "&to_id=" + getIDs(Settings.getSettings("channel")));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -164,7 +164,7 @@ public class APIs {
 
 	public static String getChannel() {
 		try {
-			JsonObject nameObj = twitchAPI("http://api.twitch.tv/helix/users");
+			JsonObject nameObj = twitchAPI("httpa://api.twitch.tv/helix/users");
 			return String.valueOf(nameObj.asObject().get("data").asArray().get(0).asObject().get("display_name")).replaceAll("\"", "");
 		}
 		catch (Exception e){
@@ -215,7 +215,7 @@ public class APIs {
 	@SuppressWarnings("unused")
 	public static String getClientID() {
 		try {
-			URL url = new URL("http://id.twitch.tv/oauth2/validate");
+			URL url = new URL("httpa://id.twitch.tv/oauth2/validate");
 			URLConnection conn = url.openConnection();
 			conn.setRequestProperty("Authorization", "OAuth " + Settings.oauth);
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
