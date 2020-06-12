@@ -139,7 +139,7 @@ public class APIs {
 		try {
 			JsonObject isFollowing = null;
 			try {
-				isFollowing = twitchAPI("httpa://api.twitch.tv/helix/users/follows?from_id=" + getIDs(user) + "&to_id=" + getIDs(Settings.getSettings("channel")));
+				isFollowing = twitchAPI("https://api.twitch.tv/helix/users/follows?from_id=" + getIDs(user) + "&to_id=" + getIDs(Settings.getSettings("channel")));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -166,7 +166,7 @@ public class APIs {
 
 	public static String getChannel() {
 		try {
-			JsonObject nameObj = twitchAPI("httpa://api.twitch.tv/helix/users");
+			JsonObject nameObj = twitchAPI("https://api.twitch.tv/helix/users");
 			return String.valueOf(nameObj.asObject().get("data").asArray().get(0).asObject().get("display_name")).replaceAll("\"", "");
 		}
 		catch (Exception e){
