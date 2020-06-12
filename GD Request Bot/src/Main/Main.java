@@ -135,17 +135,7 @@ public class Main {
 					if (!Settings.windowedMode) {
 						MainBar.createBar();            //Creates the main "Game Bar" in the top center
 					}
-					ChatReader chatReader = new ChatReader();
-					Thread thread = new Thread(() -> {
-						chatReader.connect();
-						try {
-							chatReader.joinChannel(Settings.getSettings("channel"));
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						chatReader.start();
-					});
-					thread.start();
+
 					if(!Settings.windowedMode) {
 						Reflections innerReflections = new Reflections("Main.InnerWindows", new SubTypesScanner(false));
 						Set<Class<?>> innerClasses =
@@ -182,7 +172,17 @@ public class Main {
 					Thread thread1 = new Thread(() -> runKeyboardHook());
 					thread1.start();
 
-
+					ChatReader chatReader = new ChatReader();
+					Thread thread = new Thread(() -> {
+						chatReader.connect();
+						try {
+							chatReader.joinChannel(Settings.getSettings("channel"));
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						chatReader.start();
+					});
+					thread.start();
 					Overlay.refreshUI(true);
 					if (Settings.windowedMode) {
 						Windowed.frame.setVisible(true);
@@ -216,12 +216,6 @@ public class Main {
 				sc.close();
 			}
 			Requests.addedLevels.clear();
-			String channel = APIs.getChannel();
-			Settings.channel = channel;
-			JOptionPane.showMessageDialog(Overlay.frame, Settings.channel, "Connected", JOptionPane.INFORMATION_MESSAGE);
-
-			Settings.writeSettings("channel", channel);
-			AccountSettings.refreshChannel(channel);
 			APIs.getViewers();
 			doMessage = true;
 			allowRequests = true;

@@ -189,7 +189,6 @@ public class APIs {
 				.addHeader("Client-ID", "fzwze6vc6d2f7qodgkpq2w8nnsz3rl")
 				.addHeader("Authorization", "Bearer " + Settings.oauth)
 				.build();
-
 		try (Response response = client.newCall(newReq).execute()) {
 			return JsonObject.readFrom(response.body().string());
 
@@ -284,11 +283,7 @@ public class APIs {
 				if (twitch.auth().awaitAccessToken()) {
 					Settings.oauth = twitch.auth().getAccessToken();
 					Settings.writeSettings("oauth", twitch.auth().getAccessToken());
-					String channel = "";
-							channel = APIs.getChannel();
-							Settings.channel = channel;
-					Settings.writeSettings("channel", channel);
-					AccountSettings.refreshChannel(channel);
+
 					success.set(true);
 					try {
 						GDBoardBot.restart();

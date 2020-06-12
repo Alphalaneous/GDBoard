@@ -1,5 +1,6 @@
 package Main;
 
+import Main.SettingsPanels.AccountSettings;
 import com.cavariux.twitchirc.Json.JsonObject;
 import org.json.JSONObject;
 
@@ -110,13 +111,19 @@ class GDBoardBot {
 					}
 					if (event.equalsIgnoreCase("connected")) {
 						connected = true;
+						String channel =  object.get("username").toString().replaceAll("\"", "").replaceAll("#", "");
+						Settings.channel = channel;
+						Settings.writeSettings("channel", channel);
+						AccountSettings.refreshChannel(channel);
 						dialog.setVisible(false);
-					} else if (event.equalsIgnoreCase("connect_failed")) {
+					}
+					else if (event.equalsIgnoreCase("connect_failed")) {
 						System.out.println(object.get("error").toString().replaceAll("\"", ""));
 						failed = true;
 					} if ((event.equalsIgnoreCase("command") || event.equalsIgnoreCase("level_request")) && Main.allowRequests) {
 						String sender = object.get("sender").toString().replaceAll("\"", "");
 						String message = object.get("message").toString().replaceAll("\"", "");
+
 						boolean mod = object.get("mod").asBoolean();
 						boolean sub = object.get("sub").asBoolean();
 						Thread thread1 = new Thread(() -> {
