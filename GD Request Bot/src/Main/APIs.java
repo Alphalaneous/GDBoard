@@ -8,6 +8,9 @@ import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
 import io.netty.buffer.ByteBuf;
 import io.netty.handler.codec.http.HttpResponseStatus;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 import java.nio.charset.StandardCharsets;
@@ -175,8 +178,26 @@ public class APIs {
 		}
 	}
 
+
+
 	private static JsonObject twitchAPI(String URL) {
-		try {
+		OkHttpClient client = new OkHttpClient();
+		Request request = new Request.Builder()
+				.url(URL)
+				.build();
+		Request newReq = request.newBuilder()
+				.addHeader("Client-ID", "fzwze6vc6d2f7qodgkpq2w8nnsz3rl")
+				.addHeader("Authorization", "Bearer " + Settings.oauth)
+				.build();
+
+		try (Response response = client.newCall(newReq).execute()) {
+			return JsonObject.readFrom(response.body().string());
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		/*try {
 			URL url = new URL(URL);
 			HttpsURLConnection conn = (HttpsURLConnection)url.openConnection();
 			conn.setRequestProperty("Client-ID", "fzwze6vc6d2f7qodgkpq2w8nnsz3rl");
@@ -188,11 +209,29 @@ public class APIs {
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
 			return null;
-		}
+		}*/
 	}
 
 	private static JsonObject twitchAPI(String URL, boolean v5) {
-		try {
+
+		OkHttpClient client = new OkHttpClient();
+		Request request = new Request.Builder()
+				.url(URL)
+				.build();
+		Request newReq = request.newBuilder()
+				.addHeader("Client-ID", "fzwze6vc6d2f7qodgkpq2w8nnsz3rl")
+				.addHeader("Authorization", "OAuth " + Settings.oauth)
+				.build();
+
+		try (Response response = client.newCall(newReq).execute()) {
+			return JsonObject.readFrom(response.body().string());
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		/*try {
 			URL url = new URL(URL);
 			HttpsURLConnection conn = (HttpsURLConnection)url.openConnection();
 			conn.setRequestProperty("Client-ID", "fzwze6vc6d2f7qodgkpq2w8nnsz3rl");
@@ -206,7 +245,7 @@ public class APIs {
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
 			return null;
-		}
+		}*/
 	}
 
 	private static String getIDs(String username) {
@@ -217,7 +256,7 @@ public class APIs {
 	@SuppressWarnings("unused")
 	public static String getClientID() {
 		try {
-			URL url = new URL("httpa://id.twitch.tv/oauth2/validate");
+			URL url = new URL("https://id.twitch.tv/oauth2/validate");
 			URLConnection conn = url.openConnection();
 			conn.setRequestProperty("Authorization", "OAuth " + Settings.oauth);
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
