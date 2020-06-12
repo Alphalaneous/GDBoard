@@ -6,16 +6,25 @@ import com.cavariux.twitchirc.Json.JsonArray;
 import com.cavariux.twitchirc.Json.JsonObject;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
+import io.netty.buffer.ByteBuf;
+import io.netty.handler.codec.http.HttpResponseStatus;
+import reactor.core.publisher.Mono;
+import reactor.netty.http.client.HttpClient;
+import java.nio.charset.StandardCharsets;
 
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import static io.netty.buffer.Unpooled.wrappedBuffer;
 
 public class APIs {
 /*
@@ -46,6 +55,40 @@ public class APIs {
 
         return info;
     }*/
+
+	public static ArrayList<Comment> getGDComments(int page, boolean top, String ID) throws IOException {
+		ByteBuf data = wrappedBuffer(StandardCharsets.UTF_8.encode("levelID=" + ID + "&page=" + page + "&secret=Wmfd2893gb7&gameVersion=21&binaryVersion=35&mode=" + (top ? 1 : 0)));
+		HttpClient client = HttpClient.create()
+				.baseUrl("http://www.boomlings.com/database")
+				.headers(h -> {
+					h.add("Content-Type", "application/x-www-form-urlencoded");
+					h.add("Content-Length", data.readableBytes());
+				});
+		String responce = client.post()
+				.uri("/getGJComments21.php")
+				.send(Mono.just(data))
+				.responseSingle((responceHeader, responceBody) -> {
+					if(responceHeader.status().equals(HttpResponseStatus.OK)){
+						return responceBody.asString().defaultIfEmpty("");
+					}
+					else{
+						return Mono.error(new RuntimeException(responceHeader.status().toString()));
+					}
+				}).block();
+		String[] comments = responce.split("\\|");
+
+		ArrayList<Comment> commentsData = new ArrayList<>();
+
+		for(String comment : comments){
+			String[] comData = comment.split("~");
+			String decoded = new String(Base64.getDecoder().decode(comData[1].replace("-", "+").replace("_", "/")));
+			Comment commentA = new Comment(comData[14], decoded, comData[5], comData[9]);
+
+			commentsData.add(commentA);
+			System.out.println(comment);
+		}
+		return commentsData;
+	}
 	static void getViewers(){
 		Thread thread = new Thread(() -> {
 			while(true) {

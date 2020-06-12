@@ -29,6 +29,8 @@ class MainBar {
 	private static JPanel barPanel = new JPanel();
 	private static JPanel mainPanel = new JPanel();
 	private static JPanel buttonPanel = new JPanel();
+	private static JPanel subPanel = new JPanel();
+
 	private static JLabel icon = new JLabel();
 	static boolean requests = true;
 	static JButton stopReqs = createSubButton("\uE71A", "Toggle Requests");
@@ -81,9 +83,13 @@ class MainBar {
 		mainPanel.setLayout(null);
 		barPanel.add(mainPanel);
 
-		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-		buttonPanel.setBounds(160, 0, 420, 64);
+		buttonPanel.setLayout(new GridLayout(1, 1));
+		buttonPanel.setBounds(160, 0, 300, 64);
 		buttonPanel.setBackground(Defaults.MAIN);
+
+		subPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		subPanel.setBounds(460, 0, 120, 64);
+		subPanel.setBackground(Defaults.TOP);
 
 
 			Reflections innerReflections = new Reflections("Main.InnerWindows", new SubTypesScanner(false));
@@ -129,9 +135,9 @@ class MainBar {
 			}
 		});
 
-		buttonPanel.add(stopReqs);
-		buttonPanel.add(toggleSettings);
-		buttonPanel.add(close);
+		subPanel.add(stopReqs);
+		subPanel.add(toggleSettings);
+		subPanel.add(close);
 
 
 		Map<TextAttribute, Object> attributes = new HashMap<>();
@@ -143,6 +149,8 @@ class MainBar {
 
 		mainPanel.add(time);
 		mainPanel.add(buttonPanel);
+		mainPanel.add(subPanel);
+
 		BufferedImage img = null;
 		try {
 			if (!Defaults.dark.get()) {
@@ -190,7 +198,7 @@ class MainBar {
 		}
 		defaultUI.setBackground(Defaults.MAIN);
 		JButton button = new JButtonTooltip((String)icon, 64, (String)tooltip, defaultUI);
-		button.setPreferredSize(new Dimension(60, 64));
+		//button.setPreferredSize(new Dimension(60, 64));
 		button.setBackground(Defaults.MAIN);
 		button.setUI(defaultUI);
 		button.setForeground(Defaults.FOREGROUND);

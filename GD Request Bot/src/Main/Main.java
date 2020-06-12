@@ -39,6 +39,11 @@ public class Main {
 	private static JPanel panel = new JPanel();
 	private static JLabel tf = new JLabel("Loading...");
 	public static void main(String[] args) {
+		/*try {
+			System.setOut(new PrintStream(new FileOutputStream(new File(System.getenv("APPDATA") + "\\GDBoard\\clOutput.txt"))));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}*/
 		Defaults.loaded.set(false);
 		try {
 			Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());

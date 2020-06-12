@@ -37,6 +37,8 @@ public class LevelsWindow {
 						setBounds(getX(), newY, getWidth(), newH);
 						resetDimensions(width, newH - 32);
 						scrollPane.setBounds(1, 31, width, newH - 32);
+						scrollPane.updateUI();
+
 					}
 				}
 			};
@@ -70,62 +72,10 @@ public class LevelsWindow {
 		scrollPane.setPreferredSize(new Dimension(400, height));
 		scrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(30);
-		//scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(1, height));
 		scrollPane.getVerticalScrollBar().setOpaque(false);
 		scrollPane.setOpaque(false);
 		scrollPane.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
-		/*scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
-
-			private final Dimension d = new Dimension();
-
-			@Override
-			protected JButton createDecreaseButton(int orientation) {
-				return new JButton() {
-					@Override
-					public Dimension getPreferredSize() {
-						return d;
-					}
-				};
-			}
-
-			@Override
-			protected JButton createIncreaseButton(int orientation) {
-				return new JButton() {
-					@Override
-					public Dimension getPreferredSize() {
-						return d;
-					}
-				};
-			}
-
-			@Override
-			protected void paintTrack(Graphics g, JComponent c, Rectangle r) {
-				Graphics2D g2 = (Graphics2D) g.create();
-				Color color = new Color(0, 0, 0, 0);
-
-				g2.setPaint(color);
-				g2.fillRect(r.x, r.y, r.width, r.height);
-				g2.dispose();
-			}
-
-			@Override
-			protected void paintThumb(Graphics g, JComponent c, Rectangle r) {
-				Graphics2D g2 = (Graphics2D) g.create();
-				Color color = new Color(0, 0, 0, 0);
-
-
-				g2.setPaint(color);
-				g2.fillRect(r.x, r.y, r.width, r.height);
-				g2.dispose();
-			}
-
-			@Override
-			protected void setThumbBounds(int x, int y, int width, int height) {
-				super.setThumbBounds(x, y, width, height);
-				scrollbar.repaint();
-			}
-		});*/
 		window.add(scrollPane);
 		((InnerWindow) window).refreshListener();
 		if(!Settings.windowedMode) {
@@ -347,20 +297,8 @@ public class LevelsWindow {
 						}
 						if (selectedID != prevSelectedID) {
 							Thread thread = new Thread(() -> {
-								while(true) {
-									try {
-										CommentsWindow.unloadComments(true);
-										CommentsWindow.loadComments(0, false);
-										break;
-									} catch (Exception f) {
-										f.printStackTrace();
-									}
-									try {
-										Thread.sleep(50);
-									} catch (InterruptedException e1) {
-										e1.printStackTrace();
-									}
-								}
+								CommentsWindow.unloadComments(true);
+								CommentsWindow.loadComments(0, false);
 							});
 							thread.start();
 

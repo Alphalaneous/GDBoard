@@ -465,11 +465,11 @@ public class Requests {
 					Functions.saveFunction();
 					SongWindow.refreshInfo();
 					InfoWindow.refreshInfo();
+					LevelsWindow.setOneSelect();
 					Thread thread = new Thread(() -> {
 						CommentsWindow.unloadComments(true);
 						CommentsWindow.loadComments(0, false);
 					});
-					LevelsWindow.setOneSelect();
 					thread.start();
 					if (i == 0) {
 						StringSelection selection = new StringSelection(

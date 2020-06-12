@@ -72,17 +72,19 @@ public class Functions {
 				}
 				Functions.saveFunction();
 
-				Thread thread = new Thread(() -> {
-					CommentsWindow.unloadComments(true);
-					if (Requests.levels.size() != 0) {
-						CommentsWindow.loadComments(0, false);
-					}
-				});
-				thread.start();
+
 
 			}
 			OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
 			LevelsWindow.setOneSelect();
+
+			Thread thread = new Thread(() -> {
+				CommentsWindow.unloadComments(true);
+				if (Requests.levels.size() != 0) {
+					CommentsWindow.loadComments(0, false);
+				}
+			});
+			thread.start();
 
 			SongWindow.refreshInfo();
 			InfoWindow.refreshInfo();
@@ -203,19 +205,20 @@ public class Functions {
 					LevelsWindow.removeButton();
 					Functions.saveFunction();
 
-					Thread thread = new Thread(() -> {
-						CommentsWindow.unloadComments(true);
-						if (Requests.levels.size() > 0) {
-							CommentsWindow.loadComments(0, false);
-						}
-					});
-					thread.start();
+
 				}
 				SongWindow.refreshInfo();
 				InfoWindow.refreshInfo();
 				SettingsWindow.run = true;
 			}
 			LevelsWindow.setOneSelect();
+			Thread thread = new Thread(() -> {
+				CommentsWindow.unloadComments(true);
+				if (Requests.levels.size() > 0) {
+					CommentsWindow.loadComments(0, false);
+				}
+			});
+			thread.start();
 			LevelsWindow.setName(Requests.levels.size());
 		}
 	}
