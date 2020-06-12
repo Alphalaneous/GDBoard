@@ -164,8 +164,8 @@ public class APIs {
 
 	public static String getChannel() {
 		try {
-			JsonObject nameObj = twitchAPI("https://api.twitch.tv/kraken/user", true);
-			return String.valueOf(nameObj.get("display_name")).replaceAll("\"", "");
+			JsonObject nameObj = twitchAPI("https://api.twitch.tv/helix/users");
+			return String.valueOf(nameObj.get("login")).replaceAll("\"", "");
 		}
 		catch (Exception e){
 			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
