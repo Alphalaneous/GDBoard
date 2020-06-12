@@ -218,6 +218,8 @@ public class Main {
 			Requests.addedLevels.clear();
 			String channel = APIs.getChannel();
 			Settings.channel = channel;
+			JOptionPane.showMessageDialog(Overlay.frame, Settings.channel, "Connected", JOptionPane.INFORMATION_MESSAGE);
+
 			Settings.writeSettings("channel", channel);
 			AccountSettings.refreshChannel(channel);
 			APIs.getViewers();
