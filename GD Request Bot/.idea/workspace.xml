@@ -15,6 +15,7 @@
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/APIs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/APIs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/AccountSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/AccountSettings.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -98,8 +99,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/APIs.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="55">
-              <caret line="167" column="43" selection-start-line="167" selection-start-column="43" selection-end-line="167" selection-end-column="43" />
+            <state relative-caret-position="157">
+              <caret line="167" column="163" selection-start-line="167" selection-start-column="163" selection-end-line="167" selection-end-column="163" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -138,11 +139,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="218" column="57" selection-start-line="218" selection-start-column="57" selection-end-line="218" selection-end-column="57" />
+            <state relative-caret-position="564">
+              <caret line="249" selection-start-line="249" selection-end-line="250" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/AccountSettings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="279">
+              <caret line="66" column="56" lean-forward="true" selection-start-line="66" selection-start-column="56" selection-end-line="66" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -245,7 +255,6 @@
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/RequestSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/Settings.java" />
         <option value="$PROJECT_DIR$/src/Main/Onboarding.java" />
-        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/AccountSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/Requests.java" />
         <option value="$PROJECT_DIR$/src/Main/Functions.java" />
         <option value="$PROJECT_DIR$/src/Main/MainBar.java" />
@@ -256,6 +265,7 @@
         <option value="$PROJECT_DIR$/src/Main/InnerWindows/CommentsWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/GDBoardBot.java" />
         <option value="$PROJECT_DIR$/src/Main/Main.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/AccountSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/APIs.java" />
         <option value="$PROJECT_DIR$/src/.version" />
       </list>
@@ -268,8 +278,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="275" />
-    <option name="y" value="10" />
+    <option name="x" value="326" />
+    <option name="y" value="-24" />
     <option name="width" value="1498" />
     <option name="height" value="1047" />
   </component>
@@ -1040,13 +1050,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/AccountSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="51" column="40" selection-start-line="51" selection-start-column="40" selection-end-line="51" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.classpath">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1187,10 +1190,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/AccountSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="66" column="56" lean-forward="true" selection-start-line="66" selection-start-column="56" selection-end-line="66" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="218" column="57" selection-start-line="218" selection-start-column="57" selection-end-line="218" selection-end-column="57" />
+        <state relative-caret-position="564">
+          <caret line="249" selection-start-line="249" selection-end-line="250" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1199,8 +1209,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/APIs.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="55">
-          <caret line="167" column="43" selection-start-line="167" selection-start-column="43" selection-end-line="167" selection-end-column="43" />
+        <state relative-caret-position="157">
+          <caret line="167" column="163" selection-start-line="167" selection-start-column="163" selection-end-line="167" selection-end-column="163" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

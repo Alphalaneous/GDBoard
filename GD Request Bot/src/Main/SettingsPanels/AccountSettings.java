@@ -64,9 +64,8 @@ public class AccountSettings {
 
 	}
 	public static void refreshChannel(String channel){
-			channelText.setText("Connected to: " + channel);
-			System.out.println("Set " + channel);
-
+		channelText.setText("Connected to: " + channel);
+		System.out.println("Set " + channel);
 
 		channelText.setBounds(25,20,channelText.getPreferredSize().width+5,channelText.getPreferredSize().height+5);
 
