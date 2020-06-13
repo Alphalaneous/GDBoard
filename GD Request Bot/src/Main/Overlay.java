@@ -110,12 +110,12 @@ public class Overlay {
 			Windowed.refreshUI();
 		}
 		else {
-			CommentsWindow.refreshUI();
 			ActionsWindow.refreshUI();
 			SongWindow.refreshUI();
 			MainBar.refreshUI(color);
 			//Randomizer.refreshUI();
 		}
+		CommentsWindow.refreshUI();
 		SettingsWindow.refreshUI();
 		LevelsWindow.refreshUI();
 		InfoWindow.refreshUI();
