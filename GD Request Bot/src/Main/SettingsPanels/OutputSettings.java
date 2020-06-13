@@ -18,9 +18,9 @@ public class OutputSettings {
 	public static String outputString = "Currently playing %levelName% (%levelID%) by %levelAuthor%!";
 	public static String noLevelString = "There are no levels in the queue!";
 	private static String fileLocation = Paths.get(System.getenv("APPDATA") + "\\GDBoard").toString();
-	private static FancyTextArea outputStringInput = new FancyTextArea(false);
-	private static FancyTextArea noLevelsStringInput = new FancyTextArea(false);
-	private static FancyTextArea fileLocationInput = new FancyTextArea(false);
+	private static FancyTextArea outputStringInput = new FancyTextArea(false, false);
+	private static FancyTextArea noLevelsStringInput = new FancyTextArea(false, false);
+	private static FancyTextArea fileLocationInput = new FancyTextArea(false, false);
 	private static JPanel panel = new JPanel();
 	public static JPanel createPanel() {
 		//TODO Add scrollbar to Text Area?

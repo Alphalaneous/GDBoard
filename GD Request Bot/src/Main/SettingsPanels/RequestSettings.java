@@ -4,6 +4,8 @@ import Main.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -34,6 +36,27 @@ public class RequestSettings {
 	private static CheckboxButton longL = createButton("Long", 95);
 	private static CheckboxButton XL = createButton("XL", 125);
 
+
+	private static CheckboxButton minimumLikes = createButton("Minimum Likes: ", 690);
+	private static CheckboxButton maximumLikes = createButton("Maximum Likes: ", 765);
+
+	private static CheckboxButton minimumObjects = createButton("Minimum Objects: ", 840);
+	private static CheckboxButton maximumObjects = createButton("Maximum Objects: ", 915);
+
+	private static FancyTextArea minLikesInput = new FancyTextArea(true, true);
+	private static FancyTextArea maxLikesInput = new FancyTextArea(true, true);
+	private static FancyTextArea minObjectsInput = new FancyTextArea(true, false);
+	private static FancyTextArea maxObjectsInput = new FancyTextArea(true, false);
+
+	public static int minLikes = 0;
+	public static int maxLikes = 0;
+	public static int minObjects = 0;
+	public static int maxObjects = 0;
+
+	public static boolean minLikesOption = false;
+	public static boolean maxLikesOption = false;
+	public static boolean minObjectsOption = false;
+	public static boolean maxObjectsOption = false;
 
 	public static boolean ratedOption = false;
 	public static boolean unratedOption = false;
@@ -79,8 +102,8 @@ public class RequestSettings {
 
 		panel.setLayout(null);
 		panel.setDoubleBuffered(true);
-		panel.setBounds(0, 0, 412, 700);
-		panel.setPreferredSize(new Dimension(412,700));
+		panel.setBounds(0, 0, 412, 1000);
+		panel.setPreferredSize(new Dimension(412,1000));
 		panel.setBackground(Defaults.SUB_MAIN);
 
 		rated.addMouseListener(new MouseAdapter() {
@@ -316,6 +339,109 @@ public class RequestSettings {
 			}
 		});
 
+		minimumLikes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				minLikesOption = minimumLikes.getSelectedState();
+				minLikesInput.setEditable(minLikesOption);
+			}
+		});
+		maximumLikes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				maxLikesOption = maximumLikes.getSelectedState();
+				maxLikesInput.setEditable(maxLikesOption);
+			}
+		});
+		minimumObjects.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				minObjectsOption = minimumObjects.getSelectedState();
+				minObjectsInput.setEditable(minObjectsOption);
+			}
+		});
+		maximumObjects.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				maxObjectsOption = maximumObjects.getSelectedState();
+				maxObjectsInput.setEditable(maxObjectsOption);
+			}
+		});
+
+		minLikesInput.setEditable(false);
+		minLikesInput.setBounds(25,723,345, 32);
+		minLikesInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
+		minLikesInput.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) { }
+			@Override
+			public void keyPressed(KeyEvent e) { }
+			@Override
+			public void keyReleased(KeyEvent e) {
+				try {
+					minLikes = Integer.parseInt(minLikesInput.getText());
+				}
+				catch (NumberFormatException f){
+					minLikes = 0;
+				}
+			}
+		});
+		maxLikesInput.setEditable(false);
+		maxLikesInput.setBounds(25,798,345, 32);
+		maxLikesInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
+		maxLikesInput.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) { }
+			@Override
+			public void keyPressed(KeyEvent e) { }
+			@Override
+			public void keyReleased(KeyEvent e) {
+				try {
+					maxLikes = Integer.parseInt(maxLikesInput.getText());
+				}
+				catch (NumberFormatException f){
+					maxLikes = 0;
+				}
+			}
+		});
+		minObjectsInput.setEditable(false);
+		minObjectsInput.setBounds(25,873,345, 32);
+		minObjectsInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
+		minObjectsInput.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) { }
+			@Override
+			public void keyPressed(KeyEvent e) { }
+			@Override
+			public void keyReleased(KeyEvent e) {
+				try {
+					minObjects = Integer.parseInt(minObjectsInput.getText());
+				}
+				catch (NumberFormatException f){
+					minObjects = 0;
+				}
+			}
+		});
+		maxObjectsInput.setEditable(false);
+		maxObjectsInput.setBounds(25,948,345, 32);
+		maxObjectsInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
+		maxObjectsInput.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) { }
+			@Override
+			public void keyPressed(KeyEvent e) { }
+			@Override
+			public void keyReleased(KeyEvent e) {
+				try {
+					maxObjects = Integer.parseInt(maxObjectsInput.getText());
+				}
+				catch (NumberFormatException f){
+					maxObjects = 0;
+				}
+			}
+		});
+
+
 
 		difficultyPanel.setBounds(0,110, 415, 370);
 		difficultyPanel.setBackground(Defaults.TOP);
@@ -350,6 +476,17 @@ public class RequestSettings {
 		panel.add(difficultyPanel);
 		panel.add(lengthPanel);
 
+		panel.add(minimumLikes);
+		panel.add(maximumLikes);
+		panel.add(minimumObjects);
+		panel.add(maximumObjects);
+
+		panel.add(minLikesInput);
+		panel.add(maxLikesInput);
+		panel.add(minObjectsInput);
+		panel.add(maxObjectsInput);
+
+
 		mainPanel.add(scrollPane);
 		return mainPanel;
 
@@ -374,6 +511,27 @@ public class RequestSettings {
 			}
 			if(!Settings.getSettings("lengthFilter").equalsIgnoreCase("")) {
 				excludedLengths = new ArrayList<>(Arrays.asList(Settings.getSettings("lengthFilter").split(", ")));
+			}
+
+			if(!Settings.getSettings("minLikesOption").equalsIgnoreCase("")) {
+				minLikesOption = Boolean.parseBoolean(Settings.getSettings("minLikesOption"));
+				minimumLikes.setChecked(minLikesOption);
+				minLikesInput.setEditable(minLikesOption);
+			}
+			if(!Settings.getSettings("maxLikesOption").equalsIgnoreCase("")) {
+				maxLikesOption = Boolean.parseBoolean(Settings.getSettings("maxLikesOption"));
+				maximumLikes.setChecked(maxLikesOption);
+				maxLikesInput.setEditable(maxLikesOption);
+			}
+			if(!Settings.getSettings("minObjectsOption").equalsIgnoreCase("")) {
+				minObjectsOption = Boolean.parseBoolean(Settings.getSettings("minObjectsOption"));
+				minimumObjects.setChecked(minObjectsOption);
+				minObjectsInput.setEditable(minObjectsOption);
+			}
+			if(!Settings.getSettings("maxObjectsOption").equalsIgnoreCase("")) {
+				maxObjectsOption = Boolean.parseBoolean(Settings.getSettings("maxObjectsOption"));
+				maximumObjects.setChecked(maxObjectsOption);
+				maxObjectsInput.setEditable(maxObjectsOption);
 			}
 			if(excludedLengths.contains("tiny")){
 				tiny.setChecked(true);
@@ -427,6 +585,22 @@ public class RequestSettings {
 			if(excludedDifficulties.contains("extreme demon")){
 				extremeDemon.setChecked(true);
 			}
+			if(!Settings.getSettings("minLikes").equalsIgnoreCase("")) {
+				minLikes = Integer.parseInt(Settings.getSettings("minLikes"));
+				minLikesInput.setText(String.valueOf(minLikes));
+			}
+			if(!Settings.getSettings("maxLikes").equalsIgnoreCase("")) {
+				maxLikes = Integer.parseInt(Settings.getSettings("maxLikes"));
+				maxLikesInput.setText(String.valueOf(maxLikes));
+			}
+			if(!Settings.getSettings("minObjects").equalsIgnoreCase("")) {
+				minObjects = Integer.parseInt(Settings.getSettings("minObjects"));
+				minObjectsInput.setText(String.valueOf(minObjects));
+			}
+			if(!Settings.getSettings("maxObjects").equalsIgnoreCase("")) {
+				maxObjects = Integer.parseInt(Settings.getSettings("maxObjects"));
+				maxObjectsInput.setText(String.valueOf(maxObjects));
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -437,7 +611,15 @@ public class RequestSettings {
 			Settings.writeSettings("rated", String.valueOf(ratedOption));
 			Settings.writeSettings("unrated", String.valueOf(unratedOption));
 			Settings.writeSettings("disableDifficulties", String.valueOf(disableOption));
+			Settings.writeSettings("minLikesOption", String.valueOf(minLikesOption));
+			Settings.writeSettings("maxLikesOption", String.valueOf(maxLikesOption));
+			Settings.writeSettings("minObjectsOption", String.valueOf(minObjectsOption));
+			Settings.writeSettings("maxObjectsOption", String.valueOf(maxObjectsOption));
 			Settings.writeSettings("disableLengths", String.valueOf(disableOption));
+			Settings.writeSettings("minLikes", String.valueOf(minLikes));
+			Settings.writeSettings("maxLikes", String.valueOf(maxLikes));
+			Settings.writeSettings("minObjects", String.valueOf(minObjects));
+			Settings.writeSettings("maxObjects", String.valueOf(maxObjects));
 			Settings.writeSettings("difficultyFilter", excludedDifficulties.toString().replaceAll("\\[", "").replaceAll("]", "").replaceAll(",{4}", ","));
 			Settings.writeSettings("lengthFilter", excludedLengths.toString().replaceAll("\\[", "").replaceAll("]", "").replaceAll(",{4}", ","));
 

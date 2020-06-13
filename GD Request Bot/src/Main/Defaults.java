@@ -117,7 +117,7 @@ public class Defaults {
 			HOVER = new Color(211, 211, 211);
 			SUB_MAIN = new Color(240, 240, 240);
 			SELECT = new Color(215, 215, 215);
-			BUTTON_HOVER = new Color(200, 200, 200);
+			BUTTON_HOVER = new Color(182, 182, 182);
 			TOP = Color.WHITE;
 			FOREGROUND = Color.BLACK;
 			FOREGROUND2 = new Color(100, 100, 100);

@@ -1,6 +1,13 @@
 package Main.InnerWindows;
 
 import Main.*;
+import com.github.alex1304.jdash.client.AnonymousGDClient;
+import com.github.alex1304.jdash.client.GDClientBuilder;
+import com.github.alex1304.jdash.entity.GDUser;
+import com.github.alex1304.jdash.exception.MissingAccessException;
+import com.github.alex1304.jdash.exception.SpriteLoadException;
+import com.github.alex1304.jdash.graphics.SpriteFactory;
+import com.github.alex1304.jdash.util.GDUserIconSet;
 import com.jidesoft.swing.Resizable;
 import com.jidesoft.swing.ResizablePanel;
 import org.apache.commons.io.IOUtils;
@@ -14,6 +21,7 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -221,7 +229,7 @@ public class CommentsWindow {
 				} else {
 					commenter.setForeground(Defaults.FOREGROUND);
 				}
-				commenter.setBounds(9, 4, commenter.getPreferredSize().width, 18);
+				commenter.setBounds(30, 4, commenter.getPreferredSize().width, 18);
 				int finalI = i;
 				commenter.addMouseListener(new MouseAdapter() {
 					@Override
@@ -241,21 +249,21 @@ public class CommentsWindow {
 					public void mouseEntered(MouseEvent e) {
 						super.mouseEntered(e);
 						commenter.setFont(Defaults.MAIN_FONT.deriveFont(15f));
-						commenter.setBounds(7, 4, commenter.getPreferredSize().width + 5, 18);
+						commenter.setBounds(28, 4, commenter.getPreferredSize().width + 5, 18);
 					}
 
 					@Override
 					public void mouseExited(MouseEvent e) {
 						super.mouseExited(e);
 						commenter.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-						commenter.setBounds(9, 4, commenter.getPreferredSize().width, 18);
+						commenter.setBounds(30, 4, commenter.getPreferredSize().width, 18);
 					}
 				});
 
 				JLabel percentLabel = new JLabel(percent);
 				percentLabel.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 				percentLabel.setForeground(Defaults.FOREGROUND2);
-				percentLabel.setBounds(commenter.getPreferredSize().width + 20, 4, percentLabel.getPreferredSize().width + 5, 18);
+				percentLabel.setBounds(commenter.getPreferredSize().width + 42, 4, percentLabel.getPreferredSize().width + 5, 18);
 
 
 				JLabel likeIcon = new JLabel();
@@ -273,7 +281,36 @@ public class CommentsWindow {
 				likesLabel.setFont(Defaults.MAIN_FONT.deriveFont(10f));
 				likesLabel.setForeground(Defaults.FOREGROUND);
 				likesLabel.setBounds(width - likesLabel.getPreferredSize().width - 26, 6, likesLabel.getPreferredSize().width + 5, 18);
+				JLabel playerIcon = new JLabel();
+				Thread thread = new Thread(() -> {
+					AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
 
+					GDUserIconSet iconSet = null;
+					GDUser user = null;
+					try {
+						user = client.searchUser(username).block();
+
+						try {
+							iconSet = new GDUserIconSet(user, SpriteFactory.create());
+						} catch (SpriteLoadException e) {
+							e.printStackTrace();
+						}
+					}
+					catch (MissingAccessException e){
+						user = client.searchUser("RobTop").block();
+						try {
+							iconSet = new GDUserIconSet(user, SpriteFactory.create());
+						} catch (SpriteLoadException e1) {
+							e1.printStackTrace();
+						}
+					}
+					BufferedImage icon = iconSet.generateIcon(user.getMainIconType());
+					Image imgScaled = icon.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+					ImageIcon imgNew = new ImageIcon(imgScaled);
+					playerIcon.setIcon(imgNew);
+					playerIcon.setBounds(2,-5,imgNew.getIconWidth()+2, imgNew.getIconHeight()+2);
+				});
+				thread.start();
 
 				JLabel content = new JLabel(comment);
 				content.setFont(Defaults.MAIN_FONT.deriveFont(12f));
@@ -286,6 +323,7 @@ public class CommentsWindow {
 				cmtPanel.add(percentLabel);
 				cmtPanel.add(likesLabel);
 				cmtPanel.add(likeIcon);
+				cmtPanel.add(playerIcon);
 
 				cmtPanel.setPreferredSize(new Dimension(width, 28 + content.getPreferredSize().height));
 
@@ -339,7 +377,12 @@ public class CommentsWindow {
 		defaultUI.setBackground(Defaults.TOP);
 		defaultUI.setHover(Defaults.HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
-		scrollPane.getViewport().setBackground(Defaults.SUB_MAIN);
+		if(scrollPane != null) {
+			scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
+			scrollPane.setBackground(Defaults.MAIN);
+			scrollPane.getViewport().setBackground(Defaults.SUB_MAIN);
+
+		}
 		for (Component component : panel.getComponents()) {
 			if (component instanceof JPanel) {
 				component.setBackground(Defaults.MAIN);

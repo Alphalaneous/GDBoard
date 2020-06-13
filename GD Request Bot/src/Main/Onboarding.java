@@ -215,7 +215,7 @@ public class Onboarding {
 		JPanel panel = new JPanel(null);
 		panel.setBounds(0, y, width, 36);
 		panel.setBackground(Defaults.SUB_MAIN);
-		FancyTextArea input = new FancyTextArea(false);
+		FancyTextArea input = new FancyTextArea(false, false);
 		DefaultStyledDocument doc = new DefaultStyledDocument();
 		input.setEditable(false);
 		input.addKeyListener(new SwingKeyAdapter() {

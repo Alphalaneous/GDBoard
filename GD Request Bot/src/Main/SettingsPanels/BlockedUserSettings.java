@@ -19,7 +19,7 @@ public class BlockedUserSettings {
 	private static JPanel blockedSettingsPanel = new JPanel();
 	private static JPanel blockedListPanel = new JPanel();
 	private static JScrollPane scrollPane = new JScrollPane(blockedListPanel);
-	private static FancyTextArea blockedInput = new FancyTextArea(false);
+	private static FancyTextArea blockedInput = new FancyTextArea(false, false);
 	private static RoundedJButton addID = new RoundedJButton("\uECC8", "Add User");
 	private static int i = 0;
 	private static double height = 0;

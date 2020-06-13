@@ -56,7 +56,7 @@ public class ShortcutSettings {
 		JPanel panel = new JPanel(null);
 		panel.setBounds(0, y, 415, 36);
 		panel.setBackground(Defaults.SUB_MAIN);
-		FancyTextArea input = new FancyTextArea(false);
+		FancyTextArea input = new FancyTextArea(false, false);
 		DefaultStyledDocument doc = new DefaultStyledDocument();
 		input.setEditable(false);
 		input.addKeyListener(new SwingKeyAdapter() {

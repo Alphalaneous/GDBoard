@@ -41,9 +41,9 @@ public class GeneralSettings {
 	public static int userLimit = 0;
 	public static int userLimitStream = 0;
 
-	private static FancyTextArea queueSizeInput = new FancyTextArea(true);
-	private static FancyTextArea userLimitInput = new FancyTextArea(true);
-	private static FancyTextArea userLimitStreamInput = new FancyTextArea(true);
+	private static FancyTextArea queueSizeInput = new FancyTextArea(true, false);
+	private static FancyTextArea userLimitInput = new FancyTextArea(true, false);
+	private static FancyTextArea userLimitStreamInput = new FancyTextArea(true, false);
 	private static JPanel panel = new JPanel();
 
 	public static JPanel createPanel() {

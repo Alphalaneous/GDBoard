@@ -180,6 +180,24 @@ public class Requests {
 					Main.sendMessage("@" + requester + " Please send unrated levels only!");
 					return;
 				}
+				if(level != null && RequestSettings.minObjectsOption && level.getObjectCount() < RequestSettings.minObjects){
+					Main.sendMessage("@" + requester + " That level has too few objects!");
+					return;
+				}
+				if(level != null && RequestSettings.maxObjectsOption && level.getObjectCount() > RequestSettings.maxObjects){
+					Main.sendMessage("@" + requester + " That level has too many objects!");
+					return;
+				}
+				if(level.getObjectCount() != 0) {
+					if (level != null && RequestSettings.minLikesOption && level.getObjectCount() < RequestSettings.minLikes) {
+						Main.sendMessage("@" + requester + " That level has too few likes!");
+						return;
+					}
+					if (level != null && RequestSettings.maxLikesOption && level.getObjectCount() > RequestSettings.maxLikes) {
+						Main.sendMessage("@" + requester + " That level has too many likes!");
+						return;
+					}
+				}
 			}
 			levelData.setRequester(requester);
 			levelData.setAuthor(Objects.requireNonNull(level).getCreatorName());
@@ -919,6 +937,19 @@ public class Requests {
 				int imageIDCount = 0;
 				String color = "";
 				String[] values = decompressed.split(";");
+				Requests.levels.get(k).setObjects(values.length);
+				if((values.length < RequestSettings.minObjects) && RequestSettings.minObjectsOption){
+					Main.sendMessage("@" + Requests.levels.get(k).getRequester() + " Your level has been removed for containing too few objects!");
+					LevelsWindow.removeButton(k);
+					Requests.levels.remove(k);
+					return;
+				}
+				if((values.length > RequestSettings.maxObjects) && RequestSettings.maxObjectsOption){
+					Main.sendMessage("@" + Requests.levels.get(k).getRequester() + " Your level has been removed for containing too many objects!");
+					LevelsWindow.removeButton(k);
+					Requests.levels.remove(k);
+					return;
+				}
 				for (String value1 : values) {
 					if (value1.startsWith("1,1110") || value1.startsWith("1,211") || value1.startsWith("1,914")) {
 						String value = value1.replaceAll("(,[^,]*),", "$1;");
