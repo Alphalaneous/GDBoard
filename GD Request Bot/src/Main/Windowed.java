@@ -1,5 +1,6 @@
 package Main;
 
+import Main.InnerWindows.CommentsWindow;
 import Main.InnerWindows.InfoWindow;
 import Main.InnerWindows.LevelsWindow;
 import Main.SettingsPanels.WindowedSettings;
@@ -11,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.net.URL;
 
 public class Windowed {
@@ -24,6 +26,21 @@ public class Windowed {
 	private static JButtonUI selectUI = new JButtonUI();
 	public static JFrame frame = new JFrame();
 	private static JLayeredPane mainFrame = new JLayeredPane();
+	public static boolean showingMore = false;
+	private static RoundedJButton showMore = createButton("\uE00F", "Show More");
+
+	private static JPanel commentsWindow;
+	static{
+		try {
+			if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
+				commentsWindow = CommentsWindow.getComWindow();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+
 	public static void setOnTop(boolean onTop){
 		frame.setAlwaysOnTop(onTop);
 		frame.setFocusableWindowState(!onTop);
@@ -56,14 +73,22 @@ public class Windowed {
 		content.setBounds(1,31,width-2, height);
 		content.setBackground(Defaults.SUB_MAIN);
 		content.setLayout(null);
-
+		try {
+			if(Settings.getSettings("window").equalsIgnoreCase("") && Settings.getSettings("windowed").equalsIgnoreCase("true")){
+				frame.setLocation((int)Defaults.screenSize.getWidth()/2 - width/2, 200);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		JScrollPane levelsWindow = LevelsWindow.getReqWindow();
 		levelsWindow.setBounds(0, 0, levelsWindow.getWidth(), levelsWindow.getHeight());
+		commentsWindow.setBounds(400, 0, commentsWindow.getWidth(), 512);
+		commentsWindow.setVisible(false);
 		JPanel infoWindow = InfoWindow.getInfoWindow();
 		infoWindow.setBounds(0, levelsWindow.getHeight()+ 1, infoWindow.getWidth(), infoWindow.getHeight());
 
-		buttonPanel.setBounds(levelsWindow.getWidth()+5, 0, 50, 512);
+		buttonPanel.setBounds(width-58, 0, 50, 512);
 		buttonPanel.setBackground(Defaults.SUB_MAIN);
 		JButton skip = createButton("\uEB9D", "Next/Skip Level");
 		skip.addMouseListener(new MouseAdapter() {
@@ -147,7 +172,37 @@ public class Windowed {
 			}
 		});
 		buttonPanel.add(settings);
+		showMore.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				SettingsWindow.run = false;
+				((InnerWindow) window).moveToFront();
+				showingMore = !showingMore;
+				if(showingMore) {
+					showMore.setText("\uE00E");
+					showMore.setTooltip("Show Less");
+					width = 765;
+					CommentsWindow.loadComments(0,false);
+					commentsWindow.setVisible(true);
+				}
+				else{
+					showMore.setText("\uE00F");
+					showMore.setTooltip("Show More");
+					width = 465;
+					commentsWindow.setVisible(false);
+				}
+				frame.setSize(new Dimension(width+200, frame.getHeight()));
+				mainFrame.setBounds(0, 0, width+200, mainFrame.getHeight());
+				content.setBounds(1,31,width-2, content.getHeight());
+				window.setBounds(0,0,width, window.getHeight());
+				((InnerWindow) window).resetDimensions(width-2, window.getHeight());
+
+				buttonPanel.setBounds(width-58, 0, 50, 512);
+			}
+		});
+		buttonPanel.add(showMore);
 		content.add(levelsWindow);
+		content.add(commentsWindow);
 		content.add(infoWindow);
 		content.add(buttonPanel);
 		window.add(content);
@@ -206,8 +261,8 @@ public class Windowed {
 		((InnerWindow) window).setVisible();
 
 	}
-	private static JButton createButton(String icon, String tooltip) {
-		JButton button = new RoundedJButton(icon, tooltip);
+	private static RoundedJButton createButton(String icon, String tooltip) {
+		RoundedJButton button = new RoundedJButton(icon, tooltip);
 		button.setPreferredSize(new Dimension(50, 50));
 		button.setUI(defaultUI);
 		if (!Settings.windowedMode) {
@@ -229,7 +284,33 @@ public class Windowed {
 	//region SetSettings
 	public static void setSettings(){
 		Settings.setWindowSettings("Window", frame.getX() + "," + frame.getY() + "," + false + "," + true);
-
+		try {
+			Settings.writeSettings("showMore", String.valueOf(showingMore));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public static void loadSettings(){
+		try {
+			if(!Settings.getSettings("showMore").equalsIgnoreCase("")){
+				showingMore = Boolean.parseBoolean(Settings.getSettings("showMore"));
+				if(showingMore){
+					showMore.setText("\uE00E");
+					showMore.setTooltip("Show Less");
+					width = 765;
+					CommentsWindow.loadComments(0,false);
+					commentsWindow.setVisible(true);
+					frame.setSize(new Dimension(width+200, frame.getHeight()));
+					mainFrame.setBounds(0, 0, width+200, mainFrame.getHeight());
+					content.setBounds(1,31,width-2, content.getHeight());
+					window.setBounds(0,0,width, window.getHeight());
+					((InnerWindow) window).resetDimensions(width-2, window.getHeight());
+					buttonPanel.setBounds(width-58, 0, 50, 512);
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	//endregion
 }

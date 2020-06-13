@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class WindowedSettings {
 	private static JButtonUI defaultUI = new JButtonUI();
-	public static boolean onTopOption = true;
+	public static boolean onTopOption = false;
 	private static CheckboxButton onTop = createButton("Always On Top", 20);
  	private static JPanel panel = new JPanel();
 
@@ -19,7 +19,7 @@ public class WindowedSettings {
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
-		onTop.setChecked(true);
+		onTop.setChecked(false);
 		onTop.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {

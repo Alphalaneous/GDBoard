@@ -70,6 +70,13 @@ public class SettingsWindow {
 
 			}
 		});
+		try {
+			if(Settings.getSettings("settings").equalsIgnoreCase("") && Settings.getSettings("windowed").equalsIgnoreCase("true")){
+				frame.setLocation((int)Defaults.screenSize.getWidth()/2 - width/2, 200);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		frame.setUndecorated(true);
 		frame.setSize(width + 200,height+32 + 200);
 		frame.setLayout(null);

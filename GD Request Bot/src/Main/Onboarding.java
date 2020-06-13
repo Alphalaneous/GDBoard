@@ -23,7 +23,6 @@ public class Onboarding {
 			"\uF137", true).createPanel();
 	private static JPanel content = new JPanel(null);
 	private static JButtonUI defaultUI = new JButtonUI();
-	private static JPanel openPanel = createKeybindButton(130, "Open Keybind", "openKeybind");
 	public static int openKeybind = 36;
 	static JFrame frame = new JFrame();
 
@@ -60,20 +59,19 @@ public class Onboarding {
 		mainText.setBackground(new Color(0, 0, 0, 0));
 		mainText.setFont(Defaults.MAIN_FONT.deriveFont(18f));
 
-		JTextArea keybindInfo = new JTextArea("Set the open Shortcut. \nThis is what you use to open the GDBoard Overlay, remember this!");
-		keybindInfo.setFont(Defaults.MAIN_FONT.deriveFont(12f));
-		keybindInfo.setBounds(25, 90, width - 50, keybindInfo.getPreferredSize().height + 5);
-		keybindInfo.setForeground(Color.RED);
-		keybindInfo.setEditable(false);
-		keybindInfo.setBackground(Defaults.SUB_MAIN);
-		keybindInfo.setBorder(BorderFactory.createEmptyBorder());
-		JTextArea otherInfo = new JTextArea("If you play GD in fullscreen, the overlay may not work. To fix either switch to \nwindowed mode or drag the overlay to the other monitor by clicking on the time \nnear the top middle and dragging.");
-		otherInfo.setFont(Defaults.MAIN_FONT.deriveFont(12f));
-		otherInfo.setBounds(25, 180, width - 50, otherInfo.getPreferredSize().height + 5);
-		otherInfo.setForeground(Color.RED);
-		otherInfo.setEditable(false);
-		otherInfo.setBackground(Defaults.SUB_MAIN);
-		otherInfo.setBorder(BorderFactory.createEmptyBorder());
+		JTextPane infoText = new JTextPane();
+		StyledDocument doc2 = infoText.getStyledDocument();
+		SimpleAttributeSet center2 = new SimpleAttributeSet();
+		StyleConstants.setAlignment(center2, StyleConstants.ALIGN_CENTER);
+		doc2.setParagraphAttributes(0, doc2.getLength(), center2, false);
+		infoText.setText("Before we begin, make sure GDBoard is VIP or Mod in your chat! This will prevent it from getting caught up in Twitch's default chat limits.\n\nGDBoard has tons of settings to tailor requests just for you, but can also work with defaults, just press next, log in, and boom, it's ready to go!");
+		infoText.setBounds(25, 100, width - 50, 300);
+		infoText.setOpaque(false);
+		infoText.setEditable(false);
+		infoText.setForeground(Defaults.FOREGROUND);
+		infoText.setBackground(new Color(0, 0, 0, 0));
+		infoText.setFont(Defaults.MAIN_FONT.deriveFont(13f));
+
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
@@ -123,7 +121,7 @@ public class Onboarding {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				try {
-					moveOn.setVisible(true);
+					//moveOn.setVisible(true);
 					APIs.setOauth();
 					Thread thread = new Thread(() -> {
 						while (!APIs.success.get()) {
@@ -155,12 +153,10 @@ public class Onboarding {
 		button.refresh();
 
 		content.add(mainText);
-		content.add(openPanel);
-		content.add(keybindInfo);
-		content.add(otherInfo);
 		content.add(authInfo);
 		content.add(button);
 		content.add(moveOn);
+		content.add(infoText);
 		window.add(content);
 		((InnerWindow) window).setPinVisible();
 		((InnerWindow) window).refreshListener();

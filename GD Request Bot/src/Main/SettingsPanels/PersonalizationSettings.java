@@ -12,6 +12,8 @@ public class PersonalizationSettings {
 	private static CurvedButton windowedButton = new CurvedButton("Switch to Windowed Mode (Requires Restart)");
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static JPanel panel = new JPanel(null);
+	private static JTextArea otherInfo = new JTextArea("If you play GD in fullscreen, the overlay may not work. To fix drag the \noverlay to another monitor by clicking on the time near the top \nmiddle and dragging.");
+	private static JTextArea keybindInfo = new JTextArea("The \"Home\" key is default what you use to open the GDBoard Overlay, remember this!");
 
 
 	public static JPanel createPanel() {
@@ -62,7 +64,30 @@ public class PersonalizationSettings {
 				}
 			}
 		});
+		keybindInfo.setFont(Defaults.MAIN_FONT.deriveFont(12f));
+		keybindInfo.setBounds(25, 110, 365-10, keybindInfo.getPreferredSize().height + 5);
+		keybindInfo.setForeground(Color.RED);
+		keybindInfo.setEditable(false);
+		keybindInfo.setOpaque(false);
+		keybindInfo.setBackground(new Color(0,0,0,0));
+		keybindInfo.setBorder(BorderFactory.createEmptyBorder());
+		otherInfo.setFont(Defaults.MAIN_FONT.deriveFont(12f));
+		otherInfo.setBounds(25, 60, 365-10, otherInfo.getPreferredSize().height + 5);
+		otherInfo.setForeground(Color.RED);
+		otherInfo.setEditable(false);
+		otherInfo.setOpaque(false);
+		otherInfo.setBackground(new Color(0,0,0,0));
+		otherInfo.setBorder(BorderFactory.createEmptyBorder());
 		panel.add(windowedButton);
+
+		try {
+			if(Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+				panel.add(keybindInfo);
+				panel.add(otherInfo);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return panel;
 		
 	}
@@ -70,7 +95,8 @@ public class PersonalizationSettings {
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
-
+		otherInfo.setForeground(Color.RED);
+		otherInfo.setBackground(Defaults.SUB_MAIN);
 		panel.setBackground(Defaults.SUB_MAIN);
 		for (Component component : panel.getComponents()) {
 			if (component instanceof JButton) {
@@ -84,9 +110,7 @@ public class PersonalizationSettings {
 			if (component instanceof JLabel) {
 				component.setForeground(Defaults.FOREGROUND);
 			}
-			if(component instanceof JTextArea){
-				((FancyTextArea) component).refreshAll();
-			}
+
 			if(component instanceof CheckboxButton){
 				((CheckboxButton) component).refresh();
 			}

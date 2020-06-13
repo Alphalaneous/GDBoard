@@ -11,14 +11,16 @@ import javax.swing.*;
 public class RoundedJButton extends JButton {
 
 	private static final long serialVersionUID = 1L;
+	private JLabel tooltipLabel = new JLabel();
+	private JPanel tooltipPanel = new JPanel();
+
 
 	public RoundedJButton(String label, String tooltip) {
 		super(label);
 		final boolean[] exited = {false};
 		Dimension size = getPreferredSize();
-		JPanel tooltipPanel = new JPanel();
 		tooltipPanel.setFocusable(false);
-		JLabel tooltipLabel = new JLabel(tooltip);
+		tooltipLabel.setText(tooltip);
 		tooltipPanel.add(tooltipLabel);
 		tooltipLabel.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		size.width = size.height = Math.max(size.width, size.height);
@@ -60,7 +62,15 @@ public class RoundedJButton extends JButton {
 			}
 		});
 	}
-
+	public void setTooltip(String tooltip){
+		tooltipLabel.setText(tooltip);
+		if(Settings.windowedMode){
+			tooltipPanel.setBounds(tooltipPanel.getX(), tooltipPanel.getY(), tooltipLabel.getPreferredSize().width + 10, tooltipLabel.getPreferredSize().height + 5);
+		}
+		else{
+			tooltipPanel.setBounds(tooltipPanel.getX(), tooltipPanel.getY(), tooltipLabel.getPreferredSize().width + 10, tooltipLabel.getPreferredSize().height + 5);
+		}
+	}
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 

@@ -598,6 +598,12 @@ public class InnerWindow extends ResizablePanel {
 	public void resetDimensions(int width, int height) {
 		this.height = height;
 		this.width = width;
+		topBar.setBounds(1, 1, width, 30);
+		pinButton.setBounds(width - 60, 0, 30, 30);
+		pinButtonFill.setBounds(width - 60, 0, 30, 30);
+		minimizeButton.setBounds(width - 60, 0, 30, 30);
+		closeButton.setBounds(width - 30, 0, 30, 30);
+
 
 	}
 	//endregion

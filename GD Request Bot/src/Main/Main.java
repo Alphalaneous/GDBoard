@@ -39,6 +39,14 @@ public class Main {
 	private static JPanel panel = new JPanel();
 	private static JLabel tf = new JLabel("Loading...");
 	public static void main(String[] args) {
+		try {
+			if(Settings.getSettings("windowed").equalsIgnoreCase("")){
+				Settings.writeSettings("windowed", "true");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		/*try {
 			System.setOut(new PrintStream(new FileOutputStream(new File(System.getenv("APPDATA") + "\\GDBoard\\clOutput.txt"))));
 		} catch (FileNotFoundException e) {
@@ -146,12 +154,14 @@ public class Main {
 						}
 					}
 					else{
+						CommentsWindow.createPanel();
 						LevelsWindow.createPanel();
 						InfoWindow.createPanel();
 					}
 					SettingsWindow.createPanel();
 					if (Settings.windowedMode) {
 						Windowed.createPanel();
+						Windowed.loadSettings();
 					}
 					Settings.loadSettings(false);
 
