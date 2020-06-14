@@ -53,11 +53,9 @@ public class Requests {
 			Path logged = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\requestsLog.txt");
 			Path blockedUser = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blockedUsers.txt");
 			if(Main.loaded) {
-				if(GeneralSettings.followersOption){
-					if( APIs.isNotFollowing(requester)) {
-						Main.sendMessage("@" + requester + " Please follow to send levels!");
-						return;
-					}
+				if(GeneralSettings.followersOption && APIs.isNotFollowing(requester)){
+					Main.sendMessage("@" + requester + " Please follow to send levels!");
+					return;
 				}
 				for (int k = 0; k < levels.size(); k++) {
 
