@@ -197,8 +197,7 @@ public class APIs {
 			return JsonObject.readFrom(response.body().string());
 
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
-
+			e.printStackTrace();
 			return null;
 		}
 		/*try {
@@ -230,8 +229,7 @@ public class APIs {
 			return JsonObject.readFrom(response.body().string());
 
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
-
+			e.printStackTrace();
 			return null;
 		}
 
@@ -273,8 +271,7 @@ public class APIs {
 			String x = br.readLine();
 			return JsonObject.readFrom(x).get("client_id").toString().replace("\"", "");
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
-
+			e.printStackTrace();
 			return "";
 		}
 	}
