@@ -16,6 +16,7 @@
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/APIs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/APIs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/Requests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Requests.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -86,8 +87,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/APIs.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="271" column="73" selection-start-line="271" selection-start-column="73" selection-end-line="271" selection-end-column="73" />
+            <state relative-caret-position="521">
+              <caret line="141" column="25" selection-start-line="141" selection-start-column="25" selection-end-line="141" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -96,26 +97,35 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/GeneralSettings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="311" column="5" lean-forward="true" selection-start-line="311" selection-start-column="5" selection-end-line="311" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="55" column="55" selection-start-line="55" selection-start-column="55" selection-end-line="55" selection-end-column="55" />
+            <state relative-caret-position="217">
+              <caret line="59" column="21" selection-start-line="59" selection-start-column="21" selection-end-line="59" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#15703#15704#0" expanded="true" />
-                <element signature="e#15730#15731#0" expanded="true" />
-                <element signature="e#15788#15789#0" expanded="true" />
-                <element signature="e#15812#15813#0" expanded="true" />
-                <element signature="e#16107#16108#0" expanded="true" />
-                <element signature="e#16148#16149#0" expanded="true" />
-                <element signature="e#18628#18629#0" expanded="true" />
-                <element signature="e#18649#18650#0" expanded="true" />
-                <element signature="e#27696#27697#0" expanded="true" />
-                <element signature="e#27724#27725#0" expanded="true" />
-                <element signature="e#27791#27792#0" expanded="true" />
-                <element signature="e#27837#27838#0" expanded="true" />
-                <element signature="e#27872#27873#0" expanded="true" />
-                <element signature="e#27891#27892#0" expanded="true" />
+                <element signature="e#15721#15722#0" expanded="true" />
+                <element signature="e#15748#15749#0" expanded="true" />
+                <element signature="e#15806#15807#0" expanded="true" />
+                <element signature="e#15830#15831#0" expanded="true" />
+                <element signature="e#16125#16126#0" expanded="true" />
+                <element signature="e#16166#16167#0" expanded="true" />
+                <element signature="e#18646#18647#0" expanded="true" />
+                <element signature="e#18667#18668#0" expanded="true" />
+                <element signature="e#27714#27715#0" expanded="true" />
+                <element signature="e#27742#27743#0" expanded="true" />
+                <element signature="e#27809#27810#0" expanded="true" />
+                <element signature="e#27855#27856#0" expanded="true" />
+                <element signature="e#27890#27891#0" expanded="true" />
+                <element signature="e#27909#27910#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -250,10 +260,10 @@
         <option value="$PROJECT_DIR$/src/Main/Windowed.java" />
         <option value="$PROJECT_DIR$/src/Main/InnerWindows/CommentsWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/Overlay.java" />
-        <option value="$PROJECT_DIR$/src/Main/Requests.java" />
         <option value="$PROJECT_DIR$/src/Main/ChatReader.java" />
         <option value="$PROJECT_DIR$/src/Main/Main.java" />
         <option value="$PROJECT_DIR$/src/Main/APIs.java" />
+        <option value="$PROJECT_DIR$/src/Main/Requests.java" />
         <option value="$PROJECT_DIR$/src/.version" />
       </list>
     </option>
@@ -385,7 +395,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1592138533935" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1592139476822" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../GDBoard Dependencies/okhttp-3.9.0.jar!/" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -558,7 +568,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4989339" weight="0.32713348" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5399787" visible="true" weight="0.2979415" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5399787" weight="0.2979415" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" weight="0.41928494" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -566,7 +576,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5010661" side_tool="true" weight="0.32719395" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32990867" />
-      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.43336886" weight="0.37811485" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.43336886" visible="true" weight="0.37811485" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
       <window_info anchor="right" id="Palette" order="2" />
@@ -1004,13 +1014,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/GeneralSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk-13.0.2/lib/src.zip!/java.desktop/java/awt/Window.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="211">
@@ -1145,36 +1148,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/GeneralSettings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="55" column="55" selection-start-line="55" selection-start-column="55" selection-end-line="55" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#15703#15704#0" expanded="true" />
-            <element signature="e#15730#15731#0" expanded="true" />
-            <element signature="e#15788#15789#0" expanded="true" />
-            <element signature="e#15812#15813#0" expanded="true" />
-            <element signature="e#16107#16108#0" expanded="true" />
-            <element signature="e#16148#16149#0" expanded="true" />
-            <element signature="e#18628#18629#0" expanded="true" />
-            <element signature="e#18649#18650#0" expanded="true" />
-            <element signature="e#27696#27697#0" expanded="true" />
-            <element signature="e#27724#27725#0" expanded="true" />
-            <element signature="e#27791#27792#0" expanded="true" />
-            <element signature="e#27837#27838#0" expanded="true" />
-            <element signature="e#27872#27873#0" expanded="true" />
-            <element signature="e#27891#27892#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="425">
+          <caret line="311" column="5" lean-forward="true" selection-start-line="311" selection-start-column="5" selection-end-line="311" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/APIs.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="271" column="73" selection-start-line="271" selection-start-column="73" selection-end-line="271" selection-end-column="73" />
+        <state relative-caret-position="521">
+          <caret line="141" column="25" selection-start-line="141" selection-start-column="25" selection-end-line="141" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="59" column="21" selection-start-line="59" selection-start-column="21" selection-end-line="59" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#15721#15722#0" expanded="true" />
+            <element signature="e#15748#15749#0" expanded="true" />
+            <element signature="e#15806#15807#0" expanded="true" />
+            <element signature="e#15830#15831#0" expanded="true" />
+            <element signature="e#16125#16126#0" expanded="true" />
+            <element signature="e#16166#16167#0" expanded="true" />
+            <element signature="e#18646#18647#0" expanded="true" />
+            <element signature="e#18667#18668#0" expanded="true" />
+            <element signature="e#27714#27715#0" expanded="true" />
+            <element signature="e#27742#27743#0" expanded="true" />
+            <element signature="e#27809#27810#0" expanded="true" />
+            <element signature="e#27855#27856#0" expanded="true" />
+            <element signature="e#27890#27891#0" expanded="true" />
+            <element signature="e#27909#27910#0" expanded="true" />
           </folding>
         </state>
       </provider>

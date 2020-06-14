@@ -200,35 +200,6 @@ public class APIs {
 					}
 				}).block();
 		return JsonObject.readFrom(response);
-		/*Request request = new Request.Builder()
-				.url(URL)
-				.build();
-		Request newReq = request.newBuilder()
-				.addHeader("Client-ID", "fzwze6vc6d2f7qodgkpq2w8nnsz3rl")
-				.addHeader("Authorization", "Bearer " + Settings.oauth)
-				.build();
-
-		try (Response response = client.newCall(newReq).execute()) {
-			return JsonObject.readFrom(response.body().string());
-
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
-
-			return null;
-		}*/
-		/*try {
-			URL url = new URL(URL);
-			HttpsURLConnection conn = (HttpsURLConnection)url.openConnection();
-			conn.setRequestProperty("Client-ID", "fzwze6vc6d2f7qodgkpq2w8nnsz3rl");
-			conn.setRequestProperty("Authorization", "Bearer " + Settings.oauth);
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()), 1);
-			String x = br.readLine();
-			System.out.println(x);
-			return JsonObject.readFrom(x);
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
-			return null;
-		}*/
 	}
 
 	private static JsonObject twitchAPI(String URL, boolean v5) {
@@ -249,22 +220,6 @@ public class APIs {
 
 			return null;
 		}
-
-		/*try {
-			URL url = new URL(URL);
-			HttpsURLConnection conn = (HttpsURLConnection)url.openConnection();
-			conn.setRequestProperty("Client-ID", "fzwze6vc6d2f7qodgkpq2w8nnsz3rl");
-			conn.setRequestProperty("Authorization", "OAuth " + Settings.oauth);
-			if (v5) {
-				conn.setRequestProperty("Accept", "application/vnd.twitchtv.v5+json");
-			}
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()), 1);
-			String x = br.readLine();
-			return JsonObject.readFrom(x);
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
-			return null;
-		}*/
 	}
 
 	private static String getIDs(String username) {
