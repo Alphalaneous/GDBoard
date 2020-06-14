@@ -196,7 +196,7 @@ public class APIs {
 		try (Response response = client.newCall(newReq).execute()) {
 			return JsonObject.readFrom(response.body().string());
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
 
 			return null;
@@ -229,7 +229,7 @@ public class APIs {
 		try (Response response = client.newCall(newReq).execute()) {
 			return JsonObject.readFrom(response.body().string());
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
 
 			return null;
