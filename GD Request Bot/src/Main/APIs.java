@@ -27,6 +27,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static io.netty.buffer.Unpooled.wrappedBuffer;
@@ -60,6 +61,7 @@ public class APIs {
 
         return info;
     }*/
+	private static OkHttpClient client = new OkHttpClient().newBuilder().connectTimeout(10, TimeUnit.SECONDS).build();
 
 	public static ArrayList<Comment> getGDComments(int page, boolean top, String ID) throws IOException {
 		ByteBuf data = wrappedBuffer(StandardCharsets.UTF_8.encode("levelID=" + ID + "&page=" + page + "&secret=Wmfd2893gb7&gameVersion=21&binaryVersion=35&mode=" + (top ? 1 : 0)));
@@ -181,7 +183,8 @@ public class APIs {
 
 
 	private static JsonObject twitchAPI(String URL) {
-		OkHttpClient client = new OkHttpClient();
+
+
 		Request request = new Request.Builder()
 				.url(URL)
 				.build();
@@ -189,6 +192,7 @@ public class APIs {
 				.addHeader("Client-ID", "fzwze6vc6d2f7qodgkpq2w8nnsz3rl")
 				.addHeader("Authorization", "Bearer " + Settings.oauth)
 				.build();
+
 		try (Response response = client.newCall(newReq).execute()) {
 			return JsonObject.readFrom(response.body().string());
 
@@ -213,7 +217,6 @@ public class APIs {
 
 	private static JsonObject twitchAPI(String URL, boolean v5) {
 
-		OkHttpClient client = new OkHttpClient();
 		Request request = new Request.Builder()
 				.url(URL)
 				.build();
@@ -248,9 +251,15 @@ public class APIs {
 	}
 
 	private static String getIDs(String username) {
-		JsonObject userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + username.toLowerCase());
-		assert userID != null;
-		return userID.get("data").asArray().get(0).asObject().get("id").toString().replaceAll("\"", "");
+		try {
+			JsonObject userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + username.toLowerCase());
+			assert userID != null;
+			System.out.println(userID.toString());
+			return userID.get("data").asArray().get(0).asObject().get("id").toString().replaceAll("\"", "");
+		}
+		catch (Exception e){
+			return "";
+		}
 	}
 	@SuppressWarnings("unused")
 	public static String getClientID() {
