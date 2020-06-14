@@ -16,8 +16,6 @@ import java.net.NoRouteToHostException;
 import java.net.Socket;
 
 class GDBoardBot {
-	static int wait = 2000;
-	static int tries = 0;
 	static boolean connected = false;
 	static boolean failed = false;
 	private static PrintWriter out;
@@ -78,15 +76,9 @@ class GDBoardBot {
 		} catch (ConnectException | NoRouteToHostException e) {
 			System.out.println("failed");
 			try {
-				Thread.sleep(wait);
+				Thread.sleep(15000);
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
-			}
-			tries++;
-			wait = wait * 2;
-			if(tries >= 10){
-				APIs.setOauth();
-				tries = 0;
 			}
 			start();
 			return;
@@ -188,15 +180,9 @@ class GDBoardBot {
 				e.printStackTrace();
 			}
 			try {
-				Thread.sleep(wait);
+				Thread.sleep(15000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
-			tries++;
-			wait = wait*2;
-			if(tries >= 10){
-				APIs.setOauth();
-				tries = 0;
 			}
 		});
 		thread.start();
