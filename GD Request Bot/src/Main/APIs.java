@@ -144,7 +144,7 @@ public class APIs {
 		try {
 			JsonObject isFollowing = null;
 			try {
-				isFollowing = twitchAPI("https://api.twitch.tv/helix","/users/follows?from_id=" + getIDs(user) + "&to_id=" + getIDs(Settings.getSettings("channel")));
+				isFollowing = twitchAPI("https://api.twitch.tv/helix/users/follows?from_id=" + getIDs(user) + "&to_id=" + getIDs(Settings.getSettings("channel")));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -171,7 +171,7 @@ public class APIs {
 
 	public static String getChannel() {
 		try {
-			JsonObject nameObj = twitchAPI("https://api.twitch.tv", "/helix/users");
+			JsonObject nameObj = twitchAPI("https://api.twitch.tv/helix/users");
 			return String.valueOf(nameObj.asObject().get("data").asArray().get(0).asObject().get("display_name")).replaceAll("\"", "");
 		}
 		catch (Exception e){
@@ -182,25 +182,10 @@ public class APIs {
 
 
 
-	private static JsonObject twitchAPI(String URL, String uri) {
-		HttpClient client = HttpClient.create()
-				.baseUrl(URL)
-				.headers(h -> {
-					h.add("Client-ID", "fzwze6vc6d2f7qodgkpq2w8nnsz3rl");
-					h.add("Authorization", "Bearer " + Settings.oauth);
-				});
-		String response = client.get()
-				.uri(uri)
-				.responseSingle((responceHeader, responceBody) -> {
-					if(responceHeader.status().equals(HttpResponseStatus.OK)){
-						return responceBody.asString().defaultIfEmpty("");
-					}
-					else{
-						return Mono.error(new RuntimeException(responceHeader.status().toString()));
-					}
-				}).block();
-		return JsonObject.readFrom(response);
-		/*Request request = new Request.Builder()
+	private static JsonObject twitchAPI(String URL) {
+
+
+		Request request = new Request.Builder()
 				.url(URL)
 				.build();
 		Request newReq = request.newBuilder()
@@ -215,7 +200,7 @@ public class APIs {
 			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
 
 			return null;
-		}*/
+		}
 		/*try {
 			URL url = new URL(URL);
 			HttpsURLConnection conn = (HttpsURLConnection)url.openConnection();
@@ -269,7 +254,7 @@ public class APIs {
 
 	private static String getIDs(String username) {
 		try {
-			JsonObject userID = twitchAPI("https://api.twitch.tv/helix","/users?login=" + username.toLowerCase());
+			JsonObject userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + username.toLowerCase());
 			assert userID != null;
 			System.out.println(userID.toString());
 			return userID.get("data").asArray().get(0).asObject().get("id").toString().replaceAll("\"", "");
