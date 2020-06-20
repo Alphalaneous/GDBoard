@@ -18,8 +18,9 @@ public class Command {
         sandbox.inject("xArgs", xArgs);
         sandbox.allow(Requests.class);
         sandbox.allow(GDMod.class);
+        sandbox.allow(Board.class);
         try {
-            sandbox.eval("var Levels = Java.type('Main.Requests'); var GD = Java.type('Main.GDMod');" + function);
+            sandbox.eval("var Levels = Java.type('Main.Requests'); var GD = Java.type('Main.GDMod'); var Board = Java.type('Main.Board');" + function);
         }
         catch (Exception e){
             e.printStackTrace();

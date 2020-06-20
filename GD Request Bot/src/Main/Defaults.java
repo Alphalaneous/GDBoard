@@ -162,14 +162,14 @@ public class Defaults {
 			prevColor[0] = 0;
 			ACCENT =  new Color(0, 108, 230);
 		}
-		if (prevTheme[0] == 0) {
-			Defaults.setDark();
-			dark.set(false);
-		} else if (prevTheme[0] == 1) {
-			Defaults.setLight();
-			dark.set(true);
-		}
 
+				if (prevTheme[0] == 0) {
+					Defaults.setDark();
+					dark.set(false);
+				} else if (prevTheme[0] == 1) {
+					Defaults.setLight();
+					dark.set(true);
+				}
 		Thread thread = new Thread(() -> {
 			while (true) {
 
@@ -206,15 +206,19 @@ public class Defaults {
 					}
 				} catch (NullPointerException ignored) {
 				}
-				if (theme == 0 && prevTheme[0] == 1) {
-					Defaults.setDark();
-					dark.set(false);
-					prevTheme[0] = 0;
-				} else if (theme == 1 && prevTheme[0] == 0) {
-					Defaults.setLight();
-					dark.set(true);
-					prevTheme[0] = 1;
-				}
+
+						if (theme == 0 && prevTheme[0] == 1) {
+							Defaults.setDark();
+							dark.set(false);
+							prevTheme[0] = 0;
+						} else if (theme == 1 && prevTheme[0] == 0) {
+							Defaults.setLight();
+							dark.set(true);
+							prevTheme[0] = 1;
+						}
+
+
+
 				if (!Settings.windowedMode) {
 					screenSize = GraphicsEnvironment
 							.getLocalGraphicsEnvironment()

@@ -177,7 +177,16 @@ public class APIs {
 			return "error";
 		}
 	}
-
+	public static String getPFP() {
+		try {
+			JsonObject nameObj = twitchAPI("https://api.twitch.tv/helix/users");
+			return String.valueOf(nameObj.asObject().get("data").asArray().get(0).asObject().get("profile_image_url")).replaceAll("\"", "");
+		}
+		catch (Exception e){
+			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
+			return "error";
+		}
+	}
 
 
 	private static JsonObject twitchAPI(String URL) {

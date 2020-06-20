@@ -204,22 +204,22 @@ public class Functions {
 					Requests.levels.remove(LevelsWindow.getSelectedID());
 					LevelsWindow.removeButton();
 					Functions.saveFunction();
-
+					LevelsWindow.setOneSelect();
+					Thread thread = new Thread(() -> {
+						CommentsWindow.unloadComments(true);
+						if (Requests.levels.size() > 0) {
+							CommentsWindow.loadComments(0, false);
+						}
+					});
+					thread.start();
+					LevelsWindow.setName(Requests.levels.size());
 
 				}
 				SongWindow.refreshInfo();
 				InfoWindow.refreshInfo();
 				SettingsWindow.run = true;
 			}
-			LevelsWindow.setOneSelect();
-			Thread thread = new Thread(() -> {
-				CommentsWindow.unloadComments(true);
-				if (Requests.levels.size() > 0) {
-					CommentsWindow.loadComments(0, false);
-				}
-			});
-			thread.start();
-			LevelsWindow.setName(Requests.levels.size());
+
 		}
 	}
 
