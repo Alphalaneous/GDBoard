@@ -16,6 +16,13 @@ public class Command {
         sandbox.inject("cheer", cheer);
         String[] xArgs = Arrays.copyOfRange(args, 1, args.length);
         sandbox.inject("xArgs", xArgs);
+        String message = "";
+        for(String msg : xArgs){
+            message = message + " " + msg;
+        }
+
+        sandbox.inject("message", message);
+
         sandbox.allow(Requests.class);
         sandbox.allow(GDMod.class);
         sandbox.allow(Board.class);
@@ -32,8 +39,8 @@ public class Command {
                 result = obj.toString();
             }
         } catch (Exception e) {
-            Main.sendMessage("There was an error with the command: " + e);
+            Main.sendMessage(("There was an error with the command: " + e).replaceAll(System.getProperty("user.name"), "*****"));
         }
-        return result;
+        return result.replaceAll(System.getProperty("user.name"), "*****");
     }
 }

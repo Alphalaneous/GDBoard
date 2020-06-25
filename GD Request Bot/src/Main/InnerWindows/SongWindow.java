@@ -51,8 +51,7 @@ public class SongWindow {
 					thread[0] = new Thread(() -> {
 						try {
 							Player mp3player;
-							BufferedInputStream inp;
-							inp = new BufferedInputStream(Requests.levels.get(LevelsWindow.getSelectedID()).getSongURL().openStream());
+							BufferedInputStream inp = new BufferedInputStream(Requests.levels.get(LevelsWindow.getSelectedID()).getSongURL().openStream());
 							mp3player = new Player(inp);
 							mp3player.play();
 						} catch (IOException | JavaLayerException | NullPointerException f) {

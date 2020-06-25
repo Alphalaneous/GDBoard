@@ -1,14 +1,18 @@
 package Main;
 
+import Main.InnerWindows.LevelsWindow;
+import com.github.alex1304.jdash.client.AnonymousGDClient;
+import com.github.alex1304.jdash.client.GDClientBuilder;
+import com.github.alex1304.jdash.exception.SongNotAllowedForUseException;
+import delight.nashornsandbox.NashornSandbox;
+import delight.nashornsandbox.NashornSandboxes;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
 import javax.swing.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.net.URL;
+import java.util.*;
 
 @SuppressWarnings("unused")
 
@@ -48,6 +52,69 @@ public class Board {
 			threads.get(location).stop();
 			threads.remove(location);
 		}
+	}
+	public static void stopAllSounds(){
+		Iterator hmIterator = threads.entrySet().iterator();
+
+		while (hmIterator.hasNext()) {
+			Map.Entry mapElement = (Map.Entry)hmIterator.next();
+			((Thread)mapElement.getValue()).stop();
+		}
+		threads.clear();
+	}
+	static AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
+	public static void playNewgrounds(String songID){
+		if(threads.containsKey("ng:" + songID)){
+			threads.get("ng:" + songID).stop();
+			threads.remove("ng:" + songID);
+		}
+		Thread aThread = new Thread(() -> {
+			try {
+				BufferedInputStream inp = new BufferedInputStream(new URL(client.getSongById(Long.parseLong(songID)).block().getDownloadURL()).openStream());
+				Player mp3player = new Player(inp);
+				mp3player.play();
+			} catch (IllegalArgumentException | SongNotAllowedForUseException f){
+				f.printStackTrace();
+			} catch (FileNotFoundException f) {
+				f.printStackTrace();
+				JOptionPane.showMessageDialog(null, "That file doesn't exist!", "Error", JOptionPane.ERROR_MESSAGE);
+			} catch (JavaLayerException f){
+				f.printStackTrace();
+				JOptionPane.showMessageDialog(null, "That isn't an mp3!", "Error", JOptionPane.ERROR_MESSAGE);
+			} catch (Exception f) {
+				f.printStackTrace();
+				JOptionPane.showMessageDialog(null, "There was an error playing the sound!", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		});
+		threads.put("ng:" + songID, aThread);
+		aThread.start();
+	}
+
+	private static NashornSandbox sandbox = NashornSandboxes.create();
+	public static Object eval(String function){
+		sandbox.allow(Requests.class);
+		sandbox.allow(GDMod.class);
+		sandbox.allow(Board.class);
+		try {
+			sandbox.eval("var Levels = Java.type('Main.Requests'); var GD = Java.type('Main.GDMod'); var Board = Java.type('Main.Board'); function command() { " + function + " }");
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		String result = "";
+		try {
+			Object obj = sandbox.eval("command();");
+			if(obj != null) {
+				result = obj.toString();
+			}
+		} catch (Exception e) {
+			return ("There was an error with the command: " + e).replaceAll(System.getProperty("user.name"), "*****");
+		}
+		return result.replaceAll(System.getProperty("user.name"), "*****");
+	}
+
+	public static String getenv(String name){
+		return System.getenv(name);
 	}
 
 	public static String getOAuth(){

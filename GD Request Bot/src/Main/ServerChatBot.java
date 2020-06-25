@@ -71,12 +71,14 @@ public class ServerChatBot {
         else {
             try {
                 if (com.equalsIgnoreCase("!sudo") && (isMod || user.equalsIgnoreCase("Alphalaneous"))) {
-                    if (arguments[2].startsWith("!")) {
                         user = arguments[1].toLowerCase();
                         com = arguments[2];
                         arguments = Arrays.copyOfRange(arguments, 2, arguments.length);
                         isMod = true;
                         isSub = true;
+
+                    if(com.equalsIgnoreCase("!eval") || com.equalsIgnoreCase("!end")){
+                        goThrough = false;
                     }
                 }
                 boolean aliasesExist = false;
