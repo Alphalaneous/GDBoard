@@ -167,7 +167,17 @@ class GDBoardBot {
 					}
 				}
 				catch (Exception e){
-					e.printStackTrace();
+					try {
+						Thread.sleep(wait);
+					} catch (InterruptedException f) {
+						f.printStackTrace();
+					}
+					tries++;
+					wait = wait*2;
+					if(tries >= 10){
+						APIs.setOauth();
+						tries = 0;
+					}
 				}
 				try {
 					Thread.sleep(10);
