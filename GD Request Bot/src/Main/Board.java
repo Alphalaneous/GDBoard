@@ -95,8 +95,10 @@ public class Board {
 		sandbox.allow(Requests.class);
 		sandbox.allow(GDMod.class);
 		sandbox.allow(Board.class);
+		sandbox.allow(Variables.class);
+
 		try {
-			sandbox.eval("var Levels = Java.type('Main.Requests'); var GD = Java.type('Main.GDMod'); var Board = Java.type('Main.Board'); function command() { " + function + " }");
+			sandbox.eval("var Levels = Java.type('Main.Requests'); var GD = Java.type('Main.GDMod'); var Board = Java.type('Main.Board'); var Variables = Java.type('Main.Variables'); function command() { " + function + " }");
 		}
 		catch (Exception e){
 			e.printStackTrace();
