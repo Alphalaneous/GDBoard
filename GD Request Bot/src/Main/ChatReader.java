@@ -4,6 +4,7 @@ import com.cavariux.twitchirc.Chat.Channel;
 import com.cavariux.twitchirc.Chat.User;
 import com.cavariux.twitchirc.Core.TwitchBot;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,7 +12,11 @@ public class ChatReader extends TwitchBot {
 
 	ChatReader(){
 		this.setUsername("chatBot");
-		this.setOauth_Key("oauth:" + Settings.oauth);
+		try {
+			this.setOauth_Key("oauth:" + Settings.getSettings("oauth"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	@Override
 	public void onMessage(User user, Channel channel, String message) {

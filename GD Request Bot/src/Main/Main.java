@@ -2,6 +2,7 @@ package Main;
 
 import Main.InnerWindows.*;
 import Main.SettingsPanels.*;
+import com.cavariux.twitchirc.Chat.Channel;
 import com.cavariux.twitchirc.Chat.User;
 import org.apache.commons.io.FileUtils;
 import org.jnativehook.GlobalScreen;
@@ -38,7 +39,11 @@ public class Main {
 	private static JDialog dialog = new JDialog();
 	private static JPanel panel = new JPanel();
 	private static JLabel tf = new JLabel("Loading...");
+	private static ChatReader chatReader = new ChatReader();
 	public static void main(String[] args) {
+		System.setProperty("http.agent", "");
+		System.setProperty("http.keepAlive", "false");
+
 		try {
 			if(Settings.getSettings("windowed").equalsIgnoreCase("")){
 				Settings.writeSettings("windowed", "true");
@@ -118,6 +123,7 @@ public class Main {
 					Settings.loadSettings(true);
 					GDBoardBot.start();
 
+
 					if (!Settings.hasWindowed) {
 						Settings.writeSettings("windowed", "false");
 					}
@@ -182,7 +188,7 @@ public class Main {
 					Thread thread1 = new Thread(() -> runKeyboardHook());
 					thread1.start();
 
-					ChatReader chatReader = new ChatReader();
+
 					Thread thread = new Thread(() -> {
 						chatReader.connect();
 						try {
@@ -242,7 +248,26 @@ public class Main {
 					Main.sendMessage(" ");
 				}
 			});
-			threada.start();
+			/*Thread ping = new Thread(() -> {
+				while(true){
+					ChannelPointListener.pong = false;
+					ChannelPointListener.sendMessage("{\"type\": \"PING\"}");
+
+					try {
+						Thread.sleep(240000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					if(!ChannelPointListener.pong){
+						try {
+							ChannelPointListener.restart();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			});
+			ping.start();*/
 			Path path = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\bin\\gdmod.exe");
 			if(!Files.exists(path)){
 				URL inputUrl = Main.class.getResource("/Resources/gdmod.exe");
@@ -256,7 +281,19 @@ public class Main {
 			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	static Channel channel;
 
+	static {
+		try {
+			channel = Channel.getChannel(Settings.getSettings("channel"), chatReader);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	static void sendMainMessage(String message){
+		chatReader.sendMessage(message, channel);
+	}
 	static void sendMessage(String message, boolean whisper, String user) {
 		if(!message.equalsIgnoreCase("")) {
 			JSONObject messageObj = new JSONObject();

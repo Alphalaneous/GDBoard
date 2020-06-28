@@ -40,7 +40,8 @@ public class Overlay {
 		}
 		else{
 			frame.setBackground(new Color(0, 0, 0, 0));
-
+			frame.setVisible(false);
+			mainFrame.setVisible(false);
 		}
 		URL iconURL = Windowed.class.getResource("/Resources/Icons/windowIcon.png");
 		ImageIcon icon = new ImageIcon(iconURL);

@@ -62,6 +62,11 @@ public class Board {
 		}
 		threads.clear();
 	}
+
+	public static void sendAsMain(String message){
+		Main.sendMainMessage(message);
+	}
+
 	static AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
 	public static void playNewgrounds(String songID){
 		if(threads.containsKey("ng:" + songID)){

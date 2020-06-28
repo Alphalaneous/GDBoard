@@ -229,6 +229,7 @@ public class APIs {
 		Request newReq = request.newBuilder()
 				.addHeader("Client-ID", "fzwze6vc6d2f7qodgkpq2w8nnsz3rl")
 				.addHeader("Authorization", "OAuth " + Settings.oauth)
+				.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:77.0) Gecko/20100101 Firefox/77.0")
 				.build();
 
 		try (Response response = client.newCall(newReq).execute()) {
@@ -267,6 +268,7 @@ public class APIs {
 			URL url = new URL("https://id.twitch.tv/oauth2/validate");
 			URLConnection conn = url.openConnection();
 			conn.setRequestProperty("Authorization", "OAuth " + Settings.oauth);
+			conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:77.0) Gecko/20100101 Firefox/77.0");
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String x = br.readLine();
 			return JsonObject.readFrom(x).get("client_id").toString().replace("\"", "");
@@ -286,7 +288,7 @@ public class APIs {
 				twitch.setClientId("fzwze6vc6d2f7qodgkpq2w8nnsz3rl");
 				URI authUrl = new URI(twitch.auth().getAuthenticationUrl(
 						twitch.getClientId(), callbackUri, Scopes.USER_READ
-				) + "chat:edit+chat:read+whispers:read+whispers:edit+user_read&force_verify=true");
+				) + "chat:edit+channel:moderate+channel:read:redemptions+chat:read+whispers:read+whispers:edit+user_read&force_verify=true");
 				Runtime rt = Runtime.getRuntime();
 				rt.exec("rundll32 url.dll,FileProtocolHandler " + authUrl);
 				if (twitch.auth().awaitAccessToken()) {
