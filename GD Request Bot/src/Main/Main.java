@@ -41,8 +41,6 @@ public class Main {
 	private static JLabel tf = new JLabel("Loading...");
 	private static ChatReader chatReader = new ChatReader();
 	public static void main(String[] args) {
-		System.setProperty("http.agent", "");
-		System.setProperty("http.keepAlive", "false");
 
 		try {
 			if(Settings.getSettings("windowed").equalsIgnoreCase("")){
