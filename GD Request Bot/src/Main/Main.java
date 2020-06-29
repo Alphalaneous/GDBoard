@@ -248,6 +248,7 @@ public class Main {
 					Main.sendMessage(" ");
 				}
 			});
+			threada.start();
 			/*Thread ping = new Thread(() -> {
 				while(true){
 					ChannelPointListener.pong = false;
