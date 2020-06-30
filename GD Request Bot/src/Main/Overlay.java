@@ -104,9 +104,9 @@ public class Overlay {
 		} else {
 			mainFrame.setBounds(0, 0, Defaults.screenSize.width, Defaults.screenSize.height);
 			frame.setBounds(Defaults.screenSize);
+			frame.invalidate();
+			frame.revalidate();
 		}
-		frame.invalidate();
-		frame.revalidate();
 		if(Settings.windowedMode) {
 			Windowed.refreshUI();
 		}

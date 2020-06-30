@@ -198,6 +198,8 @@ public class CommentsWindow {
 			page = 0;
 		}
 		panel.removeAll();
+		panel.setPreferredSize(new Dimension(width, 0));
+		scrollPane.updateUI();
 	}
 	public static JPanel getComWindow(){
 		scrollPane.setBounds(0, 0, width, 482);
