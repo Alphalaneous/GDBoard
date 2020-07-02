@@ -4,14 +4,37 @@ import Main.SettingsPanels.ShortcutSettings;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.SwingKeyAdapter;
 
+import javax.swing.*;
 import java.awt.*;
 
 
 public class KeyListener extends SwingKeyAdapter {
 	private static boolean keyReleased = false;
-
+	private static boolean usePlatformer = false;
+	private static boolean ctrlPressed = false;
 
 	public void nativeKeyPressed(NativeKeyEvent e) {
+		System.out.println(e.getRawCode());
+		if(usePlatformer) {
+			if (e.getRawCode() == 65) {
+				GDMod.run("speed", "-0.9");
+			}
+			if (e.getRawCode() == 68) {
+				GDMod.run("speed", "0.9");
+			}
+		}
+		if(e.getRawCode() == 81 && ctrlPressed){
+			usePlatformer = true;
+			GDMod.run("speed", "0");
+			JOptionPane.showMessageDialog(null, "Platformer Enabled, pressed Ctrl E to disable! Click OK to exit, then click back into GD", "Platformer Mode", JOptionPane.INFORMATION_MESSAGE);
+
+		}
+		if(e.getRawCode() == 69){
+			usePlatformer = false;
+		}
+		if(e.getRawCode() == 162 || e.getRawCode() == 163){
+			ctrlPressed = true;
+		}
 
 		if (keyReleased) {
 			int key = e.getRawCode();
@@ -95,5 +118,18 @@ public class KeyListener extends SwingKeyAdapter {
 
 	public void nativeKeyReleased(NativeKeyEvent e) {
 		keyReleased = true;
+		if(usePlatformer) {
+			if (e.getRawCode() == 65) {
+				GDMod.run("speed", "0");
+
+			}
+			if (e.getRawCode() == 68) {
+				GDMod.run("speed", "0");
+
+			}
+		}
+		if(e.getRawCode() == 162 || e.getRawCode() == 163){
+			ctrlPressed = false;
+		}
 	}
 }

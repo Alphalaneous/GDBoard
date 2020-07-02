@@ -59,7 +59,7 @@ public class GeneralSettings {
 
 		InputStream is;
 		try {
-			is = new FileInputStream(System.getenv("APPDATA") + "\\GDBoard\\version.txt");
+			is = new FileInputStream(Defaults.saveDirectory + "\\GDBoard\\version.txt");
 			InputStreamReader isr = new InputStreamReader(is);
 			BufferedReader br = new BufferedReader(isr);
 			versionLabel.setText("GDBoard version: " + br.readLine().replaceAll("version=", ""));

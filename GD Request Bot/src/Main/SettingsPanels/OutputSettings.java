@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 public class OutputSettings {
 	public static String outputString = "Currently playing %levelName% (%levelID%) by %levelAuthor%!";
 	public static String noLevelString = "There are no levels in the queue!";
-	private static String fileLocation = Paths.get(System.getenv("APPDATA") + "\\GDBoard").toString();
+	private static String fileLocation = Paths.get(Defaults.saveDirectory + "\\GDBoard").toString();
 	private static FancyTextArea outputStringInput = new FancyTextArea(false, false);
 	private static FancyTextArea noLevelsStringInput = new FancyTextArea(false, false);
 	private static FancyTextArea fileLocationInput = new FancyTextArea(false, false);
@@ -123,7 +123,7 @@ public class OutputSettings {
 	public static void setOutputStringFile(String text){
 		Path file = Paths.get(fileLocation + "\\output.txt");
 		if(fileLocation.equalsIgnoreCase("")){
-			file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\output.txt");
+			file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\output.txt");
 		}
 		try {
 			if(!Files.exists(file)) {

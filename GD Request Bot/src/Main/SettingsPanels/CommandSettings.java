@@ -133,8 +133,8 @@ public class CommandSettings {
 			public void mouseReleased(MouseEvent e) {
 				try {
 					int cooldown = -1;
-					if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/cooldown.txt"))) {
-						Scanner sc3 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/cooldown.txt").toFile());
+					if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt"))) {
+						Scanner sc3 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt").toFile());
 						while (sc3.hasNextLine()) {
 							String line = sc3.nextLine();
 							if (line.split(" = ")[0].replace(" ", "").equalsIgnoreCase(command)) {
@@ -145,10 +145,10 @@ public class CommandSettings {
 						sc3.close();
 					}
 					else{
-						Files.createFile(Paths.get(System.getenv("APPDATA") + "/GDBoard/cooldown.txt"));
+						Files.createFile(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt"));
 					}
 					if(cooldown != -1) {
-						BufferedReader file = new BufferedReader(new FileReader(System.getenv("APPDATA") + "\\GDBoard\\cooldown.txt"));
+						BufferedReader file = new BufferedReader(new FileReader(Defaults.saveDirectory + "\\GDBoard\\cooldown.txt"));
 						StringBuilder inputBuffer = new StringBuilder();
 						String line;
 						while ((line = file.readLine()) != null) {
@@ -157,12 +157,12 @@ public class CommandSettings {
 						}
 						file.close();
 
-						FileOutputStream fileOut = new FileOutputStream(System.getenv("APPDATA") + "\\GDBoard\\cooldown.txt");
+						FileOutputStream fileOut = new FileOutputStream(Defaults.saveDirectory + "\\GDBoard\\cooldown.txt");
 						fileOut.write(inputBuffer.toString().replace(command + " = " + cooldown, command + " = " + slider.getValue()).getBytes());
 						fileOut.close();
 					}
 					else{
-						BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(System.getenv("APPDATA") + "/GDBoard/cooldown.txt").toFile(), true));
+						BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt").toFile(), true));
 						writer.newLine();
 						writer.write((command + " = " + slider.getValue()));
 						writer.close();
@@ -178,7 +178,7 @@ public class CommandSettings {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				if (disable.getSelectedState()) {
-					Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\disable.txt");
+					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\disable.txt");
 					try {
 						if (!Files.exists(file)) {
 							Files.createFile(file);
@@ -192,7 +192,7 @@ public class CommandSettings {
 					}
 				} else {
 					boolean exists = false;
-					Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\disable.txt");
+					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\disable.txt");
 					try {
 						if (Files.exists(file)) {
 							Scanner sc = new Scanner(file);
@@ -204,7 +204,7 @@ public class CommandSettings {
 							}
 							sc.close();
 							if (exists) {
-								Path temp = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\_tempDisable_");
+								Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_tempDisable_");
 								PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
 								Files.lines(file)
 										.filter(line -> !line.contains(command))
@@ -212,7 +212,7 @@ public class CommandSettings {
 								out.flush();
 								out.close();
 								Files.delete(file);
-								Files.move(temp, temp.resolveSibling(System.getenv("APPDATA") + "\\GDBoard\\disable.txt"), StandardCopyOption.REPLACE_EXISTING);
+								Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\disable.txt"), StandardCopyOption.REPLACE_EXISTING);
 							}
 						}
 					}
@@ -226,7 +226,7 @@ public class CommandSettings {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				if (modOnly.getSelectedState()) {
-					Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\mod.txt");
+					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\mod.txt");
 					try {
 						if (!Files.exists(file)) {
 							Files.createFile(file);
@@ -240,7 +240,7 @@ public class CommandSettings {
 					}
 				} else {
 					boolean exists = false;
-					Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\mod.txt");
+					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\mod.txt");
 					try {
 						if (Files.exists(file)) {
 							Scanner sc = new Scanner(file);
@@ -252,7 +252,7 @@ public class CommandSettings {
 							}
 							sc.close();
 							if (exists) {
-								Path temp = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\_tempMod_");
+								Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_tempMod_");
 								PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
 								Files.lines(file)
 										.filter(line -> !line.contains(command))
@@ -260,7 +260,7 @@ public class CommandSettings {
 								out.flush();
 								out.close();
 								Files.delete(file);
-								Files.move(temp, temp.resolveSibling(System.getenv("APPDATA") + "\\GDBoard\\mod.txt"), StandardCopyOption.REPLACE_EXISTING);
+								Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\mod.txt"), StandardCopyOption.REPLACE_EXISTING);
 							}
 						}
 					}
@@ -274,7 +274,7 @@ public class CommandSettings {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				if (whisper.getSelectedState()) {
-					Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\whisper.txt");
+					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\whisper.txt");
 					try {
 						if (!Files.exists(file)) {
 							Files.createFile(file);
@@ -288,7 +288,7 @@ public class CommandSettings {
 					}
 				} else {
 					boolean exists = false;
-					Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\whisper.txt");
+					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\whisper.txt");
 					try {
 						if (Files.exists(file)) {
 							Scanner sc = new Scanner(file);
@@ -300,7 +300,7 @@ public class CommandSettings {
 							}
 							sc.close();
 							if (exists) {
-								Path temp = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\_tempWhisper_");
+								Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_tempWhisper_");
 								PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
 								Files.lines(file)
 										.filter(line -> !line.contains(command))
@@ -308,7 +308,7 @@ public class CommandSettings {
 								out.flush();
 								out.close();
 								Files.delete(file);
-								Files.move(temp, temp.resolveSibling(System.getenv("APPDATA") + "\\GDBoard\\whisper.txt"), StandardCopyOption.REPLACE_EXISTING);
+								Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\whisper.txt"), StandardCopyOption.REPLACE_EXISTING);
 							}
 						}
 					}
@@ -427,7 +427,7 @@ public class CommandSettings {
 				}
 				Thread.sleep(5);
 			}
-			Path comPath = Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/");
+			Path comPath = Paths.get(Defaults.saveDirectory + "/GDBoard/commands/");
 			if (Files.exists(comPath)) {
 				Stream<Path> walk1 = Files.walk(comPath, 1);
 				for (Iterator<Path> it = walk1.iterator(); it.hasNext(); ) {
@@ -461,7 +461,7 @@ public class CommandSettings {
 		commandLabel.setBounds(50,15,commandLabel.getPreferredSize().width+5, commandLabel.getPreferredSize().height + 5);
 		StringBuilder function = new StringBuilder();
 		try {
-			Path comPath = Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/" + command.split("\\\\")[command.split("\\\\").length-1] + ".js");
+			Path comPath = Paths.get(Defaults.saveDirectory + "/GDBoard/commands/" + command.split("\\\\")[command.split("\\\\").length-1] + ".js");
 			if (Files.exists(comPath)) {
 				codeInput.setText(String.valueOf(Files.readString(comPath, StandardCharsets.UTF_8)));
 			}
@@ -488,7 +488,7 @@ public class CommandSettings {
 
 
 		try {
-			Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\whisper.txt");
+			Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\whisper.txt");
 			if (Files.exists(file)) {
 				Scanner sc = new Scanner(file);
 				while (sc.hasNextLine()) {
@@ -502,7 +502,7 @@ public class CommandSettings {
 				}
 				sc.close();
 			}
-			Path file2 = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\mod.txt");
+			Path file2 = Paths.get(Defaults.saveDirectory + "\\GDBoard\\mod.txt");
 			if (Files.exists(file2)) {
 				Scanner sc = new Scanner(file2);
 				while (sc.hasNextLine()) {
@@ -516,7 +516,7 @@ public class CommandSettings {
 				}
 				sc.close();
 			}
-			Path file3 = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\disable.txt");
+			Path file3 = Paths.get(Defaults.saveDirectory + "\\GDBoard\\disable.txt");
 			if (Files.exists(file3)) {
 				Scanner sc = new Scanner(file3);
 				while (sc.hasNextLine()) {
@@ -532,8 +532,8 @@ public class CommandSettings {
 			}
 			int cooldown = 0;
 			boolean coolExists = false;
-			if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/cooldown.txt"))) {
-				Scanner sc3 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/cooldown.txt").toFile());
+			if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt"))) {
+				Scanner sc3 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt").toFile());
 				while (sc3.hasNextLine()) {
 					String line = sc3.nextLine();
 					if (line.split(" = ")[0].replace(" ", "").equalsIgnoreCase(command)) {

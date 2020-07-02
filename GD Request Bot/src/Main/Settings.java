@@ -11,7 +11,7 @@ public class Settings {
 	private static Properties gfg = new Properties();
 	private static FileInputStream in;
 	private static BufferedWriter writer;
-	private static File file = new File(System.getenv("APPDATA") + "\\GDBoard\\config.properties");
+	private static File file = new File(Defaults.saveDirectory + "\\GDBoard\\config.properties");
 
 
 	static {
@@ -90,7 +90,7 @@ public class Settings {
 	public static void writeSettings(String key, String setting) throws IOException {
 		gfg.load(in);
 		if (gfg.containsKey(key)) {
-			BufferedReader file = new BufferedReader(new FileReader(System.getenv("APPDATA") + "\\GDBoard\\config.properties"));
+			BufferedReader file = new BufferedReader(new FileReader(Defaults.saveDirectory + "\\GDBoard\\config.properties"));
 			StringBuilder inputBuffer = new StringBuilder();
 			String line;
 			while ((line = file.readLine()) != null) {
@@ -99,7 +99,7 @@ public class Settings {
 			}
 			file.close();
 
-			FileOutputStream fileOut = new FileOutputStream(System.getenv("APPDATA") + "\\GDBoard\\config.properties");
+			FileOutputStream fileOut = new FileOutputStream(Defaults.saveDirectory + "\\GDBoard\\config.properties");
 			fileOut.write(inputBuffer.toString().replace(key + "=" + gfg.get(key).toString(), key + "=" + setting).getBytes());
 			fileOut.close();
 			System.out.println(key + ": " + setting);

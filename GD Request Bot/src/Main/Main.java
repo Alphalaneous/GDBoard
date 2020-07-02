@@ -208,7 +208,7 @@ public class Main {
 				}
 				Thread.sleep(100);
 			}
-			File file = new File(System.getenv("APPDATA") + "\\GDBoard\\saved.txt");
+			File file = new File(Defaults.saveDirectory + "\\GDBoard\\saved.txt");
 
 			if (file.exists()) {
 				Scanner sc = null;
@@ -247,6 +247,7 @@ public class Main {
 				}
 			});
 			threada.start();
+
 			/*Thread ping = new Thread(() -> {
 				while(true){
 					ChannelPointListener.pong = false;
@@ -267,7 +268,7 @@ public class Main {
 				}
 			});
 			ping.start();*/
-			Path path = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\bin\\gdmod.exe");
+			Path path = Paths.get(Defaults.saveDirectory + "\\GDBoard\\bin\\gdmod.exe");
 			if(!Files.exists(path)){
 				URL inputUrl = Main.class.getResource("/Resources/gdmod.exe");
 				FileUtils.copyURLToFile(inputUrl, path.toFile());

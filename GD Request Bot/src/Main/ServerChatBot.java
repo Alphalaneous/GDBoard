@@ -82,8 +82,8 @@ public class ServerChatBot {
                     }
                 }
                 boolean aliasesExist = false;
-                if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/aliases.txt"))) {
-                    Scanner sc2 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/aliases.txt").toFile());
+                if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/commands/aliases.txt"))) {
+                    Scanner sc2 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/commands/aliases.txt").toFile());
                     while (sc2.hasNextLine()) {
                         String line = sc2.nextLine();
                         if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(com)) {
@@ -111,8 +111,8 @@ public class ServerChatBot {
                     isr.close();
                     br.close();
                 }
-                if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/disable.txt"))) {
-                    Scanner sc2 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/disable.txt").toFile());
+                if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/disable.txt"))) {
+                    Scanner sc2 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/disable.txt").toFile());
                     while (sc2.hasNextLine()) {
                         String line = sc2.nextLine();
                         if (line.equalsIgnoreCase(com)) {
@@ -122,8 +122,8 @@ public class ServerChatBot {
                     }
                     sc2.close();
                 }
-                if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/mod.txt"))) {
-                    Scanner sc2 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/mod.txt").toFile());
+                if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/mod.txt"))) {
+                    Scanner sc2 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/mod.txt").toFile());
                     while (sc2.hasNextLine()) {
                         String line = sc2.nextLine();
                         if (line.equalsIgnoreCase(com) && !isMod) {
@@ -152,8 +152,8 @@ public class ServerChatBot {
                 }
                 if(goThrough) {
                     boolean whisperExists = false;
-                    if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/whisper.txt"))) {
-                        Scanner sc2 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/whisper.txt").toFile());
+                    if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/whisper.txt"))) {
+                        Scanner sc2 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/whisper.txt").toFile());
                         while (sc2.hasNextLine()) {
                             String line = sc2.nextLine();
                             if (line.equalsIgnoreCase(com)) {
@@ -189,8 +189,8 @@ public class ServerChatBot {
                     }
                     int cooldown = 0;
                     boolean coolExists = false;
-                    if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/cooldown.txt"))) {
-                        Scanner sc3 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/cooldown.txt").toFile());
+                    if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt"))) {
+                        Scanner sc3 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt").toFile());
                         while (sc3.hasNextLine()) {
                             String line = sc3.nextLine();
                             if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(com)) {
@@ -235,7 +235,7 @@ public class ServerChatBot {
                     boolean comExists = false;
 
 
-                    Path comPath = Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/");
+                    Path comPath = Paths.get(Defaults.saveDirectory + "/GDBoard/commands/");
                     if (Files.exists(comPath)) {
                         Stream<Path> walk1 = Files.walk(comPath, 1);
                         for (Iterator<Path> it = walk1.iterator(); it.hasNext(); ) {

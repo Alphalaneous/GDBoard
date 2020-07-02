@@ -58,7 +58,7 @@ public class BlockedSettings {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				try {
-					Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
+					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
 					if (!Files.exists(file)) {
 						Files.createFile(file);
 					}
@@ -147,7 +147,7 @@ public class BlockedSettings {
 			}
 		});
 
-		File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
+		File file = new File(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
 		if (file.exists()) {
 			Scanner sc = null;
 			try {
@@ -199,7 +199,7 @@ public class BlockedSettings {
 			blockedListPanel.setPreferredSize(new Dimension(415, (int) (height + 4)));
 			scrollPane.updateUI();
 		}
-		Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
+		Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
 		CurvedButton button = new CurvedButton(ID);
 
 		button.setBackground(Defaults.BUTTON);
@@ -221,7 +221,7 @@ public class BlockedSettings {
 				if (n == 0) {
 					if (Files.exists(file)) {
 						try {
-							Path temp = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\_temp_");
+							Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_temp_");
 							PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
 							Files.lines(file)
 									.filter(line -> !line.contains(button.getLText()))
@@ -229,7 +229,7 @@ public class BlockedSettings {
 							out.flush();
 							out.close();
 							Files.delete(file);
-							Files.move(temp, temp.resolveSibling(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt"), StandardCopyOption.REPLACE_EXISTING);
+							Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\blocked.txt"), StandardCopyOption.REPLACE_EXISTING);
 
 						} catch (IOException ex) {
 

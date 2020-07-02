@@ -57,7 +57,7 @@ public class BlockedUserSettings {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				try {
-					Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blockedUsers.txt");
+					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blockedUsers.txt");
 					if (!Files.exists(file)) {
 						Files.createFile(file);
 					}
@@ -146,7 +146,7 @@ public class BlockedUserSettings {
 			}
 		});
 
-		File file = new File(System.getenv("APPDATA") + "\\GDBoard\\blockedUsers.txt");
+		File file = new File(Defaults.saveDirectory + "\\GDBoard\\blockedUsers.txt");
 		if (file.exists()) {
 			Scanner sc = null;
 			try {
@@ -199,7 +199,7 @@ public class BlockedUserSettings {
 			blockedListPanel.setPreferredSize(new Dimension(415, (int) (height + 4)));
 			scrollPane.updateUI();
 		}
-		Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blockedUsers.txt");
+		Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blockedUsers.txt");
 		CurvedButton button = new CurvedButton(user);
 
 		button.setBackground(Defaults.BUTTON);
@@ -221,7 +221,7 @@ public class BlockedUserSettings {
 				if (n == 0) {
 					if (Files.exists(file)) {
 						try {
-							Path temp = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\_temp_");
+							Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_temp_");
 							PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
 							Files.lines(file)
 									.filter(line -> !line.contains(button.getLText()))
@@ -229,7 +229,7 @@ public class BlockedUserSettings {
 							out.flush();
 							out.close();
 							Files.delete(file);
-							Files.move(temp, temp.resolveSibling(System.getenv("APPDATA") + "\\GDBoard\\blockedUsers.txt"), StandardCopyOption.REPLACE_EXISTING);
+							Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\blockedUsers.txt"), StandardCopyOption.REPLACE_EXISTING);
 
 						} catch (IOException ex) {
 							ex.printStackTrace();

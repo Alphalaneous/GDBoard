@@ -40,6 +40,7 @@ import java.util.zip.GZIPInputStream;
 
 public class Requests {
 
+	private static String os = (System.getProperty("os.name")).toUpperCase();
 	public static ArrayList<LevelData> levels = new ArrayList<>();
 	static ArrayList<String> addedLevels = new ArrayList<>();
 	private static HashMap<String, Integer> userStreamLimitMap = new HashMap<>();
@@ -49,9 +50,9 @@ public class Requests {
 
 
 		if (MainBar.requests) {
-			Path blocked = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
-			Path logged = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\requestsLog.txt");
-			Path blockedUser = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blockedUsers.txt");
+			Path blocked = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
+			Path logged = Paths.get(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
+			Path blockedUser = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blockedUsers.txt");
 			if(Main.loaded) {
 				if(GeneralSettings.followersOption){
 					if(APIs.isNotFollowing(requester)) {
@@ -302,18 +303,19 @@ public class Requests {
 
 			});
 			parse.start();
-
-			if(GeneralSettings.autoDownloadOption) {
-				Thread songDL = new Thread(() -> {
-					Path songFile = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3");
-					if (!Files.exists(songFile)) {
-						try {
-							FileUtils.copyURLToFile(levelData.getSongURL(), songFile.toFile());
-						} catch (IOException ignored) {
+			if(os.contains("WIN")) {
+				if (GeneralSettings.autoDownloadOption) {
+					Thread songDL = new Thread(() -> {
+						Path songFile = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3");
+						if (!Files.exists(songFile)) {
+							try {
+								FileUtils.copyURLToFile(levelData.getSongURL(), songFile.toFile());
+							} catch (IOException ignored) {
+							}
 						}
-					}
-				});
-				songDL.start();
+					});
+					songDL.start();
+				}
 			}
 			levels.add(levelData);
 			LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester(), levelData.getVersion(), levelData.getPlayerIcon());
@@ -337,7 +339,7 @@ public class Requests {
 			}
 			OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
 			addedLevels.add(ID);
-			Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\requestsLog.txt");
+			Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
 			try {
 				boolean exists = false;
 				if (!Files.exists(file)) {
@@ -599,7 +601,7 @@ public class Requests {
 		String response;
 		try {
 			int blockedID = Integer.parseInt(arguments[1]);
-			Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
+			Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
 			if (!Files.exists(file)) {
 				Files.createFile(file);
 			}
@@ -632,7 +634,7 @@ public class Requests {
 		String response = "";
 		try {
 			boolean exists = false;
-			Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
+			Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
 			if (Files.exists(file)) {
 				Scanner sc = new Scanner(file);
 				while (sc.hasNextLine()) {
@@ -644,7 +646,7 @@ public class Requests {
 				sc.close();
 
 				if (exists) {
-					Path temp = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\_temp_");
+					Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_temp_");
 					PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
 					Files.lines(file)
 							.filter(line -> !line.contains(unblocked))
@@ -652,7 +654,7 @@ public class Requests {
 					out.flush();
 					out.close();
 					Files.delete(file);
-					Files.move(temp, temp.resolveSibling(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt"), StandardCopyOption.REPLACE_EXISTING);
+					Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\blocked.txt"), StandardCopyOption.REPLACE_EXISTING);
 					BlockedSettings.removeID(arguments[1]);
 					response = "@" + user + " Successfully unblocked " + arguments[1];
 					BlockedSettings.removeID(unblocked);
@@ -672,7 +674,7 @@ public class Requests {
 		String response;
 		try {
 			String blockedUser = arguments[1];
-			Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blockedUsers.txt");
+			Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blockedUsers.txt");
 			if (!Files.exists(file)) {
 				Files.createFile(file);
 			}
@@ -706,7 +708,7 @@ public class Requests {
 
 		try {
 			boolean exists = false;
-			Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blockedUsers.txt");
+			Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blockedUsers.txt");
 			if (Files.exists(file)) {
 				Scanner sc = new Scanner(file);
 				while (sc.hasNextLine()) {
@@ -717,7 +719,7 @@ public class Requests {
 				}
 				sc.close();
 				if (exists) {
-					Path temp = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\_temp_");
+					Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_temp_");
 					PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
 					Files.lines(file)
 							.filter(line -> !line.contains(unblocked))
@@ -725,7 +727,7 @@ public class Requests {
 					out.flush();
 					out.close();
 					Files.delete(file);
-					Files.move(temp, temp.resolveSibling(System.getenv("APPDATA") + "\\GDBoard\\blockedUsers.txt"), StandardCopyOption.REPLACE_EXISTING);
+					Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\blockedUsers.txt"), StandardCopyOption.REPLACE_EXISTING);
 					BlockedSettings.removeID(arguments[1]);
 					response = "@" + user + " Successfully unblocked " + arguments[1];
 					BlockedUserSettings.removeUser(unblocked);
@@ -746,8 +748,8 @@ public class Requests {
 		String info = null;
 		boolean infoExists = false;
 		try {
-			if (Files.exists(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/info.txt"))) {
-				Scanner sc2 = new Scanner(Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/info.txt").toFile());
+			if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/commands/info.txt"))) {
+				Scanner sc2 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/commands/info.txt").toFile());
 				while (sc2.hasNextLine()) {
 					String line = sc2.nextLine();
 					System.out.println(line);
@@ -813,7 +815,7 @@ public class Requests {
 					}
 				}
 			}
-			Path comPath = Paths.get(System.getenv("APPDATA") + "/GDBoard/commands/");
+			Path comPath = Paths.get(Defaults.saveDirectory + "/GDBoard/commands/");
 			if(Files.exists(comPath)) {
 				Stream<Path> walk1 = Files.walk(comPath, 1);
 				for (Iterator<Path> it = walk1.iterator(); it.hasNext(); ) {

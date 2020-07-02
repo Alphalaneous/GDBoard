@@ -14,7 +14,16 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Defaults {
 
 	static int screenNum;
+	static String os = (System.getProperty("os.name")).toUpperCase();
+	static {
 
+		if(os.contains("WIN")) {
+			saveDirectory = System.getenv("APPDATA");
+		}
+		else{
+			saveDirectory = System.getProperty("user.home") + "/Library/Application Support";
+		}
+	}
 	static {
 		try {
 			screenNum = Integer.parseInt(Settings.getSettings("monitor"));
@@ -30,6 +39,7 @@ public class Defaults {
 			.getLocalGraphicsEnvironment()
 			.getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();
 
+	public static String saveDirectory;
 	public static Color ACCENT = new Color(0, 108, 230);
 	public static Color MAIN;
 	public static Color BUTTON;
@@ -146,30 +156,35 @@ public class Defaults {
 
 	//region Main Thread
 	static void startMainThread() {
-		RegistryKey personalizeStart = new RegistryKey(
-				"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
-		RegistryKey systemColorStart = new RegistryKey(
-				"Software\\Microsoft\\Windows\\DWM");
-
 		final int[] prevTheme = new int[1];
 		final Integer[] prevColor = new Integer[1];
-		try {
-			prevTheme[0] = ((RegDWORDValue) personalizeStart.getValue("AppsUseLightTheme")).getIntValue();
-			prevColor[0] = ((RegDWORDValue) systemColorStart.getValue("ColorizationColor")).getValue();
-			ACCENT = Color.decode(String.valueOf(prevColor[0]));
-		} catch (NullPointerException e) {
-			prevTheme[0] = 1;
-			prevColor[0] = 0;
-			ACCENT =  new Color(0, 108, 230);
-		}
+		if(os.contains("WIN")) {
+			RegistryKey personalizeStart = new RegistryKey(
+					"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
+			RegistryKey systemColorStart = new RegistryKey(
+					"Software\\Microsoft\\Windows\\DWM");
+			try {
+				prevTheme[0] = ((RegDWORDValue) personalizeStart.getValue("AppsUseLightTheme")).getIntValue();
+				prevColor[0] = ((RegDWORDValue) systemColorStart.getValue("ColorizationColor")).getValue();
+				ACCENT = Color.decode(String.valueOf(prevColor[0]));
+			} catch (NullPointerException e) {
+				prevTheme[0] = 1;
+				prevColor[0] = 0;
+				ACCENT = new Color(0, 108, 230);
+			}
 
-				if (prevTheme[0] == 0) {
-					Defaults.setDark();
-					dark.set(false);
-				} else if (prevTheme[0] == 1) {
-					Defaults.setLight();
-					dark.set(true);
-				}
+			if (prevTheme[0] == 0) {
+				Defaults.setDark();
+				dark.set(false);
+			} else if (prevTheme[0] == 1) {
+				Defaults.setLight();
+				dark.set(true);
+			}
+		}
+		else{
+			Defaults.setDark();
+			dark.set(false);
+		}
 		Thread thread = new Thread(() -> {
 			while (true) {
 
@@ -190,34 +205,40 @@ public class Defaults {
 					hour = 12;
 				}
 				MainBar.setTime(hour + ":" + String.format("%02d", minute) + " " + half);
-				RegistryKey personalize = new RegistryKey(
-						"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
-				RegistryKey systemColor = new RegistryKey(
-						"Software\\Microsoft\\Windows\\DWM");
+				if(os.contains("WIN")) {
+					RegistryKey personalize = new RegistryKey(
+							"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
+					RegistryKey systemColor = new RegistryKey(
+							"Software\\Microsoft\\Windows\\DWM");
 
-				int theme = 0;
-				Integer color;
-				try {
-					theme = ((RegDWORDValue) personalize.getValue("AppsUseLightTheme")).getIntValue();
-					color = ((RegDWORDValue) systemColor.getValue("ColorizationColor")).getValue();
-					if(!ACCENT.equals(Color.decode(String.valueOf(color)))) {
-						ACCENT = Color.decode(String.valueOf(color));
-						Overlay.refreshUI(false);
-					}
-				} catch (NullPointerException ignored) {
-				}
-
-						if (theme == 0 && prevTheme[0] == 1) {
-							Defaults.setDark();
-							dark.set(false);
-							prevTheme[0] = 0;
-						} else if (theme == 1 && prevTheme[0] == 0) {
-							Defaults.setLight();
-							dark.set(true);
-							prevTheme[0] = 1;
+					int theme = 0;
+					Integer color;
+					try {
+						theme = ((RegDWORDValue) personalize.getValue("AppsUseLightTheme")).getIntValue();
+						color = ((RegDWORDValue) systemColor.getValue("ColorizationColor")).getValue();
+						if (!ACCENT.equals(Color.decode(String.valueOf(color)))) {
+							ACCENT = Color.decode(String.valueOf(color));
+							Overlay.refreshUI(false);
 						}
+					} catch (NullPointerException ignored) {
+					}
 
+					if (theme == 0 && prevTheme[0] == 1) {
+						Defaults.setDark();
+						dark.set(false);
+						prevTheme[0] = 0;
+					} else if (theme == 1 && prevTheme[0] == 0) {
+						Defaults.setLight();
+						dark.set(true);
+						prevTheme[0] = 1;
+					}
 
+				}
+				else{
+					Defaults.setDark();
+					dark.set(false);
+					prevTheme[0] = 0;
+				}
 
 				if (!Settings.windowedMode) {
 					screenSize = GraphicsEnvironment

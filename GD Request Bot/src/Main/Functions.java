@@ -152,7 +152,7 @@ public class Functions {
 
 	public static void saveFunction() {
 		try {
-			Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\saved.txt");
+			Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\saved.txt");
 			if (!Files.exists(file)) {
 				Files.createFile(file);
 			}
@@ -188,7 +188,7 @@ public class Functions {
 				}
 				if (n == 0) {
 					BlockedSettings.addButton(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
-					Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\blocked.txt");
+					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
 
 					try {
 						if (!Files.exists(file)) {

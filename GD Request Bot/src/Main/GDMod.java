@@ -31,7 +31,7 @@ public class GDMod {
 		}
 		System.out.println(PID);
 		try {
-			String[] cmd = new String[]{System.getenv("APPDATA") + "\\GDBoard\\bin\\gdmod.exe", PID};
+			String[] cmd = new String[]{Defaults.saveDirectory + "\\GDBoard\\bin\\gdmod.exe", PID};
 			String[] fillCmd = ArrayUtils.addAll(cmd, args);
 			ProcessBuilder pb = new ProcessBuilder(fillCmd).redirectErrorStream(true);
 			pb.start();

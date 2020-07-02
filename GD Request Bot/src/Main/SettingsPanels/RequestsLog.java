@@ -103,7 +103,7 @@ public class RequestsLog {
 			}
 		});
 
-		File file = new File(System.getenv("APPDATA") + "\\GDBoard\\requestsLog.txt");
+		File file = new File(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
 		if (file.exists()) {
 			Scanner sc = null;
 			try {
@@ -155,7 +155,7 @@ public class RequestsLog {
 			blockedListPanel.setPreferredSize(new Dimension(415, (int) (height + 4)));
 			scrollPane.updateUI();
 		}
-		Path file = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\requestsLog.txt");
+		Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
 		CurvedButton button = new CurvedButton(ID);
 
 		button.setBackground(Defaults.BUTTON);
@@ -177,7 +177,7 @@ public class RequestsLog {
 				if (n == 0) {
 					if (Files.exists(file)) {
 						try {
-							Path temp = Paths.get(System.getenv("APPDATA") + "\\GDBoard\\_tempLog_");
+							Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_tempLog_");
 							PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
 							Files.lines(file)
 									.filter(line -> !line.contains(button.getLText()))
@@ -185,7 +185,7 @@ public class RequestsLog {
 							out.flush();
 							out.close();
 							Files.delete(file);
-							Files.move(temp, temp.resolveSibling(System.getenv("APPDATA") + "\\GDBoard\\requestsLog.txt"), StandardCopyOption.REPLACE_EXISTING);
+							Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt"), StandardCopyOption.REPLACE_EXISTING);
 
 						} catch (IOException ex) {
 

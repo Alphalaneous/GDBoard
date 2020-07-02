@@ -8,7 +8,7 @@ public class Variables {
 	private static Properties variables = new Properties();
 	private static FileInputStream in;
 	private static BufferedWriter writer;
-	private static File file = new File(System.getenv("APPDATA") + "\\GDBoard\\vars.board");
+	private static File file = new File(Defaults.saveDirectory + "\\GDBoard\\vars.board");
 
 	static {
 		while (true) {
@@ -28,7 +28,7 @@ public class Variables {
 			in = new FileInputStream(file);
 			variables.load(in);
 			if (variables.containsKey(name)) {
-				BufferedReader file = new BufferedReader(new FileReader(System.getenv("APPDATA") + "\\GDBoard\\vars.board"));
+				BufferedReader file = new BufferedReader(new FileReader(Defaults.saveDirectory + "\\GDBoard\\vars.board"));
 				StringBuilder inputBuffer = new StringBuilder();
 				String line;
 				while ((line = file.readLine()) != null) {
@@ -36,7 +36,7 @@ public class Variables {
 					inputBuffer.append('\n');
 				}
 				file.close();
-				FileOutputStream fileOut = new FileOutputStream(System.getenv("APPDATA") + "\\GDBoard\\vars.board");
+				FileOutputStream fileOut = new FileOutputStream(Defaults.saveDirectory + "\\GDBoard\\vars.board");
 				fileOut.write(inputBuffer.toString().replace(name + "=" + variables.get(name).toString(), name + "=" + object).getBytes());
 				fileOut.close();
 			} else {
@@ -66,7 +66,7 @@ public class Variables {
 		return null;
 	}
 	/*public static void clearVars() throws IOException{
-		FileOutputStream fileOut = new FileOutputStream(System.getenv("APPDATA") + "\\GDBoard\\vars.board");
+		FileOutputStream fileOut = new FileOutputStream(Defaults.saveDirectory + "\\GDBoard\\vars.board");
 		fileOut.write("".getBytes());
 		fileOut.close();
 	}*/
