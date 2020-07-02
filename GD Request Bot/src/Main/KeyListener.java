@@ -26,8 +26,6 @@ public class KeyListener extends SwingKeyAdapter {
 		if(e.getRawCode() == 81 && ctrlPressed){
 			usePlatformer = true;
 			GDMod.run("speed", "0");
-			JOptionPane.showMessageDialog(null, "Platformer Enabled, pressed Ctrl E to disable! Click OK to exit, then click back into GD", "Platformer Mode", JOptionPane.INFORMATION_MESSAGE);
-
 		}
 		if(e.getRawCode() == 69){
 			usePlatformer = false;
