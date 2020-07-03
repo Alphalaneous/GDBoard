@@ -131,14 +131,15 @@ public class CommandSettings {
 		slider.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				System.out.println(slider.getValue());
 				try {
-					double cooldown = -1;
+					int cooldown = -1;
 					if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt"))) {
 						Scanner sc3 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt").toFile());
 						while (sc3.hasNextLine()) {
 							String line = sc3.nextLine();
 							if (line.split(" = ")[0].replace(" ", "").equalsIgnoreCase(command)) {
-								cooldown = Double.parseDouble(line.split("=")[1].replace(" ", ""));
+								cooldown = Integer.parseInt(line.split("=")[1].replace(" ", ""));
 								break;
 							}
 						}
@@ -148,7 +149,7 @@ public class CommandSettings {
 						Files.createFile(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt"));
 					}
 					if(cooldown != -1) {
-						BufferedReader file = new BufferedReader(new FileReader(Defaults.saveDirectory + "\\GDBoard\\cooldown.txt"));
+						BufferedReader file = new BufferedReader(new FileReader(Defaults.saveDirectory + "/GDBoard/cooldown.txt"));
 						StringBuilder inputBuffer = new StringBuilder();
 						String line;
 						while ((line = file.readLine()) != null) {
@@ -157,14 +158,14 @@ public class CommandSettings {
 						}
 						file.close();
 
-						FileOutputStream fileOut = new FileOutputStream(Defaults.saveDirectory + "\\GDBoard\\cooldown.txt");
+						FileOutputStream fileOut = new FileOutputStream(Defaults.saveDirectory + "/GDBoard/cooldown.txt");
 						fileOut.write(inputBuffer.toString().replace(command + " = " + cooldown, command + " = " + slider.getValue()).getBytes());
 						fileOut.close();
 					}
 					else{
 						BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt").toFile(), true));
 						writer.newLine();
-						writer.write((command + " = " + slider.getValue()));
+						writer.write(command + " = " + slider.getValue());
 						writer.close();
 
 					}
@@ -562,7 +563,7 @@ public class CommandSettings {
 				br.close();
 			}
 
-			slider.setValue(cooldown/10);
+			slider.setValue(cooldown);
 		}
 		catch (Exception f){
 			f.printStackTrace();
