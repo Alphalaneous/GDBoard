@@ -220,7 +220,7 @@ public class ServerChatBot {
                     }
                     if (cooldown > 0) {
                         String finalCom = com;
-                        int finalCooldown = cooldown * 1000;
+                        int finalCooldown = cooldown * 100;
                         Thread thread = new Thread(() -> {
                             comCooldown.add(finalCom);
                             try {

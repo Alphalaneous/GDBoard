@@ -39,7 +39,7 @@ public class CommandSettings {
 	private static CheckboxButton modOnly = createButton("Mod Only", 320);
 	private static CheckboxButton whisper = createButton("Send as Whisper", 350);
 	private static RoundedJButton backButton = new RoundedJButton("\uE112", "Back");
-	private static JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 60, 0);
+	private static JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 1200, 0);
 	public static JPanel createPanel() {
 		codeInput.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
 
@@ -110,20 +110,20 @@ public class CommandSettings {
 			g.drawOval(1, 1, w-4, h-4);
 		});
 
-		slider.setMinorTickSpacing(1);
-		slider.setMinorTickSpacing(10);
+		slider.setMinorTickSpacing(5);
+		slider.setMinorTickSpacing(100);
 		slider.putClientProperty("Nimbus.Overrides",sliderDefaults);
 		slider.putClientProperty("Nimbus.Overrides.InheritDefaults",false);
 		slider.setBounds(25,410, 365,30);
 		slider.setBackground(Defaults.SUB_MAIN);
 		slider.setBorder(BorderFactory.createEmptyBorder());
 		slider.addChangeListener(e -> {
-			if(slider.getValue() == 1){
-				sliderValue.setText("Cooldown: " + slider.getValue() + " second");
+			if(slider.getValue() == 10){
+				sliderValue.setText("Cooldown: " + (double)slider.getValue()/10 + " second");
 
 			}
 			else {
-				sliderValue.setText("Cooldown: " + slider.getValue() + " seconds");
+				sliderValue.setText("Cooldown: " + (double)slider.getValue()/10 + " seconds");
 			}
 			sliderValue.setBounds(25, 390, sliderValue.getPreferredSize().width + 5, sliderValue.getPreferredSize().height + 5);
 
@@ -132,13 +132,13 @@ public class CommandSettings {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				try {
-					int cooldown = -1;
+					double cooldown = -1;
 					if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt"))) {
 						Scanner sc3 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt").toFile());
 						while (sc3.hasNextLine()) {
 							String line = sc3.nextLine();
 							if (line.split(" = ")[0].replace(" ", "").equalsIgnoreCase(command)) {
-								cooldown = Integer.parseInt(line.split("=")[1].replace(" ", ""));
+								cooldown = Double.parseDouble(line.split("=")[1].replace(" ", ""));
 								break;
 							}
 						}
@@ -562,7 +562,7 @@ public class CommandSettings {
 				br.close();
 			}
 
-			slider.setValue(cooldown);
+			slider.setValue(cooldown/10);
 		}
 		catch (Exception f){
 			f.printStackTrace();
