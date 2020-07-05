@@ -42,15 +42,15 @@ public class Functions {
 		}
 		if(Main.loaded) {
 			if (Requests.levels.size() != 0) {
-				if (Requests.levels.size() > 1 && LevelsWindow.getSelectedID() == 0) {
-					StringSelection selection = new StringSelection(
-							Requests.levels.get(LevelsWindow.getSelectedID() + 1).getLevelID());
-					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-					clipboard.setContents(selection, selection);
-				}
 				int select = LevelsWindow.getSelectedID();
 				Requests.levels.remove(LevelsWindow.getSelectedID());
 				LevelsWindow.removeButton();
+				if (Requests.levels.size() > 0 ) {
+					StringSelection selection = new StringSelection(
+							Requests.levels.get(0).getLevelID());
+					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+					clipboard.setContents(selection, selection);
+				}
 				if (select == 0 && Requests.levels.size() > 0) {
 					if (!GeneralSettings.nowPlayingOption) {
 						if(Requests.levels.get(0).getContainsImage()){
@@ -71,9 +71,6 @@ public class Functions {
 					}
 				}
 				Functions.saveFunction();
-
-
-
 			}
 			OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
 			LevelsWindow.setOneSelect();
@@ -137,6 +134,7 @@ public class Functions {
 			OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, num));
 			SongWindow.refreshInfo();
 			InfoWindow.refreshInfo();
+			Functions.saveFunction();
 			LevelsWindow.setName(Requests.levels.size());
 		}
 	}
@@ -171,6 +169,12 @@ public class Functions {
 
 	public static void blockFunction() {
 		if(Main.loaded) {
+			if(LevelsWindow.getSelectedID() == 0){
+				StringSelection selection = new StringSelection(
+						Requests.levels.get(1).getLevelID());
+				Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+				clipboard.setContents(selection, selection);
+			}
 			if (Requests.levels.size() != 0) {
 				SettingsWindow.run = false;
 				Object[] options = {"Yes", "No"};

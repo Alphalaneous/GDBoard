@@ -631,7 +631,27 @@ public class Requests {
 	public static String block(String user, String[] arguments){
 		String response;
 		try {
+			boolean start = false;
 			int blockedID = Integer.parseInt(arguments[1]);
+			if(blockedID == Integer.parseInt(Requests.levels.get(0).getLevelID()) && Requests.levels.size() > 1){
+					StringSelection selection = new StringSelection(
+							Requests.levels.get(1).getLevelID());
+					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+					clipboard.setContents(selection, selection);
+					start = true;
+			}
+			for(int i = 0; i < Requests.levels.size(); i++){
+				if(Requests.levels.get(i).getLevelID().equalsIgnoreCase(String.valueOf(blockedID))){
+					LevelsWindow.removeButton(i);
+					Requests.levels.remove(i);
+					InfoWindow.refreshInfo();
+					SongWindow.refreshInfo();
+					CommentsWindow.unloadComments(true);
+					CommentsWindow.loadComments(0, false);
+					Functions.saveFunction();
+					break;
+				}
+			}
 			Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
 			if (!Files.exists(file)) {
 				Files.createFile(file);
@@ -652,6 +672,9 @@ public class Requests {
 			}
 			response = "@" + user + " Successfully blocked " + arguments[1];
 			BlockedSettings.addButton(arguments[1]);
+			if(start){
+				LevelsWindow.setOneSelect();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			response = "@" + user + " Block failed!";
