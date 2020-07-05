@@ -506,6 +506,37 @@ public class Requests {
 		LevelsWindow.setName(Requests.levels.size());
 		return response;
 	}
+	public static String removeLatest(String user, boolean isMod){
+		String response = "";
+		for (int i = Requests.levels.size()-1; i >= 0; i--) {
+			try {
+				if (String.valueOf(user).equalsIgnoreCase(Requests.levels.get(i).getRequester())) {
+					response = "@" + user + ", " + Requests.levels.get(i).getName()+ " (" + Requests.levels.get(i).getLevelID() + ") has been removed!";
+					LevelsWindow.removeButton(i);
+					Requests.levels.remove(i);
+					Functions.saveFunction();
+					SongWindow.refreshInfo();
+					InfoWindow.refreshInfo();
+					LevelsWindow.setOneSelect();
+					Thread thread = new Thread(() -> {
+						CommentsWindow.unloadComments(true);
+						CommentsWindow.loadComments(0, false);
+					});
+					thread.start();
+					if (i == 0) {
+						StringSelection selection = new StringSelection(
+								Requests.levels.get(0).getLevelID());
+						Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+						clipboard.setContents(selection, selection);
+					}
+					break;
+				}
+			} catch (Exception ignored) {
+			}
+		}
+		LevelsWindow.setName(Requests.levels.size());
+		return response;
+	}
 	private static Thread rickThread = null;
 
 	@SuppressWarnings("unused")
