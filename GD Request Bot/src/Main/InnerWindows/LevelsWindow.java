@@ -109,6 +109,16 @@ public class LevelsWindow {
 		return ((LevelButton) mainPanel.getComponent(i));
 	}
 
+	public static void movePosition(int position, int newPosition){
+		mainPanel.add(getButton(position), newPosition);
+		LevelData data = Requests.levels.get(position);
+		Requests.levels.remove(position);
+		Requests.levels.add(newPosition, data);
+		Functions.saveFunction();
+		mainPanel.invalidate();
+		mainPanel.validate();
+	}
+
 	public static class LevelButton extends JButton{
 
 		String name;

@@ -627,6 +627,19 @@ public class Requests {
 		}
 	}
 
+	public static void movePosition(int position, int newPosition){
+		LevelsWindow.movePosition(position, newPosition);
+	}
+
+	public static int getPosFromID(String ID){
+		for(int i = 0; i < Requests.levels.size(); i++){
+			if(Requests.levels.get(i).getLevelID().equalsIgnoreCase(ID)){
+				return i;
+			}
+		}
+		return -1;
+	}
+
 	@SuppressWarnings("unused")
 	public static String block(String user, String[] arguments){
 		String response;
