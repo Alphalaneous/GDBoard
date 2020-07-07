@@ -15,10 +15,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/GDMod.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/GDMod.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/GDMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/GDMod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/KeyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/KeyListener.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -64,8 +62,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/KeyListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+            <state relative-caret-position="688">
+              <caret line="135" column="31" selection-start-line="135" selection-start-column="31" selection-end-line="135" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -73,8 +71,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/GDMod.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="42" column="19" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
+            <state relative-caret-position="85">
+              <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -231,7 +229,6 @@
         <option value="$PROJECT_DIR$/src/Main/Variables.java" />
         <option value="$PROJECT_DIR$/src/Main/Defaults.java" />
         <option value="$PROJECT_DIR$/src/Main/Main.java" />
-        <option value="$PROJECT_DIR$/src/Main/KeyListener.java" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/cooldown.txt" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/ServerChatBot.java" />
@@ -243,6 +240,7 @@
         <option value="$PROJECT_DIR$/src/Resources/Commands/!wronglevel.js" />
         <option value="$PROJECT_DIR$/src/Main/InnerWindows/LevelsWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/GDMod.java" />
+        <option value="$PROJECT_DIR$/src/Main/KeyListener.java" />
         <option value="$PROJECT_DIR$/src/.version" />
       </list>
     </option>
@@ -389,7 +387,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -430,6 +427,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -610,7 +608,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28144988" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28464818" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -619,7 +617,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4989339" weight="0.3261105" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5399787" visible="true" weight="0.20693392" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5399787" weight="0.20693392" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" weight="0.41928494" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1149,17 +1147,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/KeyListener.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/GDMod.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+        <state relative-caret-position="85">
+          <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/GDMod.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/KeyListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="42" column="19" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
+        <state relative-caret-position="688">
+          <caret line="135" column="31" selection-start-line="135" selection-start-column="31" selection-end-line="135" selection-end-column="31" />
         </state>
       </provider>
     </entry>

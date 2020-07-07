@@ -12,15 +12,25 @@ public class KeyListener extends SwingKeyAdapter {
 	private static boolean keyReleased = false;
 	private static boolean usePlatformer = false;
 	private static boolean ctrlPressed = false;
+	private static boolean goLeft = true;
+	private static boolean goRight = true;
+
+
 
 	public void nativeKeyPressed(NativeKeyEvent e) {
 		System.out.println(e.getRawCode());
 		if(usePlatformer) {
 			if (e.getRawCode() == 65) {
-				GDMod.run("speed", "-0.9");
+				if(goLeft) {
+					GDMod.run("speed", "-0.9");
+					goLeft = false;
+				}
 			}
 			if (e.getRawCode() == 68) {
-				GDMod.run("speed", "0.9");
+				if(goRight) {
+					GDMod.run("speed", "0.9");
+					goRight = false;
+				}
 			}
 		}
 		if(e.getRawCode() == 81 && ctrlPressed){
@@ -119,11 +129,11 @@ public class KeyListener extends SwingKeyAdapter {
 		if(usePlatformer) {
 			if (e.getRawCode() == 65) {
 				GDMod.run("speed", "0");
-
+				goLeft = true;
 			}
 			if (e.getRawCode() == 68) {
 				GDMod.run("speed", "0");
-
+				goRight = true;
 			}
 		}
 		if(e.getRawCode() == 162 || e.getRawCode() == 163){
