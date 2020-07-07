@@ -506,7 +506,7 @@ public class Requests {
 		LevelsWindow.setName(Requests.levels.size());
 		return response;
 	}
-	public static String removeLatest(String user, boolean isMod){
+	public static String removeLatest(String user){
 		String response = "";
 		for (int i = Requests.levels.size()-1; i >= 0; i--) {
 			try {

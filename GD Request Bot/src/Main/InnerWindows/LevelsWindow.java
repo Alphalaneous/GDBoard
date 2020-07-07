@@ -110,10 +110,25 @@ public class LevelsWindow {
 	}
 
 	public static void movePosition(int position, int newPosition){
+		String selectID = "";
+		if(newPosition >= Requests.levels.size()){
+			newPosition = Requests.levels.size()-1;
+		}
+		for(int  i = 0; i < Requests.levels.size(); i++){
+			if(getButton(i).selected){
+				selectID = Requests.levels.get(i).getLevelID();
+			}
+		}
+
 		mainPanel.add(getButton(position), newPosition);
 		LevelData data = Requests.levels.get(position);
 		Requests.levels.remove(position);
 		Requests.levels.add(newPosition, data);
+		for(int  i = 0; i < Requests.levels.size(); i++){
+			if(selectID.equalsIgnoreCase(Requests.levels.get(i).getLevelID())){
+				LevelsWindow.setSelect(i);
+			}
+		}
 		Functions.saveFunction();
 		mainPanel.invalidate();
 		mainPanel.validate();

@@ -3,5 +3,5 @@ function command(){
 	if(isNaN(intArg) || args.length == 1){
 		intArg = 1;
 	}
-	return Levels.removeLatest(user, isMod);
+	return Levels.removeLatest(user);
 }
