@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 
 public class GDMod {
 	public static void run(String... args){
+		new Thread(() -> {
 		String PID = null;
 		try {
 			ProcessBuilder pb = new ProcessBuilder("tasklist", "/fi", "\"IMAGENAME eq GeometryDash.exe\"", "/fo", "CSV").redirectErrorStream(true);
@@ -36,8 +37,9 @@ public class GDMod {
 			ProcessBuilder pb = new ProcessBuilder(fillCmd).redirectErrorStream(true);
 			pb.start();
 		}
-		catch (IOException e){
+		catch (Exception e){
 			e.printStackTrace();
 		}
+		}).start();
 	}
 }
