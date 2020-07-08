@@ -135,7 +135,6 @@ public class ShortcutSettings {
 
 		CheckboxButton button = new CheckboxButton(text);
 		button.setBounds(25, y, width, 30);
-		button.setUI(defaultUI);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));

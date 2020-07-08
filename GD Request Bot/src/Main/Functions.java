@@ -169,7 +169,7 @@ public class Functions {
 
 	public static void blockFunction() {
 		if(Main.loaded) {
-			if(LevelsWindow.getSelectedID() == 0){
+			if(LevelsWindow.getSelectedID() == 0 && Requests.levels.size() > 1){
 				StringSelection selection = new StringSelection(
 						Requests.levels.get(1).getLevelID());
 				Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();

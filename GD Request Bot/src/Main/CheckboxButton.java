@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
-public class CheckboxButton extends JButton {
+public class CheckboxButton extends JPanel {
 
 	private JLabel text = new JLabel();
 	private JLabel check = new JLabel("\uE739");
@@ -16,11 +16,11 @@ public class CheckboxButton extends JButton {
 	public CheckboxButton(String label) {
 		setLayout(null);
 		text.setText(label);
-		text.setForeground(getForeground());
+		text.setForeground(Defaults.FOREGROUND);
 		check.setFont(Defaults.SYMBOLS.deriveFont(16f));
-		checkSymbol.setForeground(getForeground());
+		checkSymbol.setForeground(Color.WHITE);
 		checkSymbol.setFont(Defaults.SYMBOLS.deriveFont(16f));
-		hover.setForeground(getForeground());
+		hover.setForeground(Defaults.FOREGROUND);
 		hover.setFont(Defaults.SYMBOLS.deriveFont(16f));
 		checkSymbol.setVisible(false);
 		hover.setVisible(false);
@@ -28,8 +28,9 @@ public class CheckboxButton extends JButton {
 		add(checkSymbol);
 		add(check);
 		add(text);
+		setBackground(new Color(0,0,0,0));
+		setOpaque(false);
 		check.setForeground(Color.LIGHT_GRAY);
-		setContentAreaFilled(false);
 		addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e){
 				if (SwingUtilities.isLeftMouseButton(e)) {
@@ -104,7 +105,6 @@ public class CheckboxButton extends JButton {
 		text.setBounds(0, (getHeight()/2)-(text.getPreferredSize().height/2), text.getPreferredSize().width+5, text.getPreferredSize().height+5);
 		check.setBounds(getWidth()-20, 0, 30,30);
 		checkSymbol.setBounds(getWidth()-20, 0, 30,30);
-		checkSymbol.setForeground(Defaults.FOREGROUND);
 		hover.setForeground(Defaults.FOREGROUND);
 		hover.setBounds(getWidth()-20, 0, 30,30);
 	}

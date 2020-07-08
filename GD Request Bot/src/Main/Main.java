@@ -91,7 +91,7 @@ public class Main {
 				public void provideErrorFeedback(Component component) {
 				}
 			});
-
+			LoadGD.load();
 			Defaults.startMainThread();        //Starts thread that always checks for changes such as time, resolution, and color scheme
 			int i = 0;
 			while(!Defaults.loaded.get()){

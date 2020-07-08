@@ -607,7 +607,6 @@ public class CommandSettings {
 	private static CheckboxButton createButton(String text, int y){
 		CheckboxButton button = new CheckboxButton(text);
 		button.setBounds(25,y,365,30);
-		button.setUI(defaultUI);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(new Font("bahnschrift", Font.PLAIN, 14));

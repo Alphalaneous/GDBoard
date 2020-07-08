@@ -6,6 +6,7 @@ import Main.InnerWindows.LevelsWindow;
 import Main.InnerWindows.SongWindow;
 import Main.SettingsPanels.*;
 import com.github.alex1304.jdash.client.AnonymousGDClient;
+import com.github.alex1304.jdash.client.AuthenticatedGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.entity.*;
 import com.github.alex1304.jdash.exception.MissingAccessException;
@@ -160,17 +161,36 @@ public class Requests {
 			}
 			System.out.println(userStreamLimitMap.get(requester));
 
-			AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
+			AuthenticatedGDClient client = null;
+			AnonymousGDClient clientAnon = null;
 			GDLevel level;
-			try {
-				level = client.getLevelById(Integer.parseInt(ID)).block();
-			} catch (MissingAccessException | NumberFormatException e) {
-				Main.sendMessage("@" + requester + " That level ID doesn't exist!");
-				return;
-			} catch (Exception e) {
-				Main.sendMessage("@" + requester + " Level search failed... (Servers down?)");
-				return;
+			GDUser user = null;
+
+			if(LoadGD.isAuth) {
+				client = (AuthenticatedGDClient) LoadGD.client;
+				try {
+					level = client.getLevelById(Integer.parseInt(ID)).block();
+				} catch (MissingAccessException | NumberFormatException e) {
+					Main.sendMessage("@" + requester + " That level ID doesn't exist!");
+					return;
+				} catch (Exception e) {
+					Main.sendMessage("@" + requester + " Level search failed... (Servers down?)");
+					return;
+				}
 			}
+			else{
+				clientAnon = (AnonymousGDClient) LoadGD.client;
+				try {
+					level = clientAnon.getLevelById(Integer.parseInt(ID)).block();
+				} catch (MissingAccessException | NumberFormatException e) {
+					Main.sendMessage("@" + requester + " That level ID doesn't exist!");
+					return;
+				} catch (Exception e) {
+					Main.sendMessage("@" + requester + " Level search failed... (Servers down?)");
+					return;
+				}
+			}
+
 			LevelData levelData = new LevelData();
 			// --------------------
 			Thread parse;
@@ -224,9 +244,13 @@ public class Requests {
 			levelData.setOriginal(Objects.requireNonNull(level.getOriginalLevelID()));
 			levelData.setCoins(Objects.requireNonNull(level.getCoinCount()));
 			GDUserIconSet iconSet = null;
-			GDUser user = null;
 			try {
-				user = client.searchUser(levelData.getAuthor()).block();
+				if(LoadGD.isAuth) {
+					user = client.searchUser(levelData.getAuthor()).block();
+				}
+				else {
+					user = clientAnon.searchUser(levelData.getAuthor()).block();
+				}
 
 				try {
 					iconSet = new GDUserIconSet(user, SpriteFactory.create());
@@ -289,19 +313,36 @@ public class Requests {
 					}
 				}
 			}
+			if(LoadGD.isAuth) {
+				AuthenticatedGDClient finalClient = client;
+				parse = new Thread(() -> {
+					Object object = Objects.requireNonNull(finalClient.getLevelById(Long.parseLong(ID)).block()).download().block();
+					if (!(level.getStars() > 0) && level.getGameVersion() / 10 >= 2) {
+						parse(((GDLevelData) Objects.requireNonNull(object)).getData(), ID);
+					}
+					levelData.setPassword(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getPass()));
+					levelData.setUpload(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getUploadTimestamp()));
+					levelData.setUpdate(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getLastUpdatedTimestamp()));
+					InfoWindow.refreshInfo();
 
-			parse = new Thread(() -> {
-				Object object = Objects.requireNonNull(client.getLevelById(Long.parseLong(ID)).block()).download().block();
-				if (!(level.getStars() > 0) && level.getGameVersion() / 10 >= 2) {
-					parse(((GDLevelData) Objects.requireNonNull(object)).getData(), ID);
-				}
-				levelData.setPassword(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getPass()));
-				levelData.setUpload(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getUploadTimestamp()));
-				levelData.setUpdate(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getLastUpdatedTimestamp()));
-				InfoWindow.refreshInfo();
+
+				});
+			}
+			else{
+				AnonymousGDClient finalClient = clientAnon;
+				parse = new Thread(() -> {
+					Object object = Objects.requireNonNull(finalClient.getLevelById(Long.parseLong(ID)).block()).download().block();
+					if (!(level.getStars() > 0) && level.getGameVersion() / 10 >= 2) {
+						parse(((GDLevelData) Objects.requireNonNull(object)).getData(), ID);
+					}
+					levelData.setPassword(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getPass()));
+					levelData.setUpload(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getUploadTimestamp()));
+					levelData.setUpdate(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getLastUpdatedTimestamp()));
+					InfoWindow.refreshInfo();
 
 
-			});
+				});
+			}
 			parse.start();
 			if(os.contains("WIN")) {
 				if (GeneralSettings.autoDownloadOption) {
