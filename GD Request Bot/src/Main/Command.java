@@ -45,4 +45,7 @@ public class Command {
         }
         return result.replaceAll(System.getProperty("user.name"), "*****");
     }
+    public static String run(String user, String message, String function){
+        return run(user, false, false, message.split(" "), function, 0);
+    }
 }

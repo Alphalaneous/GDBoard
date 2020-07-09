@@ -177,6 +177,7 @@ public class APIs {
 			return "error";
 		}
 	}
+
 	public static String getPFP() {
 		try {
 			JsonObject nameObj = twitchAPI("https://api.twitch.tv/helix/users");
@@ -189,14 +190,14 @@ public class APIs {
 	}
 
 
-	private static JsonObject twitchAPI(String URL) {
+	private static JsonObject twitchAPI(String URL) throws IOException {
 		OkHttpClient client = new OkHttpClient();
 		Request request = new Request.Builder()
 				.url(URL)
 				.build();
 		Request newReq = request.newBuilder()
 				.addHeader("Client-ID", "fzwze6vc6d2f7qodgkpq2w8nnsz3rl")
-				.addHeader("Authorization", "Bearer " + Settings.oauth)
+				.addHeader("Authorization", "Bearer " + Settings.getSettings("oauth"))
 				.build();
 		try (Response response = client.newCall(newReq).execute()) {
 			return JsonObject.readFrom(response.body().string());
@@ -220,7 +221,7 @@ public class APIs {
 		}*/
 	}
 
-	private static JsonObject twitchAPI(String URL, boolean v5) {
+	private static JsonObject twitchAPI(String URL, boolean v5) throws IOException {
 
 		OkHttpClient client = new OkHttpClient();
 		Request request = new Request.Builder()
@@ -228,7 +229,7 @@ public class APIs {
 				.build();
 		Request newReq = request.newBuilder()
 				.addHeader("Client-ID", "fzwze6vc6d2f7qodgkpq2w8nnsz3rl")
-				.addHeader("Authorization", "OAuth " + Settings.oauth)
+				.addHeader("Authorization", "OAuth " + Settings.getSettings("oauth"))
 				.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:77.0) Gecko/20100101 Firefox/77.0")
 				.build();
 
@@ -257,8 +258,14 @@ public class APIs {
 		}*/
 	}
 
-	private static String getIDs(String username) {
-		JsonObject userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + username.toLowerCase());
+	public static String getIDs(String username) {
+		JsonObject userID = null;
+		try {
+			userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + username.toLowerCase());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println(userID.toString());
 		assert userID != null;
 		return userID.get("data").asArray().get(0).asObject().get("id").toString().replaceAll("\"", "");
 	}

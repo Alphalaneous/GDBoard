@@ -5,6 +5,7 @@ import Main.SettingsPanels.*;
 import com.cavariux.twitchirc.Chat.Channel;
 import com.cavariux.twitchirc.Chat.User;
 import org.apache.commons.io.FileUtils;
+import org.java_websocket.client.WebSocketClient;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.json.JSONObject;
@@ -19,6 +20,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.*;
 import java.lang.reflect.Method;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -40,6 +43,16 @@ public class Main {
 	private static JPanel panel = new JPanel();
 	private static JLabel tf = new JLabel("Loading...");
 	private static ChatReader chatReader = new ChatReader();
+	private static ChannelPointListener client;
+
+	static {
+		try {
+			client = new ChannelPointListener(new URI("wss://pubsub-edge.twitch.tv"));
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static void main(String[] args) {
 
 		try {
@@ -92,6 +105,7 @@ public class Main {
 				}
 			});
 			LoadGD.load();
+			client.connect();
 			Defaults.startMainThread();        //Starts thread that always checks for changes such as time, resolution, and color scheme
 			int i = 0;
 			while(!Defaults.loaded.get()){
@@ -384,6 +398,7 @@ public class Main {
 				}
 				WindowedSettings.setSettings();
 			}
+			client.disconnect();
 			GeneralSettings.setSettings();
 			RequestSettings.setSettings();
 			ShortcutSettings.setSettings();
