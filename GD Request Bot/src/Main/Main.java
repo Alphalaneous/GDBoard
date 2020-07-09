@@ -31,8 +31,11 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 public class Main {
+
 
 	static boolean starting = true;
 	static boolean loaded = false;
@@ -55,6 +58,44 @@ public class Main {
 
 	public static void main(String[] args) {
 
+
+		Path conf = Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf");
+		Path confzip = Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf.zip");
+
+		if(!Files.exists(conf)){
+			URL inputUrl = Main.class.getResource("/Resources/conf.zip");
+			try {
+				FileUtils.copyURLToFile(inputUrl, confzip.toFile());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			if(Files.exists(Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf.zip"))){
+				Path decryptTo = Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf");
+				try {
+					Files.createDirectory(decryptTo);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				try (ZipInputStream zipInputStream = new ZipInputStream(Files.newInputStream(Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf.zip")))) {
+					ZipEntry entry;
+					while ((entry = zipInputStream.getNextEntry()) != null) {
+
+						final Path toPath = decryptTo.resolve(entry.getName());
+						if (entry.isDirectory()) {
+							Files.createDirectory(toPath);
+						} else {
+							Files.copy(zipInputStream, toPath);
+						}
+					}
+					Files.delete(confzip);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+			}
+		}
+
+
 		try {
 			if(Settings.getSettings("windowed").equalsIgnoreCase("")){
 				Settings.writeSettings("windowed", "true");
@@ -62,6 +103,7 @@ public class Main {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 
 		/*try {
 			System.setOut(new PrintStream(new FileOutputStream(new File(System.getenv("APPDATA") + "\\GDBoard\\clOutput.txt"))));
