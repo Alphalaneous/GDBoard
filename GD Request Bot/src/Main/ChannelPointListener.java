@@ -190,7 +190,7 @@ public class ChannelPointListener extends WebSocketClient {
 		ex.printStackTrace();
 	}
 
-	public void disconnect(){
+	public void disconnectBot(){
 		send("{\n" +
 				"  \"type\": \"UNLISTEN\"\n" +
 				"}");

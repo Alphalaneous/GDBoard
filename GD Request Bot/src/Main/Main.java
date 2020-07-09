@@ -398,7 +398,7 @@ public class Main {
 				}
 				WindowedSettings.setSettings();
 			}
-			client.disconnect();
+			client.disconnectBot();
 			GeneralSettings.setSettings();
 			RequestSettings.setSettings();
 			ShortcutSettings.setSettings();
