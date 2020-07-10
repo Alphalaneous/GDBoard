@@ -46,6 +46,7 @@ public class SettingsWindow {
 	private static JPanel overlay = OutputSettings.createPanel();
 	private static JPanel accounts = AccountSettings.createPanel();
 	private static JPanel commands = CommandSettings.createPanel();
+	private static JPanel points = ChannelPointSettings.createPanel();
 	private static JPanel requests = RequestSettings.createPanel();
 	private static JPanel shortcuts = ShortcutSettings.createPanel();
 	private static JPanel personalization = PersonalizationSettings.createPanel();
@@ -96,6 +97,7 @@ public class SettingsWindow {
 		content.add(overlay);
 		content.add(accounts);
 		content.add(commands);
+		content.add(points);
 		content.add(requests);
 		content.add(shortcuts);
 		content.add(personalization);
@@ -108,6 +110,7 @@ public class SettingsWindow {
 		overlay.setVisible(false);
 		accounts.setVisible(false);
 		commands.setVisible(false);
+		points.setVisible(false);
 		requests.setVisible(false);
 		shortcuts.setVisible(false);
 		personalization.setVisible(false);
@@ -123,6 +126,7 @@ public class SettingsWindow {
 		JButton outputs = createButton("Outputs");
 		JButton accounts = createButton("Accounts");
 		JButton commands = createButton("Commands");
+		JButton points = createButton("Channel Points");
 		JButton requests = createButton("Requests");
 		JButton shortcuts = createButton("Shortcuts");
 		JButton personalization = createButton("Personalization");
@@ -136,6 +140,7 @@ public class SettingsWindow {
 		buttons.add(outputs);
 		buttons.add(accounts);
 		buttons.add(commands);
+		buttons.add(points);
 		buttons.add(requests);
 		buttons.add(shortcuts);
 		buttons.add(personalization);
@@ -261,6 +266,9 @@ public class SettingsWindow {
 								break;
 							case "Commands":
 								commands.setVisible(true);
+								break;
+							case "Channel Points":
+								points.setVisible(true);
 								break;
 							case "Requests":
 								requests.setVisible(true);
