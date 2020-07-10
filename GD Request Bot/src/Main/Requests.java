@@ -944,7 +944,12 @@ public class Requests {
 
 	@SuppressWarnings("unused")
 	public static String getOAuth(){
-		return Settings.oauth;
+		try {
+			return Settings.getSettings("oauth");
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@SuppressWarnings("unused")

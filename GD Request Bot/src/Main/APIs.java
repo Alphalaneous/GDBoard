@@ -274,7 +274,7 @@ public class APIs {
 		try {
 			URL url = new URL("https://id.twitch.tv/oauth2/validate");
 			URLConnection conn = url.openConnection();
-			conn.setRequestProperty("Authorization", "OAuth " + Settings.oauth);
+			conn.setRequestProperty("Authorization", "OAuth " + Settings.getSettings("oauth"));
 			conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:77.0) Gecko/20100101 Firefox/77.0");
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String x = br.readLine();
@@ -285,37 +285,48 @@ public class APIs {
 		}
 	}
 	static AtomicBoolean success = new AtomicBoolean(false);
-	public static void setOauth() {
-
+	public static void setOauth(boolean threaded) {
+		if(!threaded){
+			setOauthPrivate();
+		}
+		else {
+			Thread thread = new Thread(() -> {
+				setOauthPrivate();
+			});
+			thread.start();
+		}
+	}
+	public static void setOauth(){
 		Thread thread = new Thread(() -> {
-			try {
-				Twitch twitch = new Twitch();
-				URI callbackUri = new URI("http://127.0.0.1:23522");
-
-				twitch.setClientId("fzwze6vc6d2f7qodgkpq2w8nnsz3rl");
-				URI authUrl = new URI(twitch.auth().getAuthenticationUrl(
-						twitch.getClientId(), callbackUri, Scopes.USER_READ
-				) + "chat:edit+channel:moderate+channel:read:redemptions+chat:read+whispers:read+whispers:edit+user_read&force_verify=true");
-				Runtime rt = Runtime.getRuntime();
-				rt.exec("rundll32 url.dll,FileProtocolHandler " + authUrl);
-				if (twitch.auth().awaitAccessToken()) {
-					Settings.oauth = twitch.auth().getAccessToken();
-					Settings.writeSettings("oauth", twitch.auth().getAccessToken());
-
-					success.set(true);
-					try {
-						GDBoardBot.restart();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				} else {
-					System.out.println(twitch.auth().getAuthenticationError());
-
-				}
-			} catch (Exception ignored) {
-			}
-
+			setOauthPrivate();
 		});
 		thread.start();
+	}
+	private static void setOauthPrivate(){
+		try {
+			Twitch twitch = new Twitch();
+			URI callbackUri = new URI("http://127.0.0.1:23522");
+
+			twitch.setClientId("fzwze6vc6d2f7qodgkpq2w8nnsz3rl");
+			URI authUrl = new URI(twitch.auth().getAuthenticationUrl(
+					twitch.getClientId(), callbackUri, Scopes.USER_READ
+			) + "chat:edit+channel:moderate+channel:read:redemptions+chat:read+whispers:read+whispers:edit+user_read&force_verify=true");
+			Runtime rt = Runtime.getRuntime();
+			rt.exec("rundll32 url.dll,FileProtocolHandler " + authUrl);
+			if (twitch.auth().awaitAccessToken()) {
+				Settings.writeSettings("oauth", twitch.auth().getAccessToken());
+
+				success.set(true);
+				try {
+					GDBoardBot.restart();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} else {
+				System.out.println(twitch.auth().getAuthenticationError());
+
+			}
+		} catch (Exception ignored) {
+		}
 	}
 }

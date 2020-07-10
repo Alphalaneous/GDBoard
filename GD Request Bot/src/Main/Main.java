@@ -94,8 +94,6 @@ public class Main {
 
 			}
 		}
-
-
 		try {
 			if(Settings.getSettings("windowed").equalsIgnoreCase("")){
 				Settings.writeSettings("windowed", "true");
@@ -104,12 +102,12 @@ public class Main {
 			e.printStackTrace();
 		}
 
-
 		/*try {
 			System.setOut(new PrintStream(new FileOutputStream(new File(System.getenv("APPDATA") + "\\GDBoard\\clOutput.txt"))));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}*/
+
 		Defaults.loaded.set(false);
 		try {
 			Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
@@ -177,18 +175,13 @@ public class Main {
 					Settings.loadSettings(true);
 					GDBoardBot.start();
 
-
-					if (!Settings.hasWindowed) {
-						Settings.writeSettings("windowed", "false");
-					}
 					if (!Settings.hasMonitor) {
 						Settings.writeSettings("monitor", "0");
 					}
-					MouseLock.startLock();
 					Thread.sleep(1000);
 					JSONObject authObj = new JSONObject();
 					authObj.put("request_type", "connect");
-					authObj.put("oauth", Settings.oauth);
+					authObj.put("oauth", Settings.getSettings("oauth"));
 					GDBoardBot.sendMessage(authObj.toString());
 					Thread.sleep(1000);
 					while(!GDBoardBot.connected){
@@ -200,11 +193,11 @@ public class Main {
 					}
 					Overlay.setFrame();                //Creates the JFrame that contains everything
 
-					if (!Settings.windowedMode) {
+					if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 						MainBar.createBar();            //Creates the main "Game Bar" in the top center
 					}
 
-					if(!Settings.windowedMode) {
+					if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 						Reflections innerReflections = new Reflections("Main.InnerWindows", new SubTypesScanner(false));
 						Set<Class<?>> innerClasses =
 								innerReflections.getSubTypesOf(Object.class);
@@ -219,7 +212,7 @@ public class Main {
 						InfoWindow.createPanel();
 					}
 					SettingsWindow.createPanel();
-					if (Settings.windowedMode) {
+					if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 						Windowed.createPanel();
 						Windowed.loadSettings();
 					}
@@ -237,11 +230,9 @@ public class Main {
 						}
 					}
 
-					ControllerListener.hook();         //Starts Controller Listener
-
 					Thread thread1 = new Thread(() -> runKeyboardHook());
+					ControllerListener.hook();
 					thread1.start();
-
 
 					Thread thread = new Thread(() -> {
 						chatReader.connect();
@@ -254,8 +245,10 @@ public class Main {
 					});
 					thread.start();
 					Overlay.refreshUI(true);
-					if (Settings.windowedMode) {
+					if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+						Windowed.resetCommentSize();
 						Windowed.frame.setVisible(true);
+
 					}
 					Overlay.setVisible();
 

@@ -124,9 +124,6 @@ public class Board {
 		return System.getenv(name);
 	}
 
-	public static String getOAuth(){
-		return Settings.oauth;
-	}
 
 	public static String getClientID(){
 		return "fzwze6vc6d2f7qodgkpq2w8nnsz3rl";

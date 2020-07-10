@@ -186,8 +186,12 @@ public class CommentsWindow {
 		panel.setVisible(false);
 		window.add(mainPanel);
 		((InnerWindow) window).refreshListener();
-		if(!Settings.windowedMode) {
-			Overlay.addToFrame(window);
+		try {
+			if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+				Overlay.addToFrame(window);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	//endregion

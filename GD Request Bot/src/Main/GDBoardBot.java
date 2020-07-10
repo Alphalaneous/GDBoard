@@ -192,7 +192,7 @@ class GDBoardBot {
 				Thread.sleep(1000);
 				JSONObject authObj = new JSONObject();
 				authObj.put("request_type", "connect");
-				authObj.put("oauth", Settings.oauth);
+				authObj.put("oauth", Settings.getSettings("oauth"));
 				GDBoardBot.sendMessage(authObj.toString());
 			} catch (IOException | InterruptedException e) {
 				e.printStackTrace();
@@ -229,7 +229,7 @@ class GDBoardBot {
 		}
 		JSONObject authObj = new JSONObject();
 		authObj.put("request_type", "connect");
-		authObj.put("oauth", Settings.oauth);
+		authObj.put("oauth", Settings.getSettings("oauth"));
 		GDBoardBot.sendMessage(authObj.toString());
 	}
 }

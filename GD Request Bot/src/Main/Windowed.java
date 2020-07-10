@@ -30,15 +30,6 @@ public class Windowed {
 	private static RoundedJButton showMore = createButton("\uE00F", "Show More");
 
 	private static JPanel commentsWindow;
-	static{
-		try {
-			if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
-				commentsWindow = CommentsWindow.getComWindow();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
 
 	public static void setOnTop(boolean onTop){
@@ -48,6 +39,13 @@ public class Windowed {
 	static void createPanel() {
 		if(WindowedSettings.onTopOption){
 			setOnTop(true);
+		}
+		try {
+			if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
+				commentsWindow = CommentsWindow.getComWindow();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		URL iconURL = Windowed.class.getResource("/Resources/Icons/windowIcon.png");
 		ImageIcon icon = new ImageIcon(iconURL);
@@ -66,7 +64,7 @@ public class Windowed {
 		frame.setLayout(null);
 		frame.setBackground(new Color(255, 255, 255, 0));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setBounds(0, 0, width+200, height+32 + 200);
+		mainFrame.setBounds(0, 0, width + 200, height + 32 + 200);
 		mainFrame.setLayout(null);
 		mainFrame.setDoubleBuffered(true);
 		mainFrame.setBackground(new Color(0, 0, 0));
@@ -232,6 +230,10 @@ public class Windowed {
 				component.setForeground(Defaults.FOREGROUND);
 			}
 		}
+
+	}
+	static void resetCommentSize(){
+		commentsWindow.setBounds(400, 0, commentsWindow.getWidth(), 512);
 
 	}
 	public static void addToFrame(JComponent component) {
