@@ -43,10 +43,10 @@ public class Requests {
 
 	private static String os = (System.getProperty("os.name")).toUpperCase();
 	public static ArrayList<LevelData> levels = new ArrayList<>();
-	static ArrayList<String> addedLevels = new ArrayList<>();
+	static ArrayList<Long> addedLevels = new ArrayList<Long>();
 	private static HashMap<String, Integer> userStreamLimitMap = new HashMap<>();
 
-	static void addRequest(String ID, String requester) {
+	static void addRequest(long ID, String requester) {
 		OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
 
 
@@ -63,7 +63,7 @@ public class Requests {
 				}
 				for (int k = 0; k < levels.size(); k++) {
 
-					if (ID.equals(levels.get(k).getLevelID())) {
+					if (ID == levels.get(k).getLevelID()) {
 						int j = k + 1;
 						Main.sendMessage(
 								"@" + requester + " Level is already in the queue at position " + j + "!");
@@ -82,7 +82,7 @@ public class Requests {
 				if (GeneralSettings.userLimitOption) {
 					int size = 0;
 					for (LevelData level : levels) {
-						if (level.getRequester().equalsIgnoreCase(requester)) {
+						if (level.getRequester().toString().equalsIgnoreCase(requester)) {
 							size++;
 						}
 					}
@@ -107,7 +107,7 @@ public class Requests {
 						e.printStackTrace();
 					}
 					while (sc.hasNextLine()) {
-						if (ID.equals(sc.nextLine())) {
+						if (String.valueOf(ID).equals(sc.nextLine())) {
 							sc.close();
 							Main.sendMessage("@" + requester + " That level has been requested before!");
 							return;
@@ -128,7 +128,7 @@ public class Requests {
 						e.printStackTrace();
 					}
 					while (sc.hasNextLine()) {
-						if (ID.equals(sc.nextLine())) {
+						if (String.valueOf(ID).equals(sc.nextLine())) {
 							sc.close();
 							Main.sendMessage("@" + requester + " That Level is Blocked!");
 							return;
@@ -169,7 +169,7 @@ public class Requests {
 			if(LoadGD.isAuth) {
 				client = (AuthenticatedGDClient) LoadGD.client;
 				try {
-					level = client.getLevelById(Integer.parseInt(ID)).block();
+					level = client.getLevelById(ID).block();
 				} catch (MissingAccessException | NumberFormatException e) {
 					Main.sendMessage("@" + requester + " That level ID doesn't exist!");
 					return;
@@ -181,7 +181,7 @@ public class Requests {
 			else{
 				clientAnon = (AnonymousGDClient) LoadGD.client;
 				try {
-					level = clientAnon.getLevelById(Integer.parseInt(ID)).block();
+					level = clientAnon.getLevelById(ID).block();
 				} catch (MissingAccessException | NumberFormatException e) {
 					Main.sendMessage("@" + requester + " That level ID doesn't exist!");
 					return;
@@ -227,8 +227,8 @@ public class Requests {
 			levelData.setName(level.getName());
 			levelData.setDifficulty(level.getDifficulty().toString());
 			levelData.setDescription(level.getDescription());
-			levelData.setLikes(String.valueOf(level.getLikes()));
-			levelData.setDownloads(String.valueOf(level.getDownloads()));
+			levelData.setLikes(level.getLikes());
+			levelData.setDownloads(level.getDownloads());
 			levelData.setSongURL(Objects.requireNonNull(level.getSong().block()).getDownloadURL());
 			levelData.setLength(level.getLength().toString());
 			levelData.setLevelID(ID);
@@ -236,7 +236,7 @@ public class Requests {
 			levelData.setLevelVersion(level.getLevelVersion());
 
 			levelData.setEpic(level.isEpic());
-			levelData.setSongID(String.valueOf(Objects.requireNonNull(level.getSong().block()).getId()));
+			levelData.setSongID((int) Objects.requireNonNull(level.getSong().block()).getId());
 			levelData.setStars(level.getStars());
 			levelData.setSongName(Objects.requireNonNull(level.getSong().block()).getSongTitle());
 			levelData.setSongAuthor(Objects.requireNonNull(level.getSong().block()).getSongAuthorName());
@@ -246,10 +246,10 @@ public class Requests {
 			GDUserIconSet iconSet = null;
 			try {
 				if(LoadGD.isAuth) {
-					user = client.searchUser(levelData.getAuthor()).block();
+					user = client.searchUser(levelData.getAuthor().toString()).block();
 				}
 				else {
-					user = clientAnon.searchUser(levelData.getAuthor()).block();
+					user = clientAnon.searchUser(levelData.getAuthor().toString()).block();
 				}
 
 				try {
@@ -295,18 +295,18 @@ public class Requests {
 			}
 			System.out.println(levelData.getDifficulty());
 			if(Main.loaded) {
-				if (RequestSettings.excludedDifficulties.contains(levelData.getDifficulty().toLowerCase()) && RequestSettings.disableOption) {
+				if (RequestSettings.excludedDifficulties.contains(levelData.getDifficulty().toString().toLowerCase()) && RequestSettings.disableOption) {
 					Main.sendMessage("@" + requester + " That difficulty is disabled!");
 					return;
 				}
-				if (RequestSettings.excludedLengths.contains(levelData.getLength().toLowerCase()) && RequestSettings.disableLengthOption) {
+				if (RequestSettings.excludedLengths.contains(levelData.getLength().toString().toLowerCase()) && RequestSettings.disableLengthOption) {
 					Main.sendMessage("@" + requester + " That length is disabled!");
 					return;
 				}
 			}
 
-			if (levelData.getDescription().toLowerCase().contains("nong")) {
-				String[] words = levelData.getDescription().split(" ");
+			if (levelData.getDescription().toString().toLowerCase().contains("nong")) {
+				String[] words = levelData.getDescription().toString().split(" ");
 				for (String word : words) {
 					if (isValidURL(word)){
 						levelData.setSongURL(word);
@@ -316,11 +316,11 @@ public class Requests {
 			if(LoadGD.isAuth) {
 				AuthenticatedGDClient finalClient = client;
 				parse = new Thread(() -> {
-					Object object = Objects.requireNonNull(finalClient.getLevelById(Long.parseLong(ID)).block()).download().block();
+					Object object = Objects.requireNonNull(finalClient.getLevelById(ID).block()).download().block();
 					if (!(level.getStars() > 0) && level.getGameVersion() / 10 >= 2) {
 						parse(((GDLevelData) Objects.requireNonNull(object)).getData(), ID);
 					}
-					levelData.setPassword(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getPass()));
+					levelData.setPassword(((GDLevelData) Objects.requireNonNull(object)).getPass());
 					levelData.setUpload(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getUploadTimestamp()));
 					levelData.setUpdate(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getLastUpdatedTimestamp()));
 					InfoWindow.refreshInfo();
@@ -331,11 +331,11 @@ public class Requests {
 			else{
 				AnonymousGDClient finalClient = clientAnon;
 				parse = new Thread(() -> {
-					Object object = Objects.requireNonNull(finalClient.getLevelById(Long.parseLong(ID)).block()).download().block();
+					Object object = Objects.requireNonNull(finalClient.getLevelById(ID).block()).download().block();
 					if (!(level.getStars() > 0) && level.getGameVersion() / 10 >= 2) {
 						parse(((GDLevelData) Objects.requireNonNull(object)).getData(), ID);
 					}
-					levelData.setPassword(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getPass()));
+					levelData.setPassword(((GDLevelData) Objects.requireNonNull(object)).getPass());
 					levelData.setUpload(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getUploadTimestamp()));
 					levelData.setUpdate(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getLastUpdatedTimestamp()));
 					InfoWindow.refreshInfo();
@@ -359,7 +359,7 @@ public class Requests {
 				}
 			}
 			levels.add(levelData);
-			LevelsWindow.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(), levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester(), levelData.getVersion(), levelData.getPlayerIcon());
+			LevelsWindow.createButton(levelData.getName().toString(), levelData.getAuthor().toString(), levelData.getLevelID(), levelData.getDifficulty().toString(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester().toString(), levelData.getVersion(), levelData.getPlayerIcon());
 			LevelsWindow.setName(Requests.levels.size());
 			Functions.saveFunction();
 			if(Main.doMessage) {
@@ -367,7 +367,7 @@ public class Requests {
 						+ levelData.getLevelID() + ") has been added to the queue at position " + levels.size() + "!");
 			}
 			if (levels.size() == 1) {
-				StringSelection selection = new StringSelection(Requests.levels.get(0).getLevelID());
+				StringSelection selection = new StringSelection(String.valueOf(Requests.levels.get(0).getLevelID()));
 				Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 				clipboard.setContents(selection, selection);
 				if(Main.doMessage) {
@@ -389,7 +389,7 @@ public class Requests {
 				if(Files.exists(logged)){
 					Scanner sc = new Scanner(logged.toFile());
 					while (sc.hasNextLine()) {
-						if (ID.equals(sc.nextLine())) {
+						if (String.valueOf(ID).equals(sc.nextLine())) {
 							sc.close();
 							exists = true;
 							break;
@@ -424,37 +424,37 @@ public class Requests {
 		String result = "";
 		try {
 			if (attribute.equals("name")) {
-				result = levels.get(level).getName();
+				result = levels.get(level).getName().toString();
 			}
 			if (attribute.equals("id")) {
-				result = levels.get(level).getLevelID();
+				result = String.valueOf(levels.get(level).getLevelID());
 			}
 			if (attribute.equals("author")) {
-				result = levels.get(level).getAuthor();
+				result = levels.get(level).getAuthor().toString();
 			}
 			if (attribute.equals("requester")) {
-				result = levels.get(level).getRequester();
+				result = levels.get(level).getRequester().toString();
 			}
 			if (attribute.equals("difficulty")) {
-				result = levels.get(level).getDifficulty();
+				result = levels.get(level).getDifficulty().toString();
 			}
 			if (attribute.equals("likes")) {
-				result = levels.get(level).getLikes();
+				result = String.valueOf(levels.get(level).getLikes());
 			}
 			if (attribute.equals("downloads")) {
-				result = levels.get(level).getDownloads();
+				result = String.valueOf(levels.get(level).getDownloads());
 			}
 			if (attribute.equals("description")) {
-				result = levels.get(level).getDescription();
+				result = levels.get(level).getDescription().toString();
 			}
 			if (attribute.equals("songName")) {
-				result = levels.get(level).getSongName();
+				result = levels.get(level).getSongName().toString();
 			}
 			if (attribute.equals("songID")) {
-				result = levels.get(level).getSongID();
+				result = String.valueOf(levels.get(level).getSongID());
 			}
 			if (attribute.equals("songAuthor")) {
-				result = levels.get(level).getSongAuthor();
+				result = levels.get(level).getSongAuthor().toString();
 			}
 			if (attribute.equals("songURL")) {
 				result = String.valueOf(levels.get(level).getSongURL());
@@ -472,7 +472,7 @@ public class Requests {
 				result = String.valueOf(levels.get(level).getVersion());
 			}
 			if (attribute.equals("length")) {
-				result = levels.get(level).getLength();
+				result = levels.get(level).getLength().toString();
 			}
 		}
 		catch (Exception e){
@@ -521,8 +521,8 @@ public class Requests {
 		String response = "";
 		for (int i = 0; i < Requests.levels.size(); i++) {
 			try {
-				if (Requests.levels.get(i).getLevelID().equals(Requests.levels.get(intArg - 1).getLevelID())
-						&& (isMod || String.valueOf(user).equalsIgnoreCase(Requests.levels.get(i).getRequester()))) {
+				if (Requests.levels.get(i).getLevelID() == Requests.levels.get(intArg - 1).getLevelID()
+						&& (isMod || String.valueOf(user).equalsIgnoreCase(Requests.levels.get(i).getRequester().toString()))) {
 					response = "@" + user + ", " + Requests.levels.get(i).getName()+ " (" + Requests.levels.get(i).getLevelID() + ") has been removed!";
 					LevelsWindow.removeButton(i);
 					Requests.levels.remove(i);
@@ -537,7 +537,7 @@ public class Requests {
 					thread.start();
 					if (i == 0) {
 						StringSelection selection = new StringSelection(
-								Requests.levels.get(0).getLevelID());
+								String.valueOf(Requests.levels.get(0).getLevelID()));
 						Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 						clipboard.setContents(selection, selection);
 					}
@@ -552,7 +552,7 @@ public class Requests {
 		String response = "";
 		for (int i = Requests.levels.size()-1; i >= 0; i--) {
 			try {
-				if (String.valueOf(user).equalsIgnoreCase(Requests.levels.get(i).getRequester())) {
+				if (String.valueOf(user).equalsIgnoreCase(Requests.levels.get(i).getRequester().toString())) {
 					response = "@" + user + ", " + Requests.levels.get(i).getName()+ " (" + Requests.levels.get(i).getLevelID() + ") has been removed!";
 					LevelsWindow.removeButton(i);
 					Requests.levels.remove(i);
@@ -567,7 +567,7 @@ public class Requests {
 					thread.start();
 					if (i == 0) {
 						StringSelection selection = new StringSelection(
-								Requests.levels.get(0).getLevelID());
+								String.valueOf(Requests.levels.get(0).getLevelID()));
 						Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 						clipboard.setContents(selection, selection);
 					}
@@ -677,9 +677,9 @@ public class Requests {
 		LevelsWindow.movePosition(position, newPosition);
 	}
 
-	public static int getPosFromID(String ID){
+	public static int getPosFromID(long ID){
 		for(int i = 0; i < LevelsWindow.getSize(); i++){
-			if(LevelsWindow.getButton(i).getID().equalsIgnoreCase(ID)){
+			if(LevelsWindow.getButton(i).getID() == ID){
 				return i;
 			}
 		}
@@ -692,15 +692,15 @@ public class Requests {
 		try {
 			boolean start = false;
 			int blockedID = Integer.parseInt(arguments[1]);
-			if(blockedID == Integer.parseInt(Requests.levels.get(0).getLevelID()) && Requests.levels.size() > 1){
+			if(blockedID == Requests.levels.get(0).getLevelID() && Requests.levels.size() > 1){
 					StringSelection selection = new StringSelection(
-							Requests.levels.get(1).getLevelID());
+							String.valueOf(Requests.levels.get(1).getLevelID()));
 					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 					clipboard.setContents(selection, selection);
 					start = true;
 			}
 			for(int i = 0; i < Requests.levels.size(); i++){
-				if(Requests.levels.get(i).getLevelID().equalsIgnoreCase(String.valueOf(blockedID))){
+				if(Requests.levels.get(i).getLevelID() == blockedID){
 					LevelsWindow.removeButton(i);
 					Requests.levels.remove(i);
 					InfoWindow.refreshInfo();
@@ -730,7 +730,7 @@ public class Requests {
 				e1.printStackTrace();
 			}
 			response = "@" + user + " Successfully blocked " + arguments[1];
-			BlockedSettings.addButton(arguments[1]);
+			BlockedSettings.addButton(Long.parseLong(arguments[1]));
 			if(start){
 				LevelsWindow.setOneSelect();
 			}
@@ -985,7 +985,7 @@ public class Requests {
 			assert m != null;
 			if (m.matches() && arguments.length <= 2) {
 				try {
-					Requests.addRequest(m.group(1), String.valueOf(user));
+					Requests.addRequest(Long.parseLong(m.group(1)), String.valueOf(user));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -1010,7 +1010,7 @@ public class Requests {
 							for (int i = 0; i < 10; i++) {
 								if (((GDLevel) levelPage[i]).getName().toUpperCase()
 										.startsWith(level1.substring(0, level1.length() - 1))) {
-									Requests.addRequest(String.valueOf(((GDLevel) levelPage[i]).getId()),
+									Requests.addRequest(((GDLevel) levelPage[i]).getId(),
 											String.valueOf(user));
 									break outerLoop;
 								}
@@ -1026,9 +1026,8 @@ public class Requests {
 
 					AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
 					try {
-						Requests.addRequest(String
-										.valueOf(Objects.requireNonNull(client.searchLevels(message.toString(), LevelSearchFilters.create(), 0)
-												.block()).asList().get(0).getId()),
+						Requests.addRequest(Objects.requireNonNull(client.searchLevels(message.toString(), LevelSearchFilters.create(), 0)
+												.block().asList().get(0).getId()),
 								String.valueOf(user));
 					} catch (MissingAccessException e) {
 						response = "@" + user + " That level doesn't exist!";
@@ -1045,10 +1044,10 @@ public class Requests {
 		//}
 	}
 
-	private static void parse(byte[] level, String levelID) {
+	private static void parse(byte[] level, long levelID) {
 		all:
 		for (int k = 0; k < Requests.levels.size(); k++) {
-			if (Requests.levels.get(k).getLevelID().equalsIgnoreCase(levelID)) {
+			if (Requests.levels.get(k).getLevelID() == levelID) {
 				String decompressed = null;
 				try {
 					decompressed = decompress(level);
@@ -1181,16 +1180,16 @@ public class Requests {
 
 	static String parseInfoString(String text, int level) {
 		if (Requests.levels.size() != 0) {
-			text = text.replaceAll("(?i)%levelName%", levels.get(level).getName())
-					.replaceAll("(?i)%levelID%", levels.get(level).getLevelID())
-					.replaceAll("(?i)%levelAuthor%", levels.get(level).getAuthor())
-					.replaceAll("(?i)%requester%", levels.get(level).getRequester())
-					.replaceAll("(?i)%songName%", levels.get(level).getSongName())
-					.replaceAll("(?i)%songID%", levels.get(level).getSongID())
-					.replaceAll("(?i)%songArtist%", levels.get(level).getSongAuthor())
-					.replaceAll("(?i)%likes%", levels.get(level).getLikes())
-					.replaceAll("(?i)%downloads%", levels.get(level).getDownloads())
-					.replaceAll("(?i)%description%", levels.get(level).getDescription())
+			text = text.replaceAll("(?i)%levelName%", levels.get(level).getName().toString())
+					.replaceAll("(?i)%levelID%", String.valueOf(levels.get(level).getLevelID()))
+					.replaceAll("(?i)%levelAuthor%", levels.get(level).getAuthor().toString())
+					.replaceAll("(?i)%requester%", levels.get(level).getRequester().toString())
+					.replaceAll("(?i)%songName%", levels.get(level).getSongName().toString())
+					.replaceAll("(?i)%songID%", String.valueOf(levels.get(level).getSongID()))
+					.replaceAll("(?i)%songArtist%", levels.get(level).getSongAuthor().toString())
+					.replaceAll("(?i)%likes%", String.valueOf(levels.get(level).getLikes()))
+					.replaceAll("(?i)%downloads%", String.valueOf(levels.get(level).getDownloads()))
+					.replaceAll("(?i)%description%", levels.get(level).getDescription().toString())
 					.replaceAll("(?i)%queueSize%", String.valueOf(levels.size()))
 					.replaceAll("(?i)%s%", "");
 			return text;

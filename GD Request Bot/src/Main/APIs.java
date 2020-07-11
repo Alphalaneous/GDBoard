@@ -61,7 +61,7 @@ public class APIs {
         return info;
     }*/
 
-	public static ArrayList<Comment> getGDComments(int page, boolean top, String ID) throws IOException {
+	public static ArrayList<Comment> getGDComments(int page, boolean top, long ID) throws IOException {
 		ByteBuf data = wrappedBuffer(StandardCharsets.UTF_8.encode("levelID=" + ID + "&page=" + page + "&secret=Wmfd2893gb7&gameVersion=21&binaryVersion=35&mode=" + (top ? 1 : 0)));
 		HttpClient client = HttpClient.create()
 				.baseUrl("http://www.boomlings.com/database")
@@ -69,7 +69,7 @@ public class APIs {
 					h.add("Content-Type", "application/x-www-form-urlencoded");
 					h.add("Content-Length", data.readableBytes());
 				});
-		String responce = client.post()
+		StringBuilder responce = new StringBuilder(client.post()
 				.uri("/getGJComments21.php")
 				.send(Mono.just(data))
 				.responseSingle((responceHeader, responceBody) -> {
@@ -79,18 +79,17 @@ public class APIs {
 					else{
 						return Mono.error(new RuntimeException(responceHeader.status().toString()));
 					}
-				}).block();
-		String[] comments = responce.split("\\|");
+				}).block());
+		String[] comments = responce.toString().split("\\|");
 
 		ArrayList<Comment> commentsData = new ArrayList<>();
 
 		for(String comment : comments){
 			String[] comData = comment.split("~");
-			String decoded = new String(Base64.getDecoder().decode(comData[1].replace("-", "+").replace("_", "/")));
-			Comment commentA = new Comment(comData[14], decoded, comData[5], comData[9]);
+			StringBuilder decoded = new StringBuilder(new String (Base64.getDecoder().decode(comData[1].replace("-", "+").replace("_", "/"))));
+			Comment commentA = new Comment(new StringBuilder(comData[14]), decoded, new StringBuilder(comData[5]), new StringBuilder(comData[9]));
 
 			commentsData.add(commentA);
-			System.out.println(comment);
 		}
 		return commentsData;
 	}
@@ -120,6 +119,7 @@ public class APIs {
 							for(int k = 0; k < Requests.levels.size(); k++) {
 								System.out.println("R: " + LevelsWindow.getButton(k).getRequester());
 								if (LevelsWindow.getButton(k).getRequester().equalsIgnoreCase(viewer)){
+									//todo revert
 									LevelsWindow.getButton(k).setViewership(true);
 								}
 							}

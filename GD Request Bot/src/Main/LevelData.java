@@ -9,7 +9,7 @@ public class LevelData {
 
 
 
-	public String getPassword() {
+	public int getPassword() {
 		return password;
 	}
 
@@ -17,37 +17,35 @@ public class LevelData {
 		return viewership;
 	}
 
-
-
-	public String getRequester() {
+	public StringBuilder getRequester() {
 		return requester;
 	}
 
-	public String getAuthor() {
+	public StringBuilder getAuthor() {
 		return author;
 	}
 
-	public String getName() {
+	public StringBuilder getName() {
 		return name;
 	}
 
-	public String getDifficulty() {
+	public StringBuilder getDifficulty() {
 		return difficulty;
 	}
 
-	public String getDescription() {
+	public StringBuilder getDescription() {
 		return description;
 	}
 
-	public String getLikes() {
+	public long getLikes() {
 		return likes;
 	}
 
-	public String getDownloads() {
+	public long getDownloads() {
 		return downloads;
 	}
 
-	public String getLevelID() {
+	public long getLevelID() {
 		return levelID;
 	}
 
@@ -67,22 +65,22 @@ public class LevelData {
 		return epic;
 	}
 
-	public String getSongName() {
+	public StringBuilder getSongName() {
 		return songName;
 	}
 
-	public String getSongAuthor() {
+	public StringBuilder getSongAuthor() {
 		return songAuthor;
 	}
 
-	public String getSongID() {
+	public int getSongID() {
 		return songID;
 	}
 
 	//String getSongSize() {
 	//	return songSize;
 	//}
-	
+
 	//ArrayList<GDObject> getLevelData(){
 	//	return levelData;
 	//}
@@ -104,10 +102,10 @@ public class LevelData {
 	}
 
 	public URL getSongURL() throws MalformedURLException {
-		return new URL(downloadURL);
+		return new URL(downloadURL.toString());
 	}
 
-	public String getLength(){
+	public StringBuilder getLength(){
 		return length;
 	}
 
@@ -115,21 +113,21 @@ public class LevelData {
 		return !persist;
 	}
 
-	public double getVersion() { return version; }
+	public int getVersion() { return version; }
 
-	public String getVideoTitle() {return videoTitle;}
+	public StringBuilder getVideoTitle() {return videoTitle;}
 
-	public String getVideoURL() { return videoURL;}
+	public StringBuilder getVideoURL() { return videoURL;}
 
-	public String getChannelName() { return channelName;}
+	public StringBuilder getChannelName() { return channelName;}
 
-	public String getThumbnailURL() { return thumbnailURL; }
+	public StringBuilder getThumbnailURL() { return thumbnailURL; }
 
-	public String getUpload() {
+	public StringBuilder getUpload() {
 		return upload;
 	}
 
-	public String getUpdate() {
+	public StringBuilder getUpdate() {
 		return update;
 	}
 
@@ -153,35 +151,35 @@ public class LevelData {
 		return playerIcon;
 	}
 
-	private String requester;
-	private String password;
-	private String author;
-	private String name;
-	private String difficulty;
-	private String description;
-	private String likes;
-	private String channelName;
-	private String thumbnailURL;
+	private StringBuilder requester;
+	private int password;
+	private StringBuilder author;
+	private StringBuilder name;
+	private StringBuilder difficulty;
+	private StringBuilder description;
+	private long likes;
+	private StringBuilder channelName;
+	private StringBuilder thumbnailURL;
 	private boolean viewership = true;
-	private String downloads;
-	private String levelID;
-	private String videoTitle;
-	private String videoURL;;
+	private long downloads;
+	private long levelID;
+	private StringBuilder videoTitle;
+	private StringBuilder videoURL;;
 	private boolean featured;
 	private boolean epic;
-	private String downloadURL;
-	private String songName;
-	private String songAuthor;
-	private String songID;
+	private StringBuilder downloadURL;
+	private StringBuilder songName;
+	private StringBuilder songAuthor;
+	private int songID;
 	private boolean containsVulgar;
 	private boolean containsImage;
 	private boolean analyzed = false;
 	private int stars;
-	private String length;
+	private StringBuilder length;
 	private boolean persist;
-	private double version;
-	private String upload;
-	private String update;
+	private int version;
+	private StringBuilder upload;
+	private StringBuilder update;
 	private int objects;
 	private long original;
 	private int coins;
@@ -189,9 +187,9 @@ public class LevelData {
 	private ImageIcon playerIcon;
 
 
-	public void setVideoInfo(String title, String ID, String channel, String thumbnail){
+	public void setVideoInfo(StringBuilder title, StringBuilder ID, StringBuilder channel, StringBuilder thumbnail){
 		this.videoTitle = title;
-		this.videoURL = "https://www.youtube.com/watch?v" + ID;
+		this.videoURL = new StringBuilder("https://www.youtube.com/watch?v").append(ID);
 		this.channelName = channel;
 		this.thumbnailURL = thumbnail;
 	}
@@ -220,43 +218,43 @@ public class LevelData {
 	}
 
 	public void setRequester(String requester) {
-		this.requester = requester;
+		this.requester = new StringBuilder(requester);
 	}
 
 	public void setAuthor(String author) {
-		this.author = author;
+		this.author = new StringBuilder(author);
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = new StringBuilder(name);
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(int password) {
 		this.password = password;
 	}
 
 
 	public void setDifficulty(String difficulty) {
-		this.difficulty = difficulty;
+		this.difficulty = new StringBuilder(difficulty);
 	}
 
 	public void setDescription(String description) {
-		this.description = description;
+		this.description = new StringBuilder(description);
 	}
 
-	public void setLikes(String likes) {
+	public void setLikes(long likes) {
 		this.likes = likes;
 	}
 
-	public void setDownloads(String downloads) {
+	public void setDownloads(long downloads) {
 		this.downloads = downloads;
 	}
 
-	public void setLevelID(String levelID) {
+	public void setLevelID(long levelID) {
 		this.levelID = levelID;
 	}
 
-	public void setVersion(double version) {this.version = version; }
+	public void setVersion(int version) {this.version = version; }
 	//void setCoins(String coins) {
 	//	this.coins = Integer.parseInt(coins);
 	//}
@@ -277,31 +275,31 @@ public class LevelData {
 	}
 
 	public void setSongName(String songName) {
-		this.songName = songName;
+		this.songName = new StringBuilder(songName);
 	}
 
 	public void setSongAuthor(String songAuthor) {
-		this.songAuthor = songAuthor;
+		this.songAuthor = new StringBuilder(songAuthor);
 	}
 
-	public void setSongID(String songID) {
+	public void setSongID(int songID) {
 		this.songID = songID;
 	}
 
 	public void setSongURL(String downloadURL) {
-		this.downloadURL = downloadURL;
+		this.downloadURL = new StringBuilder(downloadURL);
     }
 
 	public void setLength(String length) {
-		this.length = length;
+		this.length = new StringBuilder(length);
     }
 
 	public void setUpload(String upload) {
-		this.upload = upload;
+		this.upload = new StringBuilder(upload);
 	}
 
 	public void setUpdate(String update) {
-		this.update = update;
+		this.update = new StringBuilder(update);
 	}
 
 	public void setObjects(int objects) {

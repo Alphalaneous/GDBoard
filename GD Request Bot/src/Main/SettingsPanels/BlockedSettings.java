@@ -75,7 +75,7 @@ public class BlockedSettings {
 						if (!blockedInput.getText().equalsIgnoreCase("")) {
 
 							Files.write(file, (blockedInput.getText() + "\n").getBytes(), StandardOpenOption.APPEND);
-							addButton(blockedInput.getText());
+							addButton(Long.parseLong(blockedInput.getText()));
 							blockedInput.setText("");
 							blockedListPanel.updateUI();
 						}
@@ -157,7 +157,7 @@ public class BlockedSettings {
 			}
 			assert sc != null;
 			while (sc.hasNextLine()) {
-				addButton(sc.nextLine());
+				addButton(Long.parseLong(sc.nextLine()));
 				try {
 					Thread.sleep(5);
 				} catch (InterruptedException e) {
@@ -191,7 +191,7 @@ public class BlockedSettings {
 		}
 	}
 
-	public static void addButton(String ID) {
+	public static void addButton(long ID) {
 		i++;
 		if (i % 5 == 0) {
 			height = height + 36.7;
@@ -200,7 +200,7 @@ public class BlockedSettings {
 			scrollPane.updateUI();
 		}
 		Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
-		CurvedButton button = new CurvedButton(ID);
+		CurvedButton button = new CurvedButton(String.valueOf(ID));
 
 		button.setBackground(Defaults.BUTTON);
 		button.setUI(defaultUI);

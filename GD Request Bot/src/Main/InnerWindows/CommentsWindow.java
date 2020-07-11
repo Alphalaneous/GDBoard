@@ -212,7 +212,8 @@ public class CommentsWindow {
 		return mainPanel;
 	}
 	public static boolean loadComments(int page, boolean top){
-
+		System.gc();
+		System.runFinalization();
 		int width = CommentsWindow.width - 15;
 		try {
 			if(!Settings.getSettings("windowed").equalsIgnoreCase("true") || Windowed.showingMore) {
@@ -243,7 +244,7 @@ public class CommentsWindow {
 					JLabel commenter = new JLabel(username);
 					commenter.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 					commenter.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-					if (username.equalsIgnoreCase(Requests.levels.get(LevelsWindow.getSelectedID()).getAuthor())) {
+					if (username.equalsIgnoreCase(Requests.levels.get(LevelsWindow.getSelectedID()).getAuthor().toString())) {
 						commenter.setForeground(new Color(47, 62, 195));
 					} else {
 						commenter.setForeground(Defaults.FOREGROUND);
@@ -327,6 +328,9 @@ public class CommentsWindow {
 						ImageIcon imgNew = new ImageIcon(imgScaled);
 						playerIcon.setIcon(imgNew);
 						playerIcon.setBounds(2, -5, imgNew.getIconWidth() + 2, imgNew.getIconHeight() + 2);
+						icon = null;
+						imgScaled = null;
+						imgNew = null;
 					});
 					thread.start();
 
@@ -350,6 +354,7 @@ public class CommentsWindow {
 					panel.setPreferredSize(new Dimension(width, panelHeight));
 					scrollPane.getViewport().setViewPosition(new Point(0, 0));
 					panel.setVisible(true);
+
 				}
 				return true;
 			}
@@ -409,7 +414,7 @@ public class CommentsWindow {
 						if(((JLabel) component1).getText().contains("%")){
 							component1.setForeground(Defaults.FOREGROUND2);
 						}
-						else if(((JLabel) component1).getText().equalsIgnoreCase(Requests.levels.get(LevelsWindow.getSelectedID()).getAuthor())){
+						else if(((JLabel) component1).getText().equalsIgnoreCase(Requests.levels.get(LevelsWindow.getSelectedID()).getAuthor().toString())){
 							component1.setForeground(new Color(16, 164,0));
 						}
 						else {

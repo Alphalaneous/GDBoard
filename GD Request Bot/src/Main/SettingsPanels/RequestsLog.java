@@ -113,7 +113,7 @@ public class RequestsLog {
 			}
 			assert sc != null;
 			while (sc.hasNextLine()) {
-				addButton(sc.nextLine());
+				addButton(Long.parseLong(sc.nextLine()));
 				try {
 					Thread.sleep(5);
 				} catch (InterruptedException e) {
@@ -146,7 +146,7 @@ public class RequestsLog {
 		}
 	}
 
-	public static void addButton(String ID) {
+	public static void addButton(long ID) {
 		i++;
 		if (i % 5 == 0) {
 			height = height + 35.73333333;
@@ -155,7 +155,7 @@ public class RequestsLog {
 			scrollPane.updateUI();
 		}
 		Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
-		CurvedButton button = new CurvedButton(ID);
+		CurvedButton button = new CurvedButton(String.valueOf(ID));
 
 		button.setBackground(Defaults.BUTTON);
 		button.setUI(defaultUI);

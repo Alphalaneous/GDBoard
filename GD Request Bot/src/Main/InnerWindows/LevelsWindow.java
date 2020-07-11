@@ -86,7 +86,7 @@ public class LevelsWindow {
 		return scrollPane;
 	}
 
-	public static void createButton(String name, String author, String ID, String difficulty, boolean epic, boolean featured, int starCount, String requester, double version, ImageIcon playerIcon){
+	public static void createButton(String name, String author, long ID, String difficulty, boolean epic, boolean featured, int starCount, String requester, double version, ImageIcon playerIcon){
 		Point saved = scrollPane.getViewport().getViewPosition();
 		scrollPane.getViewport().setViewPosition( saved );
 		mainPanel.add(new LevelButton(name, author, ID, difficulty, epic, featured, starCount, requester, version, playerIcon));
@@ -113,7 +113,7 @@ public class LevelsWindow {
 	}
 
 	public static void movePosition(int position, int newPosition){
-		String selectID = "";
+		long selectID = -1;
 		if(newPosition >= Requests.levels.size()){
 			newPosition = Requests.levels.size()-1;
 		}
@@ -128,7 +128,7 @@ public class LevelsWindow {
 		Requests.levels.remove(position);
 		Requests.levels.add(newPosition, data);
 		for(int  i = 0; i < Requests.levels.size(); i++){
-			if(selectID.equalsIgnoreCase(Requests.levels.get(i).getLevelID())){
+			if(selectID == Requests.levels.get(i).getLevelID()){
 				LevelsWindow.setSelect(i);
 			}
 		}
@@ -140,7 +140,7 @@ public class LevelsWindow {
 	public static class LevelButton extends JButton{
 
 		String name;
-		String ID;
+		long ID;
 		String author;
 		String difficulty;
 		boolean epic;
@@ -162,7 +162,7 @@ public class LevelsWindow {
 		JLabel lPlayerIcon = new JLabel();
 		JLabel lStar = new JLabel("\uE24A");
 
-		LevelButton(String name, String author, String ID, String difficulty, boolean epic, boolean featured, int starCount, String requester, double version, ImageIcon playerIcon){
+		LevelButton(String name, String author, long ID, String difficulty, boolean epic, boolean featured, int starCount, String requester, double version, ImageIcon playerIcon){
 			this.name = name;
 			this.ID = ID;
 			this.author = author;
@@ -212,20 +212,11 @@ public class LevelsWindow {
 							difficultyA = "auto";
 						}
 						if (epic) {
-							reqDifficulty.setIcon(new ImageIcon(ImageIO
-									.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
-											.getResource("Resources/DifficultyIcons/Epic/" + difficultyA + ".png")))
-									.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
+							reqDifficulty.setIcon(Assets.difficultyIconsEpic.get(difficultyA));
 						} else if (featured) {
-							reqDifficulty.setIcon(new ImageIcon(ImageIO
-									.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
-											.getResource("Resources/DifficultyIcons/Featured/" + difficultyA + ".png")))
-									.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
+							reqDifficulty.setIcon(Assets.difficultyIconsFeature.get(difficultyA));
 						} else {
-							reqDifficulty.setIcon(new ImageIcon(ImageIO
-									.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
-											.getResource("Resources/DifficultyIcons/Normal/" + difficultyA + ".png")))
-									.getScaledInstance(40, 40, Image.SCALE_SMOOTH)));
+							reqDifficulty.setIcon(Assets.difficultyIconsNormal.get(difficultyA));
 						}
 					}
 				}
@@ -303,7 +294,7 @@ public class LevelsWindow {
 						}
 						if (SwingUtilities.isRightMouseButton(e)) {
 							StringSelection selection = new StringSelection(
-									ID);
+									String.valueOf(ID));
 							Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 							clipboard.setContents(selection, selection);
 						}
@@ -318,7 +309,7 @@ public class LevelsWindow {
 						}
 
 						for (int j = 0; j < Requests.levels.size(); j++) {
-							if (ID.equalsIgnoreCase(Requests.levels.get(j).getLevelID())) {
+							if (ID == Requests.levels.get(j).getLevelID()) {
 								((LevelButton)comp[j]).select();
 								selectedID = j;
 							}
@@ -361,7 +352,7 @@ public class LevelsWindow {
 		}
 		public boolean viewership = false;
 		public int gonePoints = 3;
-		public String getID(){
+		public long getID(){
 			return ID;
 		}
 		public String getUsername(){
@@ -606,11 +597,11 @@ public class LevelsWindow {
 		((InnerWindow) window).setVisible();
 	}
 
-	public static void updateUI(String ID, boolean vulgar, boolean image, boolean analyzed) {
+	public static void updateUI(long ID, boolean vulgar, boolean image, boolean analyzed) {
 		out: while(true){
 			for (Component component : mainPanel.getComponents()) {
 				if (component instanceof LevelButton) {
-					if (((LevelButton) component).ID.equalsIgnoreCase(ID)) {
+					if (((LevelButton) component).ID == ID) {
 						((LevelButton) component).setAnalyzed(analyzed, image, vulgar);
 						((LevelButton) component).refresh(image, vulgar);
 						break out;

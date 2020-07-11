@@ -145,9 +145,9 @@ public class SongWindow {
 				play.setVisible(false);
 				persist.setVisible(false);
 			} else {
-				songName.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getSongName());
+				songName.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getSongName().toString());
 
-				if (songName.getText().equalsIgnoreCase("Custom") && Requests.levels.get(LevelsWindow.getSelectedID()).getSongAuthor().equalsIgnoreCase("")) {
+				if (songName.getText().equalsIgnoreCase("Custom") && Requests.levels.get(LevelsWindow.getSelectedID()).getSongAuthor().toString().equalsIgnoreCase("")) {
 					songAuthorID.setText("");
 					stop.setVisible(false);
 					play.setVisible(false);

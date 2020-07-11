@@ -133,8 +133,8 @@ public class InfoWindow {
 
 
 		} else {
-			String pass;
-			if((pass = Requests.levels.get(LevelsWindow.getSelectedID()).getPassword()) != null) {
+			String pass = null;
+			if((pass = String.valueOf(Requests.levels.get(LevelsWindow.getSelectedID()).getPassword())) != null) {
 				if (pass.equalsIgnoreCase("-2")) {
 					password.setText("FREE COPY");
 				}
@@ -150,7 +150,7 @@ public class InfoWindow {
 
 			}
 			likes.setText("LIKES: " + Requests.levels.get(LevelsWindow.getSelectedID()).getLikes());
-			description.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getDescription());
+			description.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getDescription().toString());
 			length.setText("LENGTH: " + Requests.levels.get(LevelsWindow.getSelectedID()).getLength());
 			downloads.setText("DOWNLOADS: " + Requests.levels.get(LevelsWindow.getSelectedID()).getDownloads());
 			if(Requests.levels.get(LevelsWindow.getSelectedID()).getObjects() == 0){

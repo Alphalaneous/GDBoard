@@ -3,26 +3,26 @@ package Main;
 public class Comment {
 
 	public String getUsername() {
-		return username;
+		return String.valueOf(username);
 	}
 
 	public String getComment() {
-		return comment;
+		return String.valueOf(comment);
 	}
 
 	public String getLikes() {
-		return likes;
+		return String.valueOf(likes);
 	}
 	public String getPercent(){
-		return percent;
+		return String.valueOf(percent);
 	}
 
-	String username;
-	String comment;
-	String likes;
-	String percent;
+	StringBuilder username;
+	StringBuilder comment;
+	StringBuilder likes;
+	StringBuilder percent;
 
-	Comment(String username, String comment, String likes, String percent){
+	Comment(StringBuilder username, StringBuilder comment, StringBuilder likes, StringBuilder percent){
 		this.username = username;
 		this.comment = comment;
 		this.likes= likes;

@@ -51,7 +51,7 @@ public class Functions {
 				LevelsWindow.removeButton();
 				if (Requests.levels.size() > 0 ) {
 					StringSelection selection = new StringSelection(
-							Requests.levels.get(0).getLevelID());
+							String.valueOf(Requests.levels.get(0).getLevelID()));
 					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 					clipboard.setContents(selection, selection);
 				}
@@ -125,7 +125,7 @@ public class Functions {
 				if (Requests.levels.size() != 0) {
 					System.out.println(num);
 					StringSelection selection = new StringSelection(
-							Requests.levels.get(num).getLevelID());
+							String.valueOf(Requests.levels.get(num).getLevelID()));
 					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 					clipboard.setContents(selection, selection);
 					if (!GeneralSettings.nowPlayingOption) {
@@ -146,7 +146,7 @@ public class Functions {
 	public static void copyFunction() {
 		if (Requests.levels.size() != 0) {
 			StringSelection selection = new StringSelection(
-					Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
+					String.valueOf(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID()));
 			Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 			clipboard.setContents(selection, selection);
 		}
@@ -175,7 +175,7 @@ public class Functions {
 		if(Main.loaded) {
 			if(LevelsWindow.getSelectedID() == 0 && Requests.levels.size() > 1){
 				StringSelection selection = new StringSelection(
-						Requests.levels.get(1).getLevelID());
+						String.valueOf(Requests.levels.get(1).getLevelID()));
 				Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 				clipboard.setContents(selection, selection);
 			}
@@ -245,17 +245,13 @@ public class Functions {
 			else if (option.equalsIgnoreCase("Inactives")){
 				if (Requests.levels.size() != 0) {
 
-					ArrayList<LevelData> levelsRemove = new ArrayList<>();
 
-					for (LevelData data : Requests.levels) {
-						if(!data.getViewership()){
-							levelsRemove.add(data);
+					for (int i = Requests.levels.size()-1; i >= 0; i--) {
+						if(!Requests.levels.get(i).getViewership()){
+							Requests.levels.remove(i);
+							LevelsWindow.removeButton(i);
 						}
 					}
-					for(LevelData data : levelsRemove){
-						LevelsWindow.removeButton(Requests.getPosFromID(data.getLevelID()));
-					}
-					Requests.levels.removeAll(levelsRemove);
 
 					Functions.saveFunction();
 					SongWindow.refreshInfo();

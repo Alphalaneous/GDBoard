@@ -146,6 +146,7 @@ public class Main {
 				}
 			});
 			LoadGD.load();
+			Assets.loadAssets();
 			client.connect();
 			Defaults.startMainThread();        //Starts thread that always checks for changes such as time, resolution, and color scheme
 			int i = 0;
@@ -273,7 +274,7 @@ public class Main {
 				while (sc.hasNextLine()) {
 					String[] level = sc.nextLine().split(",");
 					try {
-						Requests.addRequest(level[0], level[1]);
+						Requests.addRequest(Long.parseLong(level[0]), level[1]);
 
 					}
 					catch (Exception e){
