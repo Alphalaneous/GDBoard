@@ -55,7 +55,7 @@ public class SongWindow {
 							mp3player = new Player(inp);
 							mp3player.play();
 						} catch (IOException | JavaLayerException | NullPointerException f) {
-							JOptionPane.showMessageDialog(null, "There was an error playing the music!", "Error",  JOptionPane.ERROR_MESSAGE);
+							DialogBox.showDialogBox("Error!", f.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 						}
 					});
 					thread[0].start();

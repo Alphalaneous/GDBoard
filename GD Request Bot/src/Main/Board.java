@@ -35,13 +35,16 @@ public class Board {
 				mp3player.play();
 			} catch (FileNotFoundException f) {
 				f.printStackTrace();
-				JOptionPane.showMessageDialog(null, "That file doesn't exist!", "Error", JOptionPane.ERROR_MESSAGE);
+				DialogBox.showDialogBox("Error!", f.toString(), "That file doesn't exist!", new String[]{"OK"});
+
 			} catch (JavaLayerException f){
 				f.printStackTrace();
-				JOptionPane.showMessageDialog(null, "That isn't an mp3!", "Error", JOptionPane.ERROR_MESSAGE);
-			} catch (NullPointerException f) {
+				DialogBox.showDialogBox("Error!", f.toString(), "That isn't an mp3!", new String[]{"OK"});
+
+			} catch (Exception f) {
 				f.printStackTrace();
-				JOptionPane.showMessageDialog(null, "There was an error playing the sound!", "Error", JOptionPane.ERROR_MESSAGE);
+				DialogBox.showDialogBox("Error!", f.toString(), "There was an error playing the sound!", new String[]{"OK"});
+
 			}
 		});
 		threads.put(location, aThread);
@@ -82,13 +85,16 @@ public class Board {
 				f.printStackTrace();
 			} catch (FileNotFoundException f) {
 				f.printStackTrace();
-				JOptionPane.showMessageDialog(null, "That file doesn't exist!", "Error", JOptionPane.ERROR_MESSAGE);
+				DialogBox.showDialogBox("Error!", f.toString(), "That file doesn't exist!", new String[]{"OK"});
+
 			} catch (JavaLayerException f){
 				f.printStackTrace();
-				JOptionPane.showMessageDialog(null, "That isn't an mp3!", "Error", JOptionPane.ERROR_MESSAGE);
+				DialogBox.showDialogBox("Error!", f.toString(), "That isn't an mp3!", new String[]{"OK"});
+
 			} catch (Exception f) {
 				f.printStackTrace();
-				JOptionPane.showMessageDialog(null, "There was an error playing the sound!", "Error", JOptionPane.ERROR_MESSAGE);
+				DialogBox.showDialogBox("Error!", f.toString(), "There was an error playing the sound!", new String[]{"OK"});
+
 			}
 		});
 		threads.put("ng:" + songID, aThread);
@@ -147,7 +153,8 @@ public class Board {
 				mp3player.play();
 			} catch (JavaLayerException | NullPointerException | IOException f) {
 				f.printStackTrace();
-				JOptionPane.showMessageDialog(null, "There was an error playing the music!", "Error", JOptionPane.ERROR_MESSAGE);
+				DialogBox.showDialogBox("Error!", f.toString(), "There was an error playing the sound!", new String[]{"OK"});
+
 			}
 		});
 		rickThread.start();
@@ -178,7 +185,8 @@ public class Board {
 				mp3player.play();
 			} catch (JavaLayerException | NullPointerException | IOException f) {
 				f.printStackTrace();
-				JOptionPane.showMessageDialog(null, "There was an error playing the music!", "Error", JOptionPane.ERROR_MESSAGE);
+				DialogBox.showDialogBox("Error!", f.toString(), "There was an error playing the sound!", new String[]{"OK"});
+
 			}
 		});
 		knockThread.start();
@@ -203,7 +211,8 @@ public class Board {
 				mp3player.play();
 			} catch (JavaLayerException | NullPointerException | IOException f) {
 				f.printStackTrace();
-				JOptionPane.showMessageDialog(null, "There was an error playing the music!", "Error", JOptionPane.ERROR_MESSAGE);
+				DialogBox.showDialogBox("Error!", f.toString(), "There was an error playing the sound!", new String[]{"OK"});
+
 			}
 		});
 		bwompThread.start();

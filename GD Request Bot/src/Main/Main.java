@@ -102,6 +102,7 @@ public class Main {
 			e.printStackTrace();
 		}
 
+
 		/*try {
 			System.setOut(new PrintStream(new FileOutputStream(new File(System.getenv("APPDATA") + "\\GDBoard\\clOutput.txt"))));
 		} catch (FileNotFoundException e) {
@@ -170,6 +171,8 @@ public class Main {
 			else{
 				starting = false;
 			}
+
+
 			while(true) {
 				if (!starting) {
 					Settings.loadSettings(true);
@@ -271,6 +274,7 @@ public class Main {
 					String[] level = sc.nextLine().split(",");
 					try {
 						Requests.addRequest(level[0], level[1]);
+
 					}
 					catch (Exception e){
 						Requests.levels.clear();
@@ -279,12 +283,15 @@ public class Main {
 				sc.close();
 			}
 			Requests.addedLevels.clear();
+
 			APIs.getViewers();
+
 			doMessage = true;
 			allowRequests = true;
 			doImage = true;
 
 			Main.sendMessage("Thank you for using GDBoard by Alphalaneous and TreehouseFalcon! It is suggested to VIP or Mod GDBoard to prevent chat limits from occurring.");
+
 			Thread threada = new Thread(() -> {
 				while(true){
 					try {
@@ -324,10 +331,9 @@ public class Main {
 			}
 
 			loaded = true;
-
 		} catch (Exception e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
+			String option = DialogBox.showDialogBox("Error!", e.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 		}
 	}
 	static Channel channel;

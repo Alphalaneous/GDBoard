@@ -407,7 +407,8 @@ public class Requests {
 
 				}
 			} catch (IOException e1) {
-				JOptionPane.showMessageDialog(null, "There was an error writing to the file!", "Error", JOptionPane.ERROR_MESSAGE);
+				DialogBox.showDialogBox("Error!", e1.toString(), "There was an error writing to the file!", new String[]{"OK"});
+
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -594,7 +595,8 @@ public class Requests {
 				mp3player.play();
 			} catch (JavaLayerException | NullPointerException | IOException f) {
 				f.printStackTrace();
-				JOptionPane.showMessageDialog(null, "There was an error playing the music!", "Error", JOptionPane.ERROR_MESSAGE);
+				DialogBox.showDialogBox("Error!", f.toString(), "There was an error playing the sound!", new String[]{"OK"});
+
 			}
 		});
 		rickThread.start();
@@ -628,7 +630,8 @@ public class Requests {
 				mp3player.play();
 			} catch (JavaLayerException | NullPointerException | IOException f) {
 				f.printStackTrace();
-				JOptionPane.showMessageDialog(null, "There was an error playing the music!", "Error", JOptionPane.ERROR_MESSAGE);
+				DialogBox.showDialogBox("Error!", f.toString(), "There was an error playing the sound!", new String[]{"OK"});
+
 			}
 		});
 		knockThread.start();
@@ -655,7 +658,9 @@ public class Requests {
 				mp3player.play();
 			} catch (JavaLayerException | NullPointerException | IOException f) {
 				f.printStackTrace();
-				JOptionPane.showMessageDialog(null, "There was an error playing the music!", "Error", JOptionPane.ERROR_MESSAGE);
+				DialogBox.showDialogBox("Error!", f.toString(), "There was an error playing the sound!", new String[]{"OK"});
+
+
 			}
 		});
 		bwompThread.start();
@@ -673,8 +678,8 @@ public class Requests {
 	}
 
 	public static int getPosFromID(String ID){
-		for(int i = 0; i < Requests.levels.size(); i++){
-			if(Requests.levels.get(i).getLevelID().equalsIgnoreCase(ID)){
+		for(int i = 0; i < LevelsWindow.getSize(); i++){
+			if(LevelsWindow.getButton(i).getID().equalsIgnoreCase(ID)){
 				return i;
 			}
 		}

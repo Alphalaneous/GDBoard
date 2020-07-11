@@ -17,7 +17,10 @@ import java.awt.datatransfer.StringSelection;
 import java.io.BufferedInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 public class Functions {
@@ -35,7 +38,8 @@ public class Functions {
 					mp3player.play();
 				} catch (JavaLayerException | NullPointerException | IOException f) {
 					f.printStackTrace();
-					JOptionPane.showMessageDialog(null, "There was an error playing the music!", "Error", JOptionPane.ERROR_MESSAGE);
+					DialogBox.showDialogBox("Error!", f.toString(), "There was an error playing the sound!", new String[]{"OK"});
+
 				}
 			});
 			bwompThread.start();
@@ -176,21 +180,12 @@ public class Functions {
 				clipboard.setContents(selection, selection);
 			}
 			if (Requests.levels.size() != 0) {
-				SettingsWindow.run = false;
-				Object[] options = {"Yes", "No"};
-				int n;
-				if (!Settings.windowedMode) {
-					n = JOptionPane.showOptionDialog(Overlay.frame,
-							"Block " + Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "?",
-							"Block ID? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
-							JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-				} else {
-					n = JOptionPane.showOptionDialog(Windowed.frame,
-							"Block " + Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "?",
-							"Block ID? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
-							JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-				}
-				if (n == 0) {
+
+				new Thread(()->{
+
+				String option = DialogBox.showDialogBox("Block " + Requests.levels.get(LevelsWindow.getSelectedID()).getName() + " (" + Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + ")?", "This will block the selected level from being added.", "This can be undone in settings.", new String[]{"Yes", "No"});
+
+				if (option.equalsIgnoreCase("yes")) {
 					BlockedSettings.addButton(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
 					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
 
@@ -203,7 +198,8 @@ public class Functions {
 								(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "\n").getBytes(),
 								StandardOpenOption.APPEND);
 					} catch (IOException e1) {
-						JOptionPane.showMessageDialog(null, "There was an error writing to the file!", "Error", JOptionPane.ERROR_MESSAGE);
+						DialogBox.showDialogBox("Error!", e1.toString(), "There was an error writing to the file!", new String[]{"OK"});
+
 					}
 					Requests.levels.remove(LevelsWindow.getSelectedID());
 					LevelsWindow.removeButton();
@@ -222,41 +218,19 @@ public class Functions {
 				SongWindow.refreshInfo();
 				InfoWindow.refreshInfo();
 				SettingsWindow.run = true;
+				}).start();
 			}
-
 		}
 	}
 
 	public static void clearFunction() {
 		if(Main.loaded) {
-			Object[] options = {"Yes", "No"};
-			int n;
-			if (!Settings.windowedMode) {
-				n = JOptionPane.showOptionDialog(Overlay.frame,
-						"Clear the queue?",
-						"Clear? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-			} else {
-				n = JOptionPane.showOptionDialog(Windowed.frame,
-						"Clear the queue?",
-						"Clear? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-			}
-			if (n == 0) {
+			new Thread(()->{
+
+			String option = DialogBox.showDialogBox("Clear the Queue?", "This will clear the levels from the queue.", "Do you want to clear the queue?", new String[]{"Clear All", "Cancel"});
+			if (option.equalsIgnoreCase("All")) {
 				if (Requests.levels.size() != 0) {
 					for (int i = 0; i < Requests.levels.size(); i++) {
-						if (Requests.levels.get(i).getSongName().equalsIgnoreCase("Custom")) {
-							if (GeneralSettings.autoDownloadOption) {
-								Path tempSong = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3.temp");
-								Path remove = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3");
-								try {
-									Files.delete(remove);
-									Files.move(tempSong, tempSong.resolveSibling(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + Requests.levels.get(i).getSongID() + ".mp3"), StandardCopyOption.REPLACE_EXISTING);
-								} catch (IOException e1) {
-									e1.printStackTrace();
-								}
-							}
-						}
 						LevelsWindow.removeButton();
 					}
 					Requests.levels.clear();
@@ -268,8 +242,35 @@ public class Functions {
 				LevelsWindow.setOneSelect();
 				SettingsWindow.run = true;
 			}
+			else if (option.equalsIgnoreCase("Inactives")){
+				if (Requests.levels.size() != 0) {
+
+					ArrayList<LevelData> levelsRemove = new ArrayList<>();
+
+					for (LevelData data : Requests.levels) {
+						if(!data.getViewership()){
+							levelsRemove.add(data);
+						}
+					}
+					for(LevelData data : levelsRemove){
+						LevelsWindow.removeButton(Requests.getPosFromID(data.getLevelID()));
+					}
+					Requests.levels.removeAll(levelsRemove);
+
+					Functions.saveFunction();
+					SongWindow.refreshInfo();
+					InfoWindow.refreshInfo();
+					CommentsWindow.unloadComments(true);
+					CommentsWindow.loadComments(0,false);
+				}
+				LevelsWindow.setOneSelect();
+				SettingsWindow.run = true;
+			}
 			LevelsWindow.setName(Requests.levels.size());
+			}).start();
+
 		}
+
 	}
 
 	static void requestsToggleFunction() {

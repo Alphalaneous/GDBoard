@@ -42,12 +42,20 @@ public class PersonalizationSettings {
 		windowedButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Object[] options = {"Yes", "No"};
-				int n = JOptionPane.showOptionDialog(SettingsWindow.window,
-						"Close GDBoard and Apply Changes?",
-						"Close? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
-				if (n == 0) {
+				new Thread(()->{
+					String option = null;
+					try {
+						if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
+							option = DialogBox.showDialogBox("Switch to Overlay?", "This will close GDboard and set to Overlay mode.", "You will have to reopen GDBoard.", new String[]{"Yes", "No"});
+						}
+						else{
+							option = DialogBox.showDialogBox("Switch to Windowed?", "This will close GDboard and set to Windowed mode.", "You will have to reopen GDBoard.", new String[]{"Yes", "No"});
+						}
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+
+					if (option.equalsIgnoreCase("Yes")) {
 					try {
 						if (Settings.windowedMode) {
 
@@ -62,6 +70,7 @@ public class PersonalizationSettings {
 					}
 					Main.close();
 				}
+				}).start();
 			}
 		});
 		keybindInfo.setFont(Defaults.MAIN_FONT.deriveFont(12f));

@@ -138,7 +138,6 @@ public class RequestsLog {
 		}
 		for (Component component : blockedListPanel.getComponents()) {
 			if (component instanceof CurvedButton) {
-				System.out.println(((CurvedButton) component).getLText());
 				if (((CurvedButton) component).getLText().equalsIgnoreCase(ID)) {
 					blockedListPanel.remove(component);
 					blockedListPanel.updateUI();
@@ -167,14 +166,13 @@ public class RequestsLog {
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Object[] options = {"Yes", "No"};
 				SettingsWindow.run = false;
-				int n = JOptionPane.showOptionDialog(SettingsWindow.window,
-						"Remove " + button.getLText() + "?",
-						"Remove logged ID? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 
-				if (n == 0) {
+				new Thread(() ->{
+
+				String option = DialogBox.showDialogBox("Remove " + button.getLText() + " from logs?", "<html>This will allow it to be sent again if \"Disable Repeated Requests All Time\" is on.<html>", "", new String[]{"Yes", "No"});
+
+				if (option.equalsIgnoreCase("yes")) {
 					if (Files.exists(file)) {
 						try {
 							Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_tempLog_");
@@ -195,6 +193,7 @@ public class RequestsLog {
 					removeID(button.getLText());
 				}
 				SettingsWindow.run = true;
+				}).start();
 			}
 		});
 		button.refresh();

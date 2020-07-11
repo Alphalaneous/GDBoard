@@ -108,6 +108,9 @@ public class LevelsWindow {
 	public static LevelButton getButton(int i) {
 		return ((LevelButton) mainPanel.getComponent(i));
 	}
+	public static int getSize() {
+		return mainPanel.getComponents().length;
+	}
 
 	public static void movePosition(int position, int newPosition){
 		String selectID = "";
@@ -353,7 +356,7 @@ public class LevelsWindow {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
+				DialogBox.showDialogBox("Error!", e.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 			}
 		}
 		public boolean viewership = false;
@@ -390,6 +393,7 @@ public class LevelsWindow {
 					gonePoints = 0;
 				}
 			}
+			Requests.levels.get(Requests.getPosFromID(ID)).setViewership(viewership);
 		}
 		public void setAnalyzed(boolean analyzed, boolean image, boolean vulgar){
 			this.analyzed = analyzed;

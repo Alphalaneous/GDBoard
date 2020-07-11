@@ -81,7 +81,7 @@ public class BlockedSettings {
 						}
 					}
 				} catch (IOException e1) {
-					JOptionPane.showMessageDialog(null, "There was an error writing to the file!", "Error", JOptionPane.ERROR_MESSAGE);
+					DialogBox.showDialogBox("Error!", e1.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 				}
 			}
 		});
@@ -211,34 +211,34 @@ public class BlockedSettings {
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Object[] options = {"Yes", "No"};
+
 				SettingsWindow.run = false;
-				int n = JOptionPane.showOptionDialog(SettingsWindow.window,
-						"Unblock " + button.getLText() + "?",
-						"Unblock ID? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+				new Thread(() -> {
 
-				if (n == 0) {
-					if (Files.exists(file)) {
-						try {
-							Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_temp_");
-							PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
-							Files.lines(file)
-									.filter(line -> !line.contains(button.getLText()))
-									.forEach(out::println);
-							out.flush();
-							out.close();
-							Files.delete(file);
-							Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\blocked.txt"), StandardCopyOption.REPLACE_EXISTING);
+					String option = DialogBox.showDialogBox("Unblock " + button.getLText() + "?", "<html>This will unblock the ID and allow it to be requested again.<html>", "", new String[]{"Yes", "No"});
 
-						} catch (IOException ex) {
+					if (option.equalsIgnoreCase("yes")) {
+						if (Files.exists(file)) {
+							try {
+								Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_temp_");
+								PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
+								Files.lines(file)
+										.filter(line -> !line.contains(button.getLText()))
+										.forEach(out::println);
+								out.flush();
+								out.close();
+								Files.delete(file);
+								Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\blocked.txt"), StandardCopyOption.REPLACE_EXISTING);
 
-							JOptionPane.showMessageDialog(Overlay.frame, "There was an error writing to the file!", "Error", JOptionPane.ERROR_MESSAGE);
+							} catch (IOException ex) {
+
+								DialogBox.showDialogBox("Error!", ex.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
+							}
 						}
+						removeID(button.getLText());
 					}
-					removeID(button.getLText());
-				}
-				SettingsWindow.run = true;
+					SettingsWindow.run = true;
+				}).start();
 			}
 		});
 		button.refresh();

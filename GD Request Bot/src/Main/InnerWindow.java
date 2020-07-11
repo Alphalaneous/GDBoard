@@ -283,6 +283,14 @@ public class InnerWindow extends ResizablePanel {
 					}
 					if(title.startsWith("GDBoard")){
 						Windowed.frame.setLocation(p);
+						GraphicsDevice[] screens = GraphicsEnvironment
+								.getLocalGraphicsEnvironment()
+								.getScreenDevices();
+						for (GraphicsDevice screen : screens) {
+							if (screen.getDefaultConfiguration().getBounds().contains(p)) {
+								Defaults.screenNum = Integer.parseInt(screen.getIDstring().replaceAll("Display", "").replace("\\", ""));
+							}
+						}
 					}
 					if(title.equalsIgnoreCase("Startup")){
 						Onboarding.frame.setLocation(p);

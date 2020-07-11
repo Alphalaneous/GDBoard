@@ -108,7 +108,7 @@ public class ActionsWindow {
 			Overlay.addToFrame(window);
 		} catch (Exception e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e, "Error", JOptionPane.ERROR_MESSAGE);
+			DialogBox.showDialogBox("Error!", e.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 		}
 	}
 	//endregion

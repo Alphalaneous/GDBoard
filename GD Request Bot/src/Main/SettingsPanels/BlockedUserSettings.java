@@ -80,7 +80,7 @@ public class BlockedUserSettings {
 						}
 					}
 				} catch (IOException e1) {
-					JOptionPane.showMessageDialog(null, "There was an error writing to the file!", "Error", JOptionPane.ERROR_MESSAGE);
+					DialogBox.showDialogBox("Error!", e1.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 				}
 			}
 		});
@@ -211,34 +211,34 @@ public class BlockedUserSettings {
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Object[] options = {"Yes", "No"};
+
 				SettingsWindow.run = false;
-				int n = JOptionPane.showOptionDialog(SettingsWindow.window,
-						"Unblock " + button.getLText() + "?",
-						"Unblock User? (Temporary Menu)", JOptionPane.YES_NO_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+				new Thread(() -> {
 
-				if (n == 0) {
-					if (Files.exists(file)) {
-						try {
-							Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_temp_");
-							PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
-							Files.lines(file)
-									.filter(line -> !line.contains(button.getLText()))
-									.forEach(out::println);
-							out.flush();
-							out.close();
-							Files.delete(file);
-							Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\blockedUsers.txt"), StandardCopyOption.REPLACE_EXISTING);
+					String option = DialogBox.showDialogBox("Unblock " + button.getLText() + "?", "<html>This will unblock the user and allow them to request again.<html>", "", new String[]{"Yes", "No"});
 
-						} catch (IOException ex) {
-							ex.printStackTrace();
-							JOptionPane.showMessageDialog(Overlay.frame, "There was an error writing to the file!", "Error", JOptionPane.ERROR_MESSAGE);
+					if (option.equalsIgnoreCase("yes")) {
+						if (Files.exists(file)) {
+							try {
+								Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_temp_");
+								PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
+								Files.lines(file)
+										.filter(line -> !line.contains(button.getLText()))
+										.forEach(out::println);
+								out.flush();
+								out.close();
+								Files.delete(file);
+								Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\blockedUsers.txt"), StandardCopyOption.REPLACE_EXISTING);
+
+							} catch (IOException ex) {
+								ex.printStackTrace();
+								DialogBox.showDialogBox("Error!", ex.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
+							}
 						}
+						removeUser(button.getLText());
 					}
-					removeUser(button.getLText());
-				}
-				SettingsWindow.run = true;
+					SettingsWindow.run = true;
+				}).start();
 			}
 		});
 		button.refresh();

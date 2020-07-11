@@ -123,11 +123,11 @@ public class Defaults {
 		if (!ft.format(date).equalsIgnoreCase("04.01")) {
 			MAIN = new Color(230, 230, 230);
 			TEXT_BOX = new Color(205, 205, 205);
-			BUTTON = new Color(210, 210, 210);
+			BUTTON = new Color(224, 224, 224);
 			HOVER = new Color(211, 211, 211);
 			SUB_MAIN = new Color(240, 240, 240);
 			SELECT = new Color(215, 215, 215);
-			BUTTON_HOVER = new Color(182, 182, 182);
+			BUTTON_HOVER = new Color(204, 204, 204);
 			TOP = Color.WHITE;
 			FOREGROUND = Color.BLACK;
 			FOREGROUND2 = new Color(100, 100, 100);
@@ -239,16 +239,20 @@ public class Defaults {
 					dark.set(false);
 					prevTheme[0] = 0;
 				}
-
-				if (!Settings.windowedMode) {
 					screenSize = GraphicsEnvironment
 							.getLocalGraphicsEnvironment()
 							.getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();
 					if (!screenSize.equals(prevScreenSize)) {
-						Overlay.refreshUI(false);
+						try {
+							if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+								Overlay.refreshUI(false);
+							}
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 					}
 					prevScreenSize = screenSize;
-				}
+
 				try {
 					Thread.sleep(100);
 				} catch (InterruptedException e) {

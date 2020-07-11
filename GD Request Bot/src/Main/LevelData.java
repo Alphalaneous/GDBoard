@@ -13,6 +13,11 @@ public class LevelData {
 		return password;
 	}
 
+	public boolean getViewership() {
+		return viewership;
+	}
+
+
 
 	public String getRequester() {
 		return requester;
@@ -155,12 +160,13 @@ public class LevelData {
 	private String difficulty;
 	private String description;
 	private String likes;
+	private String channelName;
+	private String thumbnailURL;
+	private boolean viewership = true;
 	private String downloads;
 	private String levelID;
 	private String videoTitle;
-	private String videoURL;
-	private String channelName;
-	private String thumbnailURL;
+	private String videoURL;;
 	private boolean featured;
 	private boolean epic;
 	private String downloadURL;
@@ -258,6 +264,9 @@ public class LevelData {
 	//void setVerifiedCoins(boolean verifiedCoins) {
 	//	this.verifiedCoins = verifiedCoins;
 	//}
+	public void setViewership(boolean viewership) {
+		this.viewership = viewership;
+	}
 
 	public void setFeatured() {
 		this.featured = true;

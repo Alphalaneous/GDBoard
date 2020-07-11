@@ -140,6 +140,7 @@ public class APIs {
 	static boolean isNotFollowing(String user) {
 
 		try {
+
 			JsonObject isFollowing = null;
 			try {
 				isFollowing = twitchAPI("https://api.twitch.tv/helix/users/follows?from_id=" + getIDs(user) + "&to_id=" + getIDs(Settings.getSettings("channel")));
@@ -162,7 +163,7 @@ public class APIs {
 			}
 		}
 		catch (Exception e){
-			JOptionPane.showMessageDialog(Overlay.frame, "If this pops up turn followers only off and report it to Alphalaneous please", "Error", JOptionPane.ERROR_MESSAGE);
+			DialogBox.showDialogBox("Error!", e.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 			return true;
 		}
 	}
@@ -173,7 +174,7 @@ public class APIs {
 			return String.valueOf(nameObj.asObject().get("data").asArray().get(0).asObject().get("display_name")).replaceAll("\"", "");
 		}
 		catch (Exception e){
-			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
+			DialogBox.showDialogBox("Error!", e.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 			return "error";
 		}
 	}
@@ -184,7 +185,7 @@ public class APIs {
 			return String.valueOf(nameObj.asObject().get("data").asArray().get(0).asObject().get("profile_image_url")).replaceAll("\"", "");
 		}
 		catch (Exception e){
-			JOptionPane.showMessageDialog(Overlay.frame, e, "Error", JOptionPane.ERROR_MESSAGE);
+			DialogBox.showDialogBox("Error!", e.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 			return "error";
 		}
 	}

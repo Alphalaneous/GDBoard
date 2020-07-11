@@ -18,7 +18,6 @@ public class KeyListener extends SwingKeyAdapter {
 
 
 	public void nativeKeyPressed(NativeKeyEvent e) {
-		System.out.println(e.getRawCode());
 		if(usePlatformer) {
 			if (e.getRawCode() == 65) {
 				if(goLeft) {

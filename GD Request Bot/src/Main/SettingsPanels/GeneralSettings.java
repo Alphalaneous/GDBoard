@@ -307,7 +307,7 @@ public class GeneralSettings {
 			}
 		}
 		catch (IOException e){
-			JOptionPane.showMessageDialog(null, "There was an error reading the config file!", "Error",  JOptionPane.ERROR_MESSAGE);
+			DialogBox.showDialogBox("Error!", e.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 		}
 	}
 	public static void setSettings(){
