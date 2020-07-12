@@ -257,7 +257,6 @@ public class ServerChatBot {
                             Path path = it.next();
                             String[] file = path.toString().split("/");
                             String fileName = file[file.length - 1];
-                            System.out.println(path.toString());
                             if (fileName.equalsIgnoreCase(com + ".js")) {
 
                                 InputStream is = Main.class

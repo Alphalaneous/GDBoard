@@ -43,6 +43,10 @@ public class Command {
         } catch (Exception e) {
             Main.sendMessage(("There was an error with the command: " + e).replaceAll(System.getProperty("user.name"), "*****"));
         }
+        String spacelessResult = result.replaceAll(" ", "").toLowerCase();
+        if(spacelessResult.startsWith("/color") || spacelessResult.startsWith("/block") || spacelessResult.startsWith("/unblock")){
+            return "Use of that command is prohibited, nice try :)";
+        }
         return result.replaceAll(System.getProperty("user.name"), "*****");
     }
     public static String run(String user, String message, String function){

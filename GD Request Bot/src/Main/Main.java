@@ -4,6 +4,7 @@ import Main.InnerWindows.*;
 import Main.SettingsPanels.*;
 import com.cavariux.twitchirc.Chat.Channel;
 import com.cavariux.twitchirc.Chat.User;
+import javazoom.jl.player.JavaSoundAudioDevice;
 import org.apache.commons.io.FileUtils;
 import org.java_websocket.client.WebSocketClient;
 import org.jnativehook.GlobalScreen;
@@ -12,6 +13,7 @@ import org.json.JSONObject;
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
@@ -19,6 +21,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.*;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -101,6 +104,8 @@ public class Main {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+
 
 
 		/*try {

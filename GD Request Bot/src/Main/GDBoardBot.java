@@ -2,6 +2,7 @@ package Main;
 
 import Main.SettingsPanels.AccountSettings;
 import com.cavariux.twitchirc.Json.JsonObject;
+import org.apache.commons.text.StringEscapeUtils;
 import org.json.JSONObject;
 
 import javax.swing.*;
@@ -111,7 +112,7 @@ class GDBoardBot {
 					break;
 				}
 				String event = "";
-				System.out.println(inputLine);
+				//System.out.println(inputLine);
 				try {
 					JsonObject object = JsonObject.readFrom(inputLine);
 					if (object.get("event") != null) {
@@ -130,16 +131,17 @@ class GDBoardBot {
 						failed = true;
 					} if ((event.equalsIgnoreCase("command") || event.equalsIgnoreCase("level_request")) && Main.allowRequests) {
 						String sender = object.get("sender").toString().replaceAll("\"", "");
-						String message = object.get("message").toString().replaceAll("\"", "");
-
+						String message = StringEscapeUtils.unescapeJava(object.get("message").toString());
+						message = message.substring(1, message.length()-1);
 						boolean mod = object.get("mod").asBoolean();
 						boolean sub = object.get("sub").asBoolean();
+						String finalMessage = message;
 						Thread thread1 = new Thread(() -> {
 							try {
 								while(ServerChatBot.processing){
 									Thread.sleep(50);
 								}
-								ServerChatBot.onMessage(sender, message, mod, sub, 0);
+								ServerChatBot.onMessage(sender, finalMessage, mod, sub, 0);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
@@ -167,6 +169,7 @@ class GDBoardBot {
 					}
 				}
 				catch (Exception e){
+					e.printStackTrace();
 					try {
 						Thread.sleep(wait);
 					} catch (InterruptedException f) {

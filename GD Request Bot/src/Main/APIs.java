@@ -114,12 +114,9 @@ public class APIs {
 						JsonArray viewerList = viewers.get("chatters").asObject().get(type).asArray();
 						for (int i = 0; i < viewerList.size(); i++) {
 							String viewer = viewerList.get(i).asString().replaceAll("\"", "");
-							System.out.println(viewer);
 
 							for(int k = 0; k < Requests.levels.size(); k++) {
-								System.out.println("R: " + LevelsWindow.getButton(k).getRequester());
 								if (LevelsWindow.getButton(k).getRequester().equalsIgnoreCase(viewer)){
-									//todo revert
 									LevelsWindow.getButton(k).setViewership(true);
 								}
 							}

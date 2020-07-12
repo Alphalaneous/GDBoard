@@ -18,52 +18,19 @@ import java.util.*;
 
 public class Board {
 
-	static HashMap<String, Thread> threads = new HashMap<>();
-
+	static boolean bwomp = false;
 
 	public static void playSound(String location){
-
-		if(threads.containsKey(location)){
-			threads.get(location).stop();
-			threads.remove(location);
-		}
-		Thread aThread = new Thread(() -> {
-			try {
-				FileInputStream is = new FileInputStream(location);
-				BufferedInputStream inp = new BufferedInputStream(is);
-				Player mp3player = new Player(inp);
-				mp3player.play();
-			} catch (FileNotFoundException f) {
-				f.printStackTrace();
-				DialogBox.showDialogBox("Error!", f.toString(), "That file doesn't exist!", new String[]{"OK"});
-
-			} catch (JavaLayerException f){
-				f.printStackTrace();
-				DialogBox.showDialogBox("Error!", f.toString(), "That isn't an mp3!", new String[]{"OK"});
-
-			} catch (Exception f) {
-				f.printStackTrace();
-				DialogBox.showDialogBox("Error!", f.toString(), "There was an error playing the sound!", new String[]{"OK"});
-
-			}
-		});
-		threads.put(location, aThread);
-		aThread.start();
+		Sounds.playSound(location, true, false, true, false);
+	}
+	public static void playSound(String location, boolean restart, boolean overlap, boolean isURL){
+		Sounds.playSound(location, restart, overlap, true, isURL);
 	}
 	public static void stopSound(String location){
-		if(threads.containsKey(location)){
-			threads.get(location).stop();
-			threads.remove(location);
-		}
+		Sounds.stopSound(location);
 	}
 	public static void stopAllSounds(){
-		Iterator hmIterator = threads.entrySet().iterator();
-
-		while (hmIterator.hasNext()) {
-			Map.Entry mapElement = (Map.Entry)hmIterator.next();
-			((Thread)mapElement.getValue()).stop();
-		}
-		threads.clear();
+		Sounds.stopAllSounds();
 	}
 
 	public static void sendAsMain(String message){
@@ -72,33 +39,7 @@ public class Board {
 
 	static AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
 	public static void playNewgrounds(String songID){
-		if(threads.containsKey("ng:" + songID)){
-			threads.get("ng:" + songID).stop();
-			threads.remove("ng:" + songID);
-		}
-		Thread aThread = new Thread(() -> {
-			try {
-				BufferedInputStream inp = new BufferedInputStream(new URL(client.getSongById(Long.parseLong(songID)).block().getDownloadURL()).openStream());
-				Player mp3player = new Player(inp);
-				mp3player.play();
-			} catch (IllegalArgumentException | SongNotAllowedForUseException f){
-				f.printStackTrace();
-			} catch (FileNotFoundException f) {
-				f.printStackTrace();
-				DialogBox.showDialogBox("Error!", f.toString(), "That file doesn't exist!", new String[]{"OK"});
-
-			} catch (JavaLayerException f){
-				f.printStackTrace();
-				DialogBox.showDialogBox("Error!", f.toString(), "That isn't an mp3!", new String[]{"OK"});
-
-			} catch (Exception f) {
-				f.printStackTrace();
-				DialogBox.showDialogBox("Error!", f.toString(), "There was an error playing the sound!", new String[]{"OK"});
-
-			}
-		});
-		threads.put("ng:" + songID, aThread);
-		aThread.start();
+		Sounds.playSound(client.getSongById(Long.parseLong(songID)).block().getDownloadURL(), true, false, false, true);
 	}
 
 	private static NashornSandbox sandbox = NashornSandboxes.create();
@@ -112,7 +53,7 @@ public class Board {
 			sandbox.eval("var Levels = Java.type('Main.Requests'); var GD = Java.type('Main.GDMod'); var Board = Java.type('Main.Board'); var Variables = Java.type('Main.Variables'); function command() { " + function + " }");
 		}
 		catch (Exception e){
-			e.printStackTrace();
+			return ("There was an error with the command: " + e).replaceAll(System.getProperty("user.name"), "*****");
 		}
 		String result = "";
 		try {
@@ -130,99 +71,35 @@ public class Board {
 		return System.getenv(name);
 	}
 
-
-	public static String getClientID(){
-		return "fzwze6vc6d2f7qodgkpq2w8nnsz3rl";
+	public static void toggleBwomp(){
+		bwomp = !bwomp;
 	}
 
 	public static void endGDBoard(){
 		Main.close();
 	}
-	private static Thread rickThread = null;
 
 	public static void rick(){
-		System.out.println("ricked");
-		if (rickThread != null) {
-			rickThread.stop();
-		}
-		rickThread = new Thread(() -> {
-			try {
-				BufferedInputStream inp = new BufferedInputStream(ServerChatBot.class
-						.getResource("/Resources/rick.mp3").openStream());
-				Player mp3player = new Player(inp);
-				mp3player.play();
-			} catch (JavaLayerException | NullPointerException | IOException f) {
-				f.printStackTrace();
-				DialogBox.showDialogBox("Error!", f.toString(), "There was an error playing the sound!", new String[]{"OK"});
-
-			}
-		});
-		rickThread.start();
+		Sounds.playSound("/Resources/rick.mp3", true, true, false, false);
 	}
 
 	public static void stopRick(){
-		if (rickThread != null && rickThread.isAlive()) {
-			rickThread.stop();
-		}
+		Sounds.stopSound("/Resources/rick.mp3");
 	}
-	static boolean bwomp = false;
-
-	public static void toggleBwomp(){
-		bwomp = !bwomp;
-	}
-
-	private static Thread knockThread = null;
 
 	public static void knock(){
-		if (knockThread != null) {
-			knockThread.stop();
-		}
-		knockThread = new Thread(() -> {
-			try {
-				BufferedInputStream inp = new BufferedInputStream(ServerChatBot.class
-						.getResource("/Resources/knock.mp3").openStream());
-				Player mp3player = new Player(inp);
-				mp3player.play();
-			} catch (JavaLayerException | NullPointerException | IOException f) {
-				f.printStackTrace();
-				DialogBox.showDialogBox("Error!", f.toString(), "There was an error playing the sound!", new String[]{"OK"});
-
-			}
-		});
-		knockThread.start();
+		Sounds.playSound("/Resources/knock.mp3", true, true, false, false);
 	}
 
 	public static void stopKnock(){
-		if (knockThread != null && knockThread.isAlive()) {
-			knockThread.stop();
-		}
+		Sounds.stopSound("/Resources/knock.mp3");
+
 	}
-	private static Thread bwompThread = null;
-
 	public static void bwomp(){
-		if (bwompThread != null) {
-			bwompThread.stop();
-		}
-		bwompThread = new Thread(() -> {
-			try {
-				BufferedInputStream inp = new BufferedInputStream(ServerChatBot.class
-						.getResource("/Resources/bwomp.mp3").openStream());
-				Player mp3player = new Player(inp);
-				mp3player.play();
-			} catch (JavaLayerException | NullPointerException | IOException f) {
-				f.printStackTrace();
-				DialogBox.showDialogBox("Error!", f.toString(), "There was an error playing the sound!", new String[]{"OK"});
-
-			}
-		});
-		bwompThread.start();
+		Sounds.playSound("/Resources/bwomp.mp3", true, true, false, false);
 	}
 
 	public static void stopBwomp(){
-		if (bwompThread != null && bwompThread.isAlive()) {
-			bwompThread.stop();
-		}
+		Sounds.stopSound("/Resources/bwomp.mp3");
 	}
-
-
 }
