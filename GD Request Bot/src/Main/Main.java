@@ -46,9 +46,6 @@ public class Main {
 	static boolean allowRequests = false;
 	static boolean doMessage  = false;
 	static boolean doImage  = false;
-	private static JDialog dialog = new JDialog();
-	private static JPanel panel = new JPanel();
-	private static JLabel tf = new JLabel("Loading...");
 	private static ChatReader chatReader = new ChatReader();
 	private static ChannelPointListener client;
 
@@ -106,9 +103,6 @@ public class Main {
 			e.printStackTrace();
 		}
 
-
-
-
 		/*try {
 			System.setOut(new PrintStream(new FileOutputStream(new File(System.getenv("APPDATA") + "\\GDBoard\\clOutput.txt"))));
 		} catch (FileNotFoundException e) {
@@ -121,30 +115,14 @@ public class Main {
 			logger.setLevel(Level.OFF);
 			logger.setUseParentHandlers(false);
 
-			dialog.setSize(new Dimension(200,100));
-			tf.setForeground(Color.WHITE);
-			tf.setFont(Defaults.MAIN_FONT.deriveFont(20f));
-			panel.add(tf);
-			panel.setBackground(new Color(31, 31, 31));
-			panel.setLayout(new GridBagLayout());
-			dialog.add(panel);
-
-			dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-			for ( WindowListener wl : dialog.getWindowListeners()) {
-				dialog.removeWindowListener(wl);
-			}
-			dialog.addWindowListener(new WindowAdapter() {
-				@Override
-				public void windowClosing(WindowEvent e) {
+			new Thread(() -> {
+				String choice = DialogBox.showDialogBox("Loading GDBoard...", "This may take a few seconds", "", new String[]{"Cancel"});
+				if(choice.equalsIgnoreCase("Cancel")){
 					close();
 				}
-			});
-			dialog.setResizable(false);
-			dialog.setFocusable(false);
-			dialog.setFocusableWindowState(false);
-			dialog.setTitle("Starting GDBoard");
-			dialog.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2 - dialog.getWidth()/2, Toolkit.getDefaultToolkit().getScreenSize().height/2 - dialog.getHeight()/2);
-			dialog.setVisible(true);
+			}).start();
+
+			//dialog.setVisible(true);
 
 			UIManager.setLookAndFeel(new NimbusLookAndFeel() {
 				@Override
@@ -167,7 +145,7 @@ public class Main {
 				System.out.println("Loading Colors... " + i);
 				Thread.sleep(10);
 			}
-			dialog.setVisible(false);
+			DialogBox.closeDialogBox();
 			Thread.sleep(500);
 			if(Settings.getSettings("onboarding").equalsIgnoreCase("")){
 				Onboarding.createPanel();
@@ -336,8 +314,8 @@ public class Main {
 				URL inputUrl = Main.class.getResource("/Resources/gdmod.exe");
 				FileUtils.copyURLToFile(inputUrl, path.toFile());
 			}
-
 			loaded = true;
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			String option = DialogBox.showDialogBox("Error!", e.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
