@@ -7,6 +7,7 @@ import com.cavariux.twitchirc.Chat.User;
 import javazoom.jl.player.JavaSoundAudioDevice;
 import org.apache.commons.io.FileUtils;
 import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.json.JSONObject;
@@ -445,7 +446,10 @@ public class Main {
 				}
 				WindowedSettings.setSettings();
 			}
-			client.disconnectBot();
+			try {
+				client.disconnectBot();
+			}
+			catch (WebsocketNotConnectedException ignored){}
 			GeneralSettings.setSettings();
 			RequestSettings.setSettings();
 			ShortcutSettings.setSettings();
