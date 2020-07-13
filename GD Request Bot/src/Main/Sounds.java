@@ -49,54 +49,54 @@ public class Sounds {
 		}
 		sounds.clear();
 	}
-}
+	private static class Sound {
 
-class Sound {
+		String location;
+		boolean complete = false;
+		boolean isFile = true;
+		boolean isURL = false;
+		Player mp3player;
 
-	String location;
-	boolean complete = false;
-	boolean isFile = true;
-	boolean isURL = false;
-	Player mp3player;
+		Sound(String location, boolean isFile, boolean isURL){
+			this.location = location;
+			this.isFile = isFile;
+			this.isURL = isURL;
+		}
 
-	Sound(String location, boolean isFile, boolean isURL){
-		this.location = location;
-		this.isFile = isFile;
-		this.isURL = isURL;
-	}
+		public void playSound() {
 
-	public void playSound() {
+			new Thread(() -> {
+				Sounds.sounds.put(location, this);
+				try {
+					BufferedInputStream inp = null;
+					if(isURL){
+						inp = new BufferedInputStream(new URL(location).openStream());
+					}
+					else if(isFile){
+						inp = new BufferedInputStream(new FileInputStream(location));
+					}
+					else if(!isFile){
+						inp = new BufferedInputStream(ServerChatBot.class
+								.getResource(location).openStream());
+					}
+					mp3player = new Player(inp);
 
-		new Thread(() -> {
-			Sounds.sounds.put(location, this);
-			try {
-				BufferedInputStream inp = null;
-				if(isURL){
-					inp = new BufferedInputStream(new URL(location).openStream());
+					mp3player.play();
+
+				} catch (Exception f) {
+					f.printStackTrace();
+					DialogBox.showDialogBox("Error!", f.toString(), "There was an error playing the sound!", new String[]{"OK"});
+
 				}
-				else if(isFile){
-					inp = new BufferedInputStream(new FileInputStream(location));
-				}
-				else if(!isFile){
-					inp = new BufferedInputStream(ServerChatBot.class
-							.getResource(location).openStream());
-				}
-				mp3player = new Player(inp);
+				complete = true;
+				Sounds.sounds.remove(location, this);
+			}).start();
 
-				mp3player.play();
-
-			} catch (Exception f) {
-				f.printStackTrace();
-				DialogBox.showDialogBox("Error!", f.toString(), "There was an error playing the sound!", new String[]{"OK"});
-
-			}
+		}
+		public void stopSound(){
+			mp3player.close();
 			complete = true;
-			Sounds.sounds.remove(location, this);
-		}).start();
-
-	}
-	public void stopSound(){
-		mp3player.close();
-		complete = true;
+		}
 	}
 }
+

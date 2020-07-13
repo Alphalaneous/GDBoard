@@ -67,6 +67,10 @@ public class Board {
 		return result.replaceAll(System.getProperty("user.name"), "*****");
 	}
 
+	public static void showPopup(String title, String text){
+		DialogBox.showDialogBox(title,text, "", new String[]{"OK"});
+	}
+
 	public static String getenv(String name){
 		return System.getenv(name);
 	}

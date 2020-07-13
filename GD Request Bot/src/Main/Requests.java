@@ -46,7 +46,7 @@ public class Requests {
 	static ArrayList<Long> addedLevels = new ArrayList<Long>();
 	private static HashMap<String, Integer> userStreamLimitMap = new HashMap<>();
 
-	static void addRequest(long ID, String requester) {
+	public static void addRequest(long ID, String requester) {
 		OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
 
 
@@ -489,6 +489,33 @@ public class Requests {
 			if (attribute.equals("length")) {
 				result = levels.get(level).getLength().toString();
 			}
+			if (attribute.equals("coins")) {
+				result = String.valueOf(levels.get(level).getCoins());
+			}
+			if (attribute.equals("objects")) {
+				result = String.valueOf(levels.get(level).getObjects());
+			}
+			if (attribute.equals("original")) {
+				result = String.valueOf(levels.get(level).getOriginal());
+			}
+			if (attribute.equals("image")) {
+				result = String.valueOf(levels.get(level).getContainsImage());
+			}
+			if (attribute.equals("vulgar")) {
+				result = String.valueOf(levels.get(level).getContainsVulgar());
+			}
+			if (attribute.equals("password")) {
+				result = String.valueOf(levels.get(level).getPassword());
+			}
+			if (attribute.equals("levelVersion")) {
+				result = String.valueOf(levels.get(level).getLevelVersion());
+			}
+			if (attribute.equals("upload")) {
+				result = levels.get(level).getUpload().toString();
+			}
+			if (attribute.equals("update")) {
+				result = levels.get(level).getUpdate().toString();
+			}
 		}
 		catch (Exception e){
 			result = "Exception: " + e.toString();
@@ -594,33 +621,38 @@ public class Requests {
 		LevelsWindow.setName(Requests.levels.size());
 		return response;
 	}
-	private static Thread rickThread = null;
+
+	public static long testForID(String message){
+		Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(message);
+		if (m.find()) {
+			try {
+				String[] msgs = message.split(" ");
+				String mention = "";
+				for (String s : msgs) {
+					if (s.contains("@")) {
+						mention = s;
+						break;
+					}
+				}
+				if (!mention.contains(m.group(1))) {
+					return Long.parseLong(m.group(1).replaceFirst("^0+(?!$)", ""));
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return -1;
+	}
 
 	@SuppressWarnings("unused")
 	public static void rick(){
-		if (rickThread != null) {
-			rickThread.stop();
-		}
-		rickThread = new Thread(() -> {
-			try {
-				BufferedInputStream inp = new BufferedInputStream(ServerChatBot.class
-						.getResource("/Resources/rick.mp3").openStream());
-				Player mp3player = new Player(inp);
-				mp3player.play();
-			} catch (JavaLayerException | NullPointerException | IOException f) {
-				f.printStackTrace();
-				DialogBox.showDialogBox("Error!", f.toString(), "There was an error playing the sound!", new String[]{"OK"});
-
-			}
-		});
-		rickThread.start();
+		Board.rick();
 	}
 
 	@SuppressWarnings("unused")
 	public static void stopRick(){
-		if (rickThread != null && rickThread.isAlive()) {
-			rickThread.stop();
-		}
+		Board.stopRick();
 	}
 	static boolean bwomp = false;
 
@@ -629,62 +661,24 @@ public class Requests {
 		bwomp = !bwomp;
 	}
 
-	private static Thread knockThread = null;
-
 	@SuppressWarnings("unused")
 	public static void knock(){
-		if (knockThread != null) {
-			knockThread.stop();
-		}
-		knockThread = new Thread(() -> {
-			try {
-				BufferedInputStream inp = new BufferedInputStream(ServerChatBot.class
-						.getResource("/Resources/knock.mp3").openStream());
-				Player mp3player = new Player(inp);
-				mp3player.play();
-			} catch (JavaLayerException | NullPointerException | IOException f) {
-				f.printStackTrace();
-				DialogBox.showDialogBox("Error!", f.toString(), "There was an error playing the sound!", new String[]{"OK"});
-
-			}
-		});
-		knockThread.start();
+		Board.knock();
 	}
 
 	@SuppressWarnings("unused")
 	public static void stopKnock(){
-		if (knockThread != null && knockThread.isAlive()) {
-			knockThread.stop();
-		}
+		Board.stopKnock();
 	}
-	private static Thread bwompThread = null;
 
 	@SuppressWarnings("unused")
 	public static void bwomp(){
-		if (bwompThread != null) {
-			bwompThread.stop();
-		}
-		bwompThread = new Thread(() -> {
-			try {
-				BufferedInputStream inp = new BufferedInputStream(ServerChatBot.class
-						.getResource("/Resources/bwomp.mp3").openStream());
-				Player mp3player = new Player(inp);
-				mp3player.play();
-			} catch (JavaLayerException | NullPointerException | IOException f) {
-				f.printStackTrace();
-				DialogBox.showDialogBox("Error!", f.toString(), "There was an error playing the sound!", new String[]{"OK"});
-
-
-			}
-		});
-		bwompThread.start();
+		Board.bwomp();
 	}
 
 	@SuppressWarnings("unused")
 	public static void stopBwomp(){
-		if (bwompThread != null && bwompThread.isAlive()) {
-			bwompThread.stop();
-		}
+		Board.stopBwomp();
 	}
 
 	public static void movePosition(int position, int newPosition){
@@ -1198,6 +1192,8 @@ public class Requests {
 					.replaceAll("(?i)%likes%", String.valueOf(levels.get(level).getLikes()))
 					.replaceAll("(?i)%downloads%", String.valueOf(levels.get(level).getDownloads()))
 					.replaceAll("(?i)%description%", levels.get(level).getDescription().toString())
+					.replaceAll("(?i)%coins%", String.valueOf(levels.get(level).getCoins()))
+					.replaceAll("(?i)%objects%", String.valueOf(levels.get(level).getObjects()))
 					.replaceAll("(?i)%queueSize%", String.valueOf(levels.size()))
 					.replaceAll("(?i)%s%", "");
 			return text;
