@@ -54,6 +54,8 @@ public class Requests {
 			Path blocked = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
 			Path logged = Paths.get(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
 			Path blockedUser = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blockedUsers.txt");
+			Path blockedGDUser = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blockedGDUsers.txt");
+
 			if(Main.loaded) {
 				if(GeneralSettings.followersOption){
 					if(APIs.isNotFollowing(requester)) {
@@ -192,6 +194,23 @@ public class Requests {
 			// --------------------
 			Thread parse;
 			if(Main.loaded) {
+				if (level != null && Files.exists(blockedGDUser)) {
+					Scanner sc = null;
+					try {
+						sc = new Scanner(blockedGDUser.toFile());
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					}
+					while (sc.hasNextLine()) {
+						if (level.getCreatorName().equalsIgnoreCase(sc.nextLine())) {
+							Main.sendMessage("@" + requester + " That creator is blocked!");
+							sc.close();
+							return;
+						}
+					}
+					sc.close();
+				}
+
 				if (level != null && RequestSettings.ratedOption && !(level.getStars() > 0)) {
 					Main.sendMessage("@" + requester + " Please send star rated levels only!");
 					return;

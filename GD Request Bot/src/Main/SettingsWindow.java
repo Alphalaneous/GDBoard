@@ -1,5 +1,6 @@
 package Main;
 
+import Main.InnerWindows.BlockedGDUserSettings;
 import com.jidesoft.swing.ResizablePanel;
 
 import java.awt.*;
@@ -52,6 +53,8 @@ public class SettingsWindow {
 	private static JPanel personalization = PersonalizationSettings.createPanel();
 	private static JPanel blocked = BlockedSettings.createPanel();
 	private static JPanel blockedUsers = BlockedUserSettings.createPanel();
+	private static JPanel blockedCreators = BlockedGDUserSettings.createPanel();
+
 	private static JPanel loggedIDs = RequestsLog.createPanel();
 	public static JFrame frame = new JFrame();
 	public static JPanel windowed = WindowedSettings.createPanel();
@@ -103,6 +106,7 @@ public class SettingsWindow {
 		content.add(personalization);
 		content.add(blocked);
 		content.add(blockedUsers);
+		content.add(blockedCreators);
 		content.add(loggedIDs);
 		content.add(windowed);
 
@@ -116,6 +120,7 @@ public class SettingsWindow {
 		personalization.setVisible(false);
 		blocked.setVisible(false);
 		blockedUsers.setVisible(false);
+		blockedCreators.setVisible(false);
 		windowed.setVisible(false);
 		loggedIDs.setVisible(false);
 
@@ -132,6 +137,7 @@ public class SettingsWindow {
 		JButton personalization = createButton("Personalization");
 		JButton blocked = createButton("Blocked IDs");
 		JButton blockedUsers = createButton("Blocked Users");
+		JButton blockedCreators = createButton("Blocked Creators");
 		JButton loggedIDs = createButton("Logged IDs");
 		JButton windowed = createButton("Windowed");
 
@@ -146,6 +152,7 @@ public class SettingsWindow {
 		buttons.add(personalization);
 		buttons.add(blocked);
 		buttons.add(blockedUsers);
+		buttons.add(blockedCreators);
 		buttons.add(loggedIDs);
 		if(Settings.windowedMode){
 			buttons.add(windowed);
@@ -262,6 +269,9 @@ public class SettingsWindow {
 								break;
 							case "Blocked Users":
 								blockedUsers.setVisible(true);
+								break;
+							case "Blocked Creators":
+								blockedCreators.setVisible(true);
 								break;
 							case "Commands":
 								commands.setVisible(true);

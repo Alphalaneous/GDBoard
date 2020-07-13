@@ -80,7 +80,7 @@ public class Board {
 	}
 
 	public static void rick(){
-		Sounds.playSound("/Resources/rick.mp3", true, true, false, false);
+		Sounds.playSound("/Resources/rick.mp3", true, false, false, false);
 	}
 
 	public static void stopRick(){
