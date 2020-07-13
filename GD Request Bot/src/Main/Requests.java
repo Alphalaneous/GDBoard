@@ -67,12 +67,10 @@ public class Requests {
 						int j = k + 1;
 						Main.sendMessage(
 								"@" + requester + " Level is already in the queue at position " + j + "!");
-						System.out.println("Level Already Exists");
 						return;
 					}
 				}
 				if (GeneralSettings.queueLimitBoolean && (levels.size() >= GeneralSettings.queueLimit)) {
-					System.out.println(GeneralSettings.queueLimit + ", " + (levels.size()));
 					if (!GeneralSettings.queueFullOption) {
 						Main.sendMessage("@" + requester + " The queue is full!");
 					}
@@ -159,7 +157,6 @@ public class Requests {
 			} else {
 				userStreamLimitMap.put(requester, 1);
 			}
-			System.out.println(userStreamLimitMap.get(requester));
 
 			AuthenticatedGDClient client = null;
 			AnonymousGDClient clientAnon = null;
@@ -293,7 +290,6 @@ public class Requests {
 					levelData.setDifficulty("extreme demon");
 				}
 			}
-			System.out.println(levelData.getDifficulty());
 			if(Main.loaded) {
 				if (RequestSettings.excludedDifficulties.contains(levelData.getDifficulty().toString().toLowerCase()) && RequestSettings.disableOption) {
 					Main.sendMessage("@" + requester + " That difficulty is disabled!");
@@ -583,7 +579,6 @@ public class Requests {
 
 	@SuppressWarnings("unused")
 	public static void rick(){
-		System.out.println("ricked");
 		if (rickThread != null) {
 			rickThread.stop();
 		}
@@ -865,7 +860,6 @@ public class Requests {
 				Scanner sc2 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/commands/info.txt").toFile());
 				while (sc2.hasNextLine()) {
 					String line = sc2.nextLine();
-					System.out.println(line);
 					if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(command)) {
 						infoExists = true;
 						info = line.split("=")[1];
@@ -882,7 +876,6 @@ public class Requests {
 				BufferedReader br = new BufferedReader(isr);
 				String line;
 				while ((line = br.readLine()) != null) {
-					System.out.println(line);
 					if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(command)) {
 						info = line.split("=")[1];
 						break;
@@ -904,7 +897,6 @@ public class Requests {
 
 	@SuppressWarnings("unused")
 	public static String getHelp(){
-		System.out.println("here");
 		StringBuilder message = new StringBuilder();
 		try {
 			URI uri = Main.class.getResource("/Resources/Commands/").toURI();
@@ -923,7 +915,6 @@ public class Requests {
 				String fileName = file[file.length - 1];
 				if(fileName.endsWith(".js")) {
 					if(!fileName.equalsIgnoreCase("!rick.js") && !fileName.equalsIgnoreCase("!stoprick.js") && !fileName.equalsIgnoreCase("!kill.js")) {
-						System.out.println(fileName);
 						message.append(" | ").append(fileName, 0, fileName.length() - 3);
 					}
 				}
@@ -1115,7 +1106,6 @@ public class Requests {
 
 								for (String s : text1) {
 									if (s.equalsIgnoreCase(line)) {
-										System.out.println("Contains Vulgar");
 										Requests.levels.get(k).setContainsVulgar();
 										break out;
 									}
@@ -1153,7 +1143,6 @@ public class Requests {
 				}
 				catch (IndexOutOfBoundsException ignored){
 				}
-				System.out.println("Analyzed " + k);
 			}
 			try {
 				Thread.sleep(0);

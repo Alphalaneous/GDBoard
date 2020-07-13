@@ -138,70 +138,20 @@ public class ChannelPointSettings {
 		panel.setBounds(0, 0, 415, 622);
 		panel.setBackground(Defaults.SUB_MAIN);
 		commandsPanel.setDoubleBuffered(true);
-		commandsPanel.setBounds(0, 0, 415, 0);
-		commandsPanel.setPreferredSize(new Dimension(415, 0));
+		commandsPanel.setBounds(0, 0, 400, 0);
+		commandsPanel.setPreferredSize(new Dimension(400, 0));
 		commandsPanel.setBackground(Defaults.SUB_MAIN);
+		commandsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 4, 4));
+		scrollPane.setBounds(0, 0, 412, 622);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
-		scrollPane.getViewport().setBackground(Defaults.MAIN);
-		scrollPane.setBounds(0, 10, 415 + 1, 612);
-		scrollPane.setPreferredSize(new Dimension(415, 622));
+		scrollPane.getViewport().setBackground(Defaults.SUB_MAIN);
+		scrollPane.setPreferredSize(new Dimension(412, 562));
 		scrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(30);
-		scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(1, 622));
 		scrollPane.getVerticalScrollBar().setOpaque(false);
 		scrollPane.setOpaque(false);
 		scrollPane.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
-
-			private final Dimension d = new Dimension();
-
-			@Override
-			protected JButton createDecreaseButton(int orientation) {
-				return new JButton() {
-					@Override
-					public Dimension getPreferredSize() {
-						return d;
-					}
-				};
-			}
-
-			@Override
-			protected JButton createIncreaseButton(int orientation) {
-				return new JButton() {
-					@Override
-					public Dimension getPreferredSize() {
-						return d;
-					}
-				};
-			}
-
-			@Override
-			protected void paintTrack(Graphics g, JComponent c, Rectangle r) {
-				Graphics2D g2 = (Graphics2D) g.create();
-				Color color = new Color(0, 0, 0, 0);
-
-				g2.setPaint(color);
-				g2.fillRect(r.x, r.y, r.width, r.height);
-				g2.dispose();
-			}
-
-			@Override
-			protected void paintThumb(Graphics g, JComponent c, Rectangle r) {
-				Graphics2D g2 = (Graphics2D) g.create();
-				Color color = new Color(0, 0, 0, 0);
-
-
-				g2.setPaint(color);
-				g2.fillRect(r.x, r.y, r.width, r.height);
-				g2.dispose();
-			}
-
-			@Override
-			protected void setThumbBounds(int x, int y, int width, int height) {
-				super.setThumbBounds(x, y, width, height);
-				scrollbar.repaint();
-			}
-		});
+		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
 
 		try {
 			URI uri = Main.class.getResource("/Resources/points/").toURI();
@@ -313,12 +263,14 @@ public class ChannelPointSettings {
 	}
 	private static void addButton(String command, Path path) {
 		i++;
-		if (i % 2 == 0) {
-			height = height + 36.7;
+		if ((i-1) % 2 == 0) {
+			height = height + 39;
 
-			commandsPanel.setBounds(0, 0, 415, (int) (height + 4));
-			commandsPanel.setPreferredSize(new Dimension(415, (int) (height + 4)));
-			scrollPane.updateUI();
+			commandsPanel.setBounds(0, 0, 400, (int) (height + 4));
+			commandsPanel.setPreferredSize(new Dimension(400, (int) (height + 4)));
+			if(i > 0) {
+				scrollPane.updateUI();
+			}
 		}
 		CurvedButton button = new CurvedButton(command);
 		button.setBackground(Defaults.BUTTON);
@@ -326,7 +278,7 @@ public class ChannelPointSettings {
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-		button.setPreferredSize(new Dimension(187, 30));
+		button.setPreferredSize(new Dimension(170, 35));
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {

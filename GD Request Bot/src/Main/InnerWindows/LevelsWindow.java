@@ -228,7 +228,6 @@ public class LevelsWindow {
 				add(lAnalyzed);
 				add(lPlayerIcon);
 				add(reqDifficulty);
-				System.out.println(starCount);
 				if (starCount != 0) {
 					add(lStarCount);
 					add(lStar);
@@ -264,7 +263,6 @@ public class LevelsWindow {
 
 				setBackground(Defaults.MAIN);
 				setUI(defaultUI);
-				System.out.println(version);
 				if (starCount > 0) {
 					lAnalyzed.setText("");
 				} else if (version / 10 < 2) {

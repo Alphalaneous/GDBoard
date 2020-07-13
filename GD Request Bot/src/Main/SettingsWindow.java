@@ -236,7 +236,6 @@ public class SettingsWindow {
 				super.mousePressed(e);
 				for (Component component2 : button.getComponents()) {
 					if (component2 instanceof JLabel) {
-						System.out.println(((JLabel) component2).getText());
 						for (Component componentA : content.getComponents()) {
 							if (componentA instanceof JPanel) {
 								componentA.setVisible(false);

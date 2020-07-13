@@ -51,8 +51,10 @@ public class BlockedSettings {
 		blockedSettingsPanel.add(blockedInput);
 		blockedSettingsPanel.add(label);
 		blockedListPanel.setDoubleBuffered(true);
-		blockedListPanel.setBounds(0, 0, 415, 0);
-		blockedListPanel.setPreferredSize(new Dimension(415, 0));
+		blockedListPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 4, 4));
+
+		blockedListPanel.setBounds(0, 0, 400, 0);
+		blockedListPanel.setPreferredSize(new Dimension(400, 0));
 		blockedListPanel.setBackground(Defaults.SUB_MAIN);
 		addID.addMouseListener(new MouseAdapter() {
 			@Override
@@ -85,67 +87,16 @@ public class BlockedSettings {
 				}
 			}
 		});
+		scrollPane.setBounds(0, 60, 412, 562);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
-		scrollPane.getViewport().setBackground(Defaults.MAIN);
-		scrollPane.setBounds(0, 60, 415 + 1, 582);
-		scrollPane.setPreferredSize(new Dimension(415, 622));
+		scrollPane.getViewport().setBackground(Defaults.SUB_MAIN);
+		scrollPane.setPreferredSize(new Dimension(412, 562));
 		scrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(30);
-		scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(1, 622));
 		scrollPane.getVerticalScrollBar().setOpaque(false);
 		scrollPane.setOpaque(false);
 		scrollPane.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
-
-			private final Dimension d = new Dimension();
-
-			@Override
-			protected JButton createDecreaseButton(int orientation) {
-				return new JButton() {
-					@Override
-					public Dimension getPreferredSize() {
-						return d;
-					}
-				};
-			}
-
-			@Override
-			protected JButton createIncreaseButton(int orientation) {
-				return new JButton() {
-					@Override
-					public Dimension getPreferredSize() {
-						return d;
-					}
-				};
-			}
-
-			@Override
-			protected void paintTrack(Graphics g, JComponent c, Rectangle r) {
-				Graphics2D g2 = (Graphics2D) g.create();
-				Color color = new Color(0, 0, 0, 0);
-
-				g2.setPaint(color);
-				g2.fillRect(r.x, r.y, r.width, r.height);
-				g2.dispose();
-			}
-
-			@Override
-			protected void paintThumb(Graphics g, JComponent c, Rectangle r) {
-				Graphics2D g2 = (Graphics2D) g.create();
-				Color color = new Color(0, 0, 0, 0);
-
-
-				g2.setPaint(color);
-				g2.fillRect(r.x, r.y, r.width, r.height);
-				g2.dispose();
-			}
-
-			@Override
-			protected void setThumbBounds(int x, int y, int width, int height) {
-				super.setThumbBounds(x, y, width, height);
-				scrollbar.repaint();
-			}
-		});
+		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
 
 		File file = new File(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
 		if (file.exists()) {
@@ -174,10 +125,10 @@ public class BlockedSettings {
 
 	public static void removeID(String ID) {
 		i--;
-		if (i % 5 == 0 && i !=0) {
-			height = height - 36.7;
-			blockedListPanel.setBounds(0, 0, 415, (int) (height + 4));
-			blockedListPanel.setPreferredSize(new Dimension(415, (int) (height + 4)));
+		if (i % 4 == 0 && i !=0) {
+			height = height - 39;
+			blockedListPanel.setBounds(0, 0, 400, (int) (height + 4));
+			blockedListPanel.setPreferredSize(new Dimension(400, (int) (height + 4)));
 			scrollPane.updateUI();
 		}
 		for (Component component : blockedListPanel.getComponents()) {
@@ -193,11 +144,13 @@ public class BlockedSettings {
 
 	public static void addButton(long ID) {
 		i++;
-		if (i % 5 == 0) {
-			height = height + 36.7;
-			blockedListPanel.setBounds(0, 0, 415, (int) (height + 4));
-			blockedListPanel.setPreferredSize(new Dimension(415, (int) (height + 4)));
-			scrollPane.updateUI();
+		if ((i-1) % 4 == 0) {
+			height = height + 39;
+			blockedListPanel.setBounds(0, 0, 400, (int) (height + 4));
+			blockedListPanel.setPreferredSize(new Dimension(400, (int) (height + 4)));
+			if(i > 0) {
+				scrollPane.updateUI();
+			}
 		}
 		Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
 		CurvedButton button = new CurvedButton(String.valueOf(ID));
@@ -207,7 +160,7 @@ public class BlockedSettings {
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-		button.setPreferredSize(new Dimension(75, 30));
+		button.setPreferredSize(new Dimension(85, 35));
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {

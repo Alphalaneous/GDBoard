@@ -228,7 +228,7 @@ public class Functions {
 			new Thread(()->{
 
 			String option = DialogBox.showDialogBox("Clear the Queue?", "This will clear the levels from the queue.", "Do you want to clear the queue?", new String[]{"Clear All", "Cancel"});
-			if (option.equalsIgnoreCase("All")) {
+			if (option.equalsIgnoreCase("Clear All")) {
 				if (Requests.levels.size() != 0) {
 					for (int i = 0; i < Requests.levels.size(); i++) {
 						LevelsWindow.removeButton();

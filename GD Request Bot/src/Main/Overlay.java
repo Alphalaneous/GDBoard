@@ -126,6 +126,7 @@ public class Overlay {
 		BlockedUserSettings.refreshUI();
 		GeneralSettings.refreshUI();
 		CommandSettings.refreshUI();
+		ChannelPointSettings.refreshUI();
 
 		ShortcutSettings.refreshUI();
 		RequestSettings.refreshUI();
