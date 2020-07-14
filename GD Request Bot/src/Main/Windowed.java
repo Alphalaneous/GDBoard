@@ -47,6 +47,12 @@ public class Windowed {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				Main.close();
+			}
+		});
 		URL iconURL = Windowed.class.getResource("/Resources/Icons/windowIcon.png");
 		ImageIcon icon = new ImageIcon(iconURL);
 		Image newIcon = icon.getImage().getScaledInstance(120, 120,  Image.SCALE_SMOOTH);
@@ -63,7 +69,6 @@ public class Windowed {
 		frame.setSize(width + 200,height+32 + 200);
 		frame.setLayout(null);
 		frame.setBackground(new Color(255, 255, 255, 0));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setBounds(0, 0, width + 200, height + 32 + 200);
 		mainFrame.setLayout(null);
 		mainFrame.setDoubleBuffered(true);

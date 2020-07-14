@@ -1,14 +1,18 @@
 package Main;
 
+import Main.InnerWindows.LevelsWindow;
 import Main.SettingsPanels.*;
 import com.jidesoft.swing.ResizablePanel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.util.Objects;
 
 public class InnerWindow extends ResizablePanel {
 
@@ -332,7 +336,19 @@ public class InnerWindow extends ResizablePanel {
 
 		//region WindowIcon attributes
 		windowIcon.setForeground(Defaults.FOREGROUND);
-		windowIcon.setText(icon);
+		if(title.startsWith("GDBoard")){
+			try {
+				windowIcon.setIcon(new ImageIcon(ImageIO
+						.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
+								.getResource("Resources/Icons/windowIcon.png")))
+						.getScaledInstance(18, 18, Image.SCALE_SMOOTH)));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			windowIcon.setText(icon);
+		}
 		windowIcon.setBounds(10, 0, 30, 30);
 		windowIcon.setFont(Defaults.SYMBOLS.deriveFont(14f));
 		topBar.add(windowIcon);

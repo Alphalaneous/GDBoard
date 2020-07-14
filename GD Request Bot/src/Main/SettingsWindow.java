@@ -67,7 +67,7 @@ public class SettingsWindow {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-
+				SettingsWindow.toggleVisible();
 			}
 		});
 		try {
@@ -81,7 +81,6 @@ public class SettingsWindow {
 		frame.setSize(width + 200,height+32 + 200);
 		frame.setLayout(null);
 		frame.setBackground(new Color(255, 255, 255, 0));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		blankSpace.setBounds(1, 31, 208, 20);
 		blankSpace.setBackground(Defaults.MAIN);
 

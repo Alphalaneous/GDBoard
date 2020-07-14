@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.net.URL;
 
 public class Overlay {
@@ -27,6 +29,7 @@ public class Overlay {
 
 		frame.setFocusableWindowState(false);
 		frame.setUndecorated(true);
+
 		if(!Settings.windowedMode) {
 			frame.setBackground(new Color(0, 0, 0, 100));
 			frame.addMouseListener(new MouseAdapter() {
@@ -116,6 +119,7 @@ public class Overlay {
 			MainBar.refreshUI(color);
 			//Randomizer.refreshUI();
 		}
+
 		CommentsWindow.refreshUI();
 		SettingsWindow.refreshUI();
 		LevelsWindow.refreshUI();
