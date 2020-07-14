@@ -13,67 +13,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/Main/InnerWindow.java" line="656" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/ActionsWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/ActionsWindow$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/ActionsWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/ActionsWindow$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/ActionsWindow$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/ActionsWindow$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/ActionsWindow$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/ActionsWindow$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/ActionsWindow$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/ActionsWindow$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/ActionsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/ActionsWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/CommentsWindow$1$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/CommentsWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/CommentsWindow$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/CommentsWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/CommentsWindow$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/CommentsWindow$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/CommentsWindow$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/CommentsWindow$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/CommentsWindow$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/CommentsWindow$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/CommentsWindow$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/CommentsWindow$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/CommentsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/CommentsWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/InfoWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/InfoWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/LevelsWindow$1$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/LevelsWindow$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/LevelsWindow$LevelButton$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/LevelsWindow$LevelButton$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/LevelsWindow$LevelButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/LevelsWindow$LevelButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/LevelsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/LevelsWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/SongWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/SongWindow$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/SongWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/SongWindow$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/SongWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/SongWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Onboarding.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Onboarding.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsPanels/WindowedSettings$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsPanels/WindowedSettings$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsPanels/WindowedSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsPanels/WindowedSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsWindow$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Defaults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Defaults.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/DialogBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/DialogBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/InnerWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/InnerWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/InnerWindows/ActionsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/InnerWindows/ActionsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/InnerWindows/CommentsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/InnerWindows/CommentsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/InnerWindows/LevelsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/InnerWindows/LevelsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/InnerWindows/SongWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/InnerWindows/SongWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Onboarding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Onboarding.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/SettingsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Windowed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Windowed.java" afterDir="false" />
-    </list>
+    <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -195,7 +135,7 @@
         <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="345">
-              <caret line="82" column="45" lean-forward="true" selection-start-line="82" selection-start-column="45" selection-end-line="82" selection-end-column="45" />
+              <caret line="82" column="45" selection-start-line="82" selection-start-column="45" selection-end-line="82" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -536,7 +476,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JAR Application.GD Request Bot.jar">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -655,7 +595,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="416" y="0" width="1518" height="1034" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21262003" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -666,7 +605,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4979424" weight="0.32519424" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4615912" visible="true" weight="0.19200888" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4615912" weight="0.19200888" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" weight="0.41847205" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1202,7 +1141,7 @@
     <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
-          <caret line="82" column="45" lean-forward="true" selection-start-line="82" selection-start-column="45" selection-end-line="82" selection-end-column="45" />
+          <caret line="82" column="45" selection-start-line="82" selection-start-column="45" selection-end-line="82" selection-end-column="45" />
         </state>
       </provider>
     </entry>
