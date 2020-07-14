@@ -18,7 +18,7 @@ import java.net.URL;
 public class Windowed {
 	private static int width = 465;
 	private static int height = 512;
-	public static ResizablePanel window = new InnerWindow("GDBoard - 0", Settings.getWindowWLoc().x, Settings.getWindowWLoc().y, width-2, height,
+	public static JPanel window = new InnerWindow("GDBoard - 0", Settings.getWindowWLoc().x, Settings.getWindowWLoc().y, width-2, height,
 			"\uF137", true).createPanel();
 	private static JPanel content = new JPanel(null);
 	private static JPanel buttonPanel = new JPanel();

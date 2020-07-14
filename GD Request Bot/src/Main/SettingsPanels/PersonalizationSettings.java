@@ -12,8 +12,6 @@ public class PersonalizationSettings {
 	private static CurvedButton windowedButton = new CurvedButton("Switch to Windowed Mode (Requires Restart)");
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static JPanel panel = new JPanel(null);
-	private static JTextArea otherInfo = new JTextArea("If you play GD in fullscreen, the overlay may not work. To fix drag the \noverlay to another monitor by clicking on the time near the top \nmiddle and dragging.");
-	private static JTextArea keybindInfo = new JTextArea("The \"Home\" key is default what you use to open the GDBoard Overlay, remember this!");
 
 
 	public static JPanel createPanel() {
@@ -46,7 +44,7 @@ public class PersonalizationSettings {
 					String option = null;
 					try {
 						if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
-							option = DialogBox.showDialogBox("Switch to Overlay?", "This will close GDboard and set to Overlay mode.", "You will have to reopen GDBoard.", new String[]{"Yes", "No"});
+							option = DialogBox.showDialogBox("Switch to Overlay?", "<html>If you play GD in fullscreen, this may not work, move it to another monitor by dragging the time to fix. Default is 'Home' key to open. You'll have to reopen GDBoard.", "", new String[]{"Yes", "No"});
 						}
 						else{
 							option = DialogBox.showDialogBox("Switch to Windowed?", "This will close GDboard and set to Windowed mode.", "You will have to reopen GDBoard.", new String[]{"Yes", "No"});
@@ -73,30 +71,9 @@ public class PersonalizationSettings {
 				}).start();
 			}
 		});
-		keybindInfo.setFont(Defaults.MAIN_FONT.deriveFont(12f));
-		keybindInfo.setBounds(25, 110, 365-10, keybindInfo.getPreferredSize().height + 5);
-		keybindInfo.setForeground(Color.RED);
-		keybindInfo.setEditable(false);
-		keybindInfo.setOpaque(false);
-		keybindInfo.setBackground(new Color(0,0,0,0));
-		keybindInfo.setBorder(BorderFactory.createEmptyBorder());
-		otherInfo.setFont(Defaults.MAIN_FONT.deriveFont(12f));
-		otherInfo.setBounds(25, 60, 365-10, otherInfo.getPreferredSize().height + 5);
-		otherInfo.setForeground(Color.RED);
-		otherInfo.setEditable(false);
-		otherInfo.setOpaque(false);
-		otherInfo.setBackground(new Color(0,0,0,0));
-		otherInfo.setBorder(BorderFactory.createEmptyBorder());
+
 		panel.add(windowedButton);
 
-		try {
-			if(Settings.getSettings("windowed").equalsIgnoreCase("true")) {
-				panel.add(keybindInfo);
-				panel.add(otherInfo);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		return panel;
 		
 	}
@@ -104,8 +81,6 @@ public class PersonalizationSettings {
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
-		otherInfo.setForeground(Color.RED);
-		otherInfo.setBackground(Defaults.SUB_MAIN);
 		panel.setBackground(Defaults.SUB_MAIN);
 		for (Component component : panel.getComponents()) {
 			if (component instanceof JButton) {

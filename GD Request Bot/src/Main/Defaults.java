@@ -75,7 +75,6 @@ public class Defaults {
 		}
 	}
 
-	static AtomicInteger loadPoint = new AtomicInteger();
 	static AtomicBoolean dark = new AtomicBoolean();
 	static AtomicBoolean loaded = new AtomicBoolean();
 	static AtomicBoolean colorsLoaded = new AtomicBoolean();
@@ -257,8 +256,6 @@ public class Defaults {
 					}
 					prevScreenSize = screenSize;
 
-					loadPoint.set(90);
-					DialogBox.setProgress(loadPoint.get());
 
 				try {
 					Thread.sleep(100);

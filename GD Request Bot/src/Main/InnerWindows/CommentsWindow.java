@@ -41,33 +41,8 @@ public class CommentsWindow {
 
 	private static int height = 350;
 	private static int width = 300;
-	private static ResizablePanel window = new InnerWindow("Comments", Settings.getCommentWLoc().x, Settings.getCommentWLoc().y, width, height,
-			"\uEBDB", false) {
-		@Override
-		protected Resizable createResizable() {
-
-			return new Resizable(this) {
-				@Override
-				public void resizing(int resizeCorner, int newX, int newY, int newW, int newH) {
-
-					if (!(newH < 100 || newH > 800)) {
-						if (newX + width >= 672 && newX <= 1248 && newY <= 93) {
-							newY = 93;
-						}
-						setBounds(getX(), newY, getWidth(), newH);
-						height = newH;
-						resetDimensions(width, newH - 32);
-						scrollPane.setBounds(0, 30, width, newH - 62);
-						mainPanel.setBounds(1, 1, width, height-2);
-
-						buttons.setBounds(0, mainPanel.getHeight() - 30, width, 30);
-						scrollPane.updateUI();
-					}
-				}
-			};
-		}
-
-	}.createPanel();
+	private static JPanel window = new InnerWindow("Comments", Settings.getCommentWLoc().x, Settings.getCommentWLoc().y, width, height,
+			"\uEBDB", false).createPanel();
 	private static JButtonUI newUI = new JButtonUI();
 	private static JScrollPane scrollPane = new JScrollPane(panel);
 	private static JPanel buttons = new JPanel();

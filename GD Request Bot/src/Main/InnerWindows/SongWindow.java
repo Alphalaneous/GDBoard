@@ -17,7 +17,7 @@ import javax.swing.*;
 public class SongWindow {
 	private static int height = 90;
 	private static int width = 300;
-	private static ResizablePanel window = new InnerWindow("Music - Newgrounds Audio", Settings.getSongWLoc().x, Settings.getSongWLoc().y, width, height, "\uEC4F", false).createPanel();
+	private static JPanel window = new InnerWindow("Music - Newgrounds Audio", Settings.getSongWLoc().x, Settings.getSongWLoc().y, width, height, "\uEC4F", false).createPanel();
 	private static JPanel panel = new JPanel();
 	private static JLabel songName = new JLabel();
 	private static JLabel songAuthorID = new JLabel();

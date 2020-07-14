@@ -19,7 +19,7 @@ import java.net.URL;
 public class Onboarding {
 	static int width = 465;
 	static int height = 512;
-	private static ResizablePanel window = new InnerWindow("Startup", 0, 0, width - 2, height,
+	private static JPanel window = new InnerWindow("Startup", 0, 0, width - 2, height,
 			"\uF137", true).createPanel();
 	private static JPanel content = new JPanel(null);
 	private static JButtonUI defaultUI = new JButtonUI();

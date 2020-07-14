@@ -16,7 +16,7 @@ import Main.SettingsPanels.*;
 public class SettingsWindow {
 	private static int width = 622;
 	private static int height = 622;
-	public static ResizablePanel window;
+	public static JPanel window;
 	static{
 		try {
 			if(Settings.getSettings("windowed").equalsIgnoreCase("true")){

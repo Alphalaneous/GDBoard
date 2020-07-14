@@ -26,27 +26,7 @@ public class LevelsWindow {
 	private static int buttonWidth = 385;
 
 	private static int height = 400;
-	private static ResizablePanel window = new InnerWindow("Requests - 0", Settings.getRequestsWLoc().x, Settings.getRequestsWLoc().y, width, height, "\uE179", false) {
-		@Override
-		protected Resizable createResizable() {
-			return new Resizable(this) {
-				@Override
-				public void resizing(int resizeCorner, int newX, int newY, int newW, int newH) {
-					if (!(newH < 80 || newH > 800)) {
-
-						if (newX + width >= 672 && newX <= 1248 && newY <= 93) {
-							newY = 93;
-						}
-						setBounds(getX(), newY, getWidth(), newH);
-						resetDimensions(width, newH - 32);
-						scrollPane.setBounds(1, 31, width, newH - 32);
-						scrollPane.updateUI();
-
-					}
-				}
-			};
-		}
-	}.createPanel();
+	private static JPanel window = new InnerWindow("Requests - 0", Settings.getRequestsWLoc().x, Settings.getRequestsWLoc().y, width, height, "\uE179", false).createPanel();
 	private static JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
 	private static int selectedID = 0;
 	private static int prevSelectedID = 0;

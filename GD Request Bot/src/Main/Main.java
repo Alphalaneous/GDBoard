@@ -52,7 +52,7 @@ public class Main {
 	static boolean doImage  = false;
 	private static ChatReader chatReader = new ChatReader();
 	private static ChannelPointListener client;
-
+	private static boolean passed = false;
 	static {
 		try {
 			client = new ChannelPointListener(new URI("wss://pubsub-edge.twitch.tv"));
@@ -63,6 +63,12 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		HashMap<Object, Object> progressDefaults = new HashMap<>();
+		for(Map.Entry<Object, Object> entry : UIManager.getDefaults().entrySet()){
+			if(entry.getKey().getClass() == String.class && ((String)entry.getKey()).startsWith("ProgressBar")){
+				progressDefaults.put(entry.getKey(), entry.getValue());
+			}
+		}
 
 		Path conf = Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf");
 		Path confzip = Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf.zip");
@@ -133,13 +139,26 @@ public class Main {
 				public void provideErrorFeedback(Component component) {
 				}
 			});
-			ColorUIResource colorResource = new ColorUIResource(new Color(0, 255, 12).darker());
-			UIManager.put("nimbusOrange",colorResource);
+			for(Map.Entry<Object, Object> entry : progressDefaults.entrySet()){
+				UIManager.getDefaults().put(entry.getKey(), entry.getValue());
+			}
+
+			new Thread(() -> {
+				for(int i = 0; i < 90; i++){
+					if(passed){
+						break;
+					}
+					try {
+						Thread.sleep(30);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					DialogBox.setProgress(i);
+				}
+			}).start();
 
 			LoadGD.load();
 			Assets.loadAssets();
-			Defaults.loadPoint.set(40);
-			DialogBox.setProgress(Defaults.loadPoint.get());
 
 			client.connect();
 			Defaults.startMainThread();        //Starts thread that always checks for changes such as time, resolution, and color scheme
@@ -148,17 +167,25 @@ public class Main {
 				Thread.sleep(10);
 			}
 			Thread.sleep(500);
-			Defaults.loadPoint.set(95);
-			DialogBox.setProgress(Defaults.loadPoint.get());
+
+
 
 			while(!Defaults.colorsLoaded.get()){
 				Thread.sleep(10);
 			}
-			Defaults.loadPoint.set(100);
-			DialogBox.setProgress(Defaults.loadPoint.get());
-
-			DialogBox.closeDialogBox();
+			passed = true;
+			new Thread(() -> {
+				for(int i = 90; i < 100; i++){
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					DialogBox.setProgress(i);
+				}
+			}).start();
 			Thread.sleep(500);
+			DialogBox.closeDialogBox();
 			if(Settings.getSettings("onboarding").equalsIgnoreCase("")){
 				Onboarding.createPanel();
 				Onboarding.loadSettings();

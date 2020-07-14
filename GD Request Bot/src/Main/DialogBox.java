@@ -121,8 +121,9 @@ public class DialogBox {
 			if(progressBar){
 				loadingBar = new JProgressBar();
 				loadingBar.setValue(0);
-				loadingBar.setStringPainted(true);
-				loadingBar.setBounds(35,110,330,8);
+				loadingBar.setStringPainted(false);
+				loadingBar.setBounds(35,110,330,2);
+				loadingBar.setForeground(new Color(0, 255, 12).darker());
 				loadingBar.setBorderPainted(false);
 				loadingBar.setBorder(BorderFactory.createEmptyBorder());
 				loadingBar.setVisible(true);

@@ -12,7 +12,7 @@ public class ActionsWindow {
 
 	private static int height = 60;
 	private static int width = 300;
-	private static ResizablePanel window = new InnerWindow("Actions", Settings.getActionsWLoc().x, Settings.getActionsWLoc().y, width, height,
+	private static JPanel window = new InnerWindow("Actions", Settings.getActionsWLoc().x, Settings.getActionsWLoc().y, width, height,
 			"\uE7C9", false).createPanel();
 	private static JPanel mainPanel = new JPanel();
 	private static JPanel panel = new JPanel();

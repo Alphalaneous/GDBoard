@@ -14,7 +14,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.Objects;
 
-public class InnerWindow extends ResizablePanel {
+public class InnerWindow extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private String title;
@@ -99,7 +99,7 @@ public class InnerWindow extends ResizablePanel {
 		return icon;
 	}
 	//region Create InnerWindow
-	public ResizablePanel createPanel() {
+	public JPanel createPanel() {
 
 		//region No Click Through listener
 		setDoubleBuffered(true);
