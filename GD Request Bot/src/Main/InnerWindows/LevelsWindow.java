@@ -12,8 +12,11 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
+import java.util.Scanner;
 
 import static javax.swing.ScrollPaneConstants.*;
 

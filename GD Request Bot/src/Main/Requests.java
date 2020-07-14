@@ -1079,6 +1079,7 @@ public class Requests {
 	}
 
 	private static void parse(byte[] level, long levelID) {
+		boolean image = false;
 		all:
 		for (int k = 0; k < Requests.levels.size(); k++) {
 			if (Requests.levels.get(k).getLevelID() == levelID) {
@@ -1160,7 +1161,7 @@ public class Requests {
 								}
 							}
 							if (imageIDCount >= 1000) {
-								Requests.levels.get(k).setContainsImage();
+								image = true;
 							}
 							color = tempColor;
 						} catch (IOException e) {
@@ -1174,7 +1175,24 @@ public class Requests {
 						e.printStackTrace();
 					}
 				}
-
+				try {
+					URL ids = new URL("https://raw.githubusercontent.com/Alphatism/GDBoard/Master/GD%20Request%20Bot/External/false%20positives.txt");
+					Scanner s = new Scanner(ids.openStream());
+					while (s.hasNextLine()) {
+						String lineA = s.nextLine();
+						if (lineA.equalsIgnoreCase(String.valueOf(levelID))) {
+							image = false;
+							break;
+						}
+					}
+					s.close();
+				}
+				catch (IOException e){
+					e.printStackTrace();
+				}
+				if(image) {
+					Requests.levels.get(k).setContainsImage();
+				}
 				try {
 					Thread.sleep(250);
 				} catch (InterruptedException e) {
