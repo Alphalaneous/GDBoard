@@ -309,6 +309,7 @@ public class ChannelPointSettings {
 		commandLabel.setForeground(Defaults.FOREGROUND);
 		commandsPanel.setBackground(Defaults.SUB_MAIN);
 		commandPanelView.setBackground(Defaults.SUB_MAIN);
+		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
 		codeInput.setForeground(Defaults.FOREGROUND);
 		codeInput.setBackground(Defaults.MAIN);
 		codeInput.setCurrentLineHighlightColor(Defaults.BUTTON);

@@ -15,6 +15,15 @@
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/Overlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Overlay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedCreatorSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedCreatorSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedUserSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedUserSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/ChannelPointSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/ChannelPointSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/CheerSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/CheerSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/RequestsLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/RequestsLog.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -48,47 +57,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="131" column="25" selection-start-line="131" selection-start-column="25" selection-end-line="131" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <marker date="1594691172541" expanded="false" signature="3326:3522" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/JButtonTooltip.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/.version">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
+              <caret column="13" selection-start-column="13" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/InnerWindow.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/BlockedUserSettings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="455">
-              <caret line="343" column="49" selection-start-line="343" selection-start-column="49" selection-end-line="343" selection-end-column="49" />
-              <folding>
-                <element signature="e#21723#21724#0" expanded="true" />
-                <element signature="e#21827#21828#0" expanded="true" />
-                <element signature="e#21910#21911#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="215">
+              <caret line="203" column="49" selection-start-line="203" selection-start-column="49" selection-end-line="203" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/RequestsLog.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="244">
+              <caret line="148" column="48" selection-start-line="148" selection-start-column="48" selection-end-line="148" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="537">
+              <caret line="586" column="67" selection-start-line="586" selection-start-column="67" selection-end-line="586" selection-end-column="67" />
             </state>
           </provider>
         </entry>
@@ -96,60 +96,53 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Overlay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="31" selection-start-line="31" selection-end-line="31" />
+            <state relative-caret-position="311">
+              <caret line="134" column="34" selection-start-line="134" selection-start-column="34" selection-end-line="134" selection-end-column="34" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Windowed.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/RequestSettings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="70" column="57" selection-start-line="70" selection-start-column="57" selection-end-line="70" selection-end-column="57" />
-              <folding>
-                <element signature="e#1623#1730#0" expanded="true" />
-                <element signature="e#1729#1730#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="368">
+              <caret line="640" selection-start-line="640" selection-end-line="640" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/SettingsWindow.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/ChannelPointSettings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="415">
+              <caret line="310" column="58" selection-start-line="310" selection-start-column="58" selection-end-line="310" selection-end-column="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/CheerSettings.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="369">
-              <caret line="76" column="33" selection-start-line="76" selection-start-column="33" selection-end-line="76" selection-end-column="33" />
-              <folding>
-                <element signature="e#2614#2739#0" expanded="true" />
-                <element signature="e#2738#2739#0" expanded="true" />
-              </folding>
+              <caret line="309" column="58" selection-start-line="309" selection-start-column="58" selection-end-line="309" selection-end-column="58" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Functions.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/BlockedCreatorSettings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3851">
-              <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="307">
+              <caret line="206" column="67" selection-start-line="206" selection-start-column="67" selection-end-line="206" selection-end-column="67" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Resources/Icons/windowIcon.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Assets.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/BlockedSettings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="28" column="74" selection-start-line="25" selection-start-column="50" selection-end-line="28" selection-end-column="74" />
+            <state relative-caret-position="286">
+              <caret line="206" column="67" selection-start-line="206" selection-start-column="67" selection-end-line="206" selection-end-column="67" />
             </state>
           </provider>
         </entry>
@@ -229,33 +222,33 @@
         <option value="$PROJECT_DIR$/src/Main/ServerChatBot.java" />
         <option value="$PROJECT_DIR$/src/Main/APIs.java" />
         <option value="$PROJECT_DIR$/src/Main/ChatReader.java" />
-        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedUserSettings.java" />
-        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedSettings.java" />
-        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/RequestsLog.java" />
         <option value="$PROJECT_DIR$/src/Main/Functions.java" />
-        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/ChannelPointSettings.java" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/!stoprick.js" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/!rick.js" />
         <option value="$PROJECT_DIR$/src/Main/InnerWindows/BlockedGDUserSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/InnerWindows/Twitch.java" />
         <option value="$PROJECT_DIR$/src/Main/Twitch.java" />
         <option value="$PROJECT_DIR$/src/Main/Sounds.java" />
-        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/CheerSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/Board.java" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/!popup.js" />
         <option value="$PROJECT_DIR$/src/Main/GDBoardBot.java" />
-        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedGDUserSettings.java" />
-        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedCreatorSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/Defaults.java" />
         <option value="$PROJECT_DIR$/src/Main/DialogBox.java" />
         <option value="$PROJECT_DIR$/src/Main/Main.java" />
         <option value="$PROJECT_DIR$/src/Main/InnerWindows/LevelsWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/Requests.java" />
         <option value="$PROJECT_DIR$/src/Main/InnerWindow.java" />
-        <option value="$PROJECT_DIR$/src/Main/Overlay.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/Windowed.java" />
+        <option value="$PROJECT_DIR$/src/Main/Overlay.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/ChannelPointSettings.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/CheerSettings.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedCreatorSettings.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedSettings.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedUserSettings.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/RequestsLog.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java" />
         <option value="$PROJECT_DIR$/src/.version" />
       </list>
     </option>
@@ -266,11 +259,10 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="23" />
-    <option name="y" value="73" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="416" />
     <option name="width" value="1518" />
-    <option name="height" value="1010" />
+    <option name="height" value="1034" />
   </component>
   <component name="ProjectId" id="1X2386Wf5oMdxwOPKjpPdGzrXYK" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -446,7 +438,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1594705306178" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1594705825719" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Code Stuff/Java Libraries/javafx-sdk-11.0.2/lib/javafx.web.jar!/" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -609,10 +601,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="416" y="0" width="1518" height="1034" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16311301" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20987654" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -621,13 +613,13 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4979424" weight="0.32519424" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4717484" visible="true" weight="0.18743229" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.47187927" visible="true" weight="0.19200888" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" weight="0.41847205" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5282516" side_tool="true" visible="true" weight="0.18743229" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5281207" side_tool="true" visible="true" weight="0.19200888" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32990867" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.43550107" weight="0.18743229" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -849,20 +841,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/RequestsLog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1632">
-          <caret line="108" column="13" selection-start-line="108" selection-start-column="13" selection-end-line="108" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/RequestSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1326">
-          <caret line="91" column="32" selection-start-line="86" selection-start-column="8" selection-end-line="95" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/InnerWindows/CommentsWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3723">
@@ -991,41 +969,6 @@
     <entry file="file://$PROJECT_DIR$/src/Resources/cheers/ca5e8584-d6b3-4278-8304-a4a44e633292.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="380" column="59" selection-start-line="380" selection-start-column="59" selection-end-line="380" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/CheerSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="155" selection-start-line="155" selection-end-line="155" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/ChannelPointSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-195">
-          <caret line="144" column="42" selection-start-line="144" selection-start-column="42" selection-end-line="144" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/BlockedUserSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="153" column="13" selection-start-line="153" selection-start-column="13" selection-end-line="153" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/BlockedSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="152" column="13" selection-start-line="152" selection-start-column="13" selection-end-line="152" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/GDBoardBot.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -1065,13 +1008,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1904">
           <caret line="123" column="17" selection-start-line="113" selection-start-column="16" selection-end-line="123" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/BlockedCreatorSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2703">
-          <caret line="170" column="20" selection-start-line="170" selection-start-column="20" selection-end-line="170" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -1158,13 +1094,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Overlay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Functions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3851">
@@ -1197,10 +1126,73 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Overlay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="134" column="34" selection-start-line="134" selection-start-column="34" selection-end-line="134" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/RequestSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="640" selection-start-line="640" selection-end-line="640" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/ChannelPointSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="310" column="58" selection-start-line="310" selection-start-column="58" selection-end-line="310" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/CheerSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="309" column="58" selection-start-line="309" selection-start-column="58" selection-end-line="309" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/BlockedCreatorSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="206" column="67" selection-start-line="206" selection-start-column="67" selection-end-line="206" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/BlockedSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="206" column="67" selection-start-line="206" selection-start-column="67" selection-end-line="206" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/BlockedUserSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="203" column="49" selection-start-line="203" selection-start-column="49" selection-end-line="203" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/RequestsLog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="148" column="48" selection-start-line="148" selection-start-column="48" selection-end-line="148" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="537">
+          <caret line="586" column="67" selection-start-line="586" selection-start-column="67" selection-end-line="586" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/.version">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
+          <caret column="13" selection-start-column="13" selection-end-column="13" />
         </state>
       </provider>
     </entry>

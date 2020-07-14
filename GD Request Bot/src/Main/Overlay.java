@@ -128,9 +128,11 @@ public class Overlay {
 		PersonalizationSettings.refreshUI();
 		BlockedSettings.refreshUI();
 		BlockedUserSettings.refreshUI();
+		BlockedCreatorSettings.refreshUI();
 		GeneralSettings.refreshUI();
 		CommandSettings.refreshUI();
 		ChannelPointSettings.refreshUI();
+		CheerSettings.refreshUI();
 
 		ShortcutSettings.refreshUI();
 		RequestSettings.refreshUI();

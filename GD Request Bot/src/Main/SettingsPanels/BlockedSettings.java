@@ -204,6 +204,7 @@ public class BlockedSettings {
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
 
+		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
 		blockedSettingsPanel.setBackground(Defaults.TOP);
 		for (Component component : blockedSettingsPanel.getComponents()) {
 			if (component instanceof JButton) {
