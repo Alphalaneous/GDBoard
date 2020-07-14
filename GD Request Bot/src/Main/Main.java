@@ -133,7 +133,7 @@ public class Main {
 				public void provideErrorFeedback(Component component) {
 				}
 			});
-			ColorUIResource colorResource = new ColorUIResource(new Color(0, 255, 12));
+			ColorUIResource colorResource = new ColorUIResource(new Color(0, 255, 12).darker());
 			UIManager.put("nimbusOrange",colorResource);
 
 			LoadGD.load();
