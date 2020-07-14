@@ -16,8 +16,10 @@ import org.reflections.scanners.SubTypesScanner;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.basic.BasicLookAndFeel;
 import javax.swing.plaf.metal.MetalLookAndFeel;
+import javax.swing.plaf.multi.MultiLookAndFeel;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -126,15 +128,13 @@ public class Main {
 
 			//dialog.setVisible(true);
 
-			UIManager.setLookAndFeel(new MetalLookAndFeel() {
+			UIManager.setLookAndFeel(new NimbusLookAndFeel() {
 				@Override
 				public void provideErrorFeedback(Component component) {
 				}
 			});
-			UIManager.put("ProgressBar.selectionBackground", Color.WHITE);
-			UIManager.put("ProgressBar.selectionForeground",new Color(0, 255, 12));
-			UIManager.put("ProgressBar.foreground", new Color(0, 255, 12));
-			UIManager.put("ProgressBar.background", Color.WHITE);
+			ColorUIResource colorResource = new ColorUIResource(new Color(0, 255, 12));
+			UIManager.put("nimbusOrange",colorResource);
 
 			LoadGD.load();
 			Assets.loadAssets();

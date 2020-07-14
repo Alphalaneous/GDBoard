@@ -122,7 +122,7 @@ public class DialogBox {
 				loadingBar = new JProgressBar();
 				loadingBar.setValue(0);
 				loadingBar.setStringPainted(true);
-				loadingBar.setBounds(35,110,330,4);
+				loadingBar.setBounds(35,110,330,8);
 				loadingBar.setBorderPainted(false);
 				loadingBar.setBorder(BorderFactory.createEmptyBorder());
 				loadingBar.setVisible(true);
