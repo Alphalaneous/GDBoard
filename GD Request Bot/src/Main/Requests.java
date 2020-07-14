@@ -926,9 +926,28 @@ public class Requests {
 				Path path = it.next();
 				String[] file = path.toString().split("/");
 				String fileName = file[file.length - 1];
+				ArrayList<String> disabledCommands = new ArrayList<>();
+				if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/disable.txt"))) {
+					Scanner sc2 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/disable.txt").toFile());
+					while (sc2.hasNextLine()) {
+						String line = sc2.nextLine();
+						disabledCommands.add(line);
+					}
+					sc2.close();
+				}
 				if(fileName.endsWith(".js")) {
-					if(!fileName.equalsIgnoreCase("!rick.js") && !fileName.equalsIgnoreCase("!stoprick.js") && !fileName.equalsIgnoreCase("!kill.js")) {
-						message.append(" | ").append(fileName, 0, fileName.length() - 3);
+					if(!disabledCommands.contains(fileName.substring(0, fileName.length()-3))) {
+						if (!fileName.equalsIgnoreCase("!rick.js") &&
+								!fileName.equalsIgnoreCase("!stoprick.js") &&
+								!fileName.equalsIgnoreCase("!kill.js") &&
+								!fileName.equalsIgnoreCase("!eval.js") &&
+								!fileName.equalsIgnoreCase("!stop.js") &&
+								!fileName.equalsIgnoreCase("!end.js") &&
+								!fileName.equalsIgnoreCase("!kill.js") &&
+								!fileName.equalsIgnoreCase("!popup.js") &&
+								!fileName.equalsIgnoreCase("!gd.js")) {
+							message.append(" | ").append(fileName, 0, fileName.length() - 3);
+						}
 					}
 				}
 			}
@@ -938,9 +957,20 @@ public class Requests {
 				for (Iterator<Path> it = walk1.iterator(); it.hasNext(); ) {
 					Path path = it.next();
 					String[] file = path.toString().split("\\\\");
+					ArrayList<String> disabledCommands = new ArrayList<>();
+					if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/disable.txt"))) {
+						Scanner sc2 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/disable.txt").toFile());
+						while (sc2.hasNextLine()) {
+							String line = sc2.nextLine();
+							disabledCommands.add(line);
+						}
+						sc2.close();
+					}
 					String fileName = file[file.length - 1];
-					if (fileName.endsWith(".js")) {
-						message.append(" | ").append(fileName, 0, fileName.length() - 3);
+					if(!disabledCommands.contains(fileName.substring(0, fileName.length()-3))) {
+						if (fileName.endsWith(".js")) {
+							message.append(" | ").append(fileName, 0, fileName.length() - 3);
+						}
 					}
 				}
 			}

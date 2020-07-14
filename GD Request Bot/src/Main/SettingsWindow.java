@@ -1,6 +1,6 @@
 package Main;
 
-import Main.InnerWindows.BlockedGDUserSettings;
+import Main.SettingsPanels.BlockedCreatorSettings;
 import com.jidesoft.swing.ResizablePanel;
 
 import java.awt.*;
@@ -9,14 +9,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.URL;
-import java.util.Set;
 import javax.swing.*;
 import Main.SettingsPanels.*;
-import org.reflections.Reflections;
-import org.reflections.scanners.SubTypesScanner;
 
 public class SettingsWindow {
 	private static int width = 622;
@@ -54,7 +49,7 @@ public class SettingsWindow {
 	private static JPanel personalization = PersonalizationSettings.createPanel();
 	private static JPanel blocked = BlockedSettings.createPanel();
 	private static JPanel blockedUsers = BlockedUserSettings.createPanel();
-	private static JPanel blockedCreators = BlockedGDUserSettings.createPanel();
+	private static JPanel blockedCreators = BlockedCreatorSettings.createPanel();
 
 	private static JPanel loggedIDs = RequestsLog.createPanel();
 	public static JFrame frame = new JFrame();

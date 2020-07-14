@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Defaults {
 
@@ -74,6 +75,7 @@ public class Defaults {
 		}
 	}
 
+	static AtomicInteger loadPoint = new AtomicInteger();
 	static AtomicBoolean dark = new AtomicBoolean();
 	static AtomicBoolean loaded = new AtomicBoolean();
 	static AtomicBoolean colorsLoaded = new AtomicBoolean();
@@ -185,6 +187,8 @@ public class Defaults {
 			Defaults.setDark();
 			dark.set(false);
 		}
+
+
 		Thread thread = new Thread(() -> {
 			while (true) {
 
@@ -252,6 +256,9 @@ public class Defaults {
 						}
 					}
 					prevScreenSize = screenSize;
+
+					loadPoint.set(90);
+					DialogBox.setProgress(loadPoint.get());
 
 				try {
 					Thread.sleep(100);

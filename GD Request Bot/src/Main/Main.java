@@ -16,6 +16,8 @@ import org.reflections.scanners.SubTypesScanner;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicLookAndFeel;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -116,7 +118,7 @@ public class Main {
 			logger.setUseParentHandlers(false);
 
 			new Thread(() -> {
-				String choice = DialogBox.showDialogBox("Loading GDBoard...", "This may take a few seconds", "", new String[]{"Cancel"});
+				String choice = DialogBox.showDialogBox("Loading GDBoard...", "This may take a few seconds", "", new String[]{"Cancel"}, true);
 				if(choice.equalsIgnoreCase("Cancel")){
 					close();
 				}
@@ -124,27 +126,37 @@ public class Main {
 
 			//dialog.setVisible(true);
 
-			UIManager.setLookAndFeel(new NimbusLookAndFeel() {
+			UIManager.setLookAndFeel(new MetalLookAndFeel() {
 				@Override
 				public void provideErrorFeedback(Component component) {
 				}
 			});
+			UIManager.put("ProgressBar.selectionBackground", Color.WHITE);
+			UIManager.put("ProgressBar.selectionForeground",new Color(0, 255, 12));
+			UIManager.put("ProgressBar.foreground", new Color(0, 255, 12));
+			UIManager.put("ProgressBar.background", Color.WHITE);
+
 			LoadGD.load();
 			Assets.loadAssets();
+			Defaults.loadPoint.set(40);
+			DialogBox.setProgress(Defaults.loadPoint.get());
+
 			client.connect();
 			Defaults.startMainThread();        //Starts thread that always checks for changes such as time, resolution, and color scheme
-			int i = 0;
+
 			while(!Defaults.loaded.get()){
-				System.out.println("Loading... " + i);
 				Thread.sleep(10);
-				i++;
 			}
 			Thread.sleep(500);
-			i = 0;
+			Defaults.loadPoint.set(95);
+			DialogBox.setProgress(Defaults.loadPoint.get());
+
 			while(!Defaults.colorsLoaded.get()){
-				System.out.println("Loading Colors... " + i);
 				Thread.sleep(10);
 			}
+			Defaults.loadPoint.set(100);
+			DialogBox.setProgress(Defaults.loadPoint.get());
+
 			DialogBox.closeDialogBox();
 			Thread.sleep(500);
 			if(Settings.getSettings("onboarding").equalsIgnoreCase("")){

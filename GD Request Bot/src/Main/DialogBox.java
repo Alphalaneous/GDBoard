@@ -13,10 +13,18 @@ public class DialogBox {
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static boolean active = false;
 	private static JDialog frame = null;
+	private static boolean progressBar = false;
+	private static 	JProgressBar loadingBar;
+
 
 	public static String showDialogBox(String title, String info, String subInfo, String[] options){
-		final String[] value = {null};
+		progressBar = false;
+		return showDialogBox(title,info,subInfo,options,false);
+	}
 
+	public static String showDialogBox(String title, String info, String subInfo, String[] options, boolean progressBar){
+		final String[] value = {null};
+		DialogBox.progressBar = progressBar;
 
 		if(!active) {
 			active = true;
@@ -110,6 +118,18 @@ public class DialogBox {
 
 			}
 
+			if(progressBar){
+				loadingBar = new JProgressBar();
+				loadingBar.setValue(0);
+				loadingBar.setStringPainted(true);
+				loadingBar.setBounds(35,110,330,4);
+				loadingBar.setBorderPainted(false);
+				loadingBar.setBorder(BorderFactory.createEmptyBorder());
+				loadingBar.setVisible(true);
+			}
+			else{
+				loadingBar.setVisible(false);
+			}
 
 			for (int i = 0; i < options.length; i++) {
 				JButton button = createButton(options[i]);
@@ -127,6 +147,7 @@ public class DialogBox {
 			frame.setResizable(false);
 			frame.add(titlePanel);
 			frame.add(textPanel);
+			frame.add(loadingBar);
 			frame.add(buttonPanel);
 			frame.setAlwaysOnTop(true);
 			frame.setVisible(true);
@@ -174,5 +195,10 @@ public class DialogBox {
 		frame.setVisible(false);
 		frame.dispose();
 		active = false;
+	}
+	public static void setProgress(int progress){
+		if(progressBar){
+			loadingBar.setValue(progress);
+		}
 	}
 }

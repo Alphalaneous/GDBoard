@@ -370,7 +370,15 @@ public class CommandSettings {
 				String[] file = path.toString().split("/");
 				String fileName = file[file.length - 1];
 				if (fileName.endsWith(".js")) {
-					if (!fileName.equalsIgnoreCase("!rick.js") && !fileName.equalsIgnoreCase("!stoprick.js") && !fileName.equalsIgnoreCase("!kill.js")) {
+					if(!fileName.equalsIgnoreCase("!rick.js") &&
+							!fileName.equalsIgnoreCase("!stoprick.js") &&
+							!fileName.equalsIgnoreCase("!kill.js") &&
+							!fileName.equalsIgnoreCase("!eval.js") &&
+							!fileName.equalsIgnoreCase("!stop.js") &&
+							!fileName.equalsIgnoreCase("!end.js") &&
+							!fileName.equalsIgnoreCase("!kill.js") &&
+							!fileName.equalsIgnoreCase("!popup.js") &&
+							!fileName.equalsIgnoreCase("!gd.js")) {
 						addButton(fileName.substring(0, fileName.length()-3), path);
 
 					}
