@@ -313,6 +313,7 @@ public class APIs {
 			rt.exec("rundll32 url.dll,FileProtocolHandler " + authUrl);
 			if (twitch.auth().awaitAccessToken()) {
 				Settings.writeSettings("oauth", twitch.auth().getAccessToken());
+				Settings.writeSettings("channel", getChannel());
 
 				success.set(true);
 				try {

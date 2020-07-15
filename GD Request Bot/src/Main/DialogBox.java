@@ -109,7 +109,7 @@ public class DialogBox {
 					 screenSize = GraphicsEnvironment
 							.getLocalGraphicsEnvironment()
 							.getScreenDevices()[Integer.parseInt(Settings.getSettings("monitor"))].getDefaultConfiguration().getBounds();
-				} catch (IOException e) {
+				} catch (Exception e) {
 					screenSize = GraphicsEnvironment
 							.getLocalGraphicsEnvironment()
 							.getScreenDevices()[0].getDefaultConfiguration().getBounds();

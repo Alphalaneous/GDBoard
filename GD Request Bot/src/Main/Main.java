@@ -50,7 +50,7 @@ public class Main {
 	static boolean allowRequests = false;
 	static boolean doMessage  = false;
 	static boolean doImage  = false;
-	private static ChatReader chatReader = new ChatReader();
+	private static ChatReader chatReader;
 	private static ChannelPointListener client;
 	private static boolean passed = false;
 	static {
@@ -160,7 +160,6 @@ public class Main {
 			LoadGD.load();
 			Assets.loadAssets();
 
-			client.connect();
 			Defaults.startMainThread();        //Starts thread that always checks for changes such as time, resolution, and color scheme
 
 			while(!Defaults.loaded.get()){
@@ -201,6 +200,7 @@ public class Main {
 				if (!starting) {
 					Settings.loadSettings(true);
 					GDBoardBot.start();
+					client.connect();
 
 					if (!Settings.hasMonitor) {
 						Settings.writeSettings("monitor", "0");
@@ -261,7 +261,7 @@ public class Main {
 					Thread thread1 = new Thread(() -> runKeyboardHook());
 					ControllerListener.hook();
 					thread1.start();
-
+					chatReader = new ChatReader();
 					Thread thread = new Thread(() -> {
 						chatReader.connect();
 						try {

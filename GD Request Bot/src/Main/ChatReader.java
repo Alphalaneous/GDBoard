@@ -14,7 +14,7 @@ public class ChatReader extends TwitchBot {
 		this.setUsername("chatBot");
 		try {
 			this.setOauth_Key("oauth:" + Settings.getSettings("oauth"));
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
