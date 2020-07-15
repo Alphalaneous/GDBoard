@@ -25,6 +25,8 @@ public class LoadGD {
 	public static Object client;
 	public static boolean isAuth = false;
 	public static boolean timeout = false;
+	public static boolean loaded = false;
+
 
 	public static void load() throws IOException {
 
@@ -68,6 +70,9 @@ public class LoadGD {
 						username = gameText[i + 1].replace("    <s>", "").replace("</s>", "").replace("\0", "").replace("\r", "").replace("\n", "");
 					}
 				}
+				else{
+					break;
+				}
 			}
 			try {
 				if (!timeout) {
@@ -81,6 +86,7 @@ public class LoadGD {
 				}
 			}
 		}
+		loaded = true;;
 	}
 	private static String prettyFormat(String input) {
 		try {

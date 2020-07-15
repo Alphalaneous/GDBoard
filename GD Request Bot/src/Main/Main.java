@@ -157,7 +157,24 @@ public class Main {
 				}
 			}).start();
 
-			LoadGD.load();
+			new Thread(() -> {
+				try {
+					LoadGD.load();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				while(!LoadGD.loaded){
+					if(LoadGD.timeout){
+						break;
+					}
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}).start();
+
 			Assets.loadAssets();
 
 			Defaults.startMainThread();        //Starts thread that always checks for changes such as time, resolution, and color scheme
