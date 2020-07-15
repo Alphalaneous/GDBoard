@@ -15,7 +15,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/RequestSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/RequestSettings.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -49,7 +48,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/.version">
           <provider selected="true" editor-type-id="text-editor">
             <state>
@@ -58,24 +57,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/RequestSettings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="981" column="27" selection-start-line="981" selection-start-column="27" selection-end-line="981" selection-end-column="27" />
+            <state relative-caret-position="434">
+              <caret line="1044" column="55" selection-start-line="1044" selection-start-column="55" selection-end-line="1044" selection-end-column="55" />
               <folding>
                 <element signature="e#6284#6473#0" expanded="true" />
                 <element signature="e#6472#6473#0" expanded="true" />
-                <element signature="e#9608#9756#0" expanded="true" />
-                <element signature="e#9755#9756#0" expanded="true" />
-                <element signature="e#6202#6540#0" expanded="true" />
-                <element signature="e#6539#6540#0" expanded="true" />
-                <element signature="e#19471#20515#0" expanded="true" />
-                <element signature="e#20514#20515#0" expanded="true" />
-                <element signature="e#20908#21963#0" expanded="true" />
-                <element signature="e#21962#21963#0" expanded="true" />
-                <element signature="e#30569#32220#0" expanded="true" />
-                <element signature="e#32219#32220#0" expanded="true" />
+                <element signature="e#9526#9674#0" expanded="true" />
+                <element signature="e#9673#9674#0" expanded="true" />
+                <element signature="e#10498#10836#0" expanded="true" />
+                <element signature="e#10835#10836#0" expanded="true" />
+                <element signature="e#19389#20433#0" expanded="true" />
+                <element signature="e#20432#20433#0" expanded="true" />
+                <element signature="e#20826#21881#0" expanded="true" />
+                <element signature="e#21880#21881#0" expanded="true" />
+                <element signature="e#30487#32138#0" expanded="true" />
+                <element signature="e#32137#32138#0" expanded="true" />
                 <element signature="e#31689#31690#0" expanded="true" />
                 <element signature="e#31723#31724#0" expanded="true" />
               </folding>
@@ -289,8 +288,8 @@
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/GeneralSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/CheckboxButton.java" />
         <option value="$PROJECT_DIR$/src/Main/Requests.java" />
-        <option value="$PROJECT_DIR$/src/.version" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/RequestSettings.java" />
+        <option value="$PROJECT_DIR$/src/.version" />
       </list>
     </option>
   </component>
@@ -479,7 +478,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1594774836124" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1594774871639" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Code Stuff/Java Libraries/javafx-sdk-11.0.2/lib/javafx.web.jar!/" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -643,7 +642,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="409" y="0" width="1518" height="1034" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.218107" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -654,7 +652,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4979424" weight="0.32519424" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.46021947" visible="true" weight="0.19200888" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.46021947" weight="0.19200888" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49946696" weight="0.41847205" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1252,33 +1250,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/RequestSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="1044" column="55" selection-start-line="1044" selection-start-column="55" selection-end-line="1044" selection-end-column="55" />
+          <folding>
+            <element signature="e#6284#6473#0" expanded="true" />
+            <element signature="e#6472#6473#0" expanded="true" />
+            <element signature="e#9526#9674#0" expanded="true" />
+            <element signature="e#9673#9674#0" expanded="true" />
+            <element signature="e#10498#10836#0" expanded="true" />
+            <element signature="e#10835#10836#0" expanded="true" />
+            <element signature="e#19389#20433#0" expanded="true" />
+            <element signature="e#20432#20433#0" expanded="true" />
+            <element signature="e#20826#21881#0" expanded="true" />
+            <element signature="e#21880#21881#0" expanded="true" />
+            <element signature="e#30487#32138#0" expanded="true" />
+            <element signature="e#32137#32138#0" expanded="true" />
+            <element signature="e#31689#31690#0" expanded="true" />
+            <element signature="e#31723#31724#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/.version">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/RequestSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="981" column="27" selection-start-line="981" selection-start-column="27" selection-end-line="981" selection-end-column="27" />
-          <folding>
-            <element signature="e#6284#6473#0" expanded="true" />
-            <element signature="e#6472#6473#0" expanded="true" />
-            <element signature="e#9608#9756#0" expanded="true" />
-            <element signature="e#9755#9756#0" expanded="true" />
-            <element signature="e#6202#6540#0" expanded="true" />
-            <element signature="e#6539#6540#0" expanded="true" />
-            <element signature="e#19471#20515#0" expanded="true" />
-            <element signature="e#20514#20515#0" expanded="true" />
-            <element signature="e#20908#21963#0" expanded="true" />
-            <element signature="e#21962#21963#0" expanded="true" />
-            <element signature="e#30569#32220#0" expanded="true" />
-            <element signature="e#32219#32220#0" expanded="true" />
-            <element signature="e#31689#31690#0" expanded="true" />
-            <element signature="e#31723#31724#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

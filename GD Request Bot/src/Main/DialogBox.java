@@ -151,6 +151,8 @@ public class DialogBox {
 			frame.add(loadingBar);
 			frame.add(buttonPanel);
 			frame.setAlwaysOnTop(true);
+			frame.invalidate();
+			frame.revalidate();
 			frame.setVisible(true);
 
 			while (value[0] == null) {
