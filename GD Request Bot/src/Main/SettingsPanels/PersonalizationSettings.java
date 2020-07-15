@@ -24,7 +24,7 @@ public class PersonalizationSettings {
 
 		try {
 			if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
-				windowedButton.setLText("Switch to Overlay Mode (Requires Restart)");
+				windowedButton.setLText("Switch to Overlay Mode");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

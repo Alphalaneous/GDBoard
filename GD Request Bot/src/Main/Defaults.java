@@ -242,9 +242,16 @@ public class Defaults {
 					dark.set(false);
 					prevTheme[0] = 0;
 				}
+				try {
 					screenSize = GraphicsEnvironment
 							.getLocalGraphicsEnvironment()
 							.getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();
+				}
+				catch (IndexOutOfBoundsException e){
+					screenSize = GraphicsEnvironment
+							.getLocalGraphicsEnvironment()
+							.getScreenDevices()[0].getDefaultConfiguration().getBounds();
+				}
 					if (!screenSize.equals(prevScreenSize)) {
 						try {
 							if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {

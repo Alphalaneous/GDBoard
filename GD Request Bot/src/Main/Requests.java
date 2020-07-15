@@ -55,6 +55,9 @@ public class Requests {
 			Path logged = Paths.get(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
 			Path blockedUser = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blockedUsers.txt");
 			Path blockedGDUser = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blockedGDUsers.txt");
+			Path disallowed = Paths.get(Defaults.saveDirectory + "\\GDBoard\\disallowedStrings.txt");
+			Path allowed = Paths.get(Defaults.saveDirectory + "\\GDBoard\\allowedStrings.txt");
+
 
 			if(Main.loaded) {
 				if(GeneralSettings.followersOption){
@@ -209,6 +212,47 @@ public class Requests {
 						}
 					}
 					sc.close();
+				}
+				if (level != null && RequestSettings.allowOption) {
+					if (Files.exists(allowed)) {
+						Scanner sc = null;
+						try {
+							sc = new Scanner(allowed.toFile());
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						}
+						boolean hasWord = false;
+						while (sc.hasNextLine()) {
+							if (level.getName().toLowerCase().contains(sc.nextLine().toLowerCase())) {
+								hasWord = true;
+								sc.close();
+								break;
+							}
+						}
+						if(!hasWord){
+							Main.sendMessage("@" + requester + " That level name isn't allowed!");
+							return;
+						}
+						sc.close();
+					}
+				}
+				if (level != null && RequestSettings.disallowOption) {
+					if (Files.exists(disallowed)) {
+						Scanner sc = null;
+						try {
+							sc = new Scanner(disallowed.toFile());
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						}
+						while (sc.hasNextLine()) {
+							if (level.getName().toLowerCase().contains(sc.nextLine().toLowerCase())) {
+								sc.close();
+								Main.sendMessage("@" + requester + " That level name isn't allowed!");
+								return;
+							}
+						}
+						sc.close();
+					}
 				}
 
 				if (level != null && RequestSettings.ratedOption && !(level.getStars() > 0)) {

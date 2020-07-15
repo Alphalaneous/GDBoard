@@ -8,9 +8,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
@@ -48,6 +50,10 @@ public class RequestSettings {
 	private static FancyTextArea minObjectsInput = new FancyTextArea(true, false);
 	private static FancyTextArea maxObjectsInput = new FancyTextArea(true, false);
 
+	private static CurvedButton allowedStrings = new CurvedButton("Allowed Words");
+	private static CurvedButton disallowedStrings = new CurvedButton("Disallowed Words");
+
+
 	public static int minLikes = 0;
 	public static int maxLikes = 0;
 	public static int minObjects = 0;
@@ -63,6 +69,9 @@ public class RequestSettings {
 	public static boolean disableOption = true;
 	public static boolean disableLengthOption = true;
 
+	public static boolean disallowOption = false;
+	public static boolean allowOption = false;
+
 	private static CheckboxButton rated = createButton("Rated Levels Only", 15);
 	private static CheckboxButton unrated = createButton("Unrated Levels Only", 45);
 	private static CheckboxButton disableDifficulties = createButton("Disable selected difficulties", 75);
@@ -75,13 +84,29 @@ public class RequestSettings {
 	private static JPanel panel = new JPanel();
 	private static JScrollPane scrollPane = new JScrollPane(panel);
 
+	private static JPanel listPanel = new JPanel();
+	private static JScrollPane listScrollPane = new JScrollPane(listPanel);
+	private static JPanel topPanel = new JPanel();
+	private static JLabel label = new JLabel();
+
+
+	private static FancyTextArea input = new FancyTextArea(false, false);
+	private static RoundedJButton addID = new RoundedJButton("\uECC8", "Add User");
+	private static RoundedJButton backButton = new RoundedJButton("\uE112", "Back");
+	private static CheckboxButton enableWordSetting = createButton("", 365, 55);
+
+
+	private static int i = 0;
+	private static double height = 0;
+	private static boolean allowedStringsBool = false;
+
 	public static ArrayList<String> excludedDifficulties = new ArrayList<>();
 	public static ArrayList<String> excludedLengths = new ArrayList<>();
 
 
 	public static JPanel createPanel() {
 		defaultUI.setBackground(Defaults.BUTTON);
-		defaultUI.setHover(Defaults.HOVER);
+		defaultUI.setHover(Defaults.BUTTON_HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
 
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
@@ -95,6 +120,110 @@ public class RequestSettings {
 		scrollPane.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
 
+		listPanel.setDoubleBuffered(true);
+		listPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 4, 4));
+		listPanel.setPreferredSize(new Dimension(400, 0));
+		listPanel.setBackground(Defaults.SUB_MAIN);
+
+		topPanel.setBackground(Defaults.TOP);
+		topPanel.setLayout(null);
+
+		label.setForeground(Defaults.FOREGROUND);
+		label.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+
+		input.setBounds(160, 15, 200, 32);
+		input.getDocument().putProperty("filterNewlines", Boolean.TRUE);
+		addID.setBackground(Defaults.BUTTON);
+		addID.setBounds(370, 16, 30, 30);
+		addID.setFont(Defaults.SYMBOLS.deriveFont(22f));
+		addID.setForeground(Defaults.FOREGROUND);
+		addID.setUI(defaultUI);
+
+		backButton.setBackground(Defaults.BUTTON);
+		backButton.setBounds(15, 16, 30, 30);
+		backButton.setFont(Defaults.SYMBOLS.deriveFont(15f));
+
+		backButton.setForeground(Defaults.FOREGROUND);
+		backButton.setUI(defaultUI);
+
+		backButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				topPanel.setVisible(false);
+				listScrollPane.setVisible(false);
+				scrollPane.setVisible(true);
+			}
+		});
+
+		addID.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				try {
+					Path file;
+					if(allowedStringsBool){
+						file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\allowedStrings.txt");
+					}
+					else{
+						file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\disallowedStrings.txt");
+					}
+					if (!Files.exists(file)) {
+						Files.createFile(file);
+					}
+					boolean goThrough = true;
+					Scanner sc = new Scanner(file.toFile());
+					while (sc.hasNextLine()) {
+						if (String.valueOf(input.getText()).equals(sc.nextLine())) {
+							goThrough = false;
+							break;
+						}
+					}
+					sc.close();
+					if (goThrough) {
+						if (!input.getText().equalsIgnoreCase("")) {
+
+							Files.write(file, (input.getText() + "\n").getBytes(), StandardOpenOption.APPEND);
+							addButton(input.getText());
+							input.setText("");
+							listPanel.updateUI();
+						}
+					}
+				} catch (IOException e1) {
+					DialogBox.showDialogBox("Error!", e1.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
+				}
+			}
+		});
+
+
+		topPanel.add(backButton);
+		topPanel.add(addID);
+		topPanel.add(input);
+		topPanel.add(label);
+		topPanel.add(enableWordSetting);
+		topPanel.setBounds(0,0,412,90);
+		topPanel.setVisible(false);
+
+		listScrollPane.setBorder(BorderFactory.createEmptyBorder());
+		listScrollPane.getViewport().setBackground(Defaults.SUB_MAIN);
+		listScrollPane.setBounds(0, 90, 412 , 532);
+		listScrollPane.setPreferredSize(new Dimension(412, 532));
+		listScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+		listScrollPane.getVerticalScrollBar().setUnitIncrement(30);
+		listScrollPane.getVerticalScrollBar().setOpaque(false);
+		listScrollPane.setOpaque(false);
+		listScrollPane.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS);
+		listScrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
+		listScrollPane.setVisible(false);
+
+		enableWordSetting.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if (allowedStringsBool) {
+					allowOption = enableWordSetting.getSelectedState();
+				} else {
+					disallowOption = enableWordSetting.getSelectedState();
+				}
+			}
+		});
 
 		mainPanel.setBounds(0, 0, 415 , 622);
 		mainPanel.setBackground(Defaults.SUB_MAIN);
@@ -102,8 +231,8 @@ public class RequestSettings {
 
 		panel.setLayout(null);
 		panel.setDoubleBuffered(true);
-		panel.setBounds(0, 0, 412, 1000);
-		panel.setPreferredSize(new Dimension(412,1000));
+		panel.setBounds(0, 0, 412, 1080);
+		panel.setPreferredSize(new Dimension(412,1080));
 		panel.setBackground(Defaults.SUB_MAIN);
 
 		rated.addMouseListener(new MouseAdapter() {
@@ -441,6 +570,95 @@ public class RequestSettings {
 			}
 		});
 
+		allowedStrings.setBounds(25,1000, 345,30);
+		allowedStrings.setPreferredSize(new Dimension(345,30));
+		allowedStrings.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		allowedStrings.setUI(defaultUI);
+		allowedStrings.setForeground(Defaults.FOREGROUND);
+		allowedStrings.setBackground(Defaults.BUTTON);
+		allowedStrings.refresh();
+
+		allowedStrings.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				i = 0;
+				height = 0;
+				allowedStringsBool = true;
+				scrollPane.setVisible(false);
+				listPanel.removeAll();
+				enableWordSetting.setText("Only allow level titles that contain these");
+				enableWordSetting.setChecked(allowOption);
+				enableWordSetting.refresh();
+				label.setText("Allowed: ");
+				label.setBounds(60, 22, label.getPreferredSize().width + 5, label.getPreferredSize().height + 5);
+				topPanel.setVisible(true);
+				listScrollPane.setVisible(true);
+				File file = new File(Defaults.saveDirectory + "\\GDBoard\\allowedStrings.txt");
+				if (file.exists()) {
+					Scanner sc = null;
+					try {
+						sc = new Scanner(file);
+					} catch (FileNotFoundException f) {
+						f.printStackTrace();
+					}
+					assert sc != null;
+					while (sc.hasNextLine()) {
+						addButton(sc.nextLine());
+						try {
+							Thread.sleep(5);
+						} catch (InterruptedException f) {
+							f.printStackTrace();
+						}
+					}
+					sc.close();
+				}
+			}
+		});
+
+		disallowedStrings.setBounds(25,1040, 345,30);
+		disallowedStrings.setPreferredSize(new Dimension(345,30));
+		disallowedStrings.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		disallowedStrings.setUI(defaultUI);
+		disallowedStrings.setForeground(Defaults.FOREGROUND);
+		disallowedStrings.setBackground(Defaults.BUTTON);
+		disallowedStrings.refresh();
+
+		disallowedStrings.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				i = 0;
+				height = 0;
+				allowedStringsBool = false;
+				scrollPane.setVisible(false);
+				listPanel.removeAll();
+				enableWordSetting.setText("Don't allow level titles that contain these");
+				enableWordSetting.setChecked(disallowOption);
+				enableWordSetting.refresh();
+				label.setText("Disallowed: ");
+				label.setBounds(60, 22, label.getPreferredSize().width + 5, label.getPreferredSize().height + 5);
+				topPanel.setVisible(true);
+				listScrollPane.setVisible(true);
+				File file = new File(Defaults.saveDirectory + "\\GDBoard\\disallowedStrings.txt");
+				if (file.exists()) {
+					Scanner sc = null;
+					try {
+						sc = new Scanner(file);
+					} catch (FileNotFoundException f) {
+						f.printStackTrace();
+					}
+					assert sc != null;
+					while (sc.hasNextLine()) {
+						addButton(sc.nextLine());
+						try {
+							Thread.sleep(5);
+						} catch (InterruptedException f) {
+							f.printStackTrace();
+						}
+					}
+					sc.close();
+				}
+			}
+		});
 
 
 		difficultyPanel.setBounds(0,110, 415, 370);
@@ -486,8 +704,12 @@ public class RequestSettings {
 		panel.add(minObjectsInput);
 		panel.add(maxObjectsInput);
 
+		panel.add(allowedStrings);
+		panel.add(disallowedStrings);
 
 		mainPanel.add(scrollPane);
+		mainPanel.add(listScrollPane);
+		mainPanel.add(topPanel);
 		return mainPanel;
 
 
@@ -532,6 +754,12 @@ public class RequestSettings {
 				maxObjectsOption = Boolean.parseBoolean(Settings.getSettings("maxObjectsOption"));
 				maximumObjects.setChecked(maxObjectsOption);
 				maxObjectsInput.setEditable(maxObjectsOption);
+			}
+			if(!Settings.getSettings("allowStrings").equalsIgnoreCase("")) {
+				allowOption = Boolean.parseBoolean(Settings.getSettings("allowStrings"));
+			}
+			if(!Settings.getSettings("disallowStrings").equalsIgnoreCase("")) {
+				disallowOption = Boolean.parseBoolean(Settings.getSettings("disallowStrings"));
 			}
 			if(excludedLengths.contains("tiny")){
 				tiny.setChecked(true);
@@ -610,6 +838,8 @@ public class RequestSettings {
 		try {
 			Settings.writeSettings("rated", String.valueOf(ratedOption));
 			Settings.writeSettings("unrated", String.valueOf(unratedOption));
+			Settings.writeSettings("disallowStrings", String.valueOf(disallowOption));
+			Settings.writeSettings("allowStrings", String.valueOf(allowOption));
 			Settings.writeSettings("disableDifficulties", String.valueOf(disableOption));
 			Settings.writeSettings("minLikesOption", String.valueOf(minLikesOption));
 			Settings.writeSettings("maxLikesOption", String.valueOf(maxLikesOption));
@@ -627,20 +857,113 @@ public class RequestSettings {
 			e.printStackTrace();
 		}
 	}
+	public static void removeString(String string) {
+		i--;
+		if (i % 2 == 0) {
+			height = height - 39;
+			listPanel.setBounds(0, 0, 400, (int) (height + 4));
+			listPanel.setPreferredSize(new Dimension(400, (int) (height + 4)));
+			scrollPane.updateUI();
+		}
+		for (Component component : listPanel.getComponents()) {
+			if (component instanceof CurvedButton) {
+				if (((CurvedButton) component).getLText().equalsIgnoreCase(string)) {
+					listPanel.remove(component);
+					listPanel.updateUI();
+				}
+			}
+		}
+	}
+	public static void addButton(String string) {
+		i++;
+		if ((i-1) % 2 == 0) {
+			height = height + 39;
 
-	private static CheckboxButton createButton(String text, int y) {
+			listPanel.setBounds(0, 0, 400, (int) (height + 4));
+			listPanel.setPreferredSize(new Dimension(400, (int) (height + 4)));
+			if(i > 0) {
+				scrollPane.updateUI();
+			}
+		}
+		Path file;
+		if(allowedStringsBool){
+			file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\allowedStrings.txt");
+		}
+		else{
+			file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\disallowedStrings.txt");
+		}
+		CurvedButton button = new CurvedButton(string);
+
+		button.setBackground(Defaults.BUTTON);
+		button.setUI(defaultUI);
+		button.setForeground(Defaults.FOREGROUND);
+		button.setBorder(BorderFactory.createEmptyBorder());
+		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		button.setPreferredSize(new Dimension(170, 35));
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+
+				SettingsWindow.run = false;
+				new Thread(() -> {
+					String option;
+					if(allowedStringsBool) {
+						option = DialogBox.showDialogBox("Remove " + button.getLText() + "?", "<html>This will remove the ability to send levels containing this word.<html>", "", new String[]{"Yes", "No"});
+					}
+					else {
+						option = DialogBox.showDialogBox("Remove " + button.getLText() + "?", "<html>This will allow levels containing this word.<html>", "", new String[]{"Yes", "No"});
+
+					}
+					if (option.equalsIgnoreCase("yes")) {
+						if (Files.exists(file)) {
+							try {
+								Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_temp_");
+								PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
+								Files.lines(file)
+										.filter(line -> !line.contains(button.getLText()))
+										.forEach(out::println);
+								out.flush();
+								out.close();
+								Files.delete(file);
+								if(allowedStringsBool) {
+									Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\allowedStrings.txt"), StandardCopyOption.REPLACE_EXISTING);
+								}
+								else{
+									Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\disallowedStrings.txt"), StandardCopyOption.REPLACE_EXISTING);
+
+								}
+
+							} catch (IOException ex) {
+								ex.printStackTrace();
+								DialogBox.showDialogBox("Error!", ex.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
+							}
+						}
+						removeString(button.getLText());
+					}
+					SettingsWindow.run = true;
+				}).start();
+			}
+		});
+		button.refresh();
+		listPanel.add(button);
+		listPanel.updateUI();
+
+	}
+	private static CheckboxButton createButton(String text, int width,  int y) {
 
 		CheckboxButton button = new CheckboxButton(text);
-		button.setBounds(25, y, 345, 30);
+		button.setBounds(25, y, width, 30);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		button.refresh();
 		return button;
 	}
-
+	private static CheckboxButton createButton(String text, int y) {
+		return createButton(text, 345, y);
+	}
 	public static void refreshUI() {
-		defaultUI.setBackground(Defaults.MAIN);
+		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
 		difficultyPanel.setBackground(Defaults.TOP);
@@ -655,9 +978,10 @@ public class RequestSettings {
 				for (Component component2 : ((JButton) component).getComponents()) {
 					if (component2 instanceof JLabel) {
 						component2.setForeground(Defaults.FOREGROUND);
+
 					}
 				}
-				component.setBackground(Defaults.MAIN);
+				component.setBackground(Defaults.BUTTON);
 			}
 			if (component instanceof JLabel) {
 				component.setForeground(Defaults.FOREGROUND);

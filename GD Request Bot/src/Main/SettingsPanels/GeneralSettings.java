@@ -21,14 +21,14 @@ public class GeneralSettings {
 	public static boolean userLimitOption = false;
 	public static boolean userLimitStreamOption = false;
 	private static JLabel versionLabel = new JLabel();
-	private static CheckboxButton followers = createButton("Followers Only (Experimental)", 50);
+	private static CheckboxButton followers = createButton("Followers Only", 50);
 	private static CheckboxButton subOnly = createButton("Subscribers Only", 80);
 	private static CheckboxButton nowPlaying = createButton("Disable Now Playing Message", 110);
 	private static CheckboxButton queueFull = createButton("Disable Queue is Full Message", 140);
 	private static CheckboxButton repeated = createButton("Disable Repeated Requests", 170);
 	private static CheckboxButton repeatedAll = createButton("Disable Repeated Requests All Time", 200);
 
-	private static CheckboxButton autoDownload = createButton("Automatic Song Downloads (Experimental)", 230);
+	private static CheckboxButton autoDownload = createButton("Automatic Song Downloads", 230);
 
 	private static CheckboxButton queueLimitText = createButton("Maximum Queue Size: ", 260);
 	private static CheckboxButton userLimitText = createButton("In Queue Request Limit: ", 335);

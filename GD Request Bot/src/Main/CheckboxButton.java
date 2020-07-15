@@ -73,6 +73,9 @@ public class CheckboxButton extends JPanel {
 			}
 		});
 	}
+	public void setText(String textA){
+		text.setText(textA);
+	}
 	public boolean getSelectedState(){
 		return isChecked;
 	}
