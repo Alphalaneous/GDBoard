@@ -176,7 +176,7 @@ public class Requests {
 					Main.sendMessage("@" + requester + " That level ID doesn't exist!");
 					return;
 				} catch (Exception e) {
-					Main.sendMessage("@" + requester + " Level search failed... (Servers down?)");
+					Main.sendMessage("@" + requester + " Level search failed... (Servers down?) " + e);
 					return;
 				}
 			}

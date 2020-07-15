@@ -22,7 +22,7 @@ public class LoadGD {
 
 	public static String username = "";
 	public static String password = "";
-	public static Object client;
+	public static Object client = GDClientBuilder.create().buildAnonymous();;
 	public static boolean isAuth = false;
 	public static boolean timeout = false;
 	public static boolean loaded = false;
@@ -36,13 +36,15 @@ public class LoadGD {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			timeout = true;
-			isAuth = false;
-			try {
-				Settings.writeSettings("loadGD", "false");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			if (!loaded){
+				timeout = true;
+				isAuth = false;
+				try {
+					Settings.writeSettings("loadGD", "false");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		}
 		}).start();
 		if(!Settings.getSettings("loadGD").equalsIgnoreCase("false")) {
 			Path gameFile = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\CCGameManager.dat");
@@ -84,7 +86,6 @@ public class LoadGD {
 					isAuth = false;
 				}
 			} catch (Exception e) {
-				client = GDClientBuilder.create().buildAnonymous();
 				isAuth = false;
 			}
 		}
