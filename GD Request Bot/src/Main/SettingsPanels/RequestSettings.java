@@ -972,6 +972,17 @@ public class RequestSettings {
 		mainPanel.setBackground(Defaults.SUB_MAIN);
 		scrollPane.setBackground(Defaults.SUB_MAIN);
 		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
+		addID.setForeground(Defaults.FOREGROUND);
+		addID.setBackground(Defaults.BUTTON);
+		label.setForeground(Defaults.FOREGROUND);
+		listPanel.setBackground(Defaults.SUB_MAIN);
+		listScrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
+		backButton.setForeground(Defaults.FOREGROUND);
+		backButton.setBackground(Defaults.BUTTON);
+		input.refreshAll();
+		enableWordSetting.refresh();
+		topPanel.setBackground(Defaults.TOP);
+
 
 		for (Component component : panel.getComponents()) {
 			if (component instanceof JButton) {
@@ -1014,7 +1025,7 @@ public class RequestSettings {
 				((CheckboxButton) component).refresh();
 			}
 		}
-		for (Component component : lengthPanel.getComponents()) {
+		for (Component component : listPanel.getComponents()) {
 			if (component instanceof JButton) {
 				for (Component component2 : ((JButton) component).getComponents()) {
 					if (component2 instanceof JLabel) {
@@ -1022,6 +1033,16 @@ public class RequestSettings {
 					}
 				}
 				component.setBackground(Defaults.MAIN);
+			}
+		}
+		for (Component component : lengthPanel.getComponents()) {
+			if (component instanceof JButton) {
+				for (Component component2 : ((JButton) component).getComponents()) {
+					if (component2 instanceof JLabel) {
+						component2.setForeground(Defaults.FOREGROUND);
+					}
+				}
+				component.setBackground(Defaults.BUTTON);
 			}
 			if (component instanceof JLabel) {
 				component.setForeground(Defaults.FOREGROUND);
