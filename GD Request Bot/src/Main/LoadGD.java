@@ -79,11 +79,13 @@ public class LoadGD {
 					client = GDClientBuilder.create().buildAuthenticated(new GDClientBuilder.Credentials(username, password)).block();
 					isAuth = true;
 				}
-			} catch (Exception e) {
-				if (!timeout) {
+				else{
 					client = GDClientBuilder.create().buildAnonymous();
 					isAuth = false;
 				}
+			} catch (Exception e) {
+				client = GDClientBuilder.create().buildAnonymous();
+				isAuth = false;
 			}
 		}
 		loaded = true;;
