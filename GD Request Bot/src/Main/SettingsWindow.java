@@ -309,6 +309,24 @@ public class SettingsWindow {
 		});
 		return button;
 	}
+	public static void addToFrame(JComponent component) {
+
+		// --------------------
+		// Add components to JFrame from elsewhere
+
+		frame.add(component, 0);
+
+		// --------------------
+	}
+	static void removeFromFrame(JComponent component) {
+
+		// --------------------
+		// Add components to JFrame from elsewhere
+
+		frame.remove(component);
+
+		// --------------------
+	}
 	//region SetLocation
 	static void setLocation(Point point){
 		if(Settings.windowedMode){

@@ -13,7 +13,7 @@ public class RoundedJButton extends JButton {
 	private static final long serialVersionUID = 1L;
 	private JLabel tooltipLabel = new JLabel();
 	private JPanel tooltipPanel = new JPanel();
-
+	private boolean asSettings = false;
 
 	public RoundedJButton(String label, String tooltip) {
 		super(label);
@@ -40,8 +40,14 @@ public class RoundedJButton extends JButton {
 						tooltipPanel.setBackground(Defaults.TOP);
 						tooltipLabel.setForeground(Defaults.FOREGROUND);
 						if(Settings.windowedMode){
-							tooltipPanel.setBounds(MouseInfo.getPointerInfo().getLocation().x - (tooltipLabel.getPreferredSize().width + 10)/2 - Windowed.frame.getX(), MouseInfo.getPointerInfo().getLocation().y+20 - Windowed.frame.getY(), tooltipLabel.getPreferredSize().width + 10, tooltipLabel.getPreferredSize().height + 5);
-							Windowed.addToFrame(tooltipPanel);
+							if(asSettings){
+								tooltipPanel.setBounds(MouseInfo.getPointerInfo().getLocation().x - (tooltipLabel.getPreferredSize().width + 10)/2 - SettingsWindow.frame.getX(), MouseInfo.getPointerInfo().getLocation().y+20 - SettingsWindow.frame.getY(), tooltipLabel.getPreferredSize().width + 10, tooltipLabel.getPreferredSize().height + 5);
+								SettingsWindow.addToFrame(tooltipPanel);
+							}
+							else {
+								tooltipPanel.setBounds(MouseInfo.getPointerInfo().getLocation().x - (tooltipLabel.getPreferredSize().width + 10)/2 - Windowed.frame.getX(), MouseInfo.getPointerInfo().getLocation().y+20 - Windowed.frame.getY(), tooltipLabel.getPreferredSize().width + 10, tooltipLabel.getPreferredSize().height + 5);
+								Windowed.addToFrame(tooltipPanel);
+							}
 						}
 						else{
 							tooltipPanel.setBounds(MouseInfo.getPointerInfo().getLocation().x - (tooltipLabel.getPreferredSize().width + 10)/2 - Defaults.screenSize.x, MouseInfo.getPointerInfo().getLocation().y+20 - Defaults.screenSize.y, tooltipLabel.getPreferredSize().width + 10, tooltipLabel.getPreferredSize().height + 5);
@@ -58,9 +64,18 @@ public class RoundedJButton extends JButton {
 			public void mouseExited(MouseEvent e) {
 				exited[0] = true;
 				tooltipPanel.setVisible(false);
+				if(asSettings){
+					SettingsWindow.removeFromFrame(tooltipLabel);
+				}
+				else{
+					Windowed.removeFromFrame(tooltipLabel);
+				}
 				Overlay.removeFromFrame(tooltipPanel);
 			}
 		});
+	}
+	public void asSettings(){
+		asSettings = true;
 	}
 	public void setTooltip(String tooltip){
 		tooltipLabel.setText(tooltip);

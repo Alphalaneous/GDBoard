@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 public class PersonalizationSettings {
-	private static CurvedButton windowedButton = new CurvedButton("Switch to Windowed Mode (Requires Restart)");
+	private static CurvedButton windowedButton = new CurvedButton("Switch to Windowed Mode");
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static JPanel panel = new JPanel(null);
 

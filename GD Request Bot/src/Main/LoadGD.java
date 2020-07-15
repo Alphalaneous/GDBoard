@@ -1,5 +1,6 @@
 package Main;
 
+import Main.SettingsPanels.AccountSettings;
 import com.github.alex1304.jdash.client.AuthenticatedGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
 
@@ -19,8 +20,8 @@ import java.util.zip.GZIPInputStream;
 
 public class LoadGD {
 
-	public static String username;
-	public static String password;
+	public static String username = "";
+	public static String password = "";
 	public static Object client;
 	public static boolean isAuth = false;
 

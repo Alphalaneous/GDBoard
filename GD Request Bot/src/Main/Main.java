@@ -244,6 +244,7 @@ public class Main {
 						Windowed.loadSettings();
 					}
 					Settings.loadSettings(false);
+					AccountSettings.refreshGD(LoadGD.username);
 
 					Reflections settingsReflections = new Reflections("Main.SettingsPanels", new SubTypesScanner(false));
 					Set<Class<?>> settingsClasses =

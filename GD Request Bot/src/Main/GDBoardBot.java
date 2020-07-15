@@ -5,9 +5,7 @@ import com.cavariux.twitchirc.Json.JsonObject;
 import org.apache.commons.text.StringEscapeUtils;
 import org.json.JSONObject;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -90,7 +88,7 @@ class GDBoardBot {
 						String channel =  object.get("username").toString().replaceAll("\"", "").replaceAll("#", "");
 						Settings.channel = channel;
 						Settings.writeSettings("channel", channel);
-						AccountSettings.refreshChannel(channel);
+						AccountSettings.refreshTwitch(channel);
 						DialogBox.closeDialogBox();
 					}
 					else if (event.equalsIgnoreCase("connect_failed")) {

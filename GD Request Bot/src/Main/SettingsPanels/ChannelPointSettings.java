@@ -71,6 +71,8 @@ public class ChannelPointSettings {
 				showMainPanel();
 			}
 		});
+		backButton.asSettings();
+
 		titlePanel.add(backButton);
 
 		whisper.addMouseListener(new MouseAdapter() {

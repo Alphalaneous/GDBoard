@@ -45,6 +45,7 @@ public class BlockedUserSettings {
 		addID.setFont(Defaults.SYMBOLS.deriveFont(22f));
 		addID.setForeground(Defaults.FOREGROUND);
 		addID.setUI(defaultUI);
+		addID.asSettings();
 
 		blockedSettingsPanel.add(addID);
 		blockedSettingsPanel.add(blockedInput);

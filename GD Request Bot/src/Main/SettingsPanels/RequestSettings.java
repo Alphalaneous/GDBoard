@@ -91,7 +91,7 @@ public class RequestSettings {
 
 
 	private static FancyTextArea input = new FancyTextArea(false, false);
-	private static RoundedJButton addID = new RoundedJButton("\uECC8", "Add User");
+	private static RoundedJButton addID = new RoundedJButton("\uECC8", "Add Word");
 	private static RoundedJButton backButton = new RoundedJButton("\uE112", "Back");
 	private static CheckboxButton enableWordSetting = createButton("", 365, 55);
 
@@ -138,6 +138,7 @@ public class RequestSettings {
 		addID.setFont(Defaults.SYMBOLS.deriveFont(22f));
 		addID.setForeground(Defaults.FOREGROUND);
 		addID.setUI(defaultUI);
+		addID.asSettings();
 
 		backButton.setBackground(Defaults.BUTTON);
 		backButton.setBounds(15, 16, 30, 30);
@@ -145,6 +146,7 @@ public class RequestSettings {
 
 		backButton.setForeground(Defaults.FOREGROUND);
 		backButton.setUI(defaultUI);
+		backButton.asSettings();
 
 		backButton.addMouseListener(new MouseAdapter() {
 			@Override

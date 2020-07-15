@@ -76,7 +76,10 @@ public class CommandSettings {
 				showMainPanel();
 			}
 		});
+		backButton.asSettings();
+
 		titlePanel.add(backButton);
+
 
 		sliderValue.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		sliderValue.setText("Cooldown: 0 seconds");

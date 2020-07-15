@@ -11,6 +11,8 @@ import javax.swing.*;
 
 public class AccountSettings {
 	private static JLabel channelText;
+	private static JLabel geometryText;
+
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static JPanel panel = new JPanel();
 
@@ -27,23 +29,27 @@ public class AccountSettings {
 		panel.setLayout(null);
 
 		try {
-			channelText = new JLabel("Connected to: " + Settings.getSettings("channel"));
+			channelText = new JLabel("Twitch: " + Settings.getSettings("channel"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		geometryText = new JLabel("Geometry Dash: NA");
 		channelText.setForeground(Defaults.FOREGROUND);
 		channelText.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-		channelText.setBounds(25,20,channelText.getPreferredSize().width+5,channelText.getPreferredSize().height+5);
+		channelText.setBounds(25,50,channelText.getPreferredSize().width+5,channelText.getPreferredSize().height+5);
+		geometryText.setForeground(Defaults.FOREGROUND);
+		geometryText.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		geometryText.setBounds(25,20,geometryText.getPreferredSize().width+5,geometryText.getPreferredSize().height+5);
 
-		CurvedButton button = new CurvedButton("Refresh Login with Twitch");
-
+		RoundedJButton button = new RoundedJButton("\uE149", "Refresh Login");
+		button.asSettings();
 		button.setBackground(Defaults.BUTTON);
-		button.setBounds(25,50,365,30);
+		button.setBounds(365,45,30,30);
 		button.setPreferredSize(new Dimension(365,30));
 		button.setUI(defaultUI);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
-		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		button.setFont(Defaults.SYMBOLS.deriveFont(14f));
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -57,17 +63,23 @@ public class AccountSettings {
 				thread.start();
 			}
 		});
-		button.refresh();
 		panel.add(channelText);
+		panel.add(geometryText);
 		panel.add(button);
 		return panel;
 
 	}
-	public static void refreshChannel(String channel){
-		channelText.setText("Connected to: " + channel);
-		System.out.println("Set " + channel);
+	public static void refreshTwitch(String channel){
+		channelText.setText("Twitch: " + channel);
 
-		channelText.setBounds(25,20,channelText.getPreferredSize().width+5,channelText.getPreferredSize().height+5);
+		channelText.setBounds(25,50,channelText.getPreferredSize().width+5,channelText.getPreferredSize().height+5);
+
+	}
+	public static void refreshGD(String username){
+		if(LoadGD.isAuth) {
+			geometryText.setText("Geometry Dash: " + username);
+			geometryText.setBounds(25, 20, geometryText.getPreferredSize().width + 5, geometryText.getPreferredSize().height + 5);
+		}
 
 	}
 	public static void refreshUI() {
