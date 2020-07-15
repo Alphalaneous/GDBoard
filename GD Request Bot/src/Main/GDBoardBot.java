@@ -42,7 +42,7 @@ class GDBoardBot {
 			clientSocket = new Socket("165.227.53.200", 2963);
 			//clientSocket = new Socket("localhost", 2963);
 		} catch (ConnectException | NoRouteToHostException e) {
-			System.out.println("failed");
+			System.out.println("failed here");
 			try {
 				Thread.sleep(wait);
 			} catch (InterruptedException e1) {

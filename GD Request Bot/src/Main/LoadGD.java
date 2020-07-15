@@ -24,41 +24,62 @@ public class LoadGD {
 	public static String password = "";
 	public static Object client;
 	public static boolean isAuth = false;
+	public static boolean timeout = false;
 
 	public static void load() throws IOException {
 
-		Path gameFile = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\CCGameManager.dat");
-		String[] gameText = new String[0];
-		Scanner sc = null;
-		try {
-			sc = new Scanner(gameFile.toFile());
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		assert sc != null;
-		try {
-			gameText = prettyFormat(decompress(Base64.getDecoder().decode(xor(sc.nextLine()).replace("-", "+").replace("_", "/").replace("\0", "")))).split("\n");
-			sc.close();
-		}
-		catch (Exception e){
-			e.printStackTrace();
-		}
-		for(int i = 0; i < gameText.length; i++){
-			String text = gameText[i];
-			if(text.contains("<k>GJA_002</k>")){
-				password = gameText[i+1].replace("    <s>", ""). replace("</s>", "").replace("\0", "").replace("\r", "").replace("\n", "");
+		new Thread(() -> {
+			try {
+				Thread.sleep(60000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-			if(text.contains("<k>GJA_001</k>")){
-				username = gameText[i+1].replace("    <s>", ""). replace("</s>", "").replace("\0", "").replace("\r", "").replace("\n", "");
-			}
-		}
-		try {
-			client = GDClientBuilder.create().buildAuthenticated(new GDClientBuilder.Credentials(username, password)).block();
-			isAuth = true;
-		}
-		catch (Exception e){
-			client = GDClientBuilder.create().buildAnonymous();
+			timeout = true;
 			isAuth = false;
+			try {
+				Settings.writeSettings("loadGD", "false");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}).start();
+		if(!Settings.getSettings("loadGD").equalsIgnoreCase("false")) {
+			Path gameFile = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\CCGameManager.dat");
+			String[] gameText = new String[0];
+			Scanner sc = null;
+			try {
+				sc = new Scanner(gameFile.toFile());
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			assert sc != null;
+			try {
+				gameText = prettyFormat(decompress(Base64.getDecoder().decode(xor(sc.nextLine()).replace("-", "+").replace("_", "/").replace("\0", "")))).split("\n");
+				sc.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			for (int i = 0; i < gameText.length; i++) {
+				String text = gameText[i];
+				if (!timeout) {
+					if (text.contains("<k>GJA_002</k>")) {
+						password = gameText[i + 1].replace("    <s>", "").replace("</s>", "").replace("\0", "").replace("\r", "").replace("\n", "");
+					}
+					if (text.contains("<k>GJA_001</k>")) {
+						username = gameText[i + 1].replace("    <s>", "").replace("</s>", "").replace("\0", "").replace("\r", "").replace("\n", "");
+					}
+				}
+			}
+			try {
+				if (!timeout) {
+					client = GDClientBuilder.create().buildAuthenticated(new GDClientBuilder.Credentials(username, password)).block();
+					isAuth = true;
+				}
+			} catch (Exception e) {
+				if (!timeout) {
+					client = GDClientBuilder.create().buildAnonymous();
+					isAuth = false;
+				}
+			}
 		}
 	}
 	private static String prettyFormat(String input) {
