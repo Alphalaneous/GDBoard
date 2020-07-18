@@ -50,6 +50,7 @@ public class Defaults {
 	public static Color TOP;
 	public static Color FOREGROUND;
 	public static Color FOREGROUND2;
+
 	static Color OUTLINE = new Color(70, 70, 70);
 	public static Color BUTTON_HOVER;
 	static Color TEXT_BOX;

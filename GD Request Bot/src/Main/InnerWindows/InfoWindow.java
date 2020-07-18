@@ -25,7 +25,6 @@ public class InfoWindow {
 	private static JLabel length = new JLabel();
 	private static JLabel password = new JLabel();
 	private static JLabel objects = new JLabel();
-	private static JLabel coins = new JLabel();
 	private static JLabel original = new JLabel();
 	private static JLabel upload = new JLabel();
 	private static JLabel update = new JLabel();
@@ -56,22 +55,22 @@ public class InfoWindow {
 		panel.setBackground(Defaults.MAIN);
 
 		descPanel.setPreferredSize(new Dimension(240, height));
-		descPanel.setBounds(180, 0, 220, height);
+		descPanel.setBounds(0, 0, width, height);
 		descPanel.setBackground(Defaults.SUB_MAIN);
 		descPanel.setLayout(null);
 		descPanel.setOpaque(true);
 
+
 		panel.setLayout(null);
 		likes = createLabel("LIKES: NA", 10, 160);
-		downloads = createLabel("DOWNLOADS: NA", 32, 160);
-		length = createLabel("LENGTH: NA", 54, 160);
-		password = createLabel("PASSWORD: NA", 76, 160);
-		objects = createLabel("OBJECTS: NA", 98, 160);
-		coins = createLabel("COINS: NA", 120, 160);
-		original = createLabel("ORIGINAL: NA", 142, 160);
-		upload = createLabel("UPLOAD: NA", 164, 160);
-		update = createLabel("UPDATE: NA", 186, 160);
-		version = createLabel("VERSION: NA", 208, 160);
+		downloads = createLabel("DOWNLOADS: NA", 24, 160);
+		length = createLabel("LENGTH: NA", 38, 160);
+		password = createLabel("PASSWORD: NA", 52, 160);
+		objects = createLabel("OBJECTS: NA", 66, 160);
+		original = createLabel("ORIGINAL: NA", 80, 160);
+		upload = createLabel("UPLOAD: NA", 94, 160);
+		update = createLabel("UPDATE: NA", 108, 160);
+		version = createLabel("VERSION: NA", 122, 160);
 
 
 
@@ -85,21 +84,20 @@ public class InfoWindow {
 		description.setEditable(false);
 		description.setForeground(Defaults.FOREGROUND);
 		description.setBackground(new Color(0,0,0,0));
-		description.setBounds(5,5,210, height-10);
+		description.setBounds(5,5,width-10, height-10);
 
 		panel.add(likes);
 		panel.add(downloads);
 		panel.add(length);
 		panel.add(password);
 		panel.add(objects);
-		panel.add(coins);
 		panel.add(original);
 		panel.add(upload);
 		panel.add(update);
 		panel.add(version);
 		descPanel.add(description);
 		fullPanel.setBounds(1,31,400,110);
-		fullPanel.add(scrollPane);
+		//fullPanel.add(scrollPane);
 		fullPanel.add(descPanel);
 		window.add(fullPanel);
 		((InnerWindow)window).refreshListener();
@@ -123,7 +121,6 @@ public class InfoWindow {
 			password.setText("PASSWORD: NA");
 			downloads.setText("DOWNLOADS: NA");
 			objects.setText("OBJECTS: NA");
-			coins.setText("COINS: NA");
 			original.setText("ORIGINAL: NA");
 			upload.setText("UPLOAD: NA");
 			update.setText("UPDATE: NA");
@@ -161,7 +158,6 @@ public class InfoWindow {
 				objects.setText("OBJECTS: "  + Requests.levels.get(LevelsWindow.getSelectedID()).getObjects());
 
 			}
-			coins.setText("COINS: " + Requests.levels.get(LevelsWindow.getSelectedID()).getCoins());
 			if(Requests.levels.get(LevelsWindow.getSelectedID()).getOriginal() == 0){
 				original.setText("ORIGINAL");
 
@@ -189,8 +185,8 @@ public class InfoWindow {
 	}
 	private static JLabel createLabel(String text, int y, int width){
 		JLabel label = new JLabel(text);
-		label.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-		label.setBounds(10, y, width, 20);
+		label.setFont(Defaults.MAIN_FONT.deriveFont(12f));
+		label.setBounds(10, y, width, 14);
 		label.setForeground(Defaults.FOREGROUND);
 		return label;
 	}

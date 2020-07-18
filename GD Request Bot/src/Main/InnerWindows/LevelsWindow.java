@@ -3,6 +3,7 @@ package Main.InnerWindows;
 import com.jidesoft.swing.Resizable;
 import com.jidesoft.swing.ResizablePanel;
 import Main.*;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
@@ -36,7 +37,7 @@ public class LevelsWindow {
 	private static JButtonUI noticeUI = new JButtonUI();
 	private static JButtonUI warningSelectUI = new JButtonUI();
 	private static JButtonUI noticeSelectUI = new JButtonUI();
-	private static int panelHeight = 0;
+	private static int panelHeight = 90;
 	private static JScrollPane scrollPane;
 
 
@@ -51,7 +52,7 @@ public class LevelsWindow {
 		scrollPane = new JScrollPane(mainPanel);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
 		scrollPane.getViewport().setBackground(Defaults.MAIN);
-		scrollPane.setBounds(1, 31, width , height);
+		scrollPane.setBounds(1, 31, width, height);
 		scrollPane.setPreferredSize(new Dimension(400, height));
 		scrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(30);
@@ -61,29 +62,30 @@ public class LevelsWindow {
 		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
 		window.add(scrollPane);
 		((InnerWindow) window).refreshListener();
-		if(!Settings.windowedMode) {
+		if (!Settings.windowedMode) {
 			Overlay.addToFrame(window);
 		}
 	}
-	public static JScrollPane getReqWindow(){
+
+	public static JScrollPane getReqWindow() {
 		return scrollPane;
 	}
 
-	public static void createButton(String name, String author, long ID, String difficulty, boolean epic, boolean featured, int starCount, String requester, double version, ImageIcon playerIcon){
+	public static void createButton(String name, String author, long ID, String difficulty, boolean epic, boolean featured, int starCount, String requester, double version, ImageIcon playerIcon, int coins) {
 		Point saved = scrollPane.getViewport().getViewPosition();
-		scrollPane.getViewport().setViewPosition( saved );
-		mainPanel.add(new LevelButton(name, author, ID, difficulty, epic, featured, starCount, requester, version, playerIcon));
-		if(Requests.levels.size() == 1){
+		scrollPane.getViewport().setViewPosition(saved);
+		mainPanel.add(new LevelButton(name, author, ID, difficulty, epic, featured, starCount, requester, version, playerIcon, coins));
+		if (Requests.levels.size() == 1) {
 			setOneSelect();
 		}
 		scrollPane.getViewport().setViewPosition(saved);
 	}
-	public static void setName(int count){
-		if(Settings.windowedMode){
+
+	public static void setName(int count) {
+		if (Settings.windowedMode) {
 			((InnerWindow) Windowed.window).setTitle("GDBoard - " + count);
 			Windowed.frame.setTitle("GDBoard - " + count);
-		}
-		else {
+		} else {
 			((InnerWindow) window).setTitle("Requests - " + count);
 		}
 	}
@@ -91,17 +93,18 @@ public class LevelsWindow {
 	public static LevelButton getButton(int i) {
 		return ((LevelButton) mainPanel.getComponent(i));
 	}
+
 	public static int getSize() {
 		return mainPanel.getComponents().length;
 	}
 
-	public static void movePosition(int position, int newPosition){
+	public static void movePosition(int position, int newPosition) {
 		long selectID = -1;
-		if(newPosition >= Requests.levels.size()){
-			newPosition = Requests.levels.size()-1;
+		if (newPosition >= Requests.levels.size()) {
+			newPosition = Requests.levels.size() - 1;
 		}
-		for(int  i = 0; i < Requests.levels.size(); i++){
-			if(getButton(i).selected){
+		for (int i = 0; i < Requests.levels.size(); i++) {
+			if (getButton(i).selected) {
 				selectID = Requests.levels.get(i).getLevelID();
 			}
 		}
@@ -110,17 +113,18 @@ public class LevelsWindow {
 		LevelData data = Requests.levels.get(position);
 		Requests.levels.remove(position);
 		Requests.levels.add(newPosition, data);
-		for(int  i = 0; i < Requests.levels.size(); i++){
-			if(selectID == Requests.levels.get(i).getLevelID()){
+		for (int i = 0; i < Requests.levels.size(); i++) {
+			if (selectID == Requests.levels.get(i).getLevelID()) {
 				LevelsWindow.setSelect(i);
 			}
 		}
 		Functions.saveFunction();
-		mainPanel.invalidate();
-		mainPanel.validate();
 	}
 
-	public static class LevelButton extends JButton{
+	public static class LevelButton extends JButton {
+
+		JButtonUI clear = new JButtonUI();
+		JButtonUI semiClear = new JButtonUI();
 
 		String name;
 		long ID;
@@ -135,7 +139,12 @@ public class LevelsWindow {
 		boolean image;
 		boolean vulgar;
 		boolean selected;
+		int coins;
 		ImageIcon playerIcon;
+		boolean expanded = false;
+
+		RoundedJButton analyzeButton = new RoundedJButton("\uE7BA", "WARNING");
+		JButton showMore = new JButton("\uE011");
 
 		JLabel lName = new JLabel();
 		JLabel lAuthorID = new JLabel();
@@ -143,9 +152,13 @@ public class LevelsWindow {
 		JLabel lAnalyzed = new JLabel();
 		JLabel lStarCount = new JLabel();
 		JLabel lPlayerIcon = new JLabel();
+		JLabel lLikes = new JLabel();
+		JLabel lDownloads = new JLabel();
+		JLabel lLength = new JLabel();
 		JLabel lStar = new JLabel("\uE24A");
+		JPanel info = new JPanel(new GridLayout(0, 2, 2, 2));
 
-		LevelButton(String name, String author, long ID, String difficulty, boolean epic, boolean featured, int starCount, String requester, double version, ImageIcon playerIcon){
+		LevelButton(String name, String author, long ID, String difficulty, boolean epic, boolean featured, int starCount, String requester, double version, ImageIcon playerIcon, int coins) {
 			this.name = name;
 			this.ID = ID;
 			this.author = author;
@@ -156,9 +169,18 @@ public class LevelsWindow {
 			this.requester = requester;
 			this.version = version;
 			this.playerIcon = playerIcon;
+			this.coins = coins;
 			try {
+				if(LevelsWindow.getSize() == 0){
+					this.selected = true;
+				}
+
 				defaultUI.setBackground(Defaults.MAIN);
 				defaultUI.setHover(Defaults.HOVER);
+
+				clear.setBackground(new Color(0, 0, 0, 0));
+				clear.setHover(new Color(0, 0, 0, 0));
+				clear.setSelect(new Color(0, 0, 0, 0));
 
 				selectUI.setBackground(Defaults.SELECT);
 				selectUI.setHover(Defaults.BUTTON_HOVER);
@@ -181,7 +203,7 @@ public class LevelsWindow {
 
 				lName.setText(name);
 				lAuthorID.setText("By " + author + " (" + ID + ")");
-				lRequester.setText(requester);
+				lRequester.setText("Sent by " + requester);
 				lStarCount.setText(String.valueOf(starCount));
 
 
@@ -198,17 +220,23 @@ public class LevelsWindow {
 							reqDifficulty.setIcon(Assets.difficultyIconsEpic.get(difficultyA));
 						} else if (featured) {
 							reqDifficulty.setIcon(Assets.difficultyIconsFeature.get(difficultyA));
-						} else {
+						} else if (starCount != 0) {
 							reqDifficulty.setIcon(Assets.difficultyIconsNormal.get(difficultyA));
+						} else {
+							reqDifficulty.setIcon(new ImageIcon(Assets.difficultyIconsNormal.get(difficultyA).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 						}
+
 					}
 				}
-				reqDifficulty.setBounds(10, 0, 50, 50);
+				if (starCount != 0) {
+					reqDifficulty.setBounds(10, 5, 30, 30);
+				} else {
+					reqDifficulty.setBounds(10, 15, 30, 30);
+				}
 
 				add(lName);
 				add(lAuthorID);
 				add(lRequester);
-				add(lAnalyzed);
 				add(lPlayerIcon);
 				add(reqDifficulty);
 				if (starCount != 0) {
@@ -218,28 +246,119 @@ public class LevelsWindow {
 				setLayout(null);
 
 
-				lName.setFont(Defaults.MAIN_FONT.deriveFont(20f));
-				lName.setBounds(60, 2, (int) lName.getPreferredSize().getWidth() + 5, 30);
+				lName.setFont(Defaults.MAIN_FONT.deriveFont(18f));
+				lName.setBounds(50, 2, (int) lName.getPreferredSize().getWidth() + 5, 30);
+
+				int pos = 0;
+
+				for (int i = 0; i < coins; i++) {
+					JLabel coin = new JLabel(Assets.verifiedCoin);
+					coin.setBounds((int) lName.getPreferredSize().getWidth() + lName.getX() + 5 + pos, 7, 15, 15);
+					pos = pos + 10;
+					add(coin);
+				}
+
+				if (coins != 0) {
+					analyzeButton.setBounds((int) lName.getPreferredSize().getWidth() + lName.getX() + 15 + pos, 3, 20, 20);
+				} else {
+					analyzeButton.setBounds((int) lName.getPreferredSize().getWidth() + lName.getX() + 5 + pos, 3, 20, 20);
+				}
+				analyzeButton.setFont(Defaults.SYMBOLS.deriveFont(18f));
+				analyzeButton.setUI(clear);
+				analyzeButton.setForeground(Defaults.FOREGROUND);
+				analyzeButton.setBackground(new Color(0, 0, 0, 0));
+				analyzeButton.setVisible(false);
+				add(analyzeButton);
+
+
+				info.setBackground(new Color(0, 0, 0, 0));
+				info.setBounds(50, 60, buttonWidth - 100, 80);
+				info.setVisible(false);
+				add(info);
+
+				showMore.setFont(Defaults.SYMBOLS.deriveFont(18f));
+				showMore.setUI(clear);
+				showMore.setForeground(Defaults.FOREGROUND);
+				showMore.setBackground(new Color(0, 0, 0, 0));
+				showMore.setBounds(buttonWidth - 25, 0, 25, 60);
+				showMore.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mousePressed(MouseEvent e) {
+						if (expanded) {
+							info.setVisible(false);
+							info.removeAll();
+							expanded = false;
+							showMore.setText("\uE011");
+							setPreferredSize(new Dimension(buttonWidth, 60));
+							mainPanel.invalidate();
+							mainPanel.validate();
+							panelHeight = panelHeight - 140;
+						} else {
+							JLabel likes = createLabel("Likes: " + Requests.levels.get(Requests.getPosFromID(ID)).getLikes());
+							JLabel downloads = createLabel("Downloads: " + Requests.levels.get(Requests.getPosFromID(ID)).getDownloads());
+							JLabel length = createLabel("Length: " + Requests.levels.get(Requests.getPosFromID(ID)).getLength());
+							JLabel password = createLabel("Password: " + Requests.levels.get(Requests.getPosFromID(ID)).getPassword());
+							JLabel objects = createLabel("Objects: " + Requests.levels.get(Requests.getPosFromID(ID)).getObjects());
+							JLabel original = createLabel("Original: " + Requests.levels.get(Requests.getPosFromID(ID)).getOriginal());
+							JLabel upload = createLabel("Upload: " + Requests.levels.get(Requests.getPosFromID(ID)).getUpload());
+							JLabel update = createLabel("Update: " + Requests.levels.get(Requests.getPosFromID(ID)).getUpdate());
+							JLabel version = createLabel("Version: " + Requests.levels.get(Requests.getPosFromID(ID)).getVersion());
+
+
+							info.add(likes);
+							info.add(downloads);
+							info.add(length);
+							info.add(password);
+							info.add(objects);
+							info.add(original);
+							info.add(upload);
+							info.add(update);
+							info.add(version);
+
+
+							info.setVisible(true);
+							expanded = true;
+							showMore.setText("\uE010");
+							setPreferredSize(new Dimension(buttonWidth, 200));
+							mainPanel.invalidate();
+							mainPanel.validate();
+							panelHeight = panelHeight + 140;
+						}
+						mainPanel.setBounds(0, 0, width, panelHeight);
+						mainPanel.setPreferredSize(new Dimension(width, panelHeight));
+					}
+
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						showMore.setForeground(Defaults.FOREGROUND2);
+					}
+
+					@Override
+					public void mouseExited(MouseEvent e) {
+						showMore.setForeground(Defaults.FOREGROUND);
+					}
+				});
+				//add(showMore);
+
 				lAuthorID.setFont(Defaults.MAIN_FONT.deriveFont(12f));
-				lAuthorID.setBounds(60, 28, (int) lAuthorID.getPreferredSize().getWidth() + 5, 20);
+				lAuthorID.setBounds(50, 24, (int) lAuthorID.getPreferredSize().getWidth() + 5, 20);
 				lPlayerIcon.setIcon(playerIcon);
-				lPlayerIcon.setBounds(60 + lAuthorID.getPreferredSize().width + 2, 16, 40, 40);
+				lPlayerIcon.setBounds(50 + lAuthorID.getPreferredSize().width + 2, 13, 40, 40);
 
 
 				lRequester.setFont(Defaults.MAIN_FONT.deriveFont(12f));
-				lRequester.setBounds((int) (buttonWidth - lRequester.getPreferredSize().getWidth()) - 10, 3,
-						(int) lRequester.getPreferredSize().getWidth() + 5, 20);
-				lStarCount.setFont(Defaults.MAIN_FONT.deriveFont(18f));
-				lStarCount.setBounds(((int) (buttonWidth - lStarCount.getPreferredSize().getWidth()) - 30), 28,
+				lRequester.setBounds(50, 40, (int) lRequester.getPreferredSize().getWidth() + 5, 20);
+				lStarCount.setFont(Defaults.MAIN_FONT.deriveFont(12f));
+				lStarCount.setBounds(25 - (int) (lStarCount.getPreferredSize().width + lStar.getPreferredSize().width) / 2, 38,
 						(int) lStarCount.getPreferredSize().getWidth() + 5, 20);
-				lStar.setFont(Defaults.SYMBOLS.deriveFont(16f));
-				lStar.setBounds((int) (buttonWidth - lStar.getPreferredSize().getWidth()) - 10, 25,
+				lStar.setFont(Defaults.SYMBOLS.deriveFont(12f));
+				lStar.setBounds(1 + lStarCount.getPreferredSize().width + lStarCount.getX(), 36,
 						(int) lStar.getPreferredSize().getWidth() + 5, 20);
 				lAnalyzed.setFont(Defaults.MAIN_FONT.deriveFont(12f));
 
 				lName.setForeground(Defaults.FOREGROUND);
-				lRequester.setForeground(Defaults.FOREGROUND);
-				lAuthorID.setForeground(Defaults.FOREGROUND);
+				lRequester.setForeground(Defaults.FOREGROUND2);
+				lAuthorID.setForeground(Defaults.FOREGROUND2);
 				lAnalyzed.setForeground(Defaults.FOREGROUND);
 				lStarCount.setForeground(Defaults.FOREGROUND);
 				lStar.setForeground(Defaults.FOREGROUND);
@@ -258,7 +377,7 @@ public class LevelsWindow {
 						(int) lAnalyzed.getPreferredSize().getWidth(), 20);
 
 				setBorder(BorderFactory.createEmptyBorder());
-				setPreferredSize(new Dimension(buttonWidth, 50));
+				setPreferredSize(new Dimension(buttonWidth, 60));
 
 				addMouseListener(new MouseAdapter() {
 					@Override
@@ -285,13 +404,13 @@ public class LevelsWindow {
 						Component[] comp = mainPanel.getComponents();
 						for (int j = 0; j < comp.length; j++) {
 							if (comp[j] instanceof LevelButton) {
-								((LevelButton)comp[j]).deselect();
+								((LevelButton) comp[j]).deselect();
 							}
 						}
 
 						for (int j = 0; j < Requests.levels.size(); j++) {
 							if (ID == Requests.levels.get(j).getLevelID()) {
-								((LevelButton)comp[j]).select();
+								((LevelButton) comp[j]).select();
 								selectedID = j;
 							}
 						}
@@ -318,12 +437,14 @@ public class LevelsWindow {
 					});
 					thread.start();
 				}
+				if(selected){
+					select();
+				}
 				SongWindow.refreshInfo();
 				InfoWindow.refreshInfo();
-				panelHeight = panelHeight + 50;
+				panelHeight = panelHeight + 60;
 				mainPanel.setBounds(0, 0, width, panelHeight);
 				mainPanel.setPreferredSize(new Dimension(width, panelHeight));
-				mainPanel.updateUI();
 				((InnerWindow) window).refreshListener();
 
 			} catch (Exception e) {
@@ -331,35 +452,42 @@ public class LevelsWindow {
 				DialogBox.showDialogBox("Error!", e.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 			}
 		}
+
 		public boolean viewership = false;
 		public int gonePoints = 3;
-		public long getID(){
+
+		public long getID() {
 			return ID;
 		}
-		public String getUsername(){
+
+		public String getUsername() {
 			return name;
 		}
-		public String getRequester(){
+
+		public String getRequester() {
 			return requester;
 		}
-		public boolean getAnalyzed(){
+
+		public boolean getAnalyzed() {
 			return analyzed;
 		}
-		public boolean getImage(){
+
+		public boolean getImage() {
 			return image;
 		}
-		public boolean getVulgar(){
+
+		public boolean getVulgar() {
 			return vulgar;
 		}
-		public void setViewership(boolean viewer){
-			if(viewer){
-				lRequester.setForeground(Defaults.FOREGROUND);
+
+		public void setViewership(boolean viewer) {
+			if (viewer) {
+				lRequester.setForeground(Defaults.FOREGROUND2);
 				viewership = true;
 				gonePoints = 3;
-			}
-			else{
+			} else {
 				gonePoints = gonePoints - 1;
-				if(gonePoints == 0){
+				if (gonePoints == 0) {
 					lRequester.setForeground(Color.RED);
 					viewership = false;
 					gonePoints = 0;
@@ -367,72 +495,144 @@ public class LevelsWindow {
 			}
 			Requests.levels.get(Requests.getPosFromID(ID)).setViewership(viewership);
 		}
-		public void setAnalyzed(boolean analyzed, boolean image, boolean vulgar){
+
+		public void setAnalyzed(boolean analyzed, boolean image, boolean vulgar) {
 			this.analyzed = analyzed;
 			this.image = image;
 			this.vulgar = vulgar;
 
-			if(image){
+			if (image) {
+				analyzeButton.setTooltip("IMAGE HACK");
+				analyzeButton.setVisible(true);
 				setBackground(new Color(150, 0, 0));
 				setUI(warningUI);
-				lAnalyzed.setText("Image Hack");
-			}
-			else if(vulgar){
+			} else if (vulgar) {
+				analyzeButton.setTooltip("VULGAR LANGUAGE");
+				analyzeButton.setVisible(true);
 				setBackground(new Color(150, 150, 0));
 				setUI(noticeUI);
-				lAnalyzed.setText("Vulgar Language");
-			}
-			else if(analyzed) {
+			} else if (analyzed) {
 				lAnalyzed.setText("Analyzed");
-			}
-			else{
+			} else {
 				lAnalyzed.setText("Failed Analyzing");
 			}
 			lAnalyzed.setBounds((int) (buttonWidth - lAnalyzed.getPreferredSize().getWidth()) - 10, 28,
 					(int) lAnalyzed.getPreferredSize().getWidth(), 20);
+
 		}
-		public void select(){
+
+		public void select() {
 			this.selected = true;
-			if(image) {
+			if (image) {
 				setUI(warningSelectUI);
 				setBackground(new Color(200, 0, 0));
-			}
-			else if(vulgar) {
+			} else if (vulgar) {
 				setUI(noticeSelectUI);
 				setBackground(new Color(200, 150, 0));
-			}
-			else{
+
+			} else {
 				setBackground(Defaults.SELECT);
 				setUI(selectUI);
+
 			}
+			info.setVisible(false);
+
+			info.removeAll();
+			if(Requests.getPosFromID(ID) != -1) {
+				JLabel likes = createLabel("Likes: " + Requests.levels.get(Requests.getPosFromID(ID)).getLikes());
+				JLabel downloads = createLabel("Downloads: " + Requests.levels.get(Requests.getPosFromID(ID)).getDownloads());
+				JLabel length = createLabel("Length: " + Requests.levels.get(Requests.getPosFromID(ID)).getLength());
+				JLabel password = createLabel("Password: " + Requests.levels.get(Requests.getPosFromID(ID)).getPassword());
+
+				long pass = 0;
+				if ((pass = Requests.levels.get(Requests.getPosFromID(ID)).getPassword()) != 0) {
+					if (pass == -2) {
+						password.setText("Free copy");
+					} else if (pass == -1) {
+						password.setText("No copy");
+					} else {
+						password.setText("Password: " + pass);
+					}
+				} else {
+					password.setText("Pass: NA");
+
+				}
+
+				long obj = Requests.levels.get(Requests.getPosFromID(ID)).getObjects();
+				JLabel objects;
+				if (obj == 0) {
+					objects = createLabel("Objects: NA");
+				} else {
+					objects = createLabel("Objects: " + obj);
+				}
+
+				long orig = Requests.levels.get(Requests.getPosFromID(ID)).getOriginal();
+				JLabel original;
+				if (orig == 0) {
+					original = createLabel("Original");
+				} else {
+					original = createLabel("Original: " + orig);
+				}
+				JLabel upload = createLabel("Upload: " + Requests.levels.get(Requests.getPosFromID(ID)).getUpload());
+				JLabel update = createLabel("Update: " + Requests.levels.get(Requests.getPosFromID(ID)).getUpdate());
+				JLabel version = createLabel("Version: " + Requests.levels.get(Requests.getPosFromID(ID)).getLevelVersion());
+
+
+				info.add(likes);
+				info.add(downloads);
+				info.add(length);
+				info.add(password);
+				info.add(objects);
+				info.add(original);
+				info.add(upload);
+				info.add(update);
+				info.add(version);
+			}
+			invalidate();
+			validate();
+			info.setVisible(true);
+			expanded = true;
+			showMore.setText("\uE010");
+			setPreferredSize(new Dimension(buttonWidth, 150));
+
 		}
-		public void deselect(){
+
+		public void deselect() {
+			if (this.selected) {
+				info.setVisible(false);
+				info.removeAll();
+				expanded = false;
+				showMore.setText("\uE011");
+				setPreferredSize(new Dimension(buttonWidth, 60));
+			}
 			this.selected = false;
-			if(image) {
+			if (image) {
 				setUI(warningUI);
 				setBackground(new Color(150, 0, 0));
-			}
-			else if(vulgar) {
+			} else if (vulgar) {
 				setUI(noticeUI);
 				setBackground(new Color(150, 150, 0));
-			}
-			else{
+			} else {
 				setBackground(Defaults.MAIN);
 				setUI(defaultUI);
 			}
+
 		}
-		public void refresh(boolean image, boolean vulgar){
+
+		public void refresh(boolean image, boolean vulgar) {
 			for (Component component : getComponents()) {
 				if (component instanceof JLabel) {
 					component.setForeground(Defaults.FOREGROUND);
 				}
 			}
-			if(selected){
+			analyzeButton.setForeground(Defaults.FOREGROUND);
+			lRequester.setForeground(Defaults.FOREGROUND2);
+			lAuthorID.setForeground(Defaults.FOREGROUND2);
+			if (selected) {
 				if (image) {
 					setBackground(new Color(200, 0, 0));
 					setUI(warningSelectUI);
-				}
-				else if (vulgar) {
+				} else if (vulgar) {
 					setBackground(new Color(200, 150, 0));
 					setUI(noticeSelectUI);
 				} else {
@@ -440,13 +640,11 @@ public class LevelsWindow {
 					setUI(selectUI);
 				}
 				select();
-			}
-			else {
+			} else {
 				if (image) {
 					setBackground(new Color(150, 0, 0));
 					setUI(warningUI);
-				}
-				else if (vulgar) {
+				} else if (vulgar) {
 					setBackground(new Color(150, 150, 0));
 					setUI(noticeUI);
 				} else {
@@ -454,19 +652,26 @@ public class LevelsWindow {
 					setUI(defaultUI);
 				}
 			}
+			if(selected){
+				System.out.println("jksdfhgkyeusfghd");
+				select();
+			}
 		}
-		public void refresh(){
+
+		public void refresh() {
 			for (Component component : getComponents()) {
 				if (component instanceof JLabel) {
 					component.setForeground(Defaults.FOREGROUND);
 				}
 			}
-			if(selected){
+			analyzeButton.setForeground(Defaults.FOREGROUND);
+			lRequester.setForeground(Defaults.FOREGROUND2);
+			lAuthorID.setForeground(Defaults.FOREGROUND2);
+			if (selected) {
 				if (image) {
 					setBackground(new Color(200, 0, 0));
 					setUI(warningSelectUI);
-				}
-				else if (vulgar) {
+				} else if (vulgar) {
 					setBackground(new Color(200, 150, 0));
 					setUI(noticeSelectUI);
 				} else {
@@ -474,13 +679,11 @@ public class LevelsWindow {
 					setUI(selectUI);
 				}
 				select();
-			}
-			else {
+			} else {
 				if (image) {
 					setBackground(new Color(150, 0, 0));
 					setUI(warningUI);
-				}
-				else if (vulgar) {
+				} else if (vulgar) {
 					setBackground(new Color(150, 150, 0));
 					setUI(noticeUI);
 				} else {
@@ -488,6 +691,17 @@ public class LevelsWindow {
 					setUI(defaultUI);
 				}
 			}
+			if(selected){
+				System.out.println("jksdfhgkyeusfghd");
+				select();
+			}
+		}
+
+		public JLabel createLabel(String text) {
+			JLabel label = new JLabel(text);
+			label.setForeground(Defaults.FOREGROUND2);
+			label.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+			return label;
 		}
 	}
 
@@ -516,7 +730,7 @@ public class LevelsWindow {
 			}
 			i++;
 		}
-		if(scrollPane != null) {
+		if (scrollPane != null) {
 			scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
 			scrollPane.setBackground(Defaults.MAIN);
 			scrollPane.getViewport().setBackground(Defaults.MAIN);
@@ -525,7 +739,7 @@ public class LevelsWindow {
 	}
 
 	public static void setOneSelect() {
-		if(mainPanel.getComponents().length != 0) {
+		if (mainPanel.getComponents().length != 0) {
 			((LevelButton) mainPanel.getComponent(0)).select();
 			selectedID = 0;
 		}
@@ -536,7 +750,7 @@ public class LevelsWindow {
 		for (Component component : mainPanel.getComponents()) {
 			if (component instanceof LevelButton) {
 				if (j == i) {
-					((LevelButton)component).select();
+					((LevelButton) component).select();
 					selectedID = i;
 					break;
 				}
@@ -544,12 +758,15 @@ public class LevelsWindow {
 			}
 		}
 	}
-	public String getName(){
+
+	public String getName() {
 		return "Requests";
 	}
-	public String getIcon(){
+
+	public String getIcon() {
 		return "\uE179";
 	}
+
 	public static void toggleVisible() {
 		((InnerWindow) window).toggle();
 	}
@@ -579,7 +796,8 @@ public class LevelsWindow {
 	}
 
 	public static void updateUI(long ID, boolean vulgar, boolean image, boolean analyzed) {
-		out: while(true){
+		out:
+		while (true) {
 			for (Component component : mainPanel.getComponents()) {
 				if (component instanceof LevelButton) {
 					if (((LevelButton) component).ID == ID) {

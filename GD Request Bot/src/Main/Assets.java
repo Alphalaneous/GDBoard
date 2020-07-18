@@ -14,9 +14,27 @@ public class Assets {
 	public static HashMap<String, ImageIcon> difficultyIconsNormal = new HashMap<>();
 	public static HashMap<String, ImageIcon> difficultyIconsFeature = new HashMap<>();
 	public static HashMap<String, ImageIcon> difficultyIconsEpic = new HashMap<>();
+	public static ImageIcon verifiedCoin;
+	public static ImageIcon unverifiedCoin;
+	static {
+		try {
+			verifiedCoin = new ImageIcon(ImageIO
+						.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
+								.getResource("Resources/GDAssets/verifiedCoin.png")))
+						.getScaledInstance(15, 15, Image.SCALE_SMOOTH));
+			unverifiedCoin = new ImageIcon(ImageIO
+					.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
+							.getResource("Resources/GDAssets/unverifiedCoin.png")))
+					.getScaledInstance(15, 15, Image.SCALE_SMOOTH));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-	private static int width = 40;
-	private static int height = 40;
+
+
+	private static int width = 30;
+	private static int height = 30;
 
 
 	static void loadAssets() throws IOException {
@@ -40,5 +58,6 @@ public class Assets {
 						.getScaledInstance(width, height, Image.SCALE_SMOOTH)));
 			}
 		}
+
 	}
 }

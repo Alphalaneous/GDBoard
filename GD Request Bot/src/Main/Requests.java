@@ -327,7 +327,7 @@ public class Requests {
 				}
 			}
 			BufferedImage icon = iconSet.generateIcon(user.getMainIconType());
-			Image imgScaled = icon.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+			Image imgScaled = icon.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 			ImageIcon imgNew = new ImageIcon(imgScaled);
 			levelData.setPlayerIcon(imgNew);
 			//String[] videoInfo = APIs.getYTVideo(ID);
@@ -418,7 +418,7 @@ public class Requests {
 				}
 			}
 			levels.add(levelData);
-			LevelsWindow.createButton(levelData.getName().toString(), levelData.getAuthor().toString(), levelData.getLevelID(), levelData.getDifficulty().toString(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester().toString(), levelData.getVersion(), levelData.getPlayerIcon());
+			LevelsWindow.createButton(levelData.getName().toString(), levelData.getAuthor().toString(), levelData.getLevelID(), levelData.getDifficulty().toString(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester().toString(), levelData.getVersion(), levelData.getPlayerIcon(), levelData.getCoins());
 			LevelsWindow.setName(Requests.levels.size());
 			Functions.saveFunction();
 			if(Main.doMessage) {
