@@ -204,6 +204,22 @@ public class Windowed {
 			}
 		});
 		buttonPanel.add(showMore);
+
+		JButton donate = createButton("\uE006", "Donate");
+		donate.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+					try {
+						Runtime rt = Runtime.getRuntime();
+						rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://www.paypal.me/xAlphalaneous");
+					} catch (IOException ex) {
+						ex.printStackTrace();
+					}
+				}
+			}
+		});
+		buttonPanel.add(donate);
 		content.add(levelsWindow);
 		content.add(commentsWindow);
 		content.add(infoWindow);

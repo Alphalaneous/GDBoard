@@ -372,10 +372,10 @@ public class Main {
 				FileUtils.copyURLToFile(inputUrl, path.toFile());
 			}
 			loaded = true;
-
 		} catch (Exception e) {
 			e.printStackTrace();
-			String option = DialogBox.showDialogBox("Error!", e.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
+			String option = DialogBox.showDialogBox("Error!", "<html>" + e.toString() + ": " + e.getStackTrace()[0], "Please report to Alphalaneous#9687 on Discord.", new String[]{"Close"});
+			close(true, false);
 		}
 	}
 	static Channel channel;
@@ -452,7 +452,11 @@ public class Main {
 		});
 		thread.start();
 	}
-	public static void close(){
+	public static void close(boolean forceLoaded, boolean load){
+		boolean loaded = Main.loaded;
+		if(forceLoaded){
+			loaded = load;
+		}
 		if(!Settings.onboarding && loaded) {
 			if (!Settings.windowedMode) {
 				ActionsWindow.setSettings();
@@ -496,5 +500,8 @@ public class Main {
 			}
 		}
 		System.exit(0);
+	}
+	public static void close(){
+		close(false, false);
 	}
 }

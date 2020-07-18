@@ -30,7 +30,7 @@ class GDBoardBot {
 		defaultUI.setSelect( new Color(70, 70, 70));
 
 		new Thread(() -> {
-			String choice = DialogBox.showDialogBox("Connecting to Servers...", "This may take a few seconds", "If stuck here, try pressing reconnect", new String[]{"Reconnect", "Cancel"});
+			String choice = DialogBox.showDialogBox("Connecting to Servers...", "This may take a few seconds", "If stuck here, try pressing reconnect or restart GDBoard.", new String[]{"Reconnect", "Cancel"});
 			if(choice.equalsIgnoreCase("Cancel")){
 				Main.close();
 			}
@@ -50,10 +50,6 @@ class GDBoardBot {
 			}
 			tries++;
 			wait = wait * 2;
-			if(tries >= 10){
-				APIs.setOauth();
-				tries = 0;
-			}
 			start();
 			return;
 		}
@@ -142,10 +138,6 @@ class GDBoardBot {
 					}
 					tries++;
 					wait = wait*2;
-					if(tries >= 10){
-						APIs.setOauth();
-						tries = 0;
-					}
 				}
 				try {
 					Thread.sleep(10);
@@ -179,10 +171,6 @@ class GDBoardBot {
 			}
 			tries++;
 			wait = wait*2;
-			if(tries >= 10){
-				APIs.setOauth();
-				tries = 0;
-			}
 		});
 		thread.start();
 	}
