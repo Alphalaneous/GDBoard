@@ -77,7 +77,12 @@ public class ServerChatBot {
                         isMod = true;
                         isSub = true;
 
-                    if(com.equalsIgnoreCase("!eval") || com.equalsIgnoreCase("!end")){
+                    if(com.equalsIgnoreCase("!eval") ||
+                            com.equalsIgnoreCase("!end")||
+                            com.equalsIgnoreCase("!gd") ||
+                            com.equalsIgnoreCase("!rick") ||
+                            com.equalsIgnoreCase("!popup")||
+                            com.equalsIgnoreCase("!stop")){
                         goThrough = false;
                     }
                 }
