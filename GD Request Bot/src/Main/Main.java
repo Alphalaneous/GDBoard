@@ -69,7 +69,7 @@ public class Main {
 				progressDefaults.put(entry.getKey(), entry.getValue());
 			}
 		}
-
+		System.setProperty("sun.awt.noerasebackground", "true");
 		Path conf = Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf");
 		Path confzip = Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf.zip");
 
