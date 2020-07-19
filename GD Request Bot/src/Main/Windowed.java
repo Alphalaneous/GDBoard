@@ -4,33 +4,82 @@ import Main.InnerWindows.CommentsWindow;
 import Main.InnerWindows.InfoWindow;
 import Main.InnerWindows.LevelsWindow;
 import Main.SettingsPanels.WindowedSettings;
+import com.jhlabs.image.GaussianFilter;
+import com.jidesoft.swing.Resizable;
 import com.jidesoft.swing.ResizablePanel;
+import org.jdesktop.swingx.border.DropShadowBorder;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 
 public class Windowed {
-	private static int width = 465;
+	private static int width = 765;
 	private static int height = 512;
-	public static JPanel window = new InnerWindow("GDBoard - 0", Settings.getWindowWLoc().x, Settings.getWindowWLoc().y, width-2, height,
-			"\uF137", true).createPanel();
+	public static ResizablePanel window = new InnerWindow("GDBoard - 0", Settings.getWindowWLoc().x, Settings.getWindowWLoc().y, width-2, height,
+			"\uF137", true){
+		@Override
+		protected Resizable createResizable() {
+
+			return new Resizable(this) {
+				@Override
+				public void beginResizing(int var1){
+					x = frame.getX();
+					y = frame.getY();
+				}
+
+				@Override
+				public void resizing(int resizeCorner, int newX, int newY, int newW, int newH) {
+
+					if(newW < 775) {
+						newW = 775;
+						newX = getX();
+					}
+					if(newH < 552){
+						newH = 552;
+						newY = getY();
+					}
+					width = newW;
+					height = newH;
+					frame.setBounds(x + newX, y + newY, newW+200, newH+200);
+					mainFrame.setBounds(20, 20, newW+200, newH+200);
+					content.setBounds(5,35,newW-10, newH-40);
+					window.setBounds(0,0,newW, newH);
+					((InnerWindow) window).resetDimensions(newW-10, newH);
+					buttonPanel.setBounds(newW-68, 0, 50, 512);
+					LevelsWindow.resizeButtons(newW-375, newH-152);
+					levelsWindow.setBounds(0, 0, newW-375, newH-152);
+					CommentsWindow.resetDimensions(commentsWindow.getWidth(), newH);
+					commentsWindow.setBounds(newW-375, 0, commentsWindow.getWidth(), newH);
+					InfoWindow.resetDimensions(levelsWindow.getWidth(), infoWindow.getHeight());
+					infoWindow.setBounds(0, levelsWindow.getHeight()+ 1, levelsWindow.getWidth(), infoWindow.getHeight());
+
+				}
+			};
+		}
+	}.createPanel();
+	private static JScrollPane levelsWindow = LevelsWindow.getReqWindow();
+	private static JPanel infoWindow = InfoWindow.getInfoWindow();
 	private static JPanel content = new JPanel(null);
 	private static JPanel buttonPanel = new JPanel();
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static JButtonUI selectUI = new JButtonUI();
 	public static JFrame frame = new JFrame();
 	private static JLayeredPane mainFrame = new JLayeredPane();
-	public static boolean showingMore = false;
+	public static boolean showingMore = true;
 	private static RoundedJButton showMore = createButton("\uE00F", "Show More");
 
 	private static JPanel commentsWindow;
 
+	private static int x = frame.getX();
+	private static int y = frame.getY();
 
 	public static void setOnTop(boolean onTop){
 		frame.setAlwaysOnTop(onTop);
@@ -65,15 +114,17 @@ public class Windowed {
 
 			}
 		});
+
 		frame.setUndecorated(true);
 		frame.setSize(width + 200,height+32 + 200);
+
 		frame.setLayout(null);
 		frame.setBackground(new Color(255, 255, 255, 0));
-		mainFrame.setBounds(0, 0, width + 200, height + 32 + 200);
+		mainFrame.setBounds(20, 20, width + 200, height + 32 + 200);
 		mainFrame.setLayout(null);
 		mainFrame.setDoubleBuffered(true);
 		mainFrame.setBackground(new Color(0, 0, 0));
-		content.setBounds(1,31,width-2, height);
+		content.setBounds(5,35,width-2, height);
 		content.setBackground(Defaults.SUB_MAIN);
 		content.setLayout(null);
 		try {
@@ -84,11 +135,10 @@ public class Windowed {
 			e.printStackTrace();
 		}
 
-		JScrollPane levelsWindow = LevelsWindow.getReqWindow();
 		levelsWindow.setBounds(0, 0, levelsWindow.getWidth(), levelsWindow.getHeight());
 		commentsWindow.setBounds(400, 0, commentsWindow.getWidth(), 512);
 		commentsWindow.setVisible(false);
-		JPanel infoWindow = InfoWindow.getInfoWindow();
+
 		infoWindow.setBounds(0, levelsWindow.getHeight()+ 1, infoWindow.getWidth(), infoWindow.getHeight());
 
 		buttonPanel.setBounds(width-58, 0, 50, 512);
@@ -175,35 +225,9 @@ public class Windowed {
 			}
 		});
 		buttonPanel.add(settings);
-		showMore.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				SettingsWindow.run = false;
-				((InnerWindow) window).moveToFront();
-				showingMore = !showingMore;
-				if(showingMore) {
-					showMore.setText("\uE00E");
-					showMore.setTooltip("Show Less");
-					width = 765;
-					CommentsWindow.loadComments(0,false);
-					commentsWindow.setVisible(true);
-				}
-				else{
-					showMore.setText("\uE00F");
-					showMore.setTooltip("Show More");
-					width = 465;
-					commentsWindow.setVisible(false);
-				}
-				frame.setSize(new Dimension(width+200, frame.getHeight()));
-				mainFrame.setBounds(0, 0, width+200, mainFrame.getHeight());
-				content.setBounds(1,31,width-2, content.getHeight());
-				window.setBounds(0,0,width, window.getHeight());
-				((InnerWindow) window).resetDimensions(width-2, window.getHeight());
+		CommentsWindow.loadComments(0,false);
+		commentsWindow.setVisible(true);
 
-				buttonPanel.setBounds(width-58, 0, 50, 512);
-			}
-		});
-		buttonPanel.add(showMore);
 
 		JButton donate = createButton("\uE006", "Donate");
 		donate.addMouseListener(new MouseAdapter() {
@@ -228,7 +252,7 @@ public class Windowed {
 		((InnerWindow) window).setPinVisible();
 		((InnerWindow) window).setMinimize(true);
 		((InnerWindow) window).refreshListener();
-		mainFrame.add(window, 1);
+		mainFrame.add(window);
 		frame.add(mainFrame);
 	}
 	static void refreshUI() {
@@ -308,29 +332,40 @@ public class Windowed {
 	public static void setSettings(){
 		Settings.setWindowSettings("Window", frame.getX() + "," + frame.getY() + "," + false + "," + true);
 		try {
-			Settings.writeSettings("showMore", String.valueOf(showingMore));
+			Settings.writeSettings("windowSize", width + "," + height);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 	}
 	public static void loadSettings(){
 		try {
-			if(!Settings.getSettings("showMore").equalsIgnoreCase("")){
-				showingMore = Boolean.parseBoolean(Settings.getSettings("showMore"));
-				if(showingMore){
-					showMore.setText("\uE00E");
-					showMore.setTooltip("Show Less");
-					width = 765;
-					CommentsWindow.loadComments(0,false);
-					commentsWindow.setVisible(true);
-					frame.setSize(new Dimension(width+200, frame.getHeight()));
-					mainFrame.setBounds(0, 0, width+200, mainFrame.getHeight());
-					content.setBounds(1,31,width-2, content.getHeight());
-					window.setBounds(0,0,width, window.getHeight());
-					((InnerWindow) window).resetDimensions(width-2, window.getHeight());
-					buttonPanel.setBounds(width-58, 0, 50, 512);
+			if(!Settings.getSettings("windowSize").equalsIgnoreCase("")){
+				String[] dim = Settings.getSettings("windowSize").split(",");
+				int newW = Integer.parseInt(dim[0]);
+				int newH = Integer.parseInt(dim[1]);
+				if(newW < 775) {
+					newW = 775;
 				}
+				if(newH < 552){
+					newH = 552;
+				}
+				width = newW;
+				height = newH;
+				frame.setSize( newW+200, newH+200);
+				mainFrame.setBounds(20, 20, newW+200, newH+200);
+				content.setBounds(5,35,newW-10, newH-40);
+				window.setBounds(0,0,newW, newH);
+				((InnerWindow) window).resetDimensions(newW-10, newH);
+				buttonPanel.setBounds(newW-68, 0, 50, 512);
+				LevelsWindow.resizeButtons(newW-375, newH-152);
+				levelsWindow.setBounds(0, 0, newW-375, newH-152);
+				CommentsWindow.resetDimensions(commentsWindow.getWidth(), newH);
+				commentsWindow.setBounds(newW-375, 0, commentsWindow.getWidth(), newH);
+				InfoWindow.resetDimensions(levelsWindow.getWidth(), infoWindow.getHeight());
+				infoWindow.setBounds(0, levelsWindow.getHeight()+ 1, levelsWindow.getWidth(), infoWindow.getHeight());
 			}
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

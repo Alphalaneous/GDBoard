@@ -55,7 +55,7 @@ public class CommentsWindow {
 		//region Panel attributes
 		panel.setLayout(null);
 		panel.setBounds(0, 0, width, 0);
-		mainPanel.setBounds(1, 1, width, height+30);
+		mainPanel.setBounds(5, 5, width, height+30);
 		panel.setBackground(Defaults.SUB_MAIN);
 		panel.setPreferredSize(new Dimension(width, 0));
 		//endregion
@@ -63,6 +63,7 @@ public class CommentsWindow {
 		//region ScrollPane attributes
 		scrollPane.setBackground(Defaults.SUB_MAIN);
 		scrollPane.getViewport().setBackground(Defaults.SUB_MAIN);
+		scrollPane.setBackground(Defaults.SUB_MAIN);
 		scrollPane.getVerticalScrollBar().setOpaque(false);
 		scrollPane.setOpaque(false);
 		scrollPane.setBounds(0, 30, width, height - 30);
@@ -124,7 +125,7 @@ public class CommentsWindow {
 				((InnerWindow) window).moveToFront();
 				super.mousePressed(e);
 				if (page != 0) {
-					page--;
+					page = page-2;
 					try {
 						loadComments(page, topC);
 					} catch (Exception ignored) {
@@ -141,9 +142,9 @@ public class CommentsWindow {
 			public void mousePressed(MouseEvent e) {
 				((InnerWindow) window).moveToFront();
 				super.mousePressed(e);
-				page++;
+				page = page + 2;
 				if(!loadComments(page, topC)){
-					page--;
+					page = page - 2;
 					try {
 						loadComments(page, topC);
 					} catch (Exception f) {
@@ -186,7 +187,12 @@ public class CommentsWindow {
 
 		return mainPanel;
 	}
+	public static void resetDimensions(int width, int height){
+		scrollPane.setBounds(0, 0, width, height-70);
+		buttons.setBounds(0, height-70, width, 30);
+	}
 	public static boolean loadComments(int page, boolean top){
+		topC = top;
 		System.gc();
 		System.runFinalization();
 		int width = CommentsWindow.width - 15;
@@ -197,139 +203,140 @@ public class CommentsWindow {
 				panel.setVisible(false);
 				URL gdAPI = null;
 				String message = null;
-				ArrayList<Comment> commentA = APIs.getGDComments(page, top, Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
+				for(int j = 0; j < 2; j++) {
+					ArrayList<Comment> commentA = APIs.getGDComments(page + j, top, Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
+					for (int i = 0; i < commentA.size(); i++) {
+						String percent;
+						String username = commentA.get(i).getUsername();
+						String likes = commentA.get(i).getLikes();
+						String date = "";
+						String comment = String.format("<html><div WIDTH=%d>%s</div></html>", width - 8, StringEscapeUtils.unescapeHtml4(commentA.get(i).getComment()));
+						try {
+							percent = StringEscapeUtils.unescapeHtml4(commentA.get(i).getPercent() + "%");
+						} catch (Exception e) {
+							percent = "";
+						}
+						if (percent.equalsIgnoreCase("0%")) {
+							percent = "";
+						}
+						JPanel cmtPanel = new JPanel(null);
+						cmtPanel.setBackground(Defaults.MAIN);
 
-				for (int i = 0; i < 10; i++) {
-					String percent;
-					String username = commentA.get(i).getUsername();
-					String likes = commentA.get(i).getLikes();
-					String date = "";
-					String comment = String.format("<html><div WIDTH=%d>%s</div></html>", width - 8, StringEscapeUtils.unescapeHtml4(commentA.get(i).getComment()));
-					try {
-						percent = StringEscapeUtils.unescapeHtml4(commentA.get(i).getPercent() + "%");
-					} catch (Exception e) {
-						percent = "";
-					}
-					if (percent.equalsIgnoreCase("0%")) {
-						percent = "";
-					}
-					JPanel cmtPanel = new JPanel(null);
-					cmtPanel.setBackground(Defaults.MAIN);
-
-					JLabel commenter = new JLabel(username);
-					commenter.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-					commenter.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-					if (username.equalsIgnoreCase(Requests.levels.get(LevelsWindow.getSelectedID()).getAuthor().toString())) {
-						commenter.setForeground(new Color(47, 62, 195));
-					} else {
-						commenter.setForeground(Defaults.FOREGROUND);
-					}
-					commenter.setBounds(30, 4, commenter.getPreferredSize().width, 18);
-					int finalI = i;
-					commenter.addMouseListener(new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent e) {
-							super.mouseClicked(e);
-							if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-								try {
-									Runtime rt = Runtime.getRuntime();
-									rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://www.gdbrowser.com/profile/" + commentA.get(finalI).getUsername());
-								} catch (IOException ex) {
-									ex.printStackTrace();
+						JLabel commenter = new JLabel(username);
+						commenter.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+						commenter.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+						if (username.equalsIgnoreCase(Requests.levels.get(LevelsWindow.getSelectedID()).getAuthor().toString())) {
+							commenter.setForeground(new Color(47, 62, 195));
+						} else {
+							commenter.setForeground(Defaults.FOREGROUND);
+						}
+						commenter.setBounds(30, 4, commenter.getPreferredSize().width, 18);
+						int finalI = i;
+						commenter.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent e) {
+								super.mouseClicked(e);
+								if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+									try {
+										Runtime rt = Runtime.getRuntime();
+										rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://www.gdbrowser.com/profile/" + commentA.get(finalI).getUsername());
+									} catch (IOException ex) {
+										ex.printStackTrace();
+									}
 								}
 							}
+
+							@Override
+							public void mouseEntered(MouseEvent e) {
+								super.mouseEntered(e);
+								commenter.setFont(Defaults.MAIN_FONT.deriveFont(15f));
+								commenter.setBounds(28, 4, commenter.getPreferredSize().width + 5, 18);
+							}
+
+							@Override
+							public void mouseExited(MouseEvent e) {
+								super.mouseExited(e);
+								commenter.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+								commenter.setBounds(30, 4, commenter.getPreferredSize().width, 18);
+							}
+						});
+
+						JLabel percentLabel = new JLabel(percent);
+						percentLabel.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+						percentLabel.setForeground(Defaults.FOREGROUND2);
+						percentLabel.setBounds(commenter.getPreferredSize().width + 42, 4, percentLabel.getPreferredSize().width + 5, 18);
+
+
+						JLabel likeIcon = new JLabel();
+						if (Integer.parseInt(likes.replaceAll("%", "")) < 0) {
+							likeIcon.setText("\uE8E0");
+						} else {
+							likeIcon.setText("\uE8E1");
 						}
-
-						@Override
-						public void mouseEntered(MouseEvent e) {
-							super.mouseEntered(e);
-							commenter.setFont(Defaults.MAIN_FONT.deriveFont(15f));
-							commenter.setBounds(28, 4, commenter.getPreferredSize().width + 5, 18);
-						}
-
-						@Override
-						public void mouseExited(MouseEvent e) {
-							super.mouseExited(e);
-							commenter.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-							commenter.setBounds(30, 4, commenter.getPreferredSize().width, 18);
-						}
-					});
-
-					JLabel percentLabel = new JLabel(percent);
-					percentLabel.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-					percentLabel.setForeground(Defaults.FOREGROUND2);
-					percentLabel.setBounds(commenter.getPreferredSize().width + 42, 4, percentLabel.getPreferredSize().width + 5, 18);
+						likeIcon.setFont(Defaults.SYMBOLS.deriveFont(14f));
+						likeIcon.setForeground(Defaults.FOREGROUND);
+						likeIcon.setBounds(width - 20, 4, (int) (width * 0.5), 18);
 
 
-					JLabel likeIcon = new JLabel();
-					if (Integer.parseInt(likes.replaceAll("%", "")) < 0) {
-						likeIcon.setText("\uE8E0");
-					} else {
-						likeIcon.setText("\uE8E1");
+						JLabel likesLabel = new JLabel(likes);
+						likesLabel.setFont(Defaults.MAIN_FONT.deriveFont(10f));
+						likesLabel.setForeground(Defaults.FOREGROUND);
+						likesLabel.setBounds(width - likesLabel.getPreferredSize().width - 26, 6, likesLabel.getPreferredSize().width + 5, 18);
+						JLabel playerIcon = new JLabel();
+						Thread thread = new Thread(() -> {
+							AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
+
+							GDUserIconSet iconSet = null;
+							GDUser user = null;
+							try {
+								user = client.searchUser(username).block();
+
+								try {
+									iconSet = new GDUserIconSet(user, SpriteFactory.create());
+								} catch (SpriteLoadException e) {
+									e.printStackTrace();
+								}
+							} catch (MissingAccessException e) {
+								user = client.searchUser("RobTop").block();
+								try {
+									iconSet = new GDUserIconSet(user, SpriteFactory.create());
+								} catch (SpriteLoadException e1) {
+									e1.printStackTrace();
+								}
+							}
+							BufferedImage icon = iconSet.generateIcon(user.getMainIconType());
+							Image imgScaled = icon.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+							ImageIcon imgNew = new ImageIcon(imgScaled);
+							playerIcon.setIcon(imgNew);
+							playerIcon.setBounds(2, -5, imgNew.getIconWidth() + 2, imgNew.getIconHeight() + 2);
+							icon = null;
+							imgScaled = null;
+							imgNew = null;
+						});
+						thread.start();
+
+						JLabel content = new JLabel(comment);
+						content.setFont(Defaults.MAIN_FONT.deriveFont(12f));
+						content.setForeground(Defaults.FOREGROUND);
+						content.setBounds(9, 24, width - 8, content.getPreferredSize().height);
+						panelHeight = panelHeight + 32 + content.getPreferredSize().height;
+
+						cmtPanel.add(commenter);
+						cmtPanel.add(content);
+						cmtPanel.add(percentLabel);
+						cmtPanel.add(likesLabel);
+						cmtPanel.add(likeIcon);
+						cmtPanel.add(playerIcon);
+
+						cmtPanel.setPreferredSize(new Dimension(width, 28 + content.getPreferredSize().height));
+
+						((InnerWindow) window).refreshListener();
+						panel.add(cmtPanel);
+						panel.setPreferredSize(new Dimension(width, panelHeight));
+						scrollPane.getViewport().setViewPosition(new Point(0, 0));
+						panel.setVisible(true);
+
 					}
-					likeIcon.setFont(Defaults.SYMBOLS.deriveFont(14f));
-					likeIcon.setForeground(Defaults.FOREGROUND);
-					likeIcon.setBounds(width - 20, 4, (int) (width * 0.5), 18);
-
-
-					JLabel likesLabel = new JLabel(likes);
-					likesLabel.setFont(Defaults.MAIN_FONT.deriveFont(10f));
-					likesLabel.setForeground(Defaults.FOREGROUND);
-					likesLabel.setBounds(width - likesLabel.getPreferredSize().width - 26, 6, likesLabel.getPreferredSize().width + 5, 18);
-					JLabel playerIcon = new JLabel();
-					Thread thread = new Thread(() -> {
-						AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
-
-						GDUserIconSet iconSet = null;
-						GDUser user = null;
-						try {
-							user = client.searchUser(username).block();
-
-							try {
-								iconSet = new GDUserIconSet(user, SpriteFactory.create());
-							} catch (SpriteLoadException e) {
-								e.printStackTrace();
-							}
-						} catch (MissingAccessException e) {
-							user = client.searchUser("RobTop").block();
-							try {
-								iconSet = new GDUserIconSet(user, SpriteFactory.create());
-							} catch (SpriteLoadException e1) {
-								e1.printStackTrace();
-							}
-						}
-						BufferedImage icon = iconSet.generateIcon(user.getMainIconType());
-						Image imgScaled = icon.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-						ImageIcon imgNew = new ImageIcon(imgScaled);
-						playerIcon.setIcon(imgNew);
-						playerIcon.setBounds(2, -5, imgNew.getIconWidth() + 2, imgNew.getIconHeight() + 2);
-						icon = null;
-						imgScaled = null;
-						imgNew = null;
-					});
-					thread.start();
-
-					JLabel content = new JLabel(comment);
-					content.setFont(Defaults.MAIN_FONT.deriveFont(12f));
-					content.setForeground(Defaults.FOREGROUND);
-					content.setBounds(9, 24, width - 8, content.getPreferredSize().height);
-					panelHeight = panelHeight + 32 + content.getPreferredSize().height;
-
-					cmtPanel.add(commenter);
-					cmtPanel.add(content);
-					cmtPanel.add(percentLabel);
-					cmtPanel.add(likesLabel);
-					cmtPanel.add(likeIcon);
-					cmtPanel.add(playerIcon);
-
-					cmtPanel.setPreferredSize(new Dimension(width, 28 + content.getPreferredSize().height));
-
-					((InnerWindow) window).refreshListener();
-					panel.add(cmtPanel);
-					panel.setPreferredSize(new Dimension(width, panelHeight));
-					scrollPane.getViewport().setViewPosition(new Point(0, 0));
-					panel.setVisible(true);
-
 				}
 				return true;
 			}

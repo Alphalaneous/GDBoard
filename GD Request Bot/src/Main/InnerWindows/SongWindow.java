@@ -27,7 +27,7 @@ public class SongWindow {
 	private static CurvedButton persist = new CurvedButton("Make music persist?");
 
 	public static void createPanel() {
-		panel.setBounds(1, 31, width, height);
+		panel.setBounds(5, 35, width, height);
 		panel.setBackground(Defaults.MAIN);
 		panel.setLayout(null);
 		final Thread[] thread = new Thread[1];

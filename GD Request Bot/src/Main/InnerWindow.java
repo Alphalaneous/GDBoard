@@ -3,9 +3,11 @@ package Main;
 import Main.InnerWindows.LevelsWindow;
 import Main.SettingsPanels.*;
 import com.jidesoft.swing.ResizablePanel;
+import org.jdesktop.swingx.border.DropShadowBorder;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
 import javax.swing.event.MouseInputAdapter;
 
 import java.awt.*;
@@ -14,7 +16,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.Objects;
 
-public class InnerWindow extends JPanel {
+public class InnerWindow extends ResizablePanel {
 
 	private static final long serialVersionUID = 1L;
 	private String title;
@@ -99,7 +101,7 @@ public class InnerWindow extends JPanel {
 		return icon;
 	}
 	//region Create InnerWindow
-	public JPanel createPanel() {
+	public ResizablePanel createPanel() {
 
 		//region No Click Through listener
 		setDoubleBuffered(true);
@@ -119,11 +121,11 @@ public class InnerWindow extends JPanel {
 		setBackground(new Color(0, 0, 0, 0));
 		setLayout(null);
 		if(!Settings.windowedMode) {
-			setBounds((int) x, (int) y, width + 2, height + 32);
+			setBounds((int) x, (int) y, width+10, height + 40);
 		}
 		else {
 			if(floating) {
-				setBounds((int) x, (int) y, width + 2, height + 32);
+				setBounds((int) x, (int) y, width+10, height + 40);
 			}
 			else {
 
@@ -136,7 +138,12 @@ public class InnerWindow extends JPanel {
 			}
 		}
 		setOpaque(false);
-		setBorder(BorderFactory.createLineBorder(alphaBorder));
+
+		setBorder(new CompoundBorder(
+				BorderFactory.createLineBorder(new Color(0,0,0,5),4),
+				BorderFactory.createLineBorder(alphaBorder,1)));
+
+
 
 		//endregion
 
@@ -473,7 +480,7 @@ public class InnerWindow extends JPanel {
 		});
 		//region TopBar attributes
 		topBar.setBackground(Defaults.TOP);
-		topBar.setBounds(1, 1, width, 30);
+		topBar.setBounds(5, 5, width, 30);
 
 		add(topBar);
 
@@ -549,7 +556,9 @@ public class InnerWindow extends JPanel {
 		pinButtonFill.setForeground(Defaults.FOREGROUND);
 		minimizeButton.setForeground(Defaults.FOREGROUND);
 		alphaBorder = new Color(Defaults.ACCENT.getRed(), Defaults.ACCENT.getGreen(), Defaults.ACCENT.getBlue(), 100);
-		setBorder(BorderFactory.createLineBorder(alphaBorder));
+		setBorder(new CompoundBorder(
+				BorderFactory.createLineBorder(new Color(0,0,0,5),4),
+				BorderFactory.createLineBorder(alphaBorder,1)));
 
 		for (Component component : topBar.getComponents()) {
 			if (component instanceof JButton) {
@@ -571,7 +580,6 @@ public class InnerWindow extends JPanel {
 				y = getY();
 			}
 			else {
-				//TODO Settngs window stays at location when moving between monitors
 				x = (int) ((Defaults.screenSize.getWidth()/2 - SettingsWindow.window.getWidth()/2) + Defaults.screenSize.x);
 				y = 150 + Defaults.screenSize.y;
 
@@ -622,7 +630,7 @@ public class InnerWindow extends JPanel {
 	public void resetDimensions(int width, int height) {
 		this.height = height;
 		this.width = width;
-		topBar.setBounds(1, 1, width, 30);
+		topBar.setBounds(5, 5, width, 30);
 		pinButton.setBounds(width - 60, 0, 30, 30);
 		pinButtonFill.setBounds(width - 60, 0, 30, 30);
 		minimizeButton.setBounds(width - 60, 0, 30, 30);
@@ -639,7 +647,10 @@ public class InnerWindow extends JPanel {
 	//region Set InnerWindow visible
 	public void setVisible() {
 		topBar.setVisible(true);
-		setBorder(BorderFactory.createLineBorder(alphaBorder));
+		setBorder(new CompoundBorder(
+				BorderFactory.createLineBorder(new Color(0,0,0,5),4),
+				BorderFactory.createLineBorder(alphaBorder,1)));
+
 		if (toggleState) {
 			if(!floating) {
 				setVisible(true);

@@ -96,7 +96,7 @@ public class InfoWindow {
 		panel.add(update);
 		panel.add(version);
 		descPanel.add(description);
-		fullPanel.setBounds(1,31,400,110);
+		fullPanel.setBounds(5,35,400,110);
 		//fullPanel.add(scrollPane);
 		fullPanel.add(descPanel);
 		window.add(fullPanel);
@@ -105,6 +105,11 @@ public class InfoWindow {
 			Overlay.addToFrame(window);
 		}
 		refreshInfo();
+	}
+	public static void resetDimensions(int width, int height){
+		descPanel.setBounds(0,0, width, height);
+		description.setBounds(5,5,width-10, height-10);
+
 	}
 	public static JPanel getInfoWindow(){
 		return fullPanel;

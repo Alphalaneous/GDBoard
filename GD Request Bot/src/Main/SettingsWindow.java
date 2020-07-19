@@ -81,13 +81,13 @@ public class SettingsWindow {
 		frame.setSize(width + 200,height+32 + 200);
 		frame.setLayout(null);
 		frame.setBackground(new Color(255, 255, 255, 0));
-		blankSpace.setBounds(1, 31, 208, 20);
+		blankSpace.setBounds(5, 35, 208, 20);
 		blankSpace.setBackground(Defaults.MAIN);
 
-		buttons.setBounds(1, 51, 208, height-20);
+		buttons.setBounds(5, 55, 208, height-20);
 		buttons.setBackground(Defaults.MAIN);
 
-		content.setBounds(209, 31, 412, height);
+		content.setBounds(213, 35, 412, height);
 		content.setBackground(Defaults.SUB_MAIN);
 		content.setLayout(null);
 

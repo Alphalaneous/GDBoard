@@ -46,7 +46,7 @@ public class Main {
 
 
 	static boolean starting = true;
-	static boolean loaded = false;
+	public static boolean loaded = false;
 	static boolean allowRequests = false;
 	static boolean doMessage  = false;
 	static boolean doImage  = false;
@@ -258,7 +258,6 @@ public class Main {
 					SettingsWindow.createPanel();
 					if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 						Windowed.createPanel();
-						Windowed.loadSettings();
 					}
 					Settings.loadSettings(false);
 					AccountSettings.refreshGD(LoadGD.username);
@@ -292,6 +291,7 @@ public class Main {
 					Overlay.refreshUI(true);
 					if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 						Windowed.resetCommentSize();
+						Windowed.loadSettings();
 						Windowed.frame.setVisible(true);
 
 					}

@@ -21,7 +21,7 @@ public class ActionsWindow {
 	//region Create Panel
 	public static void createPanel() {
 		try {
-			mainPanel.setBounds(1, 31, width, height);
+			mainPanel.setBounds(5, 35, width, height);
 
 			mainPanel.setLayout(null);
 
