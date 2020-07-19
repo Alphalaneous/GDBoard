@@ -60,7 +60,7 @@ public class Windowed {
 					commentsWindow.setBounds(newW-375, 0, commentsWindow.getWidth(), newH);
 					InfoWindow.resetDimensions(levelsWindow.getWidth(), infoWindow.getHeight());
 					infoWindow.setBounds(0, levelsWindow.getHeight()+ 1, levelsWindow.getWidth(), infoWindow.getHeight());
-
+					repaint();
 				}
 			};
 		}
