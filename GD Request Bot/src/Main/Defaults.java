@@ -50,6 +50,9 @@ public class Defaults {
 	public static Color TOP;
 	public static Color FOREGROUND;
 	public static Color FOREGROUND2;
+	public static JButtonUI defaultUI = new JButtonUI();
+	public static JButtonUI settingsButtonUI = new JButtonUI();
+
 
 	static Color OUTLINE = new Color(70, 70, 70);
 	public static Color BUTTON_HOVER;

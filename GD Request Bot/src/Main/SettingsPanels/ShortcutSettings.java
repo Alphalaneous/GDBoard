@@ -9,8 +9,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 
+
 public class ShortcutSettings {
-	private static JButtonUI defaultUI = new JButtonUI();
 	private static JPanel panel = new JPanel();
 	private static JPanel openPanel = createKeybindButton(25, "Open", "openKeybind");
 	private static JPanel skipPanel = createKeybindButton(75, "Skip/Next", "skipKeybind");
@@ -31,9 +31,6 @@ public class ShortcutSettings {
 
 
 	public static JPanel createPanel() {
-		defaultUI.setBackground(Defaults.BUTTON);
-		defaultUI.setHover(Defaults.HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
 
 		panel.setDoubleBuffered(true);
 		panel.setBounds(0, 0, 415, 622);
@@ -270,9 +267,6 @@ public class ShortcutSettings {
 	}
 
 	public static void refreshUI() {
-		defaultUI.setBackground(Defaults.MAIN);
-		defaultUI.setHover(Defaults.BUTTON_HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
 
 		panel.setBackground(Defaults.SUB_MAIN);
 		for (Component component : panel.getComponents()) {

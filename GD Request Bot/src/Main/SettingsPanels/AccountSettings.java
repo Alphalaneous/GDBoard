@@ -9,19 +9,15 @@ import java.io.IOException;
 
 import javax.swing.*;
 
+import static Main.Defaults.settingsButtonUI;
+
 public class AccountSettings {
 	private static JLabel channelText;
 	private static JLabel geometryText;
 
-	private static JButtonUI defaultUI = new JButtonUI();
 	private static JPanel panel = new JPanel();
 
 	public static JPanel createPanel() {
-
-		defaultUI.setBackground(Defaults.BUTTON);
-		defaultUI.setHover(Defaults.BUTTON_HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
-
 
 		panel.setDoubleBuffered(true);
 		panel.setBounds(0, 0, 415, 622);
@@ -46,7 +42,7 @@ public class AccountSettings {
 		button.setBackground(Defaults.BUTTON);
 		button.setBounds(365,45,30,30);
 		button.setPreferredSize(new Dimension(365,30));
-		button.setUI(defaultUI);
+		button.setUI(settingsButtonUI);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(Defaults.SYMBOLS.deriveFont(14f));
@@ -83,9 +79,6 @@ public class AccountSettings {
 
 	}
 	public static void refreshUI() {
-		defaultUI.setBackground(Defaults.BUTTON);
-		defaultUI.setHover(Defaults.BUTTON_HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
 
 		panel.setBackground(Defaults.SUB_MAIN);
 		for (Component component : panel.getComponents()) {

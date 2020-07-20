@@ -31,14 +31,14 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
+import static Main.Defaults.defaultUI;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 public class CommentsWindow {
 	private static JPanel panel = new JPanel();
 	private static JPanel mainPanel = new JPanel(null);
-	private static JButtonUI defaultUI = new JButtonUI();
-
+	private static JButtonUI buttonUI = new JButtonUI();
 	private static int height = 350;
 	private static int width = 300;
 	private static JPanel window = new InnerWindow("Comments", Settings.getCommentWLoc().x, Settings.getCommentWLoc().y, width, height,
@@ -59,7 +59,9 @@ public class CommentsWindow {
 		panel.setBackground(Defaults.SUB_MAIN);
 		panel.setPreferredSize(new Dimension(width, 0));
 		//endregion
-
+		buttonUI.setBackground(Defaults.TOP);
+		buttonUI.setHover(Defaults.BUTTON_HOVER);
+		buttonUI.setSelect(Defaults.SELECT);
 		//region ScrollPane attributes
 		scrollPane.setBackground(Defaults.SUB_MAIN);
 		scrollPane.getViewport().setBackground(Defaults.SUB_MAIN);
@@ -180,6 +182,7 @@ public class CommentsWindow {
 		panel.removeAll();
 		panel.setPreferredSize(new Dimension(width, 0));
 		scrollPane.updateUI();
+		System.gc();
 	}
 	public static JPanel getComWindow(){
 		scrollPane.setBounds(0, 0, width, 482);
@@ -232,6 +235,7 @@ public class CommentsWindow {
 						}
 						commenter.setBounds(30, 4, commenter.getPreferredSize().width, 18);
 						int finalI = i;
+						final ArrayList<Comment>[] finalCommentA = new ArrayList[]{commentA};
 						commenter.addMouseListener(new MouseAdapter() {
 							@Override
 							public void mouseClicked(MouseEvent e) {
@@ -239,7 +243,9 @@ public class CommentsWindow {
 								if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
 									try {
 										Runtime rt = Runtime.getRuntime();
-										rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://www.gdbrowser.com/profile/" + commentA.get(finalI).getUsername());
+										rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://www.gdbrowser.com/profile/" + finalCommentA[0].get(finalI).getUsername());
+										finalCommentA[0].clear();
+										finalCommentA[0] = null;
 									} catch (IOException ex) {
 										ex.printStackTrace();
 									}
@@ -312,6 +318,9 @@ public class CommentsWindow {
 							icon = null;
 							imgScaled = null;
 							imgNew = null;
+							iconSet = null;
+							user = null;
+							System.gc();
 						});
 						thread.start();
 
@@ -334,10 +343,11 @@ public class CommentsWindow {
 						panel.add(cmtPanel);
 						panel.setPreferredSize(new Dimension(width, panelHeight));
 						scrollPane.getViewport().setViewPosition(new Point(0, 0));
-						panel.setVisible(true);
-
 					}
+					commentA.clear();
+					commentA = null;
 				}
+				panel.setVisible(true);
 				return true;
 			}
 		}catch (Exception e){
@@ -367,7 +377,7 @@ public class CommentsWindow {
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBackground(Defaults.TOP);
-		button.setUI(defaultUI);
+		button.setUI(buttonUI);
 		button.setBounds(x, 0, 30, 30);
 		return button;
 	}
@@ -376,12 +386,12 @@ public class CommentsWindow {
 	//region RefreshUI
 	public static void refreshUI() {
 		((InnerWindow) window).refreshUI();
+		buttonUI.setBackground(Defaults.TOP);
+		buttonUI.setHover(Defaults.BUTTON_HOVER);
+		buttonUI.setSelect(Defaults.SELECT);
 		newUI.setBackground(Defaults.MAIN);
 		newUI.setHover(Defaults.HOVER);
 		newUI.setSelect(Defaults.SELECT);
-		defaultUI.setBackground(Defaults.TOP);
-		defaultUI.setHover(Defaults.HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
 		if(scrollPane != null) {
 			scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
 			scrollPane.setBackground(Defaults.MAIN);

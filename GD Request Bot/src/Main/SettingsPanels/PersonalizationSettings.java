@@ -8,9 +8,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
+import static Main.Defaults.settingsButtonUI;
+
 public class PersonalizationSettings {
 	private static CurvedButton windowedButton = new CurvedButton("Switch to Windowed Mode");
-	private static JButtonUI defaultUI = new JButtonUI();
 	private static JPanel panel = new JPanel(null);
 
 
@@ -18,9 +19,6 @@ public class PersonalizationSettings {
 		panel.setDoubleBuffered(true);
 		panel.setBounds(0, 0, 415, 622);
 		panel.setBackground(Defaults.SUB_MAIN);
-		defaultUI.setBackground(Defaults.BUTTON);
-		defaultUI.setHover(Defaults.BUTTON_HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
 
 		try {
 			if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
@@ -32,7 +30,7 @@ public class PersonalizationSettings {
 		windowedButton.setBounds(25,25, 365,30);
 		windowedButton.setPreferredSize(new Dimension(365,30));
 		windowedButton.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-		windowedButton.setUI(defaultUI);
+		windowedButton.setUI(settingsButtonUI);
 		windowedButton.setForeground(Defaults.FOREGROUND);
 		windowedButton.setBackground(Defaults.BUTTON);
 		windowedButton.refresh();
@@ -78,9 +76,6 @@ public class PersonalizationSettings {
 		
 	}
 	public static void refreshUI() {
-		defaultUI.setBackground(Defaults.BUTTON);
-		defaultUI.setHover(Defaults.BUTTON_HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
 		panel.setBackground(Defaults.SUB_MAIN);
 		for (Component component : panel.getComponents()) {
 			if (component instanceof JButton) {

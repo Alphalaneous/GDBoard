@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.Scanner;
 
+import static Main.Defaults.defaultUI;
 import static javax.swing.ScrollPaneConstants.*;
 
 public class LevelsWindow {
@@ -31,7 +32,6 @@ public class LevelsWindow {
 	private static JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
 	private static int selectedID = 0;
 	private static int prevSelectedID = 0;
-	private static JButtonUI defaultUI = new JButtonUI();
 	private static JButtonUI selectUI = new JButtonUI();
 	private static JButtonUI warningUI = new JButtonUI();
 	private static JButtonUI noticeUI = new JButtonUI();
@@ -189,9 +189,6 @@ public class LevelsWindow {
 				if(LevelsWindow.getSize() == 0){
 					this.selected = true;
 				}
-
-				defaultUI.setBackground(Defaults.MAIN);
-				defaultUI.setHover(Defaults.HOVER);
 
 				clear.setBackground(new Color(0, 0, 0, 0));
 				clear.setHover(new Color(0, 0, 0, 0));
@@ -726,10 +723,7 @@ public class LevelsWindow {
 
 	public static void refreshUI() {
 		((InnerWindow) window).refreshUI();
-		defaultUI.setBackground(Defaults.MAIN);
 		selectUI.setBackground(Defaults.SELECT);
-		defaultUI.setHover(Defaults.HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
 		selectUI.setHover(Defaults.BUTTON_HOVER);
 		selectUI.setSelect(Defaults.SELECT);
 		mainPanel.setBackground(Defaults.MAIN);

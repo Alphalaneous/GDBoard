@@ -17,11 +17,11 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
+import static Main.Defaults.settingsButtonUI;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 public class ChannelPointSettings {
-	private static JButtonUI defaultUI = new JButtonUI();
 	private static int i = 0;
 	private static double height = 0;
 	private static String command;
@@ -64,7 +64,7 @@ public class ChannelPointSettings {
 		backButton.setBounds(10, 10, 30, 30);
 		backButton.setFont(Defaults.SYMBOLS.deriveFont(15f));
 		backButton.setForeground(Defaults.FOREGROUND);
-		backButton.setUI(defaultUI);
+		backButton.setUI(settingsButtonUI);
 		backButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -131,10 +131,6 @@ public class ChannelPointSettings {
 		commandPanelView.setBackground(Defaults.SUB_MAIN);
 		commandPanelView.setVisible(false);
 
-
-		defaultUI.setBackground(Defaults.BUTTON);
-		defaultUI.setHover(Defaults.BUTTON_HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
 		panel.setLayout(null);
 		panel.setDoubleBuffered(true);
 		panel.setBounds(0, 0, 415, 622);
@@ -276,7 +272,7 @@ public class ChannelPointSettings {
 		}
 		CurvedButton button = new CurvedButton(command);
 		button.setBackground(Defaults.BUTTON);
-		button.setUI(defaultUI);
+		button.setUI(settingsButtonUI);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
@@ -305,9 +301,6 @@ public class ChannelPointSettings {
 	public static void refreshUI(){
 		panel.setBackground(Defaults.SUB_MAIN);
 		titlePanel.setBackground(Defaults.TOP);
-		defaultUI.setBackground(Defaults.BUTTON);
-		defaultUI.setHover(Defaults.BUTTON_HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
 		commandLabel.setForeground(Defaults.FOREGROUND);
 		commandsPanel.setBackground(Defaults.SUB_MAIN);
 		commandPanelView.setBackground(Defaults.SUB_MAIN);

@@ -44,9 +44,9 @@ public class Requests {
 	private static String os = (System.getProperty("os.name")).toUpperCase();
 	public static ArrayList<LevelData> levels = new ArrayList<>();
 	static ArrayList<Long> addedLevels = new ArrayList<Long>();
-	private static HashMap<String, Integer> userStreamLimitMap = new HashMap<>();
+	private static HashMap<StringBuilder, Integer> userStreamLimitMap = new HashMap<>();
 
-	public static void addRequest(long ID, String requester) {
+	public static void addRequest(long ID, StringBuilder requester) {
 		OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
 
 
@@ -61,7 +61,7 @@ public class Requests {
 
 			if(Main.loaded) {
 				if(GeneralSettings.followersOption){
-					if(APIs.isNotFollowing(requester)) {
+					if(APIs.isNotFollowing(requester.toString())) {
 						Main.sendMessage("@" + requester + " Please follow to send levels!");
 						return;
 					}
@@ -85,7 +85,7 @@ public class Requests {
 				if (GeneralSettings.userLimitOption) {
 					int size = 0;
 					for (LevelData level : levels) {
-						if (level.getRequester().toString().equalsIgnoreCase(requester)) {
+						if (level.getRequester().toString().equalsIgnoreCase(requester.toString())) {
 							size++;
 						}
 					}
@@ -148,7 +148,7 @@ public class Requests {
 							e.printStackTrace();
 						}
 						while (sc.hasNextLine()) {
-							if (requester.equalsIgnoreCase(sc.nextLine())) {
+							if (requester.toString().equalsIgnoreCase(sc.nextLine())) {
 								sc.close();
 								return;
 							}
@@ -158,9 +158,9 @@ public class Requests {
 
 			}
 			if (userStreamLimitMap.containsKey(requester)) {
-				userStreamLimitMap.put(requester, userStreamLimitMap.get(requester) + 1);
+				userStreamLimitMap.put(new StringBuilder(requester), userStreamLimitMap.get(requester) + 1);
 			} else {
-				userStreamLimitMap.put(requester, 1);
+				userStreamLimitMap.put(new StringBuilder(requester), 1);
 			}
 
 			AuthenticatedGDClient client = null;
@@ -282,7 +282,7 @@ public class Requests {
 					}
 				}
 			}
-			levelData.setRequester(requester);
+			levelData.setRequester(requester.toString());
 			levelData.setAuthor(Objects.requireNonNull(level).getCreatorName());
 			levelData.setName(level.getName());
 			levelData.setDifficulty(level.getDifficulty().toString());
@@ -374,42 +374,53 @@ public class Requests {
 			}
 			if(LoadGD.isAuth) {
 				AuthenticatedGDClient finalClient = client;
+				LevelData finalLevelData = levelData;
+				GDLevel finalLevel1 = level;
 				parse = new Thread(() -> {
 					Object object = Objects.requireNonNull(finalClient.getLevelById(ID).block()).download().block();
-					if (!(level.getStars() > 0) && level.getGameVersion() / 10 >= 2) {
+					if (!(finalLevel1.getStars() > 0) && finalLevel1.getGameVersion() / 10 >= 2) {
 						parse(((GDLevelData) Objects.requireNonNull(object)).getData(), ID);
 					}
-					levelData.setPassword(((GDLevelData) Objects.requireNonNull(object)).getPass());
-					levelData.setUpload(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getUploadTimestamp()));
-					levelData.setUpdate(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getLastUpdatedTimestamp()));
+					finalLevelData.setPassword(((GDLevelData) Objects.requireNonNull(object)).getPass());
+					finalLevelData.setUpload(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getUploadTimestamp()));
+					finalLevelData.setUpdate(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getLastUpdatedTimestamp()));
 					InfoWindow.refreshInfo();
 
 
+					object = null;
+					System.gc();
 				});
+
 			}
 			else{
 				AnonymousGDClient finalClient = clientAnon;
+				LevelData finalLevelData1 = levelData;
+				GDLevel finalLevel = level;
 				parse = new Thread(() -> {
 					Object object = Objects.requireNonNull(finalClient.getLevelById(ID).block()).download().block();
-					if (!(level.getStars() > 0) && level.getGameVersion() / 10 >= 2) {
+					if (!(finalLevel.getStars() > 0) && finalLevel.getGameVersion() / 10 >= 2) {
 						parse(((GDLevelData) Objects.requireNonNull(object)).getData(), ID);
 					}
-					levelData.setPassword(((GDLevelData) Objects.requireNonNull(object)).getPass());
-					levelData.setUpload(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getUploadTimestamp()));
-					levelData.setUpdate(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getLastUpdatedTimestamp()));
+					finalLevelData1.setPassword(((GDLevelData) Objects.requireNonNull(object)).getPass());
+					finalLevelData1.setUpload(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getUploadTimestamp()));
+					finalLevelData1.setUpdate(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getLastUpdatedTimestamp()));
 					InfoWindow.refreshInfo();
 
-
+					object = null;
+					System.gc();
 				});
+
 			}
+			level = null;
 			parse.start();
 			if(os.contains("WIN")) {
 				if (GeneralSettings.autoDownloadOption) {
+					LevelData finalLevelData2 = levelData;
 					Thread songDL = new Thread(() -> {
-						Path songFile = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + levelData.getSongID() + ".mp3");
+						Path songFile = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + finalLevelData2.getSongID() + ".mp3");
 						if (!Files.exists(songFile)) {
 							try {
-								FileUtils.copyURLToFile(levelData.getSongURL(), songFile.toFile());
+								FileUtils.copyURLToFile(finalLevelData2.getSongURL(), songFile.toFile());
 							} catch (IOException ignored) {
 							}
 						}
@@ -419,6 +430,7 @@ public class Requests {
 			}
 			levels.add(levelData);
 			LevelsWindow.createButton(levelData.getName().toString(), levelData.getAuthor().toString(), levelData.getLevelID(), levelData.getDifficulty().toString(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester().toString(), levelData.getVersion(), levelData.getPlayerIcon(), levelData.getCoins());
+
 			LevelsWindow.setName(Requests.levels.size());
 			Functions.saveFunction();
 			if(Main.doMessage) {
@@ -437,6 +449,7 @@ public class Requests {
 					}
 				}
 			}
+			levelData = null;
 			OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
 			addedLevels.add(ID);
 			Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
@@ -471,10 +484,16 @@ public class Requests {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
+			if(LoadGD.isAuth) {
+				client.clearCache();
+			}
+			else {
+				clientAnon.clearCache();
+			}
 		} else {
 			Main.sendMessage("@" + requester + " Requests are off!");
 		}
+
 	}
 
 	@SuppressWarnings("unused")
@@ -980,7 +999,7 @@ public class Requests {
 					sc2.close();
 				}
 				if(fileName.endsWith(".js")) {
-					if(!disabledCommands.contains(fileName.substring(0, fileName.length()-3))) {
+					if(!disabledCommands.contains(new String(fileName.substring(0, fileName.length()-3)))) {
 						if (!fileName.equalsIgnoreCase("!rick.js") &&
 								!fileName.equalsIgnoreCase("!stoprick.js") &&
 								!fileName.equalsIgnoreCase("!kill.js") &&
@@ -1011,7 +1030,7 @@ public class Requests {
 						sc2.close();
 					}
 					String fileName = file[file.length - 1];
-					if(!disabledCommands.contains(fileName.substring(0, fileName.length()-3))) {
+					if(!disabledCommands.contains(new String(fileName.substring(0, fileName.length()-3)))) {
 						if (fileName.endsWith(".js")) {
 							message.append(" | ").append(fileName, 0, fileName.length() - 3);
 						}
@@ -1063,7 +1082,7 @@ public class Requests {
 			assert m != null;
 			if (m.matches() && arguments.length <= 2) {
 				try {
-					Requests.addRequest(Long.parseLong(m.group(1)), String.valueOf(user));
+					Requests.addRequest(Long.parseLong(m.group(1)), new StringBuilder(user));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -1087,9 +1106,9 @@ public class Requests {
 									.block()).asList().toArray();
 							for (int i = 0; i < 10; i++) {
 								if (((GDLevel) levelPage[i]).getName().toUpperCase()
-										.startsWith(level1.substring(0, level1.length() - 1))) {
+										.startsWith(new String(level1.substring(0, level1.length() - 1)))) {
 									Requests.addRequest(((GDLevel) levelPage[i]).getId(),
-											String.valueOf(user));
+											new StringBuilder(user));
 									break outerLoop;
 								}
 							}
@@ -1106,7 +1125,7 @@ public class Requests {
 					try {
 						Requests.addRequest(Objects.requireNonNull(client.searchLevels(message.toString(), LevelSearchFilters.create(), 0)
 												.block().asList().get(0).getId()),
-								String.valueOf(user));
+								new StringBuilder(user));
 					} catch (MissingAccessException e) {
 						response = "@" + user + " That level doesn't exist!";
 					} catch (Exception e){
@@ -1127,16 +1146,16 @@ public class Requests {
 		all:
 		for (int k = 0; k < Requests.levels.size(); k++) {
 			if (Requests.levels.get(k).getLevelID() == levelID) {
-				String decompressed = null;
+				StringBuilder decompressed = null;
 				try {
 					decompressed = decompress(level);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				assert decompressed != null;
 				int imageIDCount = 0;
 				String color = "";
-				String[] values = decompressed.split(";");
+				String[] values = decompressed.toString().split(";");
+				decompressed = null;
 				Requests.levels.get(k).setObjects(values.length);
 				if((values.length < RequestSettings.minObjects) && RequestSettings.minObjectsOption){
 					Main.sendMessage("@" + Requests.levels.get(k).getRequester() + " Your level has been removed for containing too few objects!");
@@ -1180,13 +1199,12 @@ public class Requests {
 								text = new String(Base64.getDecoder().decode(formatted));
 							}
 						}
+						attributes = null;
 						InputStream is = Main.class.getClassLoader()
 								.getResourceAsStream("Resources/blockedWords.txt");
-						assert is != null;
 						InputStreamReader isr = new InputStreamReader(is);
 						BufferedReader br = new BufferedReader(isr);
 						String line;
-
 						try {
 							out:
 							while ((line = br.readLine()) != null) {
@@ -1198,6 +1216,7 @@ public class Requests {
 										break out;
 									}
 								}
+								text1 = null;
 							}
 							if (scale != 0.0 && hsv) {
 								if (tempColor.equalsIgnoreCase(color) && !zOrder) {
@@ -1208,6 +1227,9 @@ public class Requests {
 								image = true;
 							}
 							color = tempColor;
+							is.close();
+							isr.close();
+							br.close();
 						} catch (IOException e) {
 							e.printStackTrace();
 							break all;
@@ -1219,6 +1241,7 @@ public class Requests {
 						e.printStackTrace();
 					}
 				}
+				values = null;
 				try {
 					URL ids = new URL("https://raw.githubusercontent.com/Alphatism/GDBoard/Master/GD%20Request%20Bot/External/false%20positives.txt");
 					Scanner s = new Scanner(ids.openStream());
@@ -1249,15 +1272,12 @@ public class Requests {
 				catch (IndexOutOfBoundsException ignored){
 				}
 			}
-			try {
-				Thread.sleep(0);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 		}
+		level = null;
+		System.gc();
 	}
 
-	private static String decompress(byte[] compressed) throws IOException {
+	private static StringBuilder decompress(byte[] compressed) throws IOException {
 		ByteArrayInputStream bis = new ByteArrayInputStream(compressed);
 		GZIPInputStream gis = new GZIPInputStream(bis);
 		BufferedReader br = new BufferedReader(new InputStreamReader(gis, StandardCharsets.UTF_8));
@@ -1266,10 +1286,12 @@ public class Requests {
 		while ((line = br.readLine()) != null) {
 			sb.append(line);
 		}
+		compressed = null;
+		bis.close();
 		br.close();
 		gis.close();
 		bis.close();
-		return sb.toString();
+		return sb;
 	}
 
 	static String parseInfoString(String text, int level) {

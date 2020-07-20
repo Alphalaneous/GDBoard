@@ -10,11 +10,11 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.Scanner;
 
+import static Main.Defaults.settingsButtonUI;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 public class BlockedCreatorSettings {
-	private static JButtonUI defaultUI = new JButtonUI();
 	private static JPanel blockedSettingsPanel = new JPanel();
 	private static JPanel blockedListPanel = new JPanel();
 	private static JScrollPane scrollPane = new JScrollPane(blockedListPanel);
@@ -24,10 +24,6 @@ public class BlockedCreatorSettings {
 	private static double height = 0;
 
 	public static JPanel createPanel() {
-
-		defaultUI.setBackground(Defaults.BUTTON);
-		defaultUI.setHover(Defaults.BUTTON_HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
 
 		blockedSettingsPanel.setBackground(Defaults.TOP);
 		blockedSettingsPanel.setLayout(null);
@@ -43,7 +39,7 @@ public class BlockedCreatorSettings {
 		addID.setBounds(370, 16, 30, 30);
 		addID.setFont(Defaults.SYMBOLS.deriveFont(22f));
 		addID.setForeground(Defaults.FOREGROUND);
-		addID.setUI(defaultUI);
+		addID.setUI(settingsButtonUI);
 		addID.asSettings();
 
 		blockedSettingsPanel.add(addID);
@@ -157,7 +153,7 @@ public class BlockedCreatorSettings {
 		CurvedButton button = new CurvedButton(user);
 
 		button.setBackground(Defaults.BUTTON);
-		button.setUI(defaultUI);
+		button.setUI(settingsButtonUI);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
@@ -201,9 +197,6 @@ public class BlockedCreatorSettings {
 
 	}
 	public static void refreshUI() {
-		defaultUI.setBackground(Defaults.BUTTON);
-		defaultUI.setHover(Defaults.BUTTON_HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
 
 		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
 		blockedSettingsPanel.setBackground(Defaults.TOP);

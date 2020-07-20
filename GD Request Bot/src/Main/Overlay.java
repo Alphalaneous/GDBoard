@@ -12,6 +12,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.net.URL;
 
+import static Main.Defaults.defaultUI;
+import static Main.Defaults.settingsButtonUI;
+
 public class Overlay {
 
 	// --------------------
@@ -119,7 +122,12 @@ public class Overlay {
 			MainBar.refreshUI(color);
 			//Randomizer.refreshUI();
 		}
-
+		defaultUI.setBackground(Defaults.MAIN);
+		defaultUI.setHover(Defaults.BUTTON_HOVER);
+		defaultUI.setSelect(Defaults.SELECT);
+		settingsButtonUI.setBackground(Defaults.BUTTON);
+		settingsButtonUI.setHover(Defaults.BUTTON_HOVER);
+		settingsButtonUI.setSelect(Defaults.SELECT);
 		CommentsWindow.refreshUI();
 		SettingsWindow.refreshUI();
 		LevelsWindow.refreshUI();

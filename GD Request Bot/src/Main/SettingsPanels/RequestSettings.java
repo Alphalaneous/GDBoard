@@ -14,11 +14,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import static Main.Defaults.settingsButtonUI;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 public class RequestSettings {
-	private static JButtonUI defaultUI = new JButtonUI();
 	private static CheckboxButton na = createButton("NA", 5);
 	private static CheckboxButton auto = createButton("Auto", 35);
 	private static CheckboxButton easy = createButton("Easy", 65);
@@ -105,9 +105,6 @@ public class RequestSettings {
 
 
 	public static JPanel createPanel() {
-		defaultUI.setBackground(Defaults.BUTTON);
-		defaultUI.setHover(Defaults.BUTTON_HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
 
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
 		scrollPane.getViewport().setBackground(Defaults.SUB_MAIN);
@@ -137,7 +134,7 @@ public class RequestSettings {
 		addID.setBounds(370, 16, 30, 30);
 		addID.setFont(Defaults.SYMBOLS.deriveFont(22f));
 		addID.setForeground(Defaults.FOREGROUND);
-		addID.setUI(defaultUI);
+		addID.setUI(settingsButtonUI);
 		addID.asSettings();
 
 		backButton.setBackground(Defaults.BUTTON);
@@ -145,7 +142,7 @@ public class RequestSettings {
 		backButton.setFont(Defaults.SYMBOLS.deriveFont(15f));
 
 		backButton.setForeground(Defaults.FOREGROUND);
-		backButton.setUI(defaultUI);
+		backButton.setUI(settingsButtonUI);
 		backButton.asSettings();
 
 		backButton.addMouseListener(new MouseAdapter() {
@@ -575,7 +572,7 @@ public class RequestSettings {
 		allowedStrings.setBounds(25,1000, 345,30);
 		allowedStrings.setPreferredSize(new Dimension(345,30));
 		allowedStrings.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-		allowedStrings.setUI(defaultUI);
+		allowedStrings.setUI(settingsButtonUI);
 		allowedStrings.setForeground(Defaults.FOREGROUND);
 		allowedStrings.setBackground(Defaults.BUTTON);
 		allowedStrings.refresh();
@@ -620,7 +617,7 @@ public class RequestSettings {
 		disallowedStrings.setBounds(25,1040, 345,30);
 		disallowedStrings.setPreferredSize(new Dimension(345,30));
 		disallowedStrings.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-		disallowedStrings.setUI(defaultUI);
+		disallowedStrings.setUI(settingsButtonUI);
 		disallowedStrings.setForeground(Defaults.FOREGROUND);
 		disallowedStrings.setBackground(Defaults.BUTTON);
 		disallowedStrings.refresh();
@@ -897,7 +894,7 @@ public class RequestSettings {
 		CurvedButton button = new CurvedButton(string);
 
 		button.setBackground(Defaults.BUTTON);
-		button.setUI(defaultUI);
+		button.setUI(settingsButtonUI);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
@@ -965,9 +962,6 @@ public class RequestSettings {
 		return createButton(text, 345, y);
 	}
 	public static void refreshUI() {
-		defaultUI.setBackground(Defaults.BUTTON);
-		defaultUI.setHover(Defaults.BUTTON_HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
 		difficultyPanel.setBackground(Defaults.TOP);
 		lengthPanel.setBackground(Defaults.TOP);
 		panel.setBackground(Defaults.SUB_MAIN);

@@ -90,6 +90,7 @@ public class Functions {
 			SongWindow.refreshInfo();
 			InfoWindow.refreshInfo();
 			LevelsWindow.setName(Requests.levels.size());
+			System.gc();
 		}
 	}
 

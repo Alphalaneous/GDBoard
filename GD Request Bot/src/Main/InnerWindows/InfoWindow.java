@@ -16,61 +16,21 @@ public class InfoWindow {
 
 	private static int height = 110;
 	private static int width = 400;
-	private static JPanel panel = new JPanel();
-	private static JScrollPane scrollPane = new JScrollPane(panel);
 	private static JPanel descPanel = new JPanel();
 	private static JPanel fullPanel = new JPanel(null);
-	private static JLabel likes = new JLabel();
-	private static JLabel downloads = new JLabel();
-	private static JLabel length = new JLabel();
-	private static JLabel password = new JLabel();
-	private static JLabel objects = new JLabel();
-	private static JLabel original = new JLabel();
-	private static JLabel upload = new JLabel();
-	private static JLabel update = new JLabel();
-	private static JLabel version = new JLabel();
-
-
 
 	private static JTextPane description = new JTextPane();
 	private static JPanel window = new InnerWindow("Information", Settings.getInfoWLoc().x, Settings.getInfoWLoc().y, width, height, "\uE946", false).createPanel();
 
 	public static void createPanel() {
-		scrollPane.setPreferredSize(new Dimension(180, height));
-		scrollPane.setBounds(0, 0, 180, height);
-		scrollPane.setBackground(Defaults.MAIN);
-		scrollPane.setBorder(BorderFactory.createEmptyBorder());
-		scrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.getVerticalScrollBar().setUnitIncrement(30);
-		scrollPane.getVerticalScrollBar().setOpaque(false);
-		scrollPane.getHorizontalScrollBar().setOpaque(false);
-		scrollPane.setOpaque(false);
-		scrollPane.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS);
 
-		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
-		scrollPane.getHorizontalScrollBar().setUI(new ScrollbarUI());
 
-		panel.setPreferredSize(new Dimension(180, 230));
-		panel.setBounds(0, 0, 180, 230);
-		panel.setBackground(Defaults.MAIN);
 
 		descPanel.setPreferredSize(new Dimension(240, height));
 		descPanel.setBounds(0, 0, width, height);
 		descPanel.setBackground(Defaults.SUB_MAIN);
 		descPanel.setLayout(null);
 		descPanel.setOpaque(true);
-
-
-		panel.setLayout(null);
-		likes = createLabel("LIKES: NA", 10, 160);
-		downloads = createLabel("DOWNLOADS: NA", 24, 160);
-		length = createLabel("LENGTH: NA", 38, 160);
-		password = createLabel("PASSWORD: NA", 52, 160);
-		objects = createLabel("OBJECTS: NA", 66, 160);
-		original = createLabel("ORIGINAL: NA", 80, 160);
-		upload = createLabel("UPLOAD: NA", 94, 160);
-		update = createLabel("UPDATE: NA", 108, 160);
-		version = createLabel("VERSION: NA", 122, 160);
 
 
 
@@ -86,18 +46,9 @@ public class InfoWindow {
 		description.setBackground(new Color(0,0,0,0));
 		description.setBounds(5,5,width-10, height-10);
 
-		panel.add(likes);
-		panel.add(downloads);
-		panel.add(length);
-		panel.add(password);
-		panel.add(objects);
-		panel.add(original);
-		panel.add(upload);
-		panel.add(update);
-		panel.add(version);
+
 		descPanel.add(description);
 		fullPanel.setBounds(5,35,400,110);
-		//fullPanel.add(scrollPane);
 		fullPanel.add(descPanel);
 		window.add(fullPanel);
 		((InnerWindow)window).refreshListener();
@@ -120,80 +71,14 @@ public class InfoWindow {
 	public static void refreshInfo() {
 		if (Requests.levels.size() == 0) {
 			description.setText("NA");
-
-			likes.setText("LIKES: NA");
-			length.setText("LENGTH: NA");
-			password.setText("PASSWORD: NA");
-			downloads.setText("DOWNLOADS: NA");
-			objects.setText("OBJECTS: NA");
-			original.setText("ORIGINAL: NA");
-			upload.setText("UPLOAD: NA");
-			update.setText("UPDATE: NA");
-			version.setText("VERSION: NA");
-
-
-
-
 		} else {
-			String pass = null;
-			if((pass = String.valueOf(Requests.levels.get(LevelsWindow.getSelectedID()).getPassword())) != null) {
-				if (pass.equalsIgnoreCase("-2")) {
-					password.setText("FREE COPY");
-				}
-				else if (pass.equalsIgnoreCase("-1")) {
-					password.setText("NO COPY");
-				}
-				else {
-					password.setText("PASSWORD: " + pass);
-				}
-			}
-			else {
-				password.setText("NO COPY");
-
-			}
-			likes.setText("LIKES: " + Requests.levels.get(LevelsWindow.getSelectedID()).getLikes());
 			description.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getDescription().toString());
-			length.setText("LENGTH: " + Requests.levels.get(LevelsWindow.getSelectedID()).getLength());
-			downloads.setText("DOWNLOADS: " + Requests.levels.get(LevelsWindow.getSelectedID()).getDownloads());
-			if(Requests.levels.get(LevelsWindow.getSelectedID()).getObjects() == 0){
-				objects.setText("OBJECTS: NA");
-
-			}
-			else{
-				objects.setText("OBJECTS: "  + Requests.levels.get(LevelsWindow.getSelectedID()).getObjects());
-
-			}
-			if(Requests.levels.get(LevelsWindow.getSelectedID()).getOriginal() == 0){
-				original.setText("ORIGINAL");
-
-			}
-			else{
-				original.setText("ORIGINAL: " + Requests.levels.get(LevelsWindow.getSelectedID()).getOriginal());
-			}
-			upload.setText("UPLOAD: " + Requests.levels.get(LevelsWindow.getSelectedID()).getUpload() + " ago");
-			update.setText("UPDATE: " + Requests.levels.get(LevelsWindow.getSelectedID()).getUpdate() + " ago");
-			version.setText("VERSION: " + Requests.levels.get(LevelsWindow.getSelectedID()).getLevelVersion());
 		}
 	}
 	public static void refreshUI() {
 		((InnerWindow) window).refreshUI();
-		panel.setBackground(Defaults.MAIN);
-		for(Component component : panel.getComponents()){
-			if(component instanceof JLabel){
-				component.setForeground(Defaults.FOREGROUND);
-			}
-		}
 		descPanel.setBackground(Defaults.SUB_MAIN);
 		description.setForeground(Defaults.FOREGROUND);
-		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
-		scrollPane.getHorizontalScrollBar().setUI(new ScrollbarUI());
-	}
-	private static JLabel createLabel(String text, int y, int width){
-		JLabel label = new JLabel(text);
-		label.setFont(Defaults.MAIN_FONT.deriveFont(12f));
-		label.setBounds(10, y, width, 14);
-		label.setForeground(Defaults.FOREGROUND);
-		return label;
 	}
 	public String getName(){
 		return "Information";

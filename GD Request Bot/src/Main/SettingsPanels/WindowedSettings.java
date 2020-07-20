@@ -8,17 +8,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
+
 public class WindowedSettings {
-	private static JButtonUI defaultUI = new JButtonUI();
 	public static boolean onTopOption = false;
 	private static CheckboxButton onTop = createButton("Always On Top", 20);
  	private static JPanel panel = new JPanel();
 
 	public static JPanel createPanel() {
 
-		defaultUI.setBackground(Defaults.BUTTON);
-		defaultUI.setHover(Defaults.HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
 		onTop.setChecked(false);
 		onTop.addMouseListener(new MouseAdapter() {
 			@Override
@@ -66,9 +63,6 @@ public class WindowedSettings {
 		return button;
 	}
 	public static void refreshUI() {
-		defaultUI.setBackground(Defaults.BUTTON);
-		defaultUI.setHover(Defaults.BUTTON_HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
 
 		panel.setBackground(Defaults.SUB_MAIN);
 		for (Component component : panel.getComponents()) {

@@ -8,8 +8,9 @@ import java.awt.event.*;
 import java.awt.event.KeyListener;
 import java.io.*;
 
+import static Main.Defaults.settingsButtonUI;
+
 public class GeneralSettings {
-	private static JButtonUI defaultUI = new JButtonUI();
 	public static boolean followersOption = false;
 	public static boolean subsOption = false;
 	public static boolean repeatedOption = false;
@@ -47,9 +48,6 @@ public class GeneralSettings {
 	private static JPanel panel = new JPanel();
 
 	public static JPanel createPanel() {
-		defaultUI.setBackground(Defaults.BUTTON);
-		defaultUI.setHover(Defaults.BUTTON_HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
 
 
 		panel.setLayout(null);
@@ -80,7 +78,7 @@ public class GeneralSettings {
 		donationButton.setBounds(25,540, 365,60);
 		donationButton.setPreferredSize(new Dimension(365,60));
 		donationButton.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-		donationButton.setUI(defaultUI);
+		donationButton.setUI(settingsButtonUI);
 		donationButton.setForeground(Defaults.FOREGROUND);
 		donationButton.setBackground(Defaults.BUTTON);
 		donationButton.refresh();
@@ -351,10 +349,6 @@ public class GeneralSettings {
 		return button;
 	}
 	public static void refreshUI() {
-		defaultUI.setBackground(Defaults.BUTTON);
-		defaultUI.setHover(Defaults.BUTTON_HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
-
 		panel.setBackground(Defaults.SUB_MAIN);
 		for (Component component : panel.getComponents()) {
 			if (component instanceof JButton) {

@@ -91,6 +91,7 @@ public class APIs {
 
 			commentsData.add(commentA);
 		}
+		responce = null;
 		return commentsData;
 	}
 	static void getViewers(){

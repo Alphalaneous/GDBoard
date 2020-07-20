@@ -20,6 +20,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 
+import static Main.Defaults.defaultUI;
+
 public class Windowed {
 	private static int width = 765;
 	private static int height = 512;
@@ -55,28 +57,23 @@ public class Windowed {
 					((InnerWindow) window).resetDimensions(newW-10, newH);
 					buttonPanel.setBounds(newW-68, 0, 50, 512);
 					LevelsWindow.resizeButtons(newW-375, newH-152);
-					levelsWindow.setBounds(0, 0, newW-375, newH-152);
-					CommentsWindow.resetDimensions(commentsWindow.getWidth(), newH);
-					commentsWindow.setBounds(newW-375, 0, commentsWindow.getWidth(), newH);
-					InfoWindow.resetDimensions(levelsWindow.getWidth(), infoWindow.getHeight());
-					infoWindow.setBounds(0, levelsWindow.getHeight()+ 1, levelsWindow.getWidth(), infoWindow.getHeight());
+					LevelsWindow.getReqWindow().setBounds(0, 0, newW-375, newH-152);
+					CommentsWindow.getComWindow().setBounds(newW-375, 0, CommentsWindow.getComWindow().getWidth(), newH);
+					CommentsWindow.resetDimensions(CommentsWindow.getComWindow().getWidth(), newH);
+					InfoWindow.resetDimensions(LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
+					InfoWindow.getInfoWindow().setBounds(0, LevelsWindow.getReqWindow().getHeight()+ 1, LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
 					repaint();
 				}
 			};
 		}
 	}.createPanel();
-	private static JScrollPane levelsWindow = LevelsWindow.getReqWindow();
-	private static JPanel infoWindow = InfoWindow.getInfoWindow();
 	private static JPanel content = new JPanel(null);
 	private static JPanel buttonPanel = new JPanel();
-	private static JButtonUI defaultUI = new JButtonUI();
 	private static JButtonUI selectUI = new JButtonUI();
 	public static JFrame frame = new JFrame();
 	private static JLayeredPane mainFrame = new JLayeredPane();
 	public static boolean showingMore = true;
 	private static RoundedJButton showMore = createButton("\uE00F", "Show More");
-
-	private static JPanel commentsWindow;
 
 	private static int x = frame.getX();
 	private static int y = frame.getY();
@@ -88,13 +85,6 @@ public class Windowed {
 	static void createPanel() {
 		if(WindowedSettings.onTopOption){
 			setOnTop(true);
-		}
-		try {
-			if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
-				commentsWindow = CommentsWindow.getComWindow();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
@@ -135,11 +125,13 @@ public class Windowed {
 			e.printStackTrace();
 		}
 
-		levelsWindow.setBounds(0, 0, levelsWindow.getWidth(), levelsWindow.getHeight());
-		commentsWindow.setBounds(400, 0, commentsWindow.getWidth(), 512);
-		commentsWindow.setVisible(false);
+		LevelsWindow.getReqWindow().setBounds(0, 0, LevelsWindow.getReqWindow().getWidth(), LevelsWindow.getReqWindow().getHeight());
+		CommentsWindow.getComWindow().setBounds(400, 0, CommentsWindow.getComWindow().getWidth(), 512);
+		CommentsWindow.resetDimensions(CommentsWindow.getComWindow().getWidth(), 512);
 
-		infoWindow.setBounds(0, levelsWindow.getHeight()+ 1, infoWindow.getWidth(), infoWindow.getHeight());
+		CommentsWindow.getComWindow().setVisible(false);
+
+		InfoWindow.getInfoWindow().setBounds(0, LevelsWindow.getReqWindow().getHeight()+ 1, InfoWindow.getInfoWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
 
 		buttonPanel.setBounds(width-58, 0, 50, 512);
 		buttonPanel.setBackground(Defaults.SUB_MAIN);
@@ -226,7 +218,7 @@ public class Windowed {
 		});
 		buttonPanel.add(settings);
 		CommentsWindow.loadComments(0,false);
-		commentsWindow.setVisible(true);
+		CommentsWindow.getComWindow().setVisible(true);
 
 
 		JButton donate = createButton("\uE006", "Donate");
@@ -244,9 +236,9 @@ public class Windowed {
 			}
 		});
 		buttonPanel.add(donate);
-		content.add(levelsWindow);
-		content.add(commentsWindow);
-		content.add(infoWindow);
+		content.add(LevelsWindow.getReqWindow());
+		content.add(CommentsWindow.getComWindow());
+		content.add(InfoWindow.getInfoWindow());
 		content.add(buttonPanel);
 		window.add(content);
 		((InnerWindow) window).setPinVisible();
@@ -257,9 +249,6 @@ public class Windowed {
 	}
 	static void refreshUI() {
 		((InnerWindow) window).refreshUI();
-		defaultUI.setBackground(Defaults.MAIN);
-		defaultUI.setHover(Defaults.HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
 		selectUI.setBackground(Defaults.SELECT);
 		selectUI.setHover(Defaults.BUTTON_HOVER);
 		selectUI.setSelect(Defaults.SELECT);
@@ -278,7 +267,7 @@ public class Windowed {
 
 	}
 	static void resetCommentSize(){
-		commentsWindow.setBounds(400, 0, commentsWindow.getWidth(), 512);
+		CommentsWindow.getComWindow().setBounds(400, 0, CommentsWindow.getComWindow().getWidth(), 512);
 
 	}
 	public static void addToFrame(JComponent component) {
@@ -359,11 +348,11 @@ public class Windowed {
 				((InnerWindow) window).resetDimensions(newW-10, newH);
 				buttonPanel.setBounds(newW-68, 0, 50, 512);
 				LevelsWindow.resizeButtons(newW-375, newH-152);
-				levelsWindow.setBounds(0, 0, newW-375, newH-152);
-				CommentsWindow.resetDimensions(commentsWindow.getWidth(), newH);
-				commentsWindow.setBounds(newW-375, 0, commentsWindow.getWidth(), newH);
-				InfoWindow.resetDimensions(levelsWindow.getWidth(), infoWindow.getHeight());
-				infoWindow.setBounds(0, levelsWindow.getHeight()+ 1, levelsWindow.getWidth(), infoWindow.getHeight());
+				LevelsWindow.getReqWindow().setBounds(0, 0, newW-375, newH-152);
+				CommentsWindow.getComWindow().setBounds(newW-375, 0, CommentsWindow.getComWindow().getWidth(), newH);
+				CommentsWindow.resetDimensions(CommentsWindow.getComWindow().getWidth(), newH);
+				InfoWindow.resetDimensions(LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
+				InfoWindow.getInfoWindow().setBounds(0, LevelsWindow.getReqWindow().getHeight()+ 1, LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
 			}
 
 		} catch (IOException e) {

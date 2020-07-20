@@ -13,6 +13,8 @@ import java.net.URL;
 import javax.swing.*;
 import Main.SettingsPanels.*;
 
+import static Main.Defaults.defaultUI;
+
 public class SettingsWindow {
 	private static int width = 622;
 	private static int height = 622;
@@ -36,7 +38,6 @@ public class SettingsWindow {
 	private static JPanel content = new JPanel();
 	private static JPanel blankSpace = new JPanel();
 
-	private static JButtonUI defaultUI = new JButtonUI();
 	private static JButtonUI selectUI = new JButtonUI();
 	private static JPanel general = GeneralSettings.createPanel();
 	private static JPanel overlay = OutputSettings.createPanel();
@@ -172,9 +173,6 @@ public class SettingsWindow {
 	static void refreshUI() {
 		((InnerWindow) window).refreshUI();
 		blankSpace.setBackground(Defaults.MAIN);
-		defaultUI.setBackground(Defaults.MAIN);
-		defaultUI.setHover(Defaults.HOVER);
-		defaultUI.setSelect(Defaults.SELECT);
 		selectUI.setBackground(Defaults.SELECT);
 		selectUI.setHover(Defaults.BUTTON_HOVER);
 		selectUI.setSelect(Defaults.SELECT);
@@ -215,7 +213,6 @@ public class SettingsWindow {
 
 	private static JButton createButton(String text) {
 
-		defaultUI.setBackground(Defaults.MAIN);
 		selectUI.setBackground(Defaults.SELECT);
 		selectUI.setBackground(Defaults.SELECT);
 		selectUI.setHover(Defaults.BUTTON_HOVER);
