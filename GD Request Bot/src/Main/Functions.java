@@ -79,13 +79,12 @@ public class Functions {
 			OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
 			LevelsWindow.setOneSelect();
 
-			Thread thread = new Thread(() -> {
+			new Thread(() -> {
 				CommentsWindow.unloadComments(true);
 				if (Requests.levels.size() != 0) {
 					CommentsWindow.loadComments(0, false);
 				}
-			});
-			thread.start();
+			}).start();
 
 			SongWindow.refreshInfo();
 			InfoWindow.refreshInfo();
@@ -116,13 +115,12 @@ public class Functions {
 				} else {
 					LevelsWindow.setSelect(num);
 				}
-				Thread thread = new Thread(() -> {
+				new Thread(() -> {
 					CommentsWindow.unloadComments(true);
 					if (Requests.levels.size() != 0) {
 						CommentsWindow.loadComments(0, false);
 					}
-				});
-				thread.start();
+				}).start();
 				if (Requests.levels.size() != 0) {
 					System.out.println(num);
 					StringSelection selection = new StringSelection(
@@ -206,13 +204,12 @@ public class Functions {
 					LevelsWindow.removeButton();
 					Functions.saveFunction();
 					LevelsWindow.setOneSelect();
-					Thread thread = new Thread(() -> {
+					new Thread(() -> {
 						CommentsWindow.unloadComments(true);
 						if (Requests.levels.size() > 0) {
 							CommentsWindow.loadComments(0, false);
 						}
-					});
-					thread.start();
+					}).start();
 					LevelsWindow.setName(Requests.levels.size());
 
 				}

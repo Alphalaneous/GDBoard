@@ -329,7 +329,7 @@ public class Main {
 				while (sc.hasNextLine()) {
 					String[] level = sc.nextLine().split(",");
 					try {
-						Requests.addRequest(Long.parseLong(level[0]), new StringBuilder(level[1]));
+						Requests.addRequest(Long.parseLong(level[0]),level[1]);
 
 					}
 					catch (Exception e){

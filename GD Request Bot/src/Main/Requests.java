@@ -44,9 +44,9 @@ public class Requests {
 	private static String os = (System.getProperty("os.name")).toUpperCase();
 	public static ArrayList<LevelData> levels = new ArrayList<>();
 	static ArrayList<Long> addedLevels = new ArrayList<Long>();
-	private static HashMap<StringBuilder, Integer> userStreamLimitMap = new HashMap<>();
+	private static HashMap<String, Integer> userStreamLimitMap = new HashMap<>();
 
-	public static void addRequest(long ID, StringBuilder requester) {
+	public static void addRequest(long ID, String requester) {
 		OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
 
 		if (MainBar.requests) {
@@ -157,9 +157,9 @@ public class Requests {
 
 			}
 			if (userStreamLimitMap.containsKey(requester)) {
-				userStreamLimitMap.put(new StringBuilder(requester), userStreamLimitMap.get(requester) + 1);
+				userStreamLimitMap.put(requester, userStreamLimitMap.get(requester) + 1);
 			} else {
-				userStreamLimitMap.put(new StringBuilder(requester), 1);
+				userStreamLimitMap.put(requester, 1);
 			}
 
 			AuthenticatedGDClient client = null;
@@ -635,11 +635,10 @@ public class Requests {
 					SongWindow.refreshInfo();
 					InfoWindow.refreshInfo();
 					LevelsWindow.setOneSelect();
-					Thread thread = new Thread(() -> {
+					new Thread(() -> {
 						CommentsWindow.unloadComments(true);
 						CommentsWindow.loadComments(0, false);
-					});
-					thread.start();
+					}).start();
 					if (i == 0) {
 						StringSelection selection = new StringSelection(
 								String.valueOf(Requests.levels.get(0).getLevelID()));
@@ -665,11 +664,10 @@ public class Requests {
 					SongWindow.refreshInfo();
 					InfoWindow.refreshInfo();
 					LevelsWindow.setOneSelect();
-					Thread thread = new Thread(() -> {
+					new Thread(() -> {
 						CommentsWindow.unloadComments(true);
 						CommentsWindow.loadComments(0, false);
-					});
-					thread.start();
+					}).start();
 					if (i == 0) {
 						StringSelection selection = new StringSelection(
 								String.valueOf(Requests.levels.get(0).getLevelID()));
@@ -776,8 +774,10 @@ public class Requests {
 					Requests.levels.remove(i);
 					InfoWindow.refreshInfo();
 					SongWindow.refreshInfo();
-					CommentsWindow.unloadComments(true);
-					CommentsWindow.loadComments(0, false);
+					new Thread(() -> {
+						CommentsWindow.unloadComments(true);
+						CommentsWindow.loadComments(0, false);
+					}).start();
 					Functions.saveFunction();
 					break;
 				}
@@ -1082,7 +1082,7 @@ public class Requests {
 			assert m != null;
 			if (m.matches() && arguments.length <= 2) {
 				try {
-					Requests.addRequest(Long.parseLong(m.group(1)), new StringBuilder(user));
+					Requests.addRequest(Long.parseLong(m.group(1)), user);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -1108,7 +1108,7 @@ public class Requests {
 								if (((GDLevel) levelPage[i]).getName().toUpperCase()
 										.startsWith(new String(level1.substring(0, level1.length() - 1)))) {
 									Requests.addRequest(((GDLevel) levelPage[i]).getId(),
-											new StringBuilder(user));
+											user);
 									break outerLoop;
 								}
 							}
@@ -1125,7 +1125,7 @@ public class Requests {
 					try {
 						Requests.addRequest(Objects.requireNonNull(client.searchLevels(message.toString(), LevelSearchFilters.create(), 0)
 												.block().asList().get(0).getId()),
-								new StringBuilder(user));
+								user);
 					} catch (MissingAccessException e) {
 						response = "@" + user + " That level doesn't exist!";
 					} catch (Exception e){

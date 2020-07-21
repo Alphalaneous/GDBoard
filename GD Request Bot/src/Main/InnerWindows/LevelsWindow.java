@@ -285,6 +285,7 @@ public class LevelsWindow {
 
 				info.setBackground(new Color(0, 0, 0, 0));
 				info.setBounds(50, 60, buttonWidth - 100, 80);
+				info.setOpaque(false);
 				info.setVisible(false);
 				add(info);
 
@@ -420,11 +421,10 @@ public class LevelsWindow {
 							}
 						}
 						if (selectedID != prevSelectedID) {
-							Thread thread = new Thread(() -> {
+							new Thread(() -> {
 								CommentsWindow.unloadComments(true);
 								CommentsWindow.loadComments(0, false);
-							});
-							thread.start();
+							}).start();
 
 							SongWindow.refreshInfo();
 							InfoWindow.refreshInfo();

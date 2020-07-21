@@ -197,15 +197,16 @@ public class CommentsWindow {
 		topC = top;
 		int width = CommentsWindow.width - 15;
 		try {
-			if(!Settings.getSettings("windowed").equalsIgnoreCase("true") || Windowed.showingMore) {
+			if(Windowed.showingMore) {
 				int panelHeight = 0;
 				panel.removeAll();
 				panel.setVisible(false);
 				URL gdAPI = null;
 				String message = null;
-				for(int j = 0; j < 2; j++) {
+				for (int j = 0; j < 2; j++) {
 					ArrayList<Comment> commentA = APIs.getGDComments(page + j, top, Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
 					for (int i = 0; i < commentA.size(); i++) {
+						Thread.sleep(10);
 						String percent;
 						String username = commentA.get(i).getUsername();
 						String likes = commentA.get(i).getLikes();
@@ -286,7 +287,7 @@ public class CommentsWindow {
 						likesLabel.setForeground(Defaults.FOREGROUND);
 						likesLabel.setBounds(width - likesLabel.getPreferredSize().width - 26, 6, likesLabel.getPreferredSize().width + 5, 18);
 						JLabel playerIcon = new JLabel();
-						Thread thread = new Thread(() -> {
+						new Thread(() -> {
 							AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
 
 							GDUserIconSet iconSet = null;
@@ -317,8 +318,7 @@ public class CommentsWindow {
 							imgNew = null;
 							iconSet = null;
 							user = null;
-						});
-						thread.start();
+						}).start();
 
 						JLabel content = new JLabel(comment);
 						content.setFont(Defaults.MAIN_FONT.deriveFont(12f));
@@ -338,10 +338,10 @@ public class CommentsWindow {
 						((InnerWindow) window).refreshListener();
 						panel.add(cmtPanel);
 						panel.setPreferredSize(new Dimension(width, panelHeight));
-						scrollPane.getViewport().setViewPosition(new Point(0, 0));
 					}
 					commentA = null;
 				}
+				scrollPane.getViewport().setViewPosition(new Point(0, 0));
 				panel.setVisible(true);
 				return true;
 			}

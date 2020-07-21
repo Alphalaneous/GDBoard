@@ -61,7 +61,7 @@ public class ServerChatBot {
                     }
                 }
                 if (!mention.contains(m.group(1))) {
-                    Requests.addRequest(Long.parseLong(m.group(1).replaceFirst("^0+(?!$)", "")), new StringBuilder(user));
+                    Requests.addRequest(Long.parseLong(m.group(1).replaceFirst("^0+(?!$)", "")), user);
                 }
 
             } catch (Exception e) {
