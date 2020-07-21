@@ -182,7 +182,6 @@ public class CommentsWindow {
 		panel.removeAll();
 		panel.setPreferredSize(new Dimension(width, 0));
 		scrollPane.updateUI();
-		System.gc();
 	}
 	public static JPanel getComWindow(){
 		scrollPane.setBounds(0, 0, width, 482);
@@ -196,8 +195,6 @@ public class CommentsWindow {
 	}
 	public static boolean loadComments(int page, boolean top){
 		topC = top;
-		System.gc();
-		System.runFinalization();
 		int width = CommentsWindow.width - 15;
 		try {
 			if(!Settings.getSettings("windowed").equalsIgnoreCase("true") || Windowed.showingMore) {
@@ -320,7 +317,6 @@ public class CommentsWindow {
 							imgNew = null;
 							iconSet = null;
 							user = null;
-							System.gc();
 						});
 						thread.start();
 
@@ -344,7 +340,6 @@ public class CommentsWindow {
 						panel.setPreferredSize(new Dimension(width, panelHeight));
 						scrollPane.getViewport().setViewPosition(new Point(0, 0));
 					}
-					commentA.clear();
 					commentA = null;
 				}
 				panel.setVisible(true);

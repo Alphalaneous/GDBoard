@@ -69,6 +69,12 @@ public class Main {
 				progressDefaults.put(entry.getKey(), entry.getValue());
 			}
 		}
+		HashMap<Object, Object> tooltipDefaults = new HashMap<>();
+		for(Map.Entry<Object, Object> entry : UIManager.getDefaults().entrySet()){
+			if(entry.getKey().getClass() == String.class && ((String)entry.getKey()).startsWith("ToolTip")){
+				progressDefaults.put(entry.getKey(), entry.getValue());
+			}
+		}
 		System.setProperty("sun.awt.noerasebackground", "true");
 		Path conf = Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf");
 		Path confzip = Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf.zip");
@@ -140,6 +146,9 @@ public class Main {
 				}
 			});
 			for(Map.Entry<Object, Object> entry : progressDefaults.entrySet()){
+				UIManager.getDefaults().put(entry.getKey(), entry.getValue());
+			}
+			for(Map.Entry<Object, Object> entry : tooltipDefaults.entrySet()){
 				UIManager.getDefaults().put(entry.getKey(), entry.getValue());
 			}
 
@@ -235,10 +244,10 @@ public class Main {
 					if (GDBoardBot.failed) {
 						APIs.setOauth();
 					}
-					Overlay.setFrame();                //Creates the JFrame that contains everything
 
 					if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 						MainBar.createBar();            //Creates the main "Game Bar" in the top center
+						Overlay.setFrame();                //Creates the JFrame that contains everything
 					}
 
 					if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
@@ -257,7 +266,11 @@ public class Main {
 					}
 					SettingsWindow.createPanel();
 					if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
-						Windowed.createPanel();
+						java.awt.EventQueue.invokeLater(new Runnable() {
+							public void run() {
+								Windowed.createPanel();
+							}
+						});
 					}
 					Settings.loadSettings(false);
 					AccountSettings.refreshGD(LoadGD.username);
@@ -274,11 +287,10 @@ public class Main {
 						}
 					}
 
-					Thread thread1 = new Thread(() -> runKeyboardHook());
+					new Thread(() -> runKeyboardHook()).start();
 					ControllerListener.hook();
-					thread1.start();
 					chatReader = new ChatReader();
-					Thread thread = new Thread(() -> {
+					new Thread(() -> {
 						chatReader.connect();
 						try {
 							chatReader.joinChannel(Settings.getSettings("channel"));
@@ -286,8 +298,8 @@ public class Main {
 							e.printStackTrace();
 						}
 						chatReader.start();
-					});
-					thread.start();
+					}).start();
+
 					Overlay.refreshUI(true);
 					if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 						Windowed.resetCommentSize();
@@ -295,7 +307,9 @@ public class Main {
 						Windowed.frame.setVisible(true);
 
 					}
-					Overlay.setVisible();
+					if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+						Overlay.setVisible();
+					}
 
 					OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
 					break;

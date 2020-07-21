@@ -4,7 +4,9 @@ import com.registry.RegDWORDValue;
 import com.registry.RegistryKey;
 
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -194,71 +196,74 @@ public class Defaults {
 
 		Thread thread = new Thread(() -> {
 			while (true) {
-
-				int minute;
-				int hour;
-				String half;
-				LocalDateTime now = LocalDateTime.now();
-				minute = now.getMinute();
-				hour = now.getHour();
-				half = "AM";
-				if (hour >= 12) {
-					if (hour != 12) {
-						hour = hour - 12;
-					}
-					half = "PM";
-				}
-				if (hour == 0) {
-					hour = 12;
-				}
-				MainBar.setTime(hour + ":" + String.format("%02d", minute) + " " + half);
-				if(os.contains("WIN")) {
-					RegistryKey personalize = new RegistryKey(
-							"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
-					RegistryKey systemColor = new RegistryKey(
-							"Software\\Microsoft\\Windows\\DWM");
-
-					int theme = 0;
-					Integer color;
-					try {
-						theme = ((RegDWORDValue) personalize.getValue("AppsUseLightTheme")).getIntValue();
-						color = ((RegDWORDValue) systemColor.getValue("ColorizationColor")).getValue();
-						if (!ACCENT.equals(Color.decode(String.valueOf(color)))) {
-							ACCENT = Color.decode(String.valueOf(color));
-							Overlay.refreshUI(false);
+				try {
+					if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+						int minute;
+						int hour;
+						String half;
+						LocalDateTime now = LocalDateTime.now();
+						minute = now.getMinute();
+						hour = now.getHour();
+						half = "AM";
+						if (hour >= 12) {
+							if (hour != 12) {
+								hour = hour - 12;
+							}
+							half = "PM";
 						}
-					} catch (NullPointerException ignored) {
+						if (hour == 0) {
+							hour = 12;
+						}
+						MainBar.setTime(hour + ":" + String.format("%02d", minute) + " " + half);
 					}
 
-					if (theme == 0 && prevTheme[0] == 1) {
+
+					if (os.contains("WIN")) {
+						RegistryKey personalize = new RegistryKey(
+								"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
+						RegistryKey systemColor = new RegistryKey(
+								"Software\\Microsoft\\Windows\\DWM");
+
+						int theme = 0;
+						Integer color;
+						try {
+							theme = ((RegDWORDValue) personalize.getValue("AppsUseLightTheme")).getIntValue();
+							color = ((RegDWORDValue) systemColor.getValue("ColorizationColor")).getValue();
+							if (!ACCENT.equals(Color.decode(String.valueOf(color)))) {
+								ACCENT = Color.decode(String.valueOf(color));
+								Overlay.refreshUI(false);
+							}
+						} catch (NullPointerException e) {
+							e.printStackTrace();
+						}
+
+						if (theme == 0 && prevTheme[0] == 1) {
+							Defaults.setDark();
+							dark.set(false);
+							prevTheme[0] = 0;
+						} else if (theme == 1 && prevTheme[0] == 0) {
+							Defaults.setLight();
+							dark.set(true);
+							prevTheme[0] = 1;
+						}
+
+					} else {
 						Defaults.setDark();
 						dark.set(false);
 						prevTheme[0] = 0;
-					} else if (theme == 1 && prevTheme[0] == 0) {
-						Defaults.setLight();
-						dark.set(true);
-						prevTheme[0] = 1;
 					}
-
-				}
-				else{
-					Defaults.setDark();
-					dark.set(false);
-					prevTheme[0] = 0;
-				}
-				try {
-					screenSize = GraphicsEnvironment
-							.getLocalGraphicsEnvironment()
-							.getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();
-				}
-				catch (IndexOutOfBoundsException e){
-					screenSize = GraphicsEnvironment
-							.getLocalGraphicsEnvironment()
-							.getScreenDevices()[0].getDefaultConfiguration().getBounds();
-				}
+					try {
+						screenSize = GraphicsEnvironment
+								.getLocalGraphicsEnvironment()
+								.getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();
+					} catch (IndexOutOfBoundsException e) {
+						screenSize = GraphicsEnvironment
+								.getLocalGraphicsEnvironment()
+								.getScreenDevices()[0].getDefaultConfiguration().getBounds();
+					}
 					if (!screenSize.equals(prevScreenSize)) {
 						try {
-							if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+							if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 								Overlay.refreshUI(false);
 							}
 						} catch (IOException e) {
@@ -268,13 +273,17 @@ public class Defaults {
 					prevScreenSize = screenSize;
 
 
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					if (!loaded.get()) {
+						loaded.set(true);
+					}
 				}
-				if(!loaded.get()){
-					loaded.set(true);
+				catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		});

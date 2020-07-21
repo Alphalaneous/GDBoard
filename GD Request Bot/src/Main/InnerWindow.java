@@ -148,53 +148,57 @@ public class InnerWindow extends ResizablePanel {
 		//endregion
 
 		//region Mouse Relative to Window
-		if(!Settings.windowedMode && !floating) {
-			Thread threadPos = new Thread(() -> {
-				while (true) {
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					Point p = null;
-					try {
-						p = MouseInfo.getPointerInfo().getLocation();
-						SwingUtilities.convertPointFromScreen(p, topBar);
-					} catch (NullPointerException ignored) {
+		try {
+			if(!Settings.getSettings("windowed").equalsIgnoreCase("true") && !floating) {
+				Thread threadPos = new Thread(() -> {
+					while (true) {
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						Point p = null;
+						try {
+							p = MouseInfo.getPointerInfo().getLocation();
+							SwingUtilities.convertPointFromScreen(p, topBar);
+						} catch (NullPointerException ignored) {
 
-					}
+						}
 
-					if (Overlay.isVisible && !isDragging[0]) {
+						if (Overlay.isVisible && !isDragging[0]) {
+							assert p != null;
+							if (p.getY() <= 30 && p.getY() >= 27 && p.getX() >= 0 && p.getX() <= width) {
+								if (getY() <= -10) {
+									Thread thread = new Thread(() -> {
+										for (int j = 0; j < 15; j++) {
+											try {
+												Thread.sleep(1);
+											} catch (InterruptedException ex) {
+												ex.printStackTrace();
+											}
+											if (getY() >= -3 && getY() <= 0) {
+												break;
+											}
+											setLocation(getX(), getY() + 3);
+										}
+									});
+									thread.start();
+								}
+							}
+						}
+
 						assert p != null;
-						if (p.getY() <= 30 && p.getY() >= 27 && p.getX() >= 0 && p.getX() <= width) {
-							if (getY() <= -10) {
-								Thread thread = new Thread(() -> {
-									for (int j = 0; j < 15; j++) {
-										try {
-											Thread.sleep(1);
-										} catch (InterruptedException ex) {
-											ex.printStackTrace();
-										}
-										if (getY() >= -3 && getY() <= 0) {
-											break;
-										}
-										setLocation(getX(), getY() + 3);
-									}
-								});
-								thread.start();
+						if ((p.getX() >= width || p.getX() <= -1 || p.getY() <= -1 || p.getY() >= 30) && exited[0]) {
+							if (getY() <= 0) {
+								setLocation(getX(), -31);
 							}
 						}
 					}
-
-					assert p != null;
-					if ((p.getX() >= width || p.getX() <= -1 || p.getY() <= -1 || p.getY() >= 30) && exited[0]) {
-						if (getY() <= 0) {
-							setLocation(getX(), -31);
-						}
-					}
-				}
-			});
-			threadPos.start();
+				});
+				threadPos.start();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		//endregion
 

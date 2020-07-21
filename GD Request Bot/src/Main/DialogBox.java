@@ -201,7 +201,9 @@ public class DialogBox {
 	}
 	public static void setProgress(int progress){
 		if(progressBar){
-			loadingBar.setValue(progress);
+			if(loadingBar != null) {
+				loadingBar.setValue(progress);
+			}
 		}
 	}
 }

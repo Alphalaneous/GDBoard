@@ -9,13 +9,20 @@ import java.io.IOException;
 import javax.swing.*;
 
 public class RoundedJButton extends JButton {
-
+	/*public Point getToolTipLocation(MouseEvent event) {
+		return new Point( );
+	}*/
+	@Override
+	public JToolTip createToolTip() {
+		return (tooltip);
+	}
 	private static final long serialVersionUID = 1L;
 	private JLabel tooltipLabel = new JLabel();
 	private JPanel tooltipPanel = new JPanel();
 	private boolean asSettings = false;
-
+	private JToolTip tooltip = new FancyTooltip(this);
 	public RoundedJButton(String label, String tooltip) {
+
 		super(label);
 		final boolean[] exited = {false};
 		Dimension size = getPreferredSize();
@@ -26,7 +33,10 @@ public class RoundedJButton extends JButton {
 		size.width = size.height = Math.max(size.width, size.height);
 		setPreferredSize(size);
 		setContentAreaFilled(false);
-		addMouseListener(new MouseAdapter() {
+
+		setToolTipText(tooltip);
+
+		/*addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				exited[0] = false;
@@ -72,19 +82,20 @@ public class RoundedJButton extends JButton {
 				}
 				Overlay.removeFromFrame(tooltipPanel);
 			}
-		});
+		});*/
 	}
 	public void asSettings(){
 		asSettings = true;
 	}
 	public void setTooltip(String tooltip){
-		tooltipLabel.setText(tooltip);
+		setToolTipText(tooltip);
+		/*tooltipLabel.setText(tooltip);
 		if(Settings.windowedMode){
 			tooltipPanel.setBounds(tooltipPanel.getX(), tooltipPanel.getY(), tooltipLabel.getPreferredSize().width + 10, tooltipLabel.getPreferredSize().height + 5);
 		}
 		else{
 			tooltipPanel.setBounds(tooltipPanel.getX(), tooltipPanel.getY(), tooltipLabel.getPreferredSize().width + 10, tooltipLabel.getPreferredSize().height + 5);
-		}
+		}*/
 	}
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;

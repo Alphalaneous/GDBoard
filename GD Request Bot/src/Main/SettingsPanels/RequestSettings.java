@@ -953,6 +953,7 @@ public class RequestSettings {
 		CheckboxButton button = new CheckboxButton(text);
 		button.setBounds(25, y, width, 30);
 		button.setForeground(Defaults.FOREGROUND);
+		button.setOpaque(false);
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		button.refresh();

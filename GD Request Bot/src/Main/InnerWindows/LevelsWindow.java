@@ -96,7 +96,7 @@ public class LevelsWindow {
 
 	public static void setName(int count) {
 		if (Settings.windowedMode) {
-			((InnerWindow) Windowed.window).setTitle("GDBoard - " + count);
+			//((InnerWindow) Windowed.window).setTitle("GDBoard - " + count);
 			Windowed.frame.setTitle("GDBoard - " + count);
 		} else {
 			((InnerWindow) window).setTitle("Requests - " + count);
@@ -292,6 +292,7 @@ public class LevelsWindow {
 				moveUp.setUI(clear);
 				moveUp.setForeground(Defaults.FOREGROUND);
 				moveUp.setBackground(new Color(0, 0, 0, 0));
+				moveUp.setOpaque(false);
 				moveUp.setBounds(buttonWidth - 30, 0, 25, 30);
 				moveUp.addMouseListener(new MouseAdapter() {
 					@Override
@@ -320,6 +321,7 @@ public class LevelsWindow {
 				moveDown.setUI(clear);
 				moveDown.setForeground(Defaults.FOREGROUND);
 				moveDown.setBackground(new Color(0, 0, 0, 0));
+				moveDown.setOpaque(false);
 				moveDown.setBounds(buttonWidth - 30, 30, 25, 30);
 				moveDown.addMouseListener(new MouseAdapter() {
 					@Override
@@ -591,8 +593,6 @@ public class LevelsWindow {
 				info.add(update);
 				info.add(version);
 			}
-			invalidate();
-			validate();
 			info.setVisible(true);
 			expanded = true;
 			setPreferredSize(new Dimension(buttonWidth, 150));

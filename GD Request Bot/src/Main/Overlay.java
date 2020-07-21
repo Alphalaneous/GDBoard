@@ -30,8 +30,8 @@ public class Overlay {
 		// default frame stuff
 
 
-		frame.setFocusableWindowState(false);
 		frame.setUndecorated(true);
+		frame.setFocusableWindowState(false);
 
 		if(!Settings.windowedMode) {
 			frame.setBackground(new Color(0, 0, 0, 100));

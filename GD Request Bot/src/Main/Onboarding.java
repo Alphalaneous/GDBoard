@@ -34,15 +34,15 @@ public class Onboarding {
 		frame.setTitle("GDBoard Startup");
 		Onboarding.setLocation(new Point(Defaults.screenSize.width / 2 - width / 2, Defaults.screenSize.height / 2 - height / 2));
 		frame.setUndecorated(true);
-		frame.setSize(width, 700 + 32);
-		frame.setPreferredSize(new Dimension(width, 700 + 32));
+		frame.setSize(width+5, 700 + 32);
+		frame.setPreferredSize(new Dimension(width+5, 700 + 32));
 		frame.setLayout(null);
 		frame.setResizable(false);
 		frame.setBackground(new Color(255, 255, 255, 0));
 		frame.getContentPane().setSize(width, 700 + 32);
 		frame.pack();
 
-		content.setBounds(1, 31, width - 2, height);
+		content.setBounds(5, 35, width - 2, height);
 		content.setBackground(Defaults.SUB_MAIN);
 		content.setLayout(null);
 

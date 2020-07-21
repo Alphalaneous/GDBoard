@@ -49,7 +49,6 @@ public class Requests {
 	public static void addRequest(long ID, StringBuilder requester) {
 		OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
 
-
 		if (MainBar.requests) {
 			Path blocked = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
 			Path logged = Paths.get(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
@@ -493,6 +492,7 @@ public class Requests {
 		} else {
 			Main.sendMessage("@" + requester + " Requests are off!");
 		}
+		Windowed.refresh();
 
 	}
 
