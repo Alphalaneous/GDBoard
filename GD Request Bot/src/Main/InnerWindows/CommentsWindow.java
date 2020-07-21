@@ -206,7 +206,6 @@ public class CommentsWindow {
 				for (int j = 0; j < 2; j++) {
 					ArrayList<Comment> commentA = APIs.getGDComments(page + j, top, Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
 					for (int i = 0; i < commentA.size(); i++) {
-						Thread.sleep(10);
 						String percent;
 						String username = commentA.get(i).getUsername();
 						String likes = commentA.get(i).getLikes();

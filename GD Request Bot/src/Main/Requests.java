@@ -1274,7 +1274,6 @@ public class Requests {
 			}
 		}
 		level = null;
-		System.gc();
 	}
 
 	private static StringBuilder decompress(byte[] compressed) throws IOException {
