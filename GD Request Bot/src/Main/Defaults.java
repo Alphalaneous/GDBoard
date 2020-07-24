@@ -42,6 +42,10 @@ public class Defaults {
 			.getLocalGraphicsEnvironment()
 			.getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();
 
+
+	public static int relativeWidth = 1;
+	public static int relativeHeight = 1;
+
 	public static String saveDirectory;
 	public static Color ACCENT = new Color(0, 108, 230);
 	public static Color MAIN;
@@ -217,7 +221,6 @@ public class Defaults {
 						MainBar.setTime(hour + ":" + String.format("%02d", minute) + " " + half);
 					}
 
-
 					if (os.contains("WIN")) {
 						RegistryKey personalize = new RegistryKey(
 								"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
@@ -271,7 +274,6 @@ public class Defaults {
 						}
 					}
 					prevScreenSize = screenSize;
-
 
 					try {
 						Thread.sleep(100);

@@ -30,6 +30,7 @@ class GDBoardBot {
 		defaultUI.setSelect( new Color(70, 70, 70));
 
 		new Thread(() -> {
+			DialogBox.setUnfocusable();
 			String choice = DialogBox.showDialogBox("Connecting to Servers...", "This may take a few seconds", "If stuck here, try pressing reconnect or restart GDBoard.", new String[]{"Reconnect", "Cancel"});
 			if(choice.equalsIgnoreCase("Cancel")){
 				Main.close();

@@ -14,22 +14,25 @@ public class DialogBox {
 	private static boolean active = false;
 	private static JDialog frame = null;
 	private static boolean progressBar = false;
-	private static 	JProgressBar loadingBar;
-
+	private static JProgressBar loadingBar;
+	private static boolean setFocus = true;
 
 	public static String showDialogBox(String title, String info, String subInfo, String[] options){
 		progressBar = false;
 		return showDialogBox(title,info,subInfo,options,false);
 	}
-
+	public static void setUnfocusable(){
+		setFocus = false;
+	}
 	public static String showDialogBox(String title, String info, String subInfo, String[] options, boolean progressBar){
 		final String[] value = {null};
 		DialogBox.progressBar = progressBar;
 
 		if(!active) {
 			active = true;
-
 			frame = new JDialog();
+			frame.setFocusableWindowState(setFocus);
+			frame.setFocusable(setFocus);
 			JPanel textPanel = new JPanel();
 			JPanel titlePanel = new JPanel();
 			textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
@@ -165,6 +168,7 @@ public class DialogBox {
 			frame.setVisible(false);
 			frame.dispose();
 			active = false;
+			setFocus = true;
 			return value[0];
 		}
 		else {

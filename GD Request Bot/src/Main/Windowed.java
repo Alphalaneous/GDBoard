@@ -55,7 +55,7 @@ public class Windowed {
 		});
 		URL iconURL = Windowed.class.getResource("/Resources/Icons/windowIcon.png");
 		ImageIcon icon = new ImageIcon(iconURL);
-		Image newIcon = icon.getImage().getScaledInstance(120, 120,  Image.SCALE_SMOOTH);
+		Image newIcon = icon.getImage().getScaledInstance(80, 80,  Image.SCALE_SMOOTH);
 		frame.setIconImage(newIcon);
 		frame.setTitle("GDBoard - 0");
 		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -94,7 +94,7 @@ public class Windowed {
 		//frame.setUndecorated(true);
 		frame.setSize(width + 200,height+32 + 200);
 		frame.setLayout(null);
-		frame.setMinimumSize(new Dimension(465, 600));
+		frame.setMinimumSize(new Dimension(465*Defaults.relativeWidth, 600*Defaults.relativeHeight));
 		//frame.setBackground(new Color(255, 255, 255, 0));
 		mainFrame.setBounds(20, 20, width + 200, height + 32 + 200);
 		mainFrame.setLayout(null);
@@ -291,6 +291,12 @@ public class Windowed {
 		frame.getContentPane().add(content);
 	}
 	static void refreshUI() {
+		if(showingMore){
+			frame.setMinimumSize(new Dimension(765*Defaults.relativeWidth, 600*Defaults.relativeHeight));
+		}
+		else{
+			frame.setMinimumSize(new Dimension(465*Defaults.relativeWidth, 600*Defaults.relativeHeight));
+		}
 		//((InnerWindow) window).refreshUI();
 		selectUI.setBackground(Defaults.SELECT);
 		selectUI.setHover(Defaults.BUTTON_HOVER);
@@ -396,7 +402,7 @@ public class Windowed {
 				if(!Settings.getSettings("showMore").equalsIgnoreCase("true")){
 					CommentsWindow.unloadComments(true);
 					((RoundedJButton) showComments).setTooltip("Show Comments");
-					frame.setMinimumSize(new Dimension(465, 600));
+					frame.setMinimumSize(new Dimension(465*Defaults.relativeWidth, 600*Defaults.relativeHeight));
 					showingMore = false;
 					CommentsWindow.getComWindow().setVisible(false);
 					LevelsWindow.resizeButtons(frame.getWidth()-75, frame.getHeight()-152);
@@ -406,14 +412,14 @@ public class Windowed {
 					refresh();
 				}
 				else{
-					frame.setMinimumSize(new Dimension(765, 600));
+					frame.setMinimumSize(new Dimension(765*Defaults.relativeWidth, 600*Defaults.relativeHeight));
 				}
 			}
 			else{
 				CommentsWindow.unloadComments(true);
 
 				((RoundedJButton) showComments).setTooltip("Show Comments");
-				frame.setMinimumSize(new Dimension(465, 600));
+				frame.setMinimumSize(new Dimension(465*Defaults.relativeWidth, 600*Defaults.relativeHeight));
 				showingMore = false;
 				CommentsWindow.getComWindow().setVisible(false);
 				LevelsWindow.resizeButtons(frame.getWidth()-75, frame.getHeight()-152);
