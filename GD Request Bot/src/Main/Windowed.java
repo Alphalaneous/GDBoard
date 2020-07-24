@@ -20,7 +20,7 @@ import java.net.URL;
 import static Main.Defaults.defaultUI;
 
 public class Windowed {
-	private static int width = 765;
+	private static int width = 465;
 	private static int height = 600;
 	//public static ResizablePanel window = new InnerWindow("GDBoard - 0", Settings.getWindowWLoc().x, Settings.getWindowWLoc().y, width-2, height,
 	//		"\uF137", true).createPanel();
@@ -94,7 +94,7 @@ public class Windowed {
 		//frame.setUndecorated(true);
 		frame.setSize(width + 200,height+32 + 200);
 		frame.setLayout(null);
-		frame.setMinimumSize(new Dimension(765, 600));
+		frame.setMinimumSize(new Dimension(465, 600));
 		//frame.setBackground(new Color(255, 255, 255, 0));
 		mainFrame.setBounds(20, 20, width + 200, height + 32 + 200);
 		mainFrame.setLayout(null);
@@ -377,12 +377,6 @@ public class Windowed {
 				String[] dim = Settings.getSettings("windowSize").split(",");
 				int newW = Integer.parseInt(dim[0]);
 				int newH = Integer.parseInt(dim[1]);
-				if(newW < 775) {
-					newW = 775;
-				}
-				if(newH < 552){
-					newH = 552;
-				}
 				width = newW;
 				height = newH;
 				frame.setSize( newW, newH);
@@ -410,6 +404,9 @@ public class Windowed {
 					InfoWindow.resetDimensions(LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
 					InfoWindow.getInfoWindow().setBounds(0, LevelsWindow.getReqWindow().getHeight()+ 1, LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
 					refresh();
+				}
+				else{
+					frame.setMinimumSize(new Dimension(765, 600));
 				}
 			}
 			else{

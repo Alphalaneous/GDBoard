@@ -20,7 +20,7 @@ public class Overlay {
 	// --------------------
 	// Create JFrame Object
 
-	public static JFrame frame = new JFrame();
+	public static JDialog frame = new JDialog();
 	private static JLayeredPane mainFrame = new JLayeredPane();
 	static boolean isVisible = true;
 
@@ -34,6 +34,7 @@ public class Overlay {
 		frame.setFocusableWindowState(false);
 
 		if(!Settings.windowedMode) {
+			frame.getRootPane().setOpaque(false);
 			frame.setBackground(new Color(0, 0, 0, 100));
 			frame.addMouseListener(new MouseAdapter() {
 				@Override
@@ -58,6 +59,7 @@ public class Overlay {
 		frame.setLayout(null);
 		mainFrame.setDoubleBuffered(true);
 		mainFrame.setBounds(0, 0, Defaults.screenSize.width, Defaults.screenSize.height);
+		mainFrame.setOpaque(false);
 		mainFrame.setBackground(new Color(0, 0, 0, 0));
 		mainFrame.setLayout(null);
 		frame.toBack();
@@ -148,7 +150,12 @@ public class Overlay {
 		WindowedSettings.refreshUI();
 		OutputSettings.refreshUI();
 	}
-	public static JFrame getWindow(){
+	static void revalidate(){
+		frame.invalidate();
+		frame.validate();
+	}
+
+	public static JDialog getWindow(){
 		return frame;
 	}
 	static void setWindowsInvisible() {
@@ -167,6 +174,7 @@ public class Overlay {
 	static void setWindowsVisible() {
 		isVisible = true;
 		frame.setBackground(new Color(0, 0, 0, 100));
+		revalidate();
 		CommentsWindow.setVisible();
 		ActionsWindow.setVisible();
 		InfoWindow.setVisible();

@@ -194,7 +194,7 @@ public class Requests {
 
 			LevelData levelData = new LevelData();
 			// --------------------
-			Thread parse;
+			Thread parse = null;
 			if(Main.loaded) {
 				if (level != null && Files.exists(blockedGDUser)) {
 					Scanner sc = null;
@@ -376,7 +376,10 @@ public class Requests {
 				LevelData finalLevelData = levelData;
 				GDLevel finalLevel1 = level;
 				parse = new Thread(() -> {
-					Object object = Objects.requireNonNull(finalClient.getLevelById(ID).block()).download().block();
+					Object object;
+					try {
+						object = Objects.requireNonNull(finalClient.getLevelById(ID).block()).download().block();
+
 					if (!(finalLevel1.getStars() > 0) && finalLevel1.getGameVersion() / 10 >= 2) {
 						parse(((GDLevelData) Objects.requireNonNull(object)).getData(), ID);
 					}
@@ -384,14 +387,15 @@ public class Requests {
 					finalLevelData.setUpload(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getUploadTimestamp()));
 					finalLevelData.setUpdate(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getLastUpdatedTimestamp()));
 					InfoWindow.refreshInfo();
-
-
 					object = null;
-					System.gc();
-				});
+					}
+					catch (Exception e){
+						LoadGD.isAuth = false;
 
+					}
+				});
 			}
-			else{
+			if(!LoadGD.isAuth){
 				AnonymousGDClient finalClient = clientAnon;
 				LevelData finalLevelData1 = levelData;
 				GDLevel finalLevel = level;
@@ -406,7 +410,6 @@ public class Requests {
 					InfoWindow.refreshInfo();
 
 					object = null;
-					System.gc();
 				});
 
 			}
