@@ -120,9 +120,11 @@ public class ServerChatBot {
                     Scanner sc2 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/disable.txt").toFile());
                     while (sc2.hasNextLine()) {
                         String line = sc2.nextLine();
-                        if (line.equalsIgnoreCase(com)) {
-                            goThrough = false;
-                            break;
+                        if(!line.equalsIgnoreCase("!eval")) {
+                            if (line.equalsIgnoreCase(com)) {
+                                goThrough = false;
+                                break;
+                            }
                         }
                     }
                     sc2.close();
