@@ -14,12 +14,8 @@ import com.github.alex1304.jdash.exception.SpriteLoadException;
 import com.github.alex1304.jdash.graphics.SpriteFactory;
 import com.github.alex1304.jdash.util.GDUserIconSet;
 import com.github.alex1304.jdash.util.LevelSearchFilters;
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.ArrayUtils;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -58,7 +54,7 @@ public class Requests {
 			Path allowed = Paths.get(Defaults.saveDirectory + "\\GDBoard\\allowedStrings.txt");
 
 
-			if(Main.loaded) {
+			if(Main.programLoaded) {
 				if(GeneralSettings.followersOption){
 					if(APIs.isNotFollowing(requester.toString())) {
 						Main.sendMessage("@" + requester + " Please follow to send levels!");
@@ -101,7 +97,7 @@ public class Requests {
 						}
 					}
 				}
-				if (Files.exists(logged) && GeneralSettings.repeatedOptionAll && Main.loaded) {
+				if (Files.exists(logged) && GeneralSettings.repeatedOptionAll && Main.programLoaded) {
 					Scanner sc = null;
 					try {
 						sc = new Scanner(logged.toFile());
@@ -195,7 +191,7 @@ public class Requests {
 			LevelData levelData = new LevelData();
 			// --------------------
 			Thread parse = null;
-			if(Main.loaded) {
+			if(Main.programLoaded) {
 				if (level != null && Files.exists(blockedGDUser)) {
 					Scanner sc = null;
 					try {
@@ -352,7 +348,7 @@ public class Requests {
 					levelData.setDifficulty("extreme demon");
 				}
 			}
-			if(Main.loaded) {
+			if(Main.programLoaded) {
 				if (RequestSettings.excludedDifficulties.contains(levelData.getDifficulty().toString().toLowerCase()) && RequestSettings.disableOption) {
 					Main.sendMessage("@" + requester + " That difficulty is disabled!");
 					return;
@@ -435,7 +431,7 @@ public class Requests {
 
 			LevelsWindow.setName(Requests.levels.size());
 			Functions.saveFunction();
-			if(Main.doMessage) {
+			if(Main.sendMessages) {
 				Main.sendMessage("@" + levelData.getRequester() + " " + levelData.getName() + " ("
 						+ levelData.getLevelID() + ") has been added to the queue at position " + levels.size() + "!");
 			}
@@ -443,7 +439,7 @@ public class Requests {
 				StringSelection selection = new StringSelection(String.valueOf(Requests.levels.get(0).getLevelID()));
 				Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 				clipboard.setContents(selection, selection);
-				if(Main.doMessage) {
+				if(Main.sendMessages) {
 					if (!GeneralSettings.nowPlayingOption) {
 						Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
 								+ Requests.levels.get(0).getLevelID() + "). Requested by "
@@ -486,17 +482,9 @@ public class Requests {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			if(LoadGD.isAuth) {
-				client.clearCache();
-			}
-			else {
-				clientAnon.clearCache();
-			}
 		} else {
 			Main.sendMessage("@" + requester + " Requests are off!");
 		}
-		Windowed.refresh();
-
 	}
 
 	@SuppressWarnings("unused")
@@ -504,83 +492,82 @@ public class Requests {
 
 		String result = "";
 		try {
-			if (attribute.equals("name")) {
-				result = levels.get(level).getName().toString();
-			}
-			if (attribute.equals("id")) {
-				result = String.valueOf(levels.get(level).getLevelID());
-			}
-			if (attribute.equals("author")) {
-				result = levels.get(level).getAuthor().toString();
-			}
-			if (attribute.equals("requester")) {
-				result = levels.get(level).getRequester().toString();
-			}
-			if (attribute.equals("difficulty")) {
-				result = levels.get(level).getDifficulty().toString();
-			}
-			if (attribute.equals("likes")) {
-				result = String.valueOf(levels.get(level).getLikes());
-			}
-			if (attribute.equals("downloads")) {
-				result = String.valueOf(levels.get(level).getDownloads());
-			}
-			if (attribute.equals("description")) {
-				result = levels.get(level).getDescription().toString();
-			}
-			if (attribute.equals("songName")) {
-				result = levels.get(level).getSongName().toString();
-			}
-			if (attribute.equals("songID")) {
-				result = String.valueOf(levels.get(level).getSongID());
-			}
-			if (attribute.equals("songAuthor")) {
-				result = levels.get(level).getSongAuthor().toString();
-			}
-			if (attribute.equals("songURL")) {
-				result = String.valueOf(levels.get(level).getSongURL());
-			}
-			if (attribute.equals("stars")) {
-				result = String.valueOf(levels.get(level).getStars());
-			}
-			if (attribute.equals("epic")) {
-				result = String.valueOf(levels.get(level).getEpic());
-			}
-			if (attribute.equals("featured")) {
-				result = String.valueOf(levels.get(level).getFeatured());
-			}
-			if (attribute.equals("version")) {
-				result = String.valueOf(levels.get(level).getVersion());
-			}
-			if (attribute.equals("length")) {
-				result = levels.get(level).getLength().toString();
-			}
-			if (attribute.equals("coins")) {
-				result = String.valueOf(levels.get(level).getCoins());
-			}
-			if (attribute.equals("objects")) {
-				result = String.valueOf(levels.get(level).getObjects());
-			}
-			if (attribute.equals("original")) {
-				result = String.valueOf(levels.get(level).getOriginal());
-			}
-			if (attribute.equals("image")) {
-				result = String.valueOf(levels.get(level).getContainsImage());
-			}
-			if (attribute.equals("vulgar")) {
-				result = String.valueOf(levels.get(level).getContainsVulgar());
-			}
-			if (attribute.equals("password")) {
-				result = String.valueOf(levels.get(level).getPassword());
-			}
-			if (attribute.equals("levelVersion")) {
-				result = String.valueOf(levels.get(level).getLevelVersion());
-			}
-			if (attribute.equals("upload")) {
-				result = levels.get(level).getUpload().toString();
-			}
-			if (attribute.equals("update")) {
-				result = levels.get(level).getUpdate().toString();
+			switch(attribute){
+				case "name":
+					result = levels.get(level).getName().toString();
+					break;
+				case "id":
+					result = String.valueOf(levels.get(level).getLevelID());
+					break;
+				case "author":
+					result = levels.get(level).getAuthor().toString();
+					break;
+				case "requester":
+					result = levels.get(level).getRequester().toString();
+					break;
+				case "difficulty":
+					result = levels.get(level).getDifficulty().toString();
+					break;
+				case "likes":
+					result = String.valueOf(levels.get(level).getLikes());
+					break;
+				case "downloads":
+					result = String.valueOf(levels.get(level).getDownloads());
+					break;
+				case "description":
+					result = levels.get(level).getDescription().toString();
+					break;
+				case "songName":
+					result = levels.get(level).getSongName().toString();
+					break;
+				case "songID":
+					result = String.valueOf(levels.get(level).getSongID());
+					break;
+				case "songAuthor":
+					result = levels.get(level).getSongAuthor().toString();
+					break;
+				case "songURL":
+					result = String.valueOf(levels.get(level).getSongURL());
+					break;
+				case "stars":
+					result = String.valueOf(levels.get(level).getStars());
+					break;
+				case "epic":
+					result = String.valueOf(levels.get(level).getEpic());
+					break;
+				case "version":
+					result = String.valueOf(levels.get(level).getVersion());
+					break;
+				case "length":
+					result = levels.get(level).getLength().toString();
+					break;
+				case "coins":
+					result = String.valueOf(levels.get(level).getCoins());
+					break;
+				case "objects":
+					result = String.valueOf(levels.get(level).getObjects());
+					break;
+				case "original":
+					result = String.valueOf(levels.get(level).getOriginal());
+					break;
+				case "image":
+					result = String.valueOf(levels.get(level).getContainsImage());
+					break;
+				case "vulgar":
+					result = String.valueOf(levels.get(level).getContainsVulgar());
+					break;
+				case "password":
+					result = String.valueOf(levels.get(level).getPassword());
+					break;
+				case "levelVersion":
+					result = String.valueOf(levels.get(level).getLevelVersion());
+					break;
+				case "upload":
+					result = levels.get(level).getUpload().toString();
+					break;
+				case "update":
+					result = levels.get(level).getUpdate().toString();
+					break;
 			}
 		}
 		catch (Exception e){
@@ -1148,6 +1135,7 @@ public class Requests {
 		boolean image = false;
 		all:
 		for (int k = 0; k < Requests.levels.size(); k++) {
+
 			if (Requests.levels.get(k).getLevelID() == levelID) {
 				StringBuilder decompressed = null;
 				try {
@@ -1173,6 +1161,13 @@ public class Requests {
 					return;
 				}
 				for (String value1 : values) {
+					if(GeneralSettings.lowCPUMode) {
+						try {
+							Thread.sleep(50);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
 					if (value1.startsWith("1,1110") || value1.startsWith("1,211") || value1.startsWith("1,914")) {
 						String value = value1.replaceAll("(,[^,]*),", "$1;");
 						String[] attributes = value.split(";");
@@ -1274,6 +1269,7 @@ public class Requests {
 				}
 				catch (IndexOutOfBoundsException ignored){
 				}
+				break;
 			}
 		}
 		level = null;

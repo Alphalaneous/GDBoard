@@ -90,12 +90,9 @@ public class Windowed {
 				refresh();
 			}
 		});
-		//window.setDoubleBuffered(true);
-		//frame.setUndecorated(true);
 		frame.setSize(width + 200,height+32 + 200);
-		frame.setLayout(null);
 		frame.setMinimumSize(new Dimension(465*Defaults.relativeWidth, 600*Defaults.relativeHeight));
-		//frame.setBackground(new Color(255, 255, 255, 0));
+		frame.setLayout(null);
 		mainFrame.setBounds(20, 20, width + 200, height + 32 + 200);
 		mainFrame.setLayout(null);
 		mainFrame.setDoubleBuffered(true);
@@ -208,7 +205,7 @@ public class Windowed {
 		CommentsWindow.getComWindow().setVisible(true);
 
 
-		showComments = createButton("\uE134", "Show Comments");
+		showComments = createButton("\uE134", "Hide Comments");
 		showComments.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -291,13 +288,6 @@ public class Windowed {
 		frame.getContentPane().add(content);
 	}
 	static void refreshUI() {
-		if(showingMore){
-			frame.setMinimumSize(new Dimension(765*Defaults.relativeWidth, 600*Defaults.relativeHeight));
-		}
-		else{
-			frame.setMinimumSize(new Dimension(465*Defaults.relativeWidth, 600*Defaults.relativeHeight));
-		}
-		//((InnerWindow) window).refreshUI();
 		selectUI.setBackground(Defaults.SELECT);
 		selectUI.setHover(Defaults.BUTTON_HOVER);
 		selectUI.setSelect(Defaults.SELECT);
@@ -387,8 +377,6 @@ public class Windowed {
 				height = newH;
 				frame.setSize( newW, newH);
 				content.setBounds(0,0,newW-10, newH-38);
-				//window.setBounds(-5,-35,newW, newH);
-				//((InnerWindow) window).resetDimensions(newW-10, newH);
 				buttonPanel.setBounds(newW-68, 0, 50, frame.getHeight());
 				LevelsWindow.resizeButtons(newW-375, newH-152);
 				LevelsWindow.getReqWindow().setBounds(0, 0, newW-375, newH-152);
@@ -402,7 +390,6 @@ public class Windowed {
 				if(!Settings.getSettings("showMore").equalsIgnoreCase("true")){
 					CommentsWindow.unloadComments(true);
 					((RoundedJButton) showComments).setTooltip("Show Comments");
-					frame.setMinimumSize(new Dimension(465*Defaults.relativeWidth, 600*Defaults.relativeHeight));
 					showingMore = false;
 					CommentsWindow.getComWindow().setVisible(false);
 					LevelsWindow.resizeButtons(frame.getWidth()-75, frame.getHeight()-152);
@@ -417,9 +404,7 @@ public class Windowed {
 			}
 			else{
 				CommentsWindow.unloadComments(true);
-
 				((RoundedJButton) showComments).setTooltip("Show Comments");
-				frame.setMinimumSize(new Dimension(465*Defaults.relativeWidth, 600*Defaults.relativeHeight));
 				showingMore = false;
 				CommentsWindow.getComWindow().setVisible(false);
 				LevelsWindow.resizeButtons(frame.getWidth()-75, frame.getHeight()-152);

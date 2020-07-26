@@ -3,10 +3,7 @@ package Main;
 import Main.InnerWindows.*;
 import Main.SettingsPanels.*;
 import com.cavariux.twitchirc.Chat.Channel;
-import com.cavariux.twitchirc.Chat.User;
-import javazoom.jl.player.JavaSoundAudioDevice;
 import org.apache.commons.io.FileUtils;
-import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
@@ -14,19 +11,10 @@ import org.json.JSONObject;
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
 
-import javax.sound.sampled.*;
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
-import javax.swing.plaf.basic.BasicLookAndFeel;
-import javax.swing.plaf.metal.MetalLookAndFeel;
-import javax.swing.plaf.multi.MultiLookAndFeel;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.*;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -35,8 +23,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
@@ -44,93 +30,62 @@ import java.util.zip.ZipInputStream;
 
 public class Main {
 
-
-	static boolean starting = true;
-	public static boolean loaded = false;
+	static boolean programStarting = true;
+	public static boolean programLoaded = false;
 	static boolean allowRequests = false;
-	static boolean doMessage  = false;
-	static boolean doImage  = false;
+	static boolean sendMessages = false;
+	static boolean refreshImages = false;
 	private static ChatReader chatReader;
-	private static ChannelPointListener client;
-	private static boolean passed = false;
+	private static boolean finishedLoading = false;
+
+	private static ChannelPointListener channelPointListener;
 	static {
 		try {
-			client = new ChannelPointListener(new URI("wss://pubsub-edge.twitch.tv"));
+			channelPointListener = new ChannelPointListener(new URI("wss://pubsub-edge.twitch.tv"));
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void main(String[] args) {
 
-		HashMap<Object, Object> progressDefaults = new HashMap<>();
-		for(Map.Entry<Object, Object> entry : UIManager.getDefaults().entrySet()){
-			if(entry.getKey().getClass() == String.class && ((String)entry.getKey()).startsWith("ProgressBar")){
-				progressDefaults.put(entry.getKey(), entry.getValue());
-			}
+	public static void main(String[] args) throws IOException {
+
+		/**
+		 * Saves defaults of UI Elements before switching to Nimbus
+		 * Sets to Nimbus, then sets defaults back
+		 */
+		setUI();
+		/**
+		 * Places config files in JRE folder in the GDBoard AppData as I forgot to
+		 * include them in the bundled JRE
+		 */
+		createConfFiles();
+		/**
+		 * Sets Windowed to true as it is default and previously wasn't, easiest fix for all
+		 * checks of windowed mode
+		 */
+		if(Settings.getSettings("windowed").equalsIgnoreCase("")){
+			Settings.writeSettings("windowed", "true");
 		}
-		HashMap<Object, Object> tooltipDefaults = new HashMap<>();
-		for(Map.Entry<Object, Object> entry : UIManager.getDefaults().entrySet()){
-			if(entry.getKey().getClass() == String.class && ((String)entry.getKey()).startsWith("ToolTip")){
-				progressDefaults.put(entry.getKey(), entry.getValue());
-			}
-		}
-		System.setProperty("sun.awt.noerasebackground", "true");
-		Path conf = Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf");
-		Path confzip = Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf.zip");
 
-		if(!Files.exists(conf)){
-			URL inputUrl = Main.class.getResource("/Resources/conf.zip");
-			try {
-				FileUtils.copyURLToFile(inputUrl, confzip.toFile());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			if(Files.exists(Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf.zip"))){
-				Path decryptTo = Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf");
-				try {
-					Files.createDirectory(decryptTo);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				try (ZipInputStream zipInputStream = new ZipInputStream(Files.newInputStream(Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf.zip")))) {
-					ZipEntry entry;
-					while ((entry = zipInputStream.getNextEntry()) != null) {
+		Defaults.programLoaded.set(false);
 
-						final Path toPath = decryptTo.resolve(entry.getName());
-						if (entry.isDirectory()) {
-							Files.createDirectory(toPath);
-						} else {
-							Files.copy(zipInputStream, toPath);
-						}
-					}
-					Files.delete(confzip);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
-			}
-		}
 		try {
-			if(Settings.getSettings("windowed").equalsIgnoreCase("")){
-				Settings.writeSettings("windowed", "true");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
-		/*try {
-			System.setOut(new PrintStream(new FileOutputStream(new File(System.getenv("APPDATA") + "\\GDBoard\\clOutput.txt"))));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}*/
+			/**
+			 * Disables logging used with JDash
+			 */
 
-		Defaults.loaded.set(false);
-		try {
 			Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
 			logger.setLevel(Level.OFF);
 			logger.setUseParentHandlers(false);
 
+			/**
+			 * ---Lot's of bad multithreading with Swing, works though---
+			 * Don't do this at home kids
+			 *
+			 * Shows loading screen
+			 */
 			new Thread(() -> {
 				String choice = DialogBox.showDialogBox("Loading GDBoard...", "This may take a few seconds", "", new String[]{"Cancel"}, true);
 				if(choice.equalsIgnoreCase("Cancel")){
@@ -138,23 +93,12 @@ public class Main {
 				}
 			}).start();
 
-			//dialog.setVisible(true);
-
-			UIManager.setLookAndFeel(new NimbusLookAndFeel() {
-				@Override
-				public void provideErrorFeedback(Component component) {
-				}
-			});
-			for(Map.Entry<Object, Object> entry : progressDefaults.entrySet()){
-				UIManager.getDefaults().put(entry.getKey(), entry.getValue());
-			}
-			for(Map.Entry<Object, Object> entry : tooltipDefaults.entrySet()){
-				UIManager.getDefaults().put(entry.getKey(), entry.getValue());
-			}
-
+			/**
+			 * Sets loading bar progress on loading screen
+			 */
 			new Thread(() -> {
 				for(int i = 0; i < 90; i++){
-					if(passed){
+					if(finishedLoading){
 						break;
 					}
 					try {
@@ -166,6 +110,9 @@ public class Main {
 				}
 			}).start();
 
+			/**
+			 * Loads Geometry Dash data, if it fails to load and times out, continue anyways
+			 */
 			new Thread(() -> {
 				try {
 					LoadGD.load();
@@ -186,19 +133,27 @@ public class Main {
 
 			Assets.loadAssets();
 
-			Defaults.startMainThread();        //Starts thread that always checks for changes such as time, resolution, and color scheme
+			/**
+			 * Starts thread that always checks for changes such as time, resolution, and color scheme
+			 */
+			Defaults.startMainThread();
 
-			while(!Defaults.loaded.get()){
+			/**
+			 * Wait until loaded
+			 * I load colors separately due to dynamic color changing with windows
+			 */
+			while(!Defaults.programLoaded.get()){
 				Thread.sleep(10);
 			}
 			Thread.sleep(500);
-
-
-
 			while(!Defaults.colorsLoaded.get()){
 				Thread.sleep(10);
 			}
-			passed = true;
+			finishedLoading = true;
+
+			/**
+			 * Finishes Progress bar
+			 */
 			new Thread(() -> {
 				for(int i = 90; i < 100; i++){
 					try {
@@ -211,6 +166,11 @@ public class Main {
 			}).start();
 			Thread.sleep(500);
 			DialogBox.closeDialogBox();
+
+			/**
+			 * If first time launch, the user has to go through onboarding
+			 * Show it and wait until finished
+			 */
 			if(Settings.getSettings("onboarding").equalsIgnoreCase("")){
 				Onboarding.createPanel();
 				Onboarding.loadSettings();
@@ -218,15 +178,17 @@ public class Main {
 				Onboarding.frame.setVisible(true);
 			}
 			else{
-				starting = false;
+				programStarting = false;
 			}
 
-
 			while(true) {
-				if (!starting) {
+				if (!programStarting) {
+
+
+
 					Settings.loadSettings(true);
 					GDBoardBot.start();
-					client.connect();
+					channelPointListener.connect();
 
 					if (!Settings.hasMonitor) {
 						Settings.writeSettings("monitor", "0");
@@ -342,9 +304,9 @@ public class Main {
 
 			APIs.getViewers();
 
-			doMessage = true;
+			sendMessages = true;
 			allowRequests = true;
-			doImage = true;
+			refreshImages = true;
 
 			Main.sendMessage("Thank you for using GDBoard by Alphalaneous and TreehouseFalcon! It is suggested to VIP or Mod GDBoard to prevent chat limits from occurring.");
 
@@ -385,7 +347,7 @@ public class Main {
 				URL inputUrl = Main.class.getResource("/Resources/gdmod.exe");
 				FileUtils.copyURLToFile(inputUrl, path.toFile());
 			}
-			loaded = true;
+			programLoaded = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			String option = DialogBox.showDialogBox("Error!", "<html>" + e.toString() + ": " + e.getStackTrace()[0], "Please report to Alphalaneous#9687 on Discord.", new String[]{"Close"});
@@ -467,54 +429,119 @@ public class Main {
 		thread.start();
 	}
 	public static void close(boolean forceLoaded, boolean load){
-		boolean loaded = Main.loaded;
+		boolean loaded = Main.programLoaded;
 		if(forceLoaded){
 			loaded = load;
 		}
-		if(!Settings.onboarding && loaded) {
-			if (!Settings.windowedMode) {
-				ActionsWindow.setSettings();
-				CommentsWindow.setSettings();
-				InfoWindow.setSettings();
-				LevelsWindow.setSettings();
-				SongWindow.setSettings();
-				SettingsWindow.setSettings();
-				Windowed.setSettings();
-
-				try {
+		try {
+			if(Settings.getSettings("onboarding").equalsIgnoreCase("false") && loaded) {
+				if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+					ActionsWindow.setSettings();
+					CommentsWindow.setSettings();
+					InfoWindow.setSettings();
+					LevelsWindow.setSettings();
+					SongWindow.setSettings();
+					SettingsWindow.setSettings();
+					Windowed.setSettings();
 					Settings.writeLocation();
 					Settings.writeSettings("monitor", String.valueOf(Defaults.screenNum));
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-
-			} else {
-				Windowed.frame.setVisible(false);
-				SettingsWindow.setSettings();
-				Windowed.setSettings();
-				try {
+				} else {
+					Windowed.frame.setVisible(false);
+					SettingsWindow.setSettings();
+					Windowed.setSettings();
 					Settings.writeLocation();
-				} catch (IOException e) {
+					WindowedSettings.setSettings();
+				}
+				try {
+					channelPointListener.disconnectBot();
+				}
+				catch (WebsocketNotConnectedException ignored){}
+				GeneralSettings.setSettings();
+				RequestSettings.setSettings();
+				ShortcutSettings.setSettings();
+				OutputSettings.setSettings();
+				try {
+					GlobalScreen.unregisterNativeHook();
+				} catch (NativeHookException e) {
 					e.printStackTrace();
 				}
-				WindowedSettings.setSettings();
 			}
-			try {
-				client.disconnectBot();
-			}
-			catch (WebsocketNotConnectedException ignored){}
-			GeneralSettings.setSettings();
-			RequestSettings.setSettings();
-			ShortcutSettings.setSettings();
-			OutputSettings.setSettings();
-			try {
-				GlobalScreen.unregisterNativeHook();
-			} catch (NativeHookException e) {
-				e.printStackTrace();
-			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		System.exit(0);
 	}
+
+
+	public static void setUI(){
+		HashMap<Object, Object> progressDefaults = new HashMap<>();
+		for(Map.Entry<Object, Object> entry : UIManager.getDefaults().entrySet()){
+			if(entry.getKey().getClass() == String.class && ((String)entry.getKey()).startsWith("ProgressBar")){
+				progressDefaults.put(entry.getKey(), entry.getValue());
+			}
+		}
+		HashMap<Object, Object> tooltipDefaults = new HashMap<>();
+		for(Map.Entry<Object, Object> entry : UIManager.getDefaults().entrySet()){
+			if(entry.getKey().getClass() == String.class && ((String)entry.getKey()).startsWith("ToolTip")){
+				progressDefaults.put(entry.getKey(), entry.getValue());
+			}
+		}
+
+		try {
+			UIManager.setLookAndFeel(new NimbusLookAndFeel() {
+				@Override
+				public void provideErrorFeedback(Component component) {
+				}
+			});
+		} catch (UnsupportedLookAndFeelException ignored) { }
+
+		for(Map.Entry<Object, Object> entry : progressDefaults.entrySet()){
+			UIManager.getDefaults().put(entry.getKey(), entry.getValue());
+		}
+		for(Map.Entry<Object, Object> entry : tooltipDefaults.entrySet()){
+			UIManager.getDefaults().put(entry.getKey(), entry.getValue());
+		}
+		System.setProperty("sun.awt.noerasebackground", "true");
+	}
+
+	public static void createConfFiles(){
+		Path conf = Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf");
+		Path confzip = Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf.zip");
+
+		if(!Files.exists(conf)){
+			URL inputUrl = Main.class.getResource("/Resources/conf.zip");
+			try {
+				FileUtils.copyURLToFile(inputUrl, confzip.toFile());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			if(Files.exists(Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf.zip"))){
+				Path decryptTo = Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf");
+				try {
+					Files.createDirectory(decryptTo);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				try (ZipInputStream zipInputStream = new ZipInputStream(Files.newInputStream(Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf.zip")))) {
+					ZipEntry entry;
+					while ((entry = zipInputStream.getNextEntry()) != null) {
+
+						final Path toPath = decryptTo.resolve(entry.getName());
+						if (entry.isDirectory()) {
+							Files.createDirectory(toPath);
+						} else {
+							Files.copy(zipInputStream, toPath);
+						}
+					}
+					Files.delete(confzip);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+			}
+		}
+	}
+
 	public static void close(){
 		close(false, false);
 	}

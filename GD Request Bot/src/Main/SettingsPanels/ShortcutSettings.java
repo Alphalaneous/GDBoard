@@ -156,7 +156,7 @@ public class ShortcutSettings {
 	}
 
 	public static void loadSettings() throws IOException {
-		if(Settings.onboarding){
+		if(!Settings.getSettings("onboarding").equalsIgnoreCase("false")){
 			openKeybind = Onboarding.openKeybind;
 		}
 		else if (!Settings.getSettings("openKeybind").equalsIgnoreCase("") && !Settings.getSettings("openKeybind").equalsIgnoreCase("-1")) {

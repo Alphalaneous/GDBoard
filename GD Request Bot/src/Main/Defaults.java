@@ -4,15 +4,12 @@ import com.registry.RegDWORDValue;
 import com.registry.RegistryKey;
 
 import java.awt.*;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Defaults {
 
@@ -86,7 +83,7 @@ public class Defaults {
 	}
 
 	static AtomicBoolean dark = new AtomicBoolean();
-	static AtomicBoolean loaded = new AtomicBoolean();
+	static AtomicBoolean programLoaded = new AtomicBoolean();
 	static AtomicBoolean colorsLoaded = new AtomicBoolean();
 
 
@@ -280,8 +277,8 @@ public class Defaults {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					if (!loaded.get()) {
-						loaded.set(true);
+					if (!programLoaded.get()) {
+						programLoaded.set(true);
 					}
 				}
 				catch (Exception e) {

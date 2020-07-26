@@ -10,17 +10,13 @@ import Main.SettingsPanels.OutputSettings;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.BufferedInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.*;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 public class Functions {
@@ -44,7 +40,7 @@ public class Functions {
 			});
 			bwompThread.start();
 		}
-		if(Main.loaded) {
+		if(Main.programLoaded) {
 			if (Requests.levels.size() != 0) {
 				int select = LevelsWindow.getSelectedID();
 				Requests.levels.remove(LevelsWindow.getSelectedID());
@@ -94,7 +90,7 @@ public class Functions {
 	}
 
 	public static void randomFunction(){
-		if(Main.loaded) {
+		if(Main.programLoaded) {
 			Random random = new Random();
 			int num = 0;
 			try {
@@ -171,7 +167,7 @@ public class Functions {
 	}
 
 	public static void blockFunction() {
-		if(Main.loaded) {
+		if(Main.programLoaded) {
 			if(LevelsWindow.getSelectedID() == 0 && Requests.levels.size() > 1){
 				StringSelection selection = new StringSelection(
 						String.valueOf(Requests.levels.get(1).getLevelID()));
@@ -222,7 +218,7 @@ public class Functions {
 	}
 
 	public static void clearFunction() {
-		if(Main.loaded) {
+		if(Main.programLoaded) {
 			new Thread(()->{
 
 			String option = DialogBox.showDialogBox("Clear the Queue?", "This will clear the levels from the queue.", "Do you want to clear the queue?", new String[]{"Clear All", "Cancel"});
@@ -268,7 +264,7 @@ public class Functions {
 	}
 
 	static void requestsToggleFunction() {
-		if (Main.loaded) {
+		if (Main.programLoaded) {
 			if (MainBar.requests) {
 				MainBar.stopReqs.setText("\uE768");
 				MainBar.requests = false;

@@ -1,7 +1,6 @@
 package Main;
 
 
-import Main.InnerWindows.*;
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
 
@@ -241,7 +240,7 @@ class MainBar {
 		barPanel.setBorder(BorderFactory.createLineBorder(alphaBorder));
 		if (color) {
 			BufferedImage img = null;
-			if(Main.doImage) {
+			if(Main.refreshImages) {
 				try {
 					if (Defaults.dark.get()) {
 						System.out.println("Dark");

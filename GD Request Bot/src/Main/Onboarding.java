@@ -1,7 +1,6 @@
 package Main;
 
 import Main.SettingsPanels.ShortcutSettings;
-import com.jidesoft.swing.ResizablePanel;
 import org.jnativehook.keyboard.SwingKeyAdapter;
 
 import javax.swing.*;
@@ -103,7 +102,7 @@ public class Onboarding {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				Main.starting = false;
+				Main.programStarting = false;
 			}
 		});
 		moveOn.refresh();
@@ -143,7 +142,7 @@ public class Onboarding {
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
-						Main.starting = false;
+						Main.programStarting = false;
 					});
 					thread.start();
 				} catch (Exception ignored) {

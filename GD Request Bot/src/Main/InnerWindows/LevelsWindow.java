@@ -1,23 +1,15 @@
 package Main.InnerWindows;
 
-import com.jidesoft.swing.Resizable;
-import com.jidesoft.swing.ResizablePanel;
 import Main.*;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Objects;
-import java.util.Scanner;
 
 import static Main.Defaults.defaultUI;
 import static javax.swing.ScrollPaneConstants.*;
@@ -298,7 +290,7 @@ public class LevelsWindow {
 				moveUp.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mousePressed(MouseEvent e) {
-						if(Main.loaded) {
+						if(Main.programLoaded) {
 							if (Requests.getPosFromID(ID) != 0) {
 								LevelsWindow.movePosition(Requests.getPosFromID(ID), Requests.getPosFromID(ID) - 1);
 							}
@@ -327,7 +319,7 @@ public class LevelsWindow {
 				moveDown.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mousePressed(MouseEvent e) {
-						if(Main.loaded) {
+						if(Main.programLoaded) {
 							if (Requests.getPosFromID(ID) != Requests.levels.size() - 1) {
 								LevelsWindow.movePosition(Requests.getPosFromID(ID), Requests.getPosFromID(ID) + 1);
 							}

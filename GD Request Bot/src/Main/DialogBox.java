@@ -6,7 +6,6 @@ import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 
 public class DialogBox {
 
@@ -86,7 +85,7 @@ public class DialogBox {
 			frame.setSize(new Dimension(400, 200));
 			frame.setPreferredSize(new Dimension(400, 400));
 
-			if(Defaults.loaded.get()) {
+			if(Defaults.programLoaded.get()) {
 				defaultUI.setBackground(Defaults.BUTTON);
 				defaultUI.setHover(Defaults.BUTTON_HOVER);
 				defaultUI.setSelect(Defaults.SELECT);
@@ -184,7 +183,7 @@ public class DialogBox {
 
 		button.setUI(defaultUI);
 
-		if(Defaults.loaded.get()){
+		if(Defaults.programLoaded.get()){
 			button.setForeground(Defaults.FOREGROUND);
 			button.setBackground(Defaults.BUTTON);
 
