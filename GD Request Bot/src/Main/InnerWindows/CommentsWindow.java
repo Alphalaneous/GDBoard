@@ -55,7 +55,7 @@ public class CommentsWindow {
 		//region Panel attributes
 		panel.setLayout(null);
 		panel.setBounds(0, 0, width, 0);
-		mainPanel.setBounds(5, 5, width, height+30);
+		mainPanel.setBounds(1, 1, width, height+30);
 		panel.setBackground(Defaults.SUB_MAIN);
 		panel.setPreferredSize(new Dimension(width, 0));
 		//endregion
@@ -164,11 +164,19 @@ public class CommentsWindow {
 		panel.setVisible(false);
 		window.add(mainPanel);
 		((InnerWindow) window).refreshListener();
+		if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+			Overlay.addToFrame(window);
+		}
+	}
+	public static void destroyPanel(){
 		try {
-			if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
-				Overlay.addToFrame(window);
+			if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+				Windowed.removeFromFrame(mainPanel);
+			} else {
+				Overlay.removeFromFrame(window);
 			}
-		} catch (IOException e) {
+		}
+		catch (Exception e){
 			e.printStackTrace();
 		}
 	}

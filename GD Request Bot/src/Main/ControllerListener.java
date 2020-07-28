@@ -28,11 +28,11 @@ class ControllerListener {
 						ControllerState currState = controllers.getState(0);
 						if (currState.leftStickClick) {
 							if (Overlay.isVisible) {
-								if (!Settings.windowedMode) {
+								if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 									Overlay.setWindowsInvisible();
 								}
 							} else {
-								if (!Settings.windowedMode) {
+								if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 									Overlay.setWindowsVisible();
 								}
 								Overlay.frame.toFront();

@@ -39,14 +39,6 @@ public class Main {
 	private static boolean finishedLoading = false;
 
 	private static ChannelPointListener channelPointListener;
-	static {
-		try {
-			channelPointListener = new ChannelPointListener(new URI("wss://pubsub-edge.twitch.tv"));
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-	}
-
 
 	public static void main(String[] args) throws IOException {
 
@@ -119,18 +111,19 @@ public class Main {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				while(!LoadGD.loaded){
-					if(LoadGD.timeout){
-						break;
-					}
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
+
 			}).start();
 
+			while(!LoadGD.loaded){
+				if(LoadGD.timeout){
+					break;
+				}
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 			Assets.loadAssets();
 
 			/**
@@ -188,31 +181,18 @@ public class Main {
 
 					Settings.loadSettings(true);
 					GDBoardBot.start();
-					channelPointListener.connect();
+
+					while(!GDBoardBot.connected){
+						Thread.sleep(10);
+					}
 
 					if (!Settings.hasMonitor) {
 						Settings.writeSettings("monitor", "0");
 					}
 					Thread.sleep(1000);
-					JSONObject authObj = new JSONObject();
-					authObj.put("request_type", "connect");
-					authObj.put("oauth", Settings.getSettings("oauth"));
-					GDBoardBot.sendMessage(authObj.toString());
-					Thread.sleep(1000);
-					while(!GDBoardBot.connected){
-						GDBoardBot.sendMessage(authObj.toString());
-						Thread.sleep(15000);
-					}
-					if (GDBoardBot.failed) {
-						APIs.setOauth();
-					}
 
 					if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
-						MainBar.createBar();            //Creates the main "Game Bar" in the top center
-						Overlay.setFrame();                //Creates the JFrame that contains everything
-					}
-
-					if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+						Overlay.createOverlay();
 						Reflections innerReflections = new Reflections("Main.InnerWindows", new SubTypesScanner(false));
 						Set<Class<?>> innerClasses =
 								innerReflections.getSubTypesOf(Object.class);
@@ -228,14 +208,9 @@ public class Main {
 					}
 					SettingsWindow.createPanel();
 					if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
-						java.awt.EventQueue.invokeLater(new Runnable() {
-							public void run() {
-								Windowed.createPanel();
-							}
-						});
+						Windowed.createPanel();
 					}
 					Settings.loadSettings(false);
-					AccountSettings.refreshGD(LoadGD.username);
 
 					Reflections settingsReflections = new Reflections("Main.SettingsPanels", new SubTypesScanner(false));
 					Set<Class<?>> settingsClasses =
@@ -254,13 +229,18 @@ public class Main {
 					chatReader = new ChatReader();
 					new Thread(() -> {
 						chatReader.connect();
-						try {
-							chatReader.joinChannel(Settings.getSettings("channel"));
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+						chatReader.joinChannel(Settings.getSettings("channel"));
 						chatReader.start();
 					}).start();
+
+					try {
+						channelPointListener = new ChannelPointListener(new URI("wss://pubsub-edge.twitch.tv"));
+						channelPointListener.connect();
+					} catch (URISyntaxException e) {
+						e.printStackTrace();
+					}
+					System.out.println(LoadGD.username);
+					AccountSettings.refreshGD(LoadGD.username);
 
 					Overlay.refreshUI(true);
 					if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
@@ -268,8 +248,14 @@ public class Main {
 						Windowed.loadSettings();
 						Windowed.frame.setVisible(true);
 
-					}
-					if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+						Windowed.frame.setAlwaysOnTop(true);
+						Windowed.frame.setAlwaysOnTop(false);
+
+						Windowed.frame.toFront();
+						Windowed.frame.requestFocus();
+						Windowed.refresh();
+
+					} else {
 						Overlay.setVisible();
 					}
 
@@ -310,7 +296,7 @@ public class Main {
 
 			Main.sendMessage("Thank you for using GDBoard by Alphalaneous and TreehouseFalcon! It is suggested to VIP or Mod GDBoard to prevent chat limits from occurring.");
 
-			Thread threada = new Thread(() -> {
+			new Thread(() -> {
 				while(true){
 					try {
 						Thread.sleep(120000);
@@ -319,29 +305,8 @@ public class Main {
 					}
 					Main.sendMessage(" ");
 				}
-			});
-			threada.start();
+			}).start();
 
-			/*Thread ping = new Thread(() -> {
-				while(true){
-					ChannelPointListener.pong = false;
-					ChannelPointListener.sendMessage("{\"type\": \"PING\"}");
-
-					try {
-						Thread.sleep(240000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					if(!ChannelPointListener.pong){
-						try {
-							ChannelPointListener.restart();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-			});
-			ping.start();*/
 			Path path = Paths.get(Defaults.saveDirectory + "\\GDBoard\\bin\\gdmod.exe");
 			if(!Files.exists(path)){
 				URL inputUrl = Main.class.getResource("/Resources/gdmod.exe");
@@ -357,11 +322,7 @@ public class Main {
 	static Channel channel;
 
 	static {
-		try {
-			channel = Channel.getChannel(Settings.getSettings("channel"), chatReader);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		channel = Channel.getChannel(Settings.getSettings("channel"), chatReader);
 	}
 
 	static void sendMainMessage(String message){

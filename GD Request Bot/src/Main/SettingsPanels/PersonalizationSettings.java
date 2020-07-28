@@ -1,12 +1,19 @@
 package Main.SettingsPanels;
 
 import Main.*;
+import Main.InnerWindows.CommentsWindow;
+import Main.InnerWindows.InfoWindow;
+import Main.InnerWindows.LevelsWindow;
+import org.reflections.Reflections;
+import org.reflections.scanners.SubTypesScanner;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.Set;
 
 import static Main.Defaults.settingsButtonUI;
 
@@ -20,12 +27,8 @@ public class PersonalizationSettings {
 		panel.setBounds(0, 0, 415, 622);
 		panel.setBackground(Defaults.SUB_MAIN);
 
-		try {
-			if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
-				windowedButton.setLText("Switch to Overlay Mode");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
+			windowedButton.setLText("Switch to Overlay Mode");
 		}
 		windowedButton.setBounds(25,25, 365,30);
 		windowedButton.setPreferredSize(new Dimension(365,30));
@@ -40,32 +43,76 @@ public class PersonalizationSettings {
 			public void mousePressed(MouseEvent e) {
 				new Thread(()->{
 					String option = null;
-					try {
-						if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
-							option = DialogBox.showDialogBox("Switch to Overlay?", "<html>If you play GD in fullscreen, this may not work, move it to another monitor by dragging the time to fix. Default is 'Home' key to open. You'll have to reopen GDBoard.", "", new String[]{"Yes", "No"});
-						}
-						else{
-							option = DialogBox.showDialogBox("Switch to Windowed?", "This will close GDboard and set to Windowed mode.", "You will have to reopen GDBoard.", new String[]{"Yes", "No"});
-						}
-					} catch (IOException e1) {
-						e1.printStackTrace();
+					if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
+						option = DialogBox.showDialogBox("Switch to Overlay?", "<html>If you play GD in fullscreen, this may not work, move it to another monitor by dragging the time to fix. Default is 'Home' key to open. You'll have to reopen GDBoard.", "", new String[]{"Yes", "No"});
+					}
+					else{
+						option = DialogBox.showDialogBox("Switch to Windowed?", "This will close GDboard and set to Windowed mode.", "You will have to reopen GDBoard.", new String[]{"Yes", "No"});
 					}
 
 					if (option.equalsIgnoreCase("Yes")) {
 					try {
-						if (Settings.windowedMode) {
-
+						if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+							//destroyPanels();
+							//Windowed.destroyWindow();
 							Settings.writeSettings("windowed", "false");
+							//Overlay.createOverlay();
+							//SettingsWindow.destroySettings();
+							//Reflections innerReflections = new Reflections("Main.InnerWindows", new SubTypesScanner(false));
+							//Set<Class<?>> innerClasses =
+							//		innerReflections.getSubTypesOf(Object.class);
+							//for (Class<?> Class : innerClasses) {
+							//	Method method = Class.getMethod("createPanel");
+							//	method.invoke(null);
+							//}
+							//SettingsWindow.createPanel();
+							//Reflections settingsReflections = new Reflections("Main.SettingsPanels", new SubTypesScanner(false));
+							//Set<Class<?>> settingsClasses =
+							//		settingsReflections.getSubTypesOf(Object.class);
+							//for (Class<?> Class : settingsClasses) {
+							//	try {
+							//		Method method = Class.getMethod("loadSettings");
+							//		method.invoke(null);
+							//	}
+							//	catch (NoSuchMethodException ignored){
+							//	}
+							//}
+							//Overlay.setVisible();
 						} else {
+							//destroyPanels();
+							//Overlay.destroyOverlay();
 							Settings.writeSettings("windowed", "true");
+							//SettingsWindow.destroySettings();
+							//SettingsWindow.createPanel();
+							//SettingsWindow.setSettings();
+							//CommentsWindow.createPanel();
+							//Windowed.resetCommentSize();
+							//LevelsWindow.createPanel();
+							//InfoWindow.createPanel();
+							//Windowed.createPanel();
+							//Windowed.loadSettings();
+							//Reflections settingsReflections = new Reflections("Main.SettingsPanels", new SubTypesScanner(false));
+							//Set<Class<?>> settingsClasses =
+							//		settingsReflections.getSubTypesOf(Object.class);
+							//for (Class<?> Class : settingsClasses) {
+							//	try {
+							//		Method method = Class.getMethod("loadSettings");
+							//		method.invoke(null);
+							//	}
+							//	catch (NoSuchMethodException ignored){
+							//	}
+							//}
+							//Windowed.frame.setVisible(true);
+
 						}
-						Thread.sleep(100);
-						Main.close();
+						//Thread.sleep(100);
+						//Main.close();
 					}
-					catch (Exception ignored){
+					catch (Exception f){
+						f.printStackTrace();
 					}
 					Main.close();
-				}
+					}
 				}).start();
 			}
 		});
@@ -93,6 +140,20 @@ public class PersonalizationSettings {
 			if(component instanceof CheckboxButton){
 				((CheckboxButton) component).refresh();
 			}
+		}
+	}
+	public static void destroyPanels(){
+		try {
+			Reflections innerReflections = new Reflections("Main.InnerWindows", new SubTypesScanner(false));
+			Set<Class<?>> innerClasses =
+					innerReflections.getSubTypesOf(Object.class);
+			for (Class<?> Class : innerClasses) {
+				Method method = Class.getMethod("destroyPanel");
+				method.invoke(null);
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();
 		}
 	}
 }

@@ -1036,12 +1036,7 @@ public class Requests {
 
 	@SuppressWarnings("unused")
 	public static String getOAuth(){
-		try {
-			return Settings.getSettings("oauth");
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
+		return Settings.getSettings("oauth");
 	}
 
 	@SuppressWarnings("unused")

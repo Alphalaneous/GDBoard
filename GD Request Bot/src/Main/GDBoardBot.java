@@ -29,16 +29,7 @@ class GDBoardBot {
 		defaultUI.setHover( new Color(80, 80, 80));
 		defaultUI.setSelect( new Color(70, 70, 70));
 
-		new Thread(() -> {
-			DialogBox.setUnfocusable();
-			String choice = DialogBox.showDialogBox("Connecting to Servers...", "This may take a few seconds", "If stuck here, try pressing reconnect or restart GDBoard.", new String[]{"Reconnect", "Cancel"});
-			if(choice.equalsIgnoreCase("Cancel")){
-				Main.close();
-			}
-			if(choice.equalsIgnoreCase("Reconnect")){
-				APIs.setOauth();
-			}
-		}).start();
+
 		try {
 			clientSocket = new Socket("165.227.53.200", 2963);
 			//clientSocket = new Socket("localhost", 2963);
@@ -54,9 +45,26 @@ class GDBoardBot {
 			start();
 			return;
 		}
-
 		out = new PrintWriter(clientSocket.getOutputStream(), true);
 		in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+		JSONObject authObj = new JSONObject();
+		authObj.put("request_type", "connect");
+		authObj.put("oauth", Settings.getSettings("oauth"));
+		sendMessage(authObj.toString());
+
+		new Thread(() -> {
+			DialogBox.setUnfocusable();
+			String choice = DialogBox.showDialogBox("Connecting to Servers...", "This may take a few seconds", "If stuck here, try pressing reconnect or restart GDBoard.", new String[]{"Reconnect", "Cancel"});
+			if(choice.equalsIgnoreCase("Cancel")){
+				Main.close();
+			}
+			if(choice.equalsIgnoreCase("Reconnect")){
+				APIs.success.set(false);
+				APIs.setOauth(false);
+
+			}
+		}).start();
+
 
 		Thread thread = new Thread(() -> {
 			String inputLine;
@@ -74,7 +82,6 @@ class GDBoardBot {
 					break;
 				}
 				String event = "";
-				//System.out.println(inputLine);
 				try {
 					JsonObject object = JsonObject.readFrom(inputLine);
 					if (object.get("event") != null) {
@@ -88,8 +95,7 @@ class GDBoardBot {
 						AccountSettings.refreshTwitch(channel);
 						DialogBox.closeDialogBox();
 					}
-					else if (event.equalsIgnoreCase("connect_failed")) {
-						System.out.println(object.get("error").toString().replaceAll("\"", ""));
+					else if (event.equalsIgnoreCase("connect_failed") || (event.equalsIgnoreCase("error"))) {
 						failed = true;
 					} if ((event.equalsIgnoreCase("command") || event.equalsIgnoreCase("level_request")) && Main.allowRequests) {
 						String sender = object.get("sender").toString().replaceAll("\"", "");
@@ -146,28 +152,15 @@ class GDBoardBot {
 					e.printStackTrace();
 				}
 			}
-			new Thread(() -> {
-				String choice = DialogBox.showDialogBox("Loading GDBoard...", "This may take a few seconds", "", new String[]{"Reconnect", "Cancel"});
-				if(choice.equalsIgnoreCase("Cancel")){
-					Main.close();
-				}
-				if(choice.equalsIgnoreCase("Reconnect")){
-					APIs.setOauth();
-				}
-			}).start();
-			try {
-				start();
-				Thread.sleep(1000);
-				JSONObject authObj = new JSONObject();
-				authObj.put("request_type", "connect");
-				authObj.put("oauth", Settings.getSettings("oauth"));
-				GDBoardBot.sendMessage(authObj.toString());
-			} catch (IOException | InterruptedException e) {
-				e.printStackTrace();
-			}
+
 			try {
 				Thread.sleep(wait);
 			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			try {
+				start();
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			tries++;
@@ -176,24 +169,7 @@ class GDBoardBot {
 		thread.start();
 	}
 	static void sendMessage(String message){
+		System.out.println(message);
 		out.println(message);
-	}
-	static void restart() throws IOException {
-		if(clientSocket != null) {
-			clientSocket.close();
-		}
-		clientSocket = new Socket("165.227.53.200", 2963);
-		out = new PrintWriter(clientSocket.getOutputStream(), true);
-		in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-		start();
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		JSONObject authObj = new JSONObject();
-		authObj.put("request_type", "connect");
-		authObj.put("oauth", Settings.getSettings("oauth"));
-		GDBoardBot.sendMessage(authObj.toString());
 	}
 }

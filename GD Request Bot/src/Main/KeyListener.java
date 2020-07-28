@@ -84,14 +84,14 @@ public class KeyListener extends SwingKeyAdapter {
 
 					if (!Overlay.frame.getBackground().equals(new Color(0, 0, 0, 0))) {
 
-						if (!Settings.windowedMode) {
+						if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 							Overlay.setWindowsInvisible();
 						}
 						Overlay.frame.toFront();
 						Overlay.frame.requestFocus();
 
 					} else {
-						if (!Settings.windowedMode) {
+						if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 							Overlay.setWindowsVisible();
 						}
 						Overlay.frame.toFront();

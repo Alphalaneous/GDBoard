@@ -94,21 +94,17 @@ public class OutputSettings {
 		
 	}
 	public static void loadSettings(){
-		try {
-			if(!Settings.getSettings("noLevelsString").equalsIgnoreCase("")) {
-				noLevelString = Settings.getSettings("noLevelsString").replace("%n%", "\n");
-				noLevelsStringInput.setText(noLevelString.replaceAll("%s%", ""));
-			}
-			if(!Settings.getSettings("outputString").equalsIgnoreCase("")) {
-				outputString = Settings.getSettings("outputString").replace("%n%", "\n");
-				outputStringInput.setText(outputString.replaceAll("%s%", ""));
-			}
-			if(!Settings.getSettings("outputFileLocation").equalsIgnoreCase("")) {
-				fileLocation = Settings.getSettings("outputFileLocation");
-				fileLocationInput.setText(fileLocation);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(!Settings.getSettings("noLevelsString").equalsIgnoreCase("")) {
+			noLevelString = Settings.getSettings("noLevelsString").replace("%n%", "\n");
+			noLevelsStringInput.setText(noLevelString.replaceAll("%s%", ""));
+		}
+		if(!Settings.getSettings("outputString").equalsIgnoreCase("")) {
+			outputString = Settings.getSettings("outputString").replace("%n%", "\n");
+			outputStringInput.setText(outputString.replaceAll("%s%", ""));
+		}
+		if(!Settings.getSettings("outputFileLocation").equalsIgnoreCase("")) {
+			fileLocation = Settings.getSettings("outputFileLocation");
+			fileLocationInput.setText(fileLocation);
 		}
 	}
 	public static void setSettings(){

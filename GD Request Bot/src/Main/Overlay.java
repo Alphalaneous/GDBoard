@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.net.URL;
 
 import static Main.Defaults.defaultUI;
@@ -24,50 +25,43 @@ public class Overlay {
 	private static JLayeredPane mainFrame = new JLayeredPane();
 	static boolean isVisible = true;
 
-	static void setFrame() {
-
-		// --------------------
-		// default frame stuff
-
-
+	public static void createOverlay() {
+		MainBar.createBar();
 		frame.setUndecorated(true);
-		frame.setFocusableWindowState(false);
+				frame.setFocusableWindowState(false);
+				frame.getRootPane().setOpaque(false);
+				frame.setBackground(new Color(0, 0, 0, 100));
+				URL iconURL = Windowed.class.getResource("/Resources/Icons/windowIcon.png");
+				ImageIcon icon = new ImageIcon(iconURL);
+				Image newIcon = icon.getImage().getScaledInstance(120, 120,  Image.SCALE_SMOOTH);
+				frame.setIconImage(newIcon);
+				frame.setTitle("GDBoard - Settings");
+				frame.setBounds(Defaults.screenSize);
+				frame.setLayout(null);
+				mainFrame.setDoubleBuffered(true);
+				mainFrame.setBounds(0, 0, Defaults.screenSize.width, Defaults.screenSize.height);
+				mainFrame.setOpaque(false);
+				mainFrame.setBackground(new Color(0, 0, 0, 0));
+				mainFrame.setLayout(null);
+				frame.toBack();
+				frame.add(mainFrame);
+				frame.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mousePressed(MouseEvent e) {
+						isVisible = false;
+						setWindowsInvisible();
 
-		if(!Settings.windowedMode) {
-			frame.getRootPane().setOpaque(false);
-			frame.setBackground(new Color(0, 0, 0, 100));
-			frame.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mousePressed(MouseEvent e) {
-					isVisible = false;
-					setWindowsInvisible();
-
-				}
-			});
-		}
-		else{
-			frame.setBackground(new Color(0, 0, 0, 0));
-			frame.setVisible(false);
-			mainFrame.setVisible(false);
-		}
-		URL iconURL = Windowed.class.getResource("/Resources/Icons/windowIcon.png");
-		ImageIcon icon = new ImageIcon(iconURL);
-		Image newIcon = icon.getImage().getScaledInstance(120, 120,  Image.SCALE_SMOOTH);
-		frame.setIconImage(newIcon);
-		frame.setTitle("GDBoard - Settings");
-		frame.setBounds(Defaults.screenSize);
-		frame.setLayout(null);
-		mainFrame.setDoubleBuffered(true);
-		mainFrame.setBounds(0, 0, Defaults.screenSize.width, Defaults.screenSize.height);
-		mainFrame.setOpaque(false);
-		mainFrame.setBackground(new Color(0, 0, 0, 0));
-		mainFrame.setLayout(null);
-		frame.toBack();
-		frame.add(mainFrame);
-
-
+					}
+				});
 	}
-
+	public static void destroyOverlay(){
+		frame.setVisible(false);
+		MainBar.destroyBar();
+		mainFrame.removeAll();
+		frame.removeAll();
+		frame.dispose();
+		frame = new JDialog();
+	}
 	public static void addToFrame(JComponent component) {
 
 		// --------------------
@@ -77,7 +71,7 @@ public class Overlay {
 
 		// --------------------
 	}
-	static void removeFromFrame(JComponent component) {
+	public static void removeFromFrame(JComponent component) {
 
 		// --------------------
 		// Add components to JFrame from elsewhere
@@ -96,7 +90,7 @@ public class Overlay {
 		mainFrame.setLayer(component, 2);
 	}
 
-	static void setVisible() {
+	public static void setVisible() {
 		frame.setVisible(true);
 		frame.setAlwaysOnTop(true);
 	}
@@ -107,7 +101,7 @@ public class Overlay {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		if (Settings.windowedMode) {
+		if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			frame.getContentPane().setBackground(Defaults.SUB_MAIN);
 		} else {
 			mainFrame.setBounds(0, 0, Defaults.screenSize.width, Defaults.screenSize.height);
@@ -115,7 +109,7 @@ public class Overlay {
 			frame.invalidate();
 			frame.revalidate();
 		}
-		if(Settings.windowedMode) {
+		if(Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			Windowed.refreshUI();
 		}
 		else {

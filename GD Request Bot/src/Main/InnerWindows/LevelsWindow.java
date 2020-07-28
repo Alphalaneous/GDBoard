@@ -46,7 +46,7 @@ public class LevelsWindow {
 		scrollPane.getViewport().setBackground(Defaults.MAIN);
 		scrollPane.setBackground(Defaults.MAIN);
 
-		scrollPane.setBounds(5, 35, width, height);
+		scrollPane.setBounds(1, 31, width, height);
 		scrollPane.setPreferredSize(new Dimension(400, height));
 		scrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(30);
@@ -56,11 +56,22 @@ public class LevelsWindow {
 		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
 		window.add(scrollPane);
 		((InnerWindow) window).refreshListener();
-		if (!Settings.windowedMode) {
+		if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			Overlay.addToFrame(window);
 		}
 	}
-
+	public static void destroyPanel(){
+		try {
+			if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+				Windowed.removeFromFrame(scrollPane);
+			} else {
+				Overlay.removeFromFrame(window);
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+	}
 	public static void resizeButtons(int width, int height){
 		buttonWidth = width - 15;
 		Component[] comp = mainPanel.getComponents();
@@ -87,7 +98,7 @@ public class LevelsWindow {
 	}
 
 	public static void setName(int count) {
-		if (Settings.windowedMode) {
+		if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			//((InnerWindow) Windowed.window).setTitle("GDBoard - " + count);
 			Windowed.frame.setTitle("GDBoard - " + count);
 		} else {

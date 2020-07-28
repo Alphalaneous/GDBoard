@@ -88,7 +88,10 @@ public class Settings {
 	}
 
 	public static void writeSettings(String key, String setting) throws IOException {
+		in.close();
+		in = new FileInputStream(file);
 		gfg.load(in);
+
 		if (gfg.containsKey(key)) {
 			BufferedReader file = new BufferedReader(new FileReader(Defaults.saveDirectory + "\\GDBoard\\config.properties"));
 			StringBuilder inputBuffer = new StringBuilder();
@@ -112,8 +115,14 @@ public class Settings {
 
 	}
 
-	public static String getSettings(String key) throws IOException {
-		gfg.load(in);
+	public static String getSettings(String key) {
+		try {
+			in.close();
+			in = new FileInputStream(file);
+			gfg.load(in);
+		} catch (IOException e) {
+			return "";
+		}
 		if(gfg.containsKey(key)) {
 			return gfg.get(key).toString();
 		}
@@ -125,7 +134,7 @@ public class Settings {
 		GraphicsDevice[] screens = GraphicsEnvironment
 				.getLocalGraphicsEnvironment()
 				.getScreenDevices();
-
+		in = new FileInputStream(file);
 		gfg.load(in);
 		if(gfg.containsKey("oauth") ) {
 			oauth = gfg.get("oauth").toString();
@@ -159,7 +168,7 @@ public class Settings {
 				reqX = Boolean.parseBoolean(req.split(",")[3]);
 				requestsWLoc = new Point(x, y);
 				LevelsWindow.setPin(reqPin);
-				if (!Settings.windowedMode) {
+				if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 					LevelsWindow.setLocation(requestsWLoc);
 
 					if (!reqX) {
@@ -176,7 +185,7 @@ public class Settings {
 				actX = Boolean.parseBoolean(act.split(",")[3]);
 				actionsWLoc = new Point(x, y);
 				ActionsWindow.setPin(actPin);
-				if (!Settings.windowedMode) {
+				if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 					ActionsWindow.setLocation(actionsWLoc);
 
 					if (!actX) {
@@ -194,7 +203,7 @@ public class Settings {
 				comX = Boolean.parseBoolean(com.split(",")[3]);
 				commentWLoc = new Point(x, y);
 				CommentsWindow.setPin(comPin);
-				if (!Settings.windowedMode) {
+				if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 					CommentsWindow.setLocation(commentWLoc);
 
 					if (!comX) {
@@ -211,7 +220,7 @@ public class Settings {
 				infoX = Boolean.parseBoolean(info.split(",")[3]);
 				infoWLoc = new Point(x, y);
 				InfoWindow.setPin(infoPin);
-				if (!Settings.windowedMode) {
+				if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 					InfoWindow.setLocation(infoWLoc);
 
 					if (!infoX) {
@@ -228,7 +237,7 @@ public class Settings {
 				songX = Boolean.parseBoolean(song.split(",")[3]);
 				songWLoc = new Point(x, y);
 				SongWindow.setPin(songPin);
-				if (!Settings.windowedMode) {
+				if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 					SongWindow.setLocation(songWLoc);
 					if (!songX) {
 						SongWindow.toggleVisible();
@@ -249,7 +258,7 @@ public class Settings {
 				int y = Integer.parseInt(set.split(",")[1]);
 				settingsX = Boolean.parseBoolean(set.split(",")[2]);
 				settingsWLoc = new Point(x, y);
-				if (!Settings.windowedMode) {
+				if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 					//SettingsWindow.setLocation(settingsWLoc);
 					if (!settingsX) {
 						SettingsWindow.toggleVisible();
@@ -293,45 +302,45 @@ public class Settings {
 	//TODO Cheer Only Setting
 
     /*static void setWindowedMode(boolean mode) {
-        Settings.windowedMode = mode;
+        Settings.getSettings("windowed").equalsIgnoreCase("true") = mode;
     }*/
 
 	public static Point getRequestsWLoc() {
-		if (Settings.windowedMode) {
+		if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			requestsWLoc = new Point(0, 0);
 		}
 		return requestsWLoc;
 	}
 	static Point getSettingsWLoc() {
-		if (Settings.windowedMode) {
+		if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			settingsWLoc = new Point(0, 0);
 		}
 		return settingsWLoc;
 	}
 
 	public static Point getInfoWLoc() {
-		if (Settings.windowedMode) {
+		if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			infoWLoc = new Point(0, 402);
 		}
 		return infoWLoc;
 	}
 
 	public static Point getCommentWLoc() {
-		if (Settings.windowedMode) {
+		if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			commentWLoc = new Point(402, 98);
 		}
 		return commentWLoc;
 	}
 
 	public static Point getSongWLoc() {
-		if (Settings.windowedMode) {
+		if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			songWLoc = new Point(402, 422);
 		}
 		return songWLoc;
 	}
 
 	public static Point getActionsWLoc() {
-		if (Settings.windowedMode) {
+		if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			actionsWLoc = new Point(402, 20);
 		}
 		return actionsWLoc;

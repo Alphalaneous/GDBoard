@@ -27,7 +27,7 @@ public class SongWindow {
 	private static CurvedButton persist = new CurvedButton("Make music persist?");
 
 	public static void createPanel() {
-		panel.setBounds(5, 35, width, height);
+		panel.setBounds(1, 31, width, height);
 		panel.setBackground(Defaults.MAIN);
 		panel.setLayout(null);
 		final Thread[] thread = new Thread[1];
@@ -116,6 +116,16 @@ public class SongWindow {
 		Overlay.addToFrame(window);
 		refreshInfo();
 	}
+	public static void destroyPanel(){
+		try {
+			if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+				Overlay.removeFromFrame(window);
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+	}
 	public static void setPin(boolean pin){
 		((InnerWindow) window).setPin(pin);
 	}
@@ -137,7 +147,7 @@ public class SongWindow {
 		return "\uEC4F";
 	}
 	public static void refreshInfo() {
-		if(!Settings.windowedMode) {
+		if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			if (Requests.levels.size() == 0) {
 				songName.setText("N/A");
 				songAuthorID.setText("N/A");

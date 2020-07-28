@@ -41,7 +41,7 @@ public class Onboarding {
 		frame.getContentPane().setSize(width, 700 + 32);
 		frame.pack();
 
-		content.setBounds(5, 35, width - 2, height);
+		content.setBounds(1, 31, width - 2, height);
 		content.setBackground(Defaults.SUB_MAIN);
 		content.setLayout(null);
 
@@ -189,7 +189,7 @@ public class Onboarding {
 		JButton button = new RoundedJButton(icon, tooltip);
 		button.setPreferredSize(new Dimension(50, 50));
 		button.setUI(defaultUI);
-		if (!Settings.windowedMode) {
+		if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			button.setBackground(Defaults.BUTTON);
 		} else {
 			button.setBackground(Defaults.MAIN);

@@ -262,12 +262,8 @@ public class Defaults {
 								.getScreenDevices()[0].getDefaultConfiguration().getBounds();
 					}
 					if (!screenSize.equals(prevScreenSize)) {
-						try {
-							if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
-								Overlay.refreshUI(false);
-							}
-						} catch (IOException e) {
-							e.printStackTrace();
+						if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+							Overlay.refreshUI(false);
 						}
 					}
 					prevScreenSize = screenSize;

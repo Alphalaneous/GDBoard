@@ -21,7 +21,7 @@ public class ActionsWindow {
 	//region Create Panel
 	public static void createPanel() {
 		try {
-			mainPanel.setBounds(5, 35, width, height);
+			mainPanel.setBounds(1, 31, width, height);
 
 			mainPanel.setLayout(null);
 
@@ -111,6 +111,17 @@ public class ActionsWindow {
 			DialogBox.showDialogBox("Error!", e.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 		}
 	}
+	public static void destroyPanel(){
+		try {
+			if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+				Overlay.removeFromFrame(window);
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+
 	//endregion
 	public String getName(){
 		return "Actions";

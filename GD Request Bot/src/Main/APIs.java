@@ -145,12 +145,8 @@ public class APIs {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			try {
-				if (user.equalsIgnoreCase(Settings.getSettings("channel"))) {
-					return false;
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
+			if (user.equalsIgnoreCase(Settings.getSettings("channel"))) {
+				return false;
 			}
 			if (isFollowing != null) {
 				String str = isFollowing.get("total").toString();
@@ -302,6 +298,7 @@ public class APIs {
 		thread.start();
 	}
 	private static void setOauthPrivate(){
+		success.set(false);
 		try {
 			Twitch twitch = new Twitch();
 			URI callbackUri = new URI("http://127.0.0.1:23522");
@@ -314,19 +311,13 @@ public class APIs {
 			rt.exec("rundll32 url.dll,FileProtocolHandler " + authUrl);
 			if (twitch.auth().awaitAccessToken()) {
 				Settings.writeSettings("oauth", twitch.auth().getAccessToken());
-				Settings.writeSettings("channel", getChannel());
-
 				success.set(true);
-				try {
-					GDBoardBot.restart();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 			} else {
 				System.out.println(twitch.auth().getAuthenticationError());
 
 			}
-		} catch (Exception ignored) {
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

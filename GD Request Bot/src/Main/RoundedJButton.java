@@ -49,7 +49,7 @@ public class RoundedJButton extends JButton {
 					if(!exited[0]) {
 						tooltipPanel.setBackground(Defaults.TOP);
 						tooltipLabel.setForeground(Defaults.FOREGROUND);
-						if(Settings.windowedMode){
+						if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
 							if(asSettings){
 								tooltipPanel.setBounds(MouseInfo.getPointerInfo().getLocation().x - (tooltipLabel.getPreferredSize().width + 10)/2 - SettingsWindow.frame.getX(), MouseInfo.getPointerInfo().getLocation().y+20 - SettingsWindow.frame.getY(), tooltipLabel.getPreferredSize().width + 10, tooltipLabel.getPreferredSize().height + 5);
 								SettingsWindow.addToFrame(tooltipPanel);
@@ -90,7 +90,7 @@ public class RoundedJButton extends JButton {
 	public void setTooltip(String tooltip){
 		setToolTipText(tooltip);
 		/*tooltipLabel.setText(tooltip);
-		if(Settings.windowedMode){
+		if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
 			tooltipPanel.setBounds(tooltipPanel.getX(), tooltipPanel.getY(), tooltipLabel.getPreferredSize().width + 10, tooltipLabel.getPreferredSize().height + 5);
 		}
 		else{

@@ -20,7 +20,7 @@ public class InfoWindow {
 	private static JPanel fullPanel = new JPanel(null);
 
 	private static JTextPane description = new JTextPane();
-	private static JPanel window = new InnerWindow("Information", Settings.getInfoWLoc().x, Settings.getInfoWLoc().y, width, height, "\uE946", false).createPanel();
+	private static JPanel window = new InnerWindow("Description", Settings.getInfoWLoc().x, Settings.getInfoWLoc().y, width, height, "\uE946", false).createPanel();
 
 	public static void createPanel() {
 
@@ -48,14 +48,26 @@ public class InfoWindow {
 
 
 		descPanel.add(description);
-		fullPanel.setBounds(5,35,400,110);
+		fullPanel.setBounds(1,31,400,110);
 		fullPanel.add(descPanel);
 		window.add(fullPanel);
 		((InnerWindow)window).refreshListener();
-		if(!Settings.windowedMode) {
+		if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			Overlay.addToFrame(window);
 		}
 		refreshInfo();
+	}
+	public static void destroyPanel(){
+		try {
+			if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+				Windowed.removeFromFrame(fullPanel);
+			} else {
+				Overlay.removeFromFrame(window);
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 	public static void resetDimensions(int width, int height){
 		descPanel.setBounds(0,0, width, height);
@@ -81,7 +93,7 @@ public class InfoWindow {
 		description.setForeground(Defaults.FOREGROUND);
 	}
 	public String getName(){
-		return "Information";
+		return "Description";
 	}
 	public String getIcon(){
 		return "\uE946";

@@ -24,11 +24,7 @@ public class AccountSettings {
 		panel.setBackground(Defaults.SUB_MAIN);
 		panel.setLayout(null);
 
-		try {
-			channelText = new JLabel("Twitch: " + Settings.getSettings("channel"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		channelText = new JLabel("Twitch: " + Settings.getSettings("channel"));
 		geometryText = new JLabel("Geometry Dash: NA");
 		channelText.setForeground(Defaults.FOREGROUND);
 		channelText.setFont(Defaults.MAIN_FONT.deriveFont(14f));

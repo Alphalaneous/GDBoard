@@ -43,7 +43,7 @@ public class Windowed {
 		frame.setAlwaysOnTop(onTop);
 		frame.setFocusableWindowState(!onTop);
 	}
-	static void createPanel() {
+	public static void createPanel() {
 		if(WindowedSettings.onTopOption){
 			setOnTop(true);
 		}
@@ -100,12 +100,8 @@ public class Windowed {
 		content.setBounds(5,35,width-2, height);
 		content.setBackground(Defaults.SUB_MAIN);
 		content.setLayout(null);
-		try {
-			if(Settings.getSettings("window").equalsIgnoreCase("") && Settings.getSettings("windowed").equalsIgnoreCase("true")){
-				frame.setLocation((int)Defaults.screenSize.getWidth()/2 - width/2, 200);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(Settings.getSettings("window").equalsIgnoreCase("") && Settings.getSettings("windowed").equalsIgnoreCase("true")){
+			frame.setLocation((int)Defaults.screenSize.getWidth()/2 - width/2, 200);
 		}
 
 		LevelsWindow.getReqWindow().setBounds(0, 0, LevelsWindow.getReqWindow().getWidth(), LevelsWindow.getReqWindow().getHeight());
@@ -287,6 +283,10 @@ public class Windowed {
 		//mainFrame.add(window);
 		frame.getContentPane().add(content);
 	}
+	public static void destroyWindow(){
+		frame.setVisible(false);
+		frame.dispose();
+	}
 	static void refreshUI() {
 		selectUI.setBackground(Defaults.SELECT);
 		selectUI.setHover(Defaults.BUTTON_HOVER);
@@ -295,7 +295,7 @@ public class Windowed {
 		buttonPanel.setBackground(Defaults.SUB_MAIN);
 		for (Component component : buttonPanel.getComponents()) {
 			if (component instanceof JButton) {
-				if (!Settings.windowedMode) {
+				if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 					component.setBackground(Defaults.BUTTON);
 				} else {
 					component.setBackground(Defaults.MAIN);
@@ -305,7 +305,7 @@ public class Windowed {
 		}
 
 	}
-	static void resetCommentSize(){
+	public static void resetCommentSize(){
 		CommentsWindow.getComWindow().setBounds(400, 0, CommentsWindow.getComWindow().getWidth(), 600);
 
 	}
@@ -318,7 +318,7 @@ public class Windowed {
 
 		// --------------------
 	}
-	static void removeFromFrame(JComponent component) {
+	public static void removeFromFrame(JComponent component) {
 
 		// --------------------
 		// Add components to JFrame from elsewhere
@@ -327,20 +327,11 @@ public class Windowed {
 
 		// --------------------
 	}
-	static void toggleVisible() {
-
-		//((InnerWindow) window).toggle();
-	}
-
-	static void setVisible() {
-		//((InnerWindow) window).setVisible();
-
-	}
 	private static RoundedJButton createButton(String icon, String tooltip) {
 		RoundedJButton button = new RoundedJButton(icon, tooltip);
 		button.setPreferredSize(new Dimension(50, 50));
 		button.setUI(defaultUI);
-		if (!Settings.windowedMode) {
+		if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			button.setBackground(Defaults.BUTTON);
 		} else {
 			button.setBackground(Defaults.MAIN);
@@ -368,41 +359,25 @@ public class Windowed {
 
 	}
 	public static void loadSettings(){
-		try {
-			if(!Settings.getSettings("windowSize").equalsIgnoreCase("")){
-				String[] dim = Settings.getSettings("windowSize").split(",");
-				int newW = Integer.parseInt(dim[0]);
-				int newH = Integer.parseInt(dim[1]);
-				width = newW;
-				height = newH;
-				frame.setSize( newW, newH);
-				content.setBounds(0,0,newW-10, newH-38);
-				buttonPanel.setBounds(newW-68, 0, 50, frame.getHeight());
-				LevelsWindow.resizeButtons(newW-375, newH-152);
-				LevelsWindow.getReqWindow().setBounds(0, 0, newW-375, newH-152);
-				CommentsWindow.getComWindow().setBounds(newW-375, 0, CommentsWindow.getComWindow().getWidth(), newH+2);
-				CommentsWindow.resetDimensions(CommentsWindow.getComWindow().getWidth(), newH+2);
-				InfoWindow.resetDimensions(LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
-				InfoWindow.getInfoWindow().setBounds(0, LevelsWindow.getReqWindow().getHeight()+ 1, LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
-				refresh();
-			}
-			if(!Settings.getSettings("showMore").equalsIgnoreCase("")) {
-				if(!Settings.getSettings("showMore").equalsIgnoreCase("true")){
-					CommentsWindow.unloadComments(true);
-					((RoundedJButton) showComments).setTooltip("Show Comments");
-					showingMore = false;
-					CommentsWindow.getComWindow().setVisible(false);
-					LevelsWindow.resizeButtons(frame.getWidth()-75, frame.getHeight()-152);
-					LevelsWindow.getReqWindow().setBounds(0, 0, frame.getWidth()-75, frame.getHeight()-152);
-					InfoWindow.resetDimensions(LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
-					InfoWindow.getInfoWindow().setBounds(0, LevelsWindow.getReqWindow().getHeight()+ 1, LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
-					refresh();
-				}
-				else{
-					frame.setMinimumSize(new Dimension(765*Defaults.relativeWidth, 600*Defaults.relativeHeight));
-				}
-			}
-			else{
+		if(!Settings.getSettings("windowSize").equalsIgnoreCase("")){
+			String[] dim = Settings.getSettings("windowSize").split(",");
+			int newW = Integer.parseInt(dim[0]);
+			int newH = Integer.parseInt(dim[1]);
+			width = newW;
+			height = newH;
+			frame.setSize( newW, newH);
+			content.setBounds(0,0,newW-10, newH-38);
+			buttonPanel.setBounds(newW-68, 0, 50, frame.getHeight());
+			LevelsWindow.resizeButtons(newW-375, newH-152);
+			LevelsWindow.getReqWindow().setBounds(0, 0, newW-375, newH-152);
+			CommentsWindow.getComWindow().setBounds(newW-375, 0, CommentsWindow.getComWindow().getWidth(), newH+2);
+			CommentsWindow.resetDimensions(CommentsWindow.getComWindow().getWidth(), newH+2);
+			InfoWindow.resetDimensions(LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
+			InfoWindow.getInfoWindow().setBounds(0, LevelsWindow.getReqWindow().getHeight()+ 1, LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
+			refresh();
+		}
+		if(!Settings.getSettings("showMore").equalsIgnoreCase("")) {
+			if(!Settings.getSettings("showMore").equalsIgnoreCase("true")){
 				CommentsWindow.unloadComments(true);
 				((RoundedJButton) showComments).setTooltip("Show Comments");
 				showingMore = false;
@@ -413,8 +388,20 @@ public class Windowed {
 				InfoWindow.getInfoWindow().setBounds(0, LevelsWindow.getReqWindow().getHeight()+ 1, LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
 				refresh();
 			}
-			} catch (IOException e) {
-			e.printStackTrace();
+			else{
+				frame.setMinimumSize(new Dimension(765*Defaults.relativeWidth, 600*Defaults.relativeHeight));
+			}
+		}
+		else{
+			CommentsWindow.unloadComments(true);
+			((RoundedJButton) showComments).setTooltip("Show Comments");
+			showingMore = false;
+			CommentsWindow.getComWindow().setVisible(false);
+			LevelsWindow.resizeButtons(frame.getWidth()-75, frame.getHeight()-152);
+			LevelsWindow.getReqWindow().setBounds(0, 0, frame.getWidth()-75, frame.getHeight()-152);
+			InfoWindow.resetDimensions(LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
+			InfoWindow.getInfoWindow().setBounds(0, LevelsWindow.getReqWindow().getHeight()+ 1, LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
+			refresh();
 		}
 	}
 	//endregion

@@ -18,21 +18,8 @@ import static Main.Defaults.defaultUI;
 public class SettingsWindow {
 	private static int width = 622;
 	private static int height = 622;
-	public static JPanel window;
-	static{
-		try {
-			if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
-				window = new InnerWindow("Settings", 0, 0, width-2, height,
-						"\uE713", true).createPanel();
-			}
-			else{
-				window = new InnerWindow("Settings", 0, 0, width-2, height,
-						"\uE713", false).createPanel();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	public static JPanel window = new InnerWindow("Settings", 0, 0, width-2, height,
+			"\uE713", true).createPanel();
 
 	private static JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
 	private static JPanel content = new JPanel();
@@ -51,13 +38,23 @@ public class SettingsWindow {
 	private static JPanel blocked = BlockedSettings.createPanel();
 	private static JPanel blockedUsers = BlockedUserSettings.createPanel();
 	private static JPanel blockedCreators = BlockedCreatorSettings.createPanel();
-
 	private static JPanel loggedIDs = RequestsLog.createPanel();
+
 	public static JFrame frame = new JFrame();
 	public static JPanel windowed = WindowedSettings.createPanel();
 
 	public static boolean run = true;
-	static void createPanel() {
+	public static void createPanel() {
+		frame = new JFrame();
+		if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
+			window = new InnerWindow("Settings", 0, 0, width-2, height,
+					"\uE713", true).createPanel();
+		}
+		else{
+			window = new InnerWindow("Settings", 0, 0, width-2, height,
+					"\uE713", false).createPanel();
+		}
+
 		frame.setSize(800,800);
 		URL iconURL = Windowed.class.getResource("/Resources/Icons/windowIcon.png");
 		ImageIcon icon = new ImageIcon(iconURL);
@@ -71,24 +68,20 @@ public class SettingsWindow {
 				SettingsWindow.toggleVisible();
 			}
 		});
-		try {
-			if(Settings.getSettings("settings").equalsIgnoreCase("") && Settings.getSettings("windowed").equalsIgnoreCase("true")){
-				frame.setLocation((int)Defaults.screenSize.getWidth()/2 - width/2, 200);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(Settings.getSettings("settings").equalsIgnoreCase("") && Settings.getSettings("windowed").equalsIgnoreCase("true")){
+			frame.setLocation((int)Defaults.screenSize.getWidth()/2 - width/2, 200);
 		}
 		frame.setUndecorated(true);
 		frame.setSize(width + 200,height+32 + 200);
 		frame.setLayout(null);
 		frame.setBackground(new Color(255, 255, 255, 0));
-		blankSpace.setBounds(5, 35, 208, 20);
+		blankSpace.setBounds(1, 31, 208, 20);
 		blankSpace.setBackground(Defaults.MAIN);
 
-		buttons.setBounds(5, 55, 208, height-20);
+		buttons.setBounds(1, 51, 208, height-20);
 		buttons.setBackground(Defaults.MAIN);
 
-		content.setBounds(213, 35, 412, height);
+		content.setBounds(209, 31, 412, height);
 		content.setBackground(Defaults.SUB_MAIN);
 		content.setLayout(null);
 
@@ -154,7 +147,7 @@ public class SettingsWindow {
 		buttons.add(blockedUsers);
 		buttons.add(blockedCreators);
 		buttons.add(loggedIDs);
-		if(Settings.windowedMode){
+		if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
 			buttons.add(windowed);
 		}
 		toggleVisible();
@@ -163,11 +156,23 @@ public class SettingsWindow {
 		window.add(content);
 		((InnerWindow) window).setPinVisible();
 		((InnerWindow) window).refreshListener();
-		if(Settings.windowedMode){
+		if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
 			frame.add(window);
 		}
 		else {
 			Overlay.addToFrame(window);
+		}
+	}
+	public static void destroySettings(){
+		window.removeAll();
+		buttons.removeAll();
+		if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+			frame.setVisible(false);
+			frame.dispose();
+		}
+		else {
+			Overlay.removeFromFrame(window);
+			frame = new JFrame();
 		}
 	}
 	static void refreshUI() {
@@ -198,7 +203,7 @@ public class SettingsWindow {
 	}
 
 	static void toggleVisible() {
-
+		System.out.println("test");
 		((InnerWindow) window).toggle();
 	}
 
@@ -326,7 +331,7 @@ public class SettingsWindow {
 	}
 	//region SetLocation
 	static void setLocation(Point point){
-		if(Settings.windowedMode){
+		if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
 			frame.setLocation(point);
 		}
 		else {
@@ -336,7 +341,7 @@ public class SettingsWindow {
 	//endregion
 	//region SetSettings
 	public static void setSettings(){
-		if(Settings.windowedMode){
+		if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
 			Settings.setWindowSettings("Settings", frame.getX() + "," + frame.getY() + "," + false + "," + frame.isVisible());
 		}
 		else {

@@ -33,15 +33,11 @@ public class WindowedSettings {
 		return panel;
 	}
 	public static void loadSettings(){
-		try {
-			if(!Settings.getSettings("onTop").equalsIgnoreCase("")) {
-				onTopOption = Boolean.parseBoolean(Settings.getSettings("onTop"));
-				onTop.setChecked(onTopOption);
-				Windowed.setOnTop(onTopOption);
-				//((InnerWindow) Windowed.window).setMinimize(!onTopOption);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(!Settings.getSettings("onTop").equalsIgnoreCase("")) {
+			onTopOption = Boolean.parseBoolean(Settings.getSettings("onTop"));
+			onTop.setChecked(onTopOption);
+			Windowed.setOnTop(onTopOption);
+			//((InnerWindow) Windowed.window).setMinimize(!onTopOption);
 		}
 	}
 	public static void setSettings(){

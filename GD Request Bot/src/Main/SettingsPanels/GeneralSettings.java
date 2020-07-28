@@ -252,67 +252,62 @@ public class GeneralSettings {
 	}
 
 	public static void loadSettings(){
-		try {
-			followersOption = Boolean.parseBoolean(Settings.getSettings("followers"));
-			subsOption = Boolean.parseBoolean(Settings.getSettings("subscribers"));
-			nowPlayingOption = Boolean.parseBoolean(Settings.getSettings("disableNP"));
-			queueFullOption = Boolean.parseBoolean(Settings.getSettings("disableQF"));
+		followersOption = Boolean.parseBoolean(Settings.getSettings("followers"));
+		subsOption = Boolean.parseBoolean(Settings.getSettings("subscribers"));
+		nowPlayingOption = Boolean.parseBoolean(Settings.getSettings("disableNP"));
+		queueFullOption = Boolean.parseBoolean(Settings.getSettings("disableQF"));
 
-			repeatedOption = Boolean.parseBoolean(Settings.getSettings("repeatedRequests"));
-			repeatedOptionAll = Boolean.parseBoolean(Settings.getSettings("repeatedRequestsAll"));
-			lowCPUMode = Boolean.parseBoolean(Settings.getSettings("lowCPUMode"));
+		repeatedOption = Boolean.parseBoolean(Settings.getSettings("repeatedRequests"));
+		repeatedOptionAll = Boolean.parseBoolean(Settings.getSettings("repeatedRequestsAll"));
+		lowCPUMode = Boolean.parseBoolean(Settings.getSettings("lowCPUMode"));
 
 
-			autoDownloadOption = Boolean.parseBoolean(Settings.getSettings("autoDL"));
-			queueLimitBoolean = Boolean.parseBoolean(Settings.getSettings("queueLimitEnabled"));
-			if(!Settings.getSettings("queueLimit").equalsIgnoreCase("")) {
-				queueLimit = Integer.parseInt(Settings.getSettings("queueLimit"));
-				queueSizeInput.setText(String.valueOf(queueLimit));
-			}
-			userLimitOption = Boolean.parseBoolean(Settings.getSettings("userLimitEnabled"));
-			if(!Settings.getSettings("userLimit").equalsIgnoreCase("")) {
-				userLimit = Integer.parseInt(Settings.getSettings("userLimit"));
-				userLimitInput.setText(String.valueOf(userLimit));
-			}
-			userLimitStreamOption = Boolean.parseBoolean(Settings.getSettings("userLimitStreamEnabled"));
-			if(!Settings.getSettings("userLimitStream").equalsIgnoreCase("")) {
-				userLimitStream = Integer.parseInt(Settings.getSettings("userLimitStream"));
-				userLimitStreamInput.setText(String.valueOf(userLimitStream));
-			}
-			followers.setChecked(followersOption);
-			nowPlaying.setChecked(nowPlayingOption);
-			queueFull.setChecked(queueFullOption);
-
-			subOnly.setChecked(subsOption);
-			repeated.setChecked(repeatedOption);
-			repeatedAll.setChecked(repeatedOptionAll);
-			autoDownload.setChecked(autoDownloadOption);
-			queueLimitText.setChecked(queueLimitBoolean);
-			userLimitText.setChecked(userLimitOption);
-			userLimitStreamText.setChecked(userLimitStreamOption);
-			lowCPU.setChecked(lowCPUMode);
-
-			if(!queueLimitBoolean){
-				queueSizeInput.setEditable(false);
-			}
-			else{
-				queueSizeInput.setEditable(true);
-			}
-			if(!userLimitOption){
-				userLimitInput.setEditable(false);
-			}
-			else{
-				userLimitInput.setEditable(true);
-			}
-			if(!userLimitStreamOption){
-				userLimitStreamInput.setEditable(false);
-			}
-			else{
-				userLimitStreamInput.setEditable(true);
-			}
+		autoDownloadOption = Boolean.parseBoolean(Settings.getSettings("autoDL"));
+		queueLimitBoolean = Boolean.parseBoolean(Settings.getSettings("queueLimitEnabled"));
+		if(!Settings.getSettings("queueLimit").equalsIgnoreCase("")) {
+			queueLimit = Integer.parseInt(Settings.getSettings("queueLimit"));
+			queueSizeInput.setText(String.valueOf(queueLimit));
 		}
-		catch (IOException e){
-			DialogBox.showDialogBox("Error!", e.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
+		userLimitOption = Boolean.parseBoolean(Settings.getSettings("userLimitEnabled"));
+		if(!Settings.getSettings("userLimit").equalsIgnoreCase("")) {
+			userLimit = Integer.parseInt(Settings.getSettings("userLimit"));
+			userLimitInput.setText(String.valueOf(userLimit));
+		}
+		userLimitStreamOption = Boolean.parseBoolean(Settings.getSettings("userLimitStreamEnabled"));
+		if(!Settings.getSettings("userLimitStream").equalsIgnoreCase("")) {
+			userLimitStream = Integer.parseInt(Settings.getSettings("userLimitStream"));
+			userLimitStreamInput.setText(String.valueOf(userLimitStream));
+		}
+		followers.setChecked(followersOption);
+		nowPlaying.setChecked(nowPlayingOption);
+		queueFull.setChecked(queueFullOption);
+
+		subOnly.setChecked(subsOption);
+		repeated.setChecked(repeatedOption);
+		repeatedAll.setChecked(repeatedOptionAll);
+		autoDownload.setChecked(autoDownloadOption);
+		queueLimitText.setChecked(queueLimitBoolean);
+		userLimitText.setChecked(userLimitOption);
+		userLimitStreamText.setChecked(userLimitStreamOption);
+		lowCPU.setChecked(lowCPUMode);
+
+		if(!queueLimitBoolean){
+			queueSizeInput.setEditable(false);
+		}
+		else{
+			queueSizeInput.setEditable(true);
+		}
+		if(!userLimitOption){
+			userLimitInput.setEditable(false);
+		}
+		else{
+			userLimitInput.setEditable(true);
+		}
+		if(!userLimitStreamOption){
+			userLimitStreamInput.setEditable(false);
+		}
+		else{
+			userLimitStreamInput.setEditable(true);
 		}
 	}
 	public static void setSettings(){

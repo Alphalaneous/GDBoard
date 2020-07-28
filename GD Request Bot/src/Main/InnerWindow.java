@@ -45,7 +45,7 @@ public class InnerWindow extends ResizablePanel {
 		double x1;
 		double ratio = 1920 / Defaults.screenSize.getWidth();
 		this.title = title;
-		if(!Settings.windowedMode) {
+		if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			x1 = x / ratio;
 			y1 = y / ratio;
 			if (x + width >= Defaults.screenSize.getWidth() + 1) {
@@ -120,12 +120,12 @@ public class InnerWindow extends ResizablePanel {
 		final boolean[] exited = {false};
 		setBackground(new Color(0, 0, 0, 0));
 		setLayout(null);
-		if(!Settings.windowedMode) {
-			setBounds((int) x, (int) y, width+10, height + 40);
+		if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+			setBounds((int) x, (int) y, width+2, height + 32);
 		}
 		else {
 			if(floating) {
-				setBounds((int) x, (int) y, width+10, height + 40);
+				setBounds((int) x, (int) y, width+2, height + 32);
 			}
 			else {
 
@@ -139,66 +139,60 @@ public class InnerWindow extends ResizablePanel {
 		}
 		setOpaque(false);
 
-		setBorder(new CompoundBorder(
-				BorderFactory.createLineBorder(new Color(0,0,0,5),4),
-				BorderFactory.createLineBorder(alphaBorder,1)));
+		setBorder(BorderFactory.createLineBorder(alphaBorder,1));
 
 
 
 		//endregion
 
 		//region Mouse Relative to Window
-		try {
-			if(!Settings.getSettings("windowed").equalsIgnoreCase("true") && !floating) {
-				Thread threadPos = new Thread(() -> {
-					while (true) {
-						try {
-							Thread.sleep(100);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-						Point p = null;
-						try {
-							p = MouseInfo.getPointerInfo().getLocation();
-							SwingUtilities.convertPointFromScreen(p, topBar);
-						} catch (NullPointerException ignored) {
+		if(!Settings.getSettings("windowed").equalsIgnoreCase("true") && !floating) {
+			Thread threadPos = new Thread(() -> {
+				while (true) {
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					Point p = null;
+					try {
+						p = MouseInfo.getPointerInfo().getLocation();
+						SwingUtilities.convertPointFromScreen(p, topBar);
+					} catch (NullPointerException ignored) {
 
-						}
+					}
 
-						if (Overlay.isVisible && !isDragging[0]) {
-							assert p != null;
-							if (p.getY() <= 30 && p.getY() >= 27 && p.getX() >= 0 && p.getX() <= width) {
-								if (getY() <= -10) {
-									Thread thread = new Thread(() -> {
-										for (int j = 0; j < 15; j++) {
-											try {
-												Thread.sleep(1);
-											} catch (InterruptedException ex) {
-												ex.printStackTrace();
-											}
-											if (getY() >= -3 && getY() <= 0) {
-												break;
-											}
-											setLocation(getX(), getY() + 3);
-										}
-									});
-									thread.start();
-								}
-							}
-						}
-
+					if (Overlay.isVisible && !isDragging[0]) {
 						assert p != null;
-						if ((p.getX() >= width || p.getX() <= -1 || p.getY() <= -1 || p.getY() >= 30) && exited[0]) {
-							if (getY() <= 0) {
-								setLocation(getX(), -31);
+						if (p.getY() <= 30 && p.getY() >= 27 && p.getX() >= 0 && p.getX() <= width) {
+							if (getY() <= -10) {
+								Thread thread = new Thread(() -> {
+									for (int j = 0; j < 15; j++) {
+										try {
+											Thread.sleep(1);
+										} catch (InterruptedException ex) {
+											ex.printStackTrace();
+										}
+										if (getY() >= -3 && getY() <= 0) {
+											break;
+										}
+										setLocation(getX(), getY() + 3);
+									}
+								});
+								thread.start();
 							}
 						}
 					}
-				});
-				threadPos.start();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+
+					assert p != null;
+					if ((p.getX() >= width || p.getX() <= -1 || p.getY() <= -1 || p.getY() >= 30) && exited[0]) {
+						if (getY() <= 0) {
+							setLocation(getX(), -31);
+						}
+					}
+				}
+			});
+			threadPos.start();
 		}
 		//endregion
 
@@ -265,7 +259,7 @@ public class InnerWindow extends ResizablePanel {
 					setLocation(p);
 				}
 				else {
-					if(!Settings.windowedMode && !title.equalsIgnoreCase("Startup")) {
+					if(!Settings.getSettings("windowed").equalsIgnoreCase("true") && !title.equalsIgnoreCase("Startup")) {
 						if (x + width >= Defaults.screenSize.getWidth() + Defaults.screenSize.x + 1) {
 							p.setLocation(Defaults.screenSize.getWidth() + Defaults.screenSize.x + 1 - width, p.getY());
 						}
@@ -395,9 +389,6 @@ public class InnerWindow extends ResizablePanel {
 					if(title.equalsIgnoreCase("Settings")) {
 						SettingsWindow.toggleVisible();
 					}
-					if(title.startsWith("GDBoard")){
-						Windowed.toggleVisible();
-					}
 					if(title.equalsIgnoreCase("Startup")){
 						Onboarding.toggleVisible();
 					}
@@ -484,7 +475,7 @@ public class InnerWindow extends ResizablePanel {
 		});
 		//region TopBar attributes
 		topBar.setBackground(Defaults.TOP);
-		topBar.setBounds(5, 5, width, 30);
+		topBar.setBounds(1, 1, width, 30);
 
 		add(topBar);
 
@@ -560,9 +551,8 @@ public class InnerWindow extends ResizablePanel {
 		pinButtonFill.setForeground(Defaults.FOREGROUND);
 		minimizeButton.setForeground(Defaults.FOREGROUND);
 		alphaBorder = new Color(Defaults.ACCENT.getRed(), Defaults.ACCENT.getGreen(), Defaults.ACCENT.getBlue(), 100);
-		setBorder(new CompoundBorder(
-				BorderFactory.createLineBorder(new Color(0,0,0,5),4),
-				BorderFactory.createLineBorder(alphaBorder,1)));
+		setBorder(BorderFactory.createLineBorder(alphaBorder,1));
+
 
 		for (Component component : topBar.getComponents()) {
 			if (component instanceof JButton) {
@@ -572,7 +562,7 @@ public class InnerWindow extends ResizablePanel {
 				component.setForeground(Defaults.FOREGROUND);
 			}
 		}
-		if(!Settings.windowedMode) {
+		if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			double y1;
 			double x1;
 			double ratioX = 1920 / Defaults.screenSize.getWidth();
@@ -651,9 +641,8 @@ public class InnerWindow extends ResizablePanel {
 	//region Set InnerWindow visible
 	public void setVisible() {
 		topBar.setVisible(true);
-		setBorder(new CompoundBorder(
-				BorderFactory.createLineBorder(new Color(0,0,0,5),4),
-				BorderFactory.createLineBorder(alphaBorder,1)));
+		setBorder(BorderFactory.createLineBorder(alphaBorder,1));
+
 
 		if (toggleState) {
 			if(!floating) {
@@ -662,7 +651,7 @@ public class InnerWindow extends ResizablePanel {
 			}
 			else {
 				if(title.equalsIgnoreCase("Settings")) {
-					if(Settings.windowedMode){
+					if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
 						SettingsWindow.frame.setVisible(true);
 					}
 					else {
@@ -686,7 +675,7 @@ public class InnerWindow extends ResizablePanel {
 			}
 			else {
 				if(title.equalsIgnoreCase("Settings")) {
-					if(Settings.windowedMode){
+					if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
 						SettingsWindow.frame.setVisible(false);
 					}
 					else {
@@ -725,7 +714,7 @@ public class InnerWindow extends ResizablePanel {
 				}
 			}
 			if(title.equalsIgnoreCase("Settings")) {
-				if(Settings.windowedMode){
+				if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
 					SettingsWindow.frame.setVisible(false);
 				}
 				else {
@@ -748,7 +737,7 @@ public class InnerWindow extends ResizablePanel {
 				}
 			}
 			if(title.equalsIgnoreCase("Settings")) {
-				if(Settings.windowedMode){
+				if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
 					SettingsWindow.frame.setVisible(true);
 				}
 				else {

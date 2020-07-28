@@ -715,121 +715,117 @@ public class RequestSettings {
 	}
 
 	public static void loadSettings() {
-		try {
-			ratedOption = Boolean.parseBoolean(Settings.getSettings("rated"));
-			rated.setChecked(ratedOption);
-			unratedOption = Boolean.parseBoolean(Settings.getSettings("unrated"));
-			unrated.setChecked(unratedOption);
-			if(!Settings.getSettings("disableDifficulties").equalsIgnoreCase("")){
-				disableOption = Boolean.parseBoolean(Settings.getSettings("disableDifficulties"));
-			}
-			if(!Settings.getSettings("disableLengths").equalsIgnoreCase("")){
-				disableLengthOption = Boolean.parseBoolean(Settings.getSettings("disableLengths"));
-			}
-			disableDifficulties.setChecked(disableOption);
-			if(!Settings.getSettings("difficultyFilter").equalsIgnoreCase("")) {
-				excludedDifficulties = new ArrayList<>(Arrays.asList(Settings.getSettings("difficultyFilter").split(", ")));
-			}
-			if(!Settings.getSettings("lengthFilter").equalsIgnoreCase("")) {
-				excludedLengths = new ArrayList<>(Arrays.asList(Settings.getSettings("lengthFilter").split(", ")));
-			}
+		ratedOption = Boolean.parseBoolean(Settings.getSettings("rated"));
+		rated.setChecked(ratedOption);
+		unratedOption = Boolean.parseBoolean(Settings.getSettings("unrated"));
+		unrated.setChecked(unratedOption);
+		if(!Settings.getSettings("disableDifficulties").equalsIgnoreCase("")){
+			disableOption = Boolean.parseBoolean(Settings.getSettings("disableDifficulties"));
+		}
+		if(!Settings.getSettings("disableLengths").equalsIgnoreCase("")){
+			disableLengthOption = Boolean.parseBoolean(Settings.getSettings("disableLengths"));
+		}
+		disableDifficulties.setChecked(disableOption);
+		if(!Settings.getSettings("difficultyFilter").equalsIgnoreCase("")) {
+			excludedDifficulties = new ArrayList<>(Arrays.asList(Settings.getSettings("difficultyFilter").split(", ")));
+		}
+		if(!Settings.getSettings("lengthFilter").equalsIgnoreCase("")) {
+			excludedLengths = new ArrayList<>(Arrays.asList(Settings.getSettings("lengthFilter").split(", ")));
+		}
 
-			if(!Settings.getSettings("minLikesOption").equalsIgnoreCase("")) {
-				minLikesOption = Boolean.parseBoolean(Settings.getSettings("minLikesOption"));
-				minimumLikes.setChecked(minLikesOption);
-				minLikesInput.setEditable(minLikesOption);
-			}
-			if(!Settings.getSettings("maxLikesOption").equalsIgnoreCase("")) {
-				maxLikesOption = Boolean.parseBoolean(Settings.getSettings("maxLikesOption"));
-				maximumLikes.setChecked(maxLikesOption);
-				maxLikesInput.setEditable(maxLikesOption);
-			}
-			if(!Settings.getSettings("minObjectsOption").equalsIgnoreCase("")) {
-				minObjectsOption = Boolean.parseBoolean(Settings.getSettings("minObjectsOption"));
-				minimumObjects.setChecked(minObjectsOption);
-				minObjectsInput.setEditable(minObjectsOption);
-			}
-			if(!Settings.getSettings("maxObjectsOption").equalsIgnoreCase("")) {
-				maxObjectsOption = Boolean.parseBoolean(Settings.getSettings("maxObjectsOption"));
-				maximumObjects.setChecked(maxObjectsOption);
-				maxObjectsInput.setEditable(maxObjectsOption);
-			}
-			if(!Settings.getSettings("allowStrings").equalsIgnoreCase("")) {
-				allowOption = Boolean.parseBoolean(Settings.getSettings("allowStrings"));
-			}
-			if(!Settings.getSettings("disallowStrings").equalsIgnoreCase("")) {
-				disallowOption = Boolean.parseBoolean(Settings.getSettings("disallowStrings"));
-			}
-			if(excludedLengths.contains("tiny")){
-				tiny.setChecked(true);
-			}
-			if(excludedLengths.contains("short")){
-				shortL.setChecked(true);
-			}
-			if(excludedLengths.contains("medium")){
-				medium.setChecked(true);
-			}
-			if(excludedLengths.contains("long")){
-				longL.setChecked(true);
-			}
-			if(excludedLengths.contains("xl")){
-				XL.setChecked(true);
-			}
+		if(!Settings.getSettings("minLikesOption").equalsIgnoreCase("")) {
+			minLikesOption = Boolean.parseBoolean(Settings.getSettings("minLikesOption"));
+			minimumLikes.setChecked(minLikesOption);
+			minLikesInput.setEditable(minLikesOption);
+		}
+		if(!Settings.getSettings("maxLikesOption").equalsIgnoreCase("")) {
+			maxLikesOption = Boolean.parseBoolean(Settings.getSettings("maxLikesOption"));
+			maximumLikes.setChecked(maxLikesOption);
+			maxLikesInput.setEditable(maxLikesOption);
+		}
+		if(!Settings.getSettings("minObjectsOption").equalsIgnoreCase("")) {
+			minObjectsOption = Boolean.parseBoolean(Settings.getSettings("minObjectsOption"));
+			minimumObjects.setChecked(minObjectsOption);
+			minObjectsInput.setEditable(minObjectsOption);
+		}
+		if(!Settings.getSettings("maxObjectsOption").equalsIgnoreCase("")) {
+			maxObjectsOption = Boolean.parseBoolean(Settings.getSettings("maxObjectsOption"));
+			maximumObjects.setChecked(maxObjectsOption);
+			maxObjectsInput.setEditable(maxObjectsOption);
+		}
+		if(!Settings.getSettings("allowStrings").equalsIgnoreCase("")) {
+			allowOption = Boolean.parseBoolean(Settings.getSettings("allowStrings"));
+		}
+		if(!Settings.getSettings("disallowStrings").equalsIgnoreCase("")) {
+			disallowOption = Boolean.parseBoolean(Settings.getSettings("disallowStrings"));
+		}
+		if(excludedLengths.contains("tiny")){
+			tiny.setChecked(true);
+		}
+		if(excludedLengths.contains("short")){
+			shortL.setChecked(true);
+		}
+		if(excludedLengths.contains("medium")){
+			medium.setChecked(true);
+		}
+		if(excludedLengths.contains("long")){
+			longL.setChecked(true);
+		}
+		if(excludedLengths.contains("xl")){
+			XL.setChecked(true);
+		}
 
-			if(excludedDifficulties.contains("na")){
-				na.setChecked(true);
-			}
-			if(excludedDifficulties.contains("auto")){
-				auto.setChecked(true);
-			}
-			if(excludedDifficulties.contains("easy")){
-				easy.setChecked(true);
-			}
-			if(excludedDifficulties.contains("normal")){
-				normal.setChecked(true);
-			}
-			if(excludedDifficulties.contains("hard")){
-				hard.setChecked(true);
-			}
-			if(excludedDifficulties.contains("harder")){
-				harder.setChecked(true);
-			}
-			if(excludedDifficulties.contains("insane")){
-				insane.setChecked(true);
-			}
-			if(excludedDifficulties.contains("easy demon")){
-				easyDemon.setChecked(true);
-			}
-			if(excludedDifficulties.contains("medium demon")){
-				mediumDemon.setChecked(true);
-			}
-			if(excludedDifficulties.contains("hard demon")){
-				hardDemon.setChecked(true);
-			}
-			if(excludedDifficulties.contains("insane demon")){
-				insaneDemon.setChecked(true);
-			}
-			if(excludedDifficulties.contains("extreme demon")){
-				extremeDemon.setChecked(true);
-			}
-			if(!Settings.getSettings("minLikes").equalsIgnoreCase("")) {
-				minLikes = Integer.parseInt(Settings.getSettings("minLikes"));
-				minLikesInput.setText(String.valueOf(minLikes));
-			}
-			if(!Settings.getSettings("maxLikes").equalsIgnoreCase("")) {
-				maxLikes = Integer.parseInt(Settings.getSettings("maxLikes"));
-				maxLikesInput.setText(String.valueOf(maxLikes));
-			}
-			if(!Settings.getSettings("minObjects").equalsIgnoreCase("")) {
-				minObjects = Integer.parseInt(Settings.getSettings("minObjects"));
-				minObjectsInput.setText(String.valueOf(minObjects));
-			}
-			if(!Settings.getSettings("maxObjects").equalsIgnoreCase("")) {
-				maxObjects = Integer.parseInt(Settings.getSettings("maxObjects"));
-				maxObjectsInput.setText(String.valueOf(maxObjects));
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(excludedDifficulties.contains("na")){
+			na.setChecked(true);
+		}
+		if(excludedDifficulties.contains("auto")){
+			auto.setChecked(true);
+		}
+		if(excludedDifficulties.contains("easy")){
+			easy.setChecked(true);
+		}
+		if(excludedDifficulties.contains("normal")){
+			normal.setChecked(true);
+		}
+		if(excludedDifficulties.contains("hard")){
+			hard.setChecked(true);
+		}
+		if(excludedDifficulties.contains("harder")){
+			harder.setChecked(true);
+		}
+		if(excludedDifficulties.contains("insane")){
+			insane.setChecked(true);
+		}
+		if(excludedDifficulties.contains("easy demon")){
+			easyDemon.setChecked(true);
+		}
+		if(excludedDifficulties.contains("medium demon")){
+			mediumDemon.setChecked(true);
+		}
+		if(excludedDifficulties.contains("hard demon")){
+			hardDemon.setChecked(true);
+		}
+		if(excludedDifficulties.contains("insane demon")){
+			insaneDemon.setChecked(true);
+		}
+		if(excludedDifficulties.contains("extreme demon")){
+			extremeDemon.setChecked(true);
+		}
+		if(!Settings.getSettings("minLikes").equalsIgnoreCase("")) {
+			minLikes = Integer.parseInt(Settings.getSettings("minLikes"));
+			minLikesInput.setText(String.valueOf(minLikes));
+		}
+		if(!Settings.getSettings("maxLikes").equalsIgnoreCase("")) {
+			maxLikes = Integer.parseInt(Settings.getSettings("maxLikes"));
+			maxLikesInput.setText(String.valueOf(maxLikes));
+		}
+		if(!Settings.getSettings("minObjects").equalsIgnoreCase("")) {
+			minObjects = Integer.parseInt(Settings.getSettings("minObjects"));
+			minObjectsInput.setText(String.valueOf(minObjects));
+		}
+		if(!Settings.getSettings("maxObjects").equalsIgnoreCase("")) {
+			maxObjects = Integer.parseInt(Settings.getSettings("maxObjects"));
+			maxObjectsInput.setText(String.valueOf(maxObjects));
 		}
 	}
 

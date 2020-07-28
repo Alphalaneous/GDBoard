@@ -86,10 +86,11 @@ public class LoadGD {
 					isAuth = false;
 				}
 			} catch (Exception e) {
+				e.printStackTrace();
 				isAuth = false;
 			}
 		}
-		loaded = true;;
+		loaded = true;
 	}
 	private static String prettyFormat(String input) {
 		try {

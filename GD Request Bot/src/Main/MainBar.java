@@ -172,7 +172,12 @@ class MainBar {
 		mainPanel.add(icon);
 		Overlay.addToFrame(barPanel);
 	}
-
+	static void destroyBar(){
+		barPanel.removeAll();
+		mainPanel.removeAll();
+		subPanel.removeAll();
+		buttonPanel.removeAll();
+	}
 	static JPanel getMainBar() {
 		return barPanel;
 	}
