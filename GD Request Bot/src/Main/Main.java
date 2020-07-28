@@ -260,6 +260,17 @@ public class Main {
 					}
 
 					OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
+					new Thread(() -> {
+						String option = DialogBox.showDialogBox("Donate?", "<html>I'm currently getting food from the food bank and we possibly face eviction, even a dollar can help, thanks for understanding.</html>", "", new String[]{"Donate", "Cancel"});
+						if(option.equalsIgnoreCase("Donate")){
+							Runtime rt = Runtime.getRuntime();
+							try {
+								rt.exec("rundll32 url.dll,FileProtocolHandler https://paypal.me/xAlphalaneous");
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}
+						}
+					}).start();
 					break;
 				}
 				Thread.sleep(100);

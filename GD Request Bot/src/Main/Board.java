@@ -68,7 +68,9 @@ public class Board {
 	}
 
 	public static void showPopup(String title, String text){
-		DialogBox.showDialogBox(title,"<html>" + text.substring(1) + "</html>", "", new String[]{"OK"});
+		new Thread(() -> {
+			DialogBox.showDialogBox(title,"<html>" + text + "</html>", "", new String[]{"OK"});
+		}).start();
 	}
 
 	public static String getenv(String name){
