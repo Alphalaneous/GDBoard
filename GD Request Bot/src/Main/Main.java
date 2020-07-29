@@ -260,7 +260,7 @@ public class Main {
 					}
 
 					OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
-					new Thread(() -> {
+					/*new Thread(() -> {
 						String option = DialogBox.showDialogBox("Donate?", "<html>I'm currently getting food from the food bank and we possibly face eviction, even a dollar can help, thanks for understanding.</html>", "", new String[]{"Donate", "Cancel"});
 						if(option.equalsIgnoreCase("Donate")){
 							Runtime rt = Runtime.getRuntime();
@@ -270,7 +270,7 @@ public class Main {
 								e1.printStackTrace();
 							}
 						}
-					}).start();
+					}).start();*/
 					break;
 				}
 				Thread.sleep(100);
