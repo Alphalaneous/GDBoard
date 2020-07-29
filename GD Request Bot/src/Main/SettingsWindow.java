@@ -203,7 +203,6 @@ public class SettingsWindow {
 	}
 
 	static void toggleVisible() {
-		System.out.println("test");
 		((InnerWindow) window).toggle();
 	}
 
@@ -240,73 +239,75 @@ public class SettingsWindow {
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				((InnerWindow) window).moveToFront();
-				super.mousePressed(e);
-				for (Component component2 : button.getComponents()) {
-					if (component2 instanceof JLabel) {
-						for (Component componentA : content.getComponents()) {
-							if (componentA instanceof JPanel) {
-								componentA.setVisible(false);
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					((InnerWindow) window).moveToFront();
+					super.mousePressed(e);
+					for (Component component2 : button.getComponents()) {
+						if (component2 instanceof JLabel) {
+							for (Component componentA : content.getComponents()) {
+								if (componentA instanceof JPanel) {
+									componentA.setVisible(false);
+								}
 							}
+							switch (((JLabel) component2).getText()) {
+								case "General":
+									general.setVisible(true);
+									break;
+								case "Outputs":
+									overlay.setVisible(true);
+									break;
+								case "Accounts":
+									accounts.setVisible(true);
+									break;
+								case "Shortcuts":
+									shortcuts.setVisible(true);
+									break;
+								case "Personalization":
+									personalization.setVisible(true);
+									break;
+								case "Blocked IDs":
+									blocked.setVisible(true);
+									break;
+								case "Blocked Users":
+									blockedUsers.setVisible(true);
+									break;
+								case "Blocked Creators":
+									blockedCreators.setVisible(true);
+									break;
+								case "Commands":
+									commands.setVisible(true);
+									break;
+								case "Channel Points":
+									points.setVisible(true);
+									break;
+								case "Cheers":
+									cheers.setVisible(true);
+									break;
+								case "Requests":
+									requests.setVisible(true);
+									break;
+								case "Windowed":
+									windowed.setVisible(true);
+									break;
+								case "Logged IDs":
+									loggedIDs.setVisible(true);
+									break;
+							}
+							break;
 						}
-						switch (((JLabel) component2).getText()) {
-							case "General":
-								general.setVisible(true);
-								break;
-							case "Outputs":
-								overlay.setVisible(true);
-								break;
-							case "Accounts":
-								accounts.setVisible(true);
-								break;
-							case "Shortcuts":
-								shortcuts.setVisible(true);
-								break;
-							case "Personalization":
-								personalization.setVisible(true);
-								break;
-							case "Blocked IDs":
-								blocked.setVisible(true);
-								break;
-							case "Blocked Users":
-								blockedUsers.setVisible(true);
-								break;
-							case "Blocked Creators":
-								blockedCreators.setVisible(true);
-								break;
-							case "Commands":
-								commands.setVisible(true);
-								break;
-							case "Channel Points":
-								points.setVisible(true);
-								break;
-							case "Cheers":
-								cheers.setVisible(true);
-								break;
-							case "Requests":
-								requests.setVisible(true);
-								break;
-							case "Windowed":
-								windowed.setVisible(true);
-								break;
-							case "Logged IDs":
-								loggedIDs.setVisible(true);
-								break;
-						}
-						break;
 					}
-				}
-				for (Component component : buttons.getComponents()) {
-					if (component instanceof JButton) {
-						((JButton) component).setUI(defaultUI);
-						component.setBackground(Defaults.MAIN);
-						buttons.updateUI();
-						
-					}
-				}
+					for (Component component : buttons.getComponents()) {
+						if (component instanceof JButton) {
+							((JButton) component).setUI(defaultUI);
+							component.setBackground(Defaults.MAIN);
+							buttons.updateUI();
 
-				button.setUI(selectUI);
-				button.setBackground(Defaults.SELECT);
+						}
+					}
+
+					button.setUI(selectUI);
+					button.setBackground(Defaults.SELECT);
+				}
 			}
 		});
 		return button;

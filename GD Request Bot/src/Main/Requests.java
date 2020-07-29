@@ -70,6 +70,14 @@ public class Requests {
 						return;
 					}
 				}
+				if(ID < RequestSettings.minID && RequestSettings.minIDOption){
+					Main.sendMessage("@" + requester + " your ID must be above or equal to " + RequestSettings.minID + "!");
+					return;
+				}
+				if(ID > RequestSettings.maxID && RequestSettings.maxIDOption){
+					Main.sendMessage("@" + requester + " your ID must be below or equal to " + RequestSettings.maxID + "!");
+					return;
+				}
 				if (GeneralSettings.queueLimitBoolean && (levels.size() >= GeneralSettings.queueLimit)) {
 					if (!GeneralSettings.queueFullOption) {
 						Main.sendMessage("@" + requester + " The queue is full!");

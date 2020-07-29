@@ -64,9 +64,7 @@ public class Main {
 
 		try {
 
-			/**
-			 * Disables logging used with JDash
-			 */
+			/** Disables logging used with JDash */
 
 			Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
 			logger.setLevel(Level.OFF);
@@ -85,9 +83,7 @@ public class Main {
 				}
 			}).start();
 
-			/**
-			 * Sets loading bar progress on loading screen
-			 */
+			/** Sets loading bar progress on loading screen */
 			new Thread(() -> {
 				for(int i = 0; i < 90; i++){
 					if(finishedLoading){
@@ -102,9 +98,7 @@ public class Main {
 				}
 			}).start();
 
-			/**
-			 * Loads Geometry Dash data, if it fails to load and times out, continue anyways
-			 */
+			/** Loads Geometry Dash data, if it fails to load and times out, continue anyways */
 			new Thread(() -> {
 				try {
 					LoadGD.load();
@@ -126,9 +120,7 @@ public class Main {
 			}
 			Assets.loadAssets();
 
-			/**
-			 * Starts thread that always checks for changes such as time, resolution, and color scheme
-			 */
+			/** Starts thread that always checks for changes such as time, resolution, and color scheme */
 			Defaults.startMainThread();
 
 			/**
@@ -144,9 +136,7 @@ public class Main {
 			}
 			finishedLoading = true;
 
-			/**
-			 * Finishes Progress bar
-			 */
+			/** Finishes Progress bar */
 			new Thread(() -> {
 				for(int i = 90; i < 100; i++){
 					try {
@@ -177,20 +167,23 @@ public class Main {
 			while(true) {
 				if (!programStarting) {
 
-
-
 					Settings.loadSettings(true);
 					GDBoardBot.start();
 
+					/** Wait for GDBoard to connect before proceeding */
 					while(!GDBoardBot.connected){
 						Thread.sleep(10);
 					}
 
+					/** If there is no monitor setting, default to 0 */
 					if (!Settings.hasMonitor) {
 						Settings.writeSettings("monitor", "0");
 					}
-					Thread.sleep(1000);
 
+					/**
+					 * If not windowed mode, create all panels
+					 * Uses reflection to easily loop when more are added
+					 */
 					if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 						Overlay.createOverlay();
 						Reflections innerReflections = new Reflections("Main.InnerWindows", new SubTypesScanner(false));
@@ -201,31 +194,46 @@ public class Main {
 							method.invoke(null);
 						}
 					}
+					/** Else create these 3 for the windowed frame */
 					else{
 						CommentsWindow.createPanel();
 						LevelsWindow.createPanel();
 						InfoWindow.createPanel();
-					}
-					SettingsWindow.createPanel();
-					if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 						Windowed.createPanel();
 					}
+
+					/** Create the settings pane; */
+					SettingsWindow.createPanel();
+
+					/** Load GDBoard Settings */
 					Settings.loadSettings(false);
 
+					/**
+					 * Load Settings panels and Settings
+					 * Uses reflection to easily loop when more are added
+					 */
 					Reflections settingsReflections = new Reflections("Main.SettingsPanels", new SubTypesScanner(false));
 					Set<Class<?>> settingsClasses =
 							settingsReflections.getSubTypesOf(Object.class);
 					for (Class<?> Class : settingsClasses) {
-						try {
-							Method method = Class.getMethod("loadSettings");
-							method.invoke(null);
-						}
-						catch (NoSuchMethodException ignored){
+						for(Method method : Class.getMethods()){
+							if(method.getName().equalsIgnoreCase("loadSettings")){
+								method.invoke(null);
+							}
 						}
 					}
 
+					/**
+					 * Runs keyboard and Controller hook for global keybinds
+					 * Runs on separate Threads
+					 */
 					new Thread(() -> runKeyboardHook()).start();
-					ControllerListener.hook();
+					new Thread(() -> ControllerListener.hook());
+
+					/**
+					 * Reads chat as streamer, reduces load on servers for some actions
+					 * such as custom commands that don't use the normal prefix
+					 */
 					chatReader = new ChatReader();
 					new Thread(() -> {
 						chatReader.connect();
@@ -233,26 +241,27 @@ public class Main {
 						chatReader.start();
 					}).start();
 
+
+					/** Reads channel point redemptions for channel point triggers */
 					try {
 						channelPointListener = new ChannelPointListener(new URI("wss://pubsub-edge.twitch.tv"));
 						channelPointListener.connect();
 					} catch (URISyntaxException e) {
 						e.printStackTrace();
+						/** Should never fail */
 					}
-					System.out.println(LoadGD.username);
+
+					/** Refresh GD Username in Account Settings */
 					AccountSettings.refreshGD(LoadGD.username);
+
 
 					Overlay.refreshUI(true);
 					if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 						Windowed.resetCommentSize();
 						Windowed.loadSettings();
 						Windowed.frame.setVisible(true);
-
 						Windowed.frame.setAlwaysOnTop(true);
 						Windowed.frame.setAlwaysOnTop(false);
-
-						Windowed.frame.toFront();
-						Windowed.frame.requestFocus();
 						Windowed.refresh();
 
 					} else {
@@ -334,6 +343,16 @@ public class Main {
 
 	static {
 		channel = Channel.getChannel(Settings.getSettings("channel"), chatReader);
+	}
+
+	static void refreshChatReader(){
+		if(chatReader.isRunning()){
+			chatReader.stop();
+		}
+		chatReader = new ChatReader();
+		chatReader.connect();
+		chatReader.joinChannel(Settings.getSettings("channel"));
+		chatReader.start();
 	}
 
 	static void sendMainMessage(String message){

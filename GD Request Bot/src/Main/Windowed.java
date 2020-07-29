@@ -118,8 +118,10 @@ public class Windowed {
 		skip.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				//((InnerWindow) window).moveToFront();
-				Functions.skipFunction();
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					//((InnerWindow) window).moveToFront();
+					Functions.skipFunction();
+				}
 			}
 		});
 		buttonPanel.add(skip);
@@ -131,8 +133,10 @@ public class Windowed {
 		randNext.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				//((InnerWindow) window).moveToFront();
-				Functions.randomFunction();
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					//((InnerWindow) window).moveToFront();
+					Functions.randomFunction();
+				}
 
 			}
 		});
@@ -144,8 +148,10 @@ public class Windowed {
 		copy.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				//((InnerWindow) window).moveToFront();
-				Functions.copyFunction();
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					//((InnerWindow) window).moveToFront();
+					Functions.copyFunction();
+				}
 			}
 		});
 		buttonPanel.add(copy);
@@ -156,8 +162,10 @@ public class Windowed {
 		block.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				//((InnerWindow) window).moveToFront();
-				Functions.blockFunction();
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					//((InnerWindow) window).moveToFront();
+					Functions.blockFunction();
+				}
 			}
 		});
 		buttonPanel.add(block);
@@ -168,9 +176,11 @@ public class Windowed {
 		clear.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				SettingsWindow.run = false;
-				//((InnerWindow) window).moveToFront();
-				Functions.clearFunction();
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					SettingsWindow.run = false;
+					//((InnerWindow) window).moveToFront();
+					Functions.clearFunction();
+				}
 			}
 		});
 		buttonPanel.add(clear);
@@ -178,10 +188,12 @@ public class Windowed {
 		toggleRequests.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				SettingsWindow.run = false;
-				//((InnerWindow) window).moveToFront();
-				Functions.requestsToggleFunction();
-				toggleRequests.setText(MainBar.stopReqs.getText());
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					SettingsWindow.run = false;
+					//((InnerWindow) window).moveToFront();
+					Functions.requestsToggleFunction();
+					toggleRequests.setText(MainBar.stopReqs.getText());
+				}
 			}
 		});
 		buttonPanel.add(toggleRequests);
@@ -189,9 +201,11 @@ public class Windowed {
 		settings.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				SettingsWindow.run = false;
-				//((InnerWindow) window).moveToFront();
-				SettingsWindow.toggleVisible();
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					SettingsWindow.run = false;
+					//((InnerWindow) window).moveToFront();
+					SettingsWindow.toggleVisible();
+				}
 			}
 		});
 		buttonPanel.add(settings);
@@ -205,34 +219,35 @@ public class Windowed {
 		showComments.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				showingMore = !showingMore;
-				System.out.println(showingMore);
-				if(!showingMore){
-					CommentsWindow.unloadComments(true);
-					((RoundedJButton) showComments).setTooltip("Show Comments");
-					frame.setMinimumSize(new Dimension(465, 600));
-					CommentsWindow.getComWindow().setVisible(false);
-					LevelsWindow.resizeButtons(frame.getWidth()-75, frame.getHeight()-152);
-					LevelsWindow.getReqWindow().setBounds(0, 0, frame.getWidth()-75, frame.getHeight()-152);
-					InfoWindow.resetDimensions(LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
-					InfoWindow.getInfoWindow().setBounds(0, LevelsWindow.getReqWindow().getHeight()+ 1, LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
-					refresh();
-				}
-				else{
-					((RoundedJButton) showComments).setTooltip("Hide Comments");
-					if(frame.getWidth() < 765) {
-						frame.setSize(frame.getWidth()+300, frame.getHeight());
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					showingMore = !showingMore;
+					System.out.println(showingMore);
+					if (!showingMore) {
+						CommentsWindow.unloadComments(true);
+						((RoundedJButton) showComments).setTooltip("Show Comments");
+						frame.setMinimumSize(new Dimension(465, 600));
+						CommentsWindow.getComWindow().setVisible(false);
+						LevelsWindow.resizeButtons(frame.getWidth() - 75, frame.getHeight() - 152);
+						LevelsWindow.getReqWindow().setBounds(0, 0, frame.getWidth() - 75, frame.getHeight() - 152);
+						InfoWindow.resetDimensions(LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
+						InfoWindow.getInfoWindow().setBounds(0, LevelsWindow.getReqWindow().getHeight() + 1, LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
+						refresh();
+					} else {
+						((RoundedJButton) showComments).setTooltip("Hide Comments");
+						if (frame.getWidth() < 765) {
+							frame.setSize(frame.getWidth() + 300, frame.getHeight());
+						}
+						frame.setMinimumSize(new Dimension(765, 600));
+						CommentsWindow.loadComments(0, false);
+						CommentsWindow.getComWindow().setVisible(true);
+						CommentsWindow.getComWindow().setBounds(frame.getWidth() - 375, 0, CommentsWindow.getComWindow().getWidth(), frame.getHeight() + 2);
+						CommentsWindow.resetDimensions(CommentsWindow.getComWindow().getWidth(), frame.getHeight() + 2);
+						LevelsWindow.resizeButtons(frame.getWidth() - 375, frame.getHeight() - 152);
+						LevelsWindow.getReqWindow().setBounds(0, 0, frame.getWidth() - 375, frame.getHeight() - 152);
+						InfoWindow.resetDimensions(LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
+						InfoWindow.getInfoWindow().setBounds(0, LevelsWindow.getReqWindow().getHeight() + 1, LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
+						refresh();
 					}
-					frame.setMinimumSize(new Dimension(765, 600));
-					CommentsWindow.loadComments(0, false);
-					CommentsWindow.getComWindow().setVisible(true);
-					CommentsWindow.getComWindow().setBounds(frame.getWidth() - 375, 0, CommentsWindow.getComWindow().getWidth(), frame.getHeight() + 2);
-					CommentsWindow.resetDimensions(CommentsWindow.getComWindow().getWidth(), frame.getHeight() + 2);
-					LevelsWindow.resizeButtons(frame.getWidth()-375, frame.getHeight()-152);
-					LevelsWindow.getReqWindow().setBounds(0, 0, frame.getWidth()-375, frame.getHeight()-152);
-					InfoWindow.resetDimensions(LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
-					InfoWindow.getInfoWindow().setBounds(0, LevelsWindow.getReqWindow().getHeight()+ 1, LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
-					refresh();
 				}
 			}
 		});
@@ -243,12 +258,14 @@ public class Windowed {
 		donate.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-					try {
-						Runtime rt = Runtime.getRuntime();
-						rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://www.paypal.me/xAlphalaneous");
-					} catch (IOException ex) {
-						ex.printStackTrace();
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+						try {
+							Runtime rt = Runtime.getRuntime();
+							rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://www.paypal.me/xAlphalaneous");
+						} catch (IOException ex) {
+							ex.printStackTrace();
+						}
 					}
 				}
 			}
@@ -260,12 +277,14 @@ public class Windowed {
 		discord.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-					try {
-						Runtime rt = Runtime.getRuntime();
-						rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://discord.gg/x2awccH");
-					} catch (IOException ex) {
-						ex.printStackTrace();
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+						try {
+							Runtime rt = Runtime.getRuntime();
+							rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://discord.gg/x2awccH");
+						} catch (IOException ex) {
+							ex.printStackTrace();
+						}
 					}
 				}
 			}

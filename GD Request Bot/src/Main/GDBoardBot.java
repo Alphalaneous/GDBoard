@@ -169,7 +169,6 @@ class GDBoardBot {
 		thread.start();
 	}
 	static void sendMessage(String message){
-		System.out.println(message);
 		out.println(message);
 	}
 }
