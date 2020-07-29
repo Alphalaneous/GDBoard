@@ -20,7 +20,6 @@ public class Command {
         for(String msg : xArgs){
             message = message + " " + msg;
         }
-        message = message.substring(1);
         sandbox.inject("message", message);
 
         sandbox.allow(Requests.class);
