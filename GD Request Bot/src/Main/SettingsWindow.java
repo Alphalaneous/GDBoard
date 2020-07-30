@@ -8,8 +8,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Scanner;
 import javax.swing.*;
 import Main.SettingsPanels.*;
 
@@ -249,6 +252,7 @@ public class SettingsWindow {
 									componentA.setVisible(false);
 								}
 							}
+							RequestsLog.clear();
 							switch (((JLabel) component2).getText()) {
 								case "General":
 									general.setVisible(true);
@@ -291,6 +295,22 @@ public class SettingsWindow {
 									break;
 								case "Logged IDs":
 									loggedIDs.setVisible(true);
+									new Thread(() -> {
+										File file = new File(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
+										if (file.exists()) {
+											Scanner sc = null;
+											try {
+												sc = new Scanner(file);
+											} catch (FileNotFoundException f) {
+												f.printStackTrace();
+											}
+											assert sc != null;
+											while (sc.hasNextLine()) {
+												RequestsLog.addButton(Long.parseLong(sc.nextLine()));
+											}
+											sc.close();
+										}
+									}).start();
 									break;
 							}
 							break;

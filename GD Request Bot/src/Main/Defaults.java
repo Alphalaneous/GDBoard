@@ -196,6 +196,10 @@ public class Defaults {
 
 
 		Thread thread = new Thread(() -> {
+			RegistryKey personalize = new RegistryKey(
+					"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
+			RegistryKey systemColor = new RegistryKey(
+					"Software\\Microsoft\\Windows\\DWM");
 			while (true) {
 				try {
 					if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
@@ -219,11 +223,6 @@ public class Defaults {
 					}
 
 					if (os.contains("WIN")) {
-						RegistryKey personalize = new RegistryKey(
-								"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
-						RegistryKey systemColor = new RegistryKey(
-								"Software\\Microsoft\\Windows\\DWM");
-
 						int theme = 0;
 						Integer color;
 						try {

@@ -49,31 +49,15 @@ public class RequestsLog {
 		scrollPane.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
 
-		File file = new File(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
-		if (file.exists()) {
-			Scanner sc = null;
-			try {
-				sc = new Scanner(file);
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			assert sc != null;
-			while (sc.hasNextLine()) {
-				addButton(Long.parseLong(sc.nextLine()));
-				try {
-					Thread.sleep(5);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-			sc.close();
-		}
 		blockedSettingsPanel.setBounds(0, 0, 415, 622);
 		blockedSettingsPanel.add(scrollPane);
 		return blockedSettingsPanel;
 
 	}
-
+	public static void clear(){
+		blockedListPanel.removeAll();
+		height = 0;
+	}
 	private static void removeID(String ID) {
 		i--;
 		if (i % 4 == 0 && i !=0) {

@@ -481,7 +481,6 @@ public class Requests {
 							file,
 							(ID + "\n").getBytes(),
 							StandardOpenOption.APPEND);
-					RequestsLog.addButton(ID);
 
 				}
 			} catch (IOException e1) {
@@ -1207,10 +1206,8 @@ public class Requests {
 						BufferedReader br = new BufferedReader(isr);
 						String line;
 						try {
-							out:
-							while ((line = br.readLine()) != null) {
+							out: while ((line = br.readLine()) != null) {
 								String[] text1 = text.toUpperCase().split(" ");
-
 								for (String s : text1) {
 									if (s.equalsIgnoreCase(line)) {
 										Requests.levels.get(k).setContainsVulgar();
@@ -1272,7 +1269,7 @@ public class Requests {
 				}
 				catch (IndexOutOfBoundsException ignored){
 				}
-				break;
+				break all;
 			}
 		}
 		level = null;
