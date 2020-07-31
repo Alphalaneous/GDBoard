@@ -166,15 +166,12 @@ public class Requests {
 				userStreamLimitMap.put(requester, 1);
 			}
 
-			AuthenticatedGDClient client = null;
-			AnonymousGDClient clientAnon = null;
 			GDLevel level;
 			GDUser user = null;
 
 			if(LoadGD.isAuth) {
-				client = (AuthenticatedGDClient) LoadGD.client;
 				try {
-					level = client.getLevelById(ID).block();
+					level = LoadGD.authClient.getLevelById(ID).block();
 				} catch (MissingAccessException | NumberFormatException e) {
 					Main.sendMessage("@" + requester + " That level ID doesn't exist!");
 					return;
@@ -184,9 +181,8 @@ public class Requests {
 				}
 			}
 			else{
-				clientAnon = (AnonymousGDClient) LoadGD.client;
 				try {
-					level = clientAnon.getLevelById(ID).block();
+					level = LoadGD.anonClient.getLevelById(ID).block();
 				} catch (MissingAccessException | NumberFormatException e) {
 					Main.sendMessage("@" + requester + " That level ID doesn't exist!");
 					return;
@@ -309,10 +305,10 @@ public class Requests {
 			GDUserIconSet iconSet = null;
 			try {
 				if(LoadGD.isAuth) {
-					user = client.searchUser(levelData.getAuthor().toString()).block();
+					user = LoadGD.authClient.searchUser(levelData.getAuthor().toString()).block();
 				}
 				else {
-					user = clientAnon.searchUser(levelData.getAuthor().toString()).block();
+					user = LoadGD.anonClient.searchUser(levelData.getAuthor().toString()).block();
 				}
 
 				try {
@@ -322,7 +318,7 @@ public class Requests {
 				}
 			}
 			catch (MissingAccessException e){
-				user = client.searchUser("RobTop").block();
+				user = LoadGD.anonClient.searchUser("RobTop").block();
 				try {
 					iconSet = new GDUserIconSet(user, SpriteFactory.create());
 				} catch (SpriteLoadException e1) {
@@ -376,7 +372,7 @@ public class Requests {
 				}
 			}
 			if(LoadGD.isAuth) {
-				AuthenticatedGDClient finalClient = client;
+				AuthenticatedGDClient finalClient = LoadGD.authClient;
 				LevelData finalLevelData = levelData;
 				GDLevel finalLevel1 = level;
 				parse = new Thread(() -> {
@@ -400,7 +396,7 @@ public class Requests {
 				});
 			}
 			if(!LoadGD.isAuth){
-				AnonymousGDClient finalClient = clientAnon;
+				AnonymousGDClient finalClient = LoadGD.anonClient;
 				LevelData finalLevelData1 = levelData;
 				GDLevel finalLevel = level;
 				parse = new Thread(() -> {

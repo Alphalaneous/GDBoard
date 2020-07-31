@@ -1,6 +1,7 @@
 package Main;
 
 import Main.SettingsPanels.AccountSettings;
+import com.github.alex1304.jdash.client.AnonymousGDClient;
 import com.github.alex1304.jdash.client.AuthenticatedGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
 
@@ -22,7 +23,9 @@ public class LoadGD {
 
 	public static String username = "";
 	public static String password = "";
-	public static Object client = GDClientBuilder.create().buildAnonymous();;
+	public static AnonymousGDClient anonClient = GDClientBuilder.create().buildAnonymous();
+	public static AuthenticatedGDClient authClient;
+
 	public static boolean isAuth = false;
 	public static boolean timeout = false;
 	public static boolean loaded = false;
@@ -78,12 +81,8 @@ public class LoadGD {
 			}
 			try {
 				if (!timeout) {
-					client = GDClientBuilder.create().buildAuthenticated(new GDClientBuilder.Credentials(username, password)).block();
+					authClient = GDClientBuilder.create().buildAuthenticated(new GDClientBuilder.Credentials(username, password)).block();
 					isAuth = true;
-				}
-				else{
-					client = GDClientBuilder.create().buildAnonymous();
-					isAuth = false;
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

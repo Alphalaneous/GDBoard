@@ -15,20 +15,10 @@
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Defaults.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Defaults.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Requests.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Requests.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsPanels/RequestsLog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsPanels/RequestsLog$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsPanels/RequestsLog.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsPanels/RequestsLog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsWindow$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsWindow$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/board.exe" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/board.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Defaults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Defaults.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/LoadGD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/LoadGD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/Requests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Requests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/RequestsLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/RequestsLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/SettingsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsWindow.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -62,20 +52,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3642">
-              <caret line="230" column="43" selection-start-line="230" selection-start-column="43" selection-end-line="230" selection-end-column="43" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#setUI#0;class#Main#0" />
-                <element signature="method#createConfFiles#0;class#Main#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/.version">
           <provider selected="true" editor-type-id="text-editor">
@@ -86,13 +62,21 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/GDBoardBot.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/LoadGD.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1156">
-              <caret line="80" column="41" selection-start-line="80" selection-start-column="41" selection-end-line="80" selection-end-column="41" />
+            <state relative-caret-position="1143">
+              <caret line="85" column="17" selection-start-line="85" selection-start-column="17" selection-end-line="85" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="134">
+              <caret line="398" column="65" selection-start-line="398" selection-start-column="65" selection-end-line="398" selection-end-column="65" />
               <folding>
-                <element signature="e#5172#5173#0" expanded="true" />
-                <element signature="e#5199#5200#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -241,7 +225,6 @@
         <option value="$PROJECT_DIR$/src/Main/RoundedJButton.java" />
         <option value="$PROJECT_DIR$/src/Main/APIs.java" />
         <option value="$PROJECT_DIR$/src/Main/Onboarding.java" />
-        <option value="$PROJECT_DIR$/src/Main/LoadGD.java" />
         <option value="$PROJECT_DIR$/src/Main/Settings.java" />
         <option value="$PROJECT_DIR$/src/Main/Overlay.java" />
         <option value="$PROJECT_DIR$/src/Main/MainBar.java" />
@@ -259,8 +242,9 @@
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/RequestsLog.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsWindow.java" />
         <option value="$APPLICATION_CONFIG_DIR$/idea64.exe.vmoptions" />
-        <option value="$PROJECT_DIR$/src/Main/Requests.java" />
         <option value="$PROJECT_DIR$/src/Main/Defaults.java" />
+        <option value="$PROJECT_DIR$/src/Main/LoadGD.java" />
+        <option value="$PROJECT_DIR$/src/Main/Requests.java" />
         <option value="$PROJECT_DIR$/src/.version" />
       </list>
     </option>
@@ -296,38 +280,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="bin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="Main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Changed Files'; set:Changed Files; ALL; class com.intellij.packageDependencies.ChangeListScope">
           <expand>
@@ -400,6 +352,38 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="bin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="Main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -416,7 +400,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1596109872360" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1596109910373" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../GDBoard Dependencies/swingx-1.6.1.jar!/" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -588,7 +572,7 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info active="true" content_ui="combo" x="16" y="105" width="325" height="756" id="Project" order="6" sideWeight="0.29424307" side_tool="true" visible="true" weight="0.12739871" />
+      <window_info active="true" content_ui="combo" x="16" y="105" width="325" height="756" id="Project" order="6" sideWeight="0.29424307" side_tool="true" visible="true" weight="0.12846482" />
       <window_info anchor="bottom" id="JProfiler" order="0" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" sideWeight="0.4979424" weight="0.32502708" />
@@ -601,7 +585,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32990867" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.4043716" weight="0.18418202" />
       <window_info anchor="bottom" x="-37" y="178" width="1736" height="856" id="Byte Code Viewer" order="11" type="WINDOWED" />
-      <window_info anchor="bottom" id="Run" order="12" sideWeight="0.7057569" weight="0.23618636" />
+      <window_info anchor="bottom" id="Run" order="12" sideWeight="0.7057569" visible="true" weight="0.23618636" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
       <window_info anchor="right" id="Palette" order="2" />
@@ -861,13 +845,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/LoadGD.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1088">
-          <caret line="80" column="29" selection-start-line="80" selection-start-column="29" selection-end-line="80" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/AccountSettings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1020">
@@ -1068,12 +1045,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20689">
-          <caret line="1277" column="37" selection-start-line="1277" selection-start-column="37" selection-end-line="1277" selection-end-column="37" />
+        <state relative-caret-position="3468">
+          <caret line="230" column="43" selection-start-line="230" selection-start-column="43" selection-end-line="230" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#setUI#0;class#Main#0" />
+            <element signature="method#createConfFiles#0;class#Main#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/GDBoardBot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1156">
+          <caret line="80" column="41" selection-start-line="80" selection-start-column="41" selection-end-line="80" selection-end-column="41" />
+          <folding>
+            <element signature="e#5172#5173#0" expanded="true" />
+            <element signature="e#5199#5200#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1123,25 +1113,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/GDBoardBot.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/LoadGD.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1156">
-          <caret line="80" column="41" selection-start-line="80" selection-start-column="41" selection-end-line="80" selection-end-column="41" />
-          <folding>
-            <element signature="e#5172#5173#0" expanded="true" />
-            <element signature="e#5199#5200#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1143">
+          <caret line="85" column="17" selection-start-line="85" selection-start-column="17" selection-end-line="85" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3642">
-          <caret line="230" column="43" selection-start-line="230" selection-start-column="43" selection-end-line="230" selection-end-column="43" />
+        <state relative-caret-position="134">
+          <caret line="398" column="65" selection-start-line="398" selection-start-column="65" selection-end-line="398" selection-end-column="65" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#setUI#0;class#Main#0" />
-            <element signature="method#createConfFiles#0;class#Main#0" />
           </folding>
         </state>
       </provider>
