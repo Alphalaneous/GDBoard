@@ -42,6 +42,122 @@ public class Requests {
 	static ArrayList<Long> addedLevels = new ArrayList<Long>();
 	private static HashMap<String, Integer> userStreamLimitMap = new HashMap<>();
 
+	public static void forceAdd(String name, String author, long levelID, String difficulty, boolean epic, boolean featured, int stars, String requester, int gameVersion, int coins, String description, int likes, int downloads, String length, int levelVersion, int songID, String songName, String songAuthor, int objects, long original, boolean vulgar, boolean image){
+
+
+		LevelData levelData = new LevelData();
+		levelData.setName(name);
+		levelData.setAuthor(author);
+		levelData.setLevelID(levelID);
+		levelData.setDifficulty(difficulty);
+		levelData.setEpic(epic);
+		if(featured) {
+			levelData.setFeatured();
+		}
+		levelData.setStars(stars);
+		levelData.setRequester(requester);
+		levelData.setVersion(gameVersion);
+		levelData.setCoins(coins);
+		levelData.setDescription("");
+		levelData.setLikes(likes);
+		levelData.setDownloads(downloads);
+		levelData.setSongURL("");
+		levelData.setLength(length);
+		levelData.setLevelVersion(levelVersion);
+
+		levelData.setSongID(songID);
+		levelData.setSongName(songName);
+		levelData.setSongAuthor(songAuthor);
+		levelData.setObjects(objects);
+		levelData.setOriginal(original);
+		if(vulgar) {
+			levelData.setContainsVulgar();
+		}
+		if(image){
+			levelData.setContainsImage();
+		}
+
+		levels.add(levelData);
+		Thread parse = null;
+		if(LoadGD.isAuth) {
+			AuthenticatedGDClient finalClient = LoadGD.authClient;
+			parse = new Thread(() -> {
+				GDLevel level;
+
+				try {
+					level = LoadGD.authClient.getLevelById(levelID).block();
+				} catch (MissingAccessException | NumberFormatException e) {
+					Main.sendMessage("@" + requester + " That level ID doesn't exist!");
+					return;
+				} catch (Exception e) {
+					Main.sendMessage("@" + requester + " Level search failed... (Servers down?) " + e);
+					return;
+				}
+				Object object;
+				try {
+					object = Objects.requireNonNull(finalClient.getLevelById(levelID).block()).download().block();
+
+					if (!(stars > 0) && gameVersion / 10 >= 2) {
+						parse(((GDLevelData) Objects.requireNonNull(object)).getData(), levelID);
+					}
+					InfoWindow.refreshInfo();
+					object = null;
+				}
+				catch (Exception e){
+					LoadGD.isAuth = false;
+
+				}
+			});
+		}
+		if(!LoadGD.isAuth){
+			AnonymousGDClient finalClient = LoadGD.anonClient;
+			parse = new Thread(() -> {
+				GDLevel level;
+				try {
+					level = LoadGD.anonClient.getLevelById(levelID).block();
+				} catch (MissingAccessException | NumberFormatException e) {
+					Main.sendMessage("@" + requester + " That level ID doesn't exist!");
+					return;
+				} catch (Exception e) {
+					Main.sendMessage("@" + requester + " Level search failed... (Servers down?)");
+					return;
+				}
+				Object object = Objects.requireNonNull(finalClient.getLevelById(levelID).block()).download().block();
+				if (!(stars > 0) && gameVersion / 10 >= 2) {
+					parse(((GDLevelData) Objects.requireNonNull(object)).getData(), levelID);
+				}
+				InfoWindow.refreshInfo();
+
+				object = null;
+			});
+
+		}
+		parse.start();
+		if(Main.sendMessages) {
+			Main.sendMessage("@" + levelData.getRequester() + " " + levelData.getName() + " ("
+					+ levelData.getLevelID() + ") has been added to the queue at position " + levels.size() + "!");
+		}
+		if (levels.size() == 1) {
+			StringSelection selection = new StringSelection(String.valueOf(Requests.levels.get(0).getLevelID()));
+			Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+			clipboard.setContents(selection, selection);
+			if(Main.sendMessages) {
+				if (!GeneralSettings.nowPlayingOption) {
+					Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
+							+ Requests.levels.get(0).getLevelID() + "). Requested by "
+							+ Requests.levels.get(0).getRequester());
+				}
+			}
+		}
+
+		LevelsWindow.createButton(name, author, levelID, difficulty, epic, featured, stars, requester, gameVersion, null, coins);
+		LevelsWindow.setName(Requests.levels.size());
+		levelData.setAnalyzed();
+		LevelsWindow.updateUI(levelID, vulgar, image, true);
+		OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
+		Functions.saveFunction();
+	}
+
 	public static void addRequest(long ID, String requester) {
 		OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
 

@@ -15,9 +15,9 @@
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/board.exe" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/board.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/LoadGD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/LoadGD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/Functions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Functions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/Requests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Requests.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
@@ -62,19 +62,50 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/LoadGD.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1143">
-              <caret line="85" column="17" selection-start-line="85" selection-start-column="17" selection-end-line="85" selection-end-column="17" />
+            <state relative-caret-position="551">
+              <caret line="153" column="53" selection-start-line="153" selection-start-column="53" selection-end-line="153" selection-end-column="53" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#24455#24456#0" expanded="true" />
+                <element signature="e#24482#24483#0" expanded="true" />
+                <element signature="e#24540#24541#0" expanded="true" />
+                <element signature="e#24564#24565#0" expanded="true" />
+                <element signature="e#24859#24860#0" expanded="true" />
+                <element signature="e#24900#24901#0" expanded="true" />
+                <element signature="e#28122#28123#0" expanded="true" />
+                <element signature="e#28141#28142#0" expanded="true" />
+                <element signature="e#28203#28204#0" expanded="true" />
+                <element signature="e#28226#28227#0" expanded="true" />
+                <element signature="e#28322#28323#0" expanded="true" />
+                <element signature="e#28343#28344#0" expanded="true" />
+                <element signature="e#28402#28403#0" expanded="true" />
+                <element signature="e#28422#28423#0" expanded="true" />
+                <element signature="e#28485#28486#0" expanded="true" />
+                <element signature="e#28509#28510#0" expanded="true" />
+                <element signature="e#28568#28569#0" expanded="true" />
+                <element signature="e#28588#28589#0" expanded="true" />
+                <element signature="e#28651#28652#0" expanded="true" />
+                <element signature="e#28675#28676#0" expanded="true" />
+                <element signature="e#28741#28742#0" expanded="true" />
+                <element signature="e#28796#28797#0" expanded="true" />
+                <element signature="e#38440#38441#0" expanded="true" />
+                <element signature="e#38483#38484#0" expanded="true" />
+                <element signature="e#38550#38551#0" expanded="true" />
+                <element signature="e#38596#38597#0" expanded="true" />
+                <element signature="e#38631#38632#0" expanded="true" />
+                <element signature="e#38650#38651#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/Functions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="398" column="65" selection-start-line="398" selection-start-column="65" selection-end-line="398" selection-end-column="65" />
+            <state relative-caret-position="559">
+              <caret line="180" column="87" selection-start-line="180" selection-start-column="87" selection-end-line="180" selection-end-column="87" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -83,19 +114,24 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/ControllerListener.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="24" column="45" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="45" />
+            <state relative-caret-position="290">
+              <caret line="303" column="154" lean-forward="true" selection-start-line="303" selection-start-column="154" selection-end-line="303" selection-end-column="154" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#setUI#0;class#Main#0" />
+                <element signature="method#createConfFiles#0;class#Main#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/KeyListener.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/InnerWindows/InfoWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1496">
-              <caret line="93" column="86" selection-start-line="93" selection-start-column="86" selection-end-line="93" selection-end-column="86" />
+            <state relative-caret-position="219">
+              <caret line="86" selection-start-line="86" selection-end-line="86" />
             </state>
           </provider>
         </entry>
@@ -207,7 +243,6 @@
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/CheerSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/LevelData.java" />
         <option value="$PROJECT_DIR$/src/Main/FancyTooltip.java" />
-        <option value="$PROJECT_DIR$/src/Main/Functions.java" />
         <option value="$PROJECT_DIR$/src/Main/AlphaContainer.java" />
         <option value="$PROJECT_DIR$/src/Main/ServerChatBot.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/ShortcutSettings.java" />
@@ -235,7 +270,6 @@
         <option value="$PROJECT_DIR$/src/Main/Command.java" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/!popup.js" />
         <option value="$PROJECT_DIR$/src/Main/ControllerListener.java" />
-        <option value="$PROJECT_DIR$/src/Main/Main.java" />
         <option value="$PROJECT_DIR$/src/Main/GDBoardBot.java" />
         <option value="$PROJECT_DIR$/src/Main/Windowed.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/RequestSettings.java" />
@@ -244,6 +278,8 @@
         <option value="$APPLICATION_CONFIG_DIR$/idea64.exe.vmoptions" />
         <option value="$PROJECT_DIR$/src/Main/Defaults.java" />
         <option value="$PROJECT_DIR$/src/Main/LoadGD.java" />
+        <option value="$PROJECT_DIR$/src/Main/Functions.java" />
+        <option value="$PROJECT_DIR$/src/Main/Main.java" />
         <option value="$PROJECT_DIR$/src/Main/Requests.java" />
         <option value="$PROJECT_DIR$/src/.version" />
       </list>
@@ -572,7 +608,7 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info active="true" content_ui="combo" x="16" y="105" width="325" height="756" id="Project" order="6" sideWeight="0.29424307" side_tool="true" visible="true" weight="0.12846482" />
+      <window_info active="true" content_ui="combo" x="16" y="105" width="325" height="756" id="Project" order="6" sideWeight="0.29424307" side_tool="true" visible="true" weight="0.12953092" />
       <window_info anchor="bottom" id="JProfiler" order="0" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" sideWeight="0.4979424" weight="0.32502708" />
@@ -852,16 +888,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Functions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2312">
-          <caret line="153" column="23" selection-start-line="153" selection-start-column="23" selection-end-line="153" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/ChannelPointListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -881,13 +907,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/FloatingInnerWindow.java" />
-    <entry file="file://$PROJECT_DIR$/src/Main/InnerWindows/InfoWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
@@ -1038,25 +1057,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/LevelData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3468">
-          <caret line="230" column="43" selection-start-line="230" selection-start-column="43" selection-end-line="230" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#setUI#0;class#Main#0" />
-            <element signature="method#createConfFiles#0;class#Main#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/GDBoardBot.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1156">
@@ -1065,6 +1065,13 @@
             <element signature="e#5172#5173#0" expanded="true" />
             <element signature="e#5199#5200#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/LoadGD.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1156">
+          <caret line="85" column="17" selection-start-line="85" selection-start-column="17" selection-end-line="85" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -1113,19 +1120,82 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/LoadGD.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/LevelData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1143">
-          <caret line="85" column="17" selection-start-line="85" selection-start-column="17" selection-end-line="85" selection-end-column="17" />
+        <state relative-caret-position="299">
+          <caret line="272" column="16" selection-start-line="272" selection-start-column="16" selection-end-line="272" selection-end-column="16" />
+          <folding>
+            <element signature="e#5161#5162#0" expanded="true" />
+            <element signature="e#5188#5189#0" expanded="true" />
+            <element signature="e#5226#5227#0" expanded="true" />
+            <element signature="e#5249#5250#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/InnerWindows/InfoWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="86" selection-start-line="86" selection-end-line="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Functions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="559">
+          <caret line="180" column="87" selection-start-line="180" selection-start-column="87" selection-end-line="180" selection-end-column="87" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="303" column="154" lean-forward="true" selection-start-line="303" selection-start-column="154" selection-end-line="303" selection-end-column="154" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#setUI#0;class#Main#0" />
+            <element signature="method#createConfFiles#0;class#Main#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="398" column="65" selection-start-line="398" selection-start-column="65" selection-end-line="398" selection-end-column="65" />
+        <state relative-caret-position="551">
+          <caret line="153" column="53" selection-start-line="153" selection-start-column="53" selection-end-line="153" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#24455#24456#0" expanded="true" />
+            <element signature="e#24482#24483#0" expanded="true" />
+            <element signature="e#24540#24541#0" expanded="true" />
+            <element signature="e#24564#24565#0" expanded="true" />
+            <element signature="e#24859#24860#0" expanded="true" />
+            <element signature="e#24900#24901#0" expanded="true" />
+            <element signature="e#28122#28123#0" expanded="true" />
+            <element signature="e#28141#28142#0" expanded="true" />
+            <element signature="e#28203#28204#0" expanded="true" />
+            <element signature="e#28226#28227#0" expanded="true" />
+            <element signature="e#28322#28323#0" expanded="true" />
+            <element signature="e#28343#28344#0" expanded="true" />
+            <element signature="e#28402#28403#0" expanded="true" />
+            <element signature="e#28422#28423#0" expanded="true" />
+            <element signature="e#28485#28486#0" expanded="true" />
+            <element signature="e#28509#28510#0" expanded="true" />
+            <element signature="e#28568#28569#0" expanded="true" />
+            <element signature="e#28588#28589#0" expanded="true" />
+            <element signature="e#28651#28652#0" expanded="true" />
+            <element signature="e#28675#28676#0" expanded="true" />
+            <element signature="e#28741#28742#0" expanded="true" />
+            <element signature="e#28796#28797#0" expanded="true" />
+            <element signature="e#38440#38441#0" expanded="true" />
+            <element signature="e#38483#38484#0" expanded="true" />
+            <element signature="e#38550#38551#0" expanded="true" />
+            <element signature="e#38596#38597#0" expanded="true" />
+            <element signature="e#38631#38632#0" expanded="true" />
+            <element signature="e#38650#38651#0" expanded="true" />
           </folding>
         </state>
       </provider>

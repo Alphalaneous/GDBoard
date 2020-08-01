@@ -148,6 +148,8 @@ public class Functions {
 	}
 
 	public static void saveFunction() {
+		//public static void forceAdd(String name, String author, long levelID, String difficulty, boolean epic, boolean featured, int stars, String requester,
+		// int gameVersion, int coins, String description, int likes, int downloads, String length, int levelVersion, int songID, String songName, String songAuthor, int objects, long original){
 		try {
 			Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\saved.txt");
 			if (!Files.exists(file)) {
@@ -156,7 +158,30 @@ public class Functions {
 			FileWriter fooWriter = new FileWriter(file.toFile(), false);
 			StringBuilder message = new StringBuilder();
 			for (int i = 0; i < Requests.levels.size(); i++) {
-				message.append(Requests.levels.get(i).getLevelID()).append(",").append(Requests.levels.get(i).getRequester()).append("\n");
+				message.append(Requests.levels.get(i).getName())
+						.append(",").append(Requests.levels.get(i).getAuthor())
+						.append(",").append(Requests.levels.get(i).getLevelID())
+						.append(",").append(Requests.levels.get(i).getDifficulty())
+						.append(",").append(Requests.levels.get(i).getEpic())
+						.append(",").append(Requests.levels.get(i).getFeatured())
+						.append(",").append(Requests.levels.get(i).getStars())
+						.append(",").append(Requests.levels.get(i).getRequester())
+						.append(",").append(Requests.levels.get(i).getVersion())
+						.append(",").append(Requests.levels.get(i).getCoins())
+						.append(", ")
+						.append(",").append(Requests.levels.get(i).getLikes())
+						.append(",").append(Requests.levels.get(i).getDownloads())
+						.append(",").append(Requests.levels.get(i).getLength())
+						.append(",").append(Requests.levels.get(i).getLevelVersion())
+						.append(",").append(Requests.levels.get(i).getSongID())
+						.append(",").append(Requests.levels.get(i).getSongName())
+						.append(",").append(Requests.levels.get(i).getSongAuthor())
+						.append(",").append(Requests.levels.get(i).getObjects())
+						.append(",").append(Requests.levels.get(i).getOriginal())
+						.append(",").append(Requests.levels.get(i).getContainsVulgar())
+						.append(",").append(Requests.levels.get(i).getContainsImage())
+
+						.append("\n");
 			}
 			fooWriter.write(message.toString());
 			fooWriter.close();
