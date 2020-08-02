@@ -42,6 +42,9 @@ class GDBoardBot {
 			}
 			tries++;
 			wait = wait * 2;
+			if(Main.programLoaded){
+				wait = 2000;
+			}
 			start();
 			return;
 		}
@@ -145,6 +148,9 @@ class GDBoardBot {
 					}
 					tries++;
 					wait = wait*2;
+					if(Main.programLoaded){
+						wait = 2000;
+					}
 				}
 				try {
 					Thread.sleep(10);
@@ -165,6 +171,9 @@ class GDBoardBot {
 			}
 			tries++;
 			wait = wait*2;
+			if(Main.programLoaded){
+				wait = 2000;
+			}
 		});
 		thread.start();
 	}
