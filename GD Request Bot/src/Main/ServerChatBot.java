@@ -241,7 +241,6 @@ public class ServerChatBot {
                     }
                     boolean comExists = false;
 
-
                     Path comPath = Paths.get(Defaults.saveDirectory + "/GDBoard/commands/");
                     if (Files.exists(comPath)) {
                         Stream<Path> walk1 = Files.walk(comPath, 1);
@@ -249,7 +248,7 @@ public class ServerChatBot {
                             Path path = it.next();
                             String[] file = path.toString().split("\\\\");
                             String fileName = file[file.length - 1];
-                            if (fileName.equalsIgnoreCase(com + ".js") || fileName.equalsIgnoreCase(".js")) {
+                            if (fileName.equalsIgnoreCase(com + ".js")) {
                                 comExists = true;
                                 response = Command.run(user, isMod, isSub, arguments, Files.readString(path, StandardCharsets.UTF_8), cheer);
 
