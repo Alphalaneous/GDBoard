@@ -370,6 +370,7 @@ public class Windowed {
 	public static void setSettings(){
 		Settings.setWindowSettings("Window", frame.getX() + "," + frame.getY() + "," + false + "," + true);
 		try {
+			Settings.writeSettings("windowState", String.valueOf(frame.getExtendedState()));
 			Settings.writeSettings("windowSize", frame.getWidth() + "," + frame.getHeight());
 			Settings.writeSettings("showMore", String.valueOf(showingMore));
 		} catch (IOException e) {
@@ -378,7 +379,12 @@ public class Windowed {
 
 	}
 	public static void loadSettings(){
-		if(!Settings.getSettings("windowSize").equalsIgnoreCase("")){
+		if(!Settings.getSettings("windowState").equalsIgnoreCase("")){
+			int windowState = Integer.parseInt(Settings.getSettings("windowState"));
+			frame.setExtendedState(windowState);
+		}
+
+		else if(!Settings.getSettings("windowSize").equalsIgnoreCase("")){
 			String[] dim = Settings.getSettings("windowSize").split(",");
 			int newW = Integer.parseInt(dim[0]);
 			int newH = Integer.parseInt(dim[1]);

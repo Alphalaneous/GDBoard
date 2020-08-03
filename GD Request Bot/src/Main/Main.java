@@ -284,7 +284,7 @@ public class Main {
 				}
 				Thread.sleep(100);
 			}
-			File file = new File(Defaults.saveDirectory + "\\GDBoard\\saved.txt");
+			File file = new File(Defaults.saveDirectory + "\\GDBoard\\saved.txt"); //todo fix
 
 			if (file.exists()) {
 				Scanner sc = null;
@@ -294,15 +294,20 @@ public class Main {
 					e.printStackTrace();
 				}
 				assert sc != null;
+
+
 				while (sc.hasNextLine()) {
 					String[] level = sc.nextLine().split(",");
 					try {
 						Requests.forceAdd(level[0],level[1], Long.parseLong(level[2]), level[3], Boolean.parseBoolean(level[4]),
 								Boolean.parseBoolean(level[5]), Integer.parseInt(level[6]), level[7], Integer.parseInt(level[8]),
-								Integer.parseInt(level[9]), level[10], Integer.parseInt(level[11]), Integer.parseInt(level[12]),
-								level[13], Integer.parseInt(level[14]), Integer.parseInt(level[15]), level[16], level[17],
+								Integer.parseInt(level[9]), new String(Base64.getDecoder().decode(level[10])), Integer.parseInt(level[11]), Integer.parseInt(level[12]),
+								level[13], Integer.parseInt(level[14]), Integer.parseInt(level[15]),  new String(Base64.getDecoder().decode(level[16])), level[17],
 								Integer.parseInt(level[18]), Long.parseLong(level[19]), Boolean.parseBoolean(level[20]), Boolean.parseBoolean(level[21]));
 
+					}
+					catch (IndexOutOfBoundsException e){
+						e.printStackTrace();
 					}
 					catch (Exception e){
 						e.printStackTrace();
@@ -311,7 +316,8 @@ public class Main {
 				}
 				sc.close();
 			}
-			Requests.addedLevels.clear();
+
+			Functions.saveFunction();
 			LevelsWindow.setOneSelect();
 			APIs.getViewers();
 

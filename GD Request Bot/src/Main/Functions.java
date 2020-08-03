@@ -17,6 +17,7 @@ import java.io.BufferedInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.Base64;
 import java.util.Random;
 
 public class Functions {
@@ -168,13 +169,13 @@ public class Functions {
 						.append(",").append(Requests.levels.get(i).getRequester())
 						.append(",").append(Requests.levels.get(i).getVersion())
 						.append(",").append(Requests.levels.get(i).getCoins())
-						.append(", ")
+						.append(",").append(new String(Base64.getEncoder().encode(Requests.levels.get(i).getDescription().toString().getBytes())))
 						.append(",").append(Requests.levels.get(i).getLikes())
 						.append(",").append(Requests.levels.get(i).getDownloads())
 						.append(",").append(Requests.levels.get(i).getLength())
 						.append(",").append(Requests.levels.get(i).getLevelVersion())
 						.append(",").append(Requests.levels.get(i).getSongID())
-						.append(",").append(Requests.levels.get(i).getSongName())
+						.append(",").append(new String(Base64.getEncoder().encode(Requests.levels.get(i).getSongName().toString().getBytes())))
 						.append(",").append(Requests.levels.get(i).getSongAuthor())
 						.append(",").append(Requests.levels.get(i).getObjects())
 						.append(",").append(Requests.levels.get(i).getOriginal())

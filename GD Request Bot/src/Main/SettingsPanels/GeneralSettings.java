@@ -11,6 +11,7 @@ import java.io.*;
 import static Main.Defaults.settingsButtonUI;
 
 public class GeneralSettings {
+	public static boolean isChaos = false;
 	public static boolean lowCPUMode = false;
 	public static boolean followersOption = false;
 	public static boolean subsOption = false;
@@ -32,10 +33,12 @@ public class GeneralSettings {
 
 	private static CheckboxButton autoDownload = createButton("Automatic Song Downloads", 230);
 	private static CheckboxButton lowCPU = createButton("Low CPU Mode (Lowers Level Analysis Speed)", 260);
+	private static CheckboxButton chaos = createButton("Chaos Mode", 290);
 
-	private static CheckboxButton queueLimitText = createButton("Maximum Queue Size: ", 290);
-	private static CheckboxButton userLimitText = createButton("In Queue Request Limit: ", 365);
-	private static CheckboxButton userLimitStreamText = createButton("All Stream Request Limit: ", 440);
+
+	private static CheckboxButton queueLimitText = createButton("Maximum Queue Size: ", 320);
+	private static CheckboxButton userLimitText = createButton("In Queue Request Limit: ", 395);
+	private static CheckboxButton userLimitStreamText = createButton("All Stream Request Limit: ", 470);
 	private static JLabel donation = new JLabel();
 	private static CurvedButton donationButton = new CurvedButton("Donate");
 
@@ -132,6 +135,19 @@ public class GeneralSettings {
 				autoDownloadOption = autoDownload.getSelectedState();
 			}
 		});
+		lowCPU.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				lowCPUMode = lowCPU.getSelectedState();
+			}
+		});
+
+		chaos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				isChaos = chaos.getSelectedState();
+			}
+		});
 
 		queueLimitText.addMouseListener(new MouseAdapter() {
 			@Override
@@ -146,7 +162,7 @@ public class GeneralSettings {
 			}
 		});
 		queueSizeInput.setEditable(false);
-		queueSizeInput.setBounds(25,323,365, 32);
+		queueSizeInput.setBounds(25,353,365, 32);
 		queueSizeInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		queueSizeInput.addKeyListener(new KeyListener() {
 			@Override
@@ -179,7 +195,7 @@ public class GeneralSettings {
 		});
 
 		userLimitInput.setEditable(false);
-		userLimitInput.setBounds(25,395,365, 32);
+		userLimitInput.setBounds(25,425,365, 32);
 		userLimitInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		userLimitInput.addKeyListener(new KeyListener() {
 			@Override
@@ -212,7 +228,7 @@ public class GeneralSettings {
 		});
 
 		userLimitStreamInput.setEditable(false);
-		userLimitStreamInput.setBounds(25,470,365, 32);
+		userLimitStreamInput.setBounds(25,500,365, 32);
 		userLimitStreamInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		userLimitStreamInput.addKeyListener(new KeyListener() {
 			@Override
@@ -239,6 +255,7 @@ public class GeneralSettings {
 		panel.add(repeatedAll);
 		panel.add(autoDownload);
 		panel.add(lowCPU);
+		panel.add(chaos);
 		panel.add(versionLabel);
 		panel.add(queueLimitText);
 		panel.add(queueSizeInput);
@@ -260,6 +277,8 @@ public class GeneralSettings {
 		repeatedOption = Boolean.parseBoolean(Settings.getSettings("repeatedRequests"));
 		repeatedOptionAll = Boolean.parseBoolean(Settings.getSettings("repeatedRequestsAll"));
 		lowCPUMode = Boolean.parseBoolean(Settings.getSettings("lowCPUMode"));
+		isChaos = Boolean.parseBoolean(Settings.getSettings("isChaos"));
+
 
 
 		autoDownloadOption = Boolean.parseBoolean(Settings.getSettings("autoDL"));
@@ -290,6 +309,7 @@ public class GeneralSettings {
 		userLimitText.setChecked(userLimitOption);
 		userLimitStreamText.setChecked(userLimitStreamOption);
 		lowCPU.setChecked(lowCPUMode);
+		chaos.setChecked(isChaos);
 
 		if(!queueLimitBoolean){
 			queueSizeInput.setEditable(false);
@@ -326,6 +346,8 @@ public class GeneralSettings {
 			Settings.writeSettings("repeatedRequests", String.valueOf(repeatedOption));
 			Settings.writeSettings("repeatedRequestsAll", String.valueOf(repeatedOptionAll));
 			Settings.writeSettings("lowCPUMode", String.valueOf(lowCPUMode));
+			Settings.writeSettings("isChaos", String.valueOf(isChaos));
+
 
 
 		} catch (IOException e) {

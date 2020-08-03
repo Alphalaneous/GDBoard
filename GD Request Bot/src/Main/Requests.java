@@ -58,7 +58,7 @@ public class Requests {
 		levelData.setRequester(requester);
 		levelData.setVersion(gameVersion);
 		levelData.setCoins(coins);
-		levelData.setDescription("");
+		levelData.setDescription(description);
 		levelData.setLikes(likes);
 		levelData.setDownloads(downloads);
 		levelData.setSongURL("");
@@ -77,14 +77,13 @@ public class Requests {
 			levelData.setContainsImage();
 		}
 
-		levels.add(levelData);
 
 		LevelsWindow.createButton(name, author, levelID, difficulty, epic, featured, stars, requester, gameVersion, null, coins);
+		levels.add(levelData);
 		LevelsWindow.setName(Requests.levels.size());
 		levelData.setAnalyzed();
 		LevelsWindow.updateUI(levelID, vulgar, image, true);
 		OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
-		Functions.saveFunction();
 	}
 
 	public static void addRequest(long ID, String requester) {

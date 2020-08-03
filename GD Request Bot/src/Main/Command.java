@@ -1,5 +1,6 @@
 package Main;
 
+import Main.SettingsPanels.GeneralSettings;
 import delight.nashornsandbox.NashornSandbox;
 import delight.nashornsandbox.NashornSandboxes;
 
@@ -10,6 +11,8 @@ public class Command {
     private static NashornSandbox sandbox = NashornSandboxes.create();
     public static String run(String user, boolean isMod, boolean isSub, String[] args, String function, int cheer) {
         sandbox.inject("isMod", isMod);
+        sandbox.inject("isChaos", GeneralSettings.isChaos);
+
         sandbox.inject("isSub", isSub);
         sandbox.inject("user", user);
         sandbox.inject("args", args);

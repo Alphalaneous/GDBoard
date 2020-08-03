@@ -1,5 +1,5 @@
 function command(){
-	if(user === 'alphalaneous'){
+	if(user === 'alphalaneous' || (isMod && isChaos)){
 		GD.run(xArgs);
 	}
 }

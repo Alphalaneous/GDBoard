@@ -147,7 +147,7 @@ public class SongWindow {
 		return "\uEC4F";
 	}
 	public static void refreshInfo() {
-		if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+		if(Settings.getSettings("windowed").equalsIgnoreCase("false")) {
 			if (Requests.levels.size() == 0) {
 				songName.setText("N/A");
 				songAuthorID.setText("N/A");
