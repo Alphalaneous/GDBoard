@@ -167,6 +167,7 @@ public class DialogBox {
 				}
 			}
 			frame.setVisible(false);
+			frame.removeAll();
 			frame.dispose();
 			active = false;
 			setFocus = true;

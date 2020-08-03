@@ -637,6 +637,9 @@ public class LevelsWindow {
 					component.setForeground(Defaults.FOREGROUND);
 				}
 			}
+			moveDown.setForeground(Defaults.FOREGROUND);
+			moveUp.setForeground(Defaults.FOREGROUND);
+
 			analyzeButton.setForeground(Defaults.FOREGROUND);
 			lRequester.setForeground(Defaults.FOREGROUND2);
 			lAuthorID.setForeground(Defaults.FOREGROUND2);

@@ -37,12 +37,13 @@ import java.util.zip.GZIPInputStream;
 
 public class Requests {
 
-	private static String os = (System.getProperty("os.name")).toUpperCase();
 	public static ArrayList<LevelData> levels = new ArrayList<>();
 	static ArrayList<Long> addedLevels = new ArrayList<Long>();
+	static boolean bwomp = false;
+	private static String os = (System.getProperty("os.name")).toUpperCase();
 	private static HashMap<String, Integer> userStreamLimitMap = new HashMap<>();
 
-	public static void forceAdd(String name, String author, long levelID, String difficulty, boolean epic, boolean featured, int stars, String requester, int gameVersion, int coins, String description, int likes, int downloads, String length, int levelVersion, int songID, String songName, String songAuthor, int objects, long original, boolean vulgar, boolean image){
+	public static void forceAdd(String name, String author, long levelID, String difficulty, boolean epic, boolean featured, int stars, String requester, int gameVersion, int coins, String description, int likes, int downloads, String length, int levelVersion, int songID, String songName, String songAuthor, int objects, long original, boolean vulgar, boolean image) {
 
 
 		LevelData levelData = new LevelData();
@@ -51,7 +52,7 @@ public class Requests {
 		levelData.setLevelID(levelID);
 		levelData.setDifficulty(difficulty);
 		levelData.setEpic(epic);
-		if(featured) {
+		if (featured) {
 			levelData.setFeatured();
 		}
 		levelData.setStars(stars);
@@ -70,13 +71,12 @@ public class Requests {
 		levelData.setSongAuthor(songAuthor);
 		levelData.setObjects(objects);
 		levelData.setOriginal(original);
-		if(vulgar) {
+		if (vulgar) {
 			levelData.setContainsVulgar();
 		}
-		if(image){
+		if (image) {
 			levelData.setContainsImage();
 		}
-
 
 		LevelsWindow.createButton(name, author, levelID, difficulty, epic, featured, stars, requester, gameVersion, null, coins);
 		levels.add(levelData);
@@ -98,9 +98,9 @@ public class Requests {
 			Path allowed = Paths.get(Defaults.saveDirectory + "\\GDBoard\\allowedStrings.txt");
 
 
-			if(Main.programLoaded) {
-				if(GeneralSettings.followersOption){
-					if(APIs.isNotFollowing(requester.toString())) {
+			if (Main.programLoaded) {
+				if (GeneralSettings.followersOption) {
+					if (APIs.isNotFollowing(requester.toString())) {
 						Main.sendMessage("@" + requester + " Please follow to send levels!");
 						return;
 					}
@@ -114,11 +114,11 @@ public class Requests {
 						return;
 					}
 				}
-				if(ID < RequestSettings.minID && RequestSettings.minIDOption){
+				if (ID < RequestSettings.minID && RequestSettings.minIDOption) {
 					Main.sendMessage("@" + requester + " your ID must be above or equal to " + RequestSettings.minID + "!");
 					return;
 				}
-				if(ID > RequestSettings.maxID && RequestSettings.maxIDOption){
+				if (ID > RequestSettings.maxID && RequestSettings.maxIDOption) {
 					Main.sendMessage("@" + requester + " your ID must be below or equal to " + RequestSettings.maxID + "!");
 					return;
 				}
@@ -187,21 +187,21 @@ public class Requests {
 					sc.close();
 				}
 
-					if (Files.exists(blockedUser)) {
-						Scanner sc = null;
-						try {
-							sc = new Scanner(blockedUser.toFile());
-						} catch (FileNotFoundException e) {
-							e.printStackTrace();
-						}
-						while (sc.hasNextLine()) {
-							if (requester.toString().equalsIgnoreCase(sc.nextLine())) {
-								sc.close();
-								return;
-							}
-						}
-						sc.close();
+				if (Files.exists(blockedUser)) {
+					Scanner sc = null;
+					try {
+						sc = new Scanner(blockedUser.toFile());
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
 					}
+					while (sc.hasNextLine()) {
+						if (requester.toString().equalsIgnoreCase(sc.nextLine())) {
+							sc.close();
+							return;
+						}
+					}
+					sc.close();
+				}
 
 			}
 			if (userStreamLimitMap.containsKey(requester)) {
@@ -213,7 +213,7 @@ public class Requests {
 			GDLevel level;
 			GDUser user = null;
 
-			if(LoadGD.isAuth) {
+			if (LoadGD.isAuth) {
 				try {
 					level = LoadGD.authClient.getLevelById(ID).block();
 				} catch (MissingAccessException | NumberFormatException e) {
@@ -223,8 +223,7 @@ public class Requests {
 					Main.sendMessage("@" + requester + " Level search failed... (Servers down?) " + e);
 					return;
 				}
-			}
-			else{
+			} else {
 				try {
 					level = LoadGD.anonClient.getLevelById(ID).block();
 				} catch (MissingAccessException | NumberFormatException e) {
@@ -239,7 +238,7 @@ public class Requests {
 			LevelData levelData = new LevelData();
 			// --------------------
 			Thread parse = null;
-			if(Main.programLoaded) {
+			if (Main.programLoaded) {
 				if (level != null && Files.exists(blockedGDUser)) {
 					Scanner sc = null;
 					try {
@@ -272,7 +271,7 @@ public class Requests {
 								break;
 							}
 						}
-						if(!hasWord){
+						if (!hasWord) {
 							Main.sendMessage("@" + requester + " That level name isn't allowed!");
 							return;
 						}
@@ -306,15 +305,15 @@ public class Requests {
 					Main.sendMessage("@" + requester + " Please send unrated levels only!");
 					return;
 				}
-				if(level != null && RequestSettings.minObjectsOption && level.getObjectCount() < RequestSettings.minObjects){
+				if (level != null && RequestSettings.minObjectsOption && level.getObjectCount() < RequestSettings.minObjects) {
 					Main.sendMessage("@" + requester + " That level has too few objects!");
 					return;
 				}
-				if(level != null && RequestSettings.maxObjectsOption && level.getObjectCount() > RequestSettings.maxObjects){
+				if (level != null && RequestSettings.maxObjectsOption && level.getObjectCount() > RequestSettings.maxObjects) {
 					Main.sendMessage("@" + requester + " That level has too many objects!");
 					return;
 				}
-				if(level.getObjectCount() != 0) {
+				if (level.getObjectCount() != 0) {
 					if (level != null && RequestSettings.minLikesOption && level.getObjectCount() < RequestSettings.minLikes) {
 						Main.sendMessage("@" + requester + " That level has too few likes!");
 						return;
@@ -348,10 +347,9 @@ public class Requests {
 			levelData.setCoins(Objects.requireNonNull(level.getCoinCount()));
 			GDUserIconSet iconSet = null;
 			try {
-				if(LoadGD.isAuth) {
+				if (LoadGD.isAuth) {
 					user = LoadGD.authClient.searchUser(levelData.getAuthor().toString()).block();
-				}
-				else {
+				} else {
 					user = LoadGD.anonClient.searchUser(levelData.getAuthor().toString()).block();
 				}
 
@@ -360,8 +358,7 @@ public class Requests {
 				} catch (SpriteLoadException e) {
 					e.printStackTrace();
 				}
-			}
-			catch (MissingAccessException e){
+			} catch (MissingAccessException e) {
 				user = LoadGD.anonClient.searchUser("RobTop").block();
 				try {
 					iconSet = new GDUserIconSet(user, SpriteFactory.create());
@@ -396,7 +393,7 @@ public class Requests {
 					levelData.setDifficulty("extreme demon");
 				}
 			}
-			if(Main.programLoaded) {
+			if (Main.programLoaded) {
 				if (RequestSettings.excludedDifficulties.contains(levelData.getDifficulty().toString().toLowerCase()) && RequestSettings.disableOption) {
 					Main.sendMessage("@" + requester + " That difficulty is disabled!");
 					return;
@@ -410,12 +407,12 @@ public class Requests {
 			if (levelData.getDescription().toString().toLowerCase().contains("nong")) {
 				String[] words = levelData.getDescription().toString().split(" ");
 				for (String word : words) {
-					if (isValidURL(word)){
+					if (isValidURL(word)) {
 						levelData.setSongURL(word);
 					}
 				}
 			}
-			if(LoadGD.isAuth) {
+			if (LoadGD.isAuth) {
 				AuthenticatedGDClient finalClient = LoadGD.authClient;
 				LevelData finalLevelData = levelData;
 				GDLevel finalLevel1 = level;
@@ -424,22 +421,21 @@ public class Requests {
 					try {
 						object = Objects.requireNonNull(finalClient.getLevelById(ID).block()).download().block();
 
-					if (!(finalLevel1.getStars() > 0) && finalLevel1.getGameVersion() / 10 >= 2) {
-						parse(((GDLevelData) Objects.requireNonNull(object)).getData(), ID);
-					}
-					finalLevelData.setPassword(((GDLevelData) Objects.requireNonNull(object)).getPass());
-					finalLevelData.setUpload(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getUploadTimestamp()));
-					finalLevelData.setUpdate(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getLastUpdatedTimestamp()));
-					InfoWindow.refreshInfo();
-					object = null;
-					}
-					catch (Exception e){
+						if (!(finalLevel1.getStars() > 0) && finalLevel1.getGameVersion() / 10 >= 2) {
+							parse(((GDLevelData) Objects.requireNonNull(object)).getData(), ID);
+						}
+						finalLevelData.setPassword(((GDLevelData) Objects.requireNonNull(object)).getPass());
+						finalLevelData.setUpload(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getUploadTimestamp()));
+						finalLevelData.setUpdate(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getLastUpdatedTimestamp()));
+						InfoWindow.refreshInfo();
+						object = null;
+					} catch (Exception e) {
 						LoadGD.isAuth = false;
 
 					}
 				});
 			}
-			if(!LoadGD.isAuth){
+			if (!LoadGD.isAuth) {
 				AnonymousGDClient finalClient = LoadGD.anonClient;
 				LevelData finalLevelData1 = levelData;
 				GDLevel finalLevel = level;
@@ -459,7 +455,7 @@ public class Requests {
 			}
 			level = null;
 			parse.start();
-			if(os.contains("WIN")) {
+			if (os.contains("WIN")) {
 				if (GeneralSettings.autoDownloadOption) {
 					LevelData finalLevelData2 = levelData;
 					Thread songDL = new Thread(() -> {
@@ -479,7 +475,7 @@ public class Requests {
 
 			LevelsWindow.setName(Requests.levels.size());
 			Functions.saveFunction();
-			if(Main.sendMessages) {
+			if (Main.sendMessages) {
 				Main.sendMessage("@" + levelData.getRequester() + " " + levelData.getName() + " ("
 						+ levelData.getLevelID() + ") has been added to the queue at position " + levels.size() + "!");
 			}
@@ -487,7 +483,7 @@ public class Requests {
 				StringSelection selection = new StringSelection(String.valueOf(Requests.levels.get(0).getLevelID()));
 				Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 				clipboard.setContents(selection, selection);
-				if(Main.sendMessages) {
+				if (Main.sendMessages) {
 					if (!GeneralSettings.nowPlayingOption) {
 						Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
 								+ Requests.levels.get(0).getLevelID() + "). Requested by "
@@ -504,7 +500,7 @@ public class Requests {
 				if (!Files.exists(file)) {
 					Files.createFile(file);
 				}
-				if(Files.exists(logged)){
+				if (Files.exists(logged)) {
 					Scanner sc = new Scanner(logged.toFile());
 					while (sc.hasNextLine()) {
 						if (String.valueOf(ID).equals(sc.nextLine())) {
@@ -516,7 +512,7 @@ public class Requests {
 					}
 					sc.close();
 				}
-				if(!exists) {
+				if (!exists) {
 					Files.write(
 							file,
 							(ID + "\n").getBytes(),
@@ -539,7 +535,7 @@ public class Requests {
 
 		String result = "";
 		try {
-			switch(attribute){
+			switch (attribute) {
 				case "name":
 					result = levels.get(level).getName().toString();
 					break;
@@ -616,38 +612,38 @@ public class Requests {
 					result = levels.get(level).getUpdate().toString();
 					break;
 			}
-		}
-		catch (Exception e){
+		} catch (Exception e) {
 			result = "Exception: " + e.toString();
 		}
 		return result;
 	}
-	public static int getSize(){
+
+	public static int getSize() {
 		return levels.size();
 	}
 
 	@SuppressWarnings("unused")
-	public static void kill(){
+	public static void kill() {
 		GDMod.run("kill");
 	}
-	public static void crash(){
+
+	public static void crash() {
 		try {
 			ProcessBuilder pb = new ProcessBuilder("taskkill", "/IM", "GeometryDash.exe", "/F").redirectErrorStream(true);
 			pb.start();
 
-		}
-		catch (IOException e){
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	@SuppressWarnings("unused")
-	public static void toggleRequests(){
+	public static void toggleRequests() {
 		Functions.requestsToggleFunction();
 	}
 
 	@SuppressWarnings("unused")
-	public static void clear(){
+	public static void clear() {
 		for (int i = 0; i < Requests.levels.size(); i++) {
 			LevelsWindow.removeButton();
 		}
@@ -659,13 +655,14 @@ public class Requests {
 		CommentsWindow.unloadComments(true);
 		LevelsWindow.setName(Requests.levels.size());
 	}
-	public static String remove(String user, boolean isMod, int intArg){
+
+	public static String remove(String user, boolean isMod, int intArg) {
 		String response = "";
 		for (int i = 0; i < Requests.levels.size(); i++) {
 			try {
 				if (Requests.levels.get(i).getLevelID() == Requests.levels.get(intArg - 1).getLevelID()
 						&& (isMod || String.valueOf(user).equalsIgnoreCase(Requests.levels.get(i).getRequester().toString()))) {
-					response = "@" + user + ", " + Requests.levels.get(i).getName()+ " (" + Requests.levels.get(i).getLevelID() + ") has been removed!";
+					response = "@" + user + ", " + Requests.levels.get(i).getName() + " (" + Requests.levels.get(i).getLevelID() + ") has been removed!";
 					LevelsWindow.removeButton(i);
 					Requests.levels.remove(i);
 					Functions.saveFunction();
@@ -689,12 +686,13 @@ public class Requests {
 		LevelsWindow.setName(Requests.levels.size());
 		return response;
 	}
-	public static String removeLatest(String user){
+
+	public static String removeLatest(String user) {
 		String response = "";
-		for (int i = Requests.levels.size()-1; i >= 0; i--) {
+		for (int i = Requests.levels.size() - 1; i >= 0; i--) {
 			try {
 				if (String.valueOf(user).equalsIgnoreCase(Requests.levels.get(i).getRequester().toString())) {
-					response = "@" + user + ", " + Requests.levels.get(i).getName()+ " (" + Requests.levels.get(i).getLevelID() + ") has been removed!";
+					response = "@" + user + ", " + Requests.levels.get(i).getName() + " (" + Requests.levels.get(i).getLevelID() + ") has been removed!";
 					LevelsWindow.removeButton(i);
 					Requests.levels.remove(i);
 					Functions.saveFunction();
@@ -720,7 +718,7 @@ public class Requests {
 		return response;
 	}
 
-	public static long testForID(String message){
+	public static long testForID(String message) {
 		Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(message);
 		if (m.find()) {
 			try {
@@ -744,48 +742,47 @@ public class Requests {
 	}
 
 	@SuppressWarnings("unused")
-	public static void rick(){
+	public static void rick() {
 		Board.rick();
 	}
 
 	@SuppressWarnings("unused")
-	public static void stopRick(){
+	public static void stopRick() {
 		Board.stopRick();
 	}
-	static boolean bwomp = false;
 
 	@SuppressWarnings("unused")
-	public static void toggleBwomp(){
+	public static void toggleBwomp() {
 		bwomp = !bwomp;
 	}
 
 	@SuppressWarnings("unused")
-	public static void knock(){
+	public static void knock() {
 		Board.knock();
 	}
 
 	@SuppressWarnings("unused")
-	public static void stopKnock(){
+	public static void stopKnock() {
 		Board.stopKnock();
 	}
 
 	@SuppressWarnings("unused")
-	public static void bwomp(){
+	public static void bwomp() {
 		Board.bwomp();
 	}
 
 	@SuppressWarnings("unused")
-	public static void stopBwomp(){
+	public static void stopBwomp() {
 		Board.stopBwomp();
 	}
 
-	public static void movePosition(int position, int newPosition){
+	public static void movePosition(int position, int newPosition) {
 		LevelsWindow.movePosition(position, newPosition);
 	}
 
-	public static int getPosFromID(long ID){
-		for(int i = 0; i < LevelsWindow.getSize(); i++){
-			if(LevelsWindow.getButton(i).getID() == ID){
+	public static int getPosFromID(long ID) {
+		for (int i = 0; i < LevelsWindow.getSize(); i++) {
+			if (LevelsWindow.getButton(i).getID() == ID) {
 				return i;
 			}
 		}
@@ -793,20 +790,20 @@ public class Requests {
 	}
 
 	@SuppressWarnings("unused")
-	public static String block(String user, String[] arguments){
+	public static String block(String user, String[] arguments) {
 		String response;
 		try {
 			boolean start = false;
 			int blockedID = Integer.parseInt(arguments[1]);
-			if(blockedID == Requests.levels.get(0).getLevelID() && Requests.levels.size() > 1){
-					StringSelection selection = new StringSelection(
-							String.valueOf(Requests.levels.get(1).getLevelID()));
-					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-					clipboard.setContents(selection, selection);
-					start = true;
+			if (blockedID == Requests.levels.get(0).getLevelID() && Requests.levels.size() > 1) {
+				StringSelection selection = new StringSelection(
+						String.valueOf(Requests.levels.get(1).getLevelID()));
+				Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+				clipboard.setContents(selection, selection);
+				start = true;
 			}
-			for(int i = 0; i < Requests.levels.size(); i++){
-				if(Requests.levels.get(i).getLevelID() == blockedID){
+			for (int i = 0; i < Requests.levels.size(); i++) {
+				if (Requests.levels.get(i).getLevelID() == blockedID) {
 					LevelsWindow.removeButton(i);
 					Requests.levels.remove(i);
 					InfoWindow.refreshInfo();
@@ -839,7 +836,7 @@ public class Requests {
 			}
 			response = "@" + user + " Successfully blocked " + arguments[1];
 			BlockedSettings.addButton(Long.parseLong(arguments[1]));
-			if(start){
+			if (start) {
 				LevelsWindow.setOneSelect();
 			}
 		} catch (Exception e) {
@@ -850,7 +847,7 @@ public class Requests {
 	}
 
 	@SuppressWarnings("unused")
-	public static String unblock(String user, String[] arguments){
+	public static String unblock(String user, String[] arguments) {
 		String unblocked = arguments[1];
 		String response = "";
 		try {
@@ -891,7 +888,7 @@ public class Requests {
 	}
 
 	@SuppressWarnings("unused")
-	public static String blockUser(String user, String[] arguments){
+	public static String blockUser(String user, String[] arguments) {
 		String response;
 		try {
 			String blockedUser = arguments[1];
@@ -923,7 +920,7 @@ public class Requests {
 	}
 
 	@SuppressWarnings("unused")
-	public static String unblockUser(String user, String[] arguments){
+	public static String unblockUser(String user, String[] arguments) {
 		String response = "";
 		String unblocked = arguments[1];
 
@@ -965,7 +962,7 @@ public class Requests {
 
 	@SuppressWarnings("unused")
 
-	public static String getHelp(String command){
+	public static String getHelp(String command) {
 		String info = null;
 		boolean infoExists = false;
 		try {
@@ -998,18 +995,17 @@ public class Requests {
 				isr.close();
 				br.close();
 			}
-		}
-		catch (IOException e){
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if(info == null){
+		if (info == null) {
 			return "There is no info for this command!";
 		}
 		return info;
 	}
 
 	@SuppressWarnings("unused")
-	public static String getHelp(){
+	public static String getHelp() {
 		StringBuilder message = new StringBuilder();
 		try {
 			URI uri = Main.class.getResource("/Resources/Commands/").toURI();
@@ -1035,8 +1031,8 @@ public class Requests {
 					}
 					sc2.close();
 				}
-				if(fileName.endsWith(".js")) {
-					if(!disabledCommands.contains(new String(fileName.substring(0, fileName.length()-3)))) {
+				if (fileName.endsWith(".js")) {
+					if (!disabledCommands.contains(new String(fileName.substring(0, fileName.length() - 3)))) {
 						if (!fileName.equalsIgnoreCase("!rick.js") &&
 								!fileName.equalsIgnoreCase("!stoprick.js") &&
 								!fileName.equalsIgnoreCase("!kill.js") &&
@@ -1052,7 +1048,7 @@ public class Requests {
 				}
 			}
 			Path comPath = Paths.get(Defaults.saveDirectory + "/GDBoard/commands/");
-			if(Files.exists(comPath)) {
+			if (Files.exists(comPath)) {
 				Stream<Path> walk1 = Files.walk(comPath, 1);
 				for (Iterator<Path> it = walk1.iterator(); it.hasNext(); ) {
 					Path path = it.next();
@@ -1067,42 +1063,41 @@ public class Requests {
 						sc2.close();
 					}
 					String fileName = file[file.length - 1];
-					if(!disabledCommands.contains(new String(fileName.substring(0, fileName.length()-3)))) {
+					if (!disabledCommands.contains(new String(fileName.substring(0, fileName.length() - 3)))) {
 						if (fileName.endsWith(".js")) {
 							message.append(" | ").append(fileName, 0, fileName.length() - 3);
 						}
 					}
 				}
 			}
-		}
-		catch (IOException | URISyntaxException e){
+		} catch (IOException | URISyntaxException e) {
 			e.printStackTrace();
 		}
 		return message.toString();
 	}
 
 	@SuppressWarnings("unused")
-	public static String getOAuth(){
+	public static String getOAuth() {
 		return Settings.getSettings("oauth");
 	}
 
 	@SuppressWarnings("unused")
-	public static String getClientID(){
+	public static String getClientID() {
 		return "fzwze6vc6d2f7qodgkpq2w8nnsz3rl";
 	}
 
-	public static void endGDBoard(){
+	public static void endGDBoard() {
 		Main.close();
 	}
 
 	@SuppressWarnings("unused")
-	public static String request(String user, boolean isMod, boolean isSub, String[] arguments){
+	public static String request(String user, boolean isMod, boolean isSub, String[] arguments) {
 		String response = "";
 		Matcher m = null;
 		if (GeneralSettings.subsOption) {
 			if (!isSub) {
 				if (!isMod) {
-					return  "@" + user + " Please subscribe to request levels!";
+					return "@" + user + " Please subscribe to request levels!";
 				}
 			}
 		}
@@ -1156,11 +1151,11 @@ public class Requests {
 					AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
 					try {
 						Requests.addRequest(Objects.requireNonNull(client.searchLevels(message.toString(), LevelSearchFilters.create(), 0)
-												.block().asList().get(0).getId()),
+										.block().asList().get(0).getId()),
 								user);
 					} catch (MissingAccessException e) {
 						response = "@" + user + " That level doesn't exist!";
-					} catch (Exception e){
+					} catch (Exception e) {
 						response = "@" + user + " An unknown error occured";
 
 					}
@@ -1190,20 +1185,20 @@ public class Requests {
 				String[] values = decompressed.toString().split(";");
 				decompressed = null;
 				Requests.levels.get(k).setObjects(values.length);
-				if((values.length < RequestSettings.minObjects) && RequestSettings.minObjectsOption){
+				if ((values.length < RequestSettings.minObjects) && RequestSettings.minObjectsOption) {
 					Main.sendMessage("@" + Requests.levels.get(k).getRequester() + " Your level has been removed for containing too few objects!");
 					LevelsWindow.removeButton(k);
 					Requests.levels.remove(k);
 					return;
 				}
-				if((values.length > RequestSettings.maxObjects) && RequestSettings.maxObjectsOption){
+				if ((values.length > RequestSettings.maxObjects) && RequestSettings.maxObjectsOption) {
 					Main.sendMessage("@" + Requests.levels.get(k).getRequester() + " Your level has been removed for containing too many objects!");
 					LevelsWindow.removeButton(k);
 					Requests.levels.remove(k);
 					return;
 				}
 				for (String value1 : values) {
-					if(GeneralSettings.lowCPUMode) {
+					if (GeneralSettings.lowCPUMode) {
 						try {
 							Thread.sleep(50);
 						} catch (InterruptedException e) {
@@ -1246,7 +1241,8 @@ public class Requests {
 						BufferedReader br = new BufferedReader(isr);
 						String line;
 						try {
-							out: while ((line = br.readLine()) != null) {
+							out:
+							while ((line = br.readLine()) != null) {
 								String[] text1 = text.toUpperCase().split(" ");
 								for (String s : text1) {
 									if (s.equalsIgnoreCase(line)) {
@@ -1291,11 +1287,10 @@ public class Requests {
 						}
 					}
 					s.close();
-				}
-				catch (IOException e){
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				if(image) {
+				if (image) {
 					Requests.levels.get(k).setContainsImage();
 				}
 				try {
@@ -1306,8 +1301,7 @@ public class Requests {
 				try {
 					Requests.levels.get(k).setAnalyzed();
 					LevelsWindow.updateUI(Requests.levels.get(k).getLevelID(), Requests.levels.get(k).getContainsVulgar(), Requests.levels.get(k).getContainsImage(), true);
-				}
-				catch (IndexOutOfBoundsException ignored){
+				} catch (IndexOutOfBoundsException ignored) {
 				}
 				break all;
 			}

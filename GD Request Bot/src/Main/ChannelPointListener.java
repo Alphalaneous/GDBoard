@@ -53,13 +53,26 @@ public class ChannelPointListener extends WebSocketClient {
 
 	@Override
 	public void onOpen(ServerHandshake handshakedata) {
-		send("{\n" +
-				"  \"type\": \"LISTEN\",\n" +
-				"  \"data\": {\n" +
-				"    \"topics\": [\"channel-points-channel-v1." + APIs.getIDs(Settings.getSettings("channel")) + "\"],\n" +
-				"    \"auth_token\": \"" + Settings.getSettings("oauth") +  "\"\n" +
-				"  }\n" +
-				"}");
+		while(true) {
+			try {
+				send("{\n" +
+						"  \"type\": \"LISTEN\",\n" +
+						"  \"data\": {\n" +
+						"    \"topics\": [\"channel-points-channel-v1." + APIs.getIDs(Settings.getSettings("channel")) + "\"],\n" +
+						"    \"auth_token\": \"" + Settings.getSettings("oauth") + "\"\n" +
+						"  }\n" +
+						"}");
+				break;
+			}
+			catch (NullPointerException e){
+
+			}
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 		new Thread(() -> {
 			while(true){
 				send("{\n" +

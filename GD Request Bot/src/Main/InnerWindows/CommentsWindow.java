@@ -260,8 +260,9 @@ public class CommentsWindow {
 							@Override
 							public void mouseEntered(MouseEvent e) {
 								super.mouseEntered(e);
+								int center = (commenter.getPreferredSize().width)/2;
 								commenter.setFont(Defaults.MAIN_FONT.deriveFont(15f));
-								commenter.setBounds(28, 4, commenter.getPreferredSize().width + 5, 18);
+								commenter.setBounds(30 + center - (commenter.getPreferredSize().width)/2, 4, commenter.getPreferredSize().width + 5, 18);
 							}
 
 							@Override
