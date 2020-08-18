@@ -14,15 +14,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/APIs.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/APIs.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/APIs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/APIs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/CommandEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/CommandEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Onboarding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Onboarding.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Utilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Utilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/Windowed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Windowed.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -66,19 +63,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Twitch.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/Windowed.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+            <state relative-caret-position="67">
+              <caret line="743" column="27" selection-start-line="743" selection-start-column="27" selection-end-line="743" selection-end-column="27" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/GDBoardBot.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/DialogBox.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="665">
-              <caret line="92" selection-start-line="92" selection-end-line="92" />
+            <state relative-caret-position="305">
+              <caret line="114" column="44" selection-start-line="114" selection-start-column="44" selection-end-line="114" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -86,17 +83,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="353" column="27" selection-start-line="353" selection-start-column="27" selection-end-line="353" selection-end-column="27" />
+            <state relative-caret-position="114">
+              <caret line="48" column="36" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/APIs.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-5">
-              <caret line="369" column="36" selection-start-line="369" selection-start-column="36" selection-end-line="369" selection-end-column="36" />
+            <state relative-caret-position="410">
+              <caret line="179" column="31" selection-start-line="179" selection-start-column="31" selection-end-line="179" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -123,7 +120,7 @@
         <entry file="file://$PROJECT_DIR$/src/Main/Utilities.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="471">
-              <caret line="121" column="17" lean-forward="true" selection-start-line="119" selection-start-column="16" selection-end-line="121" selection-end-column="17" />
+              <caret line="121" column="17" selection-start-line="119" selection-start-column="16" selection-end-line="121" selection-end-column="17" />
               <folding>
                 <element signature="e#5360#5361#0" expanded="true" />
                 <element signature="e#5392#5393#0" expanded="true" />
@@ -145,7 +142,7 @@
         <entry file="file://$PROJECT_DIR$/src/Main/CommandEditor.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1517">
-              <caret line="411" column="103" lean-forward="true" selection-start-line="411" selection-start-column="103" selection-end-line="411" selection-end-column="103" />
+              <caret line="411" column="103" selection-start-line="411" selection-start-column="103" selection-end-line="411" selection-end-column="103" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -215,7 +212,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Main/LangLabel.java" />
         <option value="$PROJECT_DIR$/src/Main/FancyTooltip.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedCreatorSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/InnerWindows/CommentsWindow.java" />
@@ -257,7 +253,6 @@
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/AccountSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/LoadGD.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsWindow.java" />
-        <option value="$PROJECT_DIR$/src/Main/Windowed.java" />
         <option value="$PROJECT_DIR$/src/Main/GDBoardBot.java" />
         <option value="$PROJECT_DIR$/src/Main/Settings.java" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/b!addpoint.js" />
@@ -265,6 +260,8 @@
         <option value="$PROJECT_DIR$/src/Main/Onboarding.java" />
         <option value="$PROJECT_DIR$/src/Main/Utilities.java" />
         <option value="$PROJECT_DIR$/src/Main/CommandEditor.java" />
+        <option value="$PROJECT_DIR$/src/Main/Windowed.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java" />
         <option value="$PROJECT_DIR$/src/.version" />
       </list>
     </option>
@@ -648,9 +645,9 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5601093" side_tool="true" weight="0.19068256" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32936078" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32990867" />
-      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.4043716" visible="true" weight="0.17768148" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.4043716" weight="0.17768148" />
       <window_info anchor="bottom" x="-37" y="178" width="1736" height="856" id="Byte Code Viewer" order="11" type="WINDOWED" />
-      <window_info anchor="bottom" id="Run" order="12" sideWeight="0.7057569" weight="0.30119178" />
+      <window_info anchor="bottom" id="Run" order="12" sideWeight="0.7057569" visible="true" weight="0.30119178" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
       <window_info anchor="right" id="Palette" order="2" />
@@ -825,23 +822,11 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/jnafilechooser-master/README.md" />
     <entry file="file://$PROJECT_DIR$/src/jnafilechooser-master/api/src/main/java/jnafilechooser/api/JnaFileChooser.java" />
     <entry file="jar://$PROJECT_DIR$/../../../Code Stuff/Java Libraries/javafx-sdk-11.0.2/lib/javafx.graphics.jar!/javafx/stage/FileChooser.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="100" column="16" selection-start-line="100" selection-start-column="16" selection-end-line="100" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/DialogBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="114" column="44" selection-start-line="114" selection-start-column="44" selection-end-line="114" selection-end-column="44" />
-          <folding>
-            <element signature="e#4268#4403#0" expanded="true" />
-            <element signature="e#4402#4403#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -977,13 +962,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Windowed.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6205">
-          <caret line="389" column="10" selection-start-line="389" selection-start-column="10" selection-end-line="389" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/WindowedSettings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1094,13 +1072,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="353" column="27" selection-start-line="353" selection-start-column="27" selection-end-line="353" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/APIs.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-5">
@@ -1125,7 +1096,7 @@
     <entry file="file://$PROJECT_DIR$/src/Main/Utilities.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="471">
-          <caret line="121" column="17" lean-forward="true" selection-start-line="119" selection-start-column="16" selection-end-line="121" selection-end-column="17" />
+          <caret line="121" column="17" selection-start-line="119" selection-start-column="16" selection-end-line="121" selection-end-column="17" />
           <folding>
             <element signature="e#5360#5361#0" expanded="true" />
             <element signature="e#5392#5393#0" expanded="true" />
@@ -1143,10 +1114,38 @@
     <entry file="file://$PROJECT_DIR$/src/Main/CommandEditor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1517">
-          <caret line="411" column="103" lean-forward="true" selection-start-line="411" selection-start-column="103" selection-end-line="411" selection-end-column="103" />
+          <caret line="411" column="103" selection-start-line="411" selection-start-column="103" selection-end-line="411" selection-end-column="103" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Windowed.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="67">
+          <caret line="743" column="27" selection-start-line="743" selection-start-column="27" selection-end-line="743" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/DialogBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="114" column="44" selection-start-line="114" selection-start-column="44" selection-end-line="114" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="48" column="36" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="410">
+          <caret line="179" column="31" selection-start-line="179" selection-start-column="31" selection-end-line="179" selection-end-column="31" />
         </state>
       </provider>
     </entry>

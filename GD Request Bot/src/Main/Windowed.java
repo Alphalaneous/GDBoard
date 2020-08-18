@@ -739,6 +739,30 @@ public class Windowed {
 			InfoWindow.getInfoWindow().setBounds(0, LevelsWindow.getReqWindow().getHeight() + 1, LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
 			refresh();
 		}
+		else{
+			int newW = 465;
+			int newH = 630;
+			width = newW;
+			height = newH;
+			frame.setSize(newW, newH);
+			content.setBounds(0, 30, newW - 10, newH - 38);
+			actionsPanel.setBounds(0, 30, newW - 16, newH - 38);
+			buttonPanel.setBounds(newW - 70, 0, 50, frame.getHeight() - 200);
+			iconPanel.setBounds(newW - 70, frame.getHeight() - 125, 50, 50);
+
+			toolBar.setBounds(0, 0, frame.getWidth(), 30);
+			gdToggle.setBounds(frame.getWidth() - 180, 0, 100, 30);
+			switchButton.setBounds(frame.getWidth() - 50, 3, 25, 25);
+
+
+			LevelsWindow.resizeButtons(newW - 375, newH - 152);
+			LevelsWindow.getReqWindow().setBounds(0, 0, newW - 375, newH - 152);
+			CommentsWindow.getComWindow().setBounds(newW - 375, 0, CommentsWindow.getComWindow().getWidth(), newH + 2);
+			CommentsWindow.resetDimensions(CommentsWindow.getComWindow().getWidth(), newH + 2);
+			InfoWindow.resetDimensions(LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
+			InfoWindow.getInfoWindow().setBounds(0, LevelsWindow.getReqWindow().getHeight() + 1, LevelsWindow.getReqWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
+			refresh();
+		}
 		if (!Settings.getSettings("showMore").equalsIgnoreCase("")) {
 			if (!Settings.getSettings("showMore").equalsIgnoreCase("true")) {
 				CommentsWindow.unloadComments(true);

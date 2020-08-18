@@ -176,6 +176,9 @@ public class PersonalizationSettings {
 				Defaults.setLight();
 			}
 		}
+		else{
+			Defaults.setSystem();
+		}
 		if(!Settings.getSettings("onTop").equalsIgnoreCase("")) {
 			onTopOption = Boolean.parseBoolean(Settings.getSettings("onTop"));
 			onTop.setChecked(onTopOption);
