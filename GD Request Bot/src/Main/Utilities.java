@@ -7,10 +7,7 @@ import java.awt.*;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.nio.file.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -93,8 +90,7 @@ public class Utilities {
 			}
 			Main.sendMessage(Utilities.format("$COMMAND_DELETE_SUCCESS$", username, command));
 			CommandSettings.refresh();
-			saveOption(command, "commands", "SEND_MESSAGE");
-
+			deleteCommandA(command, "commands", "SEND_MESSAGE");
 		}
 		else{
 			Main.sendMessage(Utilities.format("$COMMAND_DOESNT_EXIST$", username, command));
@@ -178,8 +174,7 @@ public class Utilities {
 			}
 			Main.sendMessage(Utilities.format("$POINTS_DELETE_SUCCESS$", username, command));
 			ChannelPointSettings.refresh();
-			saveOption(command, "points", "SEND_MESSAGE");
-
+			deleteCommandA(command, "points", "SEND_MESSAGE");
 		}
 		else{
 			Main.sendMessage(Utilities.format("$POINTS_DOESNT_EXIST$", username, command));
@@ -278,9 +273,40 @@ public class Utilities {
 		}
 		return null;
 	}
+	public static void delStuff(String command, String identifier) {
+
+			boolean exists = false;
+			Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\" + identifier + ".txt");
+			try {
+				if (Files.exists(file)) {
+					Scanner sc = new Scanner(file);
+					while (sc.hasNextLine()) {
+						if (String.valueOf(command).equals(sc.nextLine())) {
+							exists = true;
+							break;
+						}
+					}
+					sc.close();
+					if (exists) {
+						Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_temp" + identifier + "_");
+						PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
+						Files.lines(file)
+								.filter(line -> !line.contains(command))
+								.forEach(out::println);
+						out.flush();
+						out.close();
+						Files.delete(file);
+						Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\" + identifier + ".txt"), StandardCopyOption.REPLACE_EXISTING);
+					}
+				}
+			} catch (Exception f) {
+				f.printStackTrace();
+			}
+
+	}
+
 	public static void saveOption(String command, String type, String optionType) {
 		try {
-
 			String typeA = null;
 			if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/" + type + "/options.txt"))) {
 				Scanner sc3 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/" + type + "/options.txt").toFile());
@@ -319,5 +345,56 @@ public class Utilities {
 		} catch (Exception f) {
 			f.printStackTrace();
 		}
+	}
+	public static void delCooldown(String command, String type) {
+		try {
+			int cooldown = -1;
+			if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt"))) {
+				Scanner sc3 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt").toFile());
+				while (sc3.hasNextLine()) {
+					String line = sc3.nextLine();
+					if(line.split("=").length > 1) {
+						if (line.split("=")[0].trim().equalsIgnoreCase(command)) {
+							cooldown = Integer.parseInt(line.split("=")[1].trim());
+							break;
+						}
+					}
+				}
+				sc3.close();
+			} else {
+				Files.createFile(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt"));
+			}
+			if (cooldown != -1) {
+				BufferedReader file = new BufferedReader(new FileReader(Defaults.saveDirectory + "/GDBoard/cooldown.txt"));
+				StringBuilder inputBuffer = new StringBuilder();
+				String line;
+				while ((line = file.readLine()) != null) {
+					inputBuffer.append(line);
+					inputBuffer.append('\n');
+				}
+				file.close();
+
+				FileOutputStream fileOut = new FileOutputStream(Defaults.saveDirectory + "/GDBoard/cooldown.txt");
+				fileOut.write(inputBuffer.toString().replace(command + " = " + cooldown, command + " = " + 0).getBytes());
+				fileOut.close();
+			} else {
+				BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt").toFile(), true));
+				writer.newLine();
+				writer.write(command + " = " + 0);
+				writer.close();
+
+			}
+		} catch (Exception f) {
+			f.printStackTrace();
+		}
+	}
+	public static void deleteCommandA(String command, String type, String optionType){
+		if(optionType.equalsIgnoreCase("command")) {
+			delStuff(command, "mod");
+			delStuff(command, "disable");
+			delStuff(command, "whisper");
+			delCooldown(command, type);
+		}
+		saveOption(command, type, optionType);
 	}
 }
