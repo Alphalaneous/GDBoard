@@ -4,10 +4,7 @@ import Main.SettingsPanels.ChannelPointSettings;
 import Main.SettingsPanels.CommandSettings;
 
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -15,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Utilities {
 
@@ -44,6 +42,7 @@ public class Utilities {
 				Files.write(file, command.getBytes());
 				Main.sendMessage(Utilities.format("$COMMAND_ADDED_SUCCESS$", username, newCommandName));
 				CommandSettings.refresh();
+				saveOption(newCommandName, "commands", "ADVANCED_EDITOR");
 			}
 			catch (Exception e){
 				e.printStackTrace();
@@ -73,6 +72,7 @@ public class Utilities {
 			try {
 				Files.write(file, command.getBytes());
 				Main.sendMessage(Utilities.format("$COMMAND_EDIT_SUCCESS$", username, newCommandName));
+				saveOption(newCommandName, "commands", "ADVANCED_EDITOR");
 
 			}
 			catch (Exception e){
@@ -93,6 +93,8 @@ public class Utilities {
 			}
 			Main.sendMessage(Utilities.format("$COMMAND_DELETE_SUCCESS$", username, command));
 			CommandSettings.refresh();
+			saveOption(command, "commands", "SEND_MESSAGE");
+
 		}
 		else{
 			Main.sendMessage(Utilities.format("$COMMAND_DOESNT_EXIST$", username, command));
@@ -124,6 +126,7 @@ public class Utilities {
 				Files.write(file, command.getBytes());
 				Main.sendMessage(Utilities.format("$POINTS_ADDED_SUCCESS$", username, newCommandName));
 				ChannelPointSettings.refresh();
+				saveOption(newCommandName, "points", "ADVANCED_EDITOR");
 
 			}
 			catch (Exception e){
@@ -154,6 +157,7 @@ public class Utilities {
 			try {
 				Files.write(file, command.getBytes());
 				Main.sendMessage(Utilities.format("$POINTS_EDIT_SUCCESS$", username, newCommandName));
+				saveOption(newCommandName, "points", "ADVANCED_EDITOR");
 
 			}
 			catch (Exception e){
@@ -174,6 +178,8 @@ public class Utilities {
 			}
 			Main.sendMessage(Utilities.format("$POINTS_DELETE_SUCCESS$", username, command));
 			ChannelPointSettings.refresh();
+			saveOption(command, "points", "SEND_MESSAGE");
+
 		}
 		else{
 			Main.sendMessage(Utilities.format("$POINTS_DOESNT_EXIST$", username, command));
@@ -271,5 +277,47 @@ public class Utilities {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	public static void saveOption(String command, String type, String optionType) {
+		try {
+
+			String typeA = null;
+			if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/" + type + "/options.txt"))) {
+				Scanner sc3 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/" + type + "/options.txt").toFile());
+				while (sc3.hasNextLine()) {
+					String line = sc3.nextLine();
+					if(line.split("=").length > 1) {
+						if (line.split("=")[0].trim().equalsIgnoreCase(command)) {
+							typeA = line.split("=")[1].trim();
+							break;
+						}
+					}
+				}
+				sc3.close();
+			} else {
+				Files.createFile(Paths.get(Defaults.saveDirectory + "/GDBoard/" + type + "/options.txt"));
+			}
+			if (typeA != null) {
+				BufferedReader file = new BufferedReader(new FileReader(Defaults.saveDirectory + "/GDBoard/" + type + "/options.txt"));
+				StringBuilder inputBuffer = new StringBuilder();
+				String line;
+				while ((line = file.readLine()) != null) {
+					inputBuffer.append(line);
+					inputBuffer.append('\n');
+				}
+				file.close();
+
+				FileOutputStream fileOut = new FileOutputStream(Defaults.saveDirectory + "/GDBoard/" + type + "/options.txt");
+				fileOut.write(inputBuffer.toString().replace(command + " = " + typeA, command + " = " + optionType).getBytes());
+				fileOut.close();
+			} else {
+				BufferedWriter writer = new BufferedWriter(new FileWriter(Paths.get(Defaults.saveDirectory + "/GDBoard/" + type + "/options.txt").toFile(), true));
+				writer.newLine();
+				writer.write(command + " = " + optionType);
+				writer.close();
+			}
+		} catch (Exception f) {
+			f.printStackTrace();
+		}
 	}
 }
