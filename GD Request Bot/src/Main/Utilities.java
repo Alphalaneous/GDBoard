@@ -1,5 +1,8 @@
 package Main;
 
+import Main.SettingsPanels.ChannelPointSettings;
+import Main.SettingsPanels.CommandSettings;
+
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.File;
@@ -37,6 +40,7 @@ public class Utilities {
 				Files.createFile(file);
 				Files.write(file, command.getBytes());
 				Main.sendMessage(Utilities.format("$COMMAND_ADDED_SUCCESS$", username, newCommandName));
+				CommandSettings.refresh();
 			}
 			catch (Exception e){
 				e.printStackTrace();
@@ -85,6 +89,7 @@ public class Utilities {
 				e.printStackTrace();
 			}
 			Main.sendMessage(Utilities.format("$COMMAND_DELETE_SUCCESS$", username, command));
+			CommandSettings.refresh();
 		}
 		else{
 			Main.sendMessage(Utilities.format("$COMMAND_DOESNT_EXIST$", username, command));
@@ -112,6 +117,8 @@ public class Utilities {
 				Files.createFile(file);
 				Files.write(file, command.getBytes());
 				Main.sendMessage(Utilities.format("$POINTS_ADDED_SUCCESS$", username, newCommandName));
+				ChannelPointSettings.refresh();
+
 			}
 			catch (Exception e){
 				e.printStackTrace();
@@ -160,6 +167,7 @@ public class Utilities {
 				e.printStackTrace();
 			}
 			Main.sendMessage(Utilities.format("$POINTS_DELETE_SUCCESS$", username, command));
+			ChannelPointSettings.refresh();
 		}
 		else{
 			Main.sendMessage(Utilities.format("$POINTS_DOESNT_EXIST$", username, command));

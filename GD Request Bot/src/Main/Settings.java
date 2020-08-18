@@ -122,17 +122,25 @@ public class Settings {
 	}
 
 	public static String getSettings(String key) {
-		try {
-			in.close();
-			in = new FileInputStream(file);
-			gfg.load(in);
-		} catch (IOException e) {
-			return "";
+		while(true) {
+			try {
+				in.close();
+				in = new FileInputStream(file);
+				gfg.load(in);
+				if (gfg.containsKey(key)) {
+					return gfg.get(key).toString();
+				}
+				else{
+					return "";
+				}
+			} catch (IOException e) {
+			}
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
-		if(gfg.containsKey(key)) {
-			return gfg.get(key).toString();
-		}
-		return "";
 	}
 
 	static void loadSettings(boolean start) throws IOException {

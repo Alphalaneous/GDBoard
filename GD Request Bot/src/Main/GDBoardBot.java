@@ -119,6 +119,7 @@ class GDBoardBot {
 							chatReader = new ChatReader();
 							chatReader.connect();
 							chatReader.joinChannel(Settings.getSettings("channel"));
+
 							chatReader.start();
 						}).start();
 					}
