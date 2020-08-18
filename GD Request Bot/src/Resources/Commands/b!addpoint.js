@@ -1,5 +1,5 @@
 function command(){
     if(isMod){
-        Utilitites.addPoints(user, xArgs);
+        Utilities.addPoints(user, xArgs);
     }
 }
