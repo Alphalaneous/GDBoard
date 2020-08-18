@@ -37,6 +37,9 @@ public class Utilities {
 		Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\Commands\\" + newCommandName +".js");
 		if (!Files.exists(file)) {
 			try {
+				if(!Files.exists(Paths.get(Defaults.saveDirectory + "\\GDBoard\\Commands\\"))) {
+					Files.createDirectory(Paths.get(Defaults.saveDirectory + "\\GDBoard\\Commands\\"));
+				}
 				Files.createFile(file);
 				Files.write(file, command.getBytes());
 				Main.sendMessage(Utilities.format("$COMMAND_ADDED_SUCCESS$", username, newCommandName));
@@ -114,6 +117,9 @@ public class Utilities {
 		Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\Points\\" + newCommandName +".js");
 		if (!Files.exists(file)) {
 			try {
+				if(!Files.exists(Paths.get(Defaults.saveDirectory + "\\GDBoard\\Points\\"))) {
+					Files.createDirectory(Paths.get(Defaults.saveDirectory + "\\GDBoard\\Points\\"));
+				}
 				Files.createFile(file);
 				Files.write(file, command.getBytes());
 				Main.sendMessage(Utilities.format("$POINTS_ADDED_SUCCESS$", username, newCommandName));

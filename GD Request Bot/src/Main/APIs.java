@@ -364,10 +364,10 @@ public class APIs {
 
 	public static void setOauth(boolean threaded) {
 		if (!threaded) {
-			setOauthPrivate();
+			setOauthPrivate(true);
 		} else {
 			Thread thread = new Thread(() -> {
-				setOauthPrivate();
+				setOauthPrivate(true);
 			});
 			thread.start();
 		}
@@ -375,12 +375,18 @@ public class APIs {
 
 	public static void setOauth() {
 		Thread thread = new Thread(() -> {
-			setOauthPrivate();
+			setOauthPrivate(true);
+		});
+		thread.start();
+	}
+	public static void setOauthNR() {
+		Thread thread = new Thread(() -> {
+			setOauthPrivate(false);
 		});
 		thread.start();
 	}
 
-	private static void setOauthPrivate() {
+	private static void setOauthPrivate(boolean refresh) {
 		success.set(false);
 		try {
 			Twitch twitch = new Twitch();
@@ -394,8 +400,9 @@ public class APIs {
 			rt.exec("rundll32 url.dll,FileProtocolHandler " + authUrl);
 			if (twitch.auth().awaitAccessToken()) {
 				Settings.writeSettings("oauth", twitch.auth().getAccessToken());
-
-				Main.refreshBot();
+				if(refresh) {
+					Main.refreshBot();
+				}
 				success.set(true);
 			} else {
 				System.out.println(twitch.auth().getAuthenticationError());

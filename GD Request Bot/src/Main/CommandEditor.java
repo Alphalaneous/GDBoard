@@ -407,6 +407,13 @@ public class CommandEditor {
 	}
 
 	public static void save() {
+		if(!Files.exists(Paths.get(Defaults.saveDirectory + "\\GDBoard\\" + type + "\\"))) {
+			try {
+				Files.createDirectory(Paths.get(Defaults.saveDirectory + "\\GDBoard\\" + type + "\\"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		String function;
 		if (editorChoices.currentSelect.equals("ADVANCED_EDITOR")) {
 			function = codeInput.getText();

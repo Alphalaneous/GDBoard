@@ -121,7 +121,7 @@ public class Onboarding {
 			public void mousePressed(MouseEvent e) {
 				try {
 					//moveOn.setVisible(true);
-					APIs.setOauth();
+					APIs.setOauthNR();
 					Thread thread = new Thread(() -> {
 						while (!APIs.success.get()) {
 							try {
