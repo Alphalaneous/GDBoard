@@ -13,11 +13,12 @@ var intArg = parseInt(args[1]);
         }
     }
     if(userPosition.length == 0){
-        return '@' + user + ' You don\'t have any levels in the queue!';
+        return Utilities.format("$POSITION_NONE_MESSAGE$", user);
     }
     if(intArg > userPosition.length){
-        return '@' + user + ' You only have ' + userPosition.length +  ' levels in the queue!';
+        return Utilities.format("$POSITION_WRONG_MESSAGE$", user, userPosition.length);
     }
     var pos = userPosition[intArg-1]+1;
-    return '@' + user + ', ' + Levels.getLevel(userPosition[intArg-1], 'name') + ' is at position ' + pos + ' in the queue!';
+    return Utilities.format("$POSITION_MESSAGE$", user,
+    Levels.getLevel(userPosition[intArg-1], 'name'), pos);
 }

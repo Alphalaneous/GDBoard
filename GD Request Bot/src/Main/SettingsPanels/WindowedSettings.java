@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class WindowedSettings {
 	public static boolean onTopOption = false;
-	private static CheckboxButton onTop = createButton("Always On Top", 20);
+	private static CheckboxButton onTop = createButton("$ALWAYS_ON_TOP$", 20);
  	private static JPanel panel = new JPanel();
 
 	public static JPanel createPanel() {
@@ -22,7 +22,6 @@ public class WindowedSettings {
 			public void mouseReleased(MouseEvent e) {
 				onTopOption = onTop.getSelectedState();
 				Windowed.setOnTop(onTop.getSelectedState());
-				//((InnerWindow) Windowed.window).setMinimize(!onTopOption);
 			}
 		});
 		panel.setLayout(null);
@@ -32,7 +31,7 @@ public class WindowedSettings {
 		panel.add(onTop);
 		return panel;
 	}
-	public static void loadSettings(){
+	public static void loadSettingsA(){
 		if(!Settings.getSettings("onTop").equalsIgnoreCase("")) {
 			onTopOption = Boolean.parseBoolean(Settings.getSettings("onTop"));
 			onTop.setChecked(onTopOption);

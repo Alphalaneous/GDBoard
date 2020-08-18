@@ -63,9 +63,10 @@ public class ChannelPointListener extends WebSocketClient {
 						"  }\n" +
 						"}");
 				break;
+
 			}
 			catch (NullPointerException e){
-
+				e.printStackTrace();
 			}
 			try {
 				Thread.sleep(1000);
@@ -100,7 +101,6 @@ public class ChannelPointListener extends WebSocketClient {
 
 	@Override
 	public void onMessage(String message) {
-
 		JsonObject object = JsonObject.readFrom(message);
 		String event = object.get("type").toString().replaceAll("\"", "");
 		if(event.equalsIgnoreCase("PONG")){
@@ -202,6 +202,15 @@ public class ChannelPointListener extends WebSocketClient {
 	public void disconnectBot(){
 		send("{\n" +
 				"  \"type\": \"UNLISTEN\"\n" +
+				"}");
+	}
+	public void reconnectBot(){
+		send("{\n" +
+				"  \"type\": \"LISTEN\",\n" +
+				"  \"data\": {\n" +
+				"    \"topics\": [\"channel-points-channel-v1." + APIs.getIDs(Settings.getSettings("channel")) + "\"],\n" +
+				"    \"auth_token\": \"" + Settings.getSettings("oauth") + "\"\n" +
+				"  }\n" +
 				"}");
 	}
 }

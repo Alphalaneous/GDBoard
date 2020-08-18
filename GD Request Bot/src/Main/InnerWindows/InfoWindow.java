@@ -39,7 +39,8 @@ public class InfoWindow {
 		SimpleAttributeSet center = new SimpleAttributeSet();
 		StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
 		doc.setParagraphAttributes(0, doc.getLength(), center, false);
-		description.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		description.setFont(Defaults.SEGOE.deriveFont(14f));
+		description.setSelectionColor(new Color(44, 144, 250));
 		description.setOpaque(false);
 		description.setEditable(false);
 		description.setForeground(Defaults.FOREGROUND);

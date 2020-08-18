@@ -8,9 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
 import java.net.URL;
 
 import static Main.Defaults.defaultUI;
@@ -95,7 +92,7 @@ public class Overlay {
 		frame.setAlwaysOnTop(true);
 	}
 
-	static void refreshUI(boolean color) {
+	public static void refreshUI(boolean color) {
 		try {
 			Thread.sleep(100);
 		} catch (InterruptedException e) {
@@ -117,6 +114,9 @@ public class Overlay {
 			SongWindow.refreshUI();
 			MainBar.refreshUI(color);
 			//Randomizer.refreshUI();
+		}
+		for(FancyTooltip toolTip : FancyTooltip.tooltips){
+			toolTip.refresh();
 		}
 		defaultUI.setBackground(Defaults.MAIN);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);

@@ -1,10 +1,16 @@
 package Main;
 
 import javax.swing.*;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
 import javax.swing.text.*;
+import javax.swing.undo.CannotUndoException;
+import javax.swing.undo.UndoManager;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
 
 public class FancyTextArea extends JTextArea {
 	public FancyTextArea(boolean intFilter, boolean allowNegative) {
@@ -38,6 +44,48 @@ public class FancyTextArea extends JTextArea {
 				doc.setDocumentFilter(new MyIntFilter());
 			}
 		}
+		UndoManager undoManager = new UndoManager();
+		Document doc = getDocument();
+		doc.addUndoableEditListener(new UndoableEditListener() {
+			@Override
+			public void undoableEditHappened(UndoableEditEvent e) {
+
+				undoManager.addEdit(e.getEdit());
+
+			}
+		});
+
+		InputMap im = getInputMap(JComponent.WHEN_FOCUSED);
+		ActionMap am = getActionMap();
+
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "Undo");
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_Y, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "Redo");
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() | Event.SHIFT_MASK), "Redo");
+
+		am.put("Undo", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if (undoManager.canUndo()) {
+						undoManager.undo();
+					}
+				} catch (CannotUndoException exp) {
+					exp.printStackTrace();
+				}
+			}
+		});
+		am.put("Redo", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if (undoManager.canRedo()) {
+						undoManager.redo();
+					}
+				} catch (CannotUndoException exp) {
+					exp.printStackTrace();
+				}
+			}
+		});
 	}
 	public void refreshAll(){
 		setBackground(Defaults.TEXT_BOX);

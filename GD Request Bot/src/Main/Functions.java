@@ -21,12 +21,10 @@ import java.util.Base64;
 import java.util.Random;
 
 public class Functions {
-
+	static boolean cooldown = false;
 	public static void skipFunction() {
 		if(Requests.bwomp){
 			Thread bwompThread;
-
-			System.out.println("bwomped");
 			bwompThread = new Thread(() -> {
 				try {
 					BufferedInputStream inp = new BufferedInputStream(ServerChatBot.class
@@ -54,20 +52,32 @@ public class Functions {
 				}
 				if (select == 0 && Requests.levels.size() > 0) {
 					if (!GeneralSettings.nowPlayingOption) {
-						if(Requests.levels.get(0).getContainsImage()){
-							Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
-									+ Requests.levels.get(0).getLevelID() + "). Requested by "
-									+ Requests.levels.get(0).getRequester() + " (Image Hack)");
-						}
-						else if(Requests.levels.get(0).getContainsVulgar()){
-							Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
-									+ Requests.levels.get(0).getLevelID() + "). Requested by "
-									+ Requests.levels.get(0).getRequester() + " (Vulgar Language)");
-						}
-						else{
-							Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
-									+ Requests.levels.get(0).getLevelID() + "). Requested by "
-									+ Requests.levels.get(0).getRequester());
+						if(!cooldown) {
+							if (Requests.levels.get(0).getContainsImage()) {
+								Main.sendMessage(Utilities.format("$NOW_PLAYING_MESSAGE$",
+										Requests.levels.get(0).getName(),
+										Requests.levels.get(0).getLevelID(),
+										Requests.levels.get(0).getRequester()) + " " + Utilities.format("$IMAGE_HACK$"));
+							} else if (Requests.levels.get(0).getContainsVulgar()) {
+								Main.sendMessage(Utilities.format("$NOW_PLAYING_MESSAGE$",
+										Requests.levels.get(0).getName(),
+										Requests.levels.get(0).getLevelID(),
+										Requests.levels.get(0).getRequester()) + " " + Utilities.format("$VULGAR_LANGUAGE$"));
+							} else {
+								Main.sendMessage(Utilities.format("$NOW_PLAYING_MESSAGE$",
+										Requests.levels.get(0).getName(),
+										Requests.levels.get(0).getLevelID(),
+										Requests.levels.get(0).getRequester()));
+							}
+							cooldown = true;
+							new Thread(()->{
+								try {
+									Thread.sleep(1000);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+								cooldown = false;
+							}).start();
 						}
 					}
 				}
@@ -97,14 +107,12 @@ public class Functions {
 			try {
 				num = random.nextInt(Requests.levels.size() - 2) + 1;
 			} catch (Exception ignored) {
-
 			}
 
 			if (Requests.levels.size() != 0) {
 
-
 				Requests.levels.remove(LevelsWindow.getSelectedID());
-				LevelsWindow.removeButton();
+				LevelsWindow.removeButton(LevelsWindow.getSelectedID());
 				Functions.saveFunction();
 
 				if (Requests.levels.size() == 1) {
@@ -119,15 +127,26 @@ public class Functions {
 					}
 				}).start();
 				if (Requests.levels.size() != 0) {
-					System.out.println(num);
 					StringSelection selection = new StringSelection(
 							String.valueOf(Requests.levels.get(num).getLevelID()));
 					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 					clipboard.setContents(selection, selection);
 					if (!GeneralSettings.nowPlayingOption) {
-						Main.sendMessage("Now Playing " + Requests.levels.get(num).getName() + " ("
-								+ Requests.levels.get(num).getLevelID() + "). Requested by "
-								+ Requests.levels.get(num).getRequester());
+						if(!cooldown) {
+							Main.sendMessage(Utilities.format("$NOW_PLAYING_MESSAGE$",
+									Requests.levels.get(0).getName(),
+									Requests.levels.get(0).getLevelID(),
+									Requests.levels.get(0).getRequester()));
+							cooldown = true;
+							new Thread(()->{
+								try {
+									Thread.sleep(1000);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+								cooldown = false;
+							}).start();
+						}
 					}
 				}
 			}
@@ -181,7 +200,10 @@ public class Functions {
 						.append(",").append(Requests.levels.get(i).getOriginal())
 						.append(",").append(Requests.levels.get(i).getContainsVulgar())
 						.append(",").append(Requests.levels.get(i).getContainsImage())
-
+						.append(",").append(Requests.levels.get(i).getPassword())
+						.append(",").append(Requests.levels.get(i).getUpload())
+						.append(",").append(Requests.levels.get(i).getUpdate())
+						.append(",").append(Requests.levels.get(i).getVerifiedCoins())
 						.append("\n");
 			}
 			fooWriter.write(message.toString());
@@ -204,9 +226,9 @@ public class Functions {
 
 				new Thread(()->{
 
-				String option = DialogBox.showDialogBox("Block " + Requests.levels.get(LevelsWindow.getSelectedID()).getName() + " (" + Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + ")?", "This will block the selected level from being added.", "This can be undone in settings.", new String[]{"Yes", "No"});
+				String option = DialogBox.showDialogBox("$BLOCK_ID_TITLE$", "$BLOCK_ID_INFO$", "$BLOCK_ID_SUBINFO$", new String[]{"$YES$", "$NO$"}, new Object[]{Requests.levels.get(LevelsWindow.getSelectedID()).getName(), Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID()});
 
-				if (option.equalsIgnoreCase("yes")) {
+				if (option.equalsIgnoreCase("YES")) {
 					BlockedSettings.addButton(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
 					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
 
@@ -247,8 +269,8 @@ public class Functions {
 		if(Main.programLoaded) {
 			new Thread(()->{
 
-			String option = DialogBox.showDialogBox("Clear the Queue?", "This will clear the levels from the queue.", "Do you want to clear the queue?", new String[]{"Clear All", "Cancel"});
-			if (option.equalsIgnoreCase("Clear All")) {
+			String option = DialogBox.showDialogBox("$CLEAR_QUEUE_TITLE$", "$CLEAR_QUEUE_INFO$", "$CLEAR_QUEUE_SUBINFO$", new String[]{"$CLEAR_ALL$", "$CANCEL$"});
+			if (option.equalsIgnoreCase("CLEAR_ALL")) {
 				if (Requests.levels.size() != 0) {
 					for (int i = 0; i < Requests.levels.size(); i++) {
 						LevelsWindow.removeButton();
@@ -294,14 +316,12 @@ public class Functions {
 			if (MainBar.requests) {
 				MainBar.stopReqs.setText("\uE768");
 				MainBar.requests = false;
-				Main.sendMessage("/me Requests are now off!");
+				Main.sendMessage(Utilities.format("$REQUESTS_OFF_TOGGLE_MESSAGE$"));
 
 			} else {
 				MainBar.stopReqs.setText("\uE71A");
 				MainBar.requests = true;
-				Main.sendMessage("/me Requests are now on!");
-
-
+				Main.sendMessage(Utilities.format("$REQUESTS_ON_TOGGLE_MESSAGE$"));
 			}
 		}
 	}

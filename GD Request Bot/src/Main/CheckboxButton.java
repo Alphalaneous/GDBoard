@@ -8,14 +8,14 @@ import javax.swing.*;
 
 public class CheckboxButton extends JPanel {
 
-	private JLabel text = new JLabel();
+	private LangLabel text = new LangLabel("");
 	private JLabel check = new JLabel("\uE739");
 	private JLabel checkSymbol = new JLabel("\uE73E");
 	private JLabel hover = new JLabel("\uE922");
 	private boolean isChecked = false;
 	public CheckboxButton(String label) {
 		setLayout(null);
-		text.setText(label);
+		text.setTextLang(label);
 		text.setForeground(Defaults.FOREGROUND);
 		check.setFont(Defaults.SYMBOLS.deriveFont(16f));
 		checkSymbol.setForeground(Color.WHITE);
@@ -105,7 +105,12 @@ public class CheckboxButton extends JPanel {
 		}
 		text.setForeground(Defaults.FOREGROUND);
 		text.setFont(getFont());
-		text.setBounds(0, (getHeight()/2)-(text.getPreferredSize().height/2), text.getPreferredSize().width+5, text.getPreferredSize().height+5);
+		if(getFont().getName().equalsIgnoreCase("bahnschrift")){
+			text.setBounds(0, (getHeight()/2)-(text.getPreferredSize().height/2)+1, getWidth(), text.getPreferredSize().height+5);
+		}
+		else{
+			text.setBounds(0, (getHeight()/2)-(text.getPreferredSize().height/2)-2, getWidth(), text.getPreferredSize().height+5);
+		}
 		check.setBounds(getWidth()-20, 0, 30,30);
 		checkSymbol.setBounds(getWidth()-20, 0, 30,30);
 		hover.setForeground(Defaults.FOREGROUND);

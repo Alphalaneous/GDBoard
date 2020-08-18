@@ -19,5 +19,7 @@
     <orderEntry type="library" name="Java-WebSocket-1.5.1-with-dependencies" level="project" />
     <orderEntry type="library" name="Filters" level="project" />
     <orderEntry type="library" name="swingx-1.6.1" level="project" />
+    <orderEntry type="library" name="javafx-swt" level="application" />
+    <orderEntry type="library" name="javafx.swing" level="project" />
   </component>
 </module>

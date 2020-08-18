@@ -29,7 +29,7 @@ public class LevelsWindow {
 	private static JButtonUI noticeUI = new JButtonUI();
 	private static JButtonUI warningSelectUI = new JButtonUI();
 	private static JButtonUI noticeSelectUI = new JButtonUI();
-	private static int panelHeight = 90;
+	private static int panelHeight = 110;
 	private static JScrollPane scrollPane;
 
 
@@ -38,8 +38,6 @@ public class LevelsWindow {
 		mainPanel.setBackground(Defaults.MAIN);
 		mainPanel.setBounds(0, 0, width, panelHeight);
 		mainPanel.setPreferredSize(new Dimension(400, panelHeight));
-
-		//TODO Queue organization
 
 		scrollPane = new JScrollPane(mainPanel);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
@@ -83,14 +81,20 @@ public class LevelsWindow {
 
 	}
 
+	public static void refreshSelectedLevel(long ID){
+		if(LevelsWindow.getSelectedID() == Requests.getPosFromID(ID)) {
+			LevelsWindow.setSelect(getSelectedID());
+		}
+	}
+
 	public static JScrollPane getReqWindow() {
 		return scrollPane;
 	}
 
-	public static void createButton(String name, String author, long ID, String difficulty, boolean epic, boolean featured, int starCount, String requester, double version, ImageIcon playerIcon, int coins) {
+	public static void createButton(String name, String author, long ID, String difficulty, boolean epic, boolean featured, int starCount, String requester, double version, ImageIcon playerIcon, int coins, boolean verifiedCoins) {
 		Point saved = scrollPane.getViewport().getViewPosition();
 		scrollPane.getViewport().setViewPosition(saved);
-		mainPanel.add(new LevelButton(name, author, ID, difficulty, epic, featured, starCount, requester, version, playerIcon, coins));
+		mainPanel.add(new LevelButton(name, author, ID, difficulty, epic, featured, starCount, requester, version, playerIcon, coins, verifiedCoins));
 		if (Requests.levels.size() == 1) {
 			setOneSelect();
 		}
@@ -176,7 +180,7 @@ public class LevelsWindow {
 		JLabel lStar = new JLabel("\uE24A");
 		JPanel info = new JPanel(new GridLayout(0, 2, 1, 1));
 
-		LevelButton(String name, String author, long ID, String difficulty, boolean epic, boolean featured, int starCount, String requester, double version, ImageIcon playerIcon, int coins) {
+		LevelButton(String name, String author, long ID, String difficulty, boolean epic, boolean featured, int starCount, String requester, double version, ImageIcon playerIcon, int coins, boolean verifiedCoins) {
 			this.name = name;
 			this.ID = ID;
 			this.author = author;
@@ -261,13 +265,19 @@ public class LevelsWindow {
 				setLayout(null);
 
 
-				lName.setFont(Defaults.MAIN_FONT.deriveFont(18f));
-				lName.setBounds(50, 2, (int) lName.getPreferredSize().getWidth() + 5, 30);
+				lName.setFont(Defaults.SEGOE.deriveFont(18f));
+				lName.setBounds(50, -3, (int) lName.getPreferredSize().getWidth() + 5, 30);
 
 				int pos = 0;
 
 				for (int i = 0; i < coins; i++) {
-					JLabel coin = new JLabel(Assets.verifiedCoin);
+					JLabel coin;
+					if(verifiedCoins) {
+						coin = new JLabel(Assets.verifiedCoin);
+					}
+					else {
+						coin = new JLabel(Assets.unverifiedCoin);
+					}
 					coin.setBounds((int) lName.getPreferredSize().getWidth() + lName.getX() + 5 + pos, 7, 15, 15);
 					pos = pos + 10;
 					add(coin);
@@ -287,7 +297,7 @@ public class LevelsWindow {
 
 
 				info.setBackground(new Color(0, 0, 0, 0));
-				info.setBounds(50, 60, buttonWidth - 100, 80);
+				info.setBounds(50, 62, buttonWidth - 100, 100);
 				info.setOpaque(false);
 				info.setVisible(false);
 				add(info);
@@ -349,21 +359,21 @@ public class LevelsWindow {
 				});
 				add(moveDown);
 
-				lAuthorID.setFont(Defaults.MAIN_FONT.deriveFont(12f));
-				lAuthorID.setBounds(50, 24, (int) lAuthorID.getPreferredSize().getWidth() + 5, 20);
+				lAuthorID.setFont(Defaults.SEGOE.deriveFont(12f));
+				lAuthorID.setBounds(50, 22, (int) lAuthorID.getPreferredSize().getWidth() + 5, 20);
 				lPlayerIcon.setIcon(playerIcon);
 				lPlayerIcon.setBounds(50 + lAuthorID.getPreferredSize().width + 2, 13, 40, 40);
 
 
-				lRequester.setFont(Defaults.MAIN_FONT.deriveFont(12f));
-				lRequester.setBounds(50, 40, (int) lRequester.getPreferredSize().getWidth() + 5, 20);
-				lStarCount.setFont(Defaults.MAIN_FONT.deriveFont(12f));
-				lStarCount.setBounds(25 - (int) (lStarCount.getPreferredSize().width + lStar.getPreferredSize().width) / 2, 38,
+				lRequester.setFont(Defaults.SEGOE.deriveFont(12f));
+				lRequester.setBounds(50, 38, (int) lRequester.getPreferredSize().getWidth() + 5, 20);
+				lStarCount.setFont(Defaults.SEGOE.deriveFont(12f));
+				lStarCount.setBounds(25 - (int) (lStarCount.getPreferredSize().width + lStar.getPreferredSize().width) / 2, 36,
 						(int) lStarCount.getPreferredSize().getWidth() + 5, 20);
 				lStar.setFont(Defaults.SYMBOLS.deriveFont(12f));
 				lStar.setBounds(1 + lStarCount.getPreferredSize().width + lStarCount.getX(), 36,
 						(int) lStar.getPreferredSize().getWidth() + 5, 20);
-				lAnalyzed.setFont(Defaults.MAIN_FONT.deriveFont(12f));
+				lAnalyzed.setFont(Defaults.SEGOE.deriveFont(12f));
 
 				lName.setForeground(Defaults.FOREGROUND);
 				lRequester.setForeground(Defaults.FOREGROUND2);
@@ -585,6 +595,11 @@ public class LevelsWindow {
 				JLabel update = createLabel("Update: " + Requests.levels.get(Requests.getPosFromID(ID)).getUpdate());
 				JLabel version = createLabel("Version: " + Requests.levels.get(Requests.getPosFromID(ID)).getLevelVersion());
 
+				JLabel songID = createLabel("Song ID: " + Requests.levels.get(Requests.getPosFromID(ID)).getSongID());
+				JLabel songName = createLabel("Song: " + Requests.levels.get(Requests.getPosFromID(ID)).getSongName());
+				JLabel songAuthor = createLabel("Song Artist: " + Requests.levels.get(Requests.getPosFromID(ID)).getSongAuthor());
+
+
 
 				info.add(likes);
 				info.add(downloads);
@@ -595,13 +610,15 @@ public class LevelsWindow {
 				info.add(upload);
 				info.add(update);
 				info.add(version);
+				info.add(songID);
+				info.add(songName);
+				info.add(songAuthor);
 			}
 			info.setVisible(true);
 			expanded = true;
-			setPreferredSize(new Dimension(buttonWidth, 150));
+			setPreferredSize(new Dimension(buttonWidth, 170));
 
 		}
-
 		public void deselect() {
 			if (this.selected) {
 				info.setVisible(false);
@@ -627,7 +644,7 @@ public class LevelsWindow {
 			buttonWidth = width-15;
 			moveUp.setBounds(buttonWidth - 30, 0, 25, 30);
 			moveDown.setBounds(buttonWidth - 30, 30, 25, 30);
-			info.setBounds(50, 60, buttonWidth - 100, 80);
+			info.setBounds(50, 60, buttonWidth - 100, 100);
 			setPreferredSize(new Dimension(buttonWidth, getHeight()));
 		}
 
@@ -668,7 +685,6 @@ public class LevelsWindow {
 				}
 			}
 			if(selected){
-				System.out.println("jksdfhgkyeusfghd");
 				select();
 			}
 		}
@@ -679,6 +695,8 @@ public class LevelsWindow {
 					component.setForeground(Defaults.FOREGROUND);
 				}
 			}
+			moveDown.setForeground(Defaults.FOREGROUND);
+			moveUp.setForeground(Defaults.FOREGROUND);
 			analyzeButton.setForeground(Defaults.FOREGROUND);
 			lRequester.setForeground(Defaults.FOREGROUND2);
 			lAuthorID.setForeground(Defaults.FOREGROUND2);
@@ -707,7 +725,6 @@ public class LevelsWindow {
 				}
 			}
 			if(selected){
-				System.out.println("jksdfhgkyeusfghd");
 				select();
 			}
 		}
@@ -717,7 +734,7 @@ public class LevelsWindow {
 
 					JLabel label = new JLabel(text);
 					label.setForeground(Defaults.FOREGROUND2);
-					label.setFont(Defaults.MAIN_FONT.deriveFont(11f));
+					label.setFont(Defaults.SEGOE.deriveFont(11f));
 					return label;
 
 		}
@@ -767,6 +784,8 @@ public class LevelsWindow {
 				if (j == i) {
 					((LevelButton) component).select();
 					selectedID = i;
+					scrollPane.getViewport().setViewPosition(new Point(0, component.getY()));
+
 					break;
 				}
 				j++;
@@ -833,7 +852,7 @@ public class LevelsWindow {
 	public static void removeButton(int i) {
 		mainPanel.remove(i);
 		selectedID = 0;
-		panelHeight = panelHeight - 50;
+		panelHeight = panelHeight - 60;
 		mainPanel.setBounds(0, 0, width, panelHeight);
 		mainPanel.setPreferredSize(new Dimension(width, panelHeight));
 	}
@@ -841,7 +860,7 @@ public class LevelsWindow {
 	public static void removeButton() {
 		mainPanel.remove(selectedID);
 		selectedID = 0;
-		panelHeight = panelHeight - 50;
+		panelHeight = panelHeight - 60;
 		mainPanel.setBounds(0, 0, width, panelHeight);
 		mainPanel.setPreferredSize(new Dimension(width, panelHeight));
 	}

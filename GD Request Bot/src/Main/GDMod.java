@@ -23,14 +23,12 @@ public class GDMod {
 					if(line.contains("GeometryDash.exe")){
 						PID = line.split(",")[1].replaceAll("\"","");
 					}
-					System.out.println(line);
 				}
 			}
 		}
 		catch (IOException e){
 			e.printStackTrace();
 		}
-		System.out.println(PID);
 		try {
 			String[] cmd = new String[]{Defaults.saveDirectory + "\\GDBoard\\bin\\gdmod.exe", PID};
 			String[] fillCmd = ArrayUtils.addAll(cmd, args);

@@ -1,7 +1,6 @@
 package Main;
 
 import Main.SettingsPanels.BlockedCreatorSettings;
-import com.jidesoft.swing.ResizablePanel;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -10,7 +9,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
 import javax.swing.*;
@@ -19,8 +17,8 @@ import Main.SettingsPanels.*;
 import static Main.Defaults.defaultUI;
 
 public class SettingsWindow {
-	private static int width = 622;
-	private static int height = 622;
+	private static int width = 636;
+	private static int height = 662;
 	public static JPanel window = new InnerWindow("Settings", 0, 0, width-2, height,
 			"\uE713", true).createPanel();
 
@@ -42,27 +40,26 @@ public class SettingsWindow {
 	private static JPanel blockedUsers = BlockedUserSettings.createPanel();
 	private static JPanel blockedCreators = BlockedCreatorSettings.createPanel();
 	private static JPanel loggedIDs = RequestsLog.createPanel();
+	private static JPanel language = LanguageSettings.createPanel();
+
 
 	public static JFrame frame = new JFrame();
-	public static JPanel windowed = WindowedSettings.createPanel();
 
 	public static boolean run = true;
 	public static void createPanel() {
 		frame = new JFrame();
-		if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
-			window = new InnerWindow("Settings", 0, 0, width-2, height,
-					"\uE713", true).createPanel();
-		}
-		else{
-			window = new InnerWindow("Settings", 0, 0, width-2, height,
+		if(!Settings.getSettings("windowed").equalsIgnoreCase("true")){
+			window = new InnerWindow("Settings", 0, 0, width-16, height-40,
 					"\uE713", false).createPanel();
 		}
-
-		frame.setSize(800,800);
+		else{
+			frame.setSize(width, height);
+		}
 		URL iconURL = Windowed.class.getResource("/Resources/Icons/windowIcon.png");
 		ImageIcon icon = new ImageIcon(iconURL);
 		Image newIcon = icon.getImage().getScaledInstance(120, 120,  Image.SCALE_SMOOTH);
 		frame.setIconImage(newIcon);
+		frame.setResizable(false);
 		frame.setTitle("GDBoard - Settings");
 		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		frame.addWindowListener(new WindowAdapter() {
@@ -74,17 +71,23 @@ public class SettingsWindow {
 		if(Settings.getSettings("settings").equalsIgnoreCase("") && Settings.getSettings("windowed").equalsIgnoreCase("true")){
 			frame.setLocation((int)Defaults.screenSize.getWidth()/2 - width/2, 200);
 		}
-		frame.setUndecorated(true);
-		frame.setSize(width + 200,height+32 + 200);
+		//frame.setUndecorated(true);
 		frame.setLayout(null);
-		frame.setBackground(new Color(255, 255, 255, 0));
-		blankSpace.setBounds(1, 31, 208, 20);
+		//frame.setBackground(new Color(255, 255, 255, 0));
+		if(Settings.getSettings("windowed").equalsIgnoreCase("false")) {
+			blankSpace.setBounds(1, 31, 208, 20);
+			buttons.setBounds(1, 51, 208, height-20);
+			content.setBounds(209, 31, 412, height);
+		}
+		else{
+			blankSpace.setBounds(0, 0, 208, 20);
+			buttons.setBounds(0, 20, 208, height-20);
+			content.setBounds(208, 0, 412, height);
+		}
 		blankSpace.setBackground(Defaults.MAIN);
 
-		buttons.setBounds(1, 51, 208, height-20);
 		buttons.setBackground(Defaults.MAIN);
 
-		content.setBounds(209, 31, 412, height);
 		content.setBackground(Defaults.SUB_MAIN);
 		content.setLayout(null);
 
@@ -101,7 +104,7 @@ public class SettingsWindow {
 		content.add(blockedUsers);
 		content.add(blockedCreators);
 		content.add(loggedIDs);
-		content.add(windowed);
+		content.add(language);
 
 		general.setVisible(true);
 		overlay.setVisible(false);
@@ -115,26 +118,28 @@ public class SettingsWindow {
 		blocked.setVisible(false);
 		blockedUsers.setVisible(false);
 		blockedCreators.setVisible(false);
-		windowed.setVisible(false);
 		loggedIDs.setVisible(false);
+		language.setVisible(false);
 
 
-		JButton general = createButton("General");
+		JButton general = createButton("$GENERAL_SETTINGS$");
 		general.setBackground(Defaults.SELECT);
 		general.setUI(selectUI);
-		JButton outputs = createButton("Outputs");
-		JButton accounts = createButton("Accounts");
-		JButton commands = createButton("Commands");
-		JButton points = createButton("Channel Points");
-		JButton cheers = createButton("Cheers");
-		JButton requests = createButton("Requests");
-		JButton shortcuts = createButton("Shortcuts");
-		JButton personalization = createButton("Personalization");
-		JButton blocked = createButton("Blocked IDs");
-		JButton blockedUsers = createButton("Blocked Users");
-		JButton blockedCreators = createButton("Blocked Creators");
-		JButton loggedIDs = createButton("Logged IDs");
-		JButton windowed = createButton("Windowed");
+		JButton outputs = createButton("$OUTPUTS_SETTINGS$");
+		JButton accounts = createButton("$ACCOUNTS_SETTINGS$");
+		JButton commands = createButton("$COMMANDS_SETTINGS$");
+		JButton points = createButton("$CHANNEL_POINTS_SETTINGS$");
+		JButton cheers = createButton("$CHEERS_SETTINGS$");
+		JButton requests = createButton("$REQUESTS_SETTINGS$");
+		JButton shortcuts = createButton("$SHORTCUTS_SETTINGS$");
+		JButton personalization = createButton("$PERSONALIZATION_SETTINGS$");
+		JButton blocked = createButton("$BLOCKED_IDS_SETTINGS$");
+		JButton blockedUsers = createButton("$BLOCKED_USERS_SETTINGS$");
+		JButton blockedCreators = createButton("$BLOCKED_CREATORS_SETTINGS$");
+		JButton loggedIDs = createButton("$LOGGED_IDS_SETTINGS$");
+		JButton windowed = createButton("$WINDOWED_SETTINGS$");
+		JButton language = createButton("$LANGUAGE_SETTINGS$");
+
 
 
 		buttons.add(general);
@@ -142,7 +147,7 @@ public class SettingsWindow {
 		buttons.add(accounts);
 		buttons.add(commands);
 		buttons.add(points);
-		buttons.add(cheers);
+		//buttons.add(cheers);
 		buttons.add(requests);
 		buttons.add(shortcuts);
 		buttons.add(personalization);
@@ -150,21 +155,26 @@ public class SettingsWindow {
 		buttons.add(blockedUsers);
 		buttons.add(blockedCreators);
 		buttons.add(loggedIDs);
-		if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
+		//buttons.add(language);
+		if(Settings.getSettings("windowed").equalsIgnoreCase("false")){
 			buttons.add(windowed);
+			window.add(blankSpace);
+			window.add(buttons);
+			window.add(content);
+			((InnerWindow) window).setPinVisible();
+			((InnerWindow) window).refreshListener();
 		}
+		frame.setVisible(false);
 		toggleVisible();
-		window.add(blankSpace);
-		window.add(buttons);
-		window.add(content);
-		((InnerWindow) window).setPinVisible();
-		((InnerWindow) window).refreshListener();
 		if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
-			frame.add(window);
+			frame.add(blankSpace);
+			frame.add(buttons);
+			frame.add(content);
 		}
 		else {
 			Overlay.addToFrame(window);
 		}
+
 	}
 	public static void destroySettings(){
 		window.removeAll();
@@ -218,18 +228,19 @@ public class SettingsWindow {
 
 	}
 
+	private static int clean = 0;
+
 	private static JButton createButton(String text) {
 
-		selectUI.setBackground(Defaults.SELECT);
 		selectUI.setBackground(Defaults.SELECT);
 		selectUI.setHover(Defaults.BUTTON_HOVER);
 
 		JButton button = new JButton();
-		JLabel label = new JLabel(text);
+		LangLabel label = new LangLabel(text);
 
-		label.setBounds(20, 9, 208, 20);
-		label.setForeground(Defaults.FOREGROUND);
 		label.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		label.setBounds(20, 10, 208, 20);
+		label.setForeground(Defaults.FOREGROUND);
 
 		button.setLayout(null);
 		button.add(label);
@@ -246,55 +257,90 @@ public class SettingsWindow {
 					((InnerWindow) window).moveToFront();
 					super.mousePressed(e);
 					for (Component component2 : button.getComponents()) {
-						if (component2 instanceof JLabel) {
-							for (Component componentA : content.getComponents()) {
-								if (componentA instanceof JPanel) {
-									componentA.setVisible(false);
+						if (component2 instanceof LangLabel) {
+							if(!((LangLabel) component2).getIdentifier().equalsIgnoreCase("WINDOWED_SETTINGS")) {
+								for (Component componentA : content.getComponents()) {
+									if (componentA instanceof JPanel) {
+										componentA.setVisible(false);
+									}
 								}
 							}
 							RequestsLog.clear();
-							switch (((JLabel) component2).getText()) {
-								case "General":
+							switch (((LangLabel) component2).getIdentifier()) {
+								case "GENERAL_SETTINGS":
 									general.setVisible(true);
+									clean++;
+									if(clean == 5){
+										System.out.println("cleaned");
+										System.gc();
+										clean = 0;
+									}
 									break;
-								case "Outputs":
+								case "OUTPUTS_SETTINGS":
 									overlay.setVisible(true);
+									clean = 0;
 									break;
-								case "Accounts":
+								case "ACCOUNTS_SETTINGS":
 									accounts.setVisible(true);
+									clean = 0;
 									break;
-								case "Shortcuts":
+								case "SHORTCUTS_SETTINGS":
 									shortcuts.setVisible(true);
+									clean = 0;
 									break;
-								case "Personalization":
+								case "PERSONALIZATION_SETTINGS":
 									personalization.setVisible(true);
+									clean = 0;
 									break;
-								case "Blocked IDs":
+								case "BLOCKED_IDS_SETTINGS":
 									blocked.setVisible(true);
+									clean = 0;
 									break;
-								case "Blocked Users":
+								case "BLOCKED_USERS_SETTINGS":
 									blockedUsers.setVisible(true);
+									clean = 0;
 									break;
-								case "Blocked Creators":
+								case "BLOCKED_CREATORS_SETTINGS":
 									blockedCreators.setVisible(true);
+									clean = 0;
 									break;
-								case "Commands":
+								case "COMMANDS_SETTINGS":
 									commands.setVisible(true);
+									clean = 0;
 									break;
-								case "Channel Points":
+								case "CHANNEL_POINTS_SETTINGS":
 									points.setVisible(true);
+									clean = 0;
 									break;
-								case "Cheers":
+								case "CHEERS_SETTINGS":
 									cheers.setVisible(true);
 									break;
-								case "Requests":
+								case "REQUESTS_SETTINGS":
 									requests.setVisible(true);
+									clean = 0;
 									break;
-								case "Windowed":
-									windowed.setVisible(true);
+								case "LANGUAGE_SETTINGS":
+									language.setVisible(true);
+									clean = 0;
 									break;
-								case "Logged IDs":
+								case "WINDOWED_SETTINGS":
+									new Thread(()->{
+										String option = DialogBox.showDialogBox("$SWITCH_TO_WINDOWED_TITLE$", "$SWINTH_TO_WINDOWED_INFO$", "$SWITCH_TO_WINDOWED_SUBINFO$", new String[]{"$YES$", "$NO$"});
+										if (option.equalsIgnoreCase("YES")) {
+											try {
+												Settings.writeSettings("windowed", "true");
+											}
+											catch (Exception f){
+												f.printStackTrace();
+											}
+											Main.close();
+										}
+									}).start();
+									clean = 0;
+									break;
+								case "LOGGED_IDS_SETTINGS":
 									loggedIDs.setVisible(true);
+									clean = 0;
 									new Thread(() -> {
 										File file = new File(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
 										if (file.exists()) {
@@ -306,7 +352,7 @@ public class SettingsWindow {
 											}
 											assert sc != null;
 											while (sc.hasNextLine()) {
-												RequestsLog.addButton(Long.parseLong(sc.nextLine()));
+												RequestsLog.addButton(Long.parseLong(sc.nextLine().split(",")[0]));
 											}
 											sc.close();
 										}
@@ -320,8 +366,6 @@ public class SettingsWindow {
 						if (component instanceof JButton) {
 							((JButton) component).setUI(defaultUI);
 							component.setBackground(Defaults.MAIN);
-							buttons.updateUI();
-
 						}
 					}
 
@@ -352,20 +396,12 @@ public class SettingsWindow {
 	}
 	//region SetLocation
 	static void setLocation(Point point){
-		if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
-			frame.setLocation(point);
-		}
-		else {
-			window.setLocation(point);
-		}
+		window.setLocation(point);
 	}
 	//endregion
 	//region SetSettings
 	public static void setSettings(){
-		if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
-			Settings.setWindowSettings("Settings", frame.getX() + "," + frame.getY() + "," + false + "," + frame.isVisible());
-		}
-		else {
+		if(!Settings.getSettings("windowed").equalsIgnoreCase("true")){
 			Settings.setWindowSettings("Settings", window.getX() + "," + window.getY() + "," + false + "," + window.isVisible());
 		}
 

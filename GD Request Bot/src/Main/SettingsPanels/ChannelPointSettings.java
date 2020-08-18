@@ -5,7 +5,6 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -13,8 +12,7 @@ import java.io.*;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
-import java.util.Iterator;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static Main.Defaults.settingsButtonUI;
@@ -33,9 +31,34 @@ public class ChannelPointSettings {
 	private static JPanel titlePanel = new JPanel();
 	private static RSyntaxTextArea codeInput = new RSyntaxTextArea();
 	private static JScrollPane codePanel = new JScrollPane(codeInput);
-	private static CheckboxButton whisper = createButton("Send as Whisper", 350);
-	private static RoundedJButton backButton = new RoundedJButton("\uE112", "Back");
+	private static RoundedJButton backButton = new RoundedJButton("\uE112", "$BACK_BUTTON$");
+	private static RoundedJButton addCommand = new RoundedJButton("\uECC8", "$ADD_CHANNEL_POINTS_TOOLTIP$");
+
+
 	public static JPanel createPanel() {
+
+		LangLabel label = new LangLabel("$POINTS_LIST$");
+		label.setForeground(Defaults.FOREGROUND);
+		label.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		label.setBounds(25, 20, label.getPreferredSize().width + 5, label.getPreferredSize().height + 5);
+
+		panel.add(label);
+
+		addCommand.setBackground(Defaults.BUTTON);
+		addCommand.setBounds(370, 16, 30, 30);
+		addCommand.setFont(Defaults.SYMBOLS.deriveFont(18f));
+		addCommand.setForeground(Defaults.FOREGROUND);
+		addCommand.setUI(settingsButtonUI);
+		addCommand.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				CommandEditor.showEditor("points", "", false);
+			}
+		});
+
+		panel.add(addCommand);
+
+
 		codeInput.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
 
 		codeInput.setCurrentLineHighlightColor(Defaults.BUTTON);
@@ -62,7 +85,7 @@ public class ChannelPointSettings {
 
 		backButton.setBackground(Defaults.BUTTON);
 		backButton.setBounds(10, 10, 30, 30);
-		backButton.setFont(Defaults.SYMBOLS.deriveFont(15f));
+		backButton.setFont(Defaults.SYMBOLS.deriveFont(14f));
 		backButton.setForeground(Defaults.FOREGROUND);
 		backButton.setUI(settingsButtonUI);
 		backButton.addMouseListener(new MouseAdapter() {
@@ -71,60 +94,11 @@ public class ChannelPointSettings {
 				showMainPanel();
 			}
 		});
-		backButton.asSettings();
 
 		titlePanel.add(backButton);
 
-		whisper.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				if (whisper.getSelectedState()) {
-					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\pointsWhisper.txt");
-					try {
-						if (!Files.exists(file)) {
-							Files.createFile(file);
-						}
-						Files.write(
-								file,
-								(command + "\n").getBytes(),
-								StandardOpenOption.APPEND);
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				} else {
-					boolean exists = false;
-					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\pointsWhisper.txt");
-					try {
-						if (Files.exists(file)) {
-							Scanner sc = new Scanner(file);
-							while (sc.hasNextLine()) {
-								if (String.valueOf(command).equals(sc.nextLine())) {
-									exists = true;
-									break;
-								}
-							}
-							sc.close();
-							if (exists) {
-								Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_tempPointsWhisper_");
-								PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
-								Files.lines(file)
-										.filter(line -> !line.contains(command))
-										.forEach(out::println);
-								out.flush();
-								out.close();
-								Files.delete(file);
-								Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\pointsWhisper.txt"), StandardCopyOption.REPLACE_EXISTING);
-							}
-						}
-					}
-					catch (Exception f){
-						f.printStackTrace();
-					}
-				}
-			}
-		});
 
-		//commandPanelView.add(whisper);
+
 		commandPanelView.setBounds(0, 0, 415, 622);
 		commandPanelView.add(titlePanel);
 		commandPanelView.add(codePanel);
@@ -140,7 +114,7 @@ public class ChannelPointSettings {
 		commandsPanel.setPreferredSize(new Dimension(400, 0));
 		commandsPanel.setBackground(Defaults.SUB_MAIN);
 		commandsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 4, 4));
-		scrollPane.setBounds(0, 0, 412, 622);
+		scrollPane.setBounds(0, 60, 412, 562);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
 		scrollPane.getViewport().setBackground(Defaults.SUB_MAIN);
 		scrollPane.setPreferredSize(new Dimension(412, 562));
@@ -150,27 +124,8 @@ public class ChannelPointSettings {
 		scrollPane.setOpaque(false);
 		scrollPane.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
-
+		HashMap<String, ButtonInfo> existingCommands = new HashMap<>();
 		try {
-			URI uri = Main.class.getResource("/Resources/points/").toURI();
-			Path myPath;
-			if (uri.getScheme().equals("jar")) {
-				myPath = ServerChatBot.fileSystem.getPath("/Resources/points/");
-			} else {
-				myPath = Paths.get(uri);
-			}
-			Stream<Path> walk = Files.walk(myPath, 1);
-			for (Iterator<Path> it = walk.iterator(); it.hasNext(); ) {
-				Path path = it.next();
-				String[] file = path.toString().split("/");
-				String fileName = file[file.length - 1];
-				if (fileName.endsWith(".js")) {
-					if(!fileName.equals("ca5e8584-d6b3-4278-8304-a4a44e633292.js")) {
-						addButton(fileName.substring(0, fileName.length() - 3), path);
-					}
-				}
-				Thread.sleep(5);
-			}
 			Path comPath = Paths.get(Defaults.saveDirectory + "/GDBoard/points/");
 			if (Files.exists(comPath)) {
 				Stream<Path> walk1 = Files.walk(comPath, 1);
@@ -179,14 +134,22 @@ public class ChannelPointSettings {
 					String[] file = path.toString().split("\\\\");
 					String fileName = file[file.length - 1];
 					if (fileName.endsWith(".js")) {
-						addButton(fileName.substring(0, fileName.length() - 3), path);
+						existingCommands.put(fileName.substring(0, fileName.length()-3), new ButtonInfo( path, false));
 					}
-					Thread.sleep(5);
 				}
 			}
 		}
 		catch (Exception e){
 			e.printStackTrace();
+		}
+		TreeMap<String, ButtonInfo> sorted = new TreeMap<>();
+		sorted.putAll(existingCommands);
+
+		for(Map.Entry<String,ButtonInfo> entry : sorted.entrySet()) {
+			String key = entry.getKey();
+			ButtonInfo value = entry.getValue();
+
+			addButton(key, value.path);
 		}
 		panel.setBounds(0, 0, 415, 622);
 		panel.add(scrollPane);
@@ -198,68 +161,72 @@ public class ChannelPointSettings {
 		scrollPane.setVisible(true);
 
 	}
-	private static void showCommandPanel(String command, Path path){
-		codeInput.discardAllEdits();
-		ChannelPointSettings.command = command;
-		commandLabel.setText(command);
-		commandLabel.setBounds(50,15,commandLabel.getPreferredSize().width+5, commandLabel.getPreferredSize().height + 5);
-		StringBuilder function = new StringBuilder();
-		try {
-			Path comPath = Paths.get(Defaults.saveDirectory + "/GDBoard/points/" + command.split("\\\\")[command.split("\\\\").length-1] + ".js");
-			if (Files.exists(comPath)) {
-				codeInput.setText(String.valueOf(Files.readString(comPath, StandardCharsets.UTF_8)));
-			}
-			else {
-				InputStream is = Main.class
-						.getClassLoader().getResourceAsStream(path.toString().substring(1));
-				assert is != null;
-				InputStreamReader isr = new InputStreamReader(is);
-				BufferedReader br = new BufferedReader(isr);
+	public static void refresh(){
 
-				String line;
-				while ((line = br.readLine()) != null) {
-					function.append(line).append("\n");
+		commandsPanel.removeAll();
+		height = 0;
+		commandsPanel.setBounds(0, 0, 400, (int) (height + 4));
+		commandsPanel.setPreferredSize(new Dimension(400, (int) (height + 4)));
+
+		HashMap<String, ButtonInfo> existingCommands = new HashMap<>();
+		try {
+			Path comPath = Paths.get(Defaults.saveDirectory + "/GDBoard/points/");
+			if (Files.exists(comPath)) {
+				Stream<Path> walk1 = Files.walk(comPath, 1);
+				for (Iterator<Path> it = walk1.iterator(); it.hasNext(); ) {
+					Path path = it.next();
+					String[] file = path.toString().split("\\\\");
+					String fileName = file[file.length - 1];
+					if (fileName.endsWith(".js")) {
+						existingCommands.put(fileName.substring(0, fileName.length()-3), new ButtonInfo( path, false));
+					}
 				}
-				is.close();
-				isr.close();
-				br.close();
-				codeInput.setText(String.valueOf(function));
 			}
 		}
 		catch (Exception e){
 			e.printStackTrace();
 		}
+		TreeMap<String, ButtonInfo> sorted = new TreeMap<>();
+		sorted.putAll(existingCommands);
 
+		for(Map.Entry<String,ButtonInfo> entry : sorted.entrySet()) {
+			String key = entry.getKey();
+			ButtonInfo value = entry.getValue();
 
-		try {
-			Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\pointsWhisper.txt");
-			if (Files.exists(file)) {
-				Scanner sc = new Scanner(file);
-				while (sc.hasNextLine()) {
-					if (String.valueOf(ChannelPointSettings.command).equals(sc.nextLine())) {
-						whisper.setChecked(true);
-						break;
-					}
-					else{
-						whisper.setChecked(false);
-					}
+			addButton(key, value.path);
+		}
+	}
+	public static class ButtonInfo{
+
+		public Path path;
+
+		ButtonInfo(Path path, boolean isDefault){
+			this.path = path;
+		}
+
+	}
+	public static void removeButton(String command) {
+		i--;
+		if (i % 2 == 0) {
+			height = height - 39;
+			commandsPanel.setBounds(0, 0, 400, (int) (height + 4));
+			commandsPanel.setPreferredSize(new Dimension(400, (int) (height + 4)));
+			scrollPane.updateUI();
+		}
+		for (int i = commandsPanel.getComponents().length-1; i >= 0; i--) {
+			if (commandsPanel.getComponents()[i] instanceof CurvedButton) {
+				System.out.println(((CurvedButton) commandsPanel.getComponents()[i]).getLText());
+				if (((CurvedButton) commandsPanel.getComponents()[i]).getLText().equalsIgnoreCase(command)) {
+					commandsPanel.remove(commandsPanel.getComponents()[i]);
+					commandsPanel.updateUI();
+					break;
 				}
-				sc.close();
 			}
 		}
-		catch (Exception f){
-			f.printStackTrace();
-		}
-
-
-
-		codeInput.setEditable(false);
-		codeInput.setCaretPosition(0);
-		codePanel.getVerticalScrollBar().setValue(0);
-		scrollPane.setVisible(false);
-		commandPanelView.setVisible(true);
 	}
-	private static void addButton(String command, Path path) {
+
+
+	public static void addButton(String command, Path path) {
 		i++;
 		if ((i-1) % 2 == 0) {
 			height = height + 39;
@@ -280,13 +247,11 @@ public class ChannelPointSettings {
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				showCommandPanel(command, path);
+				CommandEditor.showEditor("points", command, false);
 			}
 		});
 		button.refresh();
 		commandsPanel.add(button);
-		commandsPanel.updateUI();
-
 	}
 
 	private static CheckboxButton createButton(String text, int y){
@@ -299,11 +264,12 @@ public class ChannelPointSettings {
 		return button;
 	}
 	public static void refreshUI(){
-		panel.setBackground(Defaults.SUB_MAIN);
+		panel.setBackground(Defaults.TOP);
 		titlePanel.setBackground(Defaults.TOP);
 		commandLabel.setForeground(Defaults.FOREGROUND);
 		commandsPanel.setBackground(Defaults.SUB_MAIN);
 		commandPanelView.setBackground(Defaults.SUB_MAIN);
+
 		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
 		codeInput.setForeground(Defaults.FOREGROUND);
 		codeInput.setBackground(Defaults.MAIN);
@@ -313,13 +279,16 @@ public class ChannelPointSettings {
 		backButton.setBackground(Defaults.BUTTON);
 		backButton.setForeground(Defaults.FOREGROUND);
 		for (Component component : commandsPanel.getComponents()) {
-			if (component instanceof JButton) {
-				for (Component component2 : ((JButton) component).getComponents()) {
-					if (component2 instanceof JLabel) {
-						component2.setForeground(Defaults.FOREGROUND);
-					}
+			if (component instanceof CurvedButton) {
+
+				if(component.getForeground().equals(Defaults.FOREGROUND2)) {
+					component.setForeground(Defaults.FOREGROUND2);
+				}
+				else{
+					component.setForeground(Defaults.FOREGROUND);
 				}
 				component.setBackground(Defaults.BUTTON);
+				((CurvedButton) component).refresh();
 			}
 			if (component instanceof JLabel) {
 				component.setForeground(Defaults.FOREGROUND);
@@ -331,11 +300,7 @@ public class ChannelPointSettings {
 		}
 		for (Component component : commandPanelView.getComponents()) {
 			if (component instanceof JButton) {
-				for (Component component2 : ((JButton) component).getComponents()) {
-					if (component2 instanceof JLabel) {
-						component2.setForeground(Defaults.FOREGROUND);
-					}
-				}
+
 				component.setBackground(Defaults.BUTTON);
 			}
 			if (component instanceof JLabel) {
@@ -346,5 +311,18 @@ public class ChannelPointSettings {
 				((CheckboxButton) component).refresh();
 			}
 		}
+		for (Component component : panel.getComponents()) {
+			if (component instanceof JButton) {
+				component.setForeground(Defaults.FOREGROUND);
+				component.setBackground(Defaults.BUTTON);
+			}
+			if (component instanceof JLabel) {
+				component.setForeground(Defaults.FOREGROUND);
+			}
+			if(component instanceof CheckboxButton){
+				((CheckboxButton) component).refresh();
+			}
+		}
+		refresh();
 	}
 }

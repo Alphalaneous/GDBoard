@@ -12,13 +12,12 @@ import java.io.IOException;
 
 public class ShortcutSettings {
 	private static JPanel panel = new JPanel();
-	private static JPanel openPanel = createKeybindButton(25, "Open", "openKeybind");
-	private static JPanel skipPanel = createKeybindButton(75, "Skip/Next", "skipKeybind");
-	private static JPanel randPanel = createKeybindButton(125, "Random", "randomKeybind");
-	private static JPanel copyPanel = createKeybindButton(175, "Copy", "copyKeybind");
-	private static JPanel blockPanel = createKeybindButton(225, "Block", "blockKeybind");
-	private static JPanel clearPanel = createKeybindButton(275, "Clear", "clearKeybind");
-	//private static JPanel lockPanel = createKeybindButton(325, "Lock Mouse to GD", "lockKeybind");
+	private static JPanel openPanel = createKeybindButton(25, "$OPEN_SHORTCUT$", "openKeybind");
+	private static JPanel skipPanel = createKeybindButton(75, "$SKIP_SHORTCUT$", "skipKeybind");
+	private static JPanel randPanel = createKeybindButton(125, "$RANDOM_SHORTCUT$", "randomKeybind");
+	private static JPanel copyPanel = createKeybindButton(175, "$COPY_SHORTCUT$", "copyKeybind");
+	private static JPanel blockPanel = createKeybindButton(225, "$BLOCK_SHORTCUT$", "blockKeybind");
+	private static JPanel clearPanel = createKeybindButton(275, "$CLEAR_SHORTCUT$", "clearKeybind");
 	public static boolean focused = false;
 
 	public static int openKeybind = 36;
@@ -61,7 +60,7 @@ public class ShortcutSettings {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 8 || e.getKeyCode() == 16 || e.getKeyCode() == 17 || e.getKeyCode() == 18 || e.getKeyCode() == 10) {
 
-					if (text.equalsIgnoreCase("Open")) {
+					if (text.equalsIgnoreCase("$OPEN_SHORTCUT$")) {
 						input.setText("Home");
 						try {
 							Settings.writeSettings(setting, String.valueOf(36));
@@ -116,7 +115,7 @@ public class ShortcutSettings {
 
 		input.setDocument(doc);
 
-		JLabel keybindButton = new JLabel(text);
+		LangLabel keybindButton = new LangLabel(text);
 		keybindButton.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		keybindButton.setBounds(25, 3, keybindButton.getPreferredSize().width + 5, keybindButton.getPreferredSize().height + 5);
 		keybindButton.setForeground(Defaults.FOREGROUND);
@@ -147,7 +146,6 @@ public class ShortcutSettings {
 			Settings.writeSettings("copyKeybind", String.valueOf(copyKeybind));
 			Settings.writeSettings("blockKeybind", String.valueOf(blockKeybind));
 			Settings.writeSettings("clearKeybind", String.valueOf(clearKeybind));
-			Settings.writeSettings("lockKeybind", String.valueOf(lockKeybind));
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -156,113 +154,110 @@ public class ShortcutSettings {
 	}
 
 	public static void loadSettings() throws IOException {
-		if(!Settings.getSettings("onboarding").equalsIgnoreCase("false")){
-			openKeybind = Onboarding.openKeybind;
-		}
-		else if (!Settings.getSettings("openKeybind").equalsIgnoreCase("") && !Settings.getSettings("openKeybind").equalsIgnoreCase("-1")) {
-			openKeybind = Integer.parseInt(Settings.getSettings("openKeybind"));
-		}
-		if (!Settings.getSettings("skipKeybind").equalsIgnoreCase("") && !Settings.getSettings("skipKeybind").equalsIgnoreCase("-1")) {
-			skipKeybind = Integer.parseInt(Settings.getSettings("skipKeybind"));
-		}
-		if (!Settings.getSettings("randomKeybind").equalsIgnoreCase("") && !Settings.getSettings("randomKeybind").equalsIgnoreCase("-1")) {
-			randKeybind = Integer.parseInt(Settings.getSettings("randomKeybind"));
-		}
-		if (!Settings.getSettings("copyKeybind").equalsIgnoreCase("") && !Settings.getSettings("copyKeybind").equalsIgnoreCase("-1")) {
-			copyKeybind = Integer.parseInt(Settings.getSettings("copyKeybind"));
-		}
-		if (!Settings.getSettings("blockKeybind").equalsIgnoreCase("") && !Settings.getSettings("blockKeybind").equalsIgnoreCase("-1")) {
-			blockKeybind = Integer.parseInt(Settings.getSettings("blockKeybind"));
-		}
-		if (!Settings.getSettings("clearKeybind").equalsIgnoreCase("") && !Settings.getSettings("clearKeybind").equalsIgnoreCase("-1")) {
-			clearKeybind = Integer.parseInt(Settings.getSettings("clearKeybind"));
-		}
-		if (!Settings.getSettings("lockKeybind").equalsIgnoreCase("") && !Settings.getSettings("lockKeybind").equalsIgnoreCase("-1")) {
-			lockKeybind = Integer.parseInt(Settings.getSettings("lockKeybind"));
-		}
+		while(true) {
+			try {
+				if (!Settings.getSettings("onboarding").equalsIgnoreCase("false")) {
+					openKeybind = Onboarding.openKeybind;
+				} else if (!Settings.getSettings("openKeybind").equalsIgnoreCase("") && !Settings.getSettings("openKeybind").equalsIgnoreCase("-1")) {
+					openKeybind = Integer.parseInt(Settings.getSettings("openKeybind"));
+				}
+				if (!Settings.getSettings("skipKeybind").equalsIgnoreCase("") && !Settings.getSettings("skipKeybind").equalsIgnoreCase("-1")) {
+					skipKeybind = Integer.parseInt(Settings.getSettings("skipKeybind"));
+				}
+				if (!Settings.getSettings("randomKeybind").equalsIgnoreCase("") && !Settings.getSettings("randomKeybind").equalsIgnoreCase("-1")) {
+					randKeybind = Integer.parseInt(Settings.getSettings("randomKeybind"));
+				}
+				if (!Settings.getSettings("copyKeybind").equalsIgnoreCase("") && !Settings.getSettings("copyKeybind").equalsIgnoreCase("-1")) {
+					copyKeybind = Integer.parseInt(Settings.getSettings("copyKeybind"));
+				}
+				if (!Settings.getSettings("blockKeybind").equalsIgnoreCase("") && !Settings.getSettings("blockKeybind").equalsIgnoreCase("-1")) {
+					blockKeybind = Integer.parseInt(Settings.getSettings("blockKeybind"));
+				}
+				if (!Settings.getSettings("clearKeybind").equalsIgnoreCase("") && !Settings.getSettings("clearKeybind").equalsIgnoreCase("-1")) {
+					clearKeybind = Integer.parseInt(Settings.getSettings("clearKeybind"));
+				}
 
-		for (Component component : panel.getComponents()) {
-			if (component instanceof JPanel) {
-				for (Component component1 : ((JPanel) component).getComponents()) {
-					if (component1 instanceof JLabel) {
-						if (((JLabel) component1).getText().equalsIgnoreCase("Open")) {
-							if (!KeyEvent.getKeyText(openKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
-								((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(openKeybind));
-							} else {
-								((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
-							}
-						}
-						if (((JLabel) component1).getText().equalsIgnoreCase("Skip/Next")) {
-							if (!KeyEvent.getKeyText(skipKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
-								((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(skipKeybind));
-							} else {
-								((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
-							}
-						}
-						if (((JLabel) component1).getText().equalsIgnoreCase("Random")) {
-							if (!KeyEvent.getKeyText(randKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
-								((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(randKeybind));
-							} else {
-								((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
-							}
-						}
-						if (((JLabel) component1).getText().equalsIgnoreCase("Copy")) {
-							if (!KeyEvent.getKeyText(copyKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
-								((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(copyKeybind));
-							} else {
-								((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
-							}
-						}
-						if (((JLabel) component1).getText().equalsIgnoreCase("Block")) {
-							if (!KeyEvent.getKeyText(blockKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
-								((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(blockKeybind));
-							} else {
-								((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
-							}
-						}
-						if (((JLabel) component1).getText().equalsIgnoreCase("Clear")) {
-							if (!KeyEvent.getKeyText(clearKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
-								((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(clearKeybind));
-							} else {
-								((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
-							}
+				for (Component component : panel.getComponents()) {
+					if (component instanceof JPanel) {
+						for (Component component1 : ((JPanel) component).getComponents()) {
+							if (component1 instanceof LangLabel) {
+								if (((LangLabel) component1).getIdentifier().equalsIgnoreCase("OPEN_SHORTCUT")) {
+									if (!KeyEvent.getKeyText(openKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
+										((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(openKeybind));
+									} else {
+										((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
+									}
+								}
+								if (((LangLabel) component1).getIdentifier().equalsIgnoreCase("SKIP_SHORTCUT")) {
+									if (!KeyEvent.getKeyText(skipKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
+										((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(skipKeybind));
+									} else {
+										((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
+									}
+								}
+								if (((LangLabel) component1).getIdentifier().equalsIgnoreCase("RANDOM_SHORTCUT")) {
+									if (!KeyEvent.getKeyText(randKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
+										((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(randKeybind));
+									} else {
+										((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
+									}
+								}
+								if (((LangLabel) component1).getIdentifier().equalsIgnoreCase("COPY_SHORTCUT")) {
+									if (!KeyEvent.getKeyText(copyKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
+										((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(copyKeybind));
+									} else {
+										((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
+									}
+								}
+								if (((LangLabel) component1).getIdentifier().equalsIgnoreCase("BLOCK_SHORTCUT")) {
+									if (!KeyEvent.getKeyText(blockKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
+										((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(blockKeybind));
+									} else {
+										((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
+									}
+								}
+								if (((LangLabel) component1).getIdentifier().equalsIgnoreCase("CLEAR_SHORTCUT")) {
+									if (!KeyEvent.getKeyText(clearKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
+										((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(clearKeybind));
+									} else {
+										((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
+									}
 
-						}
-						if (((JLabel) component1).getText().equalsIgnoreCase("Lock to GD")) {
-							if (!KeyEvent.getKeyText(lockKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
-								((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(lockKeybind));
-							} else {
-								((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
+								}
 							}
-
 						}
 					}
 				}
+				break;
+			}
+			catch (Exception ignored){
+			}
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
 	}
 
 	public static void loadKeybind(String setting, int keybind) {
-		if (setting.equalsIgnoreCase("Open")) {
+		if (setting.equalsIgnoreCase("$OPEN_SHORTCUT$")) {
 			openKeybind = keybind;
 		}
-		if (setting.equalsIgnoreCase("Skip/Next")) {
+		if (setting.equalsIgnoreCase("$SKIP_SHORTCUT$")) {
 			skipKeybind = keybind;
 		}
-		if (setting.equalsIgnoreCase("Random")) {
+		if (setting.equalsIgnoreCase("$RANDOM_SHORTCUT$")) {
 			randKeybind = keybind;
 		}
-		if (setting.equalsIgnoreCase("Copy")) {
+		if (setting.equalsIgnoreCase("$COPY_SHORTCUT$")) {
 			copyKeybind = keybind;
 		}
-		if (setting.equalsIgnoreCase("Block")) {
+		if (setting.equalsIgnoreCase("$BLOCK_SHORTCUT$")) {
 			blockKeybind = keybind;
 		}
-		if (setting.equalsIgnoreCase("Clear")) {
+		if (setting.equalsIgnoreCase("$CLEAR_SHORTCUT$")) {
 			clearKeybind = keybind;
-		}
-		if (setting.equalsIgnoreCase("Lock Mouse to GD")) {
-			lockKeybind = keybind;
 		}
 	}
 

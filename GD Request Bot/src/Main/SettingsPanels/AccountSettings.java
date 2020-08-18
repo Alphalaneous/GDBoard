@@ -12,8 +12,10 @@ import javax.swing.*;
 import static Main.Defaults.settingsButtonUI;
 
 public class AccountSettings {
-	private static JLabel channelText;
-	private static JLabel geometryText;
+	private static LangLabel channelText = new LangLabel("");
+	private static LangLabel geometryText = new LangLabel("");
+	private static RoundedJButton refreshTwitch = new RoundedJButton("\uE149", "$REFRESH_TWITCH$");
+	private static RoundedJButton refreshGD = new RoundedJButton("\uE149", "$REFRESH_GD$");
 
 	private static JPanel panel = new JPanel();
 
@@ -24,8 +26,8 @@ public class AccountSettings {
 		panel.setBackground(Defaults.SUB_MAIN);
 		panel.setLayout(null);
 
-		channelText = new JLabel("Twitch: " + Settings.getSettings("channel"));
-		geometryText = new JLabel("Geometry Dash: NA");
+		channelText.setTextLangFormat("$TWITCH$", Settings.getSettings("channel"));
+		geometryText.setTextLangFormat("$GEOMETRY_DASH$","NA");
 		channelText.setForeground(Defaults.FOREGROUND);
 		channelText.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		channelText.setBounds(25,50,channelText.getPreferredSize().width+5,channelText.getPreferredSize().height+5);
@@ -33,21 +35,20 @@ public class AccountSettings {
 		geometryText.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		geometryText.setBounds(25,20,geometryText.getPreferredSize().width+5,geometryText.getPreferredSize().height+5);
 
-		RoundedJButton button = new RoundedJButton("\uE149", "Refresh Login");
-		button.asSettings();
-		button.setBackground(Defaults.BUTTON);
-		button.setBounds(365,45,30,30);
-		button.setPreferredSize(new Dimension(365,30));
-		button.setUI(settingsButtonUI);
-		button.setForeground(Defaults.FOREGROUND);
-		button.setBorder(BorderFactory.createEmptyBorder());
-		button.setFont(Defaults.SYMBOLS.deriveFont(14f));
-		button.addMouseListener(new MouseAdapter() {
+
+		refreshTwitch.setBackground(Defaults.BUTTON);
+		refreshTwitch.setBounds(365,48,25,25);
+		refreshTwitch.setPreferredSize(new Dimension(25,25));
+		refreshTwitch.setUI(settingsButtonUI);
+		refreshTwitch.setForeground(Defaults.FOREGROUND);
+		refreshTwitch.setBorder(BorderFactory.createEmptyBorder());
+		refreshTwitch.setFont(Defaults.SYMBOLS.deriveFont(14f));
+		refreshTwitch.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				Thread thread = new Thread(() -> {
 					try {
-						APIs.setOauth();
+						APIs.setOauth(false);
 					}
 					catch (Exception ignored){
 					}
@@ -55,27 +56,52 @@ public class AccountSettings {
 				thread.start();
 			}
 		});
+
+		refreshGD.setBackground(Defaults.BUTTON);
+		refreshGD.setBounds(365,18,25,25);
+		refreshGD.setPreferredSize(new Dimension(25,25));
+		refreshGD.setUI(settingsButtonUI);
+		refreshGD.setForeground(Defaults.FOREGROUND);
+		refreshGD.setBorder(BorderFactory.createEmptyBorder());
+		refreshGD.setFont(Defaults.SYMBOLS.deriveFont(14f));
+		refreshGD.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Thread thread = new Thread(() -> {
+					try {
+						LoadGD.load(true);
+					} catch (IOException ignored) {
+					}
+				});
+				thread.start();
+			}
+		});
+		
 		panel.add(channelText);
 		panel.add(geometryText);
-		panel.add(button);
+		panel.add(refreshTwitch);
+		panel.add(refreshGD);
 		return panel;
 
 	}
 	public static void refreshTwitch(String channel){
-		channelText.setText("Twitch: " + channel);
+		channelText.setTextLangFormat("$TWITCH$", channel);
 
 		channelText.setBounds(25,50,channelText.getPreferredSize().width+5,channelText.getPreferredSize().height+5);
 
 	}
 	public static void refreshGD(String username){
 		if(LoadGD.isAuth) {
-			geometryText.setText("Geometry Dash: " + username);
+			geometryText.setTextLangFormat("$GEOMETRY_DASH$", username);
 			geometryText.setBounds(25, 20, geometryText.getPreferredSize().width + 5, geometryText.getPreferredSize().height + 5);
 		}
 
 	}
 	public static void refreshUI() {
-
+		refreshTwitch.setBackground(Defaults.BUTTON);
+		refreshTwitch.setForeground(Defaults.FOREGROUND);
+		refreshGD.setBackground(Defaults.BUTTON);
+		refreshGD.setForeground(Defaults.FOREGROUND);
 		panel.setBackground(Defaults.SUB_MAIN);
 		for (Component component : panel.getComponents()) {
 			if (component instanceof JButton) {

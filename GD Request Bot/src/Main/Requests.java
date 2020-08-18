@@ -38,12 +38,12 @@ import java.util.zip.GZIPInputStream;
 public class Requests {
 
 	public static ArrayList<LevelData> levels = new ArrayList<>();
-	static ArrayList<Long> addedLevels = new ArrayList<Long>();
+	static HashMap<Long, Integer> addedLevels = new HashMap<Long, Integer>();
 	static boolean bwomp = false;
 	private static String os = (System.getProperty("os.name")).toUpperCase();
 	private static HashMap<String, Integer> userStreamLimitMap = new HashMap<>();
 
-	public static void forceAdd(String name, String author, long levelID, String difficulty, boolean epic, boolean featured, int stars, String requester, int gameVersion, int coins, String description, int likes, int downloads, String length, int levelVersion, int songID, String songName, String songAuthor, int objects, long original, boolean vulgar, boolean image) {
+	public static void forceAdd(String name, String author, long levelID, String difficulty, boolean epic, boolean featured, int stars, String requester, int gameVersion, int coins, String description, int likes, int downloads, String length, int levelVersion, int songID, String songName, String songAuthor, int objects, long original, boolean vulgar, boolean image, int password, String upload, String update, boolean verifiedCoins) {
 
 
 		LevelData levelData = new LevelData();
@@ -55,6 +55,7 @@ public class Requests {
 		if (featured) {
 			levelData.setFeatured();
 		}
+		levelData.setVeririedCoins(verifiedCoins);
 		levelData.setStars(stars);
 		levelData.setRequester(requester);
 		levelData.setVersion(gameVersion);
@@ -65,12 +66,36 @@ public class Requests {
 		levelData.setSongURL("");
 		levelData.setLength(length);
 		levelData.setLevelVersion(levelVersion);
-
+		levelData.setPassword(password);
 		levelData.setSongID(songID);
 		levelData.setSongName(songName);
 		levelData.setSongAuthor(songAuthor);
 		levelData.setObjects(objects);
 		levelData.setOriginal(original);
+		if(update != null) {
+			levelData.setUpdate(update);
+			levelData.setUpload(upload);
+		}
+		GDUserIconSet iconSet = null;
+		GDUser user = null;
+
+		try {
+			if (LoadGD.isAuth) {
+				user = LoadGD.authClient.searchUser(levelData.getAuthor().toString()).block();
+			} else {
+				user = LoadGD.anonClient.searchUser(levelData.getAuthor().toString()).block();
+			}
+			iconSet = new GDUserIconSet(user, spriteFactory);
+			BufferedImage icon = iconSet.generateIcon(user.getMainIconType());
+			Image imgScaled = icon.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+			ImageIcon imgNew = new ImageIcon(imgScaled);
+			levelData.setPlayerIcon(imgNew);
+		} catch (MissingAccessException e) {
+			user = LoadGD.anonClient.searchUser("RobTop").block();
+			iconSet = new GDUserIconSet(user, spriteFactory);
+		} catch (Exception e){
+			levelData.setPlayerIcon(null);
+		}
 		if (vulgar) {
 			levelData.setContainsVulgar();
 		}
@@ -78,15 +103,44 @@ public class Requests {
 			levelData.setContainsImage();
 		}
 
-		LevelsWindow.createButton(name, author, levelID, difficulty, epic, featured, stars, requester, gameVersion, null, coins);
+		LevelsWindow.createButton(name, author, levelID, difficulty, epic, featured, stars, requester, gameVersion, levelData.getPlayerIcon(), coins, verifiedCoins);
 		levels.add(levelData);
 		LevelsWindow.setName(Requests.levels.size());
 		levelData.setAnalyzed();
 		LevelsWindow.updateUI(levelID, vulgar, image, true);
 		OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
+		InfoWindow.refreshInfo();
 	}
 
-	public static void addRequest(long ID, String requester) {
+	static SpriteFactory spriteFactory;
+
+	static {
+		try {
+			spriteFactory = SpriteFactory.create();
+		} catch (SpriteLoadException e) {
+			e.printStackTrace();
+		}
+	}
+
+	static boolean onCool = false;
+	static int currentPos = 0;
+
+	public static void addRequest(long ID, String requester, boolean isMod) {
+		if(ID > 999999999){
+			return;
+		}
+
+		while (onCool) {
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		currentPos++;
+
+		onCool = true;
+
 		OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
 
 		if (MainBar.requests) {
@@ -97,35 +151,43 @@ public class Requests {
 			Path disallowed = Paths.get(Defaults.saveDirectory + "\\GDBoard\\disallowedStrings.txt");
 			Path allowed = Paths.get(Defaults.saveDirectory + "\\GDBoard\\allowedStrings.txt");
 
+			boolean bypass = false;
+			bypass = GeneralSettings.modsBypassOption && isMod;
+			if(requester.equalsIgnoreCase(Settings.getSettings("channel")) && GeneralSettings.streamerBypassOption){
+				bypass = true;
+			}
+			for (int k = 0; k < levels.size(); k++) {
 
-			if (Main.programLoaded) {
+				if (ID == levels.get(k).getLevelID()) {
+					int j = k + 1;
+					Main.sendMessage(Utilities.format("$ALREADY_IN_QUEUE_MESSAGE$", requester, j));
+					onCool = false;
+					return;
+				}
+			}
+			if (Main.programLoaded && !bypass) {
 				if (GeneralSettings.followersOption) {
 					if (APIs.isNotFollowing(requester.toString())) {
-						Main.sendMessage("@" + requester + " Please follow to send levels!");
-						return;
-					}
-				}
-				for (int k = 0; k < levels.size(); k++) {
-
-					if (ID == levels.get(k).getLevelID()) {
-						int j = k + 1;
-						Main.sendMessage(
-								"@" + requester + " Level is already in the queue at position " + j + "!");
+						Main.sendMessage(Utilities.format("$FOLLOW_MESSAGE$", requester));
+						onCool = false;
 						return;
 					}
 				}
 				if (ID < RequestSettings.minID && RequestSettings.minIDOption) {
-					Main.sendMessage("@" + requester + " your ID must be above or equal to " + RequestSettings.minID + "!");
+					Main.sendMessage(Utilities.format("$MIN_ID_MESSAGE$", requester, RequestSettings.minID));
+					onCool = false;
 					return;
 				}
 				if (ID > RequestSettings.maxID && RequestSettings.maxIDOption) {
-					Main.sendMessage("@" + requester + " your ID must be below or equal to " + RequestSettings.maxID + "!");
+					Main.sendMessage(Utilities.format("$MAX_ID_MESSAGE$", requester, RequestSettings.maxID));
+					onCool = false;
 					return;
 				}
 				if (GeneralSettings.queueLimitBoolean && (levels.size() >= GeneralSettings.queueLimit)) {
 					if (!GeneralSettings.queueFullOption) {
-						Main.sendMessage("@" + requester + " The queue is full!");
+						Main.sendMessage(Utilities.format("$QUEUE_FULL_MESSAGE$", requester));
 					}
+					onCool = false;
 					return;
 				}
 
@@ -137,19 +199,21 @@ public class Requests {
 						}
 					}
 					if (size >= GeneralSettings.userLimit) {
-						Main.sendMessage("@" + requester + " You have the maximum amount of levels in the queue!");
+						Main.sendMessage(Utilities.format("$MAXIMUM_LEVELS_MESSAGE$", requester));
+						onCool = false;
 						return;
 					}
 				}
 				if (GeneralSettings.userLimitStreamOption) {
 					if (userStreamLimitMap.containsKey(requester)) {
 						if (userStreamLimitMap.get(requester) >= GeneralSettings.userLimitStream) {
-							Main.sendMessage("@" + requester + " You've reached the maximum amount of levels for the stream!");
+							Main.sendMessage(Utilities.format("$MAXIMUM_LEVELS_STREAM_MESSAGE$", requester));
+							onCool = false;
 							return;
 						}
 					}
 				}
-				if (Files.exists(logged) && GeneralSettings.repeatedOptionAll && Main.programLoaded) {
+				if (Files.exists(logged) && (GeneralSettings.repeatedOptionAll && !GeneralSettings.updatedRepeatedOption) && Main.programLoaded && !bypass) {
 					Scanner sc = null;
 					try {
 						sc = new Scanner(logged.toFile());
@@ -157,16 +221,18 @@ public class Requests {
 						e.printStackTrace();
 					}
 					while (sc.hasNextLine()) {
-						if (String.valueOf(ID).equals(sc.nextLine())) {
+						if (String.valueOf(ID).equals(sc.nextLine().split(",")[0])) {
 							sc.close();
-							Main.sendMessage("@" + requester + " That level has been requested before!");
+							Main.sendMessage(Utilities.format("$REQUESTED_BEFORE_MESSAGE$", requester));
+							onCool = false;
 							return;
 						}
 					}
 					sc.close();
 				}
-				if (addedLevels.contains(ID) && GeneralSettings.repeatedOption) {
-					Main.sendMessage("@" + requester + " That level has been requested before!");
+				if (addedLevels.containsKey(ID) && (GeneralSettings.repeatedOption && !GeneralSettings.updatedRepeatedOption)) {
+					Main.sendMessage(Utilities.format("$REQUESTED_BEFORE_MESSAGE$", requester));
+					onCool = false;
 					return;
 				}
 
@@ -180,7 +246,8 @@ public class Requests {
 					while (sc.hasNextLine()) {
 						if (String.valueOf(ID).equals(sc.nextLine())) {
 							sc.close();
-							Main.sendMessage("@" + requester + " That Level is Blocked!");
+							Main.sendMessage(Utilities.format("$BLOCKED_LEVEL_MESSAGE$", requester));
+							onCool = false;
 							return;
 						}
 					}
@@ -197,6 +264,7 @@ public class Requests {
 					while (sc.hasNextLine()) {
 						if (requester.toString().equalsIgnoreCase(sc.nextLine())) {
 							sc.close();
+							onCool = false;
 							return;
 						}
 					}
@@ -217,20 +285,24 @@ public class Requests {
 				try {
 					level = LoadGD.authClient.getLevelById(ID).block();
 				} catch (MissingAccessException | NumberFormatException e) {
-					Main.sendMessage("@" + requester + " That level ID doesn't exist!");
+					Main.sendMessage(Utilities.format("$LEVEL_ID_DOESNT_EXIST_MESSAGE$", requester));
+					onCool = false;
 					return;
 				} catch (Exception e) {
-					Main.sendMessage("@" + requester + " Level search failed... (Servers down?) " + e);
+					Main.sendMessage(Utilities.format("$SEARCH_FAILED$", requester));
+					onCool = false;
 					return;
 				}
 			} else {
 				try {
 					level = LoadGD.anonClient.getLevelById(ID).block();
 				} catch (MissingAccessException | NumberFormatException e) {
-					Main.sendMessage("@" + requester + " That level ID doesn't exist!");
+					Main.sendMessage(Utilities.format("$LEVEL_ID_DOESNT_EXIST_MESSAGE$", requester));
+					onCool = false;
 					return;
 				} catch (Exception e) {
-					Main.sendMessage("@" + requester + " Level search failed... (Servers down?)");
+					Main.sendMessage(Utilities.format("$SEARCH_FAILED$", requester));
+					onCool = false;
 					return;
 				}
 			}
@@ -238,7 +310,7 @@ public class Requests {
 			LevelData levelData = new LevelData();
 			// --------------------
 			Thread parse = null;
-			if (Main.programLoaded) {
+			if (Main.programLoaded && !bypass) {
 				if (level != null && Files.exists(blockedGDUser)) {
 					Scanner sc = null;
 					try {
@@ -248,8 +320,9 @@ public class Requests {
 					}
 					while (sc.hasNextLine()) {
 						if (level.getCreatorName().equalsIgnoreCase(sc.nextLine())) {
-							Main.sendMessage("@" + requester + " That creator is blocked!");
+							Main.sendMessage(Utilities.format("$BLOCKED_CREATOR_MESSAGE$", requester));
 							sc.close();
+							onCool = false;
 							return;
 						}
 					}
@@ -272,7 +345,8 @@ public class Requests {
 							}
 						}
 						if (!hasWord) {
-							Main.sendMessage("@" + requester + " That level name isn't allowed!");
+							Main.sendMessage(Utilities.format("$BLOCKED_NAME_MESSAGE$", requester));
+							onCool = false;
 							return;
 						}
 						sc.close();
@@ -289,7 +363,8 @@ public class Requests {
 						while (sc.hasNextLine()) {
 							if (level.getName().toLowerCase().contains(sc.nextLine().toLowerCase())) {
 								sc.close();
-								Main.sendMessage("@" + requester + " That level name isn't allowed!");
+								Main.sendMessage(Utilities.format("$BLOCKED_NAME_MESSAGE$", requester));
+								onCool = false;
 								return;
 							}
 						}
@@ -298,28 +373,34 @@ public class Requests {
 				}
 
 				if (level != null && RequestSettings.ratedOption && !(level.getStars() > 0)) {
-					Main.sendMessage("@" + requester + " Please send star rated levels only!");
+					Main.sendMessage(Utilities.format("$STAR_RATED_MESSAGE$", requester));
+					onCool = false;
 					return;
 				}
 				if (level != null && RequestSettings.unratedOption && level.getStars() > 0) {
-					Main.sendMessage("@" + requester + " Please send unrated levels only!");
+					Main.sendMessage(Utilities.format("$UNRATED_MESSAGE$", requester));
+					onCool = false;
 					return;
 				}
 				if (level != null && RequestSettings.minObjectsOption && level.getObjectCount() < RequestSettings.minObjects) {
-					Main.sendMessage("@" + requester + " That level has too few objects!");
+					Main.sendMessage(Utilities.format("$FEW_OBJECTS_MESSAGE$", requester));
+					onCool = false;
 					return;
 				}
 				if (level != null && RequestSettings.maxObjectsOption && level.getObjectCount() > RequestSettings.maxObjects) {
-					Main.sendMessage("@" + requester + " That level has too many objects!");
+					Main.sendMessage(Utilities.format("$MANY_OBJECTS_MESSAGE$", requester));
+					onCool = false;
 					return;
 				}
 				if (level.getObjectCount() != 0) {
 					if (level != null && RequestSettings.minLikesOption && level.getObjectCount() < RequestSettings.minLikes) {
-						Main.sendMessage("@" + requester + " That level has too few likes!");
+						Main.sendMessage(Utilities.format("$FEW_LIKES_MESSAGE$", requester));
+						onCool = false;
 						return;
 					}
 					if (level != null && RequestSettings.maxLikesOption && level.getObjectCount() > RequestSettings.maxLikes) {
-						Main.sendMessage("@" + requester + " That level has too many likes!");
+						Main.sendMessage(Utilities.format("$MANY_LIKES_MESSAGE$", requester));
+						onCool = false;
 						return;
 					}
 				}
@@ -336,7 +417,7 @@ public class Requests {
 			levelData.setLevelID(ID);
 			levelData.setVersion(level.getGameVersion());
 			levelData.setLevelVersion(level.getLevelVersion());
-
+			levelData.setVeririedCoins(level.hasCoinsVerified());
 			levelData.setEpic(level.isEpic());
 			levelData.setSongID((int) Objects.requireNonNull(level.getSong().block()).getId());
 			levelData.setStars(level.getStars());
@@ -345,6 +426,45 @@ public class Requests {
 			levelData.setObjects(Objects.requireNonNull(level.getObjectCount()));
 			levelData.setOriginal(Objects.requireNonNull(level.getOriginalLevelID()));
 			levelData.setCoins(Objects.requireNonNull(level.getCoinCount()));
+
+
+			if (Files.exists(logged) && (GeneralSettings.updatedRepeatedOption && Main.programLoaded && !bypass)) {
+				Scanner sc = null;
+				try {
+					sc = new Scanner(logged.toFile());
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				while (sc.hasNextLine()) {
+					String levelLine = sc.nextLine();
+
+					if (String.valueOf(ID).equals(levelLine.split(",")[0])) {
+						int version;
+						if(levelLine.split(",").length == 1){
+							version = 1;
+						}
+						else{
+							version = Integer.parseInt(levelLine.split(",")[1]);
+						}
+						if(version >= levelData.getLevelVersion()) {
+							sc.close();
+							Main.sendMessage(Utilities.format("$REQUESTED_BEFORE_MESSAGE$", requester));
+							onCool = false;
+							return;
+						}
+					}
+				}
+				sc.close();
+			}
+			if (addedLevels.containsKey(ID) && (GeneralSettings.updatedRepeatedOption && Main.programLoaded && !bypass)) {
+				if(addedLevels.get(ID) >= levelData.getLevelVersion()) {
+					Main.sendMessage(Utilities.format("$REQUESTED_BEFORE_MESSAGE$", requester));
+					onCool = false;
+					return;
+				}
+			}
+
+
 			GDUserIconSet iconSet = null;
 			try {
 				if (LoadGD.isAuth) {
@@ -352,19 +472,10 @@ public class Requests {
 				} else {
 					user = LoadGD.anonClient.searchUser(levelData.getAuthor().toString()).block();
 				}
-
-				try {
-					iconSet = new GDUserIconSet(user, SpriteFactory.create());
-				} catch (SpriteLoadException e) {
-					e.printStackTrace();
-				}
+				iconSet = new GDUserIconSet(user, spriteFactory);
 			} catch (MissingAccessException e) {
 				user = LoadGD.anonClient.searchUser("RobTop").block();
-				try {
-					iconSet = new GDUserIconSet(user, SpriteFactory.create());
-				} catch (SpriteLoadException e1) {
-					e1.printStackTrace();
-				}
+				iconSet = new GDUserIconSet(user, spriteFactory);
 			}
 			BufferedImage icon = iconSet.generateIcon(user.getMainIconType());
 			Image imgScaled = icon.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -393,13 +504,15 @@ public class Requests {
 					levelData.setDifficulty("extreme demon");
 				}
 			}
-			if (Main.programLoaded) {
+			if (Main.programLoaded && !bypass) {
 				if (RequestSettings.excludedDifficulties.contains(levelData.getDifficulty().toString().toLowerCase()) && RequestSettings.disableOption) {
-					Main.sendMessage("@" + requester + " That difficulty is disabled!");
+					Main.sendMessage(Utilities.format("$DIFFICULTY_MESSAGE$", requester));
+					onCool = false;
 					return;
 				}
 				if (RequestSettings.excludedLengths.contains(levelData.getLength().toString().toLowerCase()) && RequestSettings.disableLengthOption) {
-					Main.sendMessage("@" + requester + " That length is disabled!");
+					Main.sendMessage(Utilities.format("$LENGTH_MESSAGE$", requester));
+					onCool = false;
 					return;
 				}
 			}
@@ -428,7 +541,8 @@ public class Requests {
 						finalLevelData.setUpload(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getUploadTimestamp()));
 						finalLevelData.setUpdate(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getLastUpdatedTimestamp()));
 						InfoWindow.refreshInfo();
-						object = null;
+						Functions.saveFunction();
+						LevelsWindow.refreshSelectedLevel(ID);
 					} catch (Exception e) {
 						LoadGD.isAuth = false;
 
@@ -448,8 +562,8 @@ public class Requests {
 					finalLevelData1.setUpload(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getUploadTimestamp()));
 					finalLevelData1.setUpdate(String.valueOf(((GDLevelData) Objects.requireNonNull(object)).getLastUpdatedTimestamp()));
 					InfoWindow.refreshInfo();
-
-					object = null;
+					LevelsWindow.refreshSelectedLevel(ID);
+					Functions.saveFunction();
 				});
 
 			}
@@ -458,7 +572,7 @@ public class Requests {
 			if (os.contains("WIN")) {
 				if (GeneralSettings.autoDownloadOption) {
 					LevelData finalLevelData2 = levelData;
-					Thread songDL = new Thread(() -> {
+					new Thread(() -> {
 						Path songFile = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\" + finalLevelData2.getSongID() + ".mp3");
 						if (!Files.exists(songFile)) {
 							try {
@@ -466,18 +580,25 @@ public class Requests {
 							} catch (IOException ignored) {
 							}
 						}
-					});
-					songDL.start();
+					}).start();
 				}
 			}
 			levels.add(levelData);
-			LevelsWindow.createButton(levelData.getName().toString(), levelData.getAuthor().toString(), levelData.getLevelID(), levelData.getDifficulty().toString(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(), levelData.getRequester().toString(), levelData.getVersion(), levelData.getPlayerIcon(), levelData.getCoins());
+			LevelsWindow.createButton(levelData.getName().toString(), levelData.getAuthor().toString(), levelData.getLevelID(),
+					levelData.getDifficulty().toString(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(),
+					levelData.getRequester().toString(), levelData.getVersion(), levelData.getPlayerIcon(), levelData.getCoins(),
+					levelData.getVerifiedCoins());
 
 			LevelsWindow.setName(Requests.levels.size());
 			Functions.saveFunction();
 			if (Main.sendMessages) {
-				Main.sendMessage("@" + levelData.getRequester() + " " + levelData.getName() + " ("
-						+ levelData.getLevelID() + ") has been added to the queue at position " + levels.size() + "!");
+				if(!GeneralSettings.confirmOption) {
+					Main.sendMessage(Utilities.format("$CONFIRMATION_MESSAGE$",
+							levelData.getRequester(),
+							levelData.getName(),
+							levelData.getLevelID(),
+							levels.size()));
+				}
 			}
 			if (levels.size() == 1) {
 				StringSelection selection = new StringSelection(String.valueOf(Requests.levels.get(0).getLevelID()));
@@ -485,25 +606,27 @@ public class Requests {
 				clipboard.setContents(selection, selection);
 				if (Main.sendMessages) {
 					if (!GeneralSettings.nowPlayingOption) {
-						Main.sendMessage("Now Playing " + Requests.levels.get(0).getName() + " ("
-								+ Requests.levels.get(0).getLevelID() + "). Requested by "
-								+ Requests.levels.get(0).getRequester());
+						Main.sendMessage(Utilities.format("$NOW_PLAYING_MESSAGE$",
+								Requests.levels.get(0).getName(),
+								Requests.levels.get(0).getLevelID(),
+								Requests.levels.get(0).getRequester()));
 					}
 				}
 			}
-			levelData = null;
+			addedLevels.put(ID, levelData.getLevelVersion());
 			OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
-			addedLevels.add(ID);
 			Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
 			try {
 				boolean exists = false;
 				if (!Files.exists(file)) {
 					Files.createFile(file);
 				}
+				String value = null;
 				if (Files.exists(logged)) {
 					Scanner sc = new Scanner(logged.toFile());
 					while (sc.hasNextLine()) {
-						if (String.valueOf(ID).equals(sc.nextLine())) {
+						value = sc.nextLine();
+						if (String.valueOf(ID).equals(value.split(",")[0])) {
 							sc.close();
 							exists = true;
 							break;
@@ -515,19 +638,37 @@ public class Requests {
 				if (!exists) {
 					Files.write(
 							file,
-							(ID + "\n").getBytes(),
+							(ID + "," + levelData.getLevelVersion()  + "\n").getBytes(),
 							StandardOpenOption.APPEND);
 
 				}
+				else if(exists){
+					BufferedReader fileA = new BufferedReader(new FileReader(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt"));
+					StringBuilder inputBuffer = new StringBuilder();
+					String line;
+					while ((line = fileA.readLine()) != null) {
+						inputBuffer.append(line);
+						inputBuffer.append('\n');
+					}
+					fileA.close();
+
+					FileOutputStream fileOut = new FileOutputStream(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
+					fileOut.write(inputBuffer.toString().replace(value, ID+","+levelData.getLevelVersion()).getBytes());
+					fileOut.close();
+				}
+				levelData = null;
+
 			} catch (IOException e1) {
 				DialogBox.showDialogBox("Error!", e1.toString(), "There was an error writing to the file!", new String[]{"OK"});
 
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+
 		} else {
-			Main.sendMessage("@" + requester + " Requests are off!");
+			Main.sendMessage(Utilities.format("$REQUESTS_OFF_MESSAGE$", requester));
 		}
+		onCool = false;
 	}
 
 	@SuppressWarnings("unused")
@@ -657,6 +798,9 @@ public class Requests {
 	}
 
 	public static String remove(String user, boolean isMod, int intArg) {
+		if(intArg-1 == LevelsWindow.getSelectedID()){
+			return "";
+		}
 		String response = "";
 		for (int i = 0; i < Requests.levels.size(); i++) {
 			try {
@@ -692,6 +836,9 @@ public class Requests {
 		for (int i = Requests.levels.size() - 1; i >= 0; i--) {
 			try {
 				if (String.valueOf(user).equalsIgnoreCase(Requests.levels.get(i).getRequester().toString())) {
+					if(i == LevelsWindow.getSelectedID()){
+						return "";
+					}
 					response = "@" + user + ", " + Requests.levels.get(i).getName() + " (" + Requests.levels.get(i).getLevelID() + ") has been removed!";
 					LevelsWindow.removeButton(i);
 					Requests.levels.remove(i);
@@ -824,7 +971,7 @@ public class Requests {
 			while (sc.hasNextLine()) {
 				if (String.valueOf(blockedID).equals(sc.nextLine())) {
 					sc.close();
-					return "@" + user + " ID Already Blocked!";
+					return Utilities.format("$BLOCK_EXISTS_MESSAGE$", user);
 				}
 			}
 			sc.close();
@@ -834,14 +981,14 @@ public class Requests {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			response = "@" + user + " Successfully blocked " + arguments[1];
+			response = Utilities.format("$BLOCK_MESSAGE$", user, arguments[1]);
 			BlockedSettings.addButton(Long.parseLong(arguments[1]));
 			if (start) {
 				LevelsWindow.setOneSelect();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			response = "@" + user + " Block failed!";
+			response = Utilities.format("$BLOCK_FAILED_MESSAGE$", user);
 		}
 		return response;
 	}
@@ -874,15 +1021,15 @@ public class Requests {
 					Files.delete(file);
 					Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\blocked.txt"), StandardCopyOption.REPLACE_EXISTING);
 					BlockedSettings.removeID(arguments[1]);
-					response = "@" + user + " Successfully unblocked " + arguments[1];
+					response = Utilities.format("$UNBLOCK_MESSAGE$", user, arguments[1]);
 					BlockedSettings.removeID(unblocked);
 				} else {
-					response = "@" + user + " That level isn't blocked!";
+					response = Utilities.format("$UNBLOCK_DOESNT_EXISTS_MESSAGE$", user);
 				}
 			}
 		} catch (IOException ex) {
 			ex.printStackTrace();
-			response = "@" + user + " unblock failed!";
+			response = Utilities.format("$UNBLOCK_FAILED_MESSAGE$", user);
 		}
 		return response;
 	}
@@ -900,7 +1047,7 @@ public class Requests {
 			while (sc.hasNextLine()) {
 				if (String.valueOf(blockedUser).equals(sc.nextLine())) {
 					sc.close();
-					return "@" + user + " User Already Blocked!";
+					return Utilities.format("$BLOCK_USER_EXISTS_MESSAGE$", user);
 				}
 			}
 			sc.close();
@@ -909,12 +1056,12 @@ public class Requests {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			response = "@" + user + " Successfully blocked " + arguments[1];
+			response = Utilities.format("$BLOCK_USER_MESSAGE$", user, arguments[1]);
 			BlockedUserSettings.addButton(arguments[1]);
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			response = "@" + user + " Block failed!";
+			response = Utilities.format("$BLOCK_USER_FAILED_MESSAGE$", user);
 		}
 		return response;
 	}
@@ -947,22 +1094,23 @@ public class Requests {
 					Files.delete(file);
 					Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\blockedUsers.txt"), StandardCopyOption.REPLACE_EXISTING);
 					BlockedSettings.removeID(arguments[1]);
-					response = "@" + user + " Successfully unblocked " + arguments[1];
+					response = Utilities.format("$UNBLOCK_USER_MESSAGE$", user, arguments[1]);
 					BlockedUserSettings.removeUser(unblocked);
 				} else {
-					response = "@" + user + " That user isn't blocked!";
+					response = Utilities.format("$UNBLOCK_USER_DOESNT_EXISTS_MESSAGE$", user);
+
 				}
 			}
 		} catch (IOException ex) {
 			ex.printStackTrace();
-			response = "@" + user + " unblock failed!";
+			response = Utilities.format("$UNBLOCK_USER_FAILED_MESSAGE$", user);
 		}
 		return response;
 	}
 
 	@SuppressWarnings("unused")
 
-	public static String getHelp(String command) {
+	public static String getHelp(String user, String command) {
 		String info = null;
 		boolean infoExists = false;
 		try {
@@ -999,13 +1147,13 @@ public class Requests {
 			e.printStackTrace();
 		}
 		if (info == null) {
-			return "There is no info for this command!";
+			info = "$HELP_NO_INFO$";
 		}
-		return info;
+		return Utilities.format("$DEFAULT_MENTION$", user) + " " + info;
 	}
 
 	@SuppressWarnings("unused")
-	public static String getHelp() {
+	public static String getHelp(String user) {
 		StringBuilder message = new StringBuilder();
 		try {
 			URI uri = Main.class.getResource("/Resources/Commands/").toURI();
@@ -1016,7 +1164,7 @@ public class Requests {
 				myPath = Paths.get(uri);
 			}
 
-			message.append("List of Commands | Type !help <command> for more help.");
+			message.append("$LIST_COMMANDS_START_MESSAGE$");
 			Stream<Path> walk = Files.walk(myPath, 1);
 			for (Iterator<Path> it = walk.iterator(); it.hasNext(); ) {
 				Path path = it.next();
@@ -1097,7 +1245,7 @@ public class Requests {
 		if (GeneralSettings.subsOption) {
 			if (!isSub) {
 				if (!isMod) {
-					return "@" + user + " Please subscribe to request levels!";
+					return Utilities.format("$REQUESTS_SUBSCRIBE_MESSAGE$", user);
 				}
 			}
 		}
@@ -1109,7 +1257,7 @@ public class Requests {
 			assert m != null;
 			if (m.matches() && arguments.length <= 2) {
 				try {
-					Requests.addRequest(Long.parseLong(m.group(1)), user);
+					Requests.addRequest(Long.parseLong(m.group(1)), user, isMod);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -1135,7 +1283,7 @@ public class Requests {
 								if (((GDLevel) levelPage[i]).getName().toUpperCase()
 										.startsWith(new String(level1.substring(0, level1.length() - 1)))) {
 									Requests.addRequest(((GDLevel) levelPage[i]).getId(),
-											user);
+											user, isMod);
 									break outerLoop;
 								}
 							}
@@ -1143,7 +1291,7 @@ public class Requests {
 
 					} catch (IndexOutOfBoundsException ignored) {
 					} catch (MissingAccessException e) {
-						response = "@" + user + " That level or user doesn't exist!";
+						response = Utilities.format("$LEVEL_USER_DOESNT_EXIST_MESSAGE$", user);
 						e.printStackTrace();
 					}
 				} else {
@@ -1152,17 +1300,17 @@ public class Requests {
 					try {
 						Requests.addRequest(Objects.requireNonNull(client.searchLevels(message.toString(), LevelSearchFilters.create(), 0)
 										.block().asList().get(0).getId()),
-								user);
+								user, isMod);
 					} catch (MissingAccessException e) {
-						response = "@" + user + " That level doesn't exist!";
+						response = Utilities.format("$LEVEL_DOESNT_EXIST_MESSAGE$", user);
 					} catch (Exception e) {
-						response = "@" + user + " An unknown error occured";
+						response = Utilities.format("$REQUEST_ERROR$", user);
 
 					}
 				}
 			}
 		} else {
-			response = "@" + user + " Please specify an ID!!";
+			response = Utilities.format("$SPECIFY_ID_MESSAGE$", user);
 		}
 		return response;
 		//}
@@ -1186,13 +1334,13 @@ public class Requests {
 				decompressed = null;
 				Requests.levels.get(k).setObjects(values.length);
 				if ((values.length < RequestSettings.minObjects) && RequestSettings.minObjectsOption) {
-					Main.sendMessage("@" + Requests.levels.get(k).getRequester() + " Your level has been removed for containing too few objects!");
+					Main.sendMessage(Utilities.format("$TOO_FEW_OBJECTS_MESSAGE$", Requests.levels.get(k).getRequester().toString()));
 					LevelsWindow.removeButton(k);
 					Requests.levels.remove(k);
 					return;
 				}
 				if ((values.length > RequestSettings.maxObjects) && RequestSettings.maxObjectsOption) {
-					Main.sendMessage("@" + Requests.levels.get(k).getRequester() + " Your level has been removed for containing too many objects!");
+					Main.sendMessage(Utilities.format("$TOO_MANY_OBJECTS_MESSAGE$", Requests.levels.get(k).getRequester().toString()));
 					LevelsWindow.removeButton(k);
 					Requests.levels.remove(k);
 					return;

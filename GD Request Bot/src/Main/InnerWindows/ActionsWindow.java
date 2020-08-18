@@ -37,8 +37,6 @@ public class ActionsWindow {
 
 			panel.setLayout(new GridLayout(1, 5, 10, 10));
 
-			//TODO make custom Yes/No dialog
-
 			//region Create Skip Button
 			JButton skip = createButton("\uEB9D", "Next/Skip Level");
 			skip.addMouseListener(new MouseAdapter() {

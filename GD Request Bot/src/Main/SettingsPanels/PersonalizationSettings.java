@@ -1,9 +1,6 @@
 package Main.SettingsPanels;
 
 import Main.*;
-import Main.InnerWindows.CommentsWindow;
-import Main.InnerWindows.InfoWindow;
-import Main.InnerWindows.LevelsWindow;
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
 
@@ -18,17 +15,54 @@ import java.util.Set;
 import static Main.Defaults.settingsButtonUI;
 
 public class PersonalizationSettings {
-	private static CurvedButton windowedButton = new CurvedButton("Switch to Windowed Mode");
+	public static boolean onTopOption = false;
+	private static CurvedButton windowedButton = new CurvedButton("$SWITCH_WINDOWED$");
 	private static JPanel panel = new JPanel(null);
-
-
+	private static RadioPanel themePanel = new RadioPanel(new String[]{"$LIGHT_MODE$", "$DARK_MODE$", "$SYSTEM_MODE$"});
+	public static String theme = "SYSTEM_MODE";
+	public static LangLabel themeText = new LangLabel("$THEME_TEXT$");
+	private static CheckboxButton onTop = createButton("$ALWAYS_ON_TOP$", 150);
 	public static JPanel createPanel() {
+
+		themeText.setBounds(25, 15, 365, 30);
+		themeText.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		themeText.setForeground(Defaults.FOREGROUND2);
+		themeText.setOpaque(false);
+		themePanel.setBounds(25,50,365,500);
+		onTop.setChecked(false);
+		onTop.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				onTopOption = onTop.getSelectedState();
+				Windowed.setOnTop(onTop.getSelectedState());
+			}
+		});
+
+		for(RadioButton button : themePanel.buttons){
+			button.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseReleased(MouseEvent e) {
+
+						System.out.println(themePanel.getSelectedButton());
+						theme = themePanel.getSelectedButton();
+						if (theme.equalsIgnoreCase("DARK_MODE")) {
+							Defaults.setDark();
+						} else if (theme.equalsIgnoreCase("LIGHT_MODE")) {
+							Defaults.setLight();
+						} else {
+							Defaults.setSystem();
+						}
+
+				}
+			});
+		}
+		themePanel.setChecked("SYSTEM_MODE");
 		panel.setDoubleBuffered(true);
 		panel.setBounds(0, 0, 415, 622);
 		panel.setBackground(Defaults.SUB_MAIN);
 
 		if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
-			windowedButton.setLText("Switch to Overlay Mode");
+			windowedButton.setLText("$SWITCH_OVERLAY$");
 		}
 		windowedButton.setBounds(25,25, 365,30);
 		windowedButton.setPreferredSize(new Dimension(365,30));
@@ -44,13 +78,13 @@ public class PersonalizationSettings {
 				new Thread(()->{
 					String option = null;
 					if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
-						option = DialogBox.showDialogBox("Switch to Overlay?", "<html>If you play GD in fullscreen, this may not work, move it to another monitor by dragging the time to fix. Default is 'Home' key to open. You'll have to reopen GDBoard.", "", new String[]{"Yes", "No"});
+						option = DialogBox.showDialogBox("$SWITCH_TO_OVERLAY_TITLE$", "<html> $SWITCH_TO_OVERLAY_INFO$ </html>", "", new String[]{"$YES$", "$NO$"});
 					}
 					else{
-						option = DialogBox.showDialogBox("Switch to Windowed?", "This will close GDboard and set to Windowed mode.", "You will have to reopen GDBoard.", new String[]{"Yes", "No"});
+						option = DialogBox.showDialogBox("$SWITCH_TO_WINDOWED_TITLE$", "$SWINTH_TO_WINDOWED_INFO$", "$SWITCH_TO_WINDOWED_SUBINFO$", new String[]{"$YES$", "$NO$"});
 					}
 
-					if (option.equalsIgnoreCase("Yes")) {
+					if (option.equalsIgnoreCase("YES")) {
 					try {
 						if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 							//destroyPanels();
@@ -116,27 +150,53 @@ public class PersonalizationSettings {
 				}).start();
 			}
 		});
-
-		panel.add(windowedButton);
-
+		panel.add(onTop);
+		panel.add(themePanel);
+		panel.add(themeText);
 		return panel;
 		
 	}
+	private static CheckboxButton createButton(String text, int y){
+		CheckboxButton button = new CheckboxButton(text);
+		button.setBounds(25,y,365,30);
+		button.setForeground(Defaults.FOREGROUND);
+		button.setBorder(BorderFactory.createEmptyBorder());
+		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		button.refresh();
+		return button;
+	}
+	public static void loadSettings(){
+		if(!Settings.getSettings("theme").equalsIgnoreCase("")) {
+			theme = Settings.getSettings("theme");
+			themePanel.setChecked(theme);
+			if(theme.equalsIgnoreCase("DARK_MODE")){
+				Defaults.setDark();
+			}
+			else if(theme.equalsIgnoreCase("LIGHT_MODE")){
+				Defaults.setLight();
+			}
+		}
+		if(!Settings.getSettings("onTop").equalsIgnoreCase("")) {
+			onTopOption = Boolean.parseBoolean(Settings.getSettings("onTop"));
+			onTop.setChecked(onTopOption);
+			Windowed.setOnTop(onTopOption);
+		}
+	}
+	public static void setSettings(){
+		try {
+			Settings.writeSettings("theme", themePanel.getSelectedButton());
+			Settings.writeSettings("onTop", String.valueOf(onTopOption));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	public static void refreshUI() {
+		themePanel.refreshUI();
+		themeText.setForeground(Defaults.FOREGROUND2);
 		panel.setBackground(Defaults.SUB_MAIN);
 		for (Component component : panel.getComponents()) {
-			if (component instanceof JButton) {
-				for (Component component2 : ((JButton) component).getComponents()) {
-					if (component2 instanceof JLabel) {
-						component2.setForeground(Defaults.FOREGROUND);
-					}
-				}
-				component.setBackground(Defaults.BUTTON);
-			}
-			if (component instanceof JLabel) {
-				component.setForeground(Defaults.FOREGROUND);
-			}
-
 			if(component instanceof CheckboxButton){
 				((CheckboxButton) component).refresh();
 			}

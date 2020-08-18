@@ -15,7 +15,10 @@ public class Assets {
 	public static HashMap<String, ImageIcon> difficultyIconsFeature = new HashMap<>();
 	public static HashMap<String, ImageIcon> difficultyIconsEpic = new HashMap<>();
 	public static ImageIcon verifiedCoin;
+	public static ImageIcon GDBoard;
 	public static ImageIcon unverifiedCoin;
+	public static ImageIcon Alphalaneous;
+	public static ImageIcon EncodedLua;
 	static {
 		try {
 			verifiedCoin = new ImageIcon(ImageIO
@@ -26,6 +29,18 @@ public class Assets {
 					.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
 							.getResource("Resources/GDAssets/unverifiedCoin.png")))
 					.getScaledInstance(15, 15, Image.SCALE_SMOOTH));
+			GDBoard = new ImageIcon(ImageIO
+					.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
+							.getResource("Resources/Icons/windowIcon.png")))
+					.getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+			Alphalaneous = new ImageIcon(ImageIO
+					.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
+							.getResource("Resources/Icons/Alphalaneous.png")))
+					.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+			EncodedLua = new ImageIcon(ImageIO
+					.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
+							.getResource("Resources/Icons/EncodedLua.png")))
+					.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -38,7 +53,7 @@ public class Assets {
 
 
 	static void loadAssets() throws IOException {
-		String[] difficulties = {"NA", "easy", "normal", "hard", "harder", "insane", "easy demon", "medium demon",
+		String[] difficulties = {"NA", "auto", "easy", "normal", "hard", "harder", "insane", "easy demon", "medium demon",
 				"hard demon", "insane demon", "extreme demon"};
 		for(String difficulty : difficulties){
 			difficultyIconsNormal.put(difficulty, new ImageIcon(ImageIO
@@ -58,6 +73,5 @@ public class Assets {
 						.getScaledInstance(width, height, Image.SCALE_SMOOTH)));
 			}
 		}
-
 	}
 }

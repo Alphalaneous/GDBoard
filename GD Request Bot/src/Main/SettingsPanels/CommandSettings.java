@@ -14,11 +14,12 @@ import java.io.*;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
-import java.util.Iterator;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static Main.Defaults.settingsButtonUI;
+import static java.nio.file.StandardWatchEventKinds.*;
+import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
@@ -27,7 +28,8 @@ public class CommandSettings {
 	private static double height = 0;
 	private static String command;
 	private static JLabel commandLabel = new JLabel();
-	private static JLabel sliderValue = new JLabel();
+	private static JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 1200, 0);
+	private static LangLabel sliderValue = new LangLabel("");
 	private static JPanel commandsPanel = new JPanel();
 	private static JScrollPane scrollPane = new JScrollPane(commandsPanel);
 	private static JPanel panel = new JPanel();
@@ -35,12 +37,37 @@ public class CommandSettings {
 	private static JPanel titlePanel = new JPanel();
 	private static RSyntaxTextArea codeInput = new RSyntaxTextArea();
 	private static JScrollPane codePanel = new JScrollPane(codeInput);
-	private static CheckboxButton disable = createButton("Disable Command", 290);
-	private static CheckboxButton modOnly = createButton("Mod Only", 320);
-	private static CheckboxButton whisper = createButton("Send as Whisper", 350);
-	private static RoundedJButton backButton = new RoundedJButton("\uE112", "Back");
-	private static JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 1200, 0);
+	private static CheckboxButton disable = createButton("$DISABLE_COMMAND$", 290);
+	private static CheckboxButton modOnly = createButton("$MOD_ONLY$", 320);
+	private static CheckboxButton whisper = createButton("$SEND_AS_WHISPER$", 350);
+	private static RoundedJButton backButton = new RoundedJButton("\uE112", "$BACK_BUTTON$");
+	private static RoundedJButton addCommand = new RoundedJButton("\uECC8", "$ADD_COMMAND_TOOLTIP$");
+
+
 	public static JPanel createPanel() {
+
+		LangLabel label = new LangLabel("$COMMANDS_LIST$");
+		label.setForeground(Defaults.FOREGROUND);
+		label.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		label.setBounds(25, 20, label.getPreferredSize().width + 5, label.getPreferredSize().height + 5);
+
+		panel.add(label);
+
+		addCommand.setBackground(Defaults.BUTTON);
+		addCommand.setBounds(370, 16, 30, 30);
+		addCommand.setFont(Defaults.SYMBOLS.deriveFont(18f));
+		addCommand.setForeground(Defaults.FOREGROUND);
+		addCommand.setUI(settingsButtonUI);
+		addCommand.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				CommandEditor.showEditor("commands", "", false);
+			}
+		});
+
+		panel.add(addCommand);
+
+
 		codeInput.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
 
 		codeInput.setCurrentLineHighlightColor(Defaults.BUTTON);
@@ -67,7 +94,7 @@ public class CommandSettings {
 
 		backButton.setBackground(Defaults.BUTTON);
 		backButton.setBounds(10, 10, 30, 30);
-		backButton.setFont(Defaults.SYMBOLS.deriveFont(15f));
+		backButton.setFont(Defaults.SYMBOLS.deriveFont(14f));
 		backButton.setForeground(Defaults.FOREGROUND);
 		backButton.setUI(settingsButtonUI);
 		backButton.addMouseListener(new MouseAdapter() {
@@ -76,13 +103,12 @@ public class CommandSettings {
 				showMainPanel();
 			}
 		});
-		backButton.asSettings();
 
 		titlePanel.add(backButton);
 
 
 		sliderValue.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-		sliderValue.setText("Cooldown: 0 seconds");
+		sliderValue.setTextLangFormat("$COOLDOWN$", 0);
 		sliderValue.setForeground(Defaults.FOREGROUND);
 		sliderValue.setBounds(25,390,sliderValue.getPreferredSize().width+5, sliderValue.getPreferredSize().height + 5);
 
@@ -122,11 +148,11 @@ public class CommandSettings {
 		slider.setBorder(BorderFactory.createEmptyBorder());
 		slider.addChangeListener(e -> {
 			if(slider.getValue() == 10){
-				sliderValue.setText("Cooldown: " + (double)slider.getValue()/10 + " second");
+				sliderValue.setTextLangFormat("$COOLDOWN_SINGULAR$",(double)slider.getValue()/10);
 
 			}
 			else {
-				sliderValue.setText("Cooldown: " + (double)slider.getValue()/10 + " seconds");
+				sliderValue.setTextLangFormat("$COOLDOWN$",(double)slider.getValue()/10);
 			}
 			sliderValue.setBounds(25, 390, sliderValue.getPreferredSize().width + 5, sliderValue.getPreferredSize().height + 5);
 			try {
@@ -344,7 +370,7 @@ public class CommandSettings {
 		commandsPanel.setPreferredSize(new Dimension(400, 0));
 		commandsPanel.setBackground(Defaults.SUB_MAIN);
 		commandsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 4, 4));
-		scrollPane.setBounds(0, 0, 412, 622);
+		scrollPane.setBounds(0, 60, 412, 562);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
 		scrollPane.getViewport().setBackground(Defaults.SUB_MAIN);
 		scrollPane.setPreferredSize(new Dimension(412, 562));
@@ -354,7 +380,7 @@ public class CommandSettings {
 		scrollPane.setOpaque(false);
 		scrollPane.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
-
+		HashMap<String, ButtonInfo> existingCommands = new HashMap<>();
 		try {
 			URI uri = Main.class.getResource("/Resources/Commands/").toURI();
 			Path myPath;
@@ -364,6 +390,18 @@ public class CommandSettings {
 				myPath = Paths.get(uri);
 			}
 			Stream<Path> walk = Files.walk(myPath, 1);
+			Path comPath = Paths.get(Defaults.saveDirectory + "/GDBoard/commands/");
+			if (Files.exists(comPath)) {
+				Stream<Path> walk1 = Files.walk(comPath, 1);
+				for (Iterator<Path> it = walk1.iterator(); it.hasNext(); ) {
+					Path path = it.next();
+					String[] file = path.toString().split("\\\\");
+					String fileName = file[file.length - 1];
+					if (fileName.endsWith(".js")) {
+						existingCommands.put(fileName.substring(0, fileName.length()-3), new ButtonInfo( path, false));
+					}
+				}
+			}
 			for (Iterator<Path> it = walk.iterator(); it.hasNext(); ) {
 				Path path = it.next();
 				String[] file = path.toString().split("/");
@@ -377,29 +415,32 @@ public class CommandSettings {
 							!fileName.equalsIgnoreCase("!end.js") &&
 							!fileName.equalsIgnoreCase("!kill.js") &&
 							!fileName.equalsIgnoreCase("!popup.js") &&
-							!fileName.equalsIgnoreCase("!gd.js")) {
-						addButton(fileName.substring(0, fileName.length()-3), path);
+							!fileName.equalsIgnoreCase("!gd.js") &&
+							!fileName.equalsIgnoreCase("b!addcom.js")&&
+							!fileName.equalsIgnoreCase("b!editcom.js")&&
+							!fileName.equalsIgnoreCase("b!delcom.js")&&
+							!fileName.equalsIgnoreCase("b!addpoint.js")&&
+							!fileName.equalsIgnoreCase("b!editpoint.js")&&
+							!fileName.equalsIgnoreCase("b!delpoint.js")){
+						if(!existingCommands.containsKey(fileName.substring(0, fileName.length()-3))) {
+							existingCommands.put(fileName.substring(0, fileName.length()-3), new ButtonInfo( path, true));
 
+						}
 					}
-				}
-				Thread.sleep(5);
-			}
-			Path comPath = Paths.get(Defaults.saveDirectory + "/GDBoard/commands/");
-			if (Files.exists(comPath)) {
-				Stream<Path> walk1 = Files.walk(comPath, 1);
-				for (Iterator<Path> it = walk1.iterator(); it.hasNext(); ) {
-					Path path = it.next();
-					String[] file = path.toString().split("\\\\");
-					String fileName = file[file.length - 1];
-					if (fileName.endsWith(".js")) {
-						addButton(fileName.substring(0, fileName.length()-3), path);
-					}
-					Thread.sleep(5);
 				}
 			}
 		}
 		catch (Exception e){
 			e.printStackTrace();
+		}
+		TreeMap<String, ButtonInfo> sorted = new TreeMap<>();
+		sorted.putAll(existingCommands);
+
+		for(Map.Entry<String,ButtonInfo> entry : sorted.entrySet()) {
+			String key = entry.getKey();
+			ButtonInfo value = entry.getValue();
+
+			addButton(key, value.path, value.isDefault);
 		}
 		panel.setBounds(0, 0, 415, 622);
 		panel.add(scrollPane);
@@ -411,6 +452,106 @@ public class CommandSettings {
 		scrollPane.setVisible(true);
 
 	}
+	public static void refresh(){
+
+		commandsPanel.removeAll();
+		height = 0;
+		commandsPanel.setBounds(0, 0, 400, (int) (height + 4));
+		commandsPanel.setPreferredSize(new Dimension(400, (int) (height + 4)));
+
+		HashMap<String, ButtonInfo> existingCommands = new HashMap<>();
+		try {
+			URI uri = Main.class.getResource("/Resources/Commands/").toURI();
+			Path myPath;
+			if (uri.getScheme().equals("jar")) {
+				myPath = ServerChatBot.fileSystem.getPath("/Resources/Commands/");
+			} else {
+				myPath = Paths.get(uri);
+			}
+			Stream<Path> walk = Files.walk(myPath, 1);
+			Path comPath = Paths.get(Defaults.saveDirectory + "/GDBoard/commands/");
+			if (Files.exists(comPath)) {
+				Stream<Path> walk1 = Files.walk(comPath, 1);
+				for (Iterator<Path> it = walk1.iterator(); it.hasNext(); ) {
+					Path path = it.next();
+					String[] file = path.toString().split("\\\\");
+					String fileName = file[file.length - 1];
+					if (fileName.endsWith(".js")) {
+						existingCommands.put(fileName.substring(0, fileName.length()-3), new ButtonInfo( path, false));
+					}
+				}
+			}
+			for (Iterator<Path> it = walk.iterator(); it.hasNext(); ) {
+				Path path = it.next();
+				String[] file = path.toString().split("/");
+				String fileName = file[file.length - 1];
+				if (fileName.endsWith(".js")) {
+					if(!fileName.equalsIgnoreCase("!rick.js") &&
+							!fileName.equalsIgnoreCase("!stoprick.js") &&
+							!fileName.equalsIgnoreCase("!kill.js") &&
+							!fileName.equalsIgnoreCase("!eval.js") &&
+							!fileName.equalsIgnoreCase("!stop.js") &&
+							!fileName.equalsIgnoreCase("!end.js") &&
+							!fileName.equalsIgnoreCase("!kill.js") &&
+							!fileName.equalsIgnoreCase("!popup.js") &&
+							!fileName.equalsIgnoreCase("!gd.js") &&
+							!fileName.equalsIgnoreCase("b!addcom.js")&&
+							!fileName.equalsIgnoreCase("b!editcom.js")&&
+							!fileName.equalsIgnoreCase("b!delcom.js")&&
+							!fileName.equalsIgnoreCase("b!addpoint.js")&&
+							!fileName.equalsIgnoreCase("b!editpoint.js")&&
+							!fileName.equalsIgnoreCase("b!delpoint.js")){
+						if(!existingCommands.containsKey(fileName.substring(0, fileName.length()-3))) {
+							existingCommands.put(fileName.substring(0, fileName.length()-3), new ButtonInfo( path, true));
+						}
+					}
+				}
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		TreeMap<String, ButtonInfo> sorted = new TreeMap<>();
+		sorted.putAll(existingCommands);
+
+		for(Map.Entry<String,ButtonInfo> entry : sorted.entrySet()) {
+			String key = entry.getKey();
+			ButtonInfo value = entry.getValue();
+
+			addButton(key, value.path, value.isDefault);
+		}
+	}
+	public static class ButtonInfo{
+
+		public Path path;
+		public boolean isDefault;
+
+		ButtonInfo(Path path, boolean isDefault){
+			this.path = path;
+			this.isDefault = isDefault;
+		}
+
+	}
+	public static void removeButton(String command) {
+		i--;
+		if (i % 2 == 0) {
+			height = height - 39;
+			commandsPanel.setBounds(0, 0, 400, (int) (height + 4));
+			commandsPanel.setPreferredSize(new Dimension(400, (int) (height + 4)));
+			scrollPane.updateUI();
+		}
+		for (int i = commandsPanel.getComponents().length-1; i >= 0; i--) {
+			if (commandsPanel.getComponents()[i] instanceof CurvedButton) {
+				System.out.println(((CurvedButton) commandsPanel.getComponents()[i]).getLText());
+				if (((CurvedButton) commandsPanel.getComponents()[i]).getLText().equalsIgnoreCase(command)) {
+					commandsPanel.remove(commandsPanel.getComponents()[i]);
+					commandsPanel.updateUI();
+					break;
+				}
+			}
+		}
+	}
+
 	private static void showCommandPanel(String command, Path path){
 		codeInput.discardAllEdits();
 		CommandSettings.command = command;
@@ -533,7 +674,7 @@ public class CommandSettings {
 		scrollPane.setVisible(false);
 		commandPanelView.setVisible(true);
 	}
-	private static void addButton(String command, Path path) {
+	public static void addButton(String command, Path path, boolean isDefault) {
 		i++;
 		if ((i-1) % 2 == 0) {
 			height = height + 39;
@@ -547,20 +688,23 @@ public class CommandSettings {
 		CurvedButton button = new CurvedButton(command);
 		button.setBackground(Defaults.BUTTON);
 		button.setUI(settingsButtonUI);
-		button.setForeground(Defaults.FOREGROUND);
+		if(isDefault) {
+			button.setForeground(Defaults.FOREGROUND2);
+		}
+		else{
+			button.setForeground(Defaults.FOREGROUND);
+		}
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		button.setPreferredSize(new Dimension(170, 35));
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				showCommandPanel(command, path);
+				CommandEditor.showEditor("commands", command, isDefault);
 			}
 		});
 		button.refresh();
 		commandsPanel.add(button);
-		commandsPanel.updateUI();
-
 	}
 
 	private static CheckboxButton createButton(String text, int y){
@@ -573,7 +717,7 @@ public class CommandSettings {
 		return button;
 	}
 	public static void refreshUI(){
-		panel.setBackground(Defaults.SUB_MAIN);
+		panel.setBackground(Defaults.TOP);
 		titlePanel.setBackground(Defaults.TOP);
 		commandLabel.setForeground(Defaults.FOREGROUND);
 		sliderValue.setForeground(Defaults.FOREGROUND);
@@ -589,13 +733,16 @@ public class CommandSettings {
 		backButton.setBackground(Defaults.BUTTON);
 		backButton.setForeground(Defaults.FOREGROUND);
 		for (Component component : commandsPanel.getComponents()) {
-			if (component instanceof JButton) {
-				for (Component component2 : ((JButton) component).getComponents()) {
-					if (component2 instanceof JLabel) {
-						component2.setForeground(Defaults.FOREGROUND);
-					}
+			if (component instanceof CurvedButton) {
+
+				if(component.getForeground().equals(Defaults.FOREGROUND2)) {
+					component.setForeground(Defaults.FOREGROUND2);
+				}
+				else{
+					component.setForeground(Defaults.FOREGROUND);
 				}
 				component.setBackground(Defaults.BUTTON);
+				((CurvedButton) component).refresh();
 			}
 			if (component instanceof JLabel) {
 				component.setForeground(Defaults.FOREGROUND);
@@ -607,11 +754,7 @@ public class CommandSettings {
 		}
 		for (Component component : commandPanelView.getComponents()) {
 			if (component instanceof JButton) {
-				for (Component component2 : ((JButton) component).getComponents()) {
-					if (component2 instanceof JLabel) {
-						component2.setForeground(Defaults.FOREGROUND);
-					}
-				}
+
 				component.setBackground(Defaults.BUTTON);
 			}
 			if (component instanceof JLabel) {
@@ -622,5 +765,18 @@ public class CommandSettings {
 				((CheckboxButton) component).refresh();
 			}
 		}
+		for (Component component : panel.getComponents()) {
+			if (component instanceof JButton) {
+				component.setForeground(Defaults.FOREGROUND);
+				component.setBackground(Defaults.BUTTON);
+			}
+			if (component instanceof JLabel) {
+				component.setForeground(Defaults.FOREGROUND);
+			}
+			if(component instanceof CheckboxButton){
+				((CheckboxButton) component).refresh();
+			}
+		}
+		refresh();
 	}
 }

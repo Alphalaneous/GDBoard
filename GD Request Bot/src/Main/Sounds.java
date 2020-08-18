@@ -33,6 +33,7 @@ public class Sounds {
 			new Sound(location, isFile, isURL).playSound();
 		}
 		else if(sounds.containsKey(location) && restart){
+
 			sounds.get(location).stopSound();
 			new Sound(location, isFile, isURL).playSound();
 		}
@@ -47,7 +48,6 @@ public class Sounds {
 			Map.Entry mapElement = (Map.Entry)hmIterator.next();
 			((Sound)mapElement.getValue()).stopSound();
 		}
-		sounds.clear();
 	}
 	private static class Sound {
 
@@ -61,12 +61,10 @@ public class Sounds {
 			this.location = location;
 			this.isFile = isFile;
 			this.isURL = isURL;
+			Sounds.sounds.put(location, this);
 		}
-
 		public void playSound() {
-
 			new Thread(() -> {
-				Sounds.sounds.put(location, this);
 				try {
 					BufferedInputStream inp = null;
 					if(isURL){

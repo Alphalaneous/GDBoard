@@ -39,7 +39,6 @@ class MainBar {
 
 	static void createBar() {
 
-		//TODO Settings and request toggle buttons in windowed mode
 		double ratio = 1920 / Defaults.screenSize.getWidth();
 		Overlay.alwaysFront(barPanel);
 		barPanel.setOpaque(false);
@@ -248,11 +247,9 @@ class MainBar {
 			if(Main.refreshImages) {
 				try {
 					if (Defaults.dark.get()) {
-						System.out.println("Dark");
 						img = ImageIO.read(Objects.requireNonNull(Main.class.getClassLoader()
 								.getResource("Resources/Icons/barIconLight.png")));
 					} else if (!Defaults.dark.get()) {
-						System.out.println("Light");
 						img = ImageIO.read(Objects.requireNonNull(Main.class.getClassLoader()
 								.getResource("Resources/Icons/barIconDark.png")));
 					}

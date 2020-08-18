@@ -101,6 +101,10 @@ public class LevelData {
 		return stars;
 	}
 
+	public boolean getVerifiedCoins(){
+		return verifiedCoins;
+	}
+
 	public URL getSongURL() throws MalformedURLException {
 		return new URL(downloadURL.toString());
 	}
@@ -161,6 +165,7 @@ public class LevelData {
 	private StringBuilder channelName;
 	private StringBuilder thumbnailURL;
 	private boolean viewership = true;
+	private boolean verifiedCoins = false;
 	private long downloads;
 	private long levelID;
 	private StringBuilder videoTitle;
@@ -252,6 +257,10 @@ public class LevelData {
 
 	public void setLevelID(long levelID) {
 		this.levelID = levelID;
+	}
+
+	public void setVeririedCoins(boolean verifiedCoins){
+		this.verifiedCoins = verifiedCoins;
 	}
 
 	public void setVersion(int version) {this.version = version; }

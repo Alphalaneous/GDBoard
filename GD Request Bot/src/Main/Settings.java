@@ -90,7 +90,13 @@ public class Settings {
 	public static void writeSettings(String key, String setting) throws IOException {
 		in.close();
 		in = new FileInputStream(file);
-		gfg.load(in);
+		try {
+			gfg.load(in);
+		}
+		catch (IOException e){
+			in = new FileInputStream(file);
+			gfg.load(in);
+		}
 
 		if (gfg.containsKey(key)) {
 			BufferedReader file = new BufferedReader(new FileReader(Defaults.saveDirectory + "\\GDBoard\\config.properties"));
@@ -258,14 +264,9 @@ public class Settings {
 				int y = Integer.parseInt(set.split(",")[1]);
 				settingsX = Boolean.parseBoolean(set.split(",")[2]);
 				settingsWLoc = new Point(x, y);
-				if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
-					//SettingsWindow.setLocation(settingsWLoc);
-					if (!settingsX) {
-						SettingsWindow.toggleVisible();
-
-					}
+				if(Settings.getSettings("windowed").equalsIgnoreCase("false")) {
+					SettingsWindow.setLocation(settingsWLoc);
 				}
-				SettingsWindow.setLocation(settingsWLoc);
 			}
 		}
 	}
@@ -298,8 +299,6 @@ public class Settings {
 	private static boolean settingsX = false;
 	//static boolean hasClientID = false;
 
-	//TODO Save window sizes
-	//TODO Cheer Only Setting
 
     /*static void setWindowedMode(boolean mode) {
         Settings.getSettings("windowed").equalsIgnoreCase("true") = mode;

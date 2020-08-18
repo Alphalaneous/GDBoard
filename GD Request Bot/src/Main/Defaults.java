@@ -1,5 +1,6 @@
 package Main;
 
+import Main.SettingsPanels.PersonalizationSettings;
 import com.registry.RegDWORDValue;
 import com.registry.RegistryKey;
 
@@ -46,10 +47,13 @@ public class Defaults {
 	public static String saveDirectory;
 	public static Color ACCENT = new Color(0, 108, 230);
 	public static Color MAIN;
+	public static Color MAIN_CLEAR;
 	public static Color BUTTON;
 	public static Color HOVER;
 	public static Color SUB_MAIN;
 	public static Color SELECT;
+	public static Color SELECT_CLEAR;
+
 	public static Color TOP;
 	public static Color FOREGROUND;
 	public static Color FOREGROUND2;
@@ -59,9 +63,13 @@ public class Defaults {
 
 	static Color OUTLINE = new Color(70, 70, 70);
 	public static Color BUTTON_HOVER;
+	public static Color BUTTON_HOVER_CLEAR;
+
 	static Color TEXT_BOX;
 	public static Font MAIN_FONT;
 	public static Font SYMBOLS;
+	public static Font SEGOE = new Font("Segoe UI", Font.PLAIN, 20);
+
 
 
 
@@ -81,24 +89,29 @@ public class Defaults {
 			e.printStackTrace();
 		}
 	}
-
 	static AtomicBoolean dark = new AtomicBoolean();
 	static AtomicBoolean programLoaded = new AtomicBoolean();
 	static AtomicBoolean colorsLoaded = new AtomicBoolean();
 
 
 	//region Dark Mode
-	private static void setDark() {
+	public static void setDark() {
 		Date date = new Date();
 		SimpleDateFormat ft = new SimpleDateFormat("MM.dd");
 		if (!ft.format(date).equalsIgnoreCase("04.01")) {
 			MAIN = new Color(31, 31, 31);
+			MAIN_CLEAR = new Color(31, 31, 31, 150);
+
 			TEXT_BOX = new Color(58, 58, 58);
 			BUTTON = new Color(50, 50, 50);
 			HOVER = new Color(60, 60, 60);
 			SUB_MAIN = new Color(20, 20, 20);
 			SELECT = new Color(70, 70, 70);
+			SELECT_CLEAR = new Color(70, 70, 70, 150);
+
 			BUTTON_HOVER = new Color(80, 80, 80);
+			BUTTON_HOVER_CLEAR = new Color(80, 80, 80, 150);
+
 			TOP = Color.BLACK;
 			FOREGROUND = Color.WHITE;
 			FOREGROUND2 = new Color(140, 140, 140);
@@ -125,17 +138,22 @@ public class Defaults {
 	//endregion
 
 	//region Light Mode
-	private static void setLight() {
+	public static void setLight() {
 		Date date = new Date();
 		SimpleDateFormat ft = new SimpleDateFormat("MM.dd");
 		if (!ft.format(date).equalsIgnoreCase("04.01")) {
 			MAIN = new Color(230, 230, 230);
+			MAIN_CLEAR = new Color(230, 230, 230, 150);
 			TEXT_BOX = new Color(205, 205, 205);
 			BUTTON = new Color(224, 224, 224);
 			HOVER = new Color(211, 211, 211);
 			SUB_MAIN = new Color(240, 240, 240);
 			SELECT = new Color(215, 215, 215);
+			SELECT_CLEAR = new Color(215, 215, 215, 150);
+
 			BUTTON_HOVER = new Color(204, 204, 204);
+			BUTTON_HOVER_CLEAR = new Color(204, 204, 204, 150);
+
 			TOP = Color.WHITE;
 			FOREGROUND = Color.BLACK;
 			FOREGROUND2 = new Color(100, 100, 100);
@@ -160,6 +178,25 @@ public class Defaults {
 		colorsLoaded.set(true);
 		Overlay.refreshUI(true);
 	}
+	public static void setSystem(){
+		final int[] prevTheme = new int[1];
+		RegistryKey personalizeStart = new RegistryKey(
+				"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
+		try {
+			prevTheme[0] = ((RegDWORDValue) personalizeStart.getValue("AppsUseLightTheme")).getIntValue();
+		} catch (NullPointerException e) {
+			prevTheme[0] = 1;
+		}
+		if(PersonalizationSettings.theme.equalsIgnoreCase("SYSTEM_MODE")) {
+			if (prevTheme[0] == 0) {
+				Defaults.setDark();
+				dark.set(false);
+			} else if (prevTheme[0] == 1) {
+				Defaults.setLight();
+				dark.set(true);
+			}
+		}
+	}
 	//endregion
 
 	//region Main Thread
@@ -180,13 +217,14 @@ public class Defaults {
 				prevColor[0] = 0;
 				ACCENT = new Color(0, 108, 230);
 			}
-
-			if (prevTheme[0] == 0) {
-				Defaults.setDark();
-				dark.set(false);
-			} else if (prevTheme[0] == 1) {
-				Defaults.setLight();
-				dark.set(true);
+			if(PersonalizationSettings.theme.equalsIgnoreCase("SYSTEM_MODE")) {
+				if (prevTheme[0] == 0) {
+					Defaults.setDark();
+					dark.set(false);
+				} else if (prevTheme[0] == 1) {
+					Defaults.setLight();
+					dark.set(true);
+				}
 			}
 		}
 		else{
@@ -195,7 +233,7 @@ public class Defaults {
 		}
 
 
-		Thread thread = new Thread(() -> {
+		new Thread(() -> {
 			RegistryKey personalize = new RegistryKey(
 					"Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize");
 			RegistryKey systemColor = new RegistryKey(
@@ -235,15 +273,16 @@ public class Defaults {
 						} catch (NullPointerException e) {
 							e.printStackTrace();
 						}
-
-						if (theme == 0 && prevTheme[0] == 1) {
-							Defaults.setDark();
-							dark.set(false);
-							prevTheme[0] = 0;
-						} else if (theme == 1 && prevTheme[0] == 0) {
-							Defaults.setLight();
-							dark.set(true);
-							prevTheme[0] = 1;
+						if(PersonalizationSettings.theme.equalsIgnoreCase("SYSTEM_MODE")) {
+							if (theme == 0 && prevTheme[0] == 1) {
+								Defaults.setDark();
+								dark.set(false);
+								prevTheme[0] = 0;
+							} else if (theme == 1 && prevTheme[0] == 0) {
+								Defaults.setLight();
+								dark.set(true);
+								prevTheme[0] = 1;
+							}
 						}
 
 					} else {
@@ -280,8 +319,7 @@ public class Defaults {
 					e.printStackTrace();
 				}
 			}
-		});
-		thread.start();
+		}).start();
 
 	}
 	//endregion

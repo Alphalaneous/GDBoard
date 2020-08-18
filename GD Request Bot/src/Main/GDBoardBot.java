@@ -1,6 +1,7 @@
 package Main;
 
 import Main.SettingsPanels.AccountSettings;
+import com.cavariux.twitchirc.Chat.Channel;
 import com.cavariux.twitchirc.Json.JsonObject;
 import org.apache.commons.text.StringEscapeUtils;
 import org.json.JSONObject;
@@ -10,9 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.ConnectException;
-import java.net.NoRouteToHostException;
-import java.net.Socket;
+import java.net.*;
 
 class GDBoardBot {
 	static int wait = 2000;
@@ -23,8 +22,16 @@ class GDBoardBot {
 	private static BufferedReader in;
 	private static Socket clientSocket;
 	private static JButtonUI defaultUI = new JButtonUI();
-
+	private static ChatReader chatReader;
+	public static ChannelPointListener channelPointListener;
+	public static boolean firstOpen = true;
 	static void start() throws IOException {
+		if(clientSocket != null && clientSocket.isConnected() ){
+			clientSocket.close();
+			out.close();
+			in.close();
+		}
+
 		defaultUI.setBackground(new Color(50, 50, 50));
 		defaultUI.setHover( new Color(80, 80, 80));
 		defaultUI.setSelect( new Color(70, 70, 70));
@@ -56,12 +63,15 @@ class GDBoardBot {
 		sendMessage(authObj.toString());
 
 		new Thread(() -> {
-			DialogBox.setUnfocusable();
-			String choice = DialogBox.showDialogBox("Connecting to Servers...", "This may take a few seconds", "If stuck here, try pressing reconnect or restart GDBoard.", new String[]{"Reconnect", "Cancel"});
-			if(choice.equalsIgnoreCase("Cancel")){
+			if(!firstOpen) {
+				DialogBox.setUnfocusable();
+			}
+			firstOpen = false;
+			String choice = DialogBox.showDialogBox("$CONNECTING_GDBOARD$", "$CONNECTING_GDBOARD_INFO$", "$CONNECTING_GDBOARD_SUBINFO$", new String[]{"$RECONNECT$", "$CANCEL$"});
+			if(choice.equalsIgnoreCase("CANCEL")){
 				Main.close();
 			}
-			if(choice.equalsIgnoreCase("Reconnect")){
+			if(choice.equalsIgnoreCase("RECONNECT")){
 				APIs.success.set(false);
 				APIs.setOauth(false);
 
@@ -69,8 +79,8 @@ class GDBoardBot {
 		}).start();
 
 
-		Thread thread = new Thread(() -> {
-			String inputLine;
+		 new Thread(() -> {
+			String inputLine = null;
 			while (true) {
 				while(clientSocket.isClosed() || !clientSocket.isConnected()){
 					try {
@@ -82,6 +92,7 @@ class GDBoardBot {
 				try {
 					if ((inputLine = in.readLine()) == null) break;
 				} catch (IOException e) {
+					e.printStackTrace();
 					break;
 				}
 				String event = "";
@@ -91,18 +102,32 @@ class GDBoardBot {
 						event = object.get("event").toString().replaceAll("\"", "");
 					}
 					if (event.equalsIgnoreCase("connected")) {
-						connected = true;
+						DialogBox.closeDialogBox();
 						String channel =  object.get("username").toString().replaceAll("\"", "").replaceAll("#", "");
 						Settings.channel = channel;
 						Settings.writeSettings("channel", channel);
 						AccountSettings.refreshTwitch(channel);
-						DialogBox.closeDialogBox();
+						connected = true;
+						/**
+						 * Reads chat as streamer, reduces load on servers for some actions
+						 * such as custom commands that don't use the normal prefix
+						 */
+						new Thread(() -> {
+							if (chatReader != null && chatReader.isRunning()) {
+								chatReader.stop();
+							}
+							chatReader = new ChatReader();
+							chatReader.connect();
+							chatReader.joinChannel(Settings.getSettings("channel"));
+							chatReader.start();
+						}).start();
 					}
 					else if (event.equalsIgnoreCase("connect_failed") || (event.equalsIgnoreCase("error"))) {
 						failed = true;
 					} if ((event.equalsIgnoreCase("command") || event.equalsIgnoreCase("level_request")) && Main.allowRequests) {
 						String sender = object.get("sender").toString().replaceAll("\"", "");
 						String message = StringEscapeUtils.unescapeJava(object.get("message").toString());
+
 						message = message.substring(1, message.length()-1);
 						boolean mod = object.get("mod").asBoolean();
 						boolean sub = object.get("sub").asBoolean();
@@ -126,7 +151,6 @@ class GDBoardBot {
 
 						boolean mod = object.get("mod").asBoolean();
 						boolean sub = object.get("sub").asBoolean();
-						Thread thread1 = new Thread(() -> {
 							try {
 								while(ServerChatBot.processing){
 									Thread.sleep(50);
@@ -135,8 +159,6 @@ class GDBoardBot {
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
-						});
-						thread1.start();
 					}
 				}
 				catch (Exception e){
@@ -174,10 +196,15 @@ class GDBoardBot {
 			if(Main.programLoaded){
 				wait = 2000;
 			}
-		});
-		thread.start();
+		}).start();
 	}
 	static void sendMessage(String message){
 		out.println(message);
 	}
+
+	static void sendMainMessage(String message) {
+		Channel channel = Channel.getChannel(Settings.getSettings("channel"), chatReader);
+		chatReader.sendMessage(message, channel);
+	}
+
 }

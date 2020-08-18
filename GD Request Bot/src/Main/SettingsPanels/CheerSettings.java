@@ -61,7 +61,7 @@ public class CheerSettings {
 
 		backButton.setBackground(Defaults.BUTTON);
 		backButton.setBounds(10, 10, 30, 30);
-		backButton.setFont(Defaults.SYMBOLS.deriveFont(15f));
+		backButton.setFont(Defaults.SYMBOLS.deriveFont(14f));
 		backButton.setForeground(Defaults.FOREGROUND);
 		backButton.setUI(settingsButtonUI);
 		backButton.addMouseListener(new MouseAdapter() {
@@ -70,7 +70,6 @@ public class CheerSettings {
 				showMainPanel();
 			}
 		});
-		backButton.asSettings();
 
 		titlePanel.add(backButton);
 

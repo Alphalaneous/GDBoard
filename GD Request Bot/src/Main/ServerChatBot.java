@@ -15,8 +15,7 @@ import java.util.stream.Stream;
 
 public class ServerChatBot {
     static boolean processing = false;
-    private static URI uri;
-    static Path myPath;
+    public static URI uri;
     static {
         try {
             uri = Main.class.getResource("/Resources/Commands/").toURI();
@@ -24,26 +23,28 @@ public class ServerChatBot {
             e.printStackTrace();
         }
     }
-
-    public static FileSystem fileSystem;
-
-    static {
-        try {
-            fileSystem = FileSystems.newFileSystem(uri, Collections.emptyMap());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public static Path myPath;
+    public static FileSystem fileSystem = null;
+    static{
         if (uri.getScheme().equals("jar")) {
+            try {
+                fileSystem = FileSystems.newFileSystem(uri, Collections.<String, Object>emptyMap());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             myPath = fileSystem.getPath("/Resources/Commands/");
-        } else {
-            myPath = Paths.get(uri);
-        }
-
+    } else {
+        myPath = Paths.get(uri);
+    }
     }
 
     private static ArrayList<String> comCooldown = new ArrayList<>();
     static void onMessage(String user, String message, boolean isMod, boolean isSub, int cheer) {
         boolean whisper = false;
+        if(Settings.getSettings("channel").equalsIgnoreCase(user)){
+            isMod = true;
+        }
+
         processing = true;
         boolean goThrough = true;
         String com = message.split(" ")[0];
@@ -61,7 +62,7 @@ public class ServerChatBot {
                     }
                 }
                 if (!mention.contains(m.group(1))) {
-                    Requests.addRequest(Long.parseLong(m.group(1).replaceFirst("^0+(?!$)", "")), user);
+                    Requests.addRequest(Long.parseLong(m.group(1).replaceFirst("^0+(?!$)", "")), user, isMod);
                 }
 
             } catch (Exception e) {
@@ -190,7 +191,6 @@ public class ServerChatBot {
                     }
 
                     if (comCooldown.contains(com)) {
-                        System.out.println("cooldown");
                         processing = false;
                         return;
                     }
@@ -250,7 +250,7 @@ public class ServerChatBot {
                             String fileName = file[file.length - 1];
                             if (fileName.equalsIgnoreCase(com + ".js")) {
                                 comExists = true;
-                                response = Command.run(user, isMod, isSub, arguments, Files.readString(path, StandardCharsets.UTF_8), cheer);
+                                response = Command.run(user, isMod, isSub, arguments, Files.readString(path, StandardCharsets.UTF_8), cheer, true);
 
                             }
                         }
@@ -261,24 +261,33 @@ public class ServerChatBot {
                         Stream<Path> walk = Files.walk(myPath, 1);
                         for (Iterator<Path> it = walk.iterator(); it.hasNext(); ) {
                             Path path = it.next();
-                            String[] file = path.toString().split("/");
+                            String[] file;
+                            if(uri.getScheme().equals("jar")) {
+                                file = path.toString().split("/");
+                            }
+                            else{
+                                file = path.toString().split("\\\\");
+                            }
                             String fileName = file[file.length - 1];
                             if (fileName.equalsIgnoreCase(com + ".js")) {
-
-                                InputStream is = Main.class
-                                        .getClassLoader().getResourceAsStream(path.toString().substring(1));
-                                assert is != null;
-                                InputStreamReader isr = new InputStreamReader(is);
-                                BufferedReader br = new BufferedReader(isr);
-                                StringBuilder function = new StringBuilder();
-                                String line;
-                                while ((line = br.readLine()) != null) {
-                                    function.append(line);
+                                if(uri.getScheme().equals("jar")){
+                                    InputStream is = Main.class
+                                            .getClassLoader().getResourceAsStream(path.toString().substring(1));
+                                    InputStreamReader isr = new InputStreamReader(is);
+                                    BufferedReader br = new BufferedReader(isr);
+                                    StringBuilder function = new StringBuilder();
+                                    String line;
+                                    while ((line = br.readLine()) != null) {
+                                        function.append(line);
+                                    }
+                                    is.close();
+                                    isr.close();
+                                    br.close();
+                                    response = Command.run(user, isMod, isSub, arguments, function.toString(), cheer, true);
                                 }
-                                is.close();
-                                isr.close();
-                                br.close();
-                                response = Command.run(user, isMod, isSub, arguments, function.toString(), cheer);
+                                else{
+                                    response = Command.run(user, isMod, isSub, arguments, Files.readString(path, StandardCharsets.UTF_8), cheer, true);
+                                }
                                 break;
                             }
                         }

@@ -577,7 +577,6 @@ public class InnerWindow extends ResizablePanel {
 				x = (int) ((Defaults.screenSize.getWidth()/2 - SettingsWindow.window.getWidth()/2) + Defaults.screenSize.x);
 				y = 150 + Defaults.screenSize.y;
 
-				System.out.println("Start: " + x + ", " + y);
 			}
 			x1 = x / ratioX;
 			y1 = y / ratioY;

@@ -17,12 +17,12 @@ public class Comment {
 		return String.valueOf(percent);
 	}
 
-	StringBuilder username;
-	StringBuilder comment;
-	StringBuilder likes;
-	StringBuilder percent;
+	String username;
+	String comment;
+	String likes;
+	String percent;
 
-	Comment(StringBuilder username, StringBuilder comment, StringBuilder likes, StringBuilder percent){
+	Comment(String username, String comment, String likes, String percent){
 		this.username = username;
 		this.comment = comment;
 		this.likes= likes;

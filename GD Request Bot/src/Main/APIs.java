@@ -13,6 +13,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
+import reactor.netty.http.client.PrematureCloseException;
+
 import java.nio.charset.StandardCharsets;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -27,6 +29,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static io.netty.buffer.Unpooled.wrappedBuffer;
@@ -62,41 +65,94 @@ public class APIs {
     }*/
 
 	public static ArrayList<Comment> getGDComments(int page, boolean top, long ID) throws IOException {
-		ByteBuf data = wrappedBuffer(StandardCharsets.UTF_8.encode("levelID=" + ID + "&page=" + page + "&secret=Wmfd2893gb7&gameVersion=21&binaryVersion=35&mode=" + (top ? 1 : 0)));
-		HttpClient client = HttpClient.create()
-				.baseUrl("http://www.boomlings.com/database")
-				.headers(h -> {
-					h.add("Content-Type", "application/x-www-form-urlencoded");
-					h.add("Content-Length", data.readableBytes());
-				});
-		StringBuilder responce = new StringBuilder(client.post()
-				.uri("/getGJComments21.php")
-				.send(Mono.just(data))
-				.responseSingle((responceHeader, responceBody) -> {
-					if(responceHeader.status().equals(HttpResponseStatus.OK)){
-						return responceBody.asString().defaultIfEmpty("");
-					}
-					else{
-						return Mono.error(new RuntimeException(responceHeader.status().toString()));
-					}
-				}).block());
-		String[] comments = responce.toString().split("\\|");
+		String response = "";
+		int tries = 0;
+		while (tries < 5) {
+			try {
+				ByteBuf data = wrappedBuffer(StandardCharsets.UTF_8.encode("levelID=" + ID + "&page=" + page + "&secret=Wmfd2893gb7&gameVersion=21&binaryVersion=35&mode=" + (top ? 1 : 0)));
+				HttpClient client = HttpClient.create()
+						.baseUrl("http://www.boomlings.com/database")
+						.headers(h -> {
+							h.add("Content-Type", "application/x-www-form-urlencoded");
+							h.add("Content-Length", data.readableBytes());
+						});
 
-		ArrayList<Comment> commentsData = new ArrayList<>();
 
-		for(String comment : comments){
-			String[] comData = comment.split("~");
-			StringBuilder decoded = new StringBuilder(new String (Base64.getDecoder().decode(comData[1].replace("-", "+").replace("_", "/"))));
-			Comment commentA = new Comment(new StringBuilder(comData[14]), decoded, new StringBuilder(comData[5]), new StringBuilder(comData[9]));
-
-			commentsData.add(commentA);
+				response = new String(client.post()
+						.uri("/getGJComments21.php")
+						.send(Mono.just(data))
+						.responseSingle((responceHeader, responceBody) -> {
+							if (responceHeader.status().equals(HttpResponseStatus.OK)) {
+								return responceBody.asString().defaultIfEmpty("");
+							} else {
+								return Mono.error(new RuntimeException(responceHeader.status().toString()));
+							}
+						}).block());
+				break;
+			} catch (Exception ignored) {
+			}
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			tries++;
 		}
-		responce = null;
+		int pages = (((Integer.parseInt(response.split("#")[1].split(":")[0]) - 1) / 10) + 1) | 0;
+		if (page > pages) {
+			return null;
+		}
+		response = response.split("#")[0].trim();
+		String[] comments = response.split("\\|");
+		ArrayList<Comment> commentsData = new ArrayList<>();
+		for (String comment : comments) {
+			try {
+				Thread.sleep(2);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			try {
+				String[] comData = comment.split("~");
+				String decoded = new String(Base64.getDecoder().decode(comData[1].replace("-", "+").replace("_", "/")));
+				Comment commentA = new Comment(comData[14], decoded, comData[5], comData[9]);
+				commentsData.add(commentA);
+			} catch (Exception ignored) {
+			}
+		}
+		response = null;
 		return commentsData;
 	}
-	static void getViewers(){
-		Thread thread = new Thread(() -> {
-			while(true) {
+
+	static ArrayList<String> allViewers = new ArrayList<>();
+
+	static void setAllViewers() {
+		try {
+			URL url = new URL("https://tmi.twitch.tv/group/user/" + Settings.getSettings("channel").toLowerCase() + "/chatters");
+			URLConnection conn = url.openConnection();
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			StringBuilder builder = new StringBuilder();
+			String x;
+			while ((x = br.readLine()) != null) {
+				builder.append(x).append("\n");
+			}
+			JsonObject viewers = JsonObject.readFrom(builder.toString());
+			String[] types = {"broadcaster", "vips", "staff", "moderators", "admins", "global_mods", "viewers"};
+			allViewers.clear();
+			for (String type : types) {
+				JsonArray viewerList = viewers.get("chatters").asObject().get(type).asArray();
+				for (int i = 0; i < viewerList.size(); i++) {
+					String viewer = viewerList.get(i).asString().replaceAll("\"", "");
+					allViewers.add(viewer);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	static void getViewers() {
+		new Thread(() -> {
+			while (true) {
 				try {
 					URL url = new URL("https://tmi.twitch.tv/group/user/" + Settings.getSettings("channel").toLowerCase() + "/chatters");
 					URLConnection conn = url.openConnection();
@@ -108,16 +164,16 @@ public class APIs {
 					}
 					JsonObject viewers = JsonObject.readFrom(builder.toString());
 					String[] types = {"broadcaster", "vips", "staff", "moderators", "admins", "global_mods", "viewers"};
-					for(int i = 0; i < Requests.levels.size(); i++){
+					for (int i = 0; i < Requests.levels.size(); i++) {
 						LevelsWindow.getButton(i).setViewership(false);
 					}
+
 					for (String type : types) {
 						JsonArray viewerList = viewers.get("chatters").asObject().get(type).asArray();
 						for (int i = 0; i < viewerList.size(); i++) {
 							String viewer = viewerList.get(i).asString().replaceAll("\"", "");
-
-							for(int k = 0; k < Requests.levels.size(); k++) {
-								if (LevelsWindow.getButton(k).getRequester().equalsIgnoreCase(viewer)){
+							for (int k = 0; k < Requests.levels.size(); k++) {
+								if (LevelsWindow.getButton(k).getRequester().equalsIgnoreCase(viewer)) {
 									LevelsWindow.getButton(k).setViewership(true);
 								}
 							}
@@ -132,9 +188,9 @@ public class APIs {
 					e.printStackTrace();
 				}
 			}
-		});
-		thread.start();
+		}).start();
 	}
+
 	static boolean isNotFollowing(String user) {
 
 		try {
@@ -155,19 +211,43 @@ public class APIs {
 			} else {
 				return true;
 			}
-		}
-		catch (Exception e){
+		} catch (Exception e) {
 			DialogBox.showDialogBox("Error!", e.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 			return true;
 		}
+	}
+
+	public static String fetchURL(String url) {
+		StringBuilder response = new StringBuilder();
+		try {
+			URL ids = new URL(url);
+			Scanner s = new Scanner(ids.openStream());
+			while (s.hasNextLine()) {
+				response.append(s.nextLine() + " ");
+			}
+			s.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return response.toString();
+	}
+
+	public static long getFollowerCount() {
+		JsonObject followCountJson = null;
+		try {
+			followCountJson = twitchAPI("https://api.twitch.tv/helix/users/follows?to_id=" + getIDs(Settings.getSettings("channel")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String total = followCountJson.get("total").toString();
+		return Long.parseLong(total);
 	}
 
 	public static String getChannel() {
 		try {
 			JsonObject nameObj = twitchAPI("https://api.twitch.tv/helix/users");
 			return String.valueOf(nameObj.asObject().get("data").asArray().get(0).asObject().get("display_name")).replaceAll("\"", "");
-		}
-		catch (Exception e){
+		} catch (Exception e) {
 			DialogBox.showDialogBox("Error!", e.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 			return "error";
 		}
@@ -177,8 +257,7 @@ public class APIs {
 		try {
 			JsonObject nameObj = twitchAPI("https://api.twitch.tv/helix/users");
 			return String.valueOf(nameObj.asObject().get("data").asArray().get(0).asObject().get("profile_image_url")).replaceAll("\"", "");
-		}
-		catch (Exception e){
+		} catch (Exception e) {
 			DialogBox.showDialogBox("Error!", e.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 			return "error";
 		}
@@ -264,6 +343,7 @@ public class APIs {
 		assert userID != null;
 		return userID.get("data").asArray().get(0).asObject().get("id").toString().replaceAll("\"", "");
 	}
+
 	@SuppressWarnings("unused")
 	public static String getClientID() {
 		try {
@@ -279,25 +359,28 @@ public class APIs {
 			return "";
 		}
 	}
+
 	static AtomicBoolean success = new AtomicBoolean(false);
+
 	public static void setOauth(boolean threaded) {
-		if(!threaded){
+		if (!threaded) {
 			setOauthPrivate();
-		}
-		else {
+		} else {
 			Thread thread = new Thread(() -> {
 				setOauthPrivate();
 			});
 			thread.start();
 		}
 	}
-	public static void setOauth(){
+
+	public static void setOauth() {
 		Thread thread = new Thread(() -> {
 			setOauthPrivate();
 		});
 		thread.start();
 	}
-	private static void setOauthPrivate(){
+
+	private static void setOauthPrivate() {
 		success.set(false);
 		try {
 			Twitch twitch = new Twitch();
@@ -306,11 +389,13 @@ public class APIs {
 			twitch.setClientId("fzwze6vc6d2f7qodgkpq2w8nnsz3rl");
 			URI authUrl = new URI(twitch.auth().getAuthenticationUrl(
 					twitch.getClientId(), callbackUri, Scopes.USER_READ
-			) + "chat:edit+channel:moderate+channel:read:redemptions+chat:read+whispers:read+whispers:edit+user_read&force_verify=true");
+			) + "chat:edit+channel:moderate+channel:read:redemptions+channel:read:subscriptions+chat:read+whispers:read+whispers:edit+user_read&force_verify=true");
 			Runtime rt = Runtime.getRuntime();
 			rt.exec("rundll32 url.dll,FileProtocolHandler " + authUrl);
 			if (twitch.auth().awaitAccessToken()) {
 				Settings.writeSettings("oauth", twitch.auth().getAccessToken());
+
+				Main.refreshBot();
 				success.set(true);
 			} else {
 				System.out.println(twitch.auth().getAuthenticationError());

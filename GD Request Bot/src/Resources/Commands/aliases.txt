@@ -15,3 +15,10 @@
 !page = !queue
 !list = !queue
 !nextLevel = !next
+!oopsIAccidentallyPutTheWrongLevelIntoTheQueue = !wronglevel
+!oops = !wronglevel
+!wrongid = !wronglevel
+!whoopsies = !wronglevel
+!frick = !wronglevel
+!pleaseHelpMeIAccidentallyPutTheWrongLevelIntoTheQueueAndIWantTheStreamerToSeeMyGoodLevelNotThisOneButIDontKnowTheCommand = !wronglevel
+!wrong = !wronglevel

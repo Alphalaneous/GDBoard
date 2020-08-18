@@ -1,8 +1,8 @@
 function command(){
     if(args.length > 1){
-        return '@' + user + ' ' + Levels.getHelp(args[1]);
+        return Levels.getHelp(user, args[1]);
     }
     else{
-	    return '@' + user + ' ' + Levels.getHelp();
+	    return Levels.getHelp(user);
 	}
 }

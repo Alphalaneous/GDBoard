@@ -1,9 +1,6 @@
 package Main.SettingsPanels;
 
-import Main.CheckboxButton;
-import Main.Defaults;
-import Main.FancyTextArea;
-import Main.Settings;
+import Main.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,13 +20,12 @@ public class OutputSettings {
 	private static FancyTextArea fileLocationInput = new FancyTextArea(false, false);
 	private static JPanel panel = new JPanel();
 	public static JPanel createPanel() {
-		//TODO Add scrollbar to Text Area?
 
 		panel.setDoubleBuffered(true);
 		panel.setBounds(0, 0, 415, 622);
-		panel.setBackground(Main.Defaults.SUB_MAIN);
+		panel.setBackground(Defaults.SUB_MAIN);
 		panel.setLayout(null);
-		JLabel outputText = new JLabel("Output Text:");
+		LangLabel outputText = new LangLabel("$OUTPUTS_TEXT$");
 		outputText.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		outputText.setBounds(25,20,outputText.getPreferredSize().width+5,outputText.getPreferredSize().height+5);
 		outputText.setForeground(Defaults.FOREGROUND);
@@ -49,7 +45,7 @@ public class OutputSettings {
 			}
 		});
 
-		JLabel noLevelsText = new JLabel("No Levels Text:");
+		LangLabel noLevelsText = new LangLabel("$NO_LEVELS_TEXT$");
 		noLevelsText.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		noLevelsText.setBounds(25,265,noLevelsText.getPreferredSize().width+5,noLevelsText.getPreferredSize().height+5);
 		noLevelsText.setForeground(Defaults.FOREGROUND);
@@ -69,7 +65,7 @@ public class OutputSettings {
 			}
 		});
 
-		JLabel fileLocationText = new JLabel("File location:");
+		LangLabel fileLocationText = new LangLabel("$FILE_LOCATION$");
 		fileLocationText.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		fileLocationText.setBounds(25,510,fileLocationText.getPreferredSize().width+5,fileLocationText.getPreferredSize().height+5);
 		fileLocationText.setForeground(Defaults.FOREGROUND);

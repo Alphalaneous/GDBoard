@@ -3,128 +3,90 @@ package Main;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Ellipse2D;
-import java.io.IOException;
+import java.awt.font.TextAttribute;
+import java.awt.geom.RoundRectangle2D;
+import java.util.ArrayList;
+import java.util.Map;
 
 import javax.swing.*;
 
 public class RoundedJButton extends JButton {
-	/*public Point getToolTipLocation(MouseEvent event) {
-		return new Point( );
-	}*/
+
 	@Override
 	public JToolTip createToolTip() {
 		return (tooltip);
 	}
-	private static final long serialVersionUID = 1L;
-	private JLabel tooltipLabel = new JLabel();
+
+	public static ArrayList<RoundedJButton> buttons = new ArrayList<>();
+	private String tooltipText;
+	private String text;
 	private JPanel tooltipPanel = new JPanel();
-	private boolean asSettings = false;
 	private JToolTip tooltip = new FancyTooltip(this);
 	public RoundedJButton(String label, String tooltip) {
-
 		super(label);
 		final boolean[] exited = {false};
+		this.tooltipText = tooltip;
+		this.text = label;
 		Dimension size = getPreferredSize();
 		tooltipPanel.setFocusable(false);
-		tooltipLabel.setText(tooltip);
-		tooltipPanel.add(tooltipLabel);
-		tooltipLabel.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		size.width = size.height = Math.max(size.width, size.height);
 		setPreferredSize(size);
 		setContentAreaFilled(false);
-
-		setToolTipText(tooltip);
-
-		/*addMouseListener(new MouseAdapter() {
+		if(!tooltip.equalsIgnoreCase("")) {
+			setToolTipText(Language.setLocale(tooltip));
+		}
+		setText(Language.setLocale(text));
+		buttons.add(this);
+		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				exited[0] = false;
-				Thread thread = new Thread(() -> {
-					try {
-						Thread.sleep(500);
-					} catch (InterruptedException e1) {
-						e1.printStackTrace();
-					}
-					if(!exited[0]) {
-						tooltipPanel.setBackground(Defaults.TOP);
-						tooltipLabel.setForeground(Defaults.FOREGROUND);
-						if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
-							if(asSettings){
-								tooltipPanel.setBounds(MouseInfo.getPointerInfo().getLocation().x - (tooltipLabel.getPreferredSize().width + 10)/2 - SettingsWindow.frame.getX(), MouseInfo.getPointerInfo().getLocation().y+20 - SettingsWindow.frame.getY(), tooltipLabel.getPreferredSize().width + 10, tooltipLabel.getPreferredSize().height + 5);
-								SettingsWindow.addToFrame(tooltipPanel);
-							}
-							else {
-								tooltipPanel.setBounds(MouseInfo.getPointerInfo().getLocation().x - (tooltipLabel.getPreferredSize().width + 10)/2 - Windowed.frame.getX(), MouseInfo.getPointerInfo().getLocation().y+20 - Windowed.frame.getY(), tooltipLabel.getPreferredSize().width + 10, tooltipLabel.getPreferredSize().height + 5);
-								Windowed.addToFrame(tooltipPanel);
-							}
-						}
-						else{
-							tooltipPanel.setBounds(MouseInfo.getPointerInfo().getLocation().x - (tooltipLabel.getPreferredSize().width + 10)/2 - Defaults.screenSize.x, MouseInfo.getPointerInfo().getLocation().y+20 - Defaults.screenSize.y, tooltipLabel.getPreferredSize().width + 10, tooltipLabel.getPreferredSize().height + 5);
-							Overlay.addToFrame(tooltipPanel);
-
-						}
-						tooltipPanel.setVisible(true);
-					}
-				});
-				thread.start();
+				Font originalFont = getFont();
+				Map attributes = originalFont.getAttributes();
+				attributes.put(TextAttribute.SIZE, originalFont.getSize() + 2);
+				setFont(originalFont.deriveFont(attributes));
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				exited[0] = true;
-				tooltipPanel.setVisible(false);
-				if(asSettings){
-					SettingsWindow.removeFromFrame(tooltipLabel);
-				}
-				else{
-					Windowed.removeFromFrame(tooltipLabel);
-				}
-				Overlay.removeFromFrame(tooltipPanel);
+				Font originalFont = getFont();
+				Map attributes = originalFont.getAttributes();
+				attributes.put(TextAttribute.SIZE, originalFont.getSize() - 2);
+				setFont(originalFont.deriveFont(attributes));
 			}
-		});*/
-	}
-	public void asSettings(){
-		asSettings = true;
+		});
 	}
 	public void setTooltip(String tooltip){
-		setToolTipText(tooltip);
-		/*tooltipLabel.setText(tooltip);
-		if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
-			tooltipPanel.setBounds(tooltipPanel.getX(), tooltipPanel.getY(), tooltipLabel.getPreferredSize().width + 10, tooltipLabel.getPreferredSize().height + 5);
-		}
-		else{
-			tooltipPanel.setBounds(tooltipPanel.getX(), tooltipPanel.getY(), tooltipLabel.getPreferredSize().width + 10, tooltipLabel.getPreferredSize().height + 5);
-		}*/
+		this.tooltipText = tooltip;
+		setToolTipText(Language.setLocale(tooltip));
+	}
+	public void refreshLocale(){
+		setToolTipText(Language.setLocale(tooltipText));
+		setText(Language.setLocale(text));
 	}
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-
 
 		g.setColor(getBackground());
 
 		RenderingHints qualityHints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		qualityHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		g2.setRenderingHints(qualityHints);
-		g2.fillOval(0, 0, getSize().width, getSize().height);
+		g2.fillRoundRect(0, 0, getSize().width, getSize().height, 10, 10);
 
 
 		super.paintComponent(g);
 	}
 
-	/*
-	 * protected void paintBorder(Graphics g) { g.setColor(getForeground());
-	 * g.drawOval(0, 0, getSize().width-1, getSize().height-1); }
-	 */
-
 	private Shape shape;
 
 	public boolean contains(int x, int y) {
 		if (shape == null || !shape.getBounds().equals(getBounds())) {
-			shape = new Ellipse2D.Float(0, 0, getWidth(), getHeight());
+			shape = new RoundRectangle2D.Float(0,0,getWidth(),getHeight(),10,10);
 		}
-
-
 		return shape.contains(x, y);
+	}
+	public void setTextLang(String text){
+		this.tooltipText = text;
+		setText(Language.setLocale(text));
 	}
 }

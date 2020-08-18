@@ -19,34 +19,34 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 public class RequestSettings {
-	private static CheckboxButton na = createButton("NA", 5);
-	private static CheckboxButton auto = createButton("Auto", 35);
-	private static CheckboxButton easy = createButton("Easy", 65);
-	private static CheckboxButton normal = createButton("Normal", 95);
-	private static CheckboxButton hard = createButton("Hard", 125);
-	private static CheckboxButton harder = createButton("Harder", 155);
-	private static CheckboxButton insane = createButton("Insane", 185);
-	private static CheckboxButton easyDemon = createButton("Easy Demon", 215);
-	private static CheckboxButton mediumDemon = createButton("Medium Demon", 245);
-	private static CheckboxButton hardDemon = createButton("Hard Demon", 275);
-	private static CheckboxButton insaneDemon = createButton("Insane Demon", 305);
-	private static CheckboxButton extremeDemon = createButton("Extreme Demon", 335);
+	private static CheckboxButton na = createButton("$GD_NA$", 5);
+	private static CheckboxButton auto = createButton("$GD_AUTO$", 35);
+	private static CheckboxButton easy = createButton("$GD_EASY$", 65);
+	private static CheckboxButton normal = createButton("$GD_NORMAL$", 95);
+	private static CheckboxButton hard = createButton("$GD_HARD$", 125);
+	private static CheckboxButton harder = createButton("$GD_HARDER$", 155);
+	private static CheckboxButton insane = createButton("$GD_INSANE$", 185);
+	private static CheckboxButton easyDemon = createButton("$GD_EASY_DEMON$", 215);
+	private static CheckboxButton mediumDemon = createButton("$GD_MEDIUM_DEMON$", 245);
+	private static CheckboxButton hardDemon = createButton("$GD_HARD_DEMON$", 275);
+	private static CheckboxButton insaneDemon = createButton("$GD_INSANE_DEMON$", 305);
+	private static CheckboxButton extremeDemon = createButton("$GD_EXTREME_DEMON$", 335);
 
-	private static CheckboxButton tiny = createButton("Tiny", 5);
-	private static CheckboxButton shortL = createButton("Short", 35);
-	private static CheckboxButton medium = createButton("Medium", 65);
-	private static CheckboxButton longL = createButton("Long", 95);
-	private static CheckboxButton XL = createButton("XL", 125);
+	private static CheckboxButton tiny = createButton("$GD_TINY$", 5);
+	private static CheckboxButton shortL = createButton("$GD_SHORT$", 35);
+	private static CheckboxButton medium = createButton("$GD_MEDIUM$", 65);
+	private static CheckboxButton longL = createButton("$GD_LONG$", 95);
+	private static CheckboxButton XL = createButton("$GD_XL$", 125);
 
 
-	private static CheckboxButton minimumLikes = createButton("Minimum Likes: ", 690);
-	private static CheckboxButton maximumLikes = createButton("Maximum Likes: ", 765);
+	private static CheckboxButton minimumLikes = createButton("$MINIMUM_LIKES$", 690);
+	private static CheckboxButton maximumLikes = createButton("$MAXIMUM_LIKES$", 765);
 
-	private static CheckboxButton minimumObjects = createButton("Minimum Objects: ", 840);
-	private static CheckboxButton maximumObjects = createButton("Maximum Objects: ", 915);
+	private static CheckboxButton minimumObjects = createButton("$MINIMUM_OBJECTS$", 840);
+	private static CheckboxButton maximumObjects = createButton("$MAXIMUM_OBJECTS$", 915);
 
-	private static CheckboxButton minimumID = createButton("Minimum ID: ", 990);
-	private static CheckboxButton maximumID = createButton("Maximum ID: ", 1065);
+	private static CheckboxButton minimumID = createButton("$MINIMUM_ID$", 990);
+	private static CheckboxButton maximumID = createButton("$MAXIMUM_ID$", 1065);
 
 	private static FancyTextArea minLikesInput = new FancyTextArea(true, true);
 	private static FancyTextArea maxLikesInput = new FancyTextArea(true, true);
@@ -55,8 +55,8 @@ public class RequestSettings {
 	private static FancyTextArea minIDInput = new FancyTextArea(true, false);
 	private static FancyTextArea maxIDInput = new FancyTextArea(true, false);
 
-	private static CurvedButton allowedStrings = new CurvedButton("Allowed Words");
-	private static CurvedButton disallowedStrings = new CurvedButton("Disallowed Words");
+	private static CurvedButton allowedStrings = new CurvedButton("$ALLOWED_WORDS$");
+	private static CurvedButton disallowedStrings = new CurvedButton("$DISALLOWED_WORDS$");
 
 
 	public static int minLikes = 0;
@@ -81,10 +81,10 @@ public class RequestSettings {
 	public static boolean disallowOption = false;
 	public static boolean allowOption = false;
 
-	private static CheckboxButton rated = createButton("Rated Levels Only", 15);
-	private static CheckboxButton unrated = createButton("Unrated Levels Only", 45);
-	private static CheckboxButton disableDifficulties = createButton("Disable selected difficulties", 75);
-	private static CheckboxButton disableLengths = createButton("Disable selected lengths", 490);
+	private static CheckboxButton rated = createButton("$RATED_LEVELS_ONLY$", 15);
+	private static CheckboxButton unrated = createButton("$UNRATED_LEVELS_ONLY$", 45);
+	private static CheckboxButton disableDifficulties = createButton("$DISABLE_SELECTED_DIFFICULTIES$", 75);
+	private static CheckboxButton disableLengths = createButton("$DISABLE_SELECTED_LENGTHS$", 490);
 
 	private static JPanel difficultyPanel = new JPanel(null);
 	private static JPanel lengthPanel = new JPanel(null);
@@ -144,15 +144,13 @@ public class RequestSettings {
 		addID.setFont(Defaults.SYMBOLS.deriveFont(22f));
 		addID.setForeground(Defaults.FOREGROUND);
 		addID.setUI(settingsButtonUI);
-		addID.asSettings();
 
 		backButton.setBackground(Defaults.BUTTON);
 		backButton.setBounds(15, 16, 30, 30);
-		backButton.setFont(Defaults.SYMBOLS.deriveFont(15f));
+		backButton.setFont(Defaults.SYMBOLS.deriveFont(14f));
 
 		backButton.setForeground(Defaults.FOREGROUND);
 		backButton.setUI(settingsButtonUI);
-		backButton.asSettings();
 
 		backButton.addMouseListener(new MouseAdapter() {
 			@Override

@@ -21,7 +21,7 @@ public class BlockedSettings {
 	private static JPanel blockedListPanel = new JPanel();
 	private static JScrollPane scrollPane = new JScrollPane(blockedListPanel);
 	private static FancyTextArea blockedInput = new FancyTextArea(true, false);
-	private static RoundedJButton addID = new RoundedJButton("\uECC8", "Add ID");
+	private static RoundedJButton addID = new RoundedJButton("\uECC8", "$ADD_ID_TOOLTIP$");
 	private static int i = 0;
 	private static double height = 0;
 
@@ -30,7 +30,7 @@ public class BlockedSettings {
 		blockedSettingsPanel.setBackground(Defaults.TOP);
 		blockedSettingsPanel.setLayout(null);
 
-		JLabel label = new JLabel("Blocked IDs:");
+		LangLabel label = new LangLabel("$BLOCKED_IDS$");
 		label.setForeground(Defaults.FOREGROUND);
 		label.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		label.setBounds(25, 20, label.getPreferredSize().width + 5, label.getPreferredSize().height + 5);
@@ -42,7 +42,6 @@ public class BlockedSettings {
 		addID.setFont(Defaults.SYMBOLS.deriveFont(22f));
 		addID.setForeground(Defaults.FOREGROUND);
 		addID.setUI(settingsButtonUI);
-		addID.asSettings();
 
 		blockedSettingsPanel.add(addID);
 		blockedSettingsPanel.add(blockedInput);
@@ -145,9 +144,6 @@ public class BlockedSettings {
 			height = height + 39;
 			blockedListPanel.setBounds(0, 0, 400, (int) (height + 4));
 			blockedListPanel.setPreferredSize(new Dimension(400, (int) (height + 4)));
-			if(i > 0) {
-				scrollPane.updateUI();
-			}
 		}
 		Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
 		CurvedButton button = new CurvedButton(String.valueOf(ID));
@@ -165,9 +161,9 @@ public class BlockedSettings {
 				SettingsWindow.run = false;
 				new Thread(() -> {
 
-					String option = DialogBox.showDialogBox("Unblock " + button.getLText() + "?", "<html>This will unblock the ID and allow it to be requested again.<html>", "", new String[]{"Yes", "No"});
+					String option = DialogBox.showDialogBox("$UNBLOCK_ID_DIALOG_TITLE$", "<html> $UNBLOCK_ID_DIALOG_INFO$ <html>", "", new String[]{"$YES$", "$NO$"}, new Object[]{button.getLText()});
 
-					if (option.equalsIgnoreCase("yes")) {
+					if (option.equalsIgnoreCase("YES")) {
 						if (Files.exists(file)) {
 							try {
 								Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_temp_");
@@ -193,7 +189,6 @@ public class BlockedSettings {
 		});
 		button.refresh();
 		blockedListPanel.add(button);
-		blockedListPanel.updateUI();
 
 	}
 	public static void refreshUI() {

@@ -35,7 +35,6 @@ public class Main {
 	static boolean allowRequests = false;
 	static boolean sendMessages = false;
 	static boolean refreshImages = false;
-	private static ChatReader chatReader;
 	private static boolean finishedLoading = false;
 
 	private static ChannelPointListener channelPointListener;
@@ -47,6 +46,7 @@ public class Main {
 		 * Sets to Nimbus, then sets defaults back
 		 */
 		setUI();
+		PersonalizationSettings.loadSettings();
 		/**
 		 * Places config files in JRE folder in the GDBoard AppData as I forgot to
 		 * include them in the bundled JRE
@@ -56,16 +56,19 @@ public class Main {
 		 * Sets Windowed to true as it is default and previously wasn't, easiest fix for all
 		 * checks of windowed mode
 		 */
-		if(Settings.getSettings("windowed").equalsIgnoreCase("")){
+		if (Settings.getSettings("windowed").equalsIgnoreCase("")) {
 			Settings.writeSettings("windowed", "true");
 		}
 
 		Defaults.programLoaded.set(false);
-
+		GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		genv.registerFont(Defaults.SYMBOLS);
+		genv.registerFont(Defaults.MAIN_FONT);
+		genv.registerFont(Defaults.SEGOE);
 		try {
 
 			/** Disables logging used with JDash */
-
+			Language.startFileChangeListener();
 			Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
 			logger.setLevel(Level.OFF);
 			logger.setUseParentHandlers(false);
@@ -77,16 +80,16 @@ public class Main {
 			 * Shows loading screen
 			 */
 			new Thread(() -> {
-				String choice = DialogBox.showDialogBox("Loading GDBoard...", "This may take a few seconds", "", new String[]{"Cancel"}, true);
-				if(choice.equalsIgnoreCase("Cancel")){
+				String choice = DialogBox.showDialogBox("$LOADING_GDBOARD$", "$LOADING_GDBOARD_INFO$", "", new String[]{"$CANCEL$"}, true, new Object[]{});
+				if (choice.equalsIgnoreCase("CANCEL")) {
 					close();
 				}
 			}).start();
 
 			/** Sets loading bar progress on loading screen */
 			new Thread(() -> {
-				for(int i = 0; i < 90; i++){
-					if(finishedLoading){
+				for (int i = 0; i < 90; i++) {
+					if (finishedLoading) {
 						break;
 					}
 					try {
@@ -101,15 +104,15 @@ public class Main {
 			/** Loads Geometry Dash data, if it fails to load and times out, continue anyways */
 			new Thread(() -> {
 				try {
-					LoadGD.load();
+					LoadGD.load(false);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 
 			}).start();
 
-			while(!LoadGD.loaded){
-				if(LoadGD.timeout){
+			while (!LoadGD.loaded) {
+				if (LoadGD.timeout) {
 					break;
 				}
 				try {
@@ -119,7 +122,7 @@ public class Main {
 				}
 			}
 			Assets.loadAssets();
-
+			addMissingFiles();
 			/** Starts thread that always checks for changes such as time, resolution, and color scheme */
 			Defaults.startMainThread();
 
@@ -127,18 +130,17 @@ public class Main {
 			 * Wait until loaded
 			 * I load colors separately due to dynamic color changing with windows
 			 */
-			while(!Defaults.programLoaded.get()){
+			while (!Defaults.programLoaded.get()) {
 				Thread.sleep(10);
 			}
-			Thread.sleep(500);
-			while(!Defaults.colorsLoaded.get()){
+			while (!Defaults.colorsLoaded.get()) {
 				Thread.sleep(10);
 			}
 			finishedLoading = true;
 
 			/** Finishes Progress bar */
 			new Thread(() -> {
-				for(int i = 90; i < 100; i++){
+				for (int i = 90; i < 100; i++) {
 					try {
 						Thread.sleep(10);
 					} catch (InterruptedException e) {
@@ -147,32 +149,31 @@ public class Main {
 					DialogBox.setProgress(i);
 				}
 			}).start();
-			Thread.sleep(500);
 			DialogBox.closeDialogBox();
 
 			/**
 			 * If first time launch, the user has to go through onboarding
 			 * Show it and wait until finished
 			 */
-			if(Settings.getSettings("onboarding").equalsIgnoreCase("")){
+			if (Settings.getSettings("onboarding").equalsIgnoreCase("")) {
 				Onboarding.createPanel();
 				Onboarding.loadSettings();
 				Onboarding.refreshUI();
 				Onboarding.frame.setVisible(true);
-			}
-			else{
+			} else {
 				programStarting = false;
 			}
 
-			while(true) {
+			while (true) {
 				if (!programStarting) {
 
 					Settings.loadSettings(true);
+					Variables.loadVars();
 					GDBoardBot.start();
 
 					/** Wait for GDBoard to connect before proceeding */
-					while(!GDBoardBot.connected){
-						Thread.sleep(10);
+					while (!GDBoardBot.connected) {
+						Thread.sleep(100);
 					}
 
 					/** If there is no monitor setting, default to 0 */
@@ -184,7 +185,7 @@ public class Main {
 					 * If not windowed mode, create all panels
 					 * Uses reflection to easily loop when more are added
 					 */
-					if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+					if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 						Overlay.createOverlay();
 						Reflections innerReflections = new Reflections("Main.InnerWindows", new SubTypesScanner(false));
 						Set<Class<?>> innerClasses =
@@ -195,7 +196,7 @@ public class Main {
 						}
 					}
 					/** Else create these 3 for the windowed frame */
-					else{
+					else {
 						CommentsWindow.createPanel();
 						LevelsWindow.createPanel();
 						InfoWindow.createPanel();
@@ -203,11 +204,19 @@ public class Main {
 					}
 
 					/** Create the settings pane; */
+					CommandEditor.createPanel();
 					SettingsWindow.createPanel();
 
 					/** Load GDBoard Settings */
-					Settings.loadSettings(false);
-
+					while(true) {
+						try {
+							Settings.loadSettings(false);
+							break;
+						}
+						catch (Exception ignored){
+						}
+						Thread.sleep(100);
+					}
 					/**
 					 * Load Settings panels and Settings
 					 * Uses reflection to easily loop when more are added
@@ -216,9 +225,15 @@ public class Main {
 					Set<Class<?>> settingsClasses =
 							settingsReflections.getSubTypesOf(Object.class);
 					for (Class<?> Class : settingsClasses) {
-						for(Method method : Class.getMethods()){
-							if(method.getName().equalsIgnoreCase("loadSettings")){
-								method.invoke(null);
+						for (Method method : Class.getMethods()) {
+							if (method.getName().equalsIgnoreCase("loadSettings")) {
+								while(true) {
+									try {
+										method.invoke(null);
+										break;
+									} catch (Exception e) {
+									}
+								}
 							}
 						}
 					}
@@ -234,12 +249,7 @@ public class Main {
 					 * Reads chat as streamer, reduces load on servers for some actions
 					 * such as custom commands that don't use the normal prefix
 					 */
-					chatReader = new ChatReader();
-					new Thread(() -> {
-						chatReader.connect();
-						chatReader.joinChannel(Settings.getSettings("channel"));
-						chatReader.start();
-					}).start();
+
 
 
 					/** Reads channel point redemptions for channel point triggers */
@@ -256,35 +266,22 @@ public class Main {
 
 
 					Overlay.refreshUI(true);
+
 					if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 						Windowed.resetCommentSize();
 						Windowed.loadSettings();
 						Windowed.frame.setVisible(true);
-						Windowed.frame.setAlwaysOnTop(true);
-						Windowed.frame.setAlwaysOnTop(false);
-						Windowed.refresh();
 
 					} else {
 						Overlay.setVisible();
 					}
 
 					OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
-					/*new Thread(() -> {
-						String option = DialogBox.showDialogBox("Donate?", "<html>I'm currently getting food from the food bank and we possibly face eviction, even a dollar can help, thanks for understanding.</html>", "", new String[]{"Donate", "Cancel"});
-						if(option.equalsIgnoreCase("Donate")){
-							Runtime rt = Runtime.getRuntime();
-							try {
-								rt.exec("rundll32 url.dll,FileProtocolHandler https://paypal.me/xAlphalaneous");
-							} catch (IOException e1) {
-								e1.printStackTrace();
-							}
-						}
-					}).start();*/
 					break;
 				}
 				Thread.sleep(100);
 			}
-			File file = new File(Defaults.saveDirectory + "\\GDBoard\\saved.txt"); //todo fix
+			File file = new File(Defaults.saveDirectory + "\\GDBoard\\saved.txt");
 
 			if (file.exists()) {
 				Scanner sc = null;
@@ -299,19 +296,24 @@ public class Main {
 				while (sc.hasNextLine()) {
 					String[] level = sc.nextLine().split(",");
 					try {
-						Requests.forceAdd(level[0],level[1], Long.parseLong(level[2]), level[3], Boolean.parseBoolean(level[4]),
-								Boolean.parseBoolean(level[5]), Integer.parseInt(level[6]), level[7], Integer.parseInt(level[8]),
-								Integer.parseInt(level[9]), new String(Base64.getDecoder().decode(level[10])), Integer.parseInt(level[11]), Integer.parseInt(level[12]),
-								level[13], Integer.parseInt(level[14]), Integer.parseInt(level[15]),  new String(Base64.getDecoder().decode(level[16])), level[17],
-								Integer.parseInt(level[18]), Long.parseLong(level[19]), Boolean.parseBoolean(level[20]), Boolean.parseBoolean(level[21]));
-
-					}
-					catch (IndexOutOfBoundsException e){
+						if(level.length < 26){
+							Requests.forceAdd(level[0], level[1], Long.parseLong(level[2]), level[3], Boolean.parseBoolean(level[4]),
+									Boolean.parseBoolean(level[5]), Integer.parseInt(level[6]), level[7], Integer.parseInt(level[8]),
+									Integer.parseInt(level[9]), new String(Base64.getDecoder().decode(level[10])), Integer.parseInt(level[11]), Integer.parseInt(level[12]),
+									level[13], Integer.parseInt(level[14]), Integer.parseInt(level[15]), new String(Base64.getDecoder().decode(level[16])), level[17],
+									Integer.parseInt(level[18]), Long.parseLong(level[19]), Boolean.parseBoolean(level[20]), Boolean.parseBoolean(level[21]),
+									-1, null, null, false);
+						}
+						if(level.length == 26) {
+							Requests.forceAdd(level[0], level[1], Long.parseLong(level[2]), level[3], Boolean.parseBoolean(level[4]),
+									Boolean.parseBoolean(level[5]), Integer.parseInt(level[6]), level[7], Integer.parseInt(level[8]),
+									Integer.parseInt(level[9]), new String(Base64.getDecoder().decode(level[10])), Integer.parseInt(level[11]), Integer.parseInt(level[12]),
+									level[13], Integer.parseInt(level[14]), Integer.parseInt(level[15]), new String(Base64.getDecoder().decode(level[16])), level[17],
+									Integer.parseInt(level[18]), Long.parseLong(level[19]), Boolean.parseBoolean(level[20]), Boolean.parseBoolean(level[21]),
+									Integer.parseInt(level[22]), level[23], level[24], Boolean.parseBoolean(level[25]));
+						}
+					} catch (Exception e) {
 						e.printStackTrace();
-					}
-					catch (Exception e){
-						e.printStackTrace();
-						Requests.levels.clear();
 					}
 				}
 				sc.close();
@@ -320,15 +322,16 @@ public class Main {
 			Functions.saveFunction();
 			LevelsWindow.setOneSelect();
 			APIs.getViewers();
+			CommentsWindow.loadComments(0, false);
 
 			sendMessages = true;
 			allowRequests = true;
 			refreshImages = true;
 
-			Main.sendMessage("Thank you for using GDBoard by Alphalaneous and TreehouseFalcon! It is suggested to VIP or Mod GDBoard to prevent chat limits from occurring.");
+			Main.sendMessage(Utilities.format("$STARTUP_MESSAGE$"));
 
 			new Thread(() -> {
-				while(true){
+				while (true) {
 					try {
 						Thread.sleep(120000);
 					} catch (InterruptedException e) {
@@ -338,11 +341,7 @@ public class Main {
 				}
 			}).start();
 
-			Path path = Paths.get(Defaults.saveDirectory + "\\GDBoard\\bin\\gdmod.exe");
-			if(!Files.exists(path)){
-				URL inputUrl = Main.class.getResource("/Resources/gdmod.exe");
-				FileUtils.copyURLToFile(inputUrl, path.toFile());
-			}
+
 			programLoaded = true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -350,50 +349,90 @@ public class Main {
 			close(true, false);
 		}
 	}
-	static Channel channel;
 
-	static {
-		channel = Channel.getChannel(Settings.getSettings("channel"), chatReader);
-	}
 
-	static void refreshChatReader(){
-		if(chatReader.isRunning()){
-			chatReader.stop();
+	public static void refreshBot() {
+		try {
+			GDBoardBot.start();
+			channelPointListener.disconnectBot();
+			channelPointListener.reconnectBot();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		chatReader = new ChatReader();
-		chatReader.connect();
-		chatReader.joinChannel(Settings.getSettings("channel"));
-		chatReader.start();
+
 	}
 
-	static void sendMainMessage(String message){
-		chatReader.sendMessage(message, channel);
+	static void sendMainMessage(String message) {
+		GDBoardBot.sendMainMessage(message);
 	}
+
+	static boolean onCool = false;
+
+	static void addMissingFiles(){
+		try {
+			Path path = Paths.get(Defaults.saveDirectory + "\\GDBoard\\bin\\gdmod.exe");
+			if (!Files.exists(path)) {
+				URL inputUrl = Main.class.getResource("/Resources/gdmod.exe");
+				FileUtils.copyURLToFile(inputUrl, path.toFile());
+			}
+			Path pathA = Paths.get(Defaults.saveDirectory + "\\GDBoard\\bin\\getProgram.bat");
+			if (!Files.exists(pathA)) {
+				URL inputUrl = Main.class.getResource("/Resources/getProgram.bat");
+				FileUtils.copyURLToFile(inputUrl, pathA.toFile());
+			}
+			Path pathB = Paths.get(Defaults.saveDirectory + "\\GDBoard\\bin\\getInstalledPrograms.bat");
+			if (!Files.exists(pathB)) {
+				URL inputUrl = Main.class.getResource("/Resources/getInstalledPrograms.bat");
+				FileUtils.copyURLToFile(inputUrl, pathB.toFile());
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+
 	static void sendMessage(String message, boolean whisper, String user) {
-		if(!message.equalsIgnoreCase("")) {
-			JSONObject messageObj = new JSONObject();
-			messageObj.put("request_type", "send_message");
-			if(whisper){
-				messageObj.put("message", "/w " + user + " " + message);
+		if(!GeneralSettings.silentOption || message.equalsIgnoreCase(" ")) {
+			if (!message.equalsIgnoreCase("")) {
+
+				while (onCool) {
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+
+				onCool = true;
+				JSONObject messageObj = new JSONObject();
+				messageObj.put("request_type", "send_message");
+				if (whisper) {
+					messageObj.put("message", "/w " + user + " " + message);
+				} else {
+					messageObj.put("message", message);
+				}
+				GDBoardBot.sendMessage(messageObj.toString());
+				new Thread(() -> {
+					try {
+						Thread.sleep(500);
+						onCool = false;
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}).start();
 			}
-			else {
-				messageObj.put("message", message);
-			}
-			GDBoardBot.sendMessage(messageObj.toString());
 		}
 	}
+
 	static void sendMessage(String message) {
-		if(!message.equalsIgnoreCase("")) {
-			JSONObject messageObj = new JSONObject();
-			messageObj.put("request_type", "send_message");
-			messageObj.put("message", message);
-			GDBoardBot.sendMessage(messageObj.toString());
-		}
+		sendMessage(message, false, null);
 	}
+
 	private static boolean failed = false;
 	static Thread thread;
+
 	private static void runKeyboardHook() {
-		if(thread != null) {
+		if (thread != null) {
 			if (thread.isAlive()) {
 				thread.stop();
 			}
@@ -407,8 +446,7 @@ public class Main {
 			while (GlobalScreen.isNativeHookRegistered()) {
 				Thread.sleep(100);
 			}
-		}
-		catch (Exception e){
+		} catch (Exception e) {
 			try {
 				GlobalScreen.unregisterNativeHook();
 			} catch (NativeHookException e1) {
@@ -417,8 +455,8 @@ public class Main {
 			failed = true;
 		}
 		thread = new Thread(() -> {
-			while(true){
-				if (failed){
+			while (true) {
+				if (failed) {
 					runKeyboardHook();
 				}
 				try {
@@ -430,13 +468,14 @@ public class Main {
 		});
 		thread.start();
 	}
-	public static void close(boolean forceLoaded, boolean load){
+
+	public static void close(boolean forceLoaded, boolean load) {
 		boolean loaded = Main.programLoaded;
-		if(forceLoaded){
+		if (forceLoaded) {
 			loaded = load;
 		}
 		try {
-			if(Settings.getSettings("onboarding").equalsIgnoreCase("false") && loaded) {
+			if (Settings.getSettings("onboarding").equalsIgnoreCase("false") && loaded) {
 				if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 					ActionsWindow.setSettings();
 					CommentsWindow.setSettings();
@@ -452,39 +491,53 @@ public class Main {
 					SettingsWindow.setSettings();
 					Windowed.setSettings();
 					Settings.writeLocation();
-					WindowedSettings.setSettings();
 				}
 				try {
 					channelPointListener.disconnectBot();
+				} catch (WebsocketNotConnectedException ignored) {
 				}
-				catch (WebsocketNotConnectedException ignored){}
+				Variables.saveVars();
 				GeneralSettings.setSettings();
 				RequestSettings.setSettings();
 				ShortcutSettings.setSettings();
 				OutputSettings.setSettings();
-				try {
-					GlobalScreen.unregisterNativeHook();
-				} catch (NativeHookException e) {
-					e.printStackTrace();
-				}
+				PersonalizationSettings.setSettings();
+
 			}
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			GlobalScreen.unregisterNativeHook();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		System.exit(0);
 	}
 
 
-	public static void setUI(){
+	public static void setUI() {
 		HashMap<Object, Object> progressDefaults = new HashMap<>();
-		for(Map.Entry<Object, Object> entry : UIManager.getDefaults().entrySet()){
-			if(entry.getKey().getClass() == String.class && ((String)entry.getKey()).startsWith("ProgressBar")){
+		for (Map.Entry<Object, Object> entry : UIManager.getDefaults().entrySet()) {
+			if (entry.getKey().getClass() == String.class && ((String) entry.getKey()).startsWith("ProgressBar")) {
 				progressDefaults.put(entry.getKey(), entry.getValue());
 			}
 		}
 		HashMap<Object, Object> tooltipDefaults = new HashMap<>();
-		for(Map.Entry<Object, Object> entry : UIManager.getDefaults().entrySet()){
-			if(entry.getKey().getClass() == String.class && ((String)entry.getKey()).startsWith("ToolTip")){
+		for (Map.Entry<Object, Object> entry : UIManager.getDefaults().entrySet()) {
+			if (entry.getKey().getClass() == String.class && ((String) entry.getKey()).startsWith("ToolTip")) {
+				progressDefaults.put(entry.getKey(), entry.getValue());
+			}
+		}
+		HashMap<Object, Object> menuItemDefaults = new HashMap<>();
+		for (Map.Entry<Object, Object> entry : UIManager.getDefaults().entrySet()) {
+			if (entry.getKey().getClass() == String.class && ((String) entry.getKey()).startsWith("MenuItem")) {
+				progressDefaults.put(entry.getKey(), entry.getValue());
+			}
+		}
+		HashMap<Object, Object> scrollBarDefaults = new HashMap<>();
+		for (Map.Entry<Object, Object> entry : UIManager.getDefaults().entrySet()) {
+			if (entry.getKey().getClass() == String.class && ((String) entry.getKey()).startsWith("ScrollBar")) {
 				progressDefaults.put(entry.getKey(), entry.getValue());
 			}
 		}
@@ -495,29 +548,44 @@ public class Main {
 				public void provideErrorFeedback(Component component) {
 				}
 			});
-		} catch (UnsupportedLookAndFeelException ignored) { }
+		} catch (UnsupportedLookAndFeelException ignored) {
+		}
 
-		for(Map.Entry<Object, Object> entry : progressDefaults.entrySet()){
+		for (Map.Entry<Object, Object> entry : progressDefaults.entrySet()) {
 			UIManager.getDefaults().put(entry.getKey(), entry.getValue());
 		}
-		for(Map.Entry<Object, Object> entry : tooltipDefaults.entrySet()){
+		for (Map.Entry<Object, Object> entry : tooltipDefaults.entrySet()) {
 			UIManager.getDefaults().put(entry.getKey(), entry.getValue());
 		}
+		for (Map.Entry<Object, Object> entry : menuItemDefaults.entrySet()) {
+			UIManager.getDefaults().put(entry.getKey(), entry.getValue());
+		}
+		for (Map.Entry<Object, Object> entry : scrollBarDefaults.entrySet()) {
+			UIManager.getDefaults().put(entry.getKey(), entry.getValue());
+		}
+
 		System.setProperty("sun.awt.noerasebackground", "true");
+		UIManager.put("Menu.selectionBackground", Color.RED);
+		UIManager.put("Menu.selectionForeground", Color.WHITE);
+		UIManager.put("Menu.background", Color.WHITE);
+		UIManager.put("Menu.foreground", Color.BLACK);
+		UIManager.put("Menu.opaque", false);
+		UIManager.put("ToolTipManager.enableToolTipMode", "allWindows");
+
 	}
 
-	public static void createConfFiles(){
+	public static void createConfFiles() {
 		Path conf = Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf");
 		Path confzip = Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf.zip");
 
-		if(!Files.exists(conf)){
+		if (!Files.exists(conf)) {
 			URL inputUrl = Main.class.getResource("/Resources/conf.zip");
 			try {
 				FileUtils.copyURLToFile(inputUrl, confzip.toFile());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			if(Files.exists(Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf.zip"))){
+			if (Files.exists(Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf.zip"))) {
 				Path decryptTo = Paths.get(Defaults.saveDirectory + "\\GDBoard\\jre\\conf");
 				try {
 					Files.createDirectory(decryptTo);
@@ -544,7 +612,7 @@ public class Main {
 		}
 	}
 
-	public static void close(){
+	public static void close() {
 		close(false, false);
 	}
 }

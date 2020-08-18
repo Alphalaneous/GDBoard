@@ -19,6 +19,8 @@ public class RequestsLog {
 	private static JPanel blockedSettingsPanel = new JPanel();
 	private static JPanel blockedListPanel = new JPanel();
 	private static JScrollPane scrollPane = new JScrollPane(blockedListPanel);
+	private static RoundedJButton clearLogs = new RoundedJButton("\uE107", "$CLEAR_LOGS_TOOLTIP$");
+
 	private static int i = 0;
 	private static double height = 0;
 
@@ -27,12 +29,41 @@ public class RequestsLog {
 		blockedSettingsPanel.setBackground(Defaults.TOP);
 		blockedSettingsPanel.setLayout(null);
 
-		JLabel label = new JLabel("Logged IDs:");
+		LangLabel label = new LangLabel("$LOGGED_IDS$");
 		label.setForeground(Defaults.FOREGROUND);
 		label.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		label.setBounds(25, 20, label.getPreferredSize().width + 5, label.getPreferredSize().height + 5);
 
+
+		clearLogs.setBackground(Defaults.BUTTON);
+		clearLogs.setBounds(370, 16, 30, 30);
+		clearLogs.setFont(Defaults.SYMBOLS.deriveFont(18f));
+		clearLogs.setForeground(Defaults.FOREGROUND);
+		clearLogs.setUI(settingsButtonUI);
+		clearLogs.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				new Thread(() -> {
+					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
+					String option = DialogBox.showDialogBox("$CLEAR_LOGS_DIALOG_TITLE$", "<html> $CLEAR_LOGS_DIALOG_INFO$ <html>", "", new String[]{"$YES$", "$NO$"});
+
+					if (option.equalsIgnoreCase("YES")) {
+						if (Files.exists(file)) {
+							try {
+								Files.delete(file);
+								clear();
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}
+						}
+					}
+					SettingsWindow.run = true;
+				}).start();
+			}
+		});
+
 		blockedSettingsPanel.add(label);
+		blockedSettingsPanel.add(clearLogs);
 		blockedListPanel.setDoubleBuffered(true);
 		blockedListPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 4, 4));
 		//blockedListPanel.setBounds(0, 0, 415, 0);
@@ -57,6 +88,10 @@ public class RequestsLog {
 	public static void clear(){
 		blockedListPanel.removeAll();
 		height = 0;
+		blockedListPanel.setBounds(0, 0, 400, (int) (height + 4));
+		blockedListPanel.setPreferredSize(new Dimension(400, (int) (height + 4)));
+		scrollPane.updateUI();
+
 	}
 	private static void removeID(String ID) {
 		i--;
@@ -84,12 +119,8 @@ public class RequestsLog {
 			height = height + 39;
 			blockedListPanel.setBounds(0, 0, 400, (int) (height + 4));
 			blockedListPanel.setPreferredSize(new Dimension(400, (int) (height + 4)));
-			if(i > 0) {
-				scrollPane.updateUI();
-			}
 		}
 
-		scrollPane.updateUI();
 		Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
 		CurvedButton button = new CurvedButton(String.valueOf(ID));
 
@@ -106,9 +137,9 @@ public class RequestsLog {
 
 				new Thread(() ->{
 
-				String option = DialogBox.showDialogBox("Remove " + button.getLText() + " from logs?", "<html>This will allow it to be sent again if \"Disable Repeated Requests All Time\" is on.<html>", "", new String[]{"Yes", "No"});
+				String option = DialogBox.showDialogBox("$REMOVE_LOG_DIALOG_TITLE$", "<html> $REMOVE_LOG_DIALOG_INFO$ <html>", "", new String[]{"$YES$", "$NO$"}, new Object[]{button.getLText()});
 
-				if (option.equalsIgnoreCase("yes")) {
+				if (option.equalsIgnoreCase("YES")) {
 					if (Files.exists(file)) {
 						try {
 							Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_tempLog_");
@@ -134,11 +165,10 @@ public class RequestsLog {
 		});
 		button.refresh();
 		blockedListPanel.add(button);
-		blockedListPanel.updateUI();
 
 	}
 	public static void refreshUI() {
-
+		scrollPane.getViewport().setBackground(Defaults.SUB_MAIN);
 		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
 		blockedSettingsPanel.setBackground(Defaults.TOP);
 		for (Component component : blockedSettingsPanel.getComponents()) {

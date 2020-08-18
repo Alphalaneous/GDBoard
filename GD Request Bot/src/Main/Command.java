@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class Command {
 
     private static NashornSandbox sandbox = NashornSandboxes.create();
-    public static String run(String user, boolean isMod, boolean isSub, String[] args, String function, int cheer) {
+    public static String run(String user, boolean isMod, boolean isSub, String[] args, String function, int cheer, boolean sayError) {
         sandbox.inject("isMod", isMod);
         sandbox.inject("isChaos", GeneralSettings.isChaos);
 
@@ -29,9 +29,18 @@ public class Command {
         sandbox.allow(GDMod.class);
         sandbox.allow(Board.class);
         sandbox.allow(Variables.class);
+        sandbox.allow(Utilities.class);
+        sandbox.allow(Twitch.class);
+
 
         try {
-            sandbox.eval("var Levels = Java.type('Main.Requests'); var GD = Java.type('Main.GDMod'); var Board = Java.type('Main.Board'); var Variables = Java.type('Main.Variables');" + function);
+            sandbox.eval("" +
+                    "var Twitch = Java.type('Main.Twitch'); " +
+                    "var Levels = Java.type('Main.Requests'); " +
+                    "var GD = Java.type('Main.GDMod'); " +
+                    "var Board = Java.type('Main.Board'); " +
+                    "var Variables = Java.type('Main.Variables'); " +
+                    "var Utilities = Java.type('Main.Utilities');" + function);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -43,15 +52,28 @@ public class Command {
                 result = obj.toString();
             }
         } catch (Exception e) {
-            Main.sendMessage(("There was an error with the command: " + e).replaceAll(System.getProperty("user.name"), "*****"));
+            //if(sayError) {
+                Main.sendMessage(("There was an error with the command: " + e).replaceAll(System.getProperty("user.name"), "*****"));
+            //}
         }
         String spacelessResult = result.replaceAll(" ", "").toLowerCase();
         if(spacelessResult.startsWith("/color") || spacelessResult.startsWith("/block") || spacelessResult.startsWith("/unblock")){
             return "Use of that command is prohibited, nice try :)";
         }
-        return result.replaceAll(System.getProperty("user.name"), "*****");
+        result = result.replaceAll(System.getProperty("user.name"), "*****");
+        String[] words = result.split(" ");
+        for(int i = 0; i < words.length; i++){
+            if(words[i].startsWith("$") && words[i].endsWith("$")){
+                String newWord = Language.getString(words[i].replaceAll("\\$", ""));
+                result = result.replace(words[i], newWord);
+            }
+        }
+        return result;
     }
     public static String run(String user, String message, String function){
-        return run(user, false, false, message.split(" "), function, 0);
+        return run(user, false, false, message.split(" "), function, 0, true);
+    }
+    public static String run(String function, boolean sayError){
+        return run("", false, false, new String[]{null, null}, function, 0, sayError);
     }
 }

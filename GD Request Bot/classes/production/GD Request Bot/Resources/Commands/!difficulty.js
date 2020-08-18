@@ -4,7 +4,10 @@ function command(){
 		intArg = 1;
 	}
 	if(Levels.getSize() > 0 && intArg <= Levels.getSize()){
-		return '@' + user + ' Level ' + intArg + ' in the queue is rated ' + Levels.getLevel(intArg-1, 'difficulty');
+	    return Utilities.format("$DIFFICULTY_MESSAGE$", user,
+	    Levels.getLevel(intArg-1, 'name'),
+	    Levels.getLevel(intArg-1, 'id'),
+	    Levels.getLevel(intArg-1, 'difficulty'));
 	}
 	else{
 	return '';

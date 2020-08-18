@@ -29,10 +29,13 @@ public class LoadGD {
 	public static boolean isAuth = false;
 	public static boolean timeout = false;
 	public static boolean loaded = false;
+	public static boolean reload = true;
 
-
-	public static void load() throws IOException {
-
+	public static void load(boolean load) throws IOException {
+		if(!reload){
+			return;
+		}
+		reload = false;
 		new Thread(() -> {
 			try {
 				Thread.sleep(60000);
@@ -49,7 +52,7 @@ public class LoadGD {
 				}
 		}
 		}).start();
-		if(!Settings.getSettings("loadGD").equalsIgnoreCase("false")) {
+		if((!Settings.getSettings("loadGD").equalsIgnoreCase("false") && !Settings.getSettings("GDLoaded").equalsIgnoreCase("true")) || load) {
 			Path gameFile = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\CCGameManager.dat");
 			String[] gameText = new String[0];
 			Scanner sc = null;
@@ -60,7 +63,7 @@ public class LoadGD {
 			}
 			assert sc != null;
 			try {
-				gameText = prettyFormat(decompress(Base64.getDecoder().decode(xor(sc.nextLine()).replace("-", "+").replace("_", "/").replace("\0", "")))).split("\n");
+				gameText = prettyFormat(decompress(Base64.getDecoder().decode(xor(sc.nextLine(), 11).replace("-", "+").replace("_", "/").replace("\0", "")))).split("\n");
 				sc.close();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -70,9 +73,12 @@ public class LoadGD {
 				if (!timeout) {
 					if (text.contains("<k>GJA_002</k>")) {
 						password = gameText[i + 1].replace("    <s>", "").replace("</s>", "").replace("\0", "").replace("\r", "").replace("\n", "");
+						Settings.writeSettings("p", new String(Base64.getEncoder().encode(xor(password, 15).getBytes())));
+
 					}
 					if (text.contains("<k>GJA_001</k>")) {
 						username = gameText[i + 1].replace("    <s>", "").replace("</s>", "").replace("\0", "").replace("\r", "").replace("\n", "");
+						Settings.writeSettings("GDUsername", username);
 					}
 				}
 				else{
@@ -83,13 +89,29 @@ public class LoadGD {
 				if (!timeout) {
 					authClient = GDClientBuilder.create().buildAuthenticated(new GDClientBuilder.Credentials(username, password)).block();
 					isAuth = true;
+					Settings.writeSettings("GDLoaded", "true");
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				isAuth = false;
 			}
+			gameText = null;
+		}
+		else if(!Settings.getSettings("GDLoaded").equalsIgnoreCase("false")){
+			username = Settings.getSettings("GDUsername");
+			password = xor(new String(Base64.getDecoder().decode(Settings.getSettings("p").getBytes())), 15);
+			try {
+				authClient = GDClientBuilder.create().buildAuthenticated(new GDClientBuilder.Credentials(username, password)).block();
+				isAuth = true;
+			}
+			catch (Exception e){
+				e.printStackTrace();
+				isAuth = false;
+			}
 		}
 		loaded = true;
+		reload = true;
+		AccountSettings.refreshGD(username);
 	}
 	private static String prettyFormat(String input) {
 		try {
@@ -103,12 +125,11 @@ public class LoadGD {
 			transformer.transform(xmlInput, xmlOutput);
 			return xmlOutput.getWriter().toString();
 		} catch (Exception e) {
-			throw new RuntimeException(e); // simple exception handling, please review it
+			return null;
 		}
 	}
 
-	private static String xor(String inputString) {
-		int xorKey = 11;
+	private static String xor(String inputString, int xorKey) {
 
 		StringBuilder outputString = new StringBuilder();
 

@@ -9,9 +9,10 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 
+import static Main.Defaults.defaultUI;
+
 public class DialogBox {
 
-	private static JButtonUI defaultUI = new JButtonUI();
 	private static boolean active = false;
 	private static JDialog frame = null;
 	private static boolean progressBar = false;
@@ -20,12 +21,16 @@ public class DialogBox {
 
 	public static String showDialogBox(String title, String info, String subInfo, String[] options){
 		progressBar = false;
-		return showDialogBox(title,info,subInfo,options,false);
+		return showDialogBox(title,info,subInfo,options,false, new Object[]{});
+	}
+	public static String showDialogBox(String title, String info, String subInfo, String[] options, Object[] args){
+		progressBar = false;
+		return showDialogBox(title,info,subInfo,options,false, args);
 	}
 	public static void setUnfocusable(){
 		setFocus = false;
 	}
-	public static String showDialogBox(String title, String info, String subInfo, String[] options, boolean progressBar){
+	public static String showDialogBox(String title, String info, String subInfo, String[] options, boolean progressBar, Object[] args){
 		final String[] value = {null};
 		DialogBox.progressBar = progressBar;
 
@@ -41,9 +46,10 @@ public class DialogBox {
 			JPanel buttonPanel = new JPanel(new GridLayout(1, 0, 6, 6));
 			frame.setUndecorated(true);
 			frame.setLayout(null);
-			JLabel titleLabel = new JLabel(title);
-			JLabel infoLabel = new JLabel(info);
-			JLabel subInfoLabel = new JLabel(subInfo);
+			LangLabel titleLabel = new LangLabel("");
+			titleLabel.setTextLangFormat(title, args);
+			LangLabel infoLabel = new LangLabel(info);
+			LangLabel subInfoLabel = new LangLabel(subInfo);
 
 			JDialog finalFrame = frame;
 			MouseInputAdapter mia = new MouseInputAdapter() {
@@ -87,10 +93,8 @@ public class DialogBox {
 			frame.setSize(new Dimension(400, 200));
 			frame.setPreferredSize(new Dimension(400, 400));
 
-			if(Defaults.programLoaded.get()) {
-				defaultUI.setBackground(Defaults.BUTTON);
-				defaultUI.setHover(Defaults.BUTTON_HOVER);
-				defaultUI.setSelect(Defaults.SELECT);
+
+
 				frame.getRootPane().setBorder(new LineBorder(Defaults.ACCENT, 1));
 				frame.getContentPane().setBackground(Defaults.TOP);
 				titleLabel.setForeground(Defaults.FOREGROUND);
@@ -98,29 +102,7 @@ public class DialogBox {
 				subInfoLabel.setForeground(Defaults.FOREGROUND);
 				frame.setLocation((int) (Defaults.screenSize.getX() + Defaults.screenSize.getWidth() / 2 - 200), (int) (Defaults.screenSize.getY() + Defaults.screenSize.getHeight() / 2 - 100));
 
-			}
-			else{
-				defaultUI.setBackground(new Color(50, 50, 50));
-				defaultUI.setHover(new Color(80, 80, 80));
-				defaultUI.setSelect(new Color(70, 70, 70));
-				frame.getRootPane().setBorder(new LineBorder(new Color(0, 108, 230), 1));
-				frame.getContentPane().setBackground(Color.BLACK);
-				titleLabel.setForeground(Color.WHITE);
-				infoLabel.setForeground(Color.WHITE);
-				subInfoLabel.setForeground(Color.WHITE);
-				Rectangle screenSize;
-				try {
-					 screenSize = GraphicsEnvironment
-							.getLocalGraphicsEnvironment()
-							.getScreenDevices()[Integer.parseInt(Settings.getSettings("monitor"))].getDefaultConfiguration().getBounds();
-				} catch (Exception e) {
-					screenSize = GraphicsEnvironment
-							.getLocalGraphicsEnvironment()
-							.getScreenDevices()[0].getDefaultConfiguration().getBounds();
-				}
-				frame.setLocation((int) (screenSize.getX() + screenSize.getWidth() / 2 - 200), (int) (screenSize.getY() + screenSize.getHeight() / 2 - 100));
 
-			}
 
 			if(progressBar){
 				loadingBar = new JProgressBar();
@@ -137,11 +119,13 @@ public class DialogBox {
 			}
 
 			for (int i = 0; i < options.length; i++) {
-				JButton button = createButton(options[i]);
+				LangButton button = createButton(options[i]);
+				button.setForeground(Defaults.FOREGROUND);
+				button.setBackground(Defaults.MAIN);
 				button.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mousePressed(MouseEvent e) {
-						value[0] = button.getText();
+						value[0] = button.getIdentifier();
 					}
 				});
 				buttonPanel.add(button);
@@ -178,9 +162,9 @@ public class DialogBox {
 		}
 		return "";
 	}
-	private static JButton createButton(String text) {
+	private static LangButton createButton(String text) {
 
-		JButton button = new JButton(text);
+		LangButton button = new LangButton(text);
 
 		button.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 
@@ -202,8 +186,11 @@ public class DialogBox {
 	}
 	public static void closeDialogBox(){
 		frame.setVisible(false);
+		frame.removeAll();
 		frame.dispose();
 		active = false;
+		setFocus = true;
+
 	}
 	public static void setProgress(int progress){
 		if(progressBar){

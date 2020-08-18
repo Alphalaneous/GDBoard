@@ -1,7 +1,7 @@
 function command(){
-if(isMod){
-	Levels.clear();
-	return '@' + user + ' Successfully cleared the queue!';
+    if(isMod){
+	    Levels.clear();
+	    return Utilities.format('$CLEAR_MESSAGE$', user);
 	}
 }
 
