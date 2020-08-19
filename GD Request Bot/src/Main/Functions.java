@@ -134,9 +134,9 @@ public class Functions {
 					if (!GeneralSettings.nowPlayingOption) {
 						if(!cooldown) {
 							Main.sendMessage(Utilities.format("$NOW_PLAYING_MESSAGE$",
-									Requests.levels.get(0).getName(),
-									Requests.levels.get(0).getLevelID(),
-									Requests.levels.get(0).getRequester()));
+									Requests.levels.get(num).getName(),
+									Requests.levels.get(num).getLevelID(),
+									Requests.levels.get(num).getRequester()));
 							cooldown = true;
 							new Thread(()->{
 								try {

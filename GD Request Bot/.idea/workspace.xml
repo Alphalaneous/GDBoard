@@ -16,8 +16,7 @@
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/CommandEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/CommandEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/DialogBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/DialogBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/Functions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Functions.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -56,6 +55,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state>
               <caret column="13" selection-start-column="13" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/Functions.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="128" column="50" lean-forward="true" selection-start-line="128" selection-start-column="50" selection-end-line="128" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -109,15 +117,6 @@
                 <element signature="e#10771#10772#0" expanded="true" />
                 <element signature="e#10813#10814#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="179" column="33" selection-start-line="179" selection-start-column="33" selection-end-line="179" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -229,7 +228,6 @@
         <option value="$PROJECT_DIR$/src/Main/CircleLabel.java" />
         <option value="$PROJECT_DIR$/src/Main/CirclePanel.java" />
         <option value="$PROJECT_DIR$/src/Main/Assets.java" />
-        <option value="$PROJECT_DIR$/src/Main/Functions.java" />
         <option value="$PROJECT_DIR$/src/Main/RoundedJButton.java" />
         <option value="$PROJECT_DIR$/src/Main/Command.java" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/b!commands.js" />
@@ -268,6 +266,7 @@
         <option value="$PROJECT_DIR$/src/Main/Board.java" />
         <option value="$PROJECT_DIR$/src/Main/DialogBox.java" />
         <option value="$PROJECT_DIR$/src/Main/CommandEditor.java" />
+        <option value="$PROJECT_DIR$/src/Main/Functions.java" />
         <option value="$PROJECT_DIR$/src/.version" />
       </list>
     </option>
@@ -828,13 +827,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/BlockedUserSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="138" column="5" selection-start-line="121" selection-start-column="4" selection-end-line="138" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Language.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="146">
@@ -1166,6 +1158,13 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Functions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="128" column="50" lean-forward="true" selection-start-line="128" selection-start-column="50" selection-end-line="128" selection-end-column="50" />
         </state>
       </provider>
     </entry>
