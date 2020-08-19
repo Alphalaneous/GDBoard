@@ -175,6 +175,9 @@ public class PersonalizationSettings {
 			else if(theme.equalsIgnoreCase("LIGHT_MODE")){
 				Defaults.setLight();
 			}
+			else{
+				Defaults.setSystem();
+			}
 		}
 		else{
 			Defaults.setSystem();

@@ -17,11 +17,113 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Functions.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Functions.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/LevelsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/InnerWindows/LevelsWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Functions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Functions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/InnerWindows/LevelsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/InnerWindows/LevelsWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$17.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed$22.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Windowed.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/.version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!block.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!blockUser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!clear.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!current.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!difficulty.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!downloads.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!end.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!eval.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!gd.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!help.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!id.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!kill.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!likes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!move.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!next.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!popup.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!position.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!queue.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!remove.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!request.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!rick.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!song.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!stop.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!stoprick.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!toggle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!top.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!unblock.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!unblockUser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/!wronglevel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/aliases.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/b!addcom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/b!addpoint.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/b!delcom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/b!delpoint.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/b!editcom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/b!editpoint.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/cooldown.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/disable.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/info.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/mod.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Commands/whisper.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Epic/auto.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Epic/easy demon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Epic/easy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Epic/extreme demon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Epic/hard demon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Epic/hard.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Epic/harder.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Epic/insane demon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Epic/insane.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Epic/medium demon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Epic/normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Featured/auto.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Featured/easy demon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Featured/easy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Featured/extreme demon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Featured/hard demon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Featured/hard.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Featured/harder.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Featured/insane demon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Featured/insane.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Featured/medium demon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Featured/normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Normal/NA.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Normal/auto.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Normal/easy demon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Normal/easy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Normal/extreme demon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Normal/hard demon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Normal/hard.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Normal/harder.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Normal/insane demon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Normal/insane.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Normal/medium demon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/DifficultyIcons/Normal/normal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Fonts/SegMDL2.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Fonts/SegoeUI.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Fonts/bahnschrift.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Fonts/segoe-ui.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/GDAssets/unverifiedCoin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/GDAssets/verifiedCoin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Icons/Alphalaneous.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Icons/EncodedLua.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Icons/EncodedLua.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Icons/barIconDark.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Icons/barIconLight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Icons/windowIcon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Languages/Languages.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/Languages/en_us.lang" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/blockedWords.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/bwomp.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/cheers/ca5e8584-d6b3-4278-8304-a4a44e633292.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/conf.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/gdmod.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/getInstalledPrograms.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/getProgram.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/knock.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/points/ca5e8584-d6b3-4278-8304-a4a44e633292.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GDBoardBot/Resources/rick.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/Windowed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Windowed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/Commands/aliases.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/Commands/aliases.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -55,50 +157,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/.version">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="13" selection-start-column="13" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Functions.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="105" column="24" selection-start-line="105" selection-start-column="24" selection-end-line="105" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/InnerWindows/LevelsWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="788" column="21" selection-start-line="788" selection-start-column="21" selection-end-line="788" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Board.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="44" column="19" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
-              <folding>
-                <element signature="e#1269#1270#0" expanded="true" />
-                <element signature="e#1298#1299#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/GDBoardBot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="530">
+            <state relative-caret-position="3264">
               <caret line="205" column="16" selection-start-line="205" selection-start-column="16" selection-end-line="205" selection-end-column="16" />
             </state>
           </provider>
@@ -107,8 +169,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/DialogBox.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="45" column="40" selection-start-line="41" selection-start-column="12" selection-end-line="45" selection-end-column="40" />
+            <state relative-caret-position="-1766">
+              <caret line="36" column="21" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -116,8 +178,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Windowed.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="71" column="88" selection-start-line="69" selection-start-column="8" selection-end-line="71" selection-end-column="88" />
+            <state relative-caret-position="255">
+              <caret line="37" column="52" selection-start-line="37" selection-start-column="52" selection-end-line="37" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -125,12 +187,52 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="365" column="26" selection-start-line="365" selection-start-column="26" selection-end-line="365" selection-end-column="26" />
+            <state relative-caret-position="119">
+              <caret line="48" column="36" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
               <folding>
                 <element signature="e#10771#10772#0" expanded="true" />
                 <element signature="e#10813#10814#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="386">
+              <caret line="178" column="37" selection-start-line="178" selection-start-column="37" selection-end-line="178" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Resources/Commands/aliases.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="24" column="17" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/Settings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="512">
+              <caret line="135" column="37" selection-start-line="135" selection-start-column="37" selection-end-line="135" selection-end-column="37" />
+              <folding>
+                <element signature="e#11273#11274#0" expanded="true" />
+                <element signature="e#11297#11298#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/Defaults.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="206">
+              <caret line="180" column="23" selection-start-line="180" selection-start-column="23" selection-end-line="180" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -147,7 +249,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/CommandEditor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
+            <state relative-caret-position="816">
               <caret line="72" column="88" selection-start-line="72" selection-start-column="88" selection-end-line="72" selection-end-column="88" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -218,7 +320,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Main/FancyTooltip.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedCreatorSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/InnerWindows/CommentsWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/RequestsLog.java" />
@@ -251,17 +352,13 @@
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/ChannelPointSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/LanguageSettings.java" />
-        <option value="$PROJECT_DIR$/src/Main/Main.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/AccountSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/LoadGD.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/GDBoardBot.java" />
-        <option value="$PROJECT_DIR$/src/Main/Settings.java" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/b!addpoint.js" />
         <option value="$PROJECT_DIR$/src/Main/APIs.java" />
         <option value="$PROJECT_DIR$/src/Main/Onboarding.java" />
-        <option value="$PROJECT_DIR$/src/Main/Windowed.java" />
-        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/Utilities.java" />
         <option value="$PROJECT_DIR$/src/Main/Board.java" />
         <option value="$PROJECT_DIR$/src/Main/DialogBox.java" />
@@ -269,6 +366,11 @@
         <option value="$PROJECT_DIR$/src/Main/InnerWindows/LevelsWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/Functions.java" />
         <option value="$PROJECT_DIR$/src/.version" />
+        <option value="$PROJECT_DIR$/src/Main/Windowed.java" />
+        <option value="$PROJECT_DIR$/src/Main/Main.java" />
+        <option value="$PROJECT_DIR$/src/Main/Settings.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java" />
+        <option value="$PROJECT_DIR$/src/Resources/Commands/aliases.txt" />
       </list>
     </option>
   </component>
@@ -373,6 +475,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Changed Files'; set:Changed Files; ALL; class com.intellij.packageDependencies.ChangeListScope">
           <expand>
@@ -445,7 +548,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -462,7 +564,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1597786537554" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1597860330640" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Code Stuff/Java Libraries/javafx-sdk-11.0.2/lib/javafx.swing.jar!/" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -640,7 +742,7 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info active="true" content_ui="combo" x="16" y="105" width="325" height="756" id="Project" order="6" sideWeight="0.29424307" side_tool="true" visible="true" weight="0.17004265" />
+      <window_info active="true" content_ui="combo" x="16" y="105" width="325" height="756" id="Project" order="6" sideWeight="0.29424307" side_tool="true" visible="true" weight="0.1716418" />
       <window_info anchor="bottom" id="JProfiler" order="0" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" sideWeight="0.4979424" weight="0.3249453" />
@@ -828,13 +930,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Main/Language.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="136" column="20" selection-start-line="136" selection-start-column="20" selection-end-line="136" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk-13.0.2/lib/src.zip!/java.desktop/java/awt/EventDispatchThread.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
@@ -907,13 +1002,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Defaults.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="84" column="13" selection-start-line="84" selection-start-column="13" selection-end-line="84" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk-13.0.2/lib/src.zip!/java.base/java/lang/Character.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="206">
@@ -957,17 +1045,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4097">
           <caret line="266" column="40" selection-start-line="266" selection-start-column="40" selection-end-line="266" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Settings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2312">
-          <caret line="140" column="16" selection-start-line="140" selection-start-column="16" selection-end-line="140" selection-end-column="36" />
-          <folding>
-            <element signature="e#11273#11274#0" expanded="true" />
-            <element signature="e#11297#11298#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1077,13 +1154,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="179" column="33" selection-start-line="179" selection-start-column="33" selection-end-line="179" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Utilities.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6579">
@@ -1095,6 +1165,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/.version">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="7" selection-start-column="7" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Functions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1479">
+          <caret line="105" column="24" selection-start-line="105" selection-start-column="24" selection-end-line="105" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/InnerWindows/LevelsWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12716">
+          <caret line="788" column="21" selection-start-line="788" selection-start-column="21" selection-end-line="788" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Board.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="44" column="19" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
+          <folding>
+            <element signature="e#1269#1270#0" expanded="true" />
+            <element signature="e#1305#1306#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/GDBoardBot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3264">
+          <caret line="205" column="16" selection-start-line="205" selection-start-column="16" selection-end-line="205" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Twitch.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -1102,52 +1211,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="365" column="26" selection-start-line="365" selection-start-column="26" selection-end-line="365" selection-end-column="26" />
-          <folding>
-            <element signature="e#10771#10772#0" expanded="true" />
-            <element signature="e#10813#10814#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/GDBoardBot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="205" column="16" selection-start-line="205" selection-start-column="16" selection-end-line="205" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="44" column="19" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
-          <folding>
-            <element signature="e#1269#1270#0" expanded="true" />
-            <element signature="e#1298#1299#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Windowed.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="71" column="88" selection-start-line="69" selection-start-column="8" selection-end-line="71" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/DialogBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="45" column="40" selection-start-line="41" selection-start-column="12" selection-end-line="45" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/CommandEditor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
+        <state relative-caret-position="816">
           <caret line="72" column="88" selection-start-line="72" selection-start-column="88" selection-end-line="72" selection-end-column="88" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1155,24 +1221,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/InnerWindows/LevelsWindow.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/Windowed.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="788" column="21" selection-start-line="788" selection-start-column="21" selection-end-line="788" selection-end-column="21" />
+        <state relative-caret-position="255">
+          <caret line="37" column="52" selection-start-line="37" selection-start-column="52" selection-end-line="37" selection-end-column="52" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Functions.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/Defaults.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="105" column="24" selection-start-line="105" selection-start-column="24" selection-end-line="105" selection-end-column="24" />
+        <state relative-caret-position="206">
+          <caret line="180" column="23" selection-start-line="180" selection-start-column="23" selection-end-line="180" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/.version">
+    <entry file="file://$PROJECT_DIR$/src/Main/DialogBox.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        <state relative-caret-position="-1766">
+          <caret line="36" column="21" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Settings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="512">
+          <caret line="135" column="37" selection-start-line="135" selection-start-column="37" selection-end-line="135" selection-end-column="37" />
+          <folding>
+            <element signature="e#11273#11274#0" expanded="true" />
+            <element signature="e#11297#11298#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="48" column="36" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
+          <folding>
+            <element signature="e#10771#10772#0" expanded="true" />
+            <element signature="e#10813#10814#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="178" column="37" selection-start-line="178" selection-start-column="37" selection-end-line="178" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Resources/Commands/aliases.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="17" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="17" />
         </state>
       </provider>
     </entry>

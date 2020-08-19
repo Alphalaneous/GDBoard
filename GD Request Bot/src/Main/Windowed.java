@@ -35,7 +35,7 @@ public class Windowed {
 	private static boolean gdPage = true;
 	private static JPanel buttonPanel = new JPanel();
 	private static JPanel iconPanel = new JPanel(null);
-	private static JDialog attributions = new JDialog();
+	private static JFrame attributions = new JFrame();
 	private static JButtonUI selectUI = new JButtonUI();
 	public static JPanel toolBar = new JPanel(null);
 	public static JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
