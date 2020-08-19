@@ -41,6 +41,10 @@ public class Board {
 		Main.sendMessage(message, false, null);
 	}
 
+	public static void sendAsMain(String message){
+		Main.sendMainMessage(message);
+	}
+
 	static AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
 	public static void playNewgrounds(String songID){
 		Sounds.playSound(client.getSongById(Long.parseLong(songID)).block().getDownloadURL(), true, false, false, true);
