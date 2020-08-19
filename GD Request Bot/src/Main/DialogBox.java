@@ -14,7 +14,7 @@ import static Main.Defaults.defaultUI;
 public class DialogBox {
 
 	private static boolean active = false;
-	private static JDialog frame = null;
+	private static JFrame frame = null;
 	private static boolean progressBar = false;
 	private static JProgressBar loadingBar;
 	private static boolean setFocus = true;
@@ -36,9 +36,14 @@ public class DialogBox {
 
 		if(!active) {
 			active = true;
-			frame = new JDialog();
+			frame = new JFrame();
 			frame.setFocusableWindowState(setFocus);
 			frame.setFocusable(setFocus);
+			frame.setTitle("GDBoard- Dialog");
+			URL iconURL = Windowed.class.getResource("/Resources/Icons/windowIcon.png");
+			ImageIcon icon = new ImageIcon(iconURL);
+			Image newIcon = icon.getImage().getScaledInstance(256, 256, Image.SCALE_SMOOTH);
+			frame.setIconImage(newIcon);
 			JPanel textPanel = new JPanel();
 			JPanel titlePanel = new JPanel();
 			textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
@@ -51,7 +56,7 @@ public class DialogBox {
 			LangLabel infoLabel = new LangLabel(info);
 			LangLabel subInfoLabel = new LangLabel(subInfo);
 
-			JDialog finalFrame = frame;
+			JFrame finalFrame = frame;
 			MouseInputAdapter mia = new MouseInputAdapter() {
 				Point location;
 				Point pressed;

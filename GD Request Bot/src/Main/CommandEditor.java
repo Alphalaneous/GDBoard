@@ -28,7 +28,7 @@ import static Main.Defaults.defaultUI;
 
 public class CommandEditor {
 
-	private static JDialog editor = new JDialog();
+	private static JFrame editor = new JFrame();
 	private static String command;
 	private static boolean active = false;
 	private static RadioPanel editorChoices = new RadioPanel(new String[]{"$BASIC_EDITOR$", "$ADVANCED_EDITOR$"});
