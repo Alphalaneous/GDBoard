@@ -785,8 +785,9 @@ public class LevelsWindow {
 					((LevelButton) component).select();
 					selectedID = i;
 					scrollPane.getViewport().setViewPosition(new Point(0, component.getY()));
-
-					break;
+				}
+				else{
+					((LevelButton) component).deselect();
 				}
 				j++;
 			}

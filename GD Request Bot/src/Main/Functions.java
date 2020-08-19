@@ -104,16 +104,17 @@ public class Functions {
 		if(Main.programLoaded) {
 			Random random = new Random();
 			int num = 0;
-			try {
-				num = random.nextInt(Requests.levels.size() - 2) + 1;
-			} catch (Exception ignored) {
-			}
 
 			if (Requests.levels.size() != 0) {
 
 				Requests.levels.remove(LevelsWindow.getSelectedID());
 				LevelsWindow.removeButton(LevelsWindow.getSelectedID());
 				Functions.saveFunction();
+
+				try {
+					num = random.nextInt(Requests.levels.size() - 2) + 1;
+				} catch (Exception ignored) {
+				}
 
 				if (Requests.levels.size() == 1) {
 					LevelsWindow.setOneSelect();
