@@ -161,8 +161,8 @@ public class CommandSettings {
 					Scanner sc3 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt").toFile());
 					while (sc3.hasNextLine()) {
 						String line = sc3.nextLine();
-						if (line.split(" = ")[0].replace(" ", "").equalsIgnoreCase(command)) {
-							cooldown = Integer.parseInt(line.split("=")[1].replace(" ", ""));
+						if (line.split("=")[0].trim().equalsIgnoreCase(command)) {
+							cooldown = Integer.parseInt(line.split("=")[1].trim());
 							break;
 						}
 					}

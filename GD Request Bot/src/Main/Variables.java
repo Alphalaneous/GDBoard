@@ -71,8 +71,7 @@ public class Variables {
 			}
 			Files.write(
 					file,
-					pairs.toString().getBytes(),
-					StandardOpenOption.APPEND);
+					pairs.toString().getBytes());
 		} catch (IOException e1) {
 			DialogBox.showDialogBox("Error!", e1.toString(), "There was an error writing to the file!", new String[]{"OK"});
 
