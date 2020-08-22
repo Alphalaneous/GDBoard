@@ -340,6 +340,7 @@ public class Main {
 					Main.sendMessage(" ");
 				}
 			}).start();
+			APIs.setAllViewers();
 
 
 			programLoaded = true;
