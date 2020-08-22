@@ -21,12 +21,14 @@ public class Twitch {
 		return APIs.allViewers.get(num);
 	}
 	public static String[] getViewers(){
-		APIs.setAllViewers();
 		ArrayList<String> allViewers = (ArrayList<String>) APIs.allViewers.clone();
 		String array[] = new String[allViewers.size()];
 		for(int j =0;j<allViewers.size();j++){
 			array[j] = allViewers.get(j);
 		}
 		return array;
+	}
+	public static void reloadViewers(){
+		APIs.setAllViewers();
 	}
 }
