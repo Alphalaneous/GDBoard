@@ -15,9 +15,20 @@
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/CommandEditor.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/CommandEditor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$MyCaret.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$MyCaret.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$MyIntFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$MyIntFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$MyNegIntFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$MyNegIntFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/APIs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/APIs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Twitch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Twitch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/CommandEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/CommandEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/FancyTextArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/FancyTextArea.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -63,8 +74,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Twitch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="28" column="9" lean-forward="true" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
+            <state relative-caret-position="391">
+              <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#140#141#0" expanded="true" />
@@ -91,34 +102,35 @@
         <entry file="file://$PROJECT_DIR$/src/Main/APIs.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="200">
-              <caret line="125" column="60" selection-start-line="125" selection-start-column="60" selection-end-line="125" selection-end-column="60" />
+              <caret line="127" column="16" selection-start-line="127" selection-start-column="16" selection-end-line="127" selection-end-column="16" />
+              <folding>
+                <element signature="e#4742#4750#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/CommandEditor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20383">
-              <caret line="1259" column="29" selection-start-line="1259" selection-start-column="29" selection-end-line="1259" selection-end-column="29" />
+            <state relative-caret-position="200">
+              <caret line="40" column="24" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Variables.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/FancyTextArea.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1105">
-              <caret line="73" column="49" selection-start-line="73" selection-start-column="49" selection-end-line="73" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Resources/Languages/en_us.lang">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2040">
-              <caret line="120" column="30" selection-start-line="120" selection-start-column="30" selection-end-line="120" selection-end-column="30" />
+            <state relative-caret-position="119">
+              <caret line="95" column="38" selection-start-line="95" selection-start-column="38" selection-end-line="95" selection-end-column="38" />
+              <folding>
+                <element signature="e#2880#2881#0" expanded="true" />
+                <element signature="e#2916#2917#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -230,7 +242,6 @@
         <option value="$PROJECT_DIR$/src/Main/ServerChatBot.java" />
         <option value="$PROJECT_DIR$/src/Main/Requests.java" />
         <option value="$PROJECT_DIR$/src/Main/RadioPanel.java" />
-        <option value="$PROJECT_DIR$/src/Main/FancyTextArea.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/ShortcutSettings.java" />
         <option value="$PROJECT_DIR$/src/jnafilechooser-master/api/src/main/java/jnafilechooser/api/JnaFileChooser.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/ChannelPointsSettings.java" />
@@ -248,7 +259,6 @@
         <option value="$PROJECT_DIR$/src/Main/Utilities.java" />
         <option value="$PROJECT_DIR$/src/Main/Board.java" />
         <option value="$PROJECT_DIR$/src/Main/DialogBox.java" />
-        <option value="$PROJECT_DIR$/src/Main/CommandEditor.java" />
         <option value="$PROJECT_DIR$/src/Main/Windowed.java" />
         <option value="$PROJECT_DIR$/src/Main/Main.java" />
         <option value="$PROJECT_DIR$/src/Main/Settings.java" />
@@ -262,6 +272,8 @@
         <option value="$PROJECT_DIR$/src/Resources/Commands/!request.js" />
         <option value="$PROJECT_DIR$/src/Main/APIs.java" />
         <option value="$PROJECT_DIR$/src/Main/Twitch.java" />
+        <option value="$PROJECT_DIR$/src/Main/CommandEditor.java" />
+        <option value="$PROJECT_DIR$/src/Main/FancyTextArea.java" />
         <option value="$PROJECT_DIR$/src/.version" />
       </list>
     </option>
@@ -828,12 +840,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Resources/Commands/b!editpoint.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Resources/Commands/b!delcom.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Resources/Commands/b!addpoint.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -958,16 +964,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/CommandEditor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="72" column="88" selection-start-line="72" selection-start-column="88" selection-end-line="72" selection-end-column="88" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Resources/Commands/!block.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1087,17 +1083,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/APIs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="125" column="60" selection-start-line="125" selection-start-column="60" selection-end-line="125" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Twitch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="9" lean-forward="true" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
+        <state relative-caret-position="391">
+          <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#140#141#0" expanded="true" />
@@ -1106,6 +1095,44 @@
             <element signature="e#225#226#0" expanded="true" />
             <element signature="e#261#262#0" expanded="true" />
             <element signature="e#298#299#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/APIs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="127" column="16" selection-start-line="127" selection-start-column="16" selection-end-line="127" selection-end-column="16" />
+          <folding>
+            <element signature="e#4742#4750#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-13.0.2/lib/src.zip!/java.desktop/javax/swing/undo/UndoManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="602" column="29" selection-start-line="602" selection-start-column="29" selection-end-line="602" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/FancyTextArea.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="95" column="38" selection-start-line="95" selection-start-column="38" selection-end-line="95" selection-end-column="38" />
+          <folding>
+            <element signature="e#2880#2881#0" expanded="true" />
+            <element signature="e#2916#2917#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/CommandEditor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="40" column="24" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

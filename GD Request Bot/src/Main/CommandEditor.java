@@ -471,7 +471,6 @@ public class CommandEditor {
 			messageLabel.setTextLang("$MESSAGE_LABEL$");
 			fileExplorerButton.setVisible(false);
 			editor.setSize(new Dimension(650, 530));
-
 			CommandEditor.isDefault = isDefault;
 			if (!command.equals("")) {
 				if(!isDefault) {
@@ -537,6 +536,7 @@ public class CommandEditor {
 			}
 			editor.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - editor.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - editor.getHeight() / 2);
 		}
+		commandNameText.clearUndo();
 		editor.setVisible(true);
 	}
 

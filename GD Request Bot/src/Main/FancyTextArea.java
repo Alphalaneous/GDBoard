@@ -13,6 +13,19 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 
 public class FancyTextArea extends JTextArea {
+
+	private UndoManager undoManager = new UndoManager();
+
+
+	private UndoableEditListener undoableEditListener = new UndoableEditListener() {
+		@Override
+		public void undoableEditHappened(UndoableEditEvent e) {
+
+			undoManager.addEdit(e.getEdit());
+
+		}
+	};
+
 	public FancyTextArea(boolean intFilter, boolean allowNegative) {
 
 		setBackground(Defaults.TEXT_BOX);
@@ -44,16 +57,8 @@ public class FancyTextArea extends JTextArea {
 				doc.setDocumentFilter(new MyIntFilter());
 			}
 		}
-		UndoManager undoManager = new UndoManager();
 		Document doc = getDocument();
-		doc.addUndoableEditListener(new UndoableEditListener() {
-			@Override
-			public void undoableEditHappened(UndoableEditEvent e) {
-
-				undoManager.addEdit(e.getEdit());
-
-			}
-		});
+		doc.addUndoableEditListener(undoableEditListener);
 
 		InputMap im = getInputMap(JComponent.WHEN_FOCUSED);
 		ActionMap am = getActionMap();
@@ -87,6 +92,10 @@ public class FancyTextArea extends JTextArea {
 			}
 		});
 	}
+	public void clearUndo(){
+		undoManager.discardAllEdits();
+	}
+
 	public void refreshAll(){
 		setBackground(Defaults.TEXT_BOX);
 		setForeground(Defaults.FOREGROUND);
