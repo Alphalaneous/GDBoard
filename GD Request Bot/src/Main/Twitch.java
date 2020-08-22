@@ -1,5 +1,6 @@
 package Main;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Twitch {
@@ -21,6 +22,11 @@ public class Twitch {
 	}
 	public static String[] getViewers(){
 		APIs.setAllViewers();
-		return (String[]) APIs.allViewers.toArray();
+		ArrayList<String> allViewers = (ArrayList<String>) APIs.allViewers.clone();
+		String array[] = new String[allViewers.size()];
+		for(int j =0;j<allViewers.size();j++){
+			array[j] = allViewers.get(j);
+		}
+		return array;
 	}
 }

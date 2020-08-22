@@ -123,7 +123,7 @@ public class APIs {
 		return commentsData;
 	}
 
-	static ArrayList<String> allViewers = new ArrayList<>();
+	static ArrayList<String> allViewers = new ArrayList<String>();
 
 	static void setAllViewers() {
 		try {
