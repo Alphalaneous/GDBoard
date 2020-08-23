@@ -122,24 +122,11 @@ public class Requests {
 		}
 	}
 
-	static boolean onCool = false;
-	static int currentPos = 0;
 
 	public static void addRequest(long ID, String requester, boolean isMod) {
 		if(ID > 999999999){
 			return;
 		}
-
-		while (onCool) {
-			try {
-				Thread.sleep(10);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		currentPos++;
-
-		onCool = true;
 
 		OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
 
@@ -161,7 +148,6 @@ public class Requests {
 				if (ID == levels.get(k).getLevelID()) {
 					int j = k + 1;
 					Main.sendMessage(Utilities.format("$ALREADY_IN_QUEUE_MESSAGE$", requester, j));
-					onCool = false;
 					return;
 				}
 			}
@@ -169,25 +155,21 @@ public class Requests {
 				if (GeneralSettings.followersOption) {
 					if (APIs.isNotFollowing(requester.toString())) {
 						Main.sendMessage(Utilities.format("$FOLLOW_MESSAGE$", requester));
-						onCool = false;
 						return;
 					}
 				}
 				if (ID < RequestSettings.minID && RequestSettings.minIDOption) {
 					Main.sendMessage(Utilities.format("$MIN_ID_MESSAGE$", requester, RequestSettings.minID));
-					onCool = false;
 					return;
 				}
 				if (ID > RequestSettings.maxID && RequestSettings.maxIDOption) {
 					Main.sendMessage(Utilities.format("$MAX_ID_MESSAGE$", requester, RequestSettings.maxID));
-					onCool = false;
 					return;
 				}
 				if (GeneralSettings.queueLimitBoolean && (levels.size() >= GeneralSettings.queueLimit)) {
 					if (!GeneralSettings.queueFullOption) {
 						Main.sendMessage(Utilities.format("$QUEUE_FULL_MESSAGE$", requester));
 					}
-					onCool = false;
 					return;
 				}
 
@@ -200,7 +182,6 @@ public class Requests {
 					}
 					if (size >= GeneralSettings.userLimit) {
 						Main.sendMessage(Utilities.format("$MAXIMUM_LEVELS_MESSAGE$", requester));
-						onCool = false;
 						return;
 					}
 				}
@@ -208,7 +189,6 @@ public class Requests {
 					if (userStreamLimitMap.containsKey(requester)) {
 						if (userStreamLimitMap.get(requester) >= GeneralSettings.userLimitStream) {
 							Main.sendMessage(Utilities.format("$MAXIMUM_LEVELS_STREAM_MESSAGE$", requester));
-							onCool = false;
 							return;
 						}
 					}
@@ -224,7 +204,6 @@ public class Requests {
 						if (String.valueOf(ID).equals(sc.nextLine().split(",")[0])) {
 							sc.close();
 							Main.sendMessage(Utilities.format("$REQUESTED_BEFORE_MESSAGE$", requester));
-							onCool = false;
 							return;
 						}
 					}
@@ -232,7 +211,6 @@ public class Requests {
 				}
 				if (addedLevels.containsKey(ID) && (GeneralSettings.repeatedOption && !GeneralSettings.updatedRepeatedOption)) {
 					Main.sendMessage(Utilities.format("$REQUESTED_BEFORE_MESSAGE$", requester));
-					onCool = false;
 					return;
 				}
 
@@ -247,7 +225,6 @@ public class Requests {
 						if (String.valueOf(ID).equals(sc.nextLine())) {
 							sc.close();
 							Main.sendMessage(Utilities.format("$BLOCKED_LEVEL_MESSAGE$", requester));
-							onCool = false;
 							return;
 						}
 					}
@@ -264,7 +241,6 @@ public class Requests {
 					while (sc.hasNextLine()) {
 						if (requester.toString().equalsIgnoreCase(sc.nextLine())) {
 							sc.close();
-							onCool = false;
 							return;
 						}
 					}
@@ -286,11 +262,9 @@ public class Requests {
 					level = LoadGD.authClient.getLevelById(ID).block();
 				} catch (MissingAccessException | NumberFormatException e) {
 					Main.sendMessage(Utilities.format("$LEVEL_ID_DOESNT_EXIST_MESSAGE$", requester));
-					onCool = false;
 					return;
 				} catch (Exception e) {
 					Main.sendMessage(Utilities.format("$SEARCH_FAILED$", requester));
-					onCool = false;
 					return;
 				}
 			} else {
@@ -298,11 +272,9 @@ public class Requests {
 					level = LoadGD.anonClient.getLevelById(ID).block();
 				} catch (MissingAccessException | NumberFormatException e) {
 					Main.sendMessage(Utilities.format("$LEVEL_ID_DOESNT_EXIST_MESSAGE$", requester));
-					onCool = false;
 					return;
 				} catch (Exception e) {
 					Main.sendMessage(Utilities.format("$SEARCH_FAILED$", requester));
-					onCool = false;
 					return;
 				}
 			}
@@ -322,7 +294,6 @@ public class Requests {
 						if (level.getCreatorName().equalsIgnoreCase(sc.nextLine())) {
 							Main.sendMessage(Utilities.format("$BLOCKED_CREATOR_MESSAGE$", requester));
 							sc.close();
-							onCool = false;
 							return;
 						}
 					}
@@ -346,7 +317,6 @@ public class Requests {
 						}
 						if (!hasWord) {
 							Main.sendMessage(Utilities.format("$BLOCKED_NAME_MESSAGE$", requester));
-							onCool = false;
 							return;
 						}
 						sc.close();
@@ -364,7 +334,6 @@ public class Requests {
 							if (level.getName().toLowerCase().contains(sc.nextLine().toLowerCase())) {
 								sc.close();
 								Main.sendMessage(Utilities.format("$BLOCKED_NAME_MESSAGE$", requester));
-								onCool = false;
 								return;
 							}
 						}
@@ -374,33 +343,27 @@ public class Requests {
 
 				if (level != null && RequestSettings.ratedOption && !(level.getStars() > 0)) {
 					Main.sendMessage(Utilities.format("$STAR_RATED_MESSAGE$", requester));
-					onCool = false;
 					return;
 				}
 				if (level != null && RequestSettings.unratedOption && level.getStars() > 0) {
 					Main.sendMessage(Utilities.format("$UNRATED_MESSAGE$", requester));
-					onCool = false;
 					return;
 				}
 				if (level != null && RequestSettings.minObjectsOption && level.getObjectCount() < RequestSettings.minObjects) {
 					Main.sendMessage(Utilities.format("$FEW_OBJECTS_MESSAGE$", requester));
-					onCool = false;
 					return;
 				}
 				if (level != null && RequestSettings.maxObjectsOption && level.getObjectCount() > RequestSettings.maxObjects) {
 					Main.sendMessage(Utilities.format("$MANY_OBJECTS_MESSAGE$", requester));
-					onCool = false;
 					return;
 				}
 				if (level.getObjectCount() != 0) {
 					if (level != null && RequestSettings.minLikesOption && level.getObjectCount() < RequestSettings.minLikes) {
 						Main.sendMessage(Utilities.format("$FEW_LIKES_MESSAGE$", requester));
-						onCool = false;
 						return;
 					}
 					if (level != null && RequestSettings.maxLikesOption && level.getObjectCount() > RequestSettings.maxLikes) {
 						Main.sendMessage(Utilities.format("$MANY_LIKES_MESSAGE$", requester));
-						onCool = false;
 						return;
 					}
 				}
@@ -449,7 +412,6 @@ public class Requests {
 						if(version >= levelData.getLevelVersion()) {
 							sc.close();
 							Main.sendMessage(Utilities.format("$REQUESTED_BEFORE_MESSAGE$", requester));
-							onCool = false;
 							return;
 						}
 					}
@@ -459,7 +421,6 @@ public class Requests {
 			if (addedLevels.containsKey(ID) && (GeneralSettings.updatedRepeatedOption && Main.programLoaded && !bypass)) {
 				if(addedLevels.get(ID) >= levelData.getLevelVersion()) {
 					Main.sendMessage(Utilities.format("$REQUESTED_BEFORE_MESSAGE$", requester));
-					onCool = false;
 					return;
 				}
 			}
@@ -507,12 +468,10 @@ public class Requests {
 			if (Main.programLoaded && !bypass) {
 				if (RequestSettings.excludedDifficulties.contains(levelData.getDifficulty().toString().toLowerCase()) && RequestSettings.disableOption) {
 					Main.sendMessage(Utilities.format("$DIFFICULTY_MESSAGE$", requester));
-					onCool = false;
 					return;
 				}
 				if (RequestSettings.excludedLengths.contains(levelData.getLength().toString().toLowerCase()) && RequestSettings.disableLengthOption) {
 					Main.sendMessage(Utilities.format("$LENGTH_MESSAGE$", requester));
-					onCool = false;
 					return;
 				}
 			}
@@ -668,7 +627,6 @@ public class Requests {
 		} else {
 			Main.sendMessage(Utilities.format("$REQUESTS_OFF_MESSAGE$", requester));
 		}
-		onCool = false;
 	}
 
 	@SuppressWarnings("unused")
