@@ -779,17 +779,27 @@ public class LevelsWindow {
 
 	public static void setSelect(int i) {
 		int j = 0;
-		for (Component component : mainPanel.getComponents()) {
-			if (component instanceof LevelButton) {
-				if (j == i) {
-					((LevelButton) component).select();
-					selectedID = i;
-					scrollPane.getViewport().setViewPosition(new Point(0, component.getY()));
+		if(Requests.levels.size() != 0) {
+			for (Component component : mainPanel.getComponents()) {
+				if (component instanceof LevelButton) {
+					if (j == i) {
+						((LevelButton) component).select();
+						selectedID = i;
+						new Thread(() -> {
+							while (component.getSize().height != 170) {
+								try {
+									Thread.sleep(100);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+							}
+							scrollPane.getViewport().setViewPosition(new Point(0, component.getY()));
+						}).start();
+					} else {
+						((LevelButton) component).deselect();
+					}
+					j++;
 				}
-				else{
-					((LevelButton) component).deselect();
-				}
-				j++;
 			}
 		}
 	}

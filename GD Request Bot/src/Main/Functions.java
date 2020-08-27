@@ -104,30 +104,28 @@ public class Functions {
 		if(Main.programLoaded) {
 			Random random = new Random();
 			int num = 0;
-
 			if (Requests.levels.size() != 0) {
 
 				Requests.levels.remove(LevelsWindow.getSelectedID());
 				LevelsWindow.removeButton(LevelsWindow.getSelectedID());
 				Functions.saveFunction();
 
-				try {
-					num = random.nextInt(Requests.levels.size() - 2) + 1;
-				} catch (Exception ignored) {
-				}
+				CommentsWindow.unloadComments(true);
 
-				if (Requests.levels.size() == 1) {
-					LevelsWindow.setOneSelect();
-				} else {
-					LevelsWindow.setSelect(num);
-				}
-				new Thread(() -> {
-					CommentsWindow.unloadComments(true);
-					if (Requests.levels.size() != 0) {
-						CommentsWindow.loadComments(0, false);
-					}
-				}).start();
 				if (Requests.levels.size() != 0) {
+					while(true) {
+						try {
+							num = random.nextInt(Requests.levels.size());
+							break;
+						} catch (Exception ignored) {
+						}
+					}
+
+					LevelsWindow.setSelect(num);
+
+					new Thread(() -> {
+						CommentsWindow.loadComments(0, false);
+					}).start();
 					StringSelection selection = new StringSelection(
 							String.valueOf(Requests.levels.get(num).getLevelID()));
 					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
