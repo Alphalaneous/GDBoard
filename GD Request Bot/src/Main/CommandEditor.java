@@ -34,6 +34,9 @@ public class CommandEditor {
 	private static RadioPanel editorChoices = new RadioPanel(new String[]{"$BASIC_EDITOR$", "$ADVANCED_EDITOR$"});
 	private static RadioPanel basicChoices = new RadioPanel(new String[]{"$SEND_MESSAGE$", "$PLAY_SOUND$"});
 
+	private static UndoManager undoManager = new UndoManager();
+
+
 	private static String choice;
 	private static LangLabel commandName = new LangLabel("$COMMAND_NAME$");
 	private static LangLabel messageLabel = new LangLabel("$MESSAGE_LABEL$");
@@ -198,7 +201,6 @@ public class CommandEditor {
 		}
 
 
-		UndoManager undoManager = new UndoManager();
 		Document doc = codeInput.getDocument();
 		doc.addUndoableEditListener(new UndoableEditListener() {
 			@Override
@@ -537,6 +539,8 @@ public class CommandEditor {
 			editor.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - editor.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - editor.getHeight() / 2);
 		}
 		commandNameText.clearUndo();
+		commandResponse.clearUndo();
+		undoManager.discardAllEdits();
 		editor.setVisible(true);
 	}
 

@@ -21,7 +21,6 @@ import java.util.Base64;
 import java.util.Random;
 
 public class Functions {
-	static boolean cooldown = false;
 	public static void skipFunction() {
 		if(Requests.bwomp){
 			Thread bwompThread;
@@ -52,7 +51,7 @@ public class Functions {
 				}
 				if (select == 0 && Requests.levels.size() > 0) {
 					if (!GeneralSettings.nowPlayingOption) {
-						if(!cooldown) {
+
 							if (Requests.levels.get(0).getContainsImage()) {
 								Main.sendMessage(Utilities.format("$NOW_PLAYING_MESSAGE$",
 										Requests.levels.get(0).getName(),
@@ -69,16 +68,6 @@ public class Functions {
 										Requests.levels.get(0).getLevelID(),
 										Requests.levels.get(0).getRequester()));
 							}
-							cooldown = true;
-							new Thread(()->{
-								try {
-									Thread.sleep(1000);
-								} catch (InterruptedException e) {
-									e.printStackTrace();
-								}
-								cooldown = false;
-							}).start();
-						}
 					}
 				}
 				Functions.saveFunction();
@@ -131,21 +120,12 @@ public class Functions {
 					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 					clipboard.setContents(selection, selection);
 					if (!GeneralSettings.nowPlayingOption) {
-						if(!cooldown) {
+
 							Main.sendMessage(Utilities.format("$NOW_PLAYING_MESSAGE$",
 									Requests.levels.get(num).getName(),
 									Requests.levels.get(num).getLevelID(),
 									Requests.levels.get(num).getRequester()));
-							cooldown = true;
-							new Thread(()->{
-								try {
-									Thread.sleep(1000);
-								} catch (InterruptedException e) {
-									e.printStackTrace();
-								}
-								cooldown = false;
-							}).start();
-						}
+
 					}
 				}
 			}
