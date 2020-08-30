@@ -529,13 +529,14 @@ public class CommandEditor {
 				editor.setSize(new Dimension(editor.getWidth(), 340));
 			}
 			CommandEditor.type = type;
-			if (!type.equalsIgnoreCase("commands")) {
-				disable.setVisible(false);
-				modOnly.setVisible(false);
-				whisper.setVisible(false);
-				slider.setVisible(false);
-				sliderValue.setVisible(false);
-			}
+			boolean commands = type.equalsIgnoreCase("commands");
+
+				disable.setVisible(commands);
+				modOnly.setVisible(commands);
+				whisper.setVisible(commands);
+				slider.setVisible(commands);
+				sliderValue.setVisible(commands);
+
 			editor.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - editor.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - editor.getHeight() / 2);
 		}
 		commandNameText.clearUndo();

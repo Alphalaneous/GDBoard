@@ -157,6 +157,7 @@ ALLOW_UPDATED_REPEATED = Allow Repeated if Updated
 AUTOMATIC_SONG_DOWNLOADS = Automatic Song Downloads
 LOW_CPU_MODE = Low CPU Mode (Lowers Level Analysis Speed)
 CHAOS_MODE = Chaos Mode
+CHAOS_CHAOS_MODE = Chaos Chaos Mode
 MAX_QUEUE_SIZE = Maximum Queue Size:
 REQUEST_LIMIT_QUEUE = In Queue Request Limit:
 STREAM_REQUEST_LIMIT = All Stream Request Limit:

@@ -409,13 +409,9 @@ public class CommandSettings {
 				if (fileName.endsWith(".js")) {
 					if(!fileName.equalsIgnoreCase("!rick.js") &&
 							!fileName.equalsIgnoreCase("!stoprick.js") &&
-							!fileName.equalsIgnoreCase("!kill.js") &&
 							!fileName.equalsIgnoreCase("!eval.js") &&
-							!fileName.equalsIgnoreCase("!stop.js") &&
 							!fileName.equalsIgnoreCase("!end.js") &&
-							!fileName.equalsIgnoreCase("!kill.js") &&
 							!fileName.equalsIgnoreCase("!popup.js") &&
-							!fileName.equalsIgnoreCase("!gd.js") &&
 							!fileName.equalsIgnoreCase("b!addcom.js")&&
 							!fileName.equalsIgnoreCase("b!editcom.js")&&
 							!fileName.equalsIgnoreCase("b!delcom.js")&&
@@ -488,13 +484,9 @@ public class CommandSettings {
 				if (fileName.endsWith(".js")) {
 					if(!fileName.equalsIgnoreCase("!rick.js") &&
 							!fileName.equalsIgnoreCase("!stoprick.js") &&
-							!fileName.equalsIgnoreCase("!kill.js") &&
 							!fileName.equalsIgnoreCase("!eval.js") &&
-							!fileName.equalsIgnoreCase("!stop.js") &&
 							!fileName.equalsIgnoreCase("!end.js") &&
-							!fileName.equalsIgnoreCase("!kill.js") &&
 							!fileName.equalsIgnoreCase("!popup.js") &&
-							!fileName.equalsIgnoreCase("!gd.js") &&
 							!fileName.equalsIgnoreCase("b!addcom.js")&&
 							!fileName.equalsIgnoreCase("b!editcom.js")&&
 							!fileName.equalsIgnoreCase("b!delcom.js")&&

@@ -14,6 +14,7 @@ import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 public class GeneralSettings {
 	public static boolean isChaos = false;
+	public static boolean isChaosChaos = false;
 	public static boolean lowCPUMode = false;
 	public static boolean followersOption = false;
 	public static boolean subsOption = false;
@@ -46,12 +47,13 @@ public class GeneralSettings {
 	private static CheckboxButton autoDownload = createButton("$AUTOMATIC_SONG_DOWNLOADS$", 320);
 	private static CheckboxButton lowCPU = createButton("$LOW_CPU_MODE$", 350);
 	private static CheckboxButton chaos = createButton("$CHAOS_MODE$", 380);
-	private static CheckboxButton streamerBypass = createButton("$STREAMER_BYPASS$", 410);
-	private static CheckboxButton modsBypass = createButton("$MODS_BYPASS$", 440);
+	private static CheckboxButton chaosChaos = createButton("$CHAOS_CHAOS_MODE$", 410);
+	private static CheckboxButton streamerBypass = createButton("$STREAMER_BYPASS$", 440);
+	private static CheckboxButton modsBypass = createButton("$MODS_BYPASS$", 470);
 
-	private static CheckboxButton queueLimitText = createButton("$MAX_QUEUE_SIZE$", 470);
-	private static CheckboxButton userLimitText = createButton("$REQUEST_LIMIT_QUEUE$", 542);
-	private static CheckboxButton userLimitStreamText = createButton("$STREAM_REQUEST_LIMIT$", 617);
+	private static CheckboxButton queueLimitText = createButton("$MAX_QUEUE_SIZE$", 500);
+	private static CheckboxButton userLimitText = createButton("$REQUEST_LIMIT_QUEUE$", 572);
+	private static CheckboxButton userLimitStreamText = createButton("$STREAM_REQUEST_LIMIT$", 647);
 
 	public static int queueLimit = 0;
 	public static int userLimit = 0;
@@ -70,8 +72,8 @@ public class GeneralSettings {
 
 		panel.setLayout(null);
 		panel.setDoubleBuffered(true);
-		panel.setBounds(0, 0, 415, 700);
-		panel.setPreferredSize(new Dimension(415, 700));
+		panel.setBounds(0, 0, 415, 730);
+		panel.setPreferredSize(new Dimension(415, 730));
 		panel.setBackground(Defaults.SUB_MAIN);
 
 		InputStream is;
@@ -168,6 +170,14 @@ public class GeneralSettings {
 			}
 		});
 
+		chaosChaos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				isChaosChaos = chaosChaos.getSelectedState();
+			}
+		});
+
+
 		streamerBypass.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -196,7 +206,7 @@ public class GeneralSettings {
 			}
 		});
 		queueSizeInput.setEditable(false);
-		queueSizeInput.setBounds(25,503,345, 32);
+		queueSizeInput.setBounds(25,533,345, 32);
 		queueSizeInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		queueSizeInput.addKeyListener(new KeyListener() {
 			@Override
@@ -229,7 +239,7 @@ public class GeneralSettings {
 		});
 
 		userLimitInput.setEditable(false);
-		userLimitInput.setBounds(25,575,345, 32);
+		userLimitInput.setBounds(25,605,345, 32);
 		userLimitInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		userLimitInput.addKeyListener(new KeyListener() {
 			@Override
@@ -262,7 +272,7 @@ public class GeneralSettings {
 		});
 
 		userLimitStreamInput.setEditable(false);
-		userLimitStreamInput.setBounds(25,650,345, 32);
+		userLimitStreamInput.setBounds(25,680,345, 32);
 		userLimitStreamInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		userLimitStreamInput.addKeyListener(new KeyListener() {
 			@Override
@@ -292,6 +302,7 @@ public class GeneralSettings {
 		panel.add(autoDownload);
 		panel.add(lowCPU);
 		panel.add(chaos);
+		panel.add(chaosChaos);
 		panel.add(streamerBypass);
 		panel.add(modsBypass);
 		panel.add(versionLabel);
@@ -329,6 +340,7 @@ public class GeneralSettings {
 		updatedRepeatedOption = Boolean.parseBoolean(Settings.getSettings("updatedRepeated"));
 		lowCPUMode = Boolean.parseBoolean(Settings.getSettings("lowCPUMode"));
 		isChaos = Boolean.parseBoolean(Settings.getSettings("isChaos"));
+		isChaosChaos = Boolean.parseBoolean(Settings.getSettings("isChaosChaos"));
 		streamerBypassOption = Boolean.parseBoolean(Settings.getSettings("streamerBypass"));
 		modsBypassOption = Boolean.parseBoolean(Settings.getSettings("modsBypass"));
 
@@ -407,6 +419,7 @@ public class GeneralSettings {
 			Settings.writeSettings("updatedRepeated", String.valueOf(updatedRepeatedOption));
 			Settings.writeSettings("lowCPUMode", String.valueOf(lowCPUMode));
 			Settings.writeSettings("isChaos", String.valueOf(isChaos));
+			Settings.writeSettings("isChaosChaos", String.valueOf(isChaosChaos));
 			Settings.writeSettings("streamerBypass", String.valueOf(streamerBypassOption));
 			Settings.writeSettings("modsBypass", String.valueOf(modsBypassOption));
 
