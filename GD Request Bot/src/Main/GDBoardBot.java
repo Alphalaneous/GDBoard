@@ -133,7 +133,6 @@ class GDBoardBot {
 						boolean mod = object.get("mod").asBoolean();
 						boolean sub = object.get("sub").asBoolean();
 						String finalMessage = message;
-						Thread thread1 = new Thread(() -> {
 							try {
 								while(ServerChatBot.processing){
 									Thread.sleep(50);
@@ -142,8 +141,7 @@ class GDBoardBot {
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
-						});
-						thread1.start();
+
 					}
 					if ((event.equalsIgnoreCase("cheer") && Main.allowRequests)) {
 						String sender = object.get("sender").toString().replaceAll("\"", "");

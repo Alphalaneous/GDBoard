@@ -5,7 +5,7 @@ function command(){
 	}
 	if(Levels.getSize() > 0 && intArg <= Levels.getSize()){
         return Utilities.format("$ID_MESSAGE$", user,
-	        intArg,
+	        intArg|0,
     	    Levels.getLevel(intArg-1, 'name'),
     	    Levels.getLevel(intArg-1, 'author'),
     	    Levels.getLevel(intArg-1, 'id'),

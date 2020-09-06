@@ -213,7 +213,10 @@ public class CommentsWindow {
 	public static boolean loadComments(int page, boolean top){
 		topC = top;
 		int width = CommentsWindow.width - 15;
-		try {
+		if(Requests.levels.size() == 0) {
+			return false;
+		}
+			try {
 			if(Windowed.showingMore && Requests.levels.size() != 0) {
 				int panelHeight = 0;
 				panel.removeAll();
