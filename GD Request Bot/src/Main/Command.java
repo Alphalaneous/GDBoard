@@ -13,6 +13,7 @@ public class Command {
         sandbox.inject("isMod", isMod);
         sandbox.inject("isChaos", GeneralSettings.isChaos);
         sandbox.inject("isChaosChaos", GeneralSettings.isChaosChaos);
+        sandbox.inject("queueLength", GeneralSettings.queueLevelLength);
         sandbox.inject("isSub", isSub);
         sandbox.inject("user", user);
         sandbox.inject("args", args);

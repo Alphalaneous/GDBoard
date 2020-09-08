@@ -8,7 +8,6 @@ import java.awt.event.*;
 import java.awt.event.KeyListener;
 import java.io.*;
 
-import static Main.Defaults.settingsButtonUI;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
@@ -58,10 +57,17 @@ public class GeneralSettings {
 	public static int queueLimit = 0;
 	public static int userLimit = 0;
 	public static int userLimitStream = 0;
+	public static int queueLevelLength = 10;
+
 
 	private static FancyTextArea queueSizeInput = new FancyTextArea(true, false);
 	private static FancyTextArea userLimitInput = new FancyTextArea(true, false);
 	private static FancyTextArea userLimitStreamInput = new FancyTextArea(true, false);
+
+	private static LangLabel queueCommandLabel = new LangLabel("$QUEUE_COMMAND_LABEL$");
+
+	private static FancyTextArea queueCommandLength = new FancyTextArea(true, false);
+
 	private static JPanel mainPanel = new JPanel(null);
 	private static JPanel panel = new JPanel();
 	private static JScrollPane scrollPane = new JScrollPane(panel);
@@ -72,8 +78,8 @@ public class GeneralSettings {
 
 		panel.setLayout(null);
 		panel.setDoubleBuffered(true);
-		panel.setBounds(0, 0, 415, 730);
-		panel.setPreferredSize(new Dimension(415, 730));
+		panel.setBounds(0, 0, 415, 800);
+		panel.setPreferredSize(new Dimension(415, 800));
 		panel.setBackground(Defaults.SUB_MAIN);
 
 		InputStream is;
@@ -290,6 +296,30 @@ public class GeneralSettings {
 			}
 		});
 
+		queueCommandLabel.setForeground(Defaults.FOREGROUND);
+		queueCommandLabel.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		queueCommandLabel.setBounds(25,728,345,queueCommandLabel.getPreferredSize().height+5);
+
+		queueCommandLength.setText("10");
+		queueCommandLength.setBounds(25,756,345, 32);
+		queueCommandLength.getDocument().putProperty("filterNewlines", Boolean.TRUE);
+		queueCommandLength.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) { }
+			@Override
+			public void keyPressed(KeyEvent e) { }
+			@Override
+			public void keyReleased(KeyEvent e) {
+				try {
+					queueLevelLength = Integer.parseInt(queueCommandLength.getText());
+				}
+				catch (NumberFormatException f){
+					queueLevelLength = 10;
+				}
+			}
+		});
+
+
 		panel.add(followers);
 		panel.add(subOnly);
 		panel.add(silentMode);
@@ -312,6 +342,8 @@ public class GeneralSettings {
 		panel.add(userLimitInput);
 		panel.add(userLimitStreamText);
 		panel.add(userLimitStreamInput);
+		panel.add(queueCommandLabel);
+		panel.add(queueCommandLength);
 
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
 		scrollPane.getViewport().setBackground(Defaults.SUB_MAIN);
@@ -359,6 +391,10 @@ public class GeneralSettings {
 		if(!Settings.getSettings("userLimitStream").equalsIgnoreCase("")) {
 			userLimitStream = Integer.parseInt(Settings.getSettings("userLimitStream"));
 			userLimitStreamInput.setText(String.valueOf(userLimitStream));
+		}
+		if(!Settings.getSettings("queueLevelLength").equalsIgnoreCase("")) {
+			queueLevelLength = Integer.parseInt(Settings.getSettings("queueLevelLength"));
+			queueCommandLength.setText(String.valueOf(queueLevelLength));
 		}
 		followers.setChecked(followersOption);
 		silentMode.setChecked(silentOption);
@@ -422,6 +458,8 @@ public class GeneralSettings {
 			Settings.writeSettings("isChaosChaos", String.valueOf(isChaosChaos));
 			Settings.writeSettings("streamerBypass", String.valueOf(streamerBypassOption));
 			Settings.writeSettings("modsBypass", String.valueOf(modsBypassOption));
+			Settings.writeSettings("queueLevelLength", String.valueOf(queueLevelLength));
+
 
 
 		} catch (IOException e) {

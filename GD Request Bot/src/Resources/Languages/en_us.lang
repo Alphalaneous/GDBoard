@@ -53,6 +53,7 @@ POINTS_DELETE_SUCCESS = @%s, %s has been deleted successfully.
 CLEAR_MESSAGE = @%s, Successfully cleared the queue!
 CURRENT_MESSAGE = @%s, The current level is %s by %s (%s) Requested by %s.
 DIFFICULTY_COMMAND_MESSAGE = @%s, %s (%s) is rated %s.
+INFO_COMMAND_MESSAGE = @%s, %s (%s) info: Creator: %s | Requester: %s | Downloads: %s | Likes: %s | Objects: %s | Difficulty: %s 
 DOWNLOADS_MESSAGE = @%s, %s (%s) has %s downloads.
 ID_MESSAGE = @%s, level %s in the queue is %s by %s (%s), requested by %s.
 LIKES_MESSAGE = @%s, %s (%s) has %s likes.
@@ -164,6 +165,7 @@ STREAM_REQUEST_LIMIT = All Stream Request Limit:
 GDBOARD_VERSION = GDBoard version: %s
 STREAMER_BYPASS = Bypass your Filters
 MODS_BYPASS = Mods Bypass Filters
+QUEUE_COMMAND_LABEL = Queue Command Level Count
 
 //Outputs Settings
 

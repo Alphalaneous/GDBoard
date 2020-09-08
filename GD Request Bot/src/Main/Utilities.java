@@ -192,7 +192,13 @@ public class Utilities {
 				format = format.replace(words[i], newWord);
 			}
 		}
-		return String.format(format, args);
+		try {
+			return String.format(format, args);
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			return format;
+		}
 	}
 	public static void openLink(String link){
 		Runtime rt = Runtime.getRuntime();
