@@ -1068,7 +1068,7 @@ public class Requests {
 
 	@SuppressWarnings("unused")
 
-	public static String getHelp(String user, String command) {
+	public static String getHelp(String user, boolean isMod, String command) {
 		String info = null;
 		boolean infoExists = false;
 		try {
@@ -1111,8 +1111,103 @@ public class Requests {
 	}
 
 	@SuppressWarnings("unused")
-	public static String getHelp(String user) {
+	public static String getHelp(String user, boolean isMod) {
+
+		ArrayList<String> existingCommands = new ArrayList<>();
+		ArrayList<String> disabledCommands = new ArrayList<>();
+		ArrayList<String> modCommands = new ArrayList<>();
+
+		try {
+			URI uri = Main.class.getResource("/Resources/Commands/").toURI();
+			Path myPath;
+			if (uri.getScheme().equals("jar")) {
+				myPath = ServerChatBot.fileSystem.getPath("/Resources/Commands/");
+			} else {
+				myPath = Paths.get(uri);
+			}
+			Stream<Path> walk = Files.walk(myPath, 1);
+			Path comPath = Paths.get(Defaults.saveDirectory + "/GDBoard/commands/");
+			if (Files.exists(comPath)) {
+				Stream<Path> walk1 = Files.walk(comPath, 1);
+				for (Iterator<Path> it = walk1.iterator(); it.hasNext(); ) {
+					Path path = it.next();
+					String[] file = path.toString().split("\\\\");
+					String fileName = file[file.length - 1];
+					if (fileName.endsWith(".js")) {
+						existingCommands.add(fileName.substring(0, fileName.length()-3).toLowerCase());
+					}
+				}
+			}
+			for (Iterator<Path> it = walk.iterator(); it.hasNext(); ) {
+				Path path = it.next();
+				String[] file = path.toString().split("/");
+				String fileName = file[file.length - 1];
+				if (fileName.endsWith(".js")) {
+					if(!fileName.equalsIgnoreCase("!rick.js") &&
+							!fileName.equalsIgnoreCase("!stoprick.js") &&
+							!fileName.equalsIgnoreCase("!kill.js") &&
+							!fileName.equalsIgnoreCase("!eval.js") &&
+							!fileName.equalsIgnoreCase("!stop.js") &&
+							!fileName.equalsIgnoreCase("!end.js") &&
+							!fileName.equalsIgnoreCase("!kill.js") &&
+							!fileName.equalsIgnoreCase("!popup.js") &&
+							!fileName.equalsIgnoreCase("!gd.js")) {
+						if(!existingCommands.contains(fileName.substring(0, fileName.length()-3))) {
+							existingCommands.add(fileName.substring(0, fileName.length()-3).toLowerCase());
+						}
+					}
+				}
+			}
+			if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/disable.txt"))) {
+				Scanner sc2 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/disable.txt").toFile());
+				while (sc2.hasNextLine()) {
+					String line = sc2.nextLine();
+					disabledCommands.add(line.toLowerCase());
+				}
+				sc2.close();
+			}
+			if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/mod.txt"))) {
+				Scanner sc2 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/mod.txt").toFile());
+				while (sc2.hasNextLine()) {
+					String line = sc2.nextLine();
+					modCommands.add(line.toLowerCase());
+				}
+				sc2.close();
+			}
+				InputStream is = Main.class
+						.getClassLoader().getResourceAsStream("Resources/Commands/mod.txt");
+				assert is != null;
+				InputStreamReader isr = new InputStreamReader(is);
+				BufferedReader br = new BufferedReader(isr);
+				String line;
+				while ((line = br.readLine()) != null) {
+					modCommands.add(line.toLowerCase());
+				}
+				is.close();
+				isr.close();
+				br.close();
+
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		Collections.sort(existingCommands, String.CASE_INSENSITIVE_ORDER);
+
 		StringBuilder message = new StringBuilder();
+		message.append("$LIST_COMMANDS_START_MESSAGE$");
+
+
+		for(String command : existingCommands){
+			if(!isMod && modCommands.contains(command)){
+				continue;
+			}
+			if(disabledCommands.contains(command)){
+				continue;
+			}
+			message.append(" | ").append(command);
+
+		}
+		/*
 		try {
 			URI uri = Main.class.getResource("/Resources/Commands/").toURI();
 			Path myPath;
@@ -1122,7 +1217,6 @@ public class Requests {
 				myPath = Paths.get(uri);
 			}
 
-			message.append("$LIST_COMMANDS_START_MESSAGE$");
 			Stream<Path> walk = Files.walk(myPath, 1);
 			for (Iterator<Path> it = walk.iterator(); it.hasNext(); ) {
 				Path path = it.next();
@@ -1179,6 +1273,7 @@ public class Requests {
 		} catch (IOException | URISyntaxException e) {
 			e.printStackTrace();
 		}
+		*/
 		return message.toString();
 	}
 
