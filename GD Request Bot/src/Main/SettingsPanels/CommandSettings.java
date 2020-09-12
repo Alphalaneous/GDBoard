@@ -42,6 +42,7 @@ public class CommandSettings {
 	private static CheckboxButton whisper = createButton("$SEND_AS_WHISPER$", 350);
 	private static RoundedJButton backButton = new RoundedJButton("\uE112", "$BACK_BUTTON$");
 	private static RoundedJButton addCommand = new RoundedJButton("\uECC8", "$ADD_COMMAND_TOOLTIP$");
+	public static String[] gdCommands = {"!gd", "!kill", "!block", "!blockuser", "!unblock", "!unblockuser", "!clear", "!info", "!move", "!next", "!position", "!queue", "!remove", "!request", "!song", "!stop", "!toggle", "!top", "!wronglevel"};
 
 
 	public static JPanel createPanel() {
@@ -420,7 +421,6 @@ public class CommandSettings {
 							!fileName.equalsIgnoreCase("b!delpoint.js")){
 						if(!existingCommands.containsKey(fileName.substring(0, fileName.length()-3))) {
 							existingCommands.put(fileName.substring(0, fileName.length()-3), new ButtonInfo( path, true));
-
 						}
 					}
 				}
@@ -433,10 +433,20 @@ public class CommandSettings {
 		sorted.putAll(existingCommands);
 
 		for(Map.Entry<String,ButtonInfo> entry : sorted.entrySet()) {
+			boolean exists = false;
 			String key = entry.getKey();
 			ButtonInfo value = entry.getValue();
-
-			addButton(key, value.path, value.isDefault);
+			if(!GeneralSettings.gdModeOption){
+				for(String command : gdCommands){
+					if(key.equalsIgnoreCase(command)){
+						exists = true;
+						break;
+					}
+				}
+			}
+			if(!exists) {
+				addButton(key, value.path, value.isDefault);
+			}
 		}
 		panel.setBounds(0, 0, 415, 622);
 		panel.add(scrollPane);
@@ -507,10 +517,20 @@ public class CommandSettings {
 		sorted.putAll(existingCommands);
 
 		for(Map.Entry<String,ButtonInfo> entry : sorted.entrySet()) {
+			boolean exists = false;
 			String key = entry.getKey();
 			ButtonInfo value = entry.getValue();
-
-			addButton(key, value.path, value.isDefault);
+			if(!GeneralSettings.gdModeOption){
+				for(String command : gdCommands){
+					if(key.equalsIgnoreCase(command)){
+						exists = true;
+						break;
+					}
+				}
+			}
+			if(!exists) {
+				addButton(key, value.path, value.isDefault);
+			}
 		}
 	}
 	public static class ButtonInfo{

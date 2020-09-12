@@ -393,7 +393,7 @@ public class Main {
 	}
 
 	static void sendMessage(String message, boolean whisper, String user) {
-		if(!GeneralSettings.silentOption || message.equalsIgnoreCase(" ")) {
+		if(!GeneralBotSettings.silentOption || message.equalsIgnoreCase(" ")) {
 			if (!message.equalsIgnoreCase("")) {
 
 				while (onCool) {

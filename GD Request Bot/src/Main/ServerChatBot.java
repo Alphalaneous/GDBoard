@@ -1,5 +1,7 @@
 package Main;
 
+import Main.SettingsPanels.GeneralSettings;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,7 +39,7 @@ public class ServerChatBot {
         myPath = Paths.get(uri);
     }
     }
-
+    public static String[] gdCommands = {"!gd", "!kill", "!block", "!blockuser", "!unblock", "!unblockuser", "!clear", "!info", "!move", "!next", "!position", "!queue", "!remove", "!request", "!song", "!stop", "!toggle", "!top", "!wronglevel"};
     private static ArrayList<String> comCooldown = new ArrayList<>();
     static void onMessage(String user, String message, boolean isMod, boolean isSub, int cheer) {
         boolean whisper = false;
@@ -62,7 +64,9 @@ public class ServerChatBot {
                     }
                 }
                 if (!mention.contains(m.group(1))) {
-                    Requests.addRequest(Long.parseLong(m.group(1).replaceFirst("^0+(?!$)", "")), user, isMod);
+                    if(GeneralSettings.gdModeOption) {
+                        Requests.addRequest(Long.parseLong(m.group(1).replaceFirst("^0+(?!$)", "")), user, isMod);
+                    }
                 }
 
             } catch (Exception e) {
@@ -157,6 +161,14 @@ public class ServerChatBot {
 					is.close();
 					isr.close();
 					br.close();
+                }
+                if(!GeneralSettings.gdModeOption){
+                    for(String command : gdCommands){
+                        if(com.equalsIgnoreCase(command)){
+                            goThrough = false;
+                            break;
+                        }
+                    }
                 }
                 if(goThrough) {
                     boolean whisperExists = false;

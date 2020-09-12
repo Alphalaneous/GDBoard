@@ -69,6 +69,9 @@ public class Defaults {
 	public static Font MAIN_FONT;
 	public static Font SYMBOLS;
 	public static Font SEGOE = new Font("Segoe UI", Font.PLAIN, 20);
+	public static Font SEGOE_LIGHT = new Font("Segoe UI Light", Font.PLAIN, 20);
+
+
 
 
 

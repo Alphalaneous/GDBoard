@@ -42,6 +42,7 @@ public class Requests {
 	static boolean bwomp = false;
 	private static String os = (System.getProperty("os.name")).toUpperCase();
 	private static HashMap<String, Integer> userStreamLimitMap = new HashMap<>();
+	public static String[] gdCommands = {"!gd", "!kill", "!block", "!blockuser", "!unblock", "!unblockuser", "!clear", "!info", "!move", "!next", "!position", "!queue", "!remove", "!request", "!song", "!stop", "!toggle", "!top", "!wronglevel"};
 
 	public static void forceAdd(String name, String author, long levelID, String difficulty, boolean epic, boolean featured, int stars, String requester, int gameVersion, int coins, String description, int likes, int downloads, String length, int levelVersion, int songID, String songName, String songAuthor, int objects, long original, boolean vulgar, boolean image, int password, String upload, String update, boolean verifiedCoins) {
 
@@ -1164,6 +1165,11 @@ public class Requests {
 					String line = sc2.nextLine();
 					disabledCommands.add(line.toLowerCase());
 				}
+				if(!GeneralSettings.gdModeOption){
+					for(String command : gdCommands){
+						disabledCommands.add(command.toLowerCase());
+					}
+				}
 				sc2.close();
 			}
 			if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/mod.txt"))) {
@@ -1294,76 +1300,79 @@ public class Requests {
 	@SuppressWarnings("unused")
 	public static String request(String user, boolean isMod, boolean isSub, String[] arguments) {
 		String response = "";
-		Matcher m = null;
-		if (GeneralSettings.subsOption) {
-			if (!isSub) {
-				if (!isMod) {
-					return Utilities.format("$REQUESTS_SUBSCRIBE_MESSAGE$", user);
-				}
-			}
-		}
-		if (arguments.length > 1) {
-			try {
-				m = Pattern.compile("(\\d+)").matcher(arguments[1]);
-			} catch (Exception ignored) {
-			}
-			assert m != null;
-			if (m.matches() && arguments.length <= 2) {
-				try {
-					Requests.addRequest(Long.parseLong(m.group(1)), user, isMod);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			} else {
-				StringBuilder message = new StringBuilder();
-				for (int i = 1; i < arguments.length; i++) {
-					if (arguments.length - 1 == i) {
-						message.append(arguments[i]);
-					} else {
-						message.append(arguments[i]).append(" ");
+		if(GeneralSettings.gdModeOption) {
+
+			Matcher m = null;
+			if (GeneralSettings.subsOption) {
+				if (!isSub) {
+					if (!isMod) {
+						return Utilities.format("$REQUESTS_SUBSCRIBE_MESSAGE$", user);
 					}
 				}
-				if (message.toString().contains(" by ")) {
-					String level1 = message.toString().split("by ")[0].toUpperCase();
-					String username = message.toString().split("by ")[1];
-					AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
+			}
+			if (arguments.length > 1) {
+				try {
+					m = Pattern.compile("(\\d+)").matcher(arguments[1]);
+				} catch (Exception ignored) {
+				}
+				assert m != null;
+				if (m.matches() && arguments.length <= 2) {
 					try {
-						outerLoop:
-						for (int j = 0; j < 10; j++) {
-							Object[] levelPage = Objects.requireNonNull(client.getLevelsByUser(Objects.requireNonNull(client.searchUser(username).block()), j)
-									.block()).asList().toArray();
-							for (int i = 0; i < 10; i++) {
-								if (((GDLevel) levelPage[i]).getName().toUpperCase()
-										.startsWith(new String(level1.substring(0, level1.length() - 1)))) {
-									Requests.addRequest(((GDLevel) levelPage[i]).getId(),
-											user, isMod);
-									break outerLoop;
-								}
-							}
-						}
-
-					} catch (IndexOutOfBoundsException ignored) {
-					} catch (MissingAccessException e) {
-						response = Utilities.format("$LEVEL_USER_DOESNT_EXIST_MESSAGE$", user);
+						Requests.addRequest(Long.parseLong(m.group(1)), user, isMod);
+					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				} else {
+					StringBuilder message = new StringBuilder();
+					for (int i = 1; i < arguments.length; i++) {
+						if (arguments.length - 1 == i) {
+							message.append(arguments[i]);
+						} else {
+							message.append(arguments[i]).append(" ");
+						}
+					}
+					if (message.toString().contains(" by ")) {
+						String level1 = message.toString().split("by ")[0].toUpperCase();
+						String username = message.toString().split("by ")[1];
+						AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
+						try {
+							outerLoop:
+							for (int j = 0; j < 10; j++) {
+								Object[] levelPage = Objects.requireNonNull(client.getLevelsByUser(Objects.requireNonNull(client.searchUser(username).block()), j)
+										.block()).asList().toArray();
+								for (int i = 0; i < 10; i++) {
+									if (((GDLevel) levelPage[i]).getName().toUpperCase()
+											.startsWith(new String(level1.substring(0, level1.length() - 1)))) {
+										Requests.addRequest(((GDLevel) levelPage[i]).getId(),
+												user, isMod);
+										break outerLoop;
+									}
+								}
+							}
 
-					AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
-					try {
-						Requests.addRequest(Objects.requireNonNull(client.searchLevels(message.toString(), LevelSearchFilters.create(), 0)
-										.block().asList().get(0).getId()),
-								user, isMod);
-					} catch (MissingAccessException e) {
-						response = Utilities.format("$LEVEL_DOESNT_EXIST_MESSAGE$", user);
-					} catch (Exception e) {
-						response = Utilities.format("$REQUEST_ERROR$", user);
+						} catch (IndexOutOfBoundsException ignored) {
+						} catch (MissingAccessException e) {
+							response = Utilities.format("$LEVEL_USER_DOESNT_EXIST_MESSAGE$", user);
+							e.printStackTrace();
+						}
+					} else {
 
+						AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
+						try {
+							Requests.addRequest(Objects.requireNonNull(client.searchLevels(message.toString(), LevelSearchFilters.create(), 0)
+											.block().asList().get(0).getId()),
+									user, isMod);
+						} catch (MissingAccessException e) {
+							response = Utilities.format("$LEVEL_DOESNT_EXIST_MESSAGE$", user);
+						} catch (Exception e) {
+							response = Utilities.format("$REQUEST_ERROR$", user);
+
+						}
 					}
 				}
+			} else {
+				response = Utilities.format("$SPECIFY_ID_MESSAGE$", user);
 			}
-		} else {
-			response = Utilities.format("$SPECIFY_ID_MESSAGE$", user);
 		}
 		return response;
 		//}

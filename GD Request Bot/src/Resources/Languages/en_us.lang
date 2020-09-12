@@ -130,6 +130,7 @@ REQUESTS_ON_TOGGLE_MESSAGE = /me Requests are now on!
 //Settings
 
 GENERAL_SETTINGS = General
+GENERAL_BOT_SETTINGS = General
 OUTPUTS_SETTINGS = Outputs
 ACCOUNTS_SETTINGS = Accounts
 COMMANDS_SETTINGS = Commands
@@ -330,3 +331,7 @@ SWITCH_TO_WINDOWED_TITLE = Switch to Windowed?
 SWITCH_TO_OVERLAY_INFO = If you play GD in fullscreen, this may not work, move it to another monitor by dragging the time to fix. Default is 'Home' key to open. You'll have to reopen GDBoard.
 SWINTH_TO_WINDOWED_INFO = This will close GDboard and set to Windowed mode.
 SWITCH_TO_WINDOWED_SUBINFO = You will have to reopen GDBoard.
+
+//Settings Main
+SETTINGS_TITLE = GDBoard Settings
+HOME_BUTTON = Home

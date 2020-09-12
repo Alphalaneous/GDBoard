@@ -55,6 +55,8 @@ public class DialogBox {
 			titleLabel.setTextLangFormat(title, args);
 			LangLabel infoLabel = new LangLabel(info);
 			LangLabel subInfoLabel = new LangLabel(subInfo);
+			subInfoLabel.setOpaque(false);
+			subInfoLabel.setBackground(Defaults.TOP);
 
 			JFrame finalFrame = frame;
 			MouseInputAdapter mia = new MouseInputAdapter() {

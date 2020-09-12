@@ -12,6 +12,7 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 public class GeneralSettings {
+	public static boolean gdModeOption = true;
 	public static boolean isChaos = false;
 	public static boolean isChaosChaos = false;
 	public static boolean lowCPUMode = false;
@@ -31,28 +32,27 @@ public class GeneralSettings {
 	public static boolean streamerBypassOption = false;
 	public static boolean modsBypassOption = false;
 
-	private static LangLabel versionLabel = new LangLabel("");
+	private static CheckboxButton gdMode = createButton("$GD_MODE$", 20);
 	private static CheckboxButton followers = createButton("$FOLLOWERS_ONLY$", 50);
 	private static CheckboxButton subOnly = createButton("$SUBSCRIBERS_ONLY$", 80);
-	private static CheckboxButton silentMode = createButton("$SILENT_MODE$", 110);
 
-	private static CheckboxButton nowPlaying = createButton("$DISABLE_NOW_PLAYING$", 140);
-	private static CheckboxButton queueFull = createButton("$DISABLE_QUEUE_FULL$", 170);
-	private static CheckboxButton confirm = createButton("$DISABLE_CONFIRMATION$", 200);
-	private static CheckboxButton repeated = createButton("$DISABLE_REPEATED$", 230);
-	private static CheckboxButton repeatedAll = createButton("$DISABLE_REPEATED_ALL$", 260);
-	private static CheckboxButton allowUpdatedRepeated = createButton("$ALLOW_UPDATED_REPEATED$", 290);
+	private static CheckboxButton nowPlaying = createButton("$DISABLE_NOW_PLAYING$", 110);
+	private static CheckboxButton queueFull = createButton("$DISABLE_QUEUE_FULL$", 140);
+	private static CheckboxButton confirm = createButton("$DISABLE_CONFIRMATION$", 170);
+	private static CheckboxButton repeated = createButton("$DISABLE_REPEATED$", 200);
+	private static CheckboxButton repeatedAll = createButton("$DISABLE_REPEATED_ALL$", 230);
+	private static CheckboxButton allowUpdatedRepeated = createButton("$ALLOW_UPDATED_REPEATED$", 260);
 
-	private static CheckboxButton autoDownload = createButton("$AUTOMATIC_SONG_DOWNLOADS$", 320);
-	private static CheckboxButton lowCPU = createButton("$LOW_CPU_MODE$", 350);
-	private static CheckboxButton chaos = createButton("$CHAOS_MODE$", 380);
-	private static CheckboxButton chaosChaos = createButton("$CHAOS_CHAOS_MODE$", 410);
-	private static CheckboxButton streamerBypass = createButton("$STREAMER_BYPASS$", 440);
-	private static CheckboxButton modsBypass = createButton("$MODS_BYPASS$", 470);
+	private static CheckboxButton autoDownload = createButton("$AUTOMATIC_SONG_DOWNLOADS$", 290);
+	private static CheckboxButton lowCPU = createButton("$LOW_CPU_MODE$", 320);
+	private static CheckboxButton chaos = createButton("$CHAOS_MODE$", 350);
+	private static CheckboxButton chaosChaos = createButton("$CHAOS_CHAOS_MODE$", 380);
+	private static CheckboxButton streamerBypass = createButton("$STREAMER_BYPASS$", 410);
+	private static CheckboxButton modsBypass = createButton("$MODS_BYPASS$", 440);
 
-	private static CheckboxButton queueLimitText = createButton("$MAX_QUEUE_SIZE$", 500);
-	private static CheckboxButton userLimitText = createButton("$REQUEST_LIMIT_QUEUE$", 572);
-	private static CheckboxButton userLimitStreamText = createButton("$STREAM_REQUEST_LIMIT$", 647);
+	private static CheckboxButton queueLimitText = createButton("$MAX_QUEUE_SIZE$", 470);
+	private static CheckboxButton userLimitText = createButton("$REQUEST_LIMIT_QUEUE$", 542);
+	private static CheckboxButton userLimitStreamText = createButton("$STREAM_REQUEST_LIMIT$", 617);
 
 	public static int queueLimit = 0;
 	public static int userLimit = 0;
@@ -78,24 +78,19 @@ public class GeneralSettings {
 
 		panel.setLayout(null);
 		panel.setDoubleBuffered(true);
-		panel.setBounds(0, 0, 415, 800);
-		panel.setPreferredSize(new Dimension(415, 800));
+		panel.setBounds(0, 0, 415, 770);
+		panel.setPreferredSize(new Dimension(415, 770));
 		panel.setBackground(Defaults.SUB_MAIN);
 
-		InputStream is;
-		try {
-			is = new FileInputStream(Defaults.saveDirectory + "\\GDBoard\\version.txt");
-			InputStreamReader isr = new InputStreamReader(is);
-			BufferedReader br = new BufferedReader(isr);
-			versionLabel.setTextLangFormat("$GDBOARD_VERSION$", br.readLine().replaceAll("version=", ""));
+		gdMode.setChecked(true);
+		gdMode.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				gdModeOption = gdMode.getSelectedState();
+				CommandSettings.refresh();
 
-		} catch (IOException e) {
-			versionLabel.setTextLangFormat("$GDBOARD_VERSION$", "unknown");
-		}
-
-		versionLabel.setForeground(Defaults.FOREGROUND2);
-		versionLabel.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-		versionLabel.setBounds(25,20,345,versionLabel.getPreferredSize().height+5);
+			}
+		});
 
 		followers.addMouseListener(new MouseAdapter() {
 			@Override
@@ -108,13 +103,6 @@ public class GeneralSettings {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				subsOption = subOnly.getSelectedState();
-			}
-		});
-
-		silentMode.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				silentOption = silentMode.getSelectedState();
 			}
 		});
 
@@ -212,7 +200,7 @@ public class GeneralSettings {
 			}
 		});
 		queueSizeInput.setEditable(false);
-		queueSizeInput.setBounds(25,533,345, 32);
+		queueSizeInput.setBounds(25,503,345, 32);
 		queueSizeInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		queueSizeInput.addKeyListener(new KeyListener() {
 			@Override
@@ -245,7 +233,7 @@ public class GeneralSettings {
 		});
 
 		userLimitInput.setEditable(false);
-		userLimitInput.setBounds(25,605,345, 32);
+		userLimitInput.setBounds(25,575,345, 32);
 		userLimitInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		userLimitInput.addKeyListener(new KeyListener() {
 			@Override
@@ -278,7 +266,7 @@ public class GeneralSettings {
 		});
 
 		userLimitStreamInput.setEditable(false);
-		userLimitStreamInput.setBounds(25,680,345, 32);
+		userLimitStreamInput.setBounds(25,650,345, 32);
 		userLimitStreamInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		userLimitStreamInput.addKeyListener(new KeyListener() {
 			@Override
@@ -298,10 +286,10 @@ public class GeneralSettings {
 
 		queueCommandLabel.setForeground(Defaults.FOREGROUND);
 		queueCommandLabel.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-		queueCommandLabel.setBounds(25,728,345,queueCommandLabel.getPreferredSize().height+5);
+		queueCommandLabel.setBounds(25,698,345,queueCommandLabel.getPreferredSize().height+5);
 
 		queueCommandLength.setText("10");
-		queueCommandLength.setBounds(25,756,345, 32);
+		queueCommandLength.setBounds(25,726,345, 32);
 		queueCommandLength.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		queueCommandLength.addKeyListener(new KeyListener() {
 			@Override
@@ -319,10 +307,10 @@ public class GeneralSettings {
 			}
 		});
 
-
+		panel.add(gdMode);
 		panel.add(followers);
 		panel.add(subOnly);
-		panel.add(silentMode);
+		//panel.add(silentMode);
 		panel.add(nowPlaying);
 		panel.add(queueFull);
 		panel.add(confirm);
@@ -335,7 +323,6 @@ public class GeneralSettings {
 		panel.add(chaosChaos);
 		panel.add(streamerBypass);
 		panel.add(modsBypass);
-		panel.add(versionLabel);
 		panel.add(queueLimitText);
 		panel.add(queueSizeInput);
 		panel.add(userLimitText);
@@ -361,9 +348,15 @@ public class GeneralSettings {
 	}
 
 	public static void loadSettings(){
+		if(!Settings.getSettings("gdMode").equalsIgnoreCase("")){
+			gdModeOption = Boolean.parseBoolean(Settings.getSettings("gdMode"));
+		}
+		else{
+			gdModeOption = true;
+		}
 		followersOption = Boolean.parseBoolean(Settings.getSettings("followers"));
 		subsOption = Boolean.parseBoolean(Settings.getSettings("subscribers"));
-		silentOption = Boolean.parseBoolean(Settings.getSettings("silentMode"));
+		//silentOption = Boolean.parseBoolean(Settings.getSettings("silentMode"));
 		nowPlayingOption = Boolean.parseBoolean(Settings.getSettings("disableNP"));
 		queueFullOption = Boolean.parseBoolean(Settings.getSettings("disableQF"));
 		confirmOption = Boolean.parseBoolean(Settings.getSettings("disableConfirm"));
@@ -396,8 +389,9 @@ public class GeneralSettings {
 			queueLevelLength = Integer.parseInt(Settings.getSettings("queueLevelLength"));
 			queueCommandLength.setText(String.valueOf(queueLevelLength));
 		}
+		gdMode.setChecked(gdModeOption);
 		followers.setChecked(followersOption);
-		silentMode.setChecked(silentOption);
+		//silentMode.setChecked(silentOption);
 		nowPlaying.setChecked(nowPlayingOption);
 		queueFull.setChecked(queueFullOption);
 		confirm.setChecked(confirmOption);
@@ -437,9 +431,10 @@ public class GeneralSettings {
 	}
 	public static void setSettings(){
 		try {
+			Settings.writeSettings("gdMode", String.valueOf(gdModeOption));
 			Settings.writeSettings("followers", String.valueOf(followersOption));
 			Settings.writeSettings("subscribers", String.valueOf(subsOption));
-			Settings.writeSettings("silentMode", String.valueOf(silentOption));
+			//Settings.writeSettings("silentMode", String.valueOf(silentOption));
 			Settings.writeSettings("disableNP", String.valueOf(nowPlayingOption));
 			Settings.writeSettings("disableQF", String.valueOf(queueFullOption));
 			Settings.writeSettings("disableConfirm", String.valueOf(confirmOption));

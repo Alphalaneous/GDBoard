@@ -130,6 +130,7 @@ public class Overlay {
 		InfoWindow.refreshUI();
 		AccountSettings.refreshUI();
 		PersonalizationSettings.refreshUI();
+		GeneralBotSettings.refreshUI();
 		BlockedSettings.refreshUI();
 		BlockedUserSettings.refreshUI();
 		BlockedCreatorSettings.refreshUI();
