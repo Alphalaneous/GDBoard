@@ -14,6 +14,7 @@ import java.awt.event.KeyEvent;
 
 public class FancyTextArea extends JTextArea {
 
+
 	private UndoManager undoManager = new UndoManager();
 
 
@@ -31,21 +32,21 @@ public class FancyTextArea extends JTextArea {
 		setBackground(Defaults.TEXT_BOX);
 		setForeground(Defaults.FOREGROUND);
 		setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(175, 175, 175)),
-				BorderFactory.createEmptyBorder(8, 8, 8, 8)));
+				BorderFactory.createEmptyBorder(4, 8, 4, 8)));
 		setCaret(new MyCaret());
 		setCaretColor(Defaults.FOREGROUND);
-		setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		setFont(Defaults.SEGOE.deriveFont(14f));
 		addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
 				setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Defaults.ACCENT),
-						BorderFactory.createEmptyBorder(8, 8, 8, 8)));
+						BorderFactory.createEmptyBorder(4, 8, 4, 8)));
 			}
 
 			@Override
 			public void focusLost(FocusEvent e) {
 				setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(175, 175, 175)),
-						BorderFactory.createEmptyBorder(8, 8, 8, 8)));
+						BorderFactory.createEmptyBorder(4, 8, 4, 8)));
 			}
 		});
 		if(intFilter) {
@@ -91,6 +92,7 @@ public class FancyTextArea extends JTextArea {
 				}
 			}
 		});
+
 	}
 	public void clearUndo(){
 		undoManager.discardAllEdits();
@@ -118,7 +120,7 @@ public class FancyTextArea extends JTextArea {
 			int textWidth = fm.stringWidth("|");
 			int textHeight = fm.getHeight();
 			x = r.x;
-			y = r.y;
+			y = r.y-1;
 			width = textWidth;
 			height = textHeight;
 			repaint();

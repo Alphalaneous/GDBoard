@@ -1,7 +1,10 @@
 package Main;
 
 import Main.SettingsPanels.AccountSettings;
+import Main.SettingsPanels.GeneralBotSettings;
+import Main.SettingsPanels.GeneralSettings;
 import com.cavariux.twitchirc.Chat.Channel;
+import com.cavariux.twitchirc.Json.JsonArray;
 import com.cavariux.twitchirc.Json.JsonObject;
 import org.apache.commons.text.StringEscapeUtils;
 import org.json.JSONObject;
@@ -12,11 +15,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 class GDBoardBot {
 	static int wait = 2000;
 	static int tries = 0;
-	static boolean connected = false;
+	static boolean initialConnect = false;
+	static AtomicBoolean isConnect = new AtomicBoolean(false);
 	static boolean failed = false;
 	private static PrintWriter out;
 	private static BufferedReader in;
@@ -63,18 +68,26 @@ class GDBoardBot {
 		sendMessage(authObj.toString());
 
 		new Thread(() -> {
+			isConnect.set(false);
 			if(!firstOpen) {
 				DialogBox.setUnfocusable();
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				firstOpen = false;
 			}
-			firstOpen = false;
-			String choice = DialogBox.showDialogBox("$CONNECTING_GDBOARD$", "$CONNECTING_GDBOARD_INFO$", "$CONNECTING_GDBOARD_SUBINFO$", new String[]{"$RECONNECT$", "$CANCEL$"});
-			if(choice.equalsIgnoreCase("CANCEL")){
-				Main.close();
-			}
-			if(choice.equalsIgnoreCase("RECONNECT")){
-				APIs.success.set(false);
-				APIs.setOauth(false);
+			if(!isConnect.get()) {
+				String choice = DialogBox.showDialogBox("$CONNECTING_GDBOARD$", "$CONNECTING_GDBOARD_INFO$", "$CONNECTING_GDBOARD_SUBINFO$", new String[]{"$RECONNECT$", "$CANCEL$"});
+				if (choice.equalsIgnoreCase("CANCEL")) {
+					Main.close();
+				}
+				if (choice.equalsIgnoreCase("RECONNECT")) {
+					APIs.success.set(false);
+					APIs.setOauth(false);
 
+				}
 			}
 		}).start();
 
@@ -96,6 +109,7 @@ class GDBoardBot {
 					break;
 				}
 				String event = "";
+				System.out.println(inputLine);
 				try {
 					JsonObject object = JsonObject.readFrom(inputLine);
 					if (object.get("event") != null) {
@@ -107,7 +121,8 @@ class GDBoardBot {
 						Settings.channel = channel;
 						Settings.writeSettings("channel", channel);
 						AccountSettings.refreshTwitch(channel);
-						connected = true;
+						initialConnect = true;
+						isConnect.set(true);
 						/**
 						 * Reads chat as streamer, reduces load on servers for some actions
 						 * such as custom commands that don't use the normal prefix
@@ -132,7 +147,21 @@ class GDBoardBot {
 						message = message.substring(1, message.length()-1);
 						boolean mod = object.get("mod").asBoolean();
 						boolean sub = object.get("sub").asBoolean();
-						String finalMessage = message;
+						if(GeneralBotSettings.multiOption){
+							String finalMessage = message;
+							new Thread(() -> {
+								try {
+									while(ServerChatBot.processing){
+										Thread.sleep(50);
+									}
+									ServerChatBot.onMessage(sender, finalMessage, mod, sub, 0);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}).start();
+						}
+						else{
+							String finalMessage = message;
 							try {
 								while(ServerChatBot.processing){
 									Thread.sleep(50);
@@ -141,7 +170,7 @@ class GDBoardBot {
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
-
+						}
 					}
 					if ((event.equalsIgnoreCase("cheer") && Main.allowRequests)) {
 						String sender = object.get("sender").toString().replaceAll("\"", "");
@@ -150,14 +179,32 @@ class GDBoardBot {
 
 						boolean mod = object.get("mod").asBoolean();
 						boolean sub = object.get("sub").asBoolean();
+						if(GeneralBotSettings.multiOption){
+							String finalMessage = message;
+							new Thread(() -> {
+								try {
+									while(ServerChatBot.processing){
+										Thread.sleep(50);
+									}
+									ServerChatBot.onMessage(sender, finalMessage, mod, sub, 0);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}).start();
+						}
+						else{
+							String finalMessage = message;
 							try {
 								while(ServerChatBot.processing){
 									Thread.sleep(50);
 								}
-								ServerChatBot.onMessage(sender, message, mod, sub, bits);
+								ServerChatBot.onMessage(sender, finalMessage, mod, sub, 0);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
+						}
+					}
+					if(event.equalsIgnoreCase("blocked_ids_updated") && GeneralSettings.gdModeOption){
 					}
 				}
 				catch (Exception e){

@@ -26,8 +26,8 @@ public class OutputSettings {
 		panel.setBackground(Defaults.SUB_MAIN);
 		panel.setLayout(null);
 		LangLabel outputText = new LangLabel("$OUTPUTS_TEXT$");
-		outputText.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-		outputText.setBounds(25,20,outputText.getPreferredSize().width+5,outputText.getPreferredSize().height+5);
+		outputText.setFont(Defaults.SEGOE.deriveFont(14f));
+		outputText.setBounds(25,16,outputText.getPreferredSize().width+5,outputText.getPreferredSize().height+5);
 		outputText.setForeground(Defaults.FOREGROUND);
 		outputStringInput.setBounds(25,45,365, 200);
 		outputStringInput.setLineWrap(true);
@@ -46,8 +46,8 @@ public class OutputSettings {
 		});
 
 		LangLabel noLevelsText = new LangLabel("$NO_LEVELS_TEXT$");
-		noLevelsText.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-		noLevelsText.setBounds(25,265,noLevelsText.getPreferredSize().width+5,noLevelsText.getPreferredSize().height+5);
+		noLevelsText.setFont(Defaults.SEGOE.deriveFont(14f));
+		noLevelsText.setBounds(25,261,noLevelsText.getPreferredSize().width+5,noLevelsText.getPreferredSize().height+5);
 		noLevelsText.setForeground(Defaults.FOREGROUND);
 		noLevelsStringInput.setBounds(25,290,365, 200);
 		noLevelsStringInput.setLineWrap(true);
@@ -66,8 +66,8 @@ public class OutputSettings {
 		});
 
 		LangLabel fileLocationText = new LangLabel("$FILE_LOCATION$");
-		fileLocationText.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-		fileLocationText.setBounds(25,510,fileLocationText.getPreferredSize().width+5,fileLocationText.getPreferredSize().height+5);
+		fileLocationText.setFont(Defaults.SEGOE.deriveFont(14f));
+		fileLocationText.setBounds(25,506,fileLocationText.getPreferredSize().width+5,fileLocationText.getPreferredSize().height+5);
 		fileLocationText.setForeground(Defaults.FOREGROUND);
 		fileLocationInput.setBounds(25,535,365, 64);
 		fileLocationInput.setLineWrap(true);

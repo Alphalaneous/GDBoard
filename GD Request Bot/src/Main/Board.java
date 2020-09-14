@@ -8,6 +8,7 @@ import delight.nashornsandbox.NashornSandbox;
 import delight.nashornsandbox.NashornSandboxes;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
+import org.json.JSONObject;
 
 import javax.swing.*;
 import java.io.*;
@@ -71,6 +72,12 @@ public class Board {
 
 	public static void endGDBoard(){
 		Main.close();
+	}
+
+	public static void signal(){
+		JSONObject messageObj = new JSONObject();
+		messageObj.put("request_type", "get_blocked_ids");
+		GDBoardBot.sendMessage(messageObj.toString());
 	}
 
 	public static void rick(){

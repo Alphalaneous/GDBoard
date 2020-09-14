@@ -145,6 +145,10 @@ BLOCKED_CREATORS_SETTINGS =Blocked Creators
 LOGGED_IDS_SETTINGS = Logged IDs
 WINDOWED_SETTINGS = Switch to Windowed
 
+//General Bot SETTINGS_BUTTON
+
+MULTI_THREAD = Multi-thread mode
+
 //General Settings
 
 FOLLOWERS_ONLY = Followers Only

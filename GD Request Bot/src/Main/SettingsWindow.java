@@ -68,7 +68,7 @@ public class SettingsWindow {
 		frame.setIconImage(newIcon);
 		frame.setResizable(false);
 		frame.setTitle("GDBoard - Settings");
-		frame.getContentPane().setBackground(Defaults.MAIN);
+		frame.getContentPane().setBackground(Defaults.TOP);
 		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
@@ -357,6 +357,7 @@ public class SettingsWindow {
 				((SettingsButton) component).refreshUI();
 			}
 		}
+		frame.getContentPane().setBackground(Defaults.TOP);
 
 		selectUI.setBackground(Defaults.SELECT);
 		selectUI.setHover(Defaults.BUTTON_HOVER);
@@ -421,14 +422,14 @@ public class SettingsWindow {
 		JButton button = new JButton();
 		LangLabel label = new LangLabel(text);
 
-		label.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-		label.setBounds(40, 11, 208, 20);
+		label.setFont(Defaults.SEGOE.deriveFont(14f));
+		label.setBounds(40, 8, 208, 20);
 		label.setForeground(Defaults.FOREGROUND);
 
 		LangLabel iconLabel = new LangLabel(icon);
 
 		iconLabel.setFont(Defaults.SYMBOLS.deriveFont(14f));
-		iconLabel.setBounds(15, 8, 20, 20);
+		iconLabel.setBounds(15, 9, 20, 20);
 		iconLabel.setForeground(Defaults.FOREGROUND);
 
 		button.setLayout(null);

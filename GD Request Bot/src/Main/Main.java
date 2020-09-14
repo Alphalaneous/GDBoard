@@ -172,7 +172,7 @@ public class Main {
 					GDBoardBot.start();
 
 					/** Wait for GDBoard to connect before proceeding */
-					while (!GDBoardBot.connected) {
+					while (!GDBoardBot.initialConnect) {
 						Thread.sleep(100);
 					}
 
@@ -499,6 +499,7 @@ public class Main {
 				}
 				Variables.saveVars();
 				GeneralSettings.setSettings();
+				GeneralBotSettings.setSettings();
 				RequestSettings.setSettings();
 				ShortcutSettings.setSettings();
 				OutputSettings.setSettings();

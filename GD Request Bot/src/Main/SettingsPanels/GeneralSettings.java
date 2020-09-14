@@ -285,8 +285,8 @@ public class GeneralSettings {
 		});
 
 		queueCommandLabel.setForeground(Defaults.FOREGROUND);
-		queueCommandLabel.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-		queueCommandLabel.setBounds(25,698,345,queueCommandLabel.getPreferredSize().height+5);
+		queueCommandLabel.setFont(Defaults.SEGOE.deriveFont(14f));
+		queueCommandLabel.setBounds(25,694,345,queueCommandLabel.getPreferredSize().height+5);
 
 		queueCommandLength.setText("10");
 		queueCommandLength.setBounds(25,726,345, 32);
@@ -477,7 +477,7 @@ public class GeneralSettings {
 		button.setBounds(25,y,345,30);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
-		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		button.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.refresh();
 		return button;
 	}

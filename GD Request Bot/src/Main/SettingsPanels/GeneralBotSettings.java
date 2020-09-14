@@ -16,10 +16,14 @@ import static Main.Defaults.settingsButtonUI;
 
 public class GeneralBotSettings {
 	public static boolean silentOption = false;
+	public static boolean multiOption = false;
+
 	private static JPanel panel = new JPanel(null);
 	private static LangLabel versionLabel = new LangLabel("");
 
 	private static CheckboxButton silentChatMode = createButton("$SILENT_MODE$", 50);
+	private static CheckboxButton multiThreadMode = createButton("$MULTI_THREAD$", 80);
+
 	public static JPanel createPanel() {
 
 		InputStream is;
@@ -36,11 +40,17 @@ public class GeneralBotSettings {
 		versionLabel.setForeground(Defaults.FOREGROUND2);
 		versionLabel.setFont(Defaults.MAIN_FONT.deriveFont(14f));
 		versionLabel.setBounds(25,20,345,versionLabel.getPreferredSize().height+5);
-		silentChatMode.setChecked(false);
+
 		silentChatMode.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				silentOption = silentChatMode.getSelectedState();
+			}
+		});
+		multiThreadMode.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				multiOption = multiThreadMode.getSelectedState();
 			}
 		});
 
@@ -51,6 +61,7 @@ public class GeneralBotSettings {
 
 		panel.add(versionLabel);
 		panel.add(silentChatMode);
+		panel.add(multiThreadMode);
 		return panel;
 		
 	}
@@ -68,12 +79,15 @@ public class GeneralBotSettings {
 		if(!Settings.getSettings("silentMode").equalsIgnoreCase("")) {
 			silentOption = Boolean.parseBoolean(Settings.getSettings("silentMode"));
 			silentChatMode.setChecked(silentOption);
-			Windowed.setOnTop(silentOption);
 		}
+		multiOption = Boolean.parseBoolean(Settings.getSettings("multiMode"));
+		multiThreadMode.setChecked(multiOption);
 	}
 	public static void setSettings(){
 		try {
 			Settings.writeSettings("silentMode", String.valueOf(silentOption));
+			Settings.writeSettings("multiMode", String.valueOf(multiOption));
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

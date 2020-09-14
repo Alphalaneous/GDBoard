@@ -135,7 +135,7 @@ public class RequestSettings {
 		topPanel.setLayout(null);
 
 		label.setForeground(Defaults.FOREGROUND);
-		label.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		label.setFont(Defaults.SEGOE.deriveFont(14f));
 
 		input.setBounds(160, 15, 200, 32);
 		input.getDocument().putProperty("filterNewlines", Boolean.TRUE);
@@ -629,7 +629,7 @@ public class RequestSettings {
 
 		allowedStrings.setBounds(25,1160, 345,30);
 		allowedStrings.setPreferredSize(new Dimension(345,30));
-		allowedStrings.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		allowedStrings.setFont(Defaults.SEGOE.deriveFont(14f));
 		allowedStrings.setUI(settingsButtonUI);
 		allowedStrings.setForeground(Defaults.FOREGROUND);
 		allowedStrings.setBackground(Defaults.BUTTON);
@@ -674,7 +674,7 @@ public class RequestSettings {
 
 		disallowedStrings.setBounds(25,1200, 345,30);
 		disallowedStrings.setPreferredSize(new Dimension(345,30));
-		disallowedStrings.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		disallowedStrings.setFont(Defaults.SEGOE.deriveFont(14f));
 		disallowedStrings.setUI(settingsButtonUI);
 		disallowedStrings.setForeground(Defaults.FOREGROUND);
 		disallowedStrings.setBackground(Defaults.BUTTON);
@@ -977,7 +977,7 @@ public class RequestSettings {
 		button.setUI(settingsButtonUI);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
-		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		button.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.setPreferredSize(new Dimension(170, 35));
 		button.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1035,7 +1035,7 @@ public class RequestSettings {
 		button.setForeground(Defaults.FOREGROUND);
 		button.setOpaque(false);
 		button.setBorder(BorderFactory.createEmptyBorder());
-		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		button.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.refresh();
 		return button;
 	}
