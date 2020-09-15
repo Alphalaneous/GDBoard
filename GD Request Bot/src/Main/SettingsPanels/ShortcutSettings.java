@@ -118,7 +118,7 @@ public class ShortcutSettings {
 		input.setDocument(doc);
 
 		LangLabel keybindButton = new LangLabel(text);
-		keybindButton.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		keybindButton.setFont(Defaults.SEGOE.deriveFont(14f));
 		keybindButton.setBounds(25, 3, keybindButton.getPreferredSize().width + 5, keybindButton.getPreferredSize().height + 5);
 		keybindButton.setForeground(Defaults.FOREGROUND);
 

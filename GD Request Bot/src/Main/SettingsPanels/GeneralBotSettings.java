@@ -38,7 +38,7 @@ public class GeneralBotSettings {
 		}
 
 		versionLabel.setForeground(Defaults.FOREGROUND2);
-		versionLabel.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		versionLabel.setFont(Defaults.SEGOE.deriveFont(14f));
 		versionLabel.setBounds(25,20,345,versionLabel.getPreferredSize().height+5);
 
 		silentChatMode.addMouseListener(new MouseAdapter() {
@@ -70,7 +70,7 @@ public class GeneralBotSettings {
 		button.setBounds(25,y,365,30);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
-		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		button.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.refresh();
 		return button;
 	}

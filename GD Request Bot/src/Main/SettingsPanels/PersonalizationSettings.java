@@ -25,7 +25,7 @@ public class PersonalizationSettings {
 	public static JPanel createPanel() {
 
 		themeText.setBounds(25, 15, 365, 30);
-		themeText.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		themeText.setFont(Defaults.SEGOE.deriveFont(14f));
 		themeText.setForeground(Defaults.FOREGROUND2);
 		themeText.setOpaque(false);
 		themePanel.setBounds(25,50,365,500);
@@ -161,7 +161,7 @@ public class PersonalizationSettings {
 		button.setBounds(25,y,365,30);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
-		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		button.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.refresh();
 		return button;
 	}

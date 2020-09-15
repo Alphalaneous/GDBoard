@@ -120,7 +120,7 @@ public class FancyTextArea extends JTextArea {
 			int textWidth = fm.stringWidth("|");
 			int textHeight = fm.getHeight();
 			x = r.x;
-			y = r.y-1;
+			y = r.y;
 			width = textWidth;
 			height = textHeight;
 			repaint();
@@ -154,7 +154,7 @@ public class FancyTextArea extends JTextArea {
 
 				g.setColor(comp.getCaretColor());
 				String mark = "|";
-				g.drawString(mark, x, y + fm.getAscent());
+				g.drawString(mark, x, y + fm.getAscent() - 1);
 			}
 		}
 

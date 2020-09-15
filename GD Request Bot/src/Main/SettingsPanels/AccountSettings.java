@@ -29,10 +29,10 @@ public class AccountSettings {
 		channelText.setTextLangFormat("$TWITCH$", Settings.getSettings("channel"));
 		geometryText.setTextLangFormat("$GEOMETRY_DASH$","NA");
 		channelText.setForeground(Defaults.FOREGROUND);
-		channelText.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		channelText.setFont(Defaults.SEGOE.deriveFont(14f));
 		channelText.setBounds(25,50,channelText.getPreferredSize().width+5,channelText.getPreferredSize().height+5);
 		geometryText.setForeground(Defaults.FOREGROUND);
-		geometryText.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		geometryText.setFont(Defaults.SEGOE.deriveFont(14f));
 		geometryText.setBounds(25,20,geometryText.getPreferredSize().width+5,geometryText.getPreferredSize().height+5);
 
 

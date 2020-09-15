@@ -299,11 +299,11 @@ public class CommandEditor {
 		basicChoices.setWidth(300);
 
 		commandName.setBounds(20, 20, 300, 30);
-		commandName.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		commandName.setFont(Defaults.SEGOE.deriveFont(14f));
 		commandName.setForeground(Defaults.FOREGROUND);
 
 		messageLabel.setBounds(20, 45, 300, 30);
-		messageLabel.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		messageLabel.setFont(Defaults.SEGOE.deriveFont(14f));
 		messageLabel.setForeground(Defaults.FOREGROUND2);
 
 		commandNameText.setBounds(20, 50, 240, 32);
@@ -338,7 +338,7 @@ public class CommandEditor {
 			}
 		});
 
-		sliderValue.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		sliderValue.setFont(Defaults.SEGOE.deriveFont(14f));
 		sliderValue.setTextLangFormat("$COOLDOWN$", 0);
 		sliderValue.setForeground(Defaults.FOREGROUND);
 		sliderValue.setBounds(25, 410, 585, sliderValue.getPreferredSize().height + 5);
@@ -554,7 +554,7 @@ public class CommandEditor {
 		button.setBounds(25, y, 585, 30);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
-		button.setFont(new Font("bahnschrift", Font.PLAIN, 14));
+		button.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.refresh();
 		return button;
 	}

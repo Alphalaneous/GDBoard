@@ -592,12 +592,6 @@ public class SettingsWindow {
 		switch (identifier) {
 			case "GENERAL_SETTINGS":
 				general.setVisible(true);
-				clean++;
-				if (clean == 5) {
-					System.out.println("cleaned");
-					System.gc();
-					clean = 0;
-				}
 				break;
 			case "OUTPUTS_SETTINGS":
 				overlay.setVisible(true);

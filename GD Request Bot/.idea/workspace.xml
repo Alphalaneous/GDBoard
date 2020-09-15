@@ -16,36 +16,24 @@
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$MyCaret.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$MyCaret.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$MyIntFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$MyIntFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$MyNegIntFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea$MyNegIntFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/FancyTextArea.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/GDBoardBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/GDBoardBot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Main$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsPanels/GeneralBotSettings$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsPanels/GeneralBotSettings$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsPanels/GeneralBotSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsPanels/GeneralBotSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsPanels/GeneralSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsPanels/GeneralSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsPanels/OutputSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsPanels/OutputSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsPanels/RequestSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsPanels/RequestSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsWindow$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsWindow$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/SettingsWindow.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Resources/Languages/en_us.lang" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Resources/Languages/en_us.lang" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/CommandEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/CommandEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/CurvedButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/CurvedButton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/FancyTextArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/FancyTextArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/GDBoardBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/GDBoardBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/RadioPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/RadioPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/AccountSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/AccountSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedCreatorSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedCreatorSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedUserSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedUserSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/ChannelPointSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/ChannelPointSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/GeneralBotSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/GeneralBotSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/GeneralSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/GeneralSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/OutputSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/OutputSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/RequestSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/RequestSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/RequestsLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/RequestsLog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/SettingsPanels/ShortcutSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsPanels/ShortcutSettings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main/SettingsWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/SettingsWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Resources/Languages/en_us.lang" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/Languages/en_us.lang" afterDir="false" />
     </list>
@@ -82,14 +70,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/GDBoardBot.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/CurvedButton.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="79" column="13" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
-              <folding>
-                <element signature="e#7301#7302#0" expanded="true" />
-                <element signature="e#7328#7329#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="400">
+              <caret line="61" column="153" selection-start-line="61" selection-start-column="153" selection-end-line="61" selection-end-column="153" />
             </state>
           </provider>
         </entry>
@@ -104,79 +88,81 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/ServerChatBot.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2941">
-              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Board.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="799">
-              <caret line="78" column="55" selection-start-line="78" selection-start-column="55" selection-end-line="78" selection-end-column="55" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/GeneralBotSettings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="935">
-              <caret line="85" column="37" selection-start-line="85" selection-start-column="37" selection-end-line="85" selection-end-column="37" />
+            <state relative-caret-position="476">
+              <caret line="40" column="43" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="404">
+              <caret line="709" column="37" selection-start-line="709" selection-start-column="37" selection-end-line="709" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/ChannelPointSettings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="448">
+              <caret line="244" column="37" selection-start-line="244" selection-start-column="37" selection-end-line="244" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/CommandEditor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="411">
+              <caret line="556" column="52" selection-start-line="556" selection-start-column="52" selection-end-line="556" selection-end-column="52" />
               <folding>
-                <element signature="e#1472#1613#0" expanded="true" />
-                <element signature="e#1612#1613#0" expanded="true" />
-                <element signature="e#1650#1791#0" expanded="true" />
-                <element signature="e#1790#1791#0" expanded="true" />
+                <element signature="e#11292#11424#0" expanded="true" />
+                <element signature="e#11423#11424#0" expanded="true" />
+                <element signature="e#11455#11586#0" expanded="true" />
+                <element signature="e#11585#11586#0" expanded="true" />
+                <element signature="e#11616#11747#0" expanded="true" />
+                <element signature="e#11746#11747#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/GeneralSettings.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/RequestsLog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="349" column="31" selection-start-line="349" selection-start-column="31" selection-end-line="349" selection-end-column="31" />
+            <state relative-caret-position="187">
+              <caret line="33" column="36" selection-start-line="33" selection-start-column="36" selection-end-line="33" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/AccountSettings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="174" column="53" selection-start-line="174" selection-start-column="53" selection-end-line="174" selection-end-column="53" />
+            <state relative-caret-position="425">
+              <caret line="34" column="43" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/RequestSettings.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="742">
-              <caret line="137" column="36" selection-start-line="137" selection-start-column="36" selection-end-line="137" selection-end-column="36" />
+            <state relative-caret-position="323">
+              <caret line="163" column="37" selection-start-line="163" selection-start-column="37" selection-end-line="163" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/CurvedButton.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/RadioPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/CheckboxButton.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            <state relative-caret-position="136">
+              <caret line="21" column="46" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -192,12 +178,9 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Settings.windowedMode</find>
-      <find>gc</find>
       <find>Main</find>
       <find>MAIN_FON</find>
       <find>M</find>
-      <find>MAIN_FONT</find>
       <find>14f</find>
       <find>12f</find>
       <find>15f</find>
@@ -222,12 +205,14 @@
       <find>command</find>
       <find>ERROR</find>
       <find>CHAos</find>
+      <find>for</find>
+      <find>while</find>
+      <find>MAIN_FONT</find>
     </findStrings>
     <replaceStrings>
       <replace>Defaults.saveDirectory</replace>
       <replace>600</replace>
       <replace>Settings.getSettings(&quot;windowed&quot;).equalsIgnoreCase(&quot;true&quot;)</replace>
-      <replace>SEGOE</replace>
       <replace>12f</replace>
       <replace>15f</replace>
       <replace>14f</replace>
@@ -235,6 +220,7 @@
       <replace>\uECCA</replace>
       <replace>replace</replace>
       <replace>replaceAll</replace>
+      <replace>SEGOE</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -243,15 +229,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/LanguageSettings.java" />
-        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/AccountSettings.java" />
-        <option value="$PROJECT_DIR$/src/Main/LoadGD.java" />
-        <option value="$PROJECT_DIR$/src/Resources/Commands/b!addpoint.js" />
-        <option value="$PROJECT_DIR$/src/Main/Onboarding.java" />
-        <option value="$PROJECT_DIR$/src/Main/Settings.java" />
-        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java" />
-        <option value="$PROJECT_DIR$/src/Main/Variables.java" />
-        <option value="$PROJECT_DIR$/src/Resources/Commands/!request.js" />
         <option value="$PROJECT_DIR$/src/Main/APIs.java" />
         <option value="$PROJECT_DIR$/src/Main/Twitch.java" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/!difficulty.js" />
@@ -261,7 +238,6 @@
         <option value="$PROJECT_DIR$/src/Resources/Commands/!gd.js" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/!stop.js" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/!kill.js" />
-        <option value="$PROJECT_DIR$/src/Main/CommandEditor.java" />
         <option value="$PROJECT_DIR$/src/Main/InnerWindows/CommentsWindow.java" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/!id.js" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/!info.js" />
@@ -280,19 +256,29 @@
         <option value="$PROJECT_DIR$/src/Main/SettingsButton.java" />
         <option value="$PROJECT_DIR$/src/Main/DialogBox.java" />
         <option value="$PROJECT_DIR$/src/Main/Overlay.java" />
-        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/ServerChatBot.java" />
         <option value="$PROJECT_DIR$/src/Main/Requests.java" />
-        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/ShortcutSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/Board.java" />
-        <option value="$PROJECT_DIR$/src/Main/FancyTextArea.java" />
-        <option value="$PROJECT_DIR$/src/Main/SettingsWindow.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/OutputSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/GeneralSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/RequestSettings.java" />
-        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/GeneralBotSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/Main.java" />
         <option value="$PROJECT_DIR$/src/Main/GDBoardBot.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsWindow.java" />
+        <option value="$PROJECT_DIR$/src/Main/FancyTextArea.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/ShortcutSettings.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedSettings.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedUserSettings.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/BlockedCreatorSettings.java" />
+        <option value="$PROJECT_DIR$/src/Main/CurvedButton.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/RequestsLog.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/AccountSettings.java" />
+        <option value="$PROJECT_DIR$/src/Main/RadioPanel.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/GeneralBotSettings.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java" />
+        <option value="$PROJECT_DIR$/src/Main/SettingsPanels/ChannelPointSettings.java" />
+        <option value="$PROJECT_DIR$/src/Main/CommandEditor.java" />
         <option value="$PROJECT_DIR$/src/.version" />
       </list>
     </option>
@@ -328,6 +314,79 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope">
+        <subPane subId="Scope 'Changed Files'; set:Changed Files; ALL; class com.intellij.packageDependencies.ChangeListScope">
+          <expand>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="SettingsPanels" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="SettingsPanels" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="PersonalizationSettings" type="1a9f42e2:ClassTreeNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="SettingsPanels" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="SettingsPanels" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="PersonalizationSettings" type="1a9f42e2:ClassTreeNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -475,79 +534,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Scope 'Changed Files'; set:Changed Files; ALL; class com.intellij.packageDependencies.ChangeListScope">
-          <expand>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="SettingsPanels" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="SettingsPanels" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="PersonalizationSettings" type="1a9f42e2:ClassTreeNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="SettingsPanels" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="SettingsPanels" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="PersonalizationSettings" type="1a9f42e2:ClassTreeNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -564,7 +550,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1600047171305" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1600148365793" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Code Stuff/Java Libraries/javafx-sdk-11.0.2/lib/javafx.swing.jar!/" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -609,7 +595,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JAR Application.GD Request Bot.jar">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -742,7 +728,7 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info active="true" content_ui="combo" x="16" y="105" width="325" height="756" id="Project" order="6" sideWeight="0.29424307" side_tool="true" visible="true" weight="0.102878466" />
+      <window_info active="true" content_ui="combo" x="16" y="105" width="325" height="756" id="Project" order="6" sideWeight="0.29424307" side_tool="true" visible="true" weight="0.10394456" />
       <window_info anchor="bottom" id="JProfiler" order="0" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" sideWeight="0.4979424" weight="0.32394367" />
@@ -930,32 +916,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Resources/Commands/!top.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Resources/Commands/!unblock.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Resources/Commands/!unblockUser.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Resources/Commands/!wronglevel.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Resources/Commands/b!addcom.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Resources/Commands/b!addpoint.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Resources/Commands/!info.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="59" selection-start-line="5" selection-start-column="59" selection-end-line="5" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Resources/Commands/!id.js" />
     <entry file="file://$PROJECT_DIR$/src/Resources/Commands/!difficulty.js" />
     <entry file="file://$PROJECT_DIR$/src/Main/Utilities.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1087,29 +1047,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="200" column="30" selection-start-line="200" selection-start-column="30" selection-end-line="200" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Overlay.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="132" column="39" selection-start-line="132" selection-start-column="39" selection-end-line="132" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="48" column="44" selection-start-line="48" selection-start-column="44" selection-end-line="48" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1576#1577#0" expanded="true" />
-            <element signature="e#1654#1655#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1127,38 +1068,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/ShortcutSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="19" column="62" selection-start-line="19" selection-start-column="62" selection-end-line="19" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="44" column="57" selection-start-line="44" selection-start-column="57" selection-end-line="44" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/CommandEditor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1377">
-          <caret line="105" selection-start-line="105" selection-end-line="106" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="52" column="38" selection-start-line="52" selection-start-column="38" selection-end-line="52" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5899">
-          <caret line="360" selection-start-line="360" selection-end-line="360" />
         </state>
       </provider>
     </entry>
@@ -1169,10 +1082,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/FancyTextArea.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/GDBoardBot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1836">
-          <caret line="122" column="21" selection-start-line="122" selection-start-column="21" selection-end-line="122" selection-end-column="21" />
+        <state relative-caret-position="1088">
+          <caret line="79" column="13" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/ServerChatBot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1183,10 +1103,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/CurvedButton.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/GeneralSettings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        <state relative-caret-position="5304">
+          <caret line="349" column="31" selection-start-line="349" selection-start-column="31" selection-end-line="349" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2516">
+          <caret line="174" column="53" selection-start-line="174" selection-start-column="53" selection-end-line="174" selection-end-column="53" />
         </state>
       </provider>
     </entry>
@@ -1197,54 +1124,151 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="771">
+          <caret line="48" column="44" selection-start-line="48" selection-start-column="44" selection-end-line="48" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1576#1577#0" expanded="true" />
+            <element signature="e#1654#1655#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1570">
+          <caret line="682" column="61" lean-forward="true" selection-start-line="682" selection-start-column="61" selection-end-line="682" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/FancyTextArea.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="156" column="60" selection-start-line="156" selection-start-column="60" selection-end-line="156" selection-end-column="60" />
+          <folding>
+            <element signature="e#2341#2584#0" expanded="true" />
+            <element signature="e#2583#2584#0" expanded="true" />
+            <element signature="e#2604#2847#0" expanded="true" />
+            <element signature="e#2846#2847#0" expanded="true" />
+            <element signature="e#2878#2879#0" expanded="true" />
+            <element signature="e#2914#2915#0" expanded="true" />
+            <element signature="e#3124#3125#0" expanded="true" />
+            <element signature="e#3150#3151#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/ShortcutSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="120" column="44" selection-start-line="120" selection-start-column="44" selection-end-line="120" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/BlockedSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="438">
+          <caret line="154" column="37" selection-start-line="154" selection-start-column="37" selection-end-line="154" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/BlockedUserSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="155" column="37" selection-start-line="155" selection-start-column="37" selection-end-line="155" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/BlockedCreatorSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="154" column="37" selection-start-line="154" selection-start-column="37" selection-end-line="154" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/RequestSettings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="742">
-          <caret line="137" column="36" selection-start-line="137" selection-start-column="36" selection-end-line="137" selection-end-column="36" />
+        <state relative-caret-position="353">
+          <caret line="973" column="14" selection-start-line="973" selection-start-column="14" selection-end-line="973" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/ServerChatBot.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/CurvedButtonAlt.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2941">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        <state relative-caret-position="68">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/GeneralSettings.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/CurvedButton.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="349" column="31" selection-start-line="349" selection-start-column="31" selection-end-line="349" selection-end-column="31" />
+        <state relative-caret-position="400">
+          <caret line="61" column="153" selection-start-line="61" selection-start-column="153" selection-end-line="61" selection-end-column="153" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/RequestsLog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="33" column="36" selection-start-line="33" selection-start-column="36" selection-end-line="33" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/AccountSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="34" column="43" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/RadioPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="21" column="46" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="163" column="37" selection-start-line="163" selection-start-column="37" selection-end-line="163" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/GeneralBotSettings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="85" column="37" selection-start-line="85" selection-start-column="37" selection-end-line="85" selection-end-column="37" />
-          <folding>
-            <element signature="e#1472#1613#0" expanded="true" />
-            <element signature="e#1612#1613#0" expanded="true" />
-            <element signature="e#1650#1791#0" expanded="true" />
-            <element signature="e#1790#1791#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="476">
+          <caret line="40" column="43" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/CommandSettings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="174" column="53" selection-start-line="174" selection-start-column="53" selection-end-line="174" selection-end-column="53" />
+        <state relative-caret-position="404">
+          <caret line="709" column="37" selection-start-line="709" selection-start-column="37" selection-end-line="709" selection-end-column="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/GDBoardBot.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/SettingsPanels/ChannelPointSettings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="79" column="13" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
+        <state relative-caret-position="448">
+          <caret line="244" column="37" selection-start-line="244" selection-start-column="37" selection-end-line="244" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/CommandEditor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="556" column="52" selection-start-line="556" selection-start-column="52" selection-end-line="556" selection-end-column="52" />
           <folding>
-            <element signature="e#7301#7302#0" expanded="true" />
-            <element signature="e#7328#7329#0" expanded="true" />
+            <element signature="e#11292#11424#0" expanded="true" />
+            <element signature="e#11423#11424#0" expanded="true" />
+            <element signature="e#11455#11586#0" expanded="true" />
+            <element signature="e#11585#11586#0" expanded="true" />
+            <element signature="e#11616#11747#0" expanded="true" />
+            <element signature="e#11746#11747#0" expanded="true" />
           </folding>
         </state>
       </provider>

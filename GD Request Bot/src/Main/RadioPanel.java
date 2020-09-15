@@ -19,7 +19,7 @@ public class RadioPanel extends JPanel {
 		for (String label : labels) {
 			RadioButton radioButton = new RadioButton(label);
 			radioButton.setBounds(0, pos, 365, 30);
-			radioButton.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+			radioButton.setFont(Defaults.SEGOE.deriveFont(14f));
 			radioButton.setBorder(BorderFactory.createEmptyBorder());
 			radioButton.refresh();
 			pos = pos + 30;

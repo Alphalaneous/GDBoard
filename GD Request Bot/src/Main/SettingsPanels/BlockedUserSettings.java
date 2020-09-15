@@ -31,7 +31,7 @@ public class BlockedUserSettings {
 
 		LangLabel label = new LangLabel("$BLOCKED_USERS$");
 		label.setForeground(Defaults.FOREGROUND);
-		label.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		label.setFont(Defaults.SEGOE.deriveFont(14f));
 		label.setBounds(25, 20, label.getPreferredSize().width + 5, label.getPreferredSize().height + 5);
 
 		blockedInput.setBounds(160, 15, 200, 32);
@@ -153,7 +153,7 @@ public class BlockedUserSettings {
 		button.setUI(settingsButtonUI);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
-		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		button.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.setPreferredSize(new Dimension(170, 35));
 		button.addMouseListener(new MouseAdapter() {
 			@Override

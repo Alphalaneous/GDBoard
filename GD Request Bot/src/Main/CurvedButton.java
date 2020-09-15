@@ -59,7 +59,7 @@ public class CurvedButton extends JButton {
 	public void refresh(){
 		text.setForeground(getForeground());
 		text.setFont(getFont());
-		text.setBounds((getPreferredSize().width/2)-(text.getPreferredSize().width/2), (getPreferredSize().height/2)-(text.getPreferredSize().height/2), text.getPreferredSize().width+5, text.getPreferredSize().height+5);
+		text.setBounds((getPreferredSize().width/2)-(text.getPreferredSize().width/2), (getPreferredSize().height/2)-(text.getPreferredSize().height/2)-3, text.getPreferredSize().width+5, text.getPreferredSize().height+5);
 
 	}
 

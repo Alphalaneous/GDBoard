@@ -88,7 +88,7 @@ public class CommandSettings {
 		codePanel.setBorder(BorderFactory.createEmptyBorder());
 
 		codePanel.setBounds(10,70,395, 200);
-		commandLabel.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		commandLabel.setFont(Defaults.SEGOE.deriveFont(14f));
 		commandLabel.setForeground(Defaults.FOREGROUND);
 		commandLabel.setBounds(50,17,commandLabel.getPreferredSize().width+5, commandLabel.getPreferredSize().height + 5);
 		titlePanel.add(commandLabel);
@@ -707,7 +707,7 @@ public class CommandSettings {
 			button.setForeground(Defaults.FOREGROUND);
 		}
 		button.setBorder(BorderFactory.createEmptyBorder());
-		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		button.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.setPreferredSize(new Dimension(170, 35));
 		button.addMouseListener(new MouseAdapter() {
 			@Override

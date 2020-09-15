@@ -145,9 +145,9 @@ BLOCKED_CREATORS_SETTINGS =Blocked Creators
 LOGGED_IDS_SETTINGS = Logged IDs
 WINDOWED_SETTINGS = Switch to Windowed
 
-//General Bot SETTINGS_BUTTON
+//General Bot Settings
 
-MULTI_THREAD = Multi-thread mode
+MULTI_THREAD = Multithreaded Commands
 
 //General Settings
 
@@ -170,7 +170,7 @@ STREAM_REQUEST_LIMIT = All Stream Request Limit:
 GDBOARD_VERSION = GDBoard version: %s
 STREAMER_BYPASS = Bypass your Filters
 MODS_BYPASS = Mods Bypass Filters
-QUEUE_COMMAND_LABEL = Queue Command Level Count
+QUEUE_COMMAND_LABEL = Queue Command Level Count:
 
 //Outputs Settings
 
