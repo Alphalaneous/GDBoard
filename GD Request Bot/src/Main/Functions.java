@@ -69,7 +69,14 @@ public class Functions {
 										Requests.levels.get(0).getRequester()));
 							}
 					}
+					if(Requests.levels.get(0).getContainsImage()){
+						Utilities.notify("Image Hack", Requests.levels.get(0).getName() + " (" + Requests.levels.get(0).getLevelID() +") possibly contains the image hack!");
+					}
+					else if(Requests.levels.get(0).getContainsVulgar()){
+						Utilities.notify("Vulgar Language", Requests.levels.get(0).getName() + " (" + Requests.levels.get(0).getLevelID() +") contains vulgar language!");
+					}
 				}
+
 				Functions.saveFunction();
 			}
 			OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
@@ -87,6 +94,8 @@ public class Functions {
 			LevelsWindow.setName(Requests.levels.size());
 
 		}
+
+
 	}
 
 	public static void randomFunction(){
@@ -126,6 +135,12 @@ public class Functions {
 									Requests.levels.get(num).getLevelID(),
 									Requests.levels.get(num).getRequester()));
 
+					}
+					if(Requests.levels.get(num).getContainsImage()){
+						Utilities.notify("Image Hack", Requests.levels.get(num).getName() + " (" + Requests.levels.get(num).getLevelID() +") possibly contains the image hack!");
+					}
+					else if(Requests.levels.get(num).getContainsVulgar()){
+						Utilities.notify("Vulgar Language", Requests.levels.get(num).getName() + " (" + Requests.levels.get(num).getLevelID() +") contains vulgar language!");
 					}
 				}
 			}

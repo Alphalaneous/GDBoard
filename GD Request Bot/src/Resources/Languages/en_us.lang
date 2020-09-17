@@ -254,6 +254,7 @@ LIGHT_MODE = Light
 DARK_MODE = Dark
 SYSTEM_MODE = System
 THEME_TEXT = Theme:
+DISABLE_NOTIFICATIONS = Disable notifications
 
 //Blocked IDs Settings
 

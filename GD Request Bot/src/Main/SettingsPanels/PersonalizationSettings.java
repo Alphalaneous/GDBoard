@@ -16,12 +16,15 @@ import static Main.Defaults.settingsButtonUI;
 
 public class PersonalizationSettings {
 	public static boolean onTopOption = false;
+	public static boolean disableNotifOption = false;
 	private static CurvedButton windowedButton = new CurvedButton("$SWITCH_WINDOWED$");
 	private static JPanel panel = new JPanel(null);
 	private static RadioPanel themePanel = new RadioPanel(new String[]{"$LIGHT_MODE$", "$DARK_MODE$", "$SYSTEM_MODE$"});
 	public static String theme = "SYSTEM_MODE";
 	public static LangLabel themeText = new LangLabel("$THEME_TEXT$");
 	private static CheckboxButton onTop = createButton("$ALWAYS_ON_TOP$", 150);
+	private static CheckboxButton notifications = createButton("$DISABLE_NOTIFICATIONS$", 180);
+
 	public static JPanel createPanel() {
 
 		themeText.setBounds(25, 15, 365, 30);
@@ -35,6 +38,13 @@ public class PersonalizationSettings {
 			public void mouseReleased(MouseEvent e) {
 				onTopOption = onTop.getSelectedState();
 				Windowed.setOnTop(onTop.getSelectedState());
+			}
+		});
+		notifications.setChecked(false);
+		notifications.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				disableNotifOption = notifications.getSelectedState();
 			}
 		});
 
@@ -151,6 +161,7 @@ public class PersonalizationSettings {
 			}
 		});
 		panel.add(onTop);
+		panel.add(notifications);
 		panel.add(themePanel);
 		panel.add(themeText);
 		return panel;
@@ -187,11 +198,16 @@ public class PersonalizationSettings {
 			onTop.setChecked(onTopOption);
 			Windowed.setOnTop(onTopOption);
 		}
+		if(!Settings.getSettings("disableNotifications").equalsIgnoreCase("")) {
+			disableNotifOption = Boolean.parseBoolean(Settings.getSettings("disableNotifications"));
+			notifications.setChecked(disableNotifOption);
+		}
 	}
 	public static void setSettings(){
 		try {
 			Settings.writeSettings("theme", themePanel.getSelectedButton());
 			Settings.writeSettings("onTop", String.valueOf(onTopOption));
+			Settings.writeSettings("disableNotifications", String.valueOf(disableNotifOption));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

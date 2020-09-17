@@ -1,14 +1,22 @@
 package Main;
 
+import Main.InnerWindows.LevelsWindow;
 import Main.SettingsPanels.ChannelPointSettings;
 import Main.SettingsPanels.CommandSettings;
+import Main.SettingsPanels.PersonalizationSettings;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.*;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Utilities {
@@ -310,7 +318,44 @@ public class Utilities {
 			}
 
 	}
+	static SystemTray tray = SystemTray.getSystemTray();
+	static Image image;
 
+	static {
+		try {
+			image = ImageIO
+						.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
+								.getResource("Resources/Icons/windowIcon.png")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+
+
+	static TrayIcon trayIcon = new TrayIcon(image, "GDBoard");
+	static{
+		trayIcon.setImageAutoSize(true);
+		trayIcon.setToolTip("GDBoard");
+		try {
+			tray.add(trayIcon);
+		} catch (AWTException e) {
+			e.printStackTrace();
+		}
+		trayIcon.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(e);
+			}
+		});
+	}
+
+	public static void notify(String title, String message){
+		if(!PersonalizationSettings.disableNotifOption) {
+			trayIcon.displayMessage(title, message, TrayIcon.MessageType.NONE);
+		}
+
+	}
 	public static void saveOption(String command, String type, String optionType) {
 		try {
 			String typeA = null;

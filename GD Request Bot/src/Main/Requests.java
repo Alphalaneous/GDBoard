@@ -106,6 +106,14 @@ public class Requests {
 
 		LevelsWindow.createButton(name, author, levelID, difficulty, epic, featured, stars, requester, gameVersion, levelData.getPlayerIcon(), coins, verifiedCoins);
 		levels.add(levelData);
+		if(Requests.levels.size() == 1){
+			if(Requests.levels.get(0).getContainsImage()){
+				Utilities.notify("Image Hack", Requests.levels.get(0).getName() + " (" + Requests.levels.get(0).getLevelID() +") possibly contains the image hack!");
+			}
+			else if(Requests.levels.get(0).getContainsVulgar()){
+				Utilities.notify("Vulgar Language", Requests.levels.get(0).getName() + " (" + Requests.levels.get(0).getLevelID() +") contains vulgar language!");
+			}
+		}
 		LevelsWindow.setName(Requests.levels.size());
 		levelData.setAnalyzed();
 		LevelsWindow.updateUI(levelID, vulgar, image, true);
@@ -1512,6 +1520,14 @@ public class Requests {
 					Requests.levels.get(k).setAnalyzed();
 					LevelsWindow.updateUI(Requests.levels.get(k).getLevelID(), Requests.levels.get(k).getContainsVulgar(), Requests.levels.get(k).getContainsImage(), true);
 				} catch (IndexOutOfBoundsException ignored) {
+				}
+				if(k == 0){
+					if(Requests.levels.get(0).getContainsImage()){
+						Utilities.notify("Image Hack", Requests.levels.get(0).getName() + " (" + Requests.levels.get(0).getLevelID() +") possibly contains the image hack!");
+					}
+					else if(Requests.levels.get(0).getContainsVulgar()){
+						Utilities.notify("Vulgar Language", Requests.levels.get(0).getName() + " (" + Requests.levels.get(0).getLevelID() +") contains vulgar language!");
+					}
 				}
 				break all;
 			}
