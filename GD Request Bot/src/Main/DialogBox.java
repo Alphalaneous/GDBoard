@@ -46,15 +46,20 @@ public class DialogBox {
 			frame.setIconImage(newIcon);
 			JPanel textPanel = new JPanel();
 			JPanel titlePanel = new JPanel();
+			textPanel.setOpaque(false);
+			titlePanel.setOpaque(false);
 			textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
 			titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
 			JPanel buttonPanel = new JPanel(new GridLayout(1, 0, 6, 6));
+			buttonPanel.setOpaque(false);
 			frame.setUndecorated(true);
 			frame.setLayout(null);
 			LangLabel titleLabel = new LangLabel("");
 			titleLabel.setTextLangFormat(title, args);
 			LangLabel infoLabel = new LangLabel(info);
 			LangLabel subInfoLabel = new LangLabel(subInfo);
+			infoLabel.setOpaque(false);
+			infoLabel.setBackground(Defaults.TOP);
 			subInfoLabel.setOpaque(false);
 			subInfoLabel.setBackground(Defaults.TOP);
 

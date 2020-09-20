@@ -18,7 +18,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/DialogBox$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/DialogBox$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/DialogBox$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/DialogBox$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/DialogBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/DialogBox.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/DialogBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/DialogBox.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -62,10 +66,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Utilities.java">
+        <entry file="file://$PROJECT_DIR$/src/Main/DialogBox.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="356" selection-start-line="356" selection-end-line="356" />
+            <state relative-caret-position="280">
+              <caret line="53" column="39" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -227,7 +231,6 @@
         <option value="$PROJECT_DIR$/src/Main/SettingsWindowB.java" />
         <option value="$PROJECT_DIR$/src/Main/Defaults.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsButton.java" />
-        <option value="$PROJECT_DIR$/src/Main/DialogBox.java" />
         <option value="$PROJECT_DIR$/src/Main/Overlay.java" />
         <option value="$PROJECT_DIR$/src/Main/ServerChatBot.java" />
         <option value="$PROJECT_DIR$/src/Main/Board.java" />
@@ -254,6 +257,7 @@
         <option value="$PROJECT_DIR$/src/Main/Requests.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/PersonalizationSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/Utilities.java" />
+        <option value="$PROJECT_DIR$/src/Main/DialogBox.java" />
         <option value="$PROJECT_DIR$/src/.version" />
       </list>
     </option>
@@ -290,78 +294,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope">
-        <subPane subId="Scope 'Changed Files'; set:Changed Files; ALL; class com.intellij.packageDependencies.ChangeListScope">
-          <expand>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="SettingsPanels" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="SettingsPanels" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="PersonalizationSettings" type="1a9f42e2:ClassTreeNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="SettingsPanels" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="SettingsPanels" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="PersonalizationSettings" type="1a9f42e2:ClassTreeNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -509,6 +441,78 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Changed Files'; set:Changed Files; ALL; class com.intellij.packageDependencies.ChangeListScope">
+          <expand>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="SettingsPanels" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="SettingsPanels" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="PersonalizationSettings" type="1a9f42e2:ClassTreeNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="SettingsPanels" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="GD Request Bot" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="SettingsPanels" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="PersonalizationSettings" type="1a9f42e2:ClassTreeNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -570,7 +574,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JAR Application.GD Request Bot.jar">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -703,7 +707,7 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info active="true" content_ui="combo" x="16" y="105" width="325" height="756" id="Project" order="6" sideWeight="0.29424307" side_tool="true" visible="true" weight="0.15018868" />
+      <window_info active="true" content_ui="combo" x="16" y="105" width="325" height="756" id="Project" order="6" sideWeight="0.29424307" side_tool="true" visible="true" weight="0.15245283" />
       <window_info anchor="bottom" id="JProfiler" order="0" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" sideWeight="0.4979424" weight="0.32394367" />
@@ -983,13 +987,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/DialogBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="138" column="13" selection-start-line="59" selection-end-line="138" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/InnerWindows/CommentsWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-55">
@@ -1187,6 +1184,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Utilities.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5695">
+          <caret line="356" selection-start-line="356" selection-end-line="356" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Functions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="952">
@@ -1243,10 +1247,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Utilities.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/DialogBox.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="356" selection-start-line="356" selection-end-line="356" />
+        <state relative-caret-position="280">
+          <caret line="53" column="39" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
         </state>
       </provider>
     </entry>
