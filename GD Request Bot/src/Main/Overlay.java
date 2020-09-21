@@ -141,6 +141,7 @@ public class Overlay {
 
 		ShortcutSettings.refreshUI();
 		RequestSettings.refreshUI();
+		CommandEditor.refreshUI();
 		RequestsLog.refreshUI();
 		WindowedSettings.refreshUI();
 		OutputSettings.refreshUI();

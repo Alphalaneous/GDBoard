@@ -309,12 +309,12 @@ public class CommandEditor {
 		commandNameText.setBounds(20, 50, 240, 32);
 		commandNameText.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 
-		commandResponse.setBounds(20, 80, 585, 96);
+		commandResponse.setBounds(20, 80, 595, 96);
 		commandResponse.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		commandResponse.setLineWrap(true);
 		commandResponse.setWrapStyleWord(true);
 
-		soundFileLocation.setBounds(20, 80, 585, 32);
+		soundFileLocation.setBounds(20, 80, 595, 32);
 		soundFileLocation.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		soundFileLocation.setVisible(false);
 
@@ -802,5 +802,31 @@ public class CommandEditor {
 		} else {
 			return string;
 		}
+	}
+	public static void refreshUI(){
+		editor.getContentPane().setBackground(Defaults.TOP);
+		codeInput.setCurrentLineHighlightColor(Defaults.BUTTON);
+		codeInput.setBackground(Defaults.MAIN);
+		codeInput.setForeground(Defaults.FOREGROUND);
+		editorChoices.refreshUI();
+		basicChoices.refreshUI();
+		basicPanel.setBackground(Defaults.SUB_MAIN);
+		advancedPanel.setBackground(Defaults.SUB_MAIN);
+		fileExplorerButton.setUI(defaultUI);
+		fileExplorerButton.setForeground(Defaults.FOREGROUND);
+		fileExplorerButton.setBackground(Defaults.MAIN);
+		deleteButton.setUI(defaultUI);
+		deleteButton.setForeground(Defaults.FOREGROUND);
+		deleteButton.setBackground(Defaults.MAIN);
+		commandName.setForeground(Defaults.FOREGROUND);
+		messageLabel.setForeground(Defaults.FOREGROUND2);
+		sliderValue.setForeground(Defaults.FOREGROUND);
+		slider.setBackground(Defaults.SUB_MAIN);
+		modOnly.refresh();
+		whisper.refresh();
+		disable.refresh();
+		commandNameText.refreshAll();
+		commandResponse.refreshAll();
+		soundFileLocation.refreshAll();
 	}
 }
