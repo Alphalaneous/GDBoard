@@ -625,10 +625,12 @@ public class CommandEditor {
 
 	public static String getCommand() {
 		try {
-			if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/" + type + "/" + commandNameText.getText() + ".js"))) {
-				return String.valueOf(Files.readString(Paths.get(Defaults.saveDirectory + "/GDBoard/" + type + "/" + commandNameText.getText() + ".js"), StandardCharsets.UTF_8));
-			}
-			else if (type.equalsIgnoreCase("commands")){
+
+				if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/" + type + "/" + commandNameText.getText() + ".js"))) {
+					return String.valueOf(Files.readString(Paths.get(Defaults.saveDirectory + "/GDBoard/" + type + "/" + commandNameText.getText() + ".js"), StandardCharsets.UTF_8));
+				}
+
+			if (type.equalsIgnoreCase("commands")){
 				StringBuilder function = new StringBuilder();
 				InputStream is = Main.class
 						.getClassLoader().getResourceAsStream("Resources/Commands/" + commandNameText.getText() + ".js");

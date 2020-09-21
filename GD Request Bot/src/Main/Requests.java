@@ -1149,7 +1149,13 @@ public class Requests {
 			}
 			for (Iterator<Path> it = walk.iterator(); it.hasNext(); ) {
 				Path path = it.next();
-				String[] file = path.toString().split("/");
+				String[] file;
+				if(uri.getScheme().equals("jar")){
+					file = path.toString().split("/");
+				}
+				else{
+					file = path.toString().split("\\\\");
+				}
 				String fileName = file[file.length - 1];
 				if (fileName.endsWith(".js")) {
 					if(!fileName.equalsIgnoreCase("!rick.js") &&

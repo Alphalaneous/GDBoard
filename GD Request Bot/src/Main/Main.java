@@ -392,7 +392,21 @@ public class Main {
 		}
 	}
 
+	static boolean cooldown = false;
+
 	static void sendMessage(String message, boolean whisper, String user) {
+		if(cooldown){
+			return;
+		}
+		cooldown = true;
+		new Thread(() -> {
+			try {
+				Thread.sleep(GeneralBotSettings.cooldown);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			cooldown = false;
+		}).start();
 		if(!GeneralBotSettings.silentOption || message.equalsIgnoreCase(" ")) {
 			if (!message.equalsIgnoreCase("")) {
 

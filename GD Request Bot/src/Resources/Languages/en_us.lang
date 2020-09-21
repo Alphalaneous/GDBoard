@@ -151,6 +151,7 @@ MULTI_THREAD = Multithreaded Commands
 MULTI_THREAD_INFO = If GDBoard is acting slow in chat, enable this. May cause duplicate requests.
 ANTI_DOX = Dox Prevention Mode
 ANTI_DOX_INFO = Replaces your PCs name with asterisks if it somehow shows in chat with a custom command.
+GLOBAL_COOLDOWN_LABEL = Global Message Cooldown (ms)
 
 //General Settings
 
