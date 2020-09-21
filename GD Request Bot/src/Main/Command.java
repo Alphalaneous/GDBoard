@@ -61,7 +61,6 @@ public class Command {
         if(spacelessResult.startsWith("/color") || spacelessResult.startsWith("/block") || spacelessResult.startsWith("/unblock")){
             return "Use of that command is prohibited, nice try :)";
         }
-        result = result.replaceAll(System.getProperty("user.name"), "*****");
         String[] words = result.split(" ");
         for(int i = 0; i < words.length; i++){
             if(words[i].startsWith("$") && words[i].endsWith("$")){

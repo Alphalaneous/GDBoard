@@ -407,6 +407,9 @@ public class Main {
 				onCool = true;
 				JSONObject messageObj = new JSONObject();
 				messageObj.put("request_type", "send_message");
+				if(GeneralBotSettings.antiDox) {
+					message = message.replaceAll(System.getProperty("user.name"), "*****");
+				}
 				if (whisper) {
 					messageObj.put("message", "/w " + user + " " + message);
 				} else {
