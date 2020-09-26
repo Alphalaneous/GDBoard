@@ -117,7 +117,7 @@ public class GeneralBotSettings {
 		
 	}
 	private static CheckboxButton createButton(String text, int y){
-		CheckboxButton button = new CheckboxButton(text);
+		CheckboxButton button = new CheckboxButton(text, GeneralBotSettings.class);
 		button.setBounds(25,y,365,30);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());

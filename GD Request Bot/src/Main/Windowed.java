@@ -28,7 +28,7 @@ public class Windowed {
 	private static int width = 465;
 	private static int height = 630;
 	public static boolean isGD = true;
-	public static CheckboxButton gdToggle = new CheckboxButton("$GD_MODE$");
+	//public static CheckboxButton gdToggle = new CheckboxButton("$GD_MODE$");
 	private static JPanel content = new JPanel(null);
 	private static JPanel actionsPanel = new JPanel(new GridLayout(10, 1, 10, 10));
 	private static RoundedJButton switchButton = new RoundedJButton("\uF1CB", "$SWITCH_PAGES$");
@@ -94,7 +94,7 @@ public class Windowed {
 				buttonPanel.setBounds(frame.getWidth() - 70, 0, 50, frame.getHeight() - 200);
 				iconPanel.setBounds(frame.getWidth() - 70, frame.getHeight() - 125, 50, 50);
 				toolBar.setBounds(0, 0, frame.getWidth(), 30);
-				gdToggle.setBounds(frame.getWidth() - 180, 0, 100, 30);
+				//gdToggle.setBounds(frame.getWidth() - 180, 0, 100, 30);
 				switchButton.setBounds(frame.getWidth() - 50, 3, 25, 25);
 
 
@@ -245,7 +245,7 @@ public class Windowed {
 				if (SwingUtilities.isLeftMouseButton(e)) {
 					showingMore = !showingMore;
 					toolBar.setBounds(0, 0, frame.getWidth(), 30);
-					gdToggle.setBounds(frame.getWidth() - 180, 0, 100, 30);
+					//gdToggle.setBounds(frame.getWidth() - 180, 0, 100, 30);
 					switchButton.setBounds(frame.getWidth() - 50, 3, 25, 25);
 
 
@@ -283,28 +283,28 @@ public class Windowed {
 
 		toolBar.setBounds(0, 0, width, 30);
 		toolBar.setBackground(Defaults.TOP);
-		gdToggle.setOpaque(false);
-		gdToggle.setBackground(new Color(0, 0, 0, 0));
-		gdToggle.setForeground(Defaults.FOREGROUND);
-		gdToggle.setBounds(frame.getWidth() - 180, 0, 100, 30);
-		gdToggle.setPreferredSize(new Dimension(80, 30));
-		gdToggle.setFont(Defaults.SEGOE.deriveFont(14f));
-		gdToggle.setChecked(true);
-		gdToggle.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				isGD = gdToggle.getSelectedState();
-				if (isGD) {
-					switchButton.setVisible(true);
-				} else {
-					switchButton.setVisible(false);
-					gdPage = false;
-					content.setVisible(false);
-					actionsPanel.setVisible(true);
-				}
-			}
-		});
-		gdToggle.refresh();
+		//gdToggle.setOpaque(false);
+		//gdToggle.setBackground(new Color(0, 0, 0, 0));
+		//gdToggle.setForeground(Defaults.FOREGROUND);
+		//gdToggle.setBounds(frame.getWidth() - 180, 0, 100, 30);
+		//gdToggle.setPreferredSize(new Dimension(80, 30));
+		//gdToggle.setFont(Defaults.SEGOE.deriveFont(14f));
+		//gdToggle.setChecked(true);
+		//gdToggle.addMouseListener(new MouseAdapter() {
+		//	@Override
+		//	public void mouseReleased(MouseEvent e) {
+		//		isGD = gdToggle.getSelectedState();
+		//		if (isGD) {
+		//			switchButton.setVisible(true);
+		//		} else {
+		//			switchButton.setVisible(false);
+		//			gdPage = false;
+		//			content.setVisible(false);
+		//			actionsPanel.setVisible(true);
+		//		}
+		//	}
+		//});
+		//gdToggle.refresh();
 
 
 		buttons.setBackground(Defaults.TOP);
@@ -605,8 +605,8 @@ public class Windowed {
 		buttonPanel.setBackground(Defaults.SUB_MAIN);
 		buttons.setBackground(Defaults.TOP);
 		toolBar.setBackground(Defaults.TOP);
-		gdToggle.setForeground(Defaults.FOREGROUND);
-		gdToggle.refresh();
+		//gdToggle.setForeground(Defaults.FOREGROUND);
+		//gdToggle.refresh();
 		switchButton.setBackground(Defaults.MAIN);
 		switchButton.setForeground(Defaults.FOREGROUND);
 		for (Component component : buttonPanel.getComponents()) {
@@ -727,7 +727,7 @@ public class Windowed {
 			iconPanel.setBounds(newW - 70, frame.getHeight() - 125, 50, 50);
 
 			toolBar.setBounds(0, 0, frame.getWidth(), 30);
-			gdToggle.setBounds(frame.getWidth() - 180, 0, 100, 30);
+			//gdToggle.setBounds(frame.getWidth() - 180, 0, 100, 30);
 			switchButton.setBounds(frame.getWidth() - 50, 3, 25, 25);
 
 
@@ -751,7 +751,7 @@ public class Windowed {
 			iconPanel.setBounds(newW - 70, frame.getHeight() - 125, 50, 50);
 
 			toolBar.setBounds(0, 0, frame.getWidth(), 30);
-			gdToggle.setBounds(frame.getWidth() - 180, 0, 100, 30);
+			//gdToggle.setBounds(frame.getWidth() - 180, 0, 100, 30);
 			switchButton.setBounds(frame.getWidth() - 50, 3, 25, 25);
 
 

@@ -217,11 +217,16 @@ public class Utilities {
 		}
 	}
 	public static void openSteamApp(int id){
-		try {
-			Desktop.getDesktop().browse(new URI("steam://rungameid/" + id));
-		} catch (IOException | URISyntaxException e) {
-			e.printStackTrace();
-		}
+		new Thread(() ->{
+			String choice = DialogBox.showDialogBox("Open Steam App ID: " + id + "?","Do you wan't to launch a steam game?", "", new String[]{"$YES$", "$NO$"});
+			if(choice.equalsIgnoreCase("yes")){
+				try {
+					Desktop.getDesktop().browse(new URI("steam://rungameid/" + id));
+				} catch (IOException | URISyntaxException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
 	}
 	public static void runProgram(String location){
 

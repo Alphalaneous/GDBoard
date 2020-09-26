@@ -3,18 +3,25 @@ package Main;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
 public class CheckboxButton extends JPanel {
 
+	static ArrayList<CheckboxButton> buttons = new ArrayList<>();
+
+	Class<?> aClass;
+	String label;
 	private LangLabel text = new LangLabel("");
 	private JLabel check = new JLabel("\uE739");
 	private JLabel checkSymbol = new JLabel("\uE73E");
 	private JLabel hover = new JLabel("\uE922");
 	private boolean isChecked = false;
-	public CheckboxButton(String label) {
+	public CheckboxButton(String label, Class<?> classA) {
 		setLayout(null);
+		aClass = classA;
+		this.label = label;
 		text.setTextLang(label);
 		text.setForeground(Defaults.FOREGROUND);
 		check.setFont(Defaults.SYMBOLS.deriveFont(16f));
@@ -72,8 +79,10 @@ public class CheckboxButton extends JPanel {
 				hover.setVisible(false);
 			}
 		});
+		buttons.add(this);
 	}
 	public void setText(String textA){
+		this.label = textA;
 		text.setText(textA);
 	}
 	public boolean getSelectedState(){

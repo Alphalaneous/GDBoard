@@ -344,6 +344,16 @@ public class Main {
 
 
 			programLoaded = true;
+			new Thread(() ->{
+				Scanner scanner = new Scanner(System.in);
+				for(CheckboxButton button : CheckboxButton.buttons) {
+					System.out.println(button.aClass.getName() + " : " + Language.getString(button.label.replace("$", "")));
+				}
+				while(true){
+					String response = scanner.nextLine();
+					System.out.println(response);
+				}
+			}).start();
 		} catch (Exception e) {
 			e.printStackTrace();
 			String option = DialogBox.showDialogBox("Error!", "<html>" + e.toString() + ": " + e.getStackTrace()[0], "Please report to Alphalaneous#9687 on Discord.", new String[]{"Close"});

@@ -1030,7 +1030,7 @@ public class RequestSettings {
 	}
 	private static CheckboxButton createButton(String text, int width,  int y) {
 
-		CheckboxButton button = new CheckboxButton(text);
+		CheckboxButton button = new CheckboxButton(text, RequestSettings.class);
 		button.setBounds(25, y, width, 30);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setOpaque(false);

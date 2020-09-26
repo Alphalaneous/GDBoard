@@ -131,7 +131,7 @@ public class ShortcutSettings {
 	@SuppressWarnings("unused")
 	private static CheckboxButton createButton(String text, int x, int y, int width) {
 
-		CheckboxButton button = new CheckboxButton(text);
+		CheckboxButton button = new CheckboxButton(text, ShortcutSettings.class);
 		button.setBounds(25, y, width, 30);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());

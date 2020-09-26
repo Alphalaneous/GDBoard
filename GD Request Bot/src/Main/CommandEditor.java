@@ -550,7 +550,7 @@ public class CommandEditor {
 	}
 
 	private static CheckboxButton createButton(String text, int y) {
-		CheckboxButton button = new CheckboxButton(text);
+		CheckboxButton button = new CheckboxButton(text, CommandEditor.class);
 		button.setBounds(25, y, 585, 30);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());

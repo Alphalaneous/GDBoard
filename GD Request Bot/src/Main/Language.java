@@ -111,8 +111,16 @@ public class Language {
 						String line;
 						while (sc.hasNextLine()) {
 							line = sc.nextLine();
-							if (line.split("=", 2)[0].trim().equals(identifier)) {
-								return line.split("=", 2)[1].trim();
+							if (line.startsWith("//")) {
+								continue;
+							}
+							try {
+								if (line.split("=", 2)[0].trim().equals(identifier)) {
+									return line.split("=", 2)[1].trim();
+								}
+							}
+							catch (IndexOutOfBoundsException e){
+								return identifier;
 							}
 						}
 						sc.close();

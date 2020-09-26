@@ -473,7 +473,7 @@ public class GeneralSettings {
 	}
 	private static CheckboxButton createButton(String text, int y){
 
-		CheckboxButton button = new CheckboxButton(text);
+		CheckboxButton button = new CheckboxButton(text, GeneralSettings.class);
 		button.setBounds(25,y,345,30);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
