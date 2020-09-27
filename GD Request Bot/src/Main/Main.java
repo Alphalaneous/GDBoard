@@ -364,7 +364,7 @@ public class Main {
 
 	public static void refreshBot() {
 		try {
-			GDBoardBot.start();
+			GDBoardBot.start(true);
 			channelPointListener.disconnectBot();
 			channelPointListener.reconnectBot();
 		} catch (IOException e) {

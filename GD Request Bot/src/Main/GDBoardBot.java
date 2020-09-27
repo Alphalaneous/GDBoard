@@ -26,42 +26,58 @@ class GDBoardBot {
 	private static PrintWriter out;
 	private static BufferedReader in;
 	private static Socket clientSocket;
+	static {
+		while(true) {
+			try {
+				clientSocket = new Socket("165.227.53.200", 2963);
+				out = new PrintWriter(clientSocket.getOutputStream(), true);
+				in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+				break;
+			} catch (ConnectException | NoRouteToHostException e) {
+				System.out.println("failed here");
+				try {
+					Thread.sleep(wait);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+				tries++;
+				wait = wait * 2;
+				if (Main.programLoaded) {
+					wait = 2000;
+				}
+			} catch (UnknownHostException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	private static JButtonUI defaultUI = new JButtonUI();
 	private static ChatReader chatReader;
 	public static ChannelPointListener channelPointListener;
 	public static boolean firstOpen = true;
 	static void start() throws IOException {
-		if(clientSocket != null && clientSocket.isConnected() ){
+		start(false);
+	}
+	static void start(boolean reconnect) throws IOException {
+		/*if(clientSocket != null && clientSocket.isConnected() ){
 			clientSocket.close();
 			out.close();
 			in.close();
-		}
+		}*/
 
 		defaultUI.setBackground(new Color(50, 50, 50));
 		defaultUI.setHover( new Color(80, 80, 80));
 		defaultUI.setSelect( new Color(70, 70, 70));
 
 
-		try {
-			clientSocket = new Socket("165.227.53.200", 2963);
-			//clientSocket = new Socket("localhost", 2963);
-		} catch (ConnectException | NoRouteToHostException e) {
-			System.out.println("failed here");
-			try {
-				Thread.sleep(wait);
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
-			tries++;
-			wait = wait * 2;
-			if(Main.programLoaded){
-				wait = 2000;
-			}
-			start();
-			return;
-		}
-		out = new PrintWriter(clientSocket.getOutputStream(), true);
-		in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+
 		JSONObject authObj = new JSONObject();
 		authObj.put("request_type", "connect");
 		authObj.put("oauth", Settings.getSettings("oauth"));
@@ -79,14 +95,16 @@ class GDBoardBot {
 				firstOpen = false;
 			}
 			if(!isConnect.get()) {
-				String choice = DialogBox.showDialogBox("$CONNECTING_GDBOARD$", "$CONNECTING_GDBOARD_INFO$", "$CONNECTING_GDBOARD_SUBINFO$", new String[]{"$RECONNECT$", "$CANCEL$"});
-				if (choice.equalsIgnoreCase("CANCEL")) {
-					Main.close();
-				}
-				if (choice.equalsIgnoreCase("RECONNECT")) {
-					APIs.success.set(false);
-					APIs.setOauth(false);
+				if(!reconnect) {
+					String choice = DialogBox.showDialogBox("$CONNECTING_GDBOARD$", "$CONNECTING_GDBOARD_INFO$", "$CONNECTING_GDBOARD_SUBINFO$", new String[]{"$RECONNECT$", "$CANCEL$"});
+					if (choice.equalsIgnoreCase("CANCEL")) {
+						Main.close();
+					}
+					if (choice.equalsIgnoreCase("RECONNECT")) {
+						APIs.success.set(false);
+						APIs.setOauth(false);
 
+					}
 				}
 			}
 		}).start();
@@ -110,6 +128,7 @@ class GDBoardBot {
 				}
 				String event = "";
 				System.out.println(inputLine);
+
 				try {
 					JsonObject object = JsonObject.readFrom(inputLine);
 					if (object.get("event") != null) {
@@ -233,7 +252,7 @@ class GDBoardBot {
 				e.printStackTrace();
 			}
 			try {
-				start();
+				start(true);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
