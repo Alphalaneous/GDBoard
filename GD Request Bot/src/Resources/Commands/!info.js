@@ -1,7 +1,7 @@
 function command(){
 	var intArg = parseInt(args[1]);
 	if(isNaN(intArg) || args.length <= 1 || args.length >= Levels.getSize()){
-		intArg = 1;
+		intArg = Levels.getSelection()+1;
 	}
 	if(Levels.getSize() > 0 && intArg <= Levels.getSize()){
 	    return Utilities.format("$INFO_COMMAND_MESSAGE$", user,

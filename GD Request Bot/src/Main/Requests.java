@@ -156,7 +156,12 @@ public class Requests {
 
 				if (ID == levels.get(k).getLevelID()) {
 					int j = k + 1;
-					Main.sendMessage(Utilities.format("$ALREADY_IN_QUEUE_MESSAGE$", requester, j));
+					if(!GeneralSettings.disableShowPositionOption) {
+						Main.sendMessage(Utilities.format("$ALREADY_IN_QUEUE_MESSAGE$", requester, j));
+					}
+					else {
+						Main.sendMessage(Utilities.format("$ALREADY_IN_QUEUE_MESSAGE_ALT$", requester));
+					}
 					return;
 				}
 			}
@@ -561,11 +566,19 @@ public class Requests {
 			Functions.saveFunction();
 			if (Main.sendMessages) {
 				if(!GeneralSettings.confirmOption) {
-					Main.sendMessage(Utilities.format("$CONFIRMATION_MESSAGE$",
-							levelData.getRequester(),
-							levelData.getName(),
-							levelData.getLevelID(),
-							levels.size()));
+					if(!GeneralSettings.disableShowPositionOption) {
+						Main.sendMessage(Utilities.format("$CONFIRMATION_MESSAGE$",
+								levelData.getRequester(),
+								levelData.getName(),
+								levelData.getLevelID(),
+								levels.size()));
+					}
+					else {
+						Main.sendMessage(Utilities.format("$CONFIRMATION_MESSAGE_ALT$",
+								levelData.getRequester(),
+								levelData.getName(),
+								levelData.getLevelID()));
+					}
 				}
 			}
 			if (levels.size() == 1) {
@@ -724,6 +737,10 @@ public class Requests {
 			result = "Exception: " + e.toString();
 		}
 		return result;
+	}
+
+	public static int getSelection(){
+		return LevelsWindow.getSelectedID();
 	}
 
 	public static int getSize() {

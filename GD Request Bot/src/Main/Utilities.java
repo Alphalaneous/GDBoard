@@ -3,6 +3,7 @@ package Main;
 import Main.InnerWindows.LevelsWindow;
 import Main.SettingsPanels.ChannelPointSettings;
 import Main.SettingsPanels.CommandSettings;
+import Main.SettingsPanels.GeneralSettings;
 import Main.SettingsPanels.PersonalizationSettings;
 
 import javax.imageio.ImageIO;
@@ -18,6 +19,8 @@ import java.nio.file.*;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Utilities {
 
@@ -452,5 +455,27 @@ public class Utilities {
 			delCooldown(command, type);
 		}
 		saveOption(command, type, optionType);
+	}
+	public static long getID(String message){
+		Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(message);
+		if (m.find() && !message.startsWith("!")) {
+			try {
+				String[] msgs = message.split(" ");
+				String mention = "";
+				for (String s : msgs) {
+					if (s.contains("@")) {
+						mention = s;
+						break;
+					}
+				}
+				if (!mention.contains(m.group(1))) {
+					return Long.parseLong(m.group(1));
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return -1;
 	}
 }

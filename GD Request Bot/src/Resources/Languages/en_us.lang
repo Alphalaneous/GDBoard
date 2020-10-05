@@ -98,7 +98,8 @@ TOO_MANY_OBJECTS_MESSAGE = @%s, Your level has been removed for containing too m
 
 //Requests Responses
 
-ALREADY_IN_QUEUE_MESSAGE = @%s, Level is already in the queue at position %s.
+ALREADY_IN_QUEUE_MESSAGE = @%s, That level is already in the queue at position %s.
+ALREADY_IN_QUEUE_MESSAGE_ALT = @%s, That level is already in the queue.
 FOLLOW_MESSAGE = @%s, Please follow to send levels.
 MIN_ID_MESSAGE = @%s, your ID must be above or equal to %s.
 MAX_ID_MESSAGE = @%s, your ID must be below or equal to %s.
@@ -120,6 +121,7 @@ MANY_LIKES_MESSAGE = @%s, That level has too many likes.
 DIFFICULTY_MESSAGE = @%s, That difficulty is disabled.
 LENGTH_MESSAGE = @%s, That length is disabled.
 CONFIRMATION_MESSAGE = @%s, %s (%s) has been added to the queue at position %s.
+CONFIRMATION_MESSAGE_ALT = @%s, %s (%s) has been added to the queue.
 NOW_PLAYING_MESSAGE = Now Playing %s (%s). Requested by %s.
 REQUESTS_OFF_MESSAGE = @%s, Requests are off!
 VULGAR_LANGUAGE = (Vulgar Language)
@@ -161,6 +163,7 @@ SILENT_MODE = Silent Chat Mode
 DISABLE_NOW_PLAYING = Disable Now Playing Message
 DISABLE_QUEUE_FULL = Disable Queue is Full Message
 DISABLE_CONFIRMATION = Disable Confirmation Message
+DISABLE_SHOW_POSITION = Remove Position in Messages
 DISABLE_REPEATED = Disable Repeated Requests
 DISABLE_REPEATED_ALL = Disable Repeated Requests All Time
 ALLOW_UPDATED_REPEATED = Allow Repeated if Updated
