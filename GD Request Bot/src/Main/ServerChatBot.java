@@ -65,7 +65,7 @@ public class ServerChatBot {
                 }
                 if (!mention.contains(m.group(1))) {
                     if(GeneralSettings.gdModeOption) {
-                        Requests.addRequest(Long.parseLong(m.group(1).replaceFirst("^0+(?!$)", "")), user, isMod);
+                        Requests.addRequest(Long.parseLong(m.group(1).replaceFirst("^0+(?!$)", "")), user, isMod, message);
                     }
                 }
 

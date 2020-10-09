@@ -56,6 +56,7 @@ public class Requests {
 		if (featured) {
 			levelData.setFeatured();
 		}
+		levelData.setMessage("Reloaded");
 		levelData.setVeririedCoins(verifiedCoins);
 		levelData.setStars(stars);
 		levelData.setRequester(requester);
@@ -132,7 +133,7 @@ public class Requests {
 	}
 
 
-	public static void addRequest(long ID, String requester, boolean isMod) {
+	public static void addRequest(long ID, String requester, boolean isMod, String message) {
 		if(ID > 999999999){
 			return;
 		}
@@ -385,6 +386,7 @@ public class Requests {
 			levelData.setRequester(requester.toString());
 			levelData.setAuthor(Objects.requireNonNull(level).getCreatorName());
 			levelData.setName(level.getName());
+			levelData.setMessage(message);
 			levelData.setDifficulty(level.getDifficulty().toString());
 			levelData.setDescription(level.getDescription());
 			levelData.setLikes(level.getLikes());
@@ -1349,7 +1351,7 @@ public class Requests {
 				assert m != null;
 				if (m.matches() && arguments.length <= 2) {
 					try {
-						Requests.addRequest(Long.parseLong(m.group(1)), user, isMod);
+						Requests.addRequest(Long.parseLong(m.group(1)), user, isMod, "Sent via Command");
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -1375,7 +1377,7 @@ public class Requests {
 									if (((GDLevel) levelPage[i]).getName().toUpperCase()
 											.startsWith(new String(level1.substring(0, level1.length() - 1)))) {
 										Requests.addRequest(((GDLevel) levelPage[i]).getId(),
-												user, isMod);
+												user, isMod, "Sent via Command");
 										break outerLoop;
 									}
 								}
@@ -1392,7 +1394,7 @@ public class Requests {
 						try {
 							Requests.addRequest(Objects.requireNonNull(client.searchLevels(message.toString(), LevelSearchFilters.create(), 0)
 											.block().asList().get(0).getId()),
-									user, isMod);
+									user, isMod, "Sent via Command");
 						} catch (MissingAccessException e) {
 							response = Utilities.format("$LEVEL_DOESNT_EXIST_MESSAGE$", user);
 						} catch (Exception e) {

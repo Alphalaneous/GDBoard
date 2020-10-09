@@ -46,6 +46,11 @@ public class Windowed {
 	private static JButton showComments;
 	private static JLabel AlphalaneousText = new JLabel("Alphalaneous");
 	private static JLabel EncodedLuaText = new JLabel("EncodedLua");
+	private static String selectedUsername;
+
+	private static JPanel infoPanel = new JPanel(null);
+	private static FancyTextArea message = new FancyTextArea(false, false);
+	private static JPanel modButtons = new JPanel();
 
 
 	public static void refresh() {
@@ -279,7 +284,94 @@ public class Windowed {
 			}
 		});
 		buttonPanel.add(showComments);
+		JFrame moderationFrame = new JFrame();
+		moderationFrame.setLayout(null);
+		moderationFrame.setTitle("GDBoard - Moderation");
+		moderationFrame.setIconImage(newIcon);
+		moderationFrame.setSize(500,300);
+		moderationFrame.setResizable(false);
 
+		infoPanel.setBackground(Defaults.MAIN);
+		message.setEditable(false);
+		message.setBounds(6,55,471, 130);
+		message.setLineWrap(true);
+		message.setWrapStyleWord(true);
+		JLabel username = new JLabel();
+		username.setForeground(Defaults.FOREGROUND);
+		username.setBounds(7,5,473, 40);
+		username.setFont(Defaults.SEGOE.deriveFont(24f));
+		JLabel levelName = new JLabel();
+		levelName.setForeground(Defaults.FOREGROUND);
+		levelName.setBounds(473,0,473, 40);
+		levelName.setFont(Defaults.SEGOE.deriveFont(14f));
+
+		JLabel levelID = new JLabel();
+		levelID.setForeground(Defaults.FOREGROUND);
+		levelID.setBounds(473,16,473, 40);
+		levelID.setFont(Defaults.SEGOE.deriveFont(14f));
+
+		infoPanel.add(levelName);
+		infoPanel.add(levelID);
+		infoPanel.add(username);
+		infoPanel.add(message);
+
+		modButtons.setBackground(Defaults.TOP);
+
+		CurvedButtonAlt timeout = createCurvedButton("$TIMEOUT$");
+		timeout.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Main.sendMessage("/timeout " + selectedUsername + " 600");
+			}
+		});
+
+		CurvedButtonAlt ban = createCurvedButton("$BAN$");
+		ban.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Main.sendMessage("/ban " + selectedUsername);
+			}
+		});
+
+		CurvedButtonAlt purge = createCurvedButton("$PURGE$");
+		purge.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Main.sendMessage("/timeout " + selectedUsername + " 1");
+			}
+		});
+
+		modButtons.add(purge);
+		modButtons.add(timeout);
+		modButtons.add(ban);
+
+		infoPanel.setBounds(0,0,486, 195);
+		modButtons.setBounds(0,195,486, 105);
+
+		moderationFrame.add(infoPanel);
+		moderationFrame.add(modButtons);
+
+
+		JButton moderate = createButton("\uED15", "$MODERATE_TOOLTIP$");
+		moderate.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					selectedUsername = String.valueOf(Requests.levels.get(LevelsWindow.getSelectedID()).getRequester());
+					username.setText(String.valueOf(Requests.levels.get(LevelsWindow.getSelectedID()).getRequester()));
+					levelName.setText(String.valueOf(Requests.levels.get(LevelsWindow.getSelectedID()).getName()));
+					levelName.setBounds(473-levelName.getPreferredSize().width,0,473, 40);
+					levelID.setText("(" + String.valueOf(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID()) + ")");
+					levelID.setBounds(473-levelID.getPreferredSize().width,16,473, 40);
+					message.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getMessage());
+					message.clearUndo();
+					moderationFrame.setVisible(true);
+					moderationFrame.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - moderationFrame.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - moderationFrame.getHeight() / 2);
+
+				}
+			}
+		});
+		buttonPanel.add(moderate);
 
 		toolBar.setBounds(0, 0, width, 30);
 		toolBar.setBackground(Defaults.TOP);
@@ -607,6 +699,9 @@ public class Windowed {
 		toolBar.setBackground(Defaults.TOP);
 		//gdToggle.setForeground(Defaults.FOREGROUND);
 		//gdToggle.refresh();
+		infoPanel.setBackground(Defaults.MAIN);
+		message.refreshAll();
+		modButtons.setBackground(Defaults.TOP);
 		switchButton.setBackground(Defaults.MAIN);
 		switchButton.setForeground(Defaults.FOREGROUND);
 		for (Component component : buttonPanel.getComponents()) {
@@ -622,6 +717,17 @@ public class Windowed {
 		for (Component component : buttons.getComponents()) {
 			if (component instanceof JButton) {
 				component.setBackground(Defaults.TOP);
+				component.setForeground(Defaults.FOREGROUND);
+			}
+		}
+		for (Component component : modButtons.getComponents()) {
+			if (component instanceof JButton) {
+				component.setBackground(Defaults.MAIN);
+				component.setForeground(Defaults.FOREGROUND);
+			}
+		}
+		for (Component component : infoPanel.getComponents()) {
+			if (component instanceof JLabel) {
 				component.setForeground(Defaults.FOREGROUND);
 			}
 		}
@@ -662,6 +768,17 @@ public class Windowed {
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setOpaque(true);
 		button.setPreferredSize(new Dimension(button.getPreferredSize().width + 14, 30));
+		return button;
+	}
+
+	private static CurvedButtonAlt createCurvedButton(String text) {
+		CurvedButtonAlt button = new CurvedButtonAlt(text);
+		button.setFont(Defaults.SEGOE.deriveFont(14f));
+		button.setBackground(Defaults.MAIN);
+		button.setUI(defaultUI);
+		button.setForeground(Defaults.FOREGROUND);
+		button.setOpaque(true);
+		button.setPreferredSize(new Dimension(150, 50));
 		return button;
 	}
 

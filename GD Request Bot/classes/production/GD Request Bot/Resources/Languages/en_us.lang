@@ -300,6 +300,9 @@ ALWAYS_ON_TOP = Always On Top
 
 //Windowed Interface
 
+BAN = Ban User
+TIMEOUT = Timeout (10min)
+PURGE = Purge (1s)
 GD_MODE = GD Mode
 SETTINGS_BUTTON = Settings
 DONATE_BUTTON = Donate
@@ -318,6 +321,7 @@ CLEAR_TOOLTIP = Clear Queue
 TOGGLE_REQUESTS_TOOLTIP = Toggle Requests
 SHOW_COMMENTS_TOOLTIP = Show Comments
 HIDE_COMMENTS_TOOLTIP = Hide Comments
+MODERATE_TOOLTIP = Message and Moderation
 
 //Comments Tooltips
 

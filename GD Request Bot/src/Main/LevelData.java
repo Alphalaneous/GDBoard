@@ -7,7 +7,9 @@ import java.net.URL;
 /** @noinspection WeakerAccess*/
 public class LevelData {
 
-
+	public String getMessage(){
+		return message;
+	}
 
 	public int getPassword() {
 		return password;
@@ -157,6 +159,7 @@ public class LevelData {
 
 	private StringBuilder requester;
 	private int password;
+	private String message;
 	private StringBuilder author;
 	private StringBuilder name;
 	private StringBuilder difficulty;
@@ -197,6 +200,10 @@ public class LevelData {
 		this.videoURL = new StringBuilder("https://www.youtube.com/watch?v").append(ID);
 		this.channelName = channel;
 		this.thumbnailURL = thumbnail;
+	}
+
+	public void setMessage(String message){
+		this.message = message;
 	}
 
 	public void setStars(int stars) {
