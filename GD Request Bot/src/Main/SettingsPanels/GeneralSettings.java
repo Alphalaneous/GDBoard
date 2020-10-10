@@ -25,6 +25,7 @@ public class GeneralSettings {
 	public static boolean nowPlayingOption = false;
 	public static boolean queueFullOption = false;
 	public static boolean confirmOption = false;
+	public static boolean confirmWhisperOption = false;
 	public static boolean autoDownloadOption = false;
 	public static boolean queueLimitBoolean = false;
 	public static boolean userLimitOption = false;
@@ -40,23 +41,25 @@ public class GeneralSettings {
 
 	private static CheckboxButton nowPlaying = createButton("$DISABLE_NOW_PLAYING$", 110);
 	private static CheckboxButton queueFull = createButton("$DISABLE_QUEUE_FULL$", 140);
-	private static CheckboxButton confirm = createButton("$DISABLE_CONFIRMATION$", 170);
-	private static CheckboxButton disableShowPosition = createButton("$DISABLE_SHOW_POSITION$", 200);
+	private static CheckboxButton confirmWhisper = createButton("$WHISPER_CONFIRMATION$", 170);
 
-	private static CheckboxButton repeated = createButton("$DISABLE_REPEATED$", 230);
-	private static CheckboxButton repeatedAll = createButton("$DISABLE_REPEATED_ALL$", 260);
-	private static CheckboxButton allowUpdatedRepeated = createButton("$ALLOW_UPDATED_REPEATED$", 290);
+	private static CheckboxButton confirm = createButton("$DISABLE_CONFIRMATION$", 200);
+	private static CheckboxButton disableShowPosition = createButton("$DISABLE_SHOW_POSITION$", 230);
 
-	private static CheckboxButton autoDownload = createButton("$AUTOMATIC_SONG_DOWNLOADS$", 320);
-	private static CheckboxButton lowCPU = createButton("$LOW_CPU_MODE$", 350);
-	private static CheckboxButton chaos = createButton("$CHAOS_MODE$", 380);
-	private static CheckboxButton chaosChaos = createButton("$CHAOS_CHAOS_MODE$", 410);
-	private static CheckboxButton streamerBypass = createButton("$STREAMER_BYPASS$", 440);
-	private static CheckboxButton modsBypass = createButton("$MODS_BYPASS$", 470);
+	private static CheckboxButton repeated = createButton("$DISABLE_REPEATED$", 260);
+	private static CheckboxButton repeatedAll = createButton("$DISABLE_REPEATED_ALL$", 290);
+	private static CheckboxButton allowUpdatedRepeated = createButton("$ALLOW_UPDATED_REPEATED$", 320);
 
-	private static CheckboxButton queueLimitText = createButton("$MAX_QUEUE_SIZE$", 500);
-	private static CheckboxButton userLimitText = createButton("$REQUEST_LIMIT_QUEUE$", 572);
-	private static CheckboxButton userLimitStreamText = createButton("$STREAM_REQUEST_LIMIT$", 647);
+	private static CheckboxButton autoDownload = createButton("$AUTOMATIC_SONG_DOWNLOADS$", 350);
+	private static CheckboxButton lowCPU = createButton("$LOW_CPU_MODE$", 380);
+	private static CheckboxButton chaos = createButton("$CHAOS_MODE$", 410);
+	private static CheckboxButton chaosChaos = createButton("$CHAOS_CHAOS_MODE$", 440);
+	private static CheckboxButton streamerBypass = createButton("$STREAMER_BYPASS$", 470);
+	private static CheckboxButton modsBypass = createButton("$MODS_BYPASS$", 500);
+
+	private static CheckboxButton queueLimitText = createButton("$MAX_QUEUE_SIZE$", 530);
+	private static CheckboxButton userLimitText = createButton("$REQUEST_LIMIT_QUEUE$", 602);
+	private static CheckboxButton userLimitStreamText = createButton("$STREAM_REQUEST_LIMIT$", 677);
 
 	public static int queueLimit = 0;
 	public static int userLimit = 0;
@@ -82,8 +85,8 @@ public class GeneralSettings {
 
 		panel.setLayout(null);
 		panel.setDoubleBuffered(true);
-		panel.setBounds(0, 0, 415, 800);
-		panel.setPreferredSize(new Dimension(415, 800));
+		panel.setBounds(0, 0, 415, 830);
+		panel.setPreferredSize(new Dimension(415, 830));
 		panel.setBackground(Defaults.SUB_MAIN);
 
 		gdMode.setChecked(true);
@@ -122,6 +125,13 @@ public class GeneralSettings {
 				queueFullOption = queueFull.getSelectedState();
 			}
 		});
+		confirmWhisper.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				confirmWhisperOption = confirmWhisper.getSelectedState();
+			}
+		});
+
 		confirm.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -210,7 +220,7 @@ public class GeneralSettings {
 			}
 		});
 		queueSizeInput.setEditable(false);
-		queueSizeInput.setBounds(25,533,345, 32);
+		queueSizeInput.setBounds(25,563,345, 32);
 		queueSizeInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		queueSizeInput.addKeyListener(new KeyListener() {
 			@Override
@@ -243,7 +253,7 @@ public class GeneralSettings {
 		});
 
 		userLimitInput.setEditable(false);
-		userLimitInput.setBounds(25,605,345, 32);
+		userLimitInput.setBounds(25,635,345, 32);
 		userLimitInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		userLimitInput.addKeyListener(new KeyListener() {
 			@Override
@@ -276,7 +286,7 @@ public class GeneralSettings {
 		});
 
 		userLimitStreamInput.setEditable(false);
-		userLimitStreamInput.setBounds(25,680,345, 32);
+		userLimitStreamInput.setBounds(25,710,345, 32);
 		userLimitStreamInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		userLimitStreamInput.addKeyListener(new KeyListener() {
 			@Override
@@ -299,7 +309,7 @@ public class GeneralSettings {
 		queueCommandLabel.setBounds(25,724,345,queueCommandLabel.getPreferredSize().height+5);
 
 		queueCommandLength.setText("10");
-		queueCommandLength.setBounds(25,756,345, 32);
+		queueCommandLength.setBounds(25,786,345, 32);
 		queueCommandLength.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		queueCommandLength.addKeyListener(new KeyListener() {
 			@Override
@@ -323,6 +333,7 @@ public class GeneralSettings {
 		//panel.add(silentMode);
 		panel.add(nowPlaying);
 		panel.add(queueFull);
+		panel.add(confirmWhisper);
 		panel.add(confirm);
 		panel.add(disableShowPosition);
 		panel.add(repeated);
@@ -370,6 +381,7 @@ public class GeneralSettings {
 		//silentOption = Boolean.parseBoolean(Settings.getSettings("silentMode"));
 		nowPlayingOption = Boolean.parseBoolean(Settings.getSettings("disableNP"));
 		queueFullOption = Boolean.parseBoolean(Settings.getSettings("disableQF"));
+		confirmWhisperOption = Boolean.parseBoolean(Settings.getSettings("whisperConfirm"));
 		confirmOption = Boolean.parseBoolean(Settings.getSettings("disableConfirm"));
 		disableShowPositionOption = Boolean.parseBoolean(Settings.getSettings("disableShowPosition"));
 		repeatedOption = Boolean.parseBoolean(Settings.getSettings("repeatedRequests"));
@@ -407,8 +419,7 @@ public class GeneralSettings {
 		disableShowPosition.setChecked(disableShowPositionOption);
 		queueFull.setChecked(queueFullOption);
 		confirm.setChecked(confirmOption);
-
-		confirm.setChecked(confirmOption);
+		confirmWhisper.setChecked(confirmWhisperOption);
 		subOnly.setChecked(subsOption);
 		repeated.setChecked(repeatedOption);
 		repeatedAll.setChecked(repeatedOptionAll);
@@ -419,6 +430,7 @@ public class GeneralSettings {
 		userLimitStreamText.setChecked(userLimitStreamOption);
 		lowCPU.setChecked(lowCPUMode);
 		chaos.setChecked(isChaos);
+		chaosChaos.setChecked(isChaosChaos);
 		streamerBypass.setChecked(streamerBypassOption);
 		modsBypass.setChecked(modsBypassOption);
 
@@ -448,6 +460,7 @@ public class GeneralSettings {
 			Settings.writeSettings("subscribers", String.valueOf(subsOption));
 			Settings.writeSettings("disableNP", String.valueOf(nowPlayingOption));
 			Settings.writeSettings("disableQF", String.valueOf(queueFullOption));
+			Settings.writeSettings("whisperConfirm", String.valueOf(confirmWhisperOption));
 			Settings.writeSettings("disableConfirm", String.valueOf(confirmOption));
 			Settings.writeSettings("disableShowPosition", String.valueOf(disableShowPositionOption));
 			Settings.writeSettings("autoDL", String.valueOf(autoDownloadOption));

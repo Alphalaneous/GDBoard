@@ -450,6 +450,17 @@ public class Main {
 				}).start();
 			}
 		}
+		else if (whisper){
+			if (!message.equalsIgnoreCase("")) {
+				JSONObject messageObj = new JSONObject();
+				messageObj.put("request_type", "send_message");
+				if(GeneralBotSettings.antiDox) {
+					message = message.replaceAll(System.getProperty("user.name"), "*****");
+				}
+				messageObj.put("message", "/w " + user + " " + message);
+				GDBoardBot.sendMessage(messageObj.toString());
+			}
+		}
 	}
 
 	static void sendMessage(String message) {

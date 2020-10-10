@@ -162,6 +162,7 @@ SUBSCRIBERS_ONLY = Subscribers Only
 SILENT_MODE = Silent Chat Mode
 DISABLE_NOW_PLAYING = Disable Now Playing Message
 DISABLE_QUEUE_FULL = Disable Queue is Full Message
+WHISPER_CONFIRMATION = Send Confirmation in Whispers
 DISABLE_CONFIRMATION = Disable Confirmation Message
 DISABLE_SHOW_POSITION = Remove Position in Messages
 DISABLE_REPEATED = Disable Repeated Requests

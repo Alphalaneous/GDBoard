@@ -568,19 +568,20 @@ public class Requests {
 			Functions.saveFunction();
 			if (Main.sendMessages) {
 				if(!GeneralSettings.confirmOption) {
-					if(!GeneralSettings.disableShowPositionOption) {
-						Main.sendMessage(Utilities.format("$CONFIRMATION_MESSAGE$",
-								levelData.getRequester(),
-								levelData.getName(),
-								levelData.getLevelID(),
-								levels.size()));
-					}
-					else {
-						Main.sendMessage(Utilities.format("$CONFIRMATION_MESSAGE_ALT$",
-								levelData.getRequester(),
-								levelData.getName(),
-								levelData.getLevelID()));
-					}
+
+						if (!GeneralSettings.disableShowPositionOption) {
+							Main.sendMessage(Utilities.format("$CONFIRMATION_MESSAGE$",
+									levelData.getRequester(),
+									levelData.getName(),
+									levelData.getLevelID(),
+									levels.size()), GeneralSettings.confirmWhisperOption, requester);
+						} else {
+							Main.sendMessage(Utilities.format("$CONFIRMATION_MESSAGE_ALT$",
+									levelData.getRequester(),
+									levelData.getName(),
+									levelData.getLevelID()), GeneralSettings.confirmWhisperOption, requester);
+						}
+
 				}
 			}
 			if (levels.size() == 1) {
