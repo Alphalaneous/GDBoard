@@ -306,7 +306,7 @@ public class GeneralSettings {
 
 		queueCommandLabel.setForeground(Defaults.FOREGROUND);
 		queueCommandLabel.setFont(Defaults.SEGOE.deriveFont(14f));
-		queueCommandLabel.setBounds(25,724,345,queueCommandLabel.getPreferredSize().height+5);
+		queueCommandLabel.setBounds(25,754,345,queueCommandLabel.getPreferredSize().height+5);
 
 		queueCommandLength.setText("10");
 		queueCommandLength.setBounds(25,786,345, 32);
