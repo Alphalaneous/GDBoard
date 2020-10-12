@@ -3,6 +3,7 @@ package Main;
 import Main.SettingsPanels.AccountSettings;
 import Main.SettingsPanels.GeneralSettings;
 import com.cavariux.twitchirc.Json.JsonObject;
+import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.json.JSONObject;
 
 import java.awt.*;
@@ -109,14 +110,20 @@ class GDBoardBot {
 
 		 new Thread(() -> {
 			String inputLine = null;
-			 new Thread(() -> {
-				 if (chatReader2 != null) {
-					 chatReader2.disconnect();
-				 }
-				 chatReader2 = new ChatListener(Settings.getSettings("channel"));
-				 chatReader2.connect(Settings.getSettings("oauth"), Settings.getSettings("channel"));
-			 }).start();
+
 			while (true) {
+				new Thread(() -> {
+					try {
+						if (chatReader2 != null) {
+							chatReader2.disconnect();
+						}
+						chatReader2 = new ChatListener(Settings.getSettings("channel"));
+						chatReader2.connect(Settings.getSettings("oauth"), Settings.getSettings("channel"));
+					}
+					catch (WebsocketNotConnectedException e){
+
+					}
+				}).start();
 				while(clientSocket.isClosed() || !clientSocket.isConnected()){
 					try {
 						Thread.sleep(100);

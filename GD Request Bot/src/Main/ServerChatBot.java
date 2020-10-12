@@ -43,10 +43,6 @@ public class ServerChatBot {
     private static ArrayList<String> comCooldown = new ArrayList<>();
     static void onMessage(String user, String message, boolean isMod, boolean isSub, int cheer) {
         boolean whisper = false;
-        if(Settings.getSettings("channel").equalsIgnoreCase(user)){
-            isMod = true;
-        }
-
         processing = true;
         boolean goThrough = true;
         String com = message.split(" ")[0];
