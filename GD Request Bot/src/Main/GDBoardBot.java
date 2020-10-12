@@ -61,25 +61,26 @@ class GDBoardBot {
 		start(false);
 	}
 	static void start(boolean reconnect) throws IOException {
+		System.out.println("started");
 		/*if(clientSocket != null && clientSocket.isConnected() ){
 			clientSocket.close();
 			out.close();
 			in.close();
 		}*/
 
-		defaultUI.setBackground(new Color(50, 50, 50));
-		defaultUI.setHover( new Color(80, 80, 80));
-		defaultUI.setSelect( new Color(70, 70, 70));
+			defaultUI.setBackground(new Color(50, 50, 50));
+			defaultUI.setHover( new Color(80, 80, 80));
+			defaultUI.setSelect( new Color(70, 70, 70));
 
 
 
 
-		JSONObject authObj = new JSONObject();
-		authObj.put("request_type", "connect");
-		authObj.put("oauth", Settings.getSettings("oauth"));
-		sendMessage(authObj.toString());
+			JSONObject authObj = new JSONObject();
+			authObj.put("request_type", "connect");
+			authObj.put("oauth", Settings.getSettings("oauth"));
+			sendMessage(authObj.toString());
 
-		new Thread(() -> {
+			new Thread(() -> {
 			isConnect.set(false);
 			if(!firstOpen) {
 				DialogBox.setUnfocusable();
@@ -108,6 +109,13 @@ class GDBoardBot {
 
 		 new Thread(() -> {
 			String inputLine = null;
+			 new Thread(() -> {
+				 if (chatReader2 != null) {
+					 chatReader2.disconnect();
+				 }
+				 chatReader2 = new ChatListener(Settings.getSettings("channel"));
+				 chatReader2.connect(Settings.getSettings("oauth"), Settings.getSettings("channel"));
+			 }).start();
 			while (true) {
 				while(clientSocket.isClosed() || !clientSocket.isConnected()){
 					try {
@@ -118,8 +126,15 @@ class GDBoardBot {
 				}
 				try {
 					if ((inputLine = in.readLine()) == null) break;
-				} catch (IOException e) {
-					e.printStackTrace();
+				} catch (Exception e) {
+					try {
+						clientSocket.close();
+						out.close();
+						in.close();
+						start();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 					break;
 				}
 				String event = "";
@@ -142,13 +157,6 @@ class GDBoardBot {
 						 * Reads chat as streamer, reduces load on servers for some actions
 						 * such as custom commands that don't use the normal prefix
 						 */
-						new Thread(() -> {
-							if (chatReader2 != null) {
-								chatReader2.disconnect();
-							}
-							chatReader2 = new ChatListener(Settings.getSettings("channel"));
-							chatReader2.connect(Settings.getSettings("oauth"), Settings.getSettings("channel"));
-						}).start();
 					}
 					else if (event.equalsIgnoreCase("connect_failed") || (event.equalsIgnoreCase("error"))) {
 						failed = true;

@@ -408,6 +408,9 @@ public class APIs {
 				System.out.println(twitch.auth().getAuthenticationError());
 
 			}
+			if(!GDBoardBot.initialConnect){
+				GDBoardBot.initialConnect = true;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

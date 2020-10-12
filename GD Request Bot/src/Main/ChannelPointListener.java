@@ -19,6 +19,7 @@ import com.cavariux.twitchirc.Json.JsonObject;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
 import org.java_websocket.drafts.Draft_6455;
+import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.java_websocket.handshake.ServerHandshake;
 
 public class ChannelPointListener extends WebSocketClient {
@@ -200,9 +201,14 @@ public class ChannelPointListener extends WebSocketClient {
 	}
 
 	public void disconnectBot(){
-		send("{\n" +
-				"  \"type\": \"UNLISTEN\"\n" +
-				"}");
+		try {
+			send("{\n" +
+					"  \"type\": \"UNLISTEN\"\n" +
+					"}");
+		}
+		catch (WebsocketNotConnectedException e){
+
+		}
 	}
 	public void reconnectBot(){
 		send("{\n" +

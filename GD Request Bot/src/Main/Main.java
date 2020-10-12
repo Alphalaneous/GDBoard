@@ -163,18 +163,19 @@ public class Main {
 			} else {
 				programStarting = false;
 			}
+			Settings.loadSettings(true);
+			Variables.loadVars();
+			GDBoardBot.start();
 
+			/** Wait for GDBoard to connect before proceeding */
+			while (!GDBoardBot.initialConnect) {
+				Thread.sleep(100);
+			}
 			while (true) {
+				System.out.println("test");
 				if (!programStarting) {
 
-					Settings.loadSettings(true);
-					Variables.loadVars();
-					GDBoardBot.start();
 
-					/** Wait for GDBoard to connect before proceeding */
-					while (!GDBoardBot.initialConnect) {
-						Thread.sleep(100);
-					}
 
 					/** If there is no monitor setting, default to 0 */
 					if (!Settings.hasMonitor) {
@@ -365,9 +366,12 @@ public class Main {
 	public static void refreshBot() {
 		try {
 			GDBoardBot.start(true);
-			channelPointListener.disconnectBot();
-			channelPointListener.reconnectBot();
-		} catch (IOException e) {
+			if(channelPointListener != null) {
+				channelPointListener.disconnectBot();
+			}
+			channelPointListener = new ChannelPointListener(new URI("wss://pubsub-edge.twitch.tv"));
+			channelPointListener.connect();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
