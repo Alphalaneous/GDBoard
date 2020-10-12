@@ -42,6 +42,8 @@ public class Requests {
 	static boolean bwomp = false;
 	private static String os = (System.getProperty("os.name")).toUpperCase();
 	private static HashMap<String, Integer> userStreamLimitMap = new HashMap<>();
+	public static HashMap<Long, String> globallyBlockedIDs = new HashMap<>();
+
 	public static String[] gdCommands = {"!gd", "!kill", "!block", "!blockuser", "!unblock", "!unblockuser", "!clear", "!info", "!move", "!next", "!position", "!queue", "!remove", "!request", "!song", "!stop", "!toggle", "!top", "!wronglevel"};
 
 	public static void forceAdd(String name, String author, long levelID, String difficulty, boolean epic, boolean featured, int stars, String requester, int gameVersion, int coins, String description, int likes, int downloads, String length, int levelVersion, int songID, String songName, String songAuthor, int objects, long original, boolean vulgar, boolean image, int password, String upload, String update, boolean verifiedCoins) {
@@ -187,7 +189,10 @@ public class Requests {
 					}
 					return;
 				}
-
+				if(globallyBlockedIDs.containsKey(ID)){
+					Main.sendMessage(Utilities.format("$GLOBALLY_BLOCKED_LEVEL_MESSAGE$", requester, globallyBlockedIDs.get(ID)));
+					return;
+				}
 				if (GeneralSettings.userLimitOption) {
 					int size = 0;
 					for (LevelData level : levels) {

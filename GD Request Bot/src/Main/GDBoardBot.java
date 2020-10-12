@@ -1,12 +1,8 @@
 package Main;
 
 import Main.SettingsPanels.AccountSettings;
-import Main.SettingsPanels.GeneralBotSettings;
 import Main.SettingsPanels.GeneralSettings;
-import com.cavariux.twitchirc.Chat.Channel;
-import com.cavariux.twitchirc.Json.JsonArray;
 import com.cavariux.twitchirc.Json.JsonObject;
-import org.apache.commons.text.StringEscapeUtils;
 import org.json.JSONObject;
 
 import java.awt.*;
@@ -58,7 +54,7 @@ class GDBoardBot {
 		}
 	}
 	private static JButtonUI defaultUI = new JButtonUI();
-	private static ChatReader chatReader;
+	private static ChatListener chatReader2;
 	public static ChannelPointListener channelPointListener;
 	public static boolean firstOpen = true;
 	static void start() throws IOException {
@@ -127,7 +123,7 @@ class GDBoardBot {
 					break;
 				}
 				String event = "";
-				System.out.println(inputLine);
+				//System.out.println(inputLine);
 
 				try {
 					JsonObject object = JsonObject.readFrom(inputLine);
@@ -147,19 +143,16 @@ class GDBoardBot {
 						 * such as custom commands that don't use the normal prefix
 						 */
 						new Thread(() -> {
-							if (chatReader != null && chatReader.isRunning()) {
-								chatReader.stop();
+							if (chatReader2 != null) {
+								chatReader2.disconnect();
 							}
-							chatReader = new ChatReader();
-							chatReader.connect();
-							chatReader.joinChannel(Settings.getSettings("channel"));
-
-							chatReader.start();
+							chatReader2 = new ChatListener(Settings.getSettings("channel"));
+							chatReader2.connect(Settings.getSettings("oauth"), Settings.getSettings("channel"));
 						}).start();
 					}
 					else if (event.equalsIgnoreCase("connect_failed") || (event.equalsIgnoreCase("error"))) {
 						failed = true;
-					} if ((event.equalsIgnoreCase("command") || event.equalsIgnoreCase("level_request")) && Main.allowRequests) {
+					} /*if ((event.equalsIgnoreCase("command") || event.equalsIgnoreCase("level_request")) && Main.allowRequests) {
 						String sender = object.get("sender").toString().replaceAll("\"", "");
 						String message = StringEscapeUtils.unescapeJava(object.get("message").toString());
 
@@ -222,8 +215,12 @@ class GDBoardBot {
 								e.printStackTrace();
 							}
 						}
-					}
+					}*/
 					if(event.equalsIgnoreCase("blocked_ids_updated") && GeneralSettings.gdModeOption){
+						String IDs[] = object.get("ids").toString().replace("\"", "").replace("{", "").replace("}", "").replace("\\", "").split(",");
+						for(String ID : IDs) {
+							Requests.globallyBlockedIDs.put(Long.parseLong(ID.split(":", 2)[0]), ID.split(":", 2)[1]);
+						}
 					}
 				}
 				catch (Exception e){
@@ -268,8 +265,7 @@ class GDBoardBot {
 	}
 
 	static void sendMainMessage(String message) {
-		Channel channel = Channel.getChannel(Settings.getSettings("channel"), chatReader);
-		chatReader.sendMessage(message, channel);
+		chatReader2.sendMessage(message);
 	}
 
 }

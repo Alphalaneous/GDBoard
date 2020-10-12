@@ -323,7 +323,7 @@ public class Main {
 			LevelsWindow.setOneSelect();
 			APIs.getViewers();
 			CommentsWindow.loadComments(0, false);
-
+			Board.signal();
 			sendMessages = true;
 			allowRequests = true;
 			refreshImages = true;
@@ -344,7 +344,7 @@ public class Main {
 
 
 			programLoaded = true;
-			new Thread(() ->{
+			/*new Thread(() ->{
 				Scanner scanner = new Scanner(System.in);
 				for(CheckboxButton button : CheckboxButton.buttons) {
 					System.out.println(button.aClass.getName() + " : " + Language.getString(button.label.replace("$", "")));
@@ -353,7 +353,7 @@ public class Main {
 					String response = scanner.nextLine();
 					System.out.println(response);
 				}
-			}).start();
+			}).start();*/
 		} catch (Exception e) {
 			e.printStackTrace();
 			String option = DialogBox.showDialogBox("Error!", "<html>" + e.toString() + ": " + e.getStackTrace()[0], "Please report to Alphalaneous#9687 on Discord.", new String[]{"Close"});

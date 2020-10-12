@@ -21,5 +21,6 @@
     <orderEntry type="library" name="swingx-1.6.1" level="project" />
     <orderEntry type="library" name="javafx-swt" level="application" />
     <orderEntry type="library" name="javafx.swing" level="project" />
+    <orderEntry type="library" name="EasyTwitchIRC" level="project" />
   </component>
 </module>
