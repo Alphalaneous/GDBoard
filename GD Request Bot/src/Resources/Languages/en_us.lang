@@ -302,6 +302,7 @@ ALWAYS_ON_TOP = Always On Top
 
 //Windowed Interface
 
+DELETE = Delete Message
 BAN = Ban User
 TIMEOUT = Timeout (10min)
 PURGE = Purge (1s)

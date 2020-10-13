@@ -36,6 +36,8 @@ public class Main {
 	static boolean sendMessages = false;
 	static boolean refreshImages = false;
 	private static boolean finishedLoading = false;
+	private static ChatListener chatReader2;
+
 
 	private static ChannelPointListener channelPointListener;
 
@@ -165,7 +167,32 @@ public class Main {
 			}
 			Settings.loadSettings(true);
 			Variables.loadVars();
+			new Thread(() -> {
+				while(true) {
+					try {
+						if(chatReader2 != null){
+							try {
+								chatReader2.disconnect();
+							}
+							catch (WebsocketNotConnectedException e){
+							}
+						}
+						chatReader2 = new ChatListener(Settings.getSettings("channel"));
+						chatReader2.connect(Settings.getSettings("oauth"), Settings.getSettings("channel"));
+						while(!chatReader2.isClosed()){
+							Thread.sleep(100);
+						}
+					} catch (Exception e) {
+					}
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}).start();
 			GDBoardBot.start();
+
 
 			/** Wait for GDBoard to connect before proceeding */
 			while (!GDBoardBot.initialConnect) {

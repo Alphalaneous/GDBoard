@@ -27,26 +27,24 @@ public class ChatListener extends ChatBot {
 
 	@Override
 	public void onMessage(ChatMessage chatMessage) {
-		Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(chatMessage.getMessage());
-		if(!String.valueOf(chatMessage.getSender()).equalsIgnoreCase("gdboard")) {
-			if(GeneralBotSettings.multiOption){
+		if(!chatMessage.getSender().equalsIgnoreCase("gdboard")) {
+			if (GeneralBotSettings.multiOption) {
 				new Thread(() -> {
 					try {
 						while (ServerChatBot.processing) {
 							Thread.sleep(50);
 						}
-						ServerChatBot.onMessage(chatMessage.getSender(), chatMessage.getMessage(), chatMessage.isMod(), chatMessage.isSub(), chatMessage.getCheerCount());
+						ServerChatBot.onMessage(chatMessage.getSender(), chatMessage.getMessage(), chatMessage.isMod(), chatMessage.isSub(), chatMessage.getCheerCount(), chatMessage.getTag("id"));
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}).start();
-			}
-			else{
+			} else {
 				try {
 					while (ServerChatBot.processing) {
 						Thread.sleep(50);
 					}
-					ServerChatBot.onMessage(chatMessage.getSender(), chatMessage.getMessage(), chatMessage.isMod(), chatMessage.isSub(), chatMessage.getCheerCount());
+					ServerChatBot.onMessage(chatMessage.getSender(), chatMessage.getMessage(), chatMessage.isMod(), chatMessage.isSub(), chatMessage.getCheerCount(), chatMessage.getTag("id"));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

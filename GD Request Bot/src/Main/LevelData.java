@@ -11,6 +11,10 @@ public class LevelData {
 		return message;
 	}
 
+	public String getMessageID(){
+		return messageID;
+	}
+
 	public int getPassword() {
 		return password;
 	}
@@ -160,6 +164,7 @@ public class LevelData {
 	private StringBuilder requester;
 	private int password;
 	private String message;
+	private String messageID;
 	private StringBuilder author;
 	private StringBuilder name;
 	private StringBuilder difficulty;
@@ -204,6 +209,10 @@ public class LevelData {
 
 	public void setMessage(String message){
 		this.message = message;
+	}
+
+	public void setMessageID(String messageID){
+		this.messageID = messageID;
 	}
 
 	public void setStars(int stars) {

@@ -47,6 +47,7 @@ public class Windowed {
 	private static JLabel AlphalaneousText = new JLabel("Alphalaneous");
 	private static JLabel EncodedLuaText = new JLabel("EncodedLua");
 	private static String selectedUsername;
+	private static int selectedID;
 
 	private static JPanel infoPanel = new JPanel(null);
 	private static FancyTextArea message = new FancyTextArea(false, false);
@@ -317,6 +318,14 @@ public class Windowed {
 
 		modButtons.setBackground(Defaults.TOP);
 
+		CurvedButtonAlt delete = createCurvedButton("$DELETE$");
+		delete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Main.sendMessage("/delete " + Requests.levels.get(selectedID).getMessageID());
+			}
+		});
+
 		CurvedButtonAlt timeout = createCurvedButton("$TIMEOUT$");
 		timeout.addMouseListener(new MouseAdapter() {
 			@Override
@@ -340,7 +349,7 @@ public class Windowed {
 				Main.sendMessage("/timeout " + selectedUsername + " 1");
 			}
 		});
-
+		modButtons.add(delete);
 		modButtons.add(purge);
 		modButtons.add(timeout);
 		modButtons.add(ban);
@@ -358,6 +367,7 @@ public class Windowed {
 			public void mousePressed(MouseEvent e) {
 				if (SwingUtilities.isLeftMouseButton(e)) {
 					selectedUsername = String.valueOf(Requests.levels.get(LevelsWindow.getSelectedID()).getRequester());
+					selectedID = LevelsWindow.getSelectedID();
 					username.setText(String.valueOf(Requests.levels.get(LevelsWindow.getSelectedID()).getRequester()));
 					levelName.setText(String.valueOf(Requests.levels.get(LevelsWindow.getSelectedID()).getName()));
 					levelName.setBounds(473-levelName.getPreferredSize().width,0,473, 40);
@@ -778,7 +788,7 @@ public class Windowed {
 		button.setUI(defaultUI);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setOpaque(true);
-		button.setPreferredSize(new Dimension(150, 50));
+		button.setPreferredSize(new Dimension(button.getPreferredSize().width+10, 50));
 		return button;
 	}
 

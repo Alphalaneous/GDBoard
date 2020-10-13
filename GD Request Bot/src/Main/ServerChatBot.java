@@ -41,7 +41,7 @@ public class ServerChatBot {
     }
     public static String[] gdCommands = {"!gd", "!kill", "!block", "!blockuser", "!unblock", "!unblockuser", "!clear", "!info", "!move", "!next", "!position", "!queue", "!remove", "!request", "!song", "!stop", "!toggle", "!top", "!wronglevel"};
     private static ArrayList<String> comCooldown = new ArrayList<>();
-    static void onMessage(String user, String message, boolean isMod, boolean isSub, int cheer) {
+    static void onMessage(String user, String message, boolean isMod, boolean isSub, int cheer, String ID) {
         boolean whisper = false;
         processing = true;
         boolean goThrough = true;
@@ -61,7 +61,7 @@ public class ServerChatBot {
                 }
                 if (!mention.contains(m.group(1))) {
                     if(GeneralSettings.gdModeOption) {
-                        Requests.addRequest(Long.parseLong(m.group(1).replaceFirst("^0+(?!$)", "")), user, isMod, message);
+                        Requests.addRequest(Long.parseLong(m.group(1).replaceFirst("^0+(?!$)", "")), user, isMod, message, ID);
                     }
                 }
 

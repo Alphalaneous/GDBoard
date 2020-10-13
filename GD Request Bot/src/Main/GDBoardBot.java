@@ -112,18 +112,7 @@ class GDBoardBot {
 			String inputLine = null;
 
 			while (true) {
-				new Thread(() -> {
-					try {
-						if (chatReader2 != null) {
-							chatReader2.disconnect();
-						}
-						chatReader2 = new ChatListener(Settings.getSettings("channel"));
-						chatReader2.connect(Settings.getSettings("oauth"), Settings.getSettings("channel"));
-					}
-					catch (WebsocketNotConnectedException e){
 
-					}
-				}).start();
 				while(clientSocket.isClosed() || !clientSocket.isConnected()){
 					try {
 						Thread.sleep(100);

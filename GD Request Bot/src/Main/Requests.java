@@ -135,7 +135,7 @@ public class Requests {
 	}
 
 
-	public static void addRequest(long ID, String requester, boolean isMod, String message) {
+	public static void addRequest(long ID, String requester, boolean isMod, String message, String messageID) {
 		if(ID > 999999999){
 			return;
 		}
@@ -392,6 +392,9 @@ public class Requests {
 			levelData.setAuthor(Objects.requireNonNull(level).getCreatorName());
 			levelData.setName(level.getName());
 			levelData.setMessage(message);
+			if(messageID != null) {
+				levelData.setMessageID(messageID);
+			}
 			levelData.setDifficulty(level.getDifficulty().toString());
 			levelData.setDescription(level.getDescription());
 			levelData.setLikes(level.getLikes());
@@ -1357,7 +1360,7 @@ public class Requests {
 				assert m != null;
 				if (m.matches() && arguments.length <= 2) {
 					try {
-						Requests.addRequest(Long.parseLong(m.group(1)), user, isMod, "Sent via Command");
+						Requests.addRequest(Long.parseLong(m.group(1)), user, isMod, "Sent via Command", null);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -1383,7 +1386,7 @@ public class Requests {
 									if (((GDLevel) levelPage[i]).getName().toUpperCase()
 											.startsWith(new String(level1.substring(0, level1.length() - 1)))) {
 										Requests.addRequest(((GDLevel) levelPage[i]).getId(),
-												user, isMod, "Sent via Command");
+												user, isMod, "Sent via Command", null);
 										break outerLoop;
 									}
 								}
@@ -1400,7 +1403,7 @@ public class Requests {
 						try {
 							Requests.addRequest(Objects.requireNonNull(client.searchLevels(message.toString(), LevelSearchFilters.create(), 0)
 											.block().asList().get(0).getId()),
-									user, isMod, "Sent via Command");
+									user, isMod, "Sent via Command", null);
 						} catch (MissingAccessException e) {
 							response = Utilities.format("$LEVEL_DOESNT_EXIST_MESSAGE$", user);
 						} catch (Exception e) {
