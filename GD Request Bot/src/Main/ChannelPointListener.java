@@ -115,7 +115,7 @@ public class ChannelPointListener extends WebSocketClient {
 				String redemptionA = object.get("data").asObject().get("message").toString().replaceAll("\\\\\"", "\"");
 				String redemption = JsonObject.readFrom(redemptionA.substring(1, redemptionA.length()-1)).get("data").asObject().get("redemption").asObject().get("reward").asObject().get("title").toString().replaceAll("\"", "");
 				String username = JsonObject.readFrom(redemptionA.substring(1, redemptionA.length()-1)).get("data").asObject().get("redemption").asObject().get("user").asObject().get("login").toString().replaceAll("\"", "");
-
+				System.out.println(username);
 				boolean isUserinput = JsonObject.readFrom(redemptionA.substring(1, redemptionA.length()-1)).get("data").asObject().get("redemption").asObject().get("reward").asObject().get("is_user_input_required").asBoolean();
 				String userInput = "";
 				if(isUserinput) {

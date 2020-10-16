@@ -55,7 +55,6 @@ class GDBoardBot {
 		}
 	}
 	private static JButtonUI defaultUI = new JButtonUI();
-	private static ChatListener chatReader2;
 	public static ChannelPointListener channelPointListener;
 	public static boolean firstOpen = true;
 	static void start() throws IOException {
@@ -266,10 +265,6 @@ class GDBoardBot {
 	}
 	static void sendMessage(String message){
 		out.println(message);
-	}
-
-	static void sendMainMessage(String message) {
-		chatReader2.sendMessage(message);
 	}
 
 }

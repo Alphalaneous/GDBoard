@@ -27,6 +27,7 @@ public class ChatListener extends ChatBot {
 
 	@Override
 	public void onMessage(ChatMessage chatMessage) {
+		//TwitchChat.addMessage(chatMessage);
 		if(!chatMessage.getSender().equalsIgnoreCase("gdboard")) {
 			if (GeneralBotSettings.multiOption) {
 				new Thread(() -> {

@@ -42,7 +42,7 @@ public class Main {
 	private static ChannelPointListener channelPointListener;
 
 	public static void main(String[] args) throws IOException {
-
+		//TwitchChat.createPanel();
 		/**
 		 * Saves defaults of UI Elements before switching to Nimbus
 		 * Sets to Nimbus, then sets defaults back
@@ -405,7 +405,7 @@ public class Main {
 	}
 
 	static void sendMainMessage(String message) {
-		GDBoardBot.sendMainMessage(message);
+		chatReader2.sendMessage(message);
 	}
 
 	static boolean onCool = false;
