@@ -32,6 +32,11 @@ public class LoadGD {
 	public static boolean reload = true;
 
 	public static void load(boolean load) throws IOException {
+		boolean doStuff = true;
+		if(Settings.getSettings("loadGD").equalsIgnoreCase("false")){
+			doStuff = false;
+		}
+		if(doStuff) {
 		if(!reload){
 			return;
 		}
@@ -53,11 +58,6 @@ public class LoadGD {
 		}
 		}).start();
 		boolean doesFail = false;
-		boolean doStuff = true;
-		if(Settings.getSettings("loadGD").equalsIgnoreCase("false")){
-			doStuff = false;
-		}
-		if(doStuff) {
 			if ((!Settings.getSettings("loadGD").equalsIgnoreCase("false") && !Settings.getSettings("GDLoaded").equalsIgnoreCase("true")) || load) {
 				Path gameFile = Paths.get(System.getenv("LOCALAPPDATA") + "\\GeometryDash\\CCGameManager.dat");
 				String[] gameText = new String[0];
