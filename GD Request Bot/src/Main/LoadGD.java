@@ -38,7 +38,7 @@ public class LoadGD {
 		reload = false;
 		new Thread(() -> {
 			try {
-				Thread.sleep(60000);
+				Thread.sleep(30000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -100,7 +100,7 @@ public class LoadGD {
 			}
 			gameText = null;
 		}
-		else if(!Settings.getSettings("GDLoaded").equalsIgnoreCase("false")){
+		else if(!Settings.getSettings("GDLoaded").equalsIgnoreCase("false") && !Settings.getSettings("loadGD").equalsIgnoreCase("false")){
 			username = Settings.getSettings("GDUsername");
 			password = xor(new String(Base64.getDecoder().decode(Settings.getSettings("p").getBytes())), 15);
 			try {
