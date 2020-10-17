@@ -59,6 +59,7 @@ public class LoadGD {
 			try {
 				sc = new Scanner(gameFile.toFile());
 			} catch (FileNotFoundException e) {
+				isAuth = false;
 				e.printStackTrace();
 			}
 			assert sc != null;
@@ -66,6 +67,7 @@ public class LoadGD {
 				gameText = prettyFormat(decompress(Base64.getDecoder().decode(xor(sc.nextLine(), 11).replace("-", "+").replace("_", "/").replace("\0", "")))).split("\n");
 				sc.close();
 			} catch (Exception e) {
+				isAuth = false;
 				e.printStackTrace();
 			}
 			for (int i = 0; i < gameText.length; i++) {
@@ -82,6 +84,7 @@ public class LoadGD {
 					}
 				}
 				else{
+					isAuth = false;
 					break;
 				}
 			}
@@ -108,6 +111,9 @@ public class LoadGD {
 				e.printStackTrace();
 				isAuth = false;
 			}
+		}
+		else{
+			isAuth = false;
 		}
 		loaded = true;
 		reload = true;
