@@ -193,6 +193,9 @@ GEOMETRY_DASH = Geometry Dash: %s
 TWITCH = Twitch: %s
 REFRESH_TWITCH = Refresh Twitch
 REFRESH_GD = Refresh GD
+DISCLAIMER = Your log in information is sent only to Geometry Dash and saved locally.
+USERNAME = Username:
+PASSWORD = Password:
 
 //Channel Point Settings
 

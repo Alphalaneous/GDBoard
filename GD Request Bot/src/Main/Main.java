@@ -103,26 +103,8 @@ public class Main {
 				}
 			}).start();
 
-			/** Loads Geometry Dash data, if it fails to load and times out, continue anyways */
-			new Thread(() -> {
-				try {
-					LoadGD.load(false);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+			LoadGD.load(false);
 
-			}).start();
-
-			while (!LoadGD.loaded) {
-				if (LoadGD.timeout) {
-					break;
-				}
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
 			Assets.loadAssets();
 			addMissingFiles();
 			/** Starts thread that always checks for changes such as time, resolution, and color scheme */

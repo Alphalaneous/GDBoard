@@ -33,7 +33,7 @@ public class Defaults {
 		}
 	}
 
-	static Rectangle screenSize = GraphicsEnvironment
+	public static Rectangle screenSize = GraphicsEnvironment
 			.getLocalGraphicsEnvironment()
 			.getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();
 	private static Rectangle prevScreenSize = GraphicsEnvironment
@@ -45,6 +45,7 @@ public class Defaults {
 	public static int relativeHeight = 1;
 
 	public static String saveDirectory;
+	public static String gdDirectory;
 	public static Color ACCENT = new Color(0, 108, 230);
 	public static Color MAIN;
 	public static Color MAIN_CLEAR;
