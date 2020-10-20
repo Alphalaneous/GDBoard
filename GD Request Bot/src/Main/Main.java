@@ -387,6 +387,7 @@ public class Main {
 	}
 
 	static void sendMainMessage(String message) {
+
 		chatReader2.sendMessage(message);
 	}
 

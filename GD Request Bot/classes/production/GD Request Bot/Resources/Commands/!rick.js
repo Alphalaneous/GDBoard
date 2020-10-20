@@ -1,5 +1,5 @@
 function command(){
-    if(user === 'alphalaneous'){
+    if(user === 'Alphalaneous'){
 	    Board.rick();
 	}
 }
