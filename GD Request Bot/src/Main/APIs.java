@@ -169,12 +169,14 @@ public class APIs {
 					}
 
 					for (String type : types) {
-						JsonArray viewerList = viewers.get("chatters").asObject().get(type).asArray();
-						for (int i = 0; i < viewerList.size(); i++) {
-							String viewer = viewerList.get(i).asString().replaceAll("\"", "");
-							for (int k = 0; k < Requests.levels.size(); k++) {
-								if (LevelsWindow.getButton(k).getRequester().equalsIgnoreCase(viewer)) {
-									LevelsWindow.getButton(k).setViewership(true);
+						if(viewers.get("chatters") != null) {
+							JsonArray viewerList = viewers.get("chatters").asObject().get(type).asArray();
+							for (int i = 0; i < viewerList.size(); i++) {
+								String viewer = viewerList.get(i).asString().replaceAll("\"", "");
+								for (int k = 0; k < Requests.levels.size(); k++) {
+									if (LevelsWindow.getButton(k).getRequester().equalsIgnoreCase(viewer)) {
+										LevelsWindow.getButton(k).setViewership(true);
+									}
 								}
 							}
 						}
@@ -382,6 +384,7 @@ public class APIs {
 	public static void setOauthNR() {
 		Thread thread = new Thread(() -> {
 			setOauthPrivate(false);
+
 		});
 		thread.start();
 	}

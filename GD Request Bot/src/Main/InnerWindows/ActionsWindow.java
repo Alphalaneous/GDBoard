@@ -12,8 +12,8 @@ public class ActionsWindow {
 
 	private static int height = 60;
 	private static int width = 300;
-	private static JPanel window = new InnerWindow("Actions", Settings.getActionsWLoc().x, Settings.getActionsWLoc().y, width, height,
-			"\uE7C9", false).createPanel();
+	private static JPanel window = new InnerWindow("Actions",  width, height,
+			"\uE7C9").createPanel();
 	private static JPanel mainPanel = new JPanel();
 	private static JPanel panel = new JPanel();
 	private static JButtonUI defaultUI = new JButtonUI();
@@ -102,7 +102,6 @@ public class ActionsWindow {
 			//endregion
 			mainPanel.add(panel);
 			window.add(mainPanel);
-			((InnerWindow) window).refreshListener();
 			Overlay.addToFrame(window);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -140,11 +139,6 @@ public class ActionsWindow {
 	}
 	//endregion
 
-	//region Set Pin
-	public static void setPin(boolean pin) {
-		((InnerWindow) window).setPin(pin);
-	}
-	//endregion
 
 	//region RefreshUI
 	public static void refreshUI() {
@@ -165,22 +159,9 @@ public class ActionsWindow {
 	}
 	//endregion
 
-	//region Toggle Visible
-	public static void toggleVisible() {
-		((InnerWindow) window).toggle();
-	}
+
 	//endregion
 
-	//region SetInvisible
-	public static void setInvisible() {
-		((InnerWindow) window).setInvisible();
-	}
-	//endregion
-
-	//region SetVisible
-	public static void setVisible() {
-		((InnerWindow) window).setVisible();
-	}
 	//endregion
 
 	//region SetLocation

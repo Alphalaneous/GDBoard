@@ -54,19 +54,21 @@ public class Main {
 		 * include them in the bundled JRE
 		 */
 		createConfFiles();
+		new Thread(() -> {
+			String choice = DialogBox.showDialogBox("$LOADING_GDBOARD$", "$LOADING_GDBOARD_INFO$", "", new String[]{"$CANCEL$"}, true, new Object[]{});
+			if (choice.equalsIgnoreCase("CANCEL")) {
+				close();
+			}
+		}).start();
 		/**
 		 * Sets Windowed to true as it is default and previously wasn't, easiest fix for all
 		 * checks of windowed mode
 		 */
-		if (Settings.getSettings("windowed").equalsIgnoreCase("")) {
+		if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			Settings.writeSettings("windowed", "true");
 		}
 
 		Defaults.programLoaded.set(false);
-		GraphicsEnvironment genv = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		genv.registerFont(Defaults.SYMBOLS);
-		genv.registerFont(Defaults.MAIN_FONT);
-		genv.registerFont(Defaults.SEGOE);
 		try {
 
 			/** Disables logging used with JDash */
@@ -81,12 +83,7 @@ public class Main {
 			 *
 			 * Shows loading screen
 			 */
-			new Thread(() -> {
-				String choice = DialogBox.showDialogBox("$LOADING_GDBOARD$", "$LOADING_GDBOARD_INFO$", "", new String[]{"$CANCEL$"}, true, new Object[]{});
-				if (choice.equalsIgnoreCase("CANCEL")) {
-					close();
-				}
-			}).start();
+
 
 			/** Sets loading bar progress on loading screen */
 			new Thread(() -> {
@@ -114,12 +111,12 @@ public class Main {
 			 * Wait until loaded
 			 * I load colors separately due to dynamic color changing with windows
 			 */
-			while (!Defaults.programLoaded.get()) {
+			/*while (!Defaults.programLoaded.get()) {
 				Thread.sleep(10);
 			}
 			while (!Defaults.colorsLoaded.get()) {
 				Thread.sleep(10);
-			}
+			}*/
 			finishedLoading = true;
 
 			/** Finishes Progress bar */
@@ -144,8 +141,13 @@ public class Main {
 				Onboarding.loadSettings();
 				Onboarding.refreshUI();
 				Onboarding.frame.setVisible(true);
+				Onboarding.isLoading = true;
 			} else {
 				programStarting = false;
+			}
+
+			while(Onboarding.isLoading){
+				Thread.sleep(100);
 			}
 			Settings.loadSettings(true);
 			Variables.loadVars();
@@ -195,23 +197,14 @@ public class Main {
 					 * If not windowed mode, create all panels
 					 * Uses reflection to easily loop when more are added
 					 */
-					if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
-						Overlay.createOverlay();
-						Reflections innerReflections = new Reflections("Main.InnerWindows", new SubTypesScanner(false));
-						Set<Class<?>> innerClasses =
-								innerReflections.getSubTypesOf(Object.class);
-						for (Class<?> Class : innerClasses) {
-							Method method = Class.getMethod("createPanel");
-							method.invoke(null);
-						}
-					}
+
 					/** Else create these 3 for the windowed frame */
-					else {
+
 						CommentsWindow.createPanel();
 						LevelsWindow.createPanel();
 						InfoWindow.createPanel();
 						Windowed.createPanel();
-					}
+
 
 					/** Create the settings pane; */
 					CommandEditor.createPanel();
@@ -231,22 +224,14 @@ public class Main {
 					 * Load Settings panels and Settings
 					 * Uses reflection to easily loop when more are added
 					 */
-					Reflections settingsReflections = new Reflections("Main.SettingsPanels", new SubTypesScanner(false));
-					Set<Class<?>> settingsClasses =
-							settingsReflections.getSubTypesOf(Object.class);
-					for (Class<?> Class : settingsClasses) {
-						for (Method method : Class.getMethods()) {
-							if (method.getName().equalsIgnoreCase("loadSettings")) {
-								while(true) {
-									try {
-										method.invoke(null);
-										break;
-									} catch (Exception e) {
-									}
-								}
-							}
-						}
-					}
+
+					GeneralBotSettings.loadSettings();
+					GeneralSettings.loadSettings();
+					OutputSettings.loadSettings();
+					PersonalizationSettings.loadSettings();
+					RequestSettings.loadSettings();
+					ShortcutSettings.loadSettings();
+
 
 					/**
 					 * Runs keyboard and Controller hook for global keybinds
@@ -277,14 +262,10 @@ public class Main {
 
 					Overlay.refreshUI(true);
 
-					if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+
 						Windowed.resetCommentSize();
 						Windowed.loadSettings();
 						Windowed.frame.setVisible(true);
-
-					} else {
-						Overlay.setVisible();
-					}
 
 					OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
 					break;
@@ -350,7 +331,6 @@ public class Main {
 					Main.sendMessage(" ");
 				}
 			}).start();
-			APIs.setAllViewers();
 
 
 			programLoaded = true;

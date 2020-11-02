@@ -17,7 +17,7 @@ import javax.swing.*;
 public class SongWindow {
 	private static int height = 90;
 	private static int width = 300;
-	private static JPanel window = new InnerWindow("Music - Newgrounds Audio", Settings.getSongWLoc().x, Settings.getSongWLoc().y, width, height, "\uEC4F", false).createPanel();
+	private static JPanel window = new InnerWindow("Music - Newgrounds Audio", width, height, "\uEC4F").createPanel();
 	private static JPanel panel = new JPanel();
 	private static JLabel songName = new JLabel();
 	private static JLabel songAuthorID = new JLabel();
@@ -110,7 +110,6 @@ public class SongWindow {
 		panel.add(play);
 		panel.add(stop);
 		window.add(panel);
-		((InnerWindow)window).refreshListener();
 		
 		
 		Overlay.addToFrame(window);
@@ -125,9 +124,6 @@ public class SongWindow {
 		catch (Exception e){
 			e.printStackTrace();
 		}
-	}
-	public static void setPin(boolean pin){
-		((InnerWindow) window).setPin(pin);
 	}
 	private static RoundedJButton createButton(String icon, int i, String tooltip) {
 		RoundedJButton button = new RoundedJButton(icon, tooltip);
@@ -187,13 +183,6 @@ public class SongWindow {
 			}
 	}
 
-	public static void toggleVisible() {
-		((InnerWindow) window).toggle();
-	}
-	
-	public static void setInvisible() {
-		((InnerWindow) window).setInvisible();
-	}
 
 	//region SetLocation
 	public static void setLocation(Point point){
@@ -207,8 +196,5 @@ public class SongWindow {
 	}
 	//endregion
 
-	public static void setVisible() {
-		((InnerWindow) window).setVisible();
-	}
 }
 

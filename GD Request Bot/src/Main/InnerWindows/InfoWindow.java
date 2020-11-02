@@ -20,7 +20,7 @@ public class InfoWindow {
 	private static JPanel fullPanel = new JPanel(null);
 
 	private static JTextPane description = new JTextPane();
-	private static JPanel window = new InnerWindow("Description", Settings.getInfoWLoc().x, Settings.getInfoWLoc().y, width, height, "\uE946", false).createPanel();
+	private static JPanel window = new InnerWindow("Description", width, height, "\uE946").createPanel();
 
 	public static void createPanel() {
 
@@ -52,7 +52,6 @@ public class InfoWindow {
 		fullPanel.setBounds(1,31,400,110);
 		fullPanel.add(descPanel);
 		window.add(fullPanel);
-		((InnerWindow)window).refreshListener();
 		if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			Overlay.addToFrame(window);
 		}
@@ -78,9 +77,6 @@ public class InfoWindow {
 	public static JPanel getInfoWindow(){
 		return fullPanel;
 	}
-	public static void setPin(boolean pin){
-		((InnerWindow) window).setPin(pin);
-	}
 	public static void refreshInfo() {
 		if (Requests.levels.size() == 0) {
 			description.setText("NA");
@@ -99,13 +95,6 @@ public class InfoWindow {
 	public String getIcon(){
 		return "\uE946";
 	}
-	public static void toggleVisible() {
-		((InnerWindow) window).toggle();
-	}
-	
-	public static void setInvisible() {
-		((InnerWindow) window).setInvisible();
-	}
 
 	//region SetLocation
 	public static void setLocation(Point point){
@@ -119,7 +108,4 @@ public class InfoWindow {
 	}
 	//endregion
 
-	public static void setVisible() {
-		((InnerWindow) window).setVisible();
-	}
 }

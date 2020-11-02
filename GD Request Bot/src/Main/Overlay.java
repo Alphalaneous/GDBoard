@@ -93,11 +93,7 @@ public class Overlay {
 	}
 
 	public static void refreshUI(boolean color) {
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+
 		if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			frame.getContentPane().setBackground(Defaults.SUB_MAIN);
 		} else {
@@ -115,6 +111,7 @@ public class Overlay {
 			MainBar.refreshUI(color);
 			//Randomizer.refreshUI();
 		}
+
 		for(FancyTooltip toolTip : FancyTooltip.tooltips){
 			toolTip.refresh();
 		}
@@ -157,12 +154,6 @@ public class Overlay {
 	static void setWindowsInvisible() {
 		isVisible = false;
 		frame.setBackground(new Color(0, 0, 0, 0));
-		CommentsWindow.setInvisible();
-		ActionsWindow.setInvisible();
-		InfoWindow.setInvisible();
-		LevelsWindow.setInvisible();
-		SongWindow.setInvisible();
-		SettingsWindow.setInvisible();
 		MainBar.setInvisible();
 		//Randomizer.setInvisible();
 	}
@@ -171,12 +162,6 @@ public class Overlay {
 		isVisible = true;
 		frame.setBackground(new Color(0, 0, 0, 100));
 		revalidate();
-		CommentsWindow.setVisible();
-		ActionsWindow.setVisible();
-		InfoWindow.setVisible();
-		LevelsWindow.setVisible();
-		SongWindow.setVisible();
-		SettingsWindow.setVisible();
 		MainBar.setVisible();
 
 		//Randomizer.setVisible();

@@ -100,9 +100,7 @@ public class Defaults {
 
 	//region Dark Mode
 	public static void setDark() {
-		Date date = new Date();
-		SimpleDateFormat ft = new SimpleDateFormat("MM.dd");
-		if (!ft.format(date).equalsIgnoreCase("04.01")) {
+
 			MAIN = new Color(31, 31, 31);
 			MAIN_CLEAR = new Color(31, 31, 31, 150);
 
@@ -119,23 +117,6 @@ public class Defaults {
 			TOP = Color.BLACK;
 			FOREGROUND = Color.WHITE;
 			FOREGROUND2 = new Color(140, 140, 140);
-		} else {
-			MAIN = new Color(137, 0, 96);
-			TEXT_BOX = new Color(203, 0, 154);
-			BUTTON = new Color(107, 0, 80);
-			HOVER = new Color(88, 0, 64);
-			SUB_MAIN = new Color(111, 0, 80);
-			SELECT = new Color(163, 34, 121);
-			BUTTON_HOVER = new Color(203, 0, 154);
-			TOP = new Color(70, 14, 52);
-			FOREGROUND = Color.WHITE;
-			FOREGROUND2 = new Color(159, 0, 114);
-		}
-		try {
-			Thread.sleep(50);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		colorsLoaded.set(true);
 		Overlay.refreshUI(true);
 	}
@@ -143,9 +124,7 @@ public class Defaults {
 
 	//region Light Mode
 	public static void setLight() {
-		Date date = new Date();
-		SimpleDateFormat ft = new SimpleDateFormat("MM.dd");
-		if (!ft.format(date).equalsIgnoreCase("04.01")) {
+
 			MAIN = new Color(230, 230, 230);
 			MAIN_CLEAR = new Color(230, 230, 230, 150);
 			TEXT_BOX = new Color(205, 205, 205);
@@ -161,24 +140,7 @@ public class Defaults {
 			TOP = Color.WHITE;
 			FOREGROUND = Color.BLACK;
 			FOREGROUND2 = new Color(100, 100, 100);
-		} else {
-			MAIN = new Color(137, 0, 96);
-			TEXT_BOX = new Color(203, 0, 154);
-			BUTTON = new Color(107, 0, 80);
-			HOVER = new Color(88, 0, 64);
-			SUB_MAIN = new Color(111, 0, 80);
-			SELECT = new Color(163, 34, 121);
-			BUTTON_HOVER = new Color(203, 0, 154);
-			TOP = new Color(70, 14, 52);
-			FOREGROUND = Color.WHITE;
-			FOREGROUND2 = new Color(159, 0, 114);
-			Overlay.refreshUI(true);
-		}
-		try {
-			Thread.sleep(50);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+
 		colorsLoaded.set(true);
 		Overlay.refreshUI(true);
 	}

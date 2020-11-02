@@ -18,8 +18,8 @@ import static Main.Defaults.defaultUI;
 public class SettingsWindow {
 	private static int width = 636;
 	private static int height = 662;
-	public static JPanel window = new InnerWindow("Settings", 0, 0, width-2, height,
-			"\uE713", true).createPanel();
+	public static JPanel window = new InnerWindow("Settings", width-2, height,
+			"\uE713").createPanel();
 
 	private static JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
 	private static JPanel content = new JPanel();
@@ -55,13 +55,7 @@ public class SettingsWindow {
 	public static boolean run = true;
 	public static void createPanel() {
 		frame = new JFrame();
-		if(!Settings.getSettings("windowed").equalsIgnoreCase("true")){
-			window = new InnerWindow("Settings", 0, 0, width-16, height-40,
-					"\uE713", false).createPanel();
-		}
-		else{
-			frame.setSize(width, height);
-		}
+		frame.setSize(width, height);
 		URL iconURL = Windowed.class.getResource("/Resources/Icons/windowIcon.png");
 		ImageIcon icon = new ImageIcon(iconURL);
 		Image newIcon = icon.getImage().getScaledInstance(120, 120,  Image.SCALE_SMOOTH);
@@ -73,26 +67,21 @@ public class SettingsWindow {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				SettingsWindow.toggleVisible();
 				mainPanel.setVisible(true);
 				tempPanel.setVisible(false);
+				frame.setVisible(false);
 			}
 		});
-		if(Settings.getSettings("settings").equalsIgnoreCase("") && Settings.getSettings("windowed").equalsIgnoreCase("true")){
+		if(Settings.getSettings("settings").equalsIgnoreCase("")){
 			frame.setLocation((int)Defaults.screenSize.getWidth()/2 - width/2, 200);
 
 		}
 		frame.setLayout(null);
-		if(Settings.getSettings("windowed").equalsIgnoreCase("false")) {
-			blankSpace.setBounds(1, 31, 208, 60);
-			buttons.setBounds(1, 91, 208, height-20);
-			content.setBounds(209, 31, 412, height);
-		}
-		else{
+
 			blankSpace.setBounds(0, 0, 208, 60);
 			buttons.setBounds(0, 60, 208, height-20);
 			content.setBounds(208, 0, 412, height);
-		}
+
 		blankSpace.setBackground(Defaults.MAIN);
 
 
@@ -305,11 +294,8 @@ public class SettingsWindow {
 			tempPanel.add(buttons);
 			tempPanel.add(content);
 			window.add(tempPanel);
-			((InnerWindow) window).setPinVisible();
-			((InnerWindow) window).refreshListener();
 		}
 		frame.setVisible(false);
-		toggleVisible();
 		if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
 			frame.add(mainPanel);
 
@@ -398,18 +384,6 @@ public class SettingsWindow {
 		}
 	}
 
-	static void toggleVisible() {
-		((InnerWindow) window).toggle();
-	}
-
-	static void setInvisible() {
-		((InnerWindow) window).setInvisible();
-	}
-
-	static void setVisible() {
-		((InnerWindow) window).setVisible();
-
-	}
 
 	private static int clean = 0;
 

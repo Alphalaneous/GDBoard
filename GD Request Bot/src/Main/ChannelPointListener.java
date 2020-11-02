@@ -63,6 +63,7 @@ public class ChannelPointListener extends WebSocketClient {
 						"    \"auth_token\": \"" + Settings.getSettings("oauth") + "\"\n" +
 						"  }\n" +
 						"}");
+				System.out.println("Connected to Channel Points");
 				break;
 
 			}

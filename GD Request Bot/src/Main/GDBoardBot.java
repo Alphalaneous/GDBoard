@@ -42,6 +42,11 @@ class GDBoardBot {
 				if (Main.programLoaded) {
 					wait = 2000;
 				}
+				try {
+					start();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -148,6 +153,7 @@ class GDBoardBot {
 						AccountSettings.refreshTwitch(channel);
 						initialConnect = true;
 						isConnect.set(true);
+						APIs.setAllViewers();
 						/**
 						 * Reads chat as streamer, reduces load on servers for some actions
 						 * such as custom commands that don't use the normal prefix

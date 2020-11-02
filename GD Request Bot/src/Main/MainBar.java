@@ -107,13 +107,6 @@ class MainBar {
 			}
 		});
 
-		toggleSettings.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				super.mousePressed(e);
-				SettingsWindow.toggleVisible();
-			}
-		});
 
 		close.addMouseListener(new MouseAdapter() {
 			@Override

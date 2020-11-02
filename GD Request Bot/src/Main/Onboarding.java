@@ -18,8 +18,9 @@ import java.net.URL;
 public class Onboarding {
 	static int width = 465;
 	static int height = 512;
-	private static JPanel window = new InnerWindow("Startup", 0, 0, width - 2, height,
-			"\uF137", true).createPanel();
+	static boolean isLoading = false;
+	private static JPanel window = new InnerWindow("Startup", width - 2, height,
+			"\uF137").createPanel();
 	private static JPanel content = new JPanel(null);
 	private static JButtonUI defaultUI = new JButtonUI();
 	public static int openKeybind = 36;
@@ -32,16 +33,13 @@ public class Onboarding {
 		frame.setIconImage(newIcon);
 		frame.setTitle("GDBoard Startup");
 		Onboarding.setLocation(new Point(Defaults.screenSize.width / 2 - width / 2, Defaults.screenSize.height / 2 - height / 2));
-		frame.setUndecorated(true);
-		frame.setSize(width+5, 700 + 32);
-		frame.setPreferredSize(new Dimension(width+5, 700 + 32));
+		frame.setSize(width+5, height + 38);
+		frame.setPreferredSize(new Dimension(width+5, height + 38));
 		frame.setLayout(null);
 		frame.setResizable(false);
-		frame.setBackground(new Color(255, 255, 255, 0));
-		frame.getContentPane().setSize(width, 700 + 32);
 		frame.pack();
 
-		content.setBounds(1, 31, width - 2, height);
+		content.setBounds(0, 0, width - 2, height);
 		content.setBackground(Defaults.SUB_MAIN);
 		content.setLayout(null);
 
@@ -90,7 +88,6 @@ public class Onboarding {
 		moveOn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Onboarding.setInvisible();
 				ShortcutSettings.loadKeybind("Open", openKeybind);
 				try {
 					Settings.writeSettings("openKeybind", String.valueOf(openKeybind));
@@ -130,7 +127,6 @@ public class Onboarding {
 								e1.printStackTrace();
 							}
 						}
-						Onboarding.setInvisible();
 						ShortcutSettings.loadKeybind("Open", openKeybind);
 						try {
 							Settings.writeSettings("openKeybind", String.valueOf(openKeybind));
@@ -139,6 +135,8 @@ public class Onboarding {
 						}
 						try {
 							Settings.writeSettings("onboarding", "false");
+							Onboarding.isLoading = false;
+							frame.setVisible(false);
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
@@ -157,8 +155,6 @@ public class Onboarding {
 		content.add(moveOn);
 		content.add(infoText);
 		window.add(content);
-		((InnerWindow) window).setPinVisible();
-		((InnerWindow) window).refreshListener();
 		frame.add(window);
 	}
 
@@ -170,19 +166,7 @@ public class Onboarding {
 		content.setBackground(Defaults.SUB_MAIN);
 	}
 
-	static void toggleVisible() {
 
-		((InnerWindow) window).toggle();
-	}
-
-	private static void setInvisible() {
-		((InnerWindow) window).setInvisible();
-	}
-
-	static void setVisible() {
-		((InnerWindow) window).setVisible();
-
-	}
 
 	@SuppressWarnings("unused")
 	private static JButton createButton(String icon, String tooltip) {

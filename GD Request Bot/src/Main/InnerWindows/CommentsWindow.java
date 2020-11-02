@@ -42,8 +42,8 @@ public class CommentsWindow {
 	private static JButtonUI buttonUI = new JButtonUI();
 	private static int height = 350;
 	private static int width = 300;
-	private static JPanel window = new InnerWindow("Comments", Settings.getCommentWLoc().x, Settings.getCommentWLoc().y, width, height,
-			"\uEBDB", false).createPanel();
+	private static JPanel window = new InnerWindow("Comments", width, height,
+			"\uEBDB").createPanel();
 	private static JButtonUI newUI = new JButtonUI();
 	private static JScrollPane scrollPane = new JScrollPane(panel);
 	private static JPanel buttons = new JPanel();
@@ -56,7 +56,7 @@ public class CommentsWindow {
 		//region Panel attributes
 		panel.setLayout(null);
 		panel.setBounds(0, 0, width, 0);
-		mainPanel.setBounds(1, 1, width, height+30);
+		mainPanel.setBounds(1, 1, width, height + 30);
 		panel.setBackground(Defaults.SUB_MAIN);
 		panel.setPreferredSize(new Dimension(width, 0));
 		//endregion
@@ -80,7 +80,7 @@ public class CommentsWindow {
 
 		//region Buttons Panel attributes
 		buttons.setLayout(null);
-		buttons.setBounds(0, mainPanel.getHeight()-40, width, 40);
+		buttons.setBounds(0, mainPanel.getHeight() - 40, width, 40);
 		buttons.setBackground(Defaults.TOP);
 		mainPanel.add(buttons);
 		//endregion
@@ -94,7 +94,7 @@ public class CommentsWindow {
 				((InnerWindow) window).moveToFront();
 				super.mousePressed(e);
 				if (page != 0) {
-					page = page-2;
+					page = page - 2;
 					try {
 						loadComments(page, topC);
 					} catch (Exception ignored) {
@@ -112,7 +112,7 @@ public class CommentsWindow {
 				((InnerWindow) window).moveToFront();
 				super.mousePressed(e);
 				page = page + 2;
-				if(!loadComments(page, topC)){
+				if (!loadComments(page, topC)) {
 					page = page - 2;
 					try {
 						loadComments(page, topC);
@@ -161,25 +161,25 @@ public class CommentsWindow {
 		panel.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 4));
 		panel.setVisible(false);
 		window.add(mainPanel);
-		((InnerWindow) window).refreshListener();
-		if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
+		if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			Overlay.addToFrame(window);
 		}
 	}
-	public static void destroyPanel(){
+
+	public static void destroyPanel() {
 		try {
 			if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 				Windowed.removeFromFrame(mainPanel);
 			} else {
 				Overlay.removeFromFrame(window);
 			}
-		}
-		catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 	//endregion
-	public static void unloadComments(boolean reset){
+	public static void unloadComments(boolean reset) {
 		panel.setVisible(false);
 		if (reset) {
 			topC = false;
@@ -189,16 +189,19 @@ public class CommentsWindow {
 		panel.setPreferredSize(new Dimension(width, 0));
 		scrollPane.updateUI();
 	}
-	public static JPanel getComWindow(){
+
+	public static JPanel getComWindow() {
 		scrollPane.setBounds(0, 0, width, 472);
 		buttons.setBounds(0, 472, width, 40);
 
 		return mainPanel;
 	}
-	public static void resetDimensions(int width, int height){
-		scrollPane.setBounds(0, 0, width, height-80);
-		buttons.setBounds(0, height-80, width, 40);
+
+	public static void resetDimensions(int width, int height) {
+		scrollPane.setBounds(0, 0, width, height - 80);
+		buttons.setBounds(0, height - 80, width, 40);
 	}
+
 	static AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
 	static SpriteFactory spriteFactory;
 
@@ -210,21 +213,21 @@ public class CommentsWindow {
 		}
 	}
 
-	public static boolean loadComments(int page, boolean top){
+	public static boolean loadComments(int page, boolean top) {
 		topC = top;
 		int width = CommentsWindow.width - 15;
-		if(Requests.levels.size() == 0) {
+		if (Requests.levels.size() == 0) {
 			return false;
 		}
-			try {
-			if(Windowed.showingMore && Requests.levels.size() != 0) {
+		try {
+			if (Windowed.showingMore && Requests.levels.size() != 0) {
 				int panelHeight = 0;
 				panel.removeAll();
 				panel.setVisible(false);
 				for (int j = 0; j < 2; j++) {
 
 					ArrayList<Comment> commentA = APIs.getGDComments(page + j, top, Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
-					if(commentA == null || commentA.size() == 0){
+					if (commentA == null || commentA.size() == 0) {
 						return false;
 					}
 					for (int i = 0; i < commentA.size(); i++) {
@@ -272,9 +275,9 @@ public class CommentsWindow {
 							@Override
 							public void mouseEntered(MouseEvent e) {
 								super.mouseEntered(e);
-								int center = (commenter.getPreferredSize().width)/2;
+								int center = (commenter.getPreferredSize().width) / 2;
 								commenter.setFont(Defaults.SEGOE.deriveFont(13f));
-								commenter.setBounds(30 + center - (commenter.getPreferredSize().width)/2, 2, commenter.getPreferredSize().width + 5, 18);
+								commenter.setBounds(30 + center - (commenter.getPreferredSize().width) / 2, 2, commenter.getPreferredSize().width + 5, 18);
 							}
 
 							@Override
@@ -340,7 +343,6 @@ public class CommentsWindow {
 
 						cmtPanel.setPreferredSize(new Dimension(width, 28 + content.getPreferredSize().height));
 
-						((InnerWindow) window).refreshListener();
 						panel.add(cmtPanel);
 						panel.setPreferredSize(new Dimension(width, panelHeight));
 					}
@@ -350,28 +352,26 @@ public class CommentsWindow {
 				panel.setVisible(true);
 				return true;
 			}
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
 		return false;
 	}
 
-	public String getName(){
+	public String getName() {
 		return "Comments";
 	}
-	public String getIcon(){
+
+	public String getIcon() {
 		return "\uEBDB";
 	}
 
 	//region Set Pin
-	public static void setPin(boolean pin){
-		((InnerWindow) window).setPin(pin);
-	}
 	//endregion
 
 	//region CreateButton
-	private static JButton createButton(String icon, int x, String tooltip){
+	private static JButton createButton(String icon, int x, String tooltip) {
 		JButton button = new RoundedJButton(icon, tooltip);
 		button.setFont(Defaults.SYMBOLS.deriveFont(20f));
 		button.setMargin(new Insets(0, 0, 0, 0));
@@ -379,7 +379,7 @@ public class CommentsWindow {
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBackground(Defaults.TOP);
 		button.setUI(buttonUI);
-		button.setBounds(x+5, 5, 30, 30);
+		button.setBounds(x + 5, 5, 30, 30);
 		return button;
 	}
 	//endregion
@@ -393,7 +393,7 @@ public class CommentsWindow {
 		newUI.setBackground(Defaults.MAIN);
 		newUI.setHover(Defaults.HOVER);
 		newUI.setSelect(Defaults.SELECT);
-		if(scrollPane != null) {
+		if (scrollPane != null) {
 			scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
 			scrollPane.setBackground(Defaults.MAIN);
 			scrollPane.getViewport().setBackground(Defaults.SUB_MAIN);
@@ -404,13 +404,11 @@ public class CommentsWindow {
 				component.setBackground(Defaults.MAIN);
 				for (Component component1 : ((JPanel) component).getComponents()) {
 					if (component1 instanceof JLabel) {
-						if(((JLabel) component1).getText().contains("%")){
+						if (((JLabel) component1).getText().contains("%")) {
 							component1.setForeground(Defaults.FOREGROUND2);
-						}
-						else if(((JLabel) component1).getText().equalsIgnoreCase(Requests.levels.get(LevelsWindow.getSelectedID()).getAuthor().toString())){
-							component1.setForeground(new Color(16, 164,0));
-						}
-						else {
+						} else if (((JLabel) component1).getText().equalsIgnoreCase(Requests.levels.get(LevelsWindow.getSelectedID()).getAuthor().toString())) {
+							component1.setForeground(new Color(16, 164, 0));
+						} else {
 							component1.setForeground(Defaults.FOREGROUND);
 						}
 					}
@@ -432,32 +430,20 @@ public class CommentsWindow {
 	//endregion
 
 	//region ToggleVisible
-	public static void toggleVisible() {
-		((InnerWindow) window).toggle();
-	}
 	//endregion
 
 	//region SetInvisible
-	public static void setInvisible() {
-		((InnerWindow) window).setInvisible();
-	}
 	//endregion
 
 	//region SetLocation
-	public static void setLocation(Point point){
+	public static void setLocation(Point point) {
 		window.setLocation(point);
 	}
 	//endregion
 
 	//region SetSettings
-	public static void setSettings(){
+	public static void setSettings() {
 		((InnerWindow) window).setSettings();
-	}
-	//endregion
-
-	//region SetVisible
-	public static void setVisible() {
-		((InnerWindow) window).setVisible();
 	}
 	//endregion
 }

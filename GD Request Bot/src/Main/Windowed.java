@@ -97,7 +97,7 @@ public class Windowed {
 
 				//window.setBounds(-5,-35,frame.getWidth(), frame.getHeight());
 				//((InnerWindow) window).resetDimensions(frame.getWidth()-10, frame.getHeight());
-				buttonPanel.setBounds(frame.getWidth() - 70, 0, 50, frame.getHeight() - 200);
+				buttonPanel.setBounds(frame.getWidth() - 70, 0, 50, frame.getHeight() - 100);
 				iconPanel.setBounds(frame.getWidth() - 70, frame.getHeight() - 125, 50, 50);
 				toolBar.setBounds(0, 0, frame.getWidth(), 30);
 				//gdToggle.setBounds(frame.getWidth() - 180, 0, 100, 30);
@@ -156,7 +156,7 @@ public class Windowed {
 
 		InfoWindow.getInfoWindow().setBounds(0, LevelsWindow.getReqWindow().getHeight() + 1, InfoWindow.getInfoWindow().getWidth(), InfoWindow.getInfoWindow().getHeight());
 
-		buttonPanel.setBounds(width - 60, 0, 50, frame.getHeight() - 200);
+		buttonPanel.setBounds(width - 60, 0, 50, frame.getHeight() - 100);
 		iconPanel.setBounds(width - 60, frame.getHeight() - 125, 50, 50);
 
 		buttonPanel.setBackground(Defaults.SUB_MAIN);
@@ -366,18 +366,19 @@ public class Windowed {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (SwingUtilities.isLeftMouseButton(e)) {
-					selectedUsername = String.valueOf(Requests.levels.get(LevelsWindow.getSelectedID()).getRequester());
-					selectedID = LevelsWindow.getSelectedID();
-					username.setText(String.valueOf(Requests.levels.get(LevelsWindow.getSelectedID()).getRequester()));
-					levelName.setText(String.valueOf(Requests.levels.get(LevelsWindow.getSelectedID()).getName()));
-					levelName.setBounds(473-levelName.getPreferredSize().width,0,473, 40);
-					levelID.setText("(" + String.valueOf(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID()) + ")");
-					levelID.setBounds(473-levelID.getPreferredSize().width,16,473, 40);
-					message.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getMessage());
-					message.clearUndo();
-					moderationFrame.setVisible(true);
-					moderationFrame.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - moderationFrame.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - moderationFrame.getHeight() / 2);
-
+					if(Requests.levels.size() != 0) {
+						selectedUsername = String.valueOf(Requests.levels.get(LevelsWindow.getSelectedID()).getRequester());
+						selectedID = LevelsWindow.getSelectedID();
+						username.setText(String.valueOf(Requests.levels.get(LevelsWindow.getSelectedID()).getRequester()));
+						levelName.setText(String.valueOf(Requests.levels.get(LevelsWindow.getSelectedID()).getName()));
+						levelName.setBounds(473 - levelName.getPreferredSize().width, 0, 473, 40);
+						levelID.setText("(" + String.valueOf(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID()) + ")");
+						levelID.setBounds(473 - levelID.getPreferredSize().width, 16, 473, 40);
+						message.setText(Requests.levels.get(LevelsWindow.getSelectedID()).getMessage());
+						message.clearUndo();
+						moderationFrame.setVisible(true);
+						moderationFrame.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - moderationFrame.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - moderationFrame.getHeight() / 2);
+					}
 				}
 			}
 		});
@@ -420,7 +421,7 @@ public class Windowed {
 					SettingsWindow.run = false;
 					if (!SettingsWindow.frame.isVisible()) {
 						SettingsWindow.frame.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - SettingsWindow.frame.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - SettingsWindow.frame.getHeight() / 2);
-						SettingsWindow.toggleVisible();
+						SettingsWindow.frame.setVisible(true);
 					} else {
 						SettingsWindow.frame.toFront();
 					}
@@ -850,7 +851,7 @@ public class Windowed {
 			frame.setSize(newW, newH);
 			content.setBounds(0, 30, newW - 10, newH - 38);
 			actionsPanel.setBounds(0, 30, newW - 16, newH - 38);
-			buttonPanel.setBounds(newW - 70, 0, 50, frame.getHeight() - 200);
+			buttonPanel.setBounds(newW - 70, 0, 50, frame.getHeight() - 100);
 			iconPanel.setBounds(newW - 70, frame.getHeight() - 125, 50, 50);
 
 			toolBar.setBounds(0, 0, frame.getWidth(), 30);
@@ -874,7 +875,7 @@ public class Windowed {
 			frame.setSize(newW, newH);
 			content.setBounds(0, 30, newW - 10, newH - 38);
 			actionsPanel.setBounds(0, 30, newW - 16, newH - 38);
-			buttonPanel.setBounds(newW - 70, 0, 50, frame.getHeight() - 200);
+			buttonPanel.setBounds(newW - 70, 0, 50, frame.getHeight() - 100);
 			iconPanel.setBounds(newW - 70, frame.getHeight() - 125, 50, 50);
 
 			toolBar.setBounds(0, 0, frame.getWidth(), 30);

@@ -20,7 +20,7 @@ public class LevelsWindow {
 	private static int buttonWidth = 385;
 
 	private static int height = 400;
-	private static JPanel window = new InnerWindow("Requests - 0", Settings.getRequestsWLoc().x, Settings.getRequestsWLoc().y, width, height, "\uE179", false).createPanel();
+	private static JPanel window = new InnerWindow("Requests - 0", width, height, "\uE179").createPanel();
 	private static JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
 	private static int selectedID = 0;
 	private static int prevSelectedID = 0;
@@ -53,7 +53,6 @@ public class LevelsWindow {
 		scrollPane.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
 		window.add(scrollPane);
-		((InnerWindow) window).refreshListener();
 		if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			Overlay.addToFrame(window);
 		}
@@ -102,12 +101,9 @@ public class LevelsWindow {
 	}
 
 	public static void setName(int count) {
-		if (Settings.getSettings("windowed").equalsIgnoreCase("true")) {
-			//((InnerWindow) Windowed.window).setTitle("GDBoard - " + count);
-			Windowed.frame.setTitle("GDBoard - " + count);
-		} else {
-			((InnerWindow) window).setTitle("Requests - " + count);
-		}
+
+		Windowed.frame.setTitle("GDBoard - " + count);
+
 	}
 
 	public static LevelButton getButton(int i) {
@@ -463,7 +459,6 @@ public class LevelsWindow {
 				panelHeight = panelHeight + 60;
 				mainPanel.setBounds(0, 0, width, panelHeight);
 				mainPanel.setPreferredSize(new Dimension(width, panelHeight));
-				((InnerWindow) window).refreshListener();
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -740,9 +735,6 @@ public class LevelsWindow {
 		}
 	}
 
-	public static void setPin(boolean pin) {
-		((InnerWindow) window).setPin(pin);
-	}
 
 	public static void refreshUI() {
 		((InnerWindow) window).refreshUI();
@@ -812,13 +804,6 @@ public class LevelsWindow {
 		return "\uE179";
 	}
 
-	public static void toggleVisible() {
-		((InnerWindow) window).toggle();
-	}
-
-	public static void setInvisible() {
-		((InnerWindow) window).setInvisible();
-	}
 
 	//region SetLocation
 	public static void setLocation(Point point) {
@@ -836,9 +821,6 @@ public class LevelsWindow {
 		return selectedID;
 	}
 
-	public static void setVisible() {
-		((InnerWindow) window).setVisible();
-	}
 
 	public static void updateUI(long ID, boolean vulgar, boolean image, boolean analyzed) {
 		out:

@@ -192,7 +192,7 @@ public class PersonalizationSettings {
 		}
 		else{
 			Defaults.setSystem();
-		}
+		}/*
 		if(!Settings.getSettings("onTop").equalsIgnoreCase("")) {
 			onTopOption = Boolean.parseBoolean(Settings.getSettings("onTop"));
 			onTop.setChecked(onTopOption);
@@ -201,7 +201,7 @@ public class PersonalizationSettings {
 		if(!Settings.getSettings("disableNotifications").equalsIgnoreCase("")) {
 			disableNotifOption = Boolean.parseBoolean(Settings.getSettings("disableNotifications"));
 			notifications.setChecked(disableNotifOption);
-		}
+		}*/
 	}
 	public static void setSettings(){
 		try {

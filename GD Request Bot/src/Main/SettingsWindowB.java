@@ -19,8 +19,8 @@ import static Main.Defaults.defaultUI;
 public class SettingsWindowB {
 	private static int width = 636;
 	private static int height = 662;
-	public static JPanel window = new InnerWindow("Settings", 0, 0, width-2, height,
-			"\uE713", true).createPanel();
+	public static JPanel window = new InnerWindow("Settings", width-2, height,
+			"\uE713").createPanel();
 
 	private static JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
 	private static JPanel content = new JPanel();
@@ -49,8 +49,8 @@ public class SettingsWindowB {
 	public static void createPanel() {
 		frame = new JFrame();
 		if(!Settings.getSettings("windowed").equalsIgnoreCase("true")){
-			window = new InnerWindow("Settings", 0, 0, width-16, height-40,
-					"\uE713", false).createPanel();
+			window = new InnerWindow("Settings", width-16, height-40,
+					"\uE713").createPanel();
 		}
 		else{
 			frame.setSize(width, height);
@@ -62,12 +62,6 @@ public class SettingsWindowB {
 		frame.setResizable(false);
 		frame.setTitle("GDBoard - Settings");
 		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-		frame.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				SettingsWindow.toggleVisible();
-			}
-		});
 		if(Settings.getSettings("settings").equalsIgnoreCase("") && Settings.getSettings("windowed").equalsIgnoreCase("true")){
 			frame.setLocation((int)Defaults.screenSize.getWidth()/2 - width/2, 200);
 		}
@@ -161,11 +155,8 @@ public class SettingsWindowB {
 			window.add(blankSpace);
 			window.add(buttons);
 			window.add(content);
-			((InnerWindow) window).setPinVisible();
-			((InnerWindow) window).refreshListener();
 		}
 		frame.setVisible(false);
-		toggleVisible();
 		if(Settings.getSettings("windowed").equalsIgnoreCase("true")){
 			frame.add(blankSpace);
 			frame.add(buttons);
@@ -214,17 +205,7 @@ public class SettingsWindowB {
 		}
 
 	}
-
-	static void toggleVisible() {
-		((InnerWindow) window).toggle();
-	}
-
-	static void setInvisible() {
-		((InnerWindow) window).setInvisible();
-	}
-
 	static void setVisible() {
-		((InnerWindow) window).setVisible();
 
 	}
 
