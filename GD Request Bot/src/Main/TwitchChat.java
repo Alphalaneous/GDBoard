@@ -39,7 +39,7 @@ public class TwitchChat {
 		textArea.setBorder(BorderFactory.createEmptyBorder());
 		textArea.setOpaque(false);
 		textArea.setBackground(new Color(0,0,0,0));
-		textArea.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		textArea.setFont(Defaults.SEGOE.deriveFont(14f));
 		textArea.setForeground(Defaults.FOREGROUND);
 		int height = getJTextPaneHeight(textArea);
 		textArea.setPreferredSize(new Dimension(400, height));

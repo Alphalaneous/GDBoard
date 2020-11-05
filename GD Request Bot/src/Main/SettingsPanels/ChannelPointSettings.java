@@ -31,7 +31,7 @@ public class ChannelPointSettings {
 
 		LangLabel label = new LangLabel("$POINTS_LIST$");
 		label.setForeground(Defaults.FOREGROUND);
-		label.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		label.setFont(Defaults.SEGOE.deriveFont(14f));
 		label.setBounds(25, 20, label.getPreferredSize().width + 5, label.getPreferredSize().height + 5);
 
 		panel.add(label);

@@ -278,16 +278,6 @@ public class Main {
 				URL inputUrl = Main.class.getResource("/Resources/gdmod.exe");
 				FileUtils.copyURLToFile(inputUrl, path.toFile());
 			}
-			Path pathA = Paths.get(Defaults.saveDirectory + "\\GDBoard\\bin\\getProgram.bat");
-			if (!Files.exists(pathA)) {
-				URL inputUrl = Main.class.getResource("/Resources/getProgram.bat");
-				FileUtils.copyURLToFile(inputUrl, pathA.toFile());
-			}
-			Path pathB = Paths.get(Defaults.saveDirectory + "\\GDBoard\\bin\\getInstalledPrograms.bat");
-			if (!Files.exists(pathB)) {
-				URL inputUrl = Main.class.getResource("/Resources/getInstalledPrograms.bat");
-				FileUtils.copyURLToFile(inputUrl, pathB.toFile());
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

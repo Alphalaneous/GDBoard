@@ -57,19 +57,10 @@ public class Defaults {
 	public static Color BUTTON_HOVER_CLEAR;
 
 	public static Color TEXT_BOX;
-	public static Font MAIN_FONT;
 	public static Font SYMBOLS;
 	public static Font SEGOE = new Font("Segoe UI", Font.PLAIN, 20);
 	public static Font SEGOE_LIGHT = new Font("Segoe UI Light", Font.PLAIN, 20);
 
-	static {
-		try {
-			MAIN_FONT = Font.createFont(Font.TRUETYPE_FONT,
-					Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream("Resources/Fonts/bahnschrift.ttf")));
-		} catch (FontFormatException | IOException e) {
-			e.printStackTrace();
-		}
-	}
 	static {
 		try {
 			SYMBOLS = Font.createFont(Font.TRUETYPE_FONT,

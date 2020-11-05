@@ -520,7 +520,7 @@ public class Window {
 					int rand = random.nextInt(6);
 
 					action.setBackground(colors[rand]);
-					action.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+					action.setFont(Defaults.SEGOE.deriveFont(14f));
 					JButtonUI separateUI = new JButtonUI();
 					separateUI.setBackground(colors[rand]);
 					separateUI.setHover(colors[rand].brighter());

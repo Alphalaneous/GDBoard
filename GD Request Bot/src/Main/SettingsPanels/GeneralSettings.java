@@ -488,7 +488,7 @@ public class GeneralSettings {
 	@SuppressWarnings("unused")
 	private static JLabel createLabel(String text, int y){
 		JLabel label = new JLabel(text);
-		label.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		label.setFont(Defaults.SEGOE.deriveFont(14f));
 		label.setBounds(25,y,label.getPreferredSize().width + 5,30);
 		label.setForeground(Defaults.FOREGROUND);
 

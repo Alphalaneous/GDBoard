@@ -55,7 +55,7 @@ public class Onboarding {
 		mainText.setEditable(false);
 		mainText.setForeground(Defaults.FOREGROUND);
 		mainText.setBackground(new Color(0, 0, 0, 0));
-		mainText.setFont(Defaults.MAIN_FONT.deriveFont(18f));
+		mainText.setFont(Defaults.SEGOE.deriveFont(18f));
 
 		JTextPane infoText = new JTextPane();
 		StyledDocument doc2 = infoText.getStyledDocument();
@@ -68,14 +68,14 @@ public class Onboarding {
 		infoText.setEditable(false);
 		infoText.setForeground(Defaults.FOREGROUND);
 		infoText.setBackground(new Color(0, 0, 0, 0));
-		infoText.setFont(Defaults.MAIN_FONT.deriveFont(13f));
+		infoText.setFont(Defaults.SEGOE.deriveFont(13f));
 
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
 
 		JLabel authInfo = new JLabel("Press Next to Log In with Twitch and start GDBoard!");
-		authInfo.setFont(Defaults.MAIN_FONT.deriveFont(12f));
+		authInfo.setFont(Defaults.SEGOE.deriveFont(12f));
 		authInfo.setBounds(25, height - 80, width - 50, authInfo.getPreferredSize().height + 5);
 		authInfo.setForeground(Defaults.FOREGROUND);
 		CurvedButton moveOn = new CurvedButton("Click here if Success and GDBoard hasn't moved on");
@@ -85,7 +85,7 @@ public class Onboarding {
 		moveOn.setUI(defaultUI);
 		moveOn.setForeground(Defaults.FOREGROUND);
 		moveOn.setBorder(BorderFactory.createEmptyBorder());
-		moveOn.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		moveOn.setFont(Defaults.SEGOE.deriveFont(14f));
 		moveOn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -105,7 +105,7 @@ public class Onboarding {
 		button.setUI(defaultUI);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
-		button.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		button.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -168,7 +168,7 @@ public class Onboarding {
 		}
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
-		button.setFont(Defaults.MAIN_FONT.deriveFont(20f));
+		button.setFont(Defaults.SEGOE.deriveFont(20f));
 		return button;
 	}
 

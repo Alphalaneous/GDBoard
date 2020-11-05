@@ -92,15 +92,15 @@ public class SongPanel {
 		persist.setUI(defaultUI);
 		persist.setForeground(Defaults.FOREGROUND);
 		persist.setBorder(BorderFactory.createEmptyBorder());
-		persist.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		persist.setFont(Defaults.SEGOE.deriveFont(14f));
 		persist.refresh();
 		persist.setVisible(false);
 
-		songName.setFont(Defaults.MAIN_FONT.deriveFont(20f));
+		songName.setFont(Defaults.SEGOE.deriveFont(20f));
 		songName.setBounds(10, 7, width, 30);
 		songName.setForeground(Defaults.FOREGROUND);
 
-		songAuthorID.setFont(Defaults.MAIN_FONT.deriveFont(14f));
+		songAuthorID.setFont(Defaults.SEGOE.deriveFont(14f));
 		songAuthorID.setBounds(10, height - 28, width/2, 20);
 		songAuthorID.setForeground(Defaults.FOREGROUND);
 		
