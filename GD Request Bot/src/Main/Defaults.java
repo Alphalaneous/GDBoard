@@ -1,23 +1,20 @@
 package Main;
 
+import Main.Components.JButtonUI;
 import Main.SettingsPanels.PersonalizationSettings;
 import com.registry.RegDWORDValue;
 import com.registry.RegistryKey;
 
 import java.awt.*;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Defaults {
 
-	static int screenNum;
-	static String os = (System.getProperty("os.name")).toUpperCase();
+	public static int screenNum;
+	private static String os = (System.getProperty("os.name")).toUpperCase();
 	static {
-
 		if(os.contains("WIN")) {
 			saveDirectory = System.getenv("APPDATA");
 		}
@@ -40,12 +37,7 @@ public class Defaults {
 			.getLocalGraphicsEnvironment()
 			.getScreenDevices()[screenNum].getDefaultConfiguration().getBounds();
 
-
-	public static int relativeWidth = 1;
-	public static int relativeHeight = 1;
-
 	public static String saveDirectory;
-	public static String gdDirectory;
 	public static Color ACCENT = new Color(0, 108, 230);
 	public static Color MAIN;
 	public static Color MAIN_CLEAR;
@@ -61,21 +53,14 @@ public class Defaults {
 	public static JButtonUI defaultUI = new JButtonUI();
 	public static JButtonUI settingsButtonUI = new JButtonUI();
 
-
-	static Color OUTLINE = new Color(70, 70, 70);
 	public static Color BUTTON_HOVER;
 	public static Color BUTTON_HOVER_CLEAR;
 
-	static Color TEXT_BOX;
+	public static Color TEXT_BOX;
 	public static Font MAIN_FONT;
 	public static Font SYMBOLS;
 	public static Font SEGOE = new Font("Segoe UI", Font.PLAIN, 20);
 	public static Font SEGOE_LIGHT = new Font("Segoe UI Light", Font.PLAIN, 20);
-
-
-
-
-
 
 	static {
 		try {
@@ -93,9 +78,9 @@ public class Defaults {
 			e.printStackTrace();
 		}
 	}
-	static AtomicBoolean dark = new AtomicBoolean();
-	static AtomicBoolean programLoaded = new AtomicBoolean();
-	static AtomicBoolean colorsLoaded = new AtomicBoolean();
+	private static AtomicBoolean dark = new AtomicBoolean();
+	public static AtomicBoolean programLoaded = new AtomicBoolean();
+	private static AtomicBoolean colorsLoaded = new AtomicBoolean();
 
 
 	//region Dark Mode
@@ -118,7 +103,7 @@ public class Defaults {
 			FOREGROUND = Color.WHITE;
 			FOREGROUND2 = new Color(140, 140, 140);
 		colorsLoaded.set(true);
-		Overlay.refreshUI(true);
+		Themes.refreshUI();
 	}
 	//endregion
 
@@ -142,7 +127,7 @@ public class Defaults {
 			FOREGROUND2 = new Color(100, 100, 100);
 
 		colorsLoaded.set(true);
-		Overlay.refreshUI(true);
+		Themes.refreshUI();
 	}
 	public static void setSystem(){
 		final int[] prevTheme = new int[1];
@@ -206,26 +191,6 @@ public class Defaults {
 					"Software\\Microsoft\\Windows\\DWM");
 			while (true) {
 				try {
-					if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
-						int minute;
-						int hour;
-						String half;
-						LocalDateTime now = LocalDateTime.now();
-						minute = now.getMinute();
-						hour = now.getHour();
-						half = "AM";
-						if (hour >= 12) {
-							if (hour != 12) {
-								hour = hour - 12;
-							}
-							half = "PM";
-						}
-						if (hour == 0) {
-							hour = 12;
-						}
-						MainBar.setTime(hour + ":" + String.format("%02d", minute) + " " + half);
-					}
-
 					if (os.contains("WIN")) {
 						int theme = 0;
 						Integer color;
@@ -234,7 +199,7 @@ public class Defaults {
 							color = ((RegDWORDValue) systemColor.getValue("ColorizationColor")).getValue();
 							if (!ACCENT.equals(Color.decode(String.valueOf(color)))) {
 								ACCENT = Color.decode(String.valueOf(color));
-								Overlay.refreshUI(false);
+								Themes.refreshUI();
 							}
 						} catch (NullPointerException e) {
 							e.printStackTrace();
@@ -267,7 +232,7 @@ public class Defaults {
 					}
 					if (!screenSize.equals(prevScreenSize)) {
 						if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
-							Overlay.refreshUI(false);
+							Themes.refreshUI();
 						}
 					}
 					prevScreenSize = screenSize;

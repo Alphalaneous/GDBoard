@@ -1,22 +1,19 @@
 package Main;
 
-import Main.InnerWindows.LevelsWindow;
+import Main.Panels.LevelsPanel;
 import Main.SettingsPanels.ChannelPointSettings;
 import Main.SettingsPanels.CommandSettings;
-import Main.SettingsPanels.GeneralSettings;
 import Main.SettingsPanels.PersonalizationSettings;
+import Main.Windows.DialogBox;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.*;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -26,16 +23,16 @@ public class Utilities {
 
 
 	public static void addCommand(String username, String... args){
-		String newCommandName = args[0].toString();
-		String message = "";
+		String newCommandName = args[0];
+		StringBuilder message = new StringBuilder();
 
 		for(String msg : args){
-			message = message + " " + msg;
+			message.append(" ").append(msg);
 		}
-		message = message.replaceFirst(args[0], "").trim();
+		message = new StringBuilder(message.toString().replaceFirst(args[0], "").trim());
 		String command;
-		if(message.startsWith("eval:")){
-			command = "function command(){" + message.replace("eval:", "").trim() + "}";
+		if(message.toString().startsWith("eval:")){
+			command = "function command(){" + message.toString().replace("eval:", "").trim() + "}";
 		}
 		else{
 			command = "function command() { return \"" + message.toString() + "\";}";
@@ -61,19 +58,19 @@ public class Utilities {
 		}
 	}
 	public static void editCommand(String username, String... args){
-		String newCommandName = args[0].toString();
-		String message = "";
+		String newCommandName = args[0];
+		StringBuilder message = new StringBuilder();
 
 		for(String msg : args){
-			message = message + " " + msg;
+			message.append(" ").append(msg);
 		}
-		message = message.replaceFirst(args[0], "").trim();
+		message = new StringBuilder(message.toString().replaceFirst(args[0], "").trim());
 		String command;
-		if(message.startsWith("eval:")){
-			command = "function command(){" + message.replace("eval:", "").trim() + "}";
+		if(message.toString().startsWith("eval:")){
+			command = "function command(){" + message.toString().replace("eval:", "").trim() + "}";
 		}
 		else{
-			command = "function command() { return \"" + message.toString() + "\";}";
+			command = "function command() { return \"" + message + "\";}";
 		}
 		Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\Commands\\" + newCommandName +".js");
 		if (Files.exists(file)) {
@@ -109,16 +106,16 @@ public class Utilities {
 		}
 	}
 	public static void addPoints(String username, String... args){
-		String newCommandName = args[0].toString();
-		String message = "";
+		String newCommandName = args[0];
+		StringBuilder message = new StringBuilder();
 
 		for(String msg : args){
-			message = message + " " + msg;
+			message.append(" ").append(msg);
 		}
-		message = message.replaceFirst(args[0], "").trim();
+		message = new StringBuilder(message.toString().replaceFirst(args[0], "").trim());
 		String command;
-		if(message.startsWith("eval:")){
-			command = "function command(){" + message.replace("eval:", "").trim() + "}";
+		if(message.toString().startsWith("eval:")){
+			command = "function command(){" + message.toString().replace("eval:", "").trim() + "}";
 		}
 		else{
 			command = "function command() { return \"" + message.toString() + "\";}";
@@ -145,19 +142,19 @@ public class Utilities {
 		}
 	}
 	public static void editPoints(String username, String... args){
-		String newCommandName = args[0].toString();
-		String message = "";
+		String newCommandName = args[0];
+		StringBuilder message = new StringBuilder();
 
 		for(String msg : args){
-			message = message + " " + msg;
+			message.append(" ").append(msg);
 		}
-		message = message.replaceFirst(args[0], "").trim();
+		message = new StringBuilder(message.toString().replaceFirst(args[0], "").trim());
 		String command;
-		if(message.startsWith("eval:")){
-			command = "function command(){" + message.replace("eval:", "").trim() + "}";
+		if(message.toString().startsWith("eval:")){
+			command = "function command(){" + message.toString().replace("eval:", "").trim() + "}";
 		}
 		else{
-			command = "function command() { return \"" + message.toString() + "\";}";
+			command = "function command() { return \"" + message + "\";}";
 		}
 		Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\Points\\" + newCommandName +".js");
 		if (Files.exists(file)) {
@@ -197,10 +194,10 @@ public class Utilities {
 	}
 	public static String format(String format, Object... args){
 		String[] words = format.split(" ");
-		for(int i = 0; i < words.length; i++){
-			if(words[i].startsWith("$") && words[i].endsWith("$")){
-				String newWord = Language.getString(words[i].replaceAll("\\$", ""));
-				format = format.replace(words[i], newWord);
+		for (String word : words) {
+			if (word.startsWith("$") && word.endsWith("$")) {
+				String newWord = Language.getString(word.replaceAll("\\$", ""));
+				format = format.replace(word, newWord);
 			}
 		}
 		try {
@@ -236,7 +233,7 @@ public class Utilities {
 		String[] loc = location.split("\\\\");
 		StringBuilder dir = new StringBuilder();
 		for(int i = 0; i < loc.length-1; i++ ) {
-			dir.append(loc[i] + "\\\\");
+			dir.append(loc[i]).append("\\\\");
 		}
 		try {
 			Runtime.getRuntime().exec(new String[]{location}, null, new File(dir.toString()));
@@ -259,43 +256,7 @@ public class Utilities {
 			e.printStackTrace();
 		}
 	}
-	public static String findProgram(String search){
-		try {
-			Process getInstalled = Runtime.getRuntime().exec(Defaults.saveDirectory + "\\GDBoard\\bin\\getInstalledPrograms.bat " + search);
-			BufferedReader installed = new BufferedReader(new InputStreamReader(getInstalled.getInputStream()));
-			String install;
-			String exe = null;
-			int count = 0;
-			while(true) {
-				install = installed.readLine();
-				if(install == null) {
-					break;
-				}
-				install = install.trim();
-				if(count < 3 || install.equals("")) {
-					count++;
-					continue;
-				}
-				Process getExes = Runtime.getRuntime().exec(Defaults.saveDirectory + "\\GDBoard\\bin\\getProgram.bat " + "\"" + install + "\"");
-				BufferedReader exes = new BufferedReader(new InputStreamReader(getExes.getInputStream()));
-				while(true) {
-					exe = exes.readLine();
-					if(exe == null) {
-						break;
-					}
-					exe = exe.trim();
-				}
-			}
-			if(exe != null) {
-				return exe;
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	public static void delStuff(String command, String identifier) {
+	private static void delStuff(String command, String identifier) {
 
 			boolean exists = false;
 			Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\" + identifier + ".txt");
@@ -326,22 +287,19 @@ public class Utilities {
 			}
 
 	}
-	static SystemTray tray = SystemTray.getSystemTray();
-	static Image image;
+	private static SystemTray tray = SystemTray.getSystemTray();
+	private static Image image;
 
 	static {
 		try {
-			image = ImageIO
-						.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
+			image = ImageIO.read(Objects.requireNonNull(LevelsPanel.class.getClassLoader()
 								.getResource("Resources/Icons/windowIcon.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-
-
-	static TrayIcon trayIcon = new TrayIcon(image, "GDBoard");
+	private static TrayIcon trayIcon = new TrayIcon(image, "GDBoard");
 	static{
 		trayIcon.setImageAutoSize(true);
 		trayIcon.setToolTip("GDBoard");
@@ -350,12 +308,7 @@ public class Utilities {
 		} catch (AWTException e) {
 			e.printStackTrace();
 		}
-		trayIcon.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println(e);
-			}
-		});
+		trayIcon.addActionListener(System.out::println);
 	}
 
 	public static void notify(String title, String message){
@@ -364,7 +317,7 @@ public class Utilities {
 		}
 
 	}
-	public static void saveOption(String command, String type, String optionType) {
+	private static void saveOption(String command, String type, String optionType) {
 		try {
 			String typeA = null;
 			if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/" + type + "/options.txt"))) {
@@ -405,7 +358,7 @@ public class Utilities {
 			f.printStackTrace();
 		}
 	}
-	public static void delCooldown(String command, String type) {
+	private static void delCooldown(String command, String type) {
 		try {
 			int cooldown = -1;
 			if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt"))) {
@@ -447,7 +400,7 @@ public class Utilities {
 			f.printStackTrace();
 		}
 	}
-	public static void deleteCommandA(String command, String type, String optionType){
+	private static void deleteCommandA(String command, String type, String optionType){
 		if(optionType.equalsIgnoreCase("command")) {
 			delStuff(command, "mod");
 			delStuff(command, "disable");

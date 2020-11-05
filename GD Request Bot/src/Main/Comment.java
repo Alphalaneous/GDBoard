@@ -17,10 +17,10 @@ public class Comment {
 		return String.valueOf(percent);
 	}
 
-	String username;
-	String comment;
-	String likes;
-	String percent;
+	private String username;
+	private String comment;
+	private String likes;
+	private String percent;
 
 	Comment(String username, String comment, String likes, String percent){
 		this.username = username;

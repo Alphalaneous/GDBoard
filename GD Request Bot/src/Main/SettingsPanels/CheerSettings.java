@@ -1,6 +1,10 @@
 package Main.SettingsPanels;
 
 import Main.*;
+import Main.Components.CheckboxButton;
+import Main.Components.CurvedButton;
+import Main.Components.RoundedJButton;
+import Main.Components.ScrollbarUI;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 

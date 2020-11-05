@@ -1,12 +1,11 @@
 package Main.SettingsPanels;
 
 import Main.*;
+import Main.Components.CheckboxButton;
+import Main.Components.FancyTextArea;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.IOException;
 
 
 public class LanguageSettings {
@@ -22,12 +21,6 @@ public class LanguageSettings {
 		panel.setBackground(Defaults.SUB_MAIN);
 
 		return panel;
-	}
-	public static void loadSettingsA(){
-
-	}
-	public static void setSettings(){
-
 	}
 	public static void refreshUI() {
 

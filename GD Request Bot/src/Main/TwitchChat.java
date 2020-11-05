@@ -1,26 +1,9 @@
 package Main;
 
 import com.alphalaneous.ChatMessage;
-import com.google.common.base.Throwables;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.text.BadLocationException;
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.font.FontRenderContext;
-import java.awt.font.LineBreakMeasurer;
-import java.awt.font.TextLayout;
-import java.text.AttributedCharacterIterator;
-import java.text.AttributedString;
-import java.text.BreakIterator;
-import java.util.Arrays;
-
-import static org.reflections.Reflections.log;
 
 public class TwitchChat {
 	private static JFrame chatWindow = new JFrame();

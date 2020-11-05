@@ -1,17 +1,11 @@
 package Main;
 
 import Main.SettingsPanels.ShortcutSettings;
-import org.jnativehook.NativeInputEvent;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.SwingKeyAdapter;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -85,23 +79,6 @@ public class KeyListener extends SwingKeyAdapter {
 			if (!ShortcutSettings.focused) {
 				if (key == ShortcutSettings.openKeybind) {
 
-					if (!Overlay.frame.getBackground().equals(new Color(0, 0, 0, 0))) {
-
-						if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
-							Overlay.setWindowsInvisible();
-						}
-						Overlay.frame.toFront();
-						Overlay.frame.requestFocus();
-
-					} else {
-						if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
-							Overlay.setWindowsVisible();
-						}
-						Overlay.frame.toFront();
-						Overlay.frame.requestFocus();
-
-
-					}
 				}
 				if (key == ShortcutSettings.skipKeybind) {
 					Functions.skipFunction();
@@ -119,7 +96,6 @@ public class KeyListener extends SwingKeyAdapter {
 					Functions.clearFunction();
 				}
 				if (key == ShortcutSettings.lockKeybind) {
-					MouseLock.doLock = !MouseLock.doLock;
 				}
 			}
 			if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/actions/keybinds.txt"))) {
@@ -129,6 +105,7 @@ public class KeyListener extends SwingKeyAdapter {
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 				}
+				assert sc3 != null;
 				while (sc3.hasNextLine()) {
 					String line = sc3.nextLine();
 					if (line.split("=")[0].replace(" ", "").equalsIgnoreCase(String.valueOf(e.getRawCode()))) {
@@ -137,7 +114,7 @@ public class KeyListener extends SwingKeyAdapter {
 							new Thread(() -> {
 								try {
 									String response = Command.run(Files.readString(path, StandardCharsets.UTF_8), false);
-									if (!response.equalsIgnoreCase("") && response != null) {
+									if (!response.equalsIgnoreCase("")) {
 										Main.sendMessage(response);
 									}
 								} catch (IOException e1) {

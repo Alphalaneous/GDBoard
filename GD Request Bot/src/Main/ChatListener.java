@@ -5,10 +5,6 @@ import com.alphalaneous.ChatBot;
 import com.alphalaneous.ChatMessage;
 import org.java_websocket.handshake.ServerHandshake;
 
-import java.net.URISyntaxException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class ChatListener extends ChatBot {
 
 	ChatListener(String channel) {

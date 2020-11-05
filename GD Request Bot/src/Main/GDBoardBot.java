@@ -1,9 +1,10 @@
 package Main;
 
+import Main.Components.JButtonUI;
 import Main.SettingsPanels.AccountSettings;
 import Main.SettingsPanels.GeneralSettings;
+import Main.Windows.DialogBox;
 import com.cavariux.twitchirc.Json.JsonObject;
-import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.json.JSONObject;
 
 import java.awt.*;
@@ -65,7 +66,7 @@ class GDBoardBot {
 	static void start() throws IOException {
 		start(false);
 	}
-	static void start(boolean reconnect) throws IOException {
+	static void start(boolean reconnect) {
 		System.out.println("started");
 		/*if(clientSocket != null && clientSocket.isConnected() ){
 			clientSocket.close();
@@ -148,7 +149,6 @@ class GDBoardBot {
 					if (event.equalsIgnoreCase("connected")) {
 						DialogBox.closeDialogBox();
 						String channel =  object.get("username").toString().replaceAll("\"", "").replaceAll("#", "");
-						Settings.channel = channel;
 						Settings.writeSettings("channel", channel);
 						AccountSettings.refreshTwitch(channel);
 						initialConnect = true;
@@ -257,11 +257,7 @@ class GDBoardBot {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			try {
-				start(true);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			start(true);
 			tries++;
 			wait = wait*2;
 			if(Main.programLoaded){

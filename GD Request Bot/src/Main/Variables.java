@@ -1,34 +1,14 @@
 package Main;
 
-import Main.InnerWindows.LevelsWindow;
+import Main.Windows.DialogBox;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.*;
-import java.util.stream.Stream;
 
 public class Variables {
-
-	private static Properties variables = new Properties();
-	private static FileInputStream in;
-	private static BufferedWriter writer;
-	private static File file = new File(Defaults.saveDirectory + "\\GDBoard\\vars.board");
-
-	static {
-		while (true) {
-			try {
-				writer = new BufferedWriter(new FileWriter(file, true));
-				in = new FileInputStream(file);
-				break;
-			} catch (IOException e) {
-				file.mkdir();
-				file.getParentFile().mkdir();
-			}
-		}
-	}
 
 	private static HashMap<String, Object> vars = new HashMap<>();
 
@@ -42,6 +22,7 @@ public class Variables {
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
+			assert sc != null;
 			while (sc.hasNextLine()) {
 				String line = sc.nextLine();
 				if(line.contains("=")) {
@@ -63,7 +44,7 @@ public class Variables {
 			StringBuilder pairs = new StringBuilder();
 			while (it.hasNext()) {
 				Map.Entry pair = (Map.Entry)it.next();
-				pairs.append(pair.getKey() + " = " + pair.getValue() + "\n");
+				pairs.append(pair.getKey()).append(" = ").append(pair.getValue()).append("\n");
 				it.remove();
 			}
 			if (!Files.exists(file)) {

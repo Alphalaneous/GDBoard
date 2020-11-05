@@ -1,12 +1,15 @@
 package Main.SettingsPanels;
 
 import Main.*;
+import Main.Components.CheckboxButton;
+import Main.Components.FancyTextArea;
+import Main.Components.LangLabel;
+import Main.Components.ScrollbarUI;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.KeyListener;
-import java.io.*;
 
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
@@ -18,7 +21,6 @@ public class GeneralSettings {
 	public static boolean lowCPUMode = false;
 	public static boolean followersOption = false;
 	public static boolean subsOption = false;
-	public static boolean silentOption = false;
 	public static boolean repeatedOption = false;
 	public static boolean repeatedOptionAll = false;
 	public static boolean updatedRepeatedOption = false;
@@ -454,7 +456,7 @@ public class GeneralSettings {
 		}
 	}
 	public static void setSettings(){
-		try {
+
 			Settings.writeSettings("gdMode", String.valueOf(gdModeOption));
 			Settings.writeSettings("followers", String.valueOf(followersOption));
 			Settings.writeSettings("subscribers", String.valueOf(subsOption));
@@ -480,9 +482,7 @@ public class GeneralSettings {
 			Settings.writeSettings("modsBypass", String.valueOf(modsBypassOption));
 			Settings.writeSettings("queueLevelLength", String.valueOf(queueLevelLength));
 
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "There was an error writing to the file!", "Error",  JOptionPane.ERROR_MESSAGE);
-		}
+
 	}
 
 	@SuppressWarnings("unused")

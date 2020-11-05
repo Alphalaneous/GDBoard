@@ -1,10 +1,13 @@
 package Main;
 
+import Main.Components.CurvedButton;
+import Main.Components.FancyTextArea;
+import Main.Components.JButtonUI;
+import Main.Components.RoundedJButton;
 import Main.SettingsPanels.ShortcutSettings;
-import org.jnativehook.keyboard.SwingKeyAdapter;
+import Main.Windows.Window;
 
 import javax.swing.*;
-import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -12,29 +15,27 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 import java.net.URL;
 
 public class Onboarding {
-	static int width = 465;
-	static int height = 512;
 	static boolean isLoading = false;
-	private static JPanel window = new InnerWindow("Startup", width - 2, height,
-			"\uF137").createPanel();
+	private static JPanel window = new JPanel();
 	private static JPanel content = new JPanel(null);
 	private static JButtonUI defaultUI = new JButtonUI();
 	public static int openKeybind = 36;
 	static JFrame frame = new JFrame();
 
 	static void createPanel() {
-		URL iconURL = Windowed.class.getResource("/Resources/Icons/windowIcon.png");
+		URL iconURL = Window.class.getResource("/Resources/Icons/windowIcon.png");
 		ImageIcon icon = new ImageIcon(iconURL);
 		Image newIcon = icon.getImage().getScaledInstance(120, 120,  Image.SCALE_SMOOTH);
 		frame.setIconImage(newIcon);
 		frame.setTitle("GDBoard Startup");
+		int width = 465;
+		int height = 512;
 		Onboarding.setLocation(new Point(Defaults.screenSize.width / 2 - width / 2, Defaults.screenSize.height / 2 - height / 2));
-		frame.setSize(width+5, height + 38);
-		frame.setPreferredSize(new Dimension(width+5, height + 38));
+		frame.setSize(width +5, height + 38);
+		frame.setPreferredSize(new Dimension(width +5, height + 38));
 		frame.setLayout(null);
 		frame.setResizable(false);
 		frame.pack();
@@ -89,16 +90,8 @@ public class Onboarding {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				ShortcutSettings.loadKeybind("Open", openKeybind);
-				try {
-					Settings.writeSettings("openKeybind", String.valueOf(openKeybind));
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-				try {
-					Settings.writeSettings("onboarding", "false");
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+				Settings.writeSettings("openKeybind", String.valueOf(openKeybind));
+				Settings.writeSettings("onboarding", "false");
 				Main.programStarting = false;
 			}
 		});
@@ -128,18 +121,14 @@ public class Onboarding {
 							}
 						}
 						ShortcutSettings.loadKeybind("Open", openKeybind);
-						try {
+
 							Settings.writeSettings("openKeybind", String.valueOf(openKeybind));
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
-						try {
+
+
 							Settings.writeSettings("onboarding", "false");
 							Onboarding.isLoading = false;
 							frame.setVisible(false);
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
+
 						Main.programStarting = false;
 					});
 					thread.start();
@@ -159,7 +148,6 @@ public class Onboarding {
 	}
 
 	static void refreshUI() {
-		((InnerWindow) window).refreshUI();
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
 		defaultUI.setSelect(Defaults.SELECT);
@@ -185,58 +173,13 @@ public class Onboarding {
 	}
 
 	//region SetLocation
-	static void setLocation(Point point) {
+	private static void setLocation(Point point) {
 		frame.setLocation(point);
 	}
 
-	/** @noinspection SameParameterValue*/ //endregion
-	private static JPanel createKeybindButton(int y, String text, String setting) {
-		JPanel panel = new JPanel(null);
-		panel.setBounds(0, y, width, 36);
-		panel.setBackground(Defaults.SUB_MAIN);
-		FancyTextArea input = new FancyTextArea(false, false);
-		DefaultStyledDocument doc = new DefaultStyledDocument();
-		input.setEditable(false);
-		input.addKeyListener(new SwingKeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == 8 || e.getKeyCode() == 16 || e.getKeyCode() == 17 || e.getKeyCode() == 18) {
-					if (text.equalsIgnoreCase("Open Keybind")) {
-						input.setText("Home");
-						try {
-							Settings.writeSettings(setting, String.valueOf(36));
-							ShortcutSettings.loadKeybind(text.split(" ")[0], 36);
-						} catch (IOException ex) {
-							ex.printStackTrace();
-						}
-						openKeybind = 36;
-					}
-				} else {
-					input.setText(KeyEvent.getKeyText(e.getKeyCode()));
-					try {
-						Settings.writeSettings(setting, String.valueOf(e.getKeyCode()));
-					} catch (IOException ex) {
-						ex.printStackTrace();
-					}
-					openKeybind = e.getKeyCode();
-				}
-				panel.requestFocusInWindow();
-			}
-		});
-		input.setBounds(width - 140, 1, 100, 32);
 
-		input.setDocument(doc);
 
-		JLabel keybindButton = new JLabel(text);
-		keybindButton.setFont(Defaults.MAIN_FONT.deriveFont(14f));
-		keybindButton.setBounds(25, 3, keybindButton.getPreferredSize().width + 5, keybindButton.getPreferredSize().height + 5);
-		keybindButton.setForeground(Defaults.FOREGROUND);
-		panel.add(keybindButton);
-		panel.add(input);
-		return panel;
-	}
-
-	static void loadSettings() throws IOException {
+	static void loadSettings() {
 
 		if (!Settings.getSettings("openKeybind").equalsIgnoreCase("") && !Settings.getSettings("openKeybind").equalsIgnoreCase("-1")) {
 			openKeybind = Integer.parseInt(Settings.getSettings("openKeybind"));

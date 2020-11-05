@@ -22,7 +22,7 @@ public class Twitch {
 	}
 	public static String[] getViewers(){
 		ArrayList<String> allViewers = (ArrayList<String>) APIs.allViewers.clone();
-		String array[] = new String[allViewers.size()];
+		String[] array = new String[allViewers.size()];
 		for(int j =0;j<allViewers.size();j++){
 			array[j] = allViewers.get(j);
 		}

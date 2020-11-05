@@ -1,12 +1,14 @@
 package Main;
 
-import Main.InnerWindows.CommentsWindow;
-import Main.InnerWindows.InfoWindow;
-import Main.InnerWindows.LevelsWindow;
-import Main.InnerWindows.SongWindow;
+import Main.Panels.CommentsPanel;
+import Main.Panels.InfoPanel;
+import Main.Panels.LevelsPanel;
+import Main.Panels.SongPanel;
 import Main.SettingsPanels.BlockedSettings;
 import Main.SettingsPanels.GeneralSettings;
 import Main.SettingsPanels.OutputSettings;
+import Main.Windows.DialogBox;
+import Main.Windows.SettingsWindow;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
@@ -40,9 +42,9 @@ public class Functions {
 		}
 		if(Main.programLoaded) {
 			if (Requests.levels.size() != 0) {
-				int select = LevelsWindow.getSelectedID();
-				Requests.levels.remove(LevelsWindow.getSelectedID());
-				LevelsWindow.removeButton();
+				int select = LevelsPanel.getSelectedID();
+				Requests.levels.remove(LevelsPanel.getSelectedID());
+				LevelsPanel.removeButton();
 				if (Requests.levels.size() > 0 ) {
 					StringSelection selection = new StringSelection(
 							String.valueOf(Requests.levels.get(0).getLevelID()));
@@ -80,18 +82,18 @@ public class Functions {
 				Functions.saveFunction();
 			}
 			OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
-			LevelsWindow.setOneSelect();
+			LevelsPanel.setOneSelect();
 
 			new Thread(() -> {
-				CommentsWindow.unloadComments(true);
+				CommentsPanel.unloadComments(true);
 				if (Requests.levels.size() != 0) {
-					CommentsWindow.loadComments(0, false);
+					CommentsPanel.loadComments(0, false);
 				}
 			}).start();
 
-			SongWindow.refreshInfo();
-			InfoWindow.refreshInfo();
-			LevelsWindow.setName(Requests.levels.size());
+			SongPanel.refreshInfo();
+			InfoPanel.refreshInfo();
+			LevelsPanel.setName(Requests.levels.size());
 
 		}
 
@@ -104,11 +106,11 @@ public class Functions {
 			int num = 0;
 			if (Requests.levels.size() != 0) {
 
-				Requests.levels.remove(LevelsWindow.getSelectedID());
-				LevelsWindow.removeButton(LevelsWindow.getSelectedID());
+				Requests.levels.remove(LevelsPanel.getSelectedID());
+				LevelsPanel.removeButton(LevelsPanel.getSelectedID());
 				Functions.saveFunction();
 
-				CommentsWindow.unloadComments(true);
+				CommentsPanel.unloadComments(true);
 
 				if (Requests.levels.size() != 0) {
 					while(true) {
@@ -119,11 +121,9 @@ public class Functions {
 						}
 					}
 
-					LevelsWindow.setSelect(num);
+					LevelsPanel.setSelect(num);
 
-					new Thread(() -> {
-						CommentsWindow.loadComments(0, false);
-					}).start();
+					new Thread(() -> CommentsPanel.loadComments(0, false)).start();
 					StringSelection selection = new StringSelection(
 							String.valueOf(Requests.levels.get(num).getLevelID()));
 					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -145,17 +145,17 @@ public class Functions {
 				}
 			}
 			OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, num));
-			SongWindow.refreshInfo();
-			InfoWindow.refreshInfo();
+			SongPanel.refreshInfo();
+			InfoPanel.refreshInfo();
 			Functions.saveFunction();
-			LevelsWindow.setName(Requests.levels.size());
+			LevelsPanel.setName(Requests.levels.size());
 		}
 	}
 
 	public static void copyFunction() {
 		if (Requests.levels.size() != 0) {
 			StringSelection selection = new StringSelection(
-					String.valueOf(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID()));
+					String.valueOf(Requests.levels.get(LevelsPanel.getSelectedID()).getLevelID()));
 			Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 			clipboard.setContents(selection, selection);
 		}
@@ -210,7 +210,7 @@ public class Functions {
 
 	public static void blockFunction() {
 		if(Main.programLoaded) {
-			if(LevelsWindow.getSelectedID() == 0 && Requests.levels.size() > 1){
+			if(LevelsPanel.getSelectedID() == 0 && Requests.levels.size() > 1){
 				StringSelection selection = new StringSelection(
 						String.valueOf(Requests.levels.get(1).getLevelID()));
 				Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -220,10 +220,10 @@ public class Functions {
 
 				new Thread(()->{
 
-				String option = DialogBox.showDialogBox("$BLOCK_ID_TITLE$", "$BLOCK_ID_INFO$", "$BLOCK_ID_SUBINFO$", new String[]{"$YES$", "$NO$"}, new Object[]{Requests.levels.get(LevelsWindow.getSelectedID()).getName(), Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID()});
+				String option = DialogBox.showDialogBox("$BLOCK_ID_TITLE$", "$BLOCK_ID_INFO$", "$BLOCK_ID_SUBINFO$", new String[]{"$YES$", "$NO$"}, new Object[]{Requests.levels.get(LevelsPanel.getSelectedID()).getName(), Requests.levels.get(LevelsPanel.getSelectedID()).getLevelID()});
 
 				if (option.equalsIgnoreCase("YES")) {
-					BlockedSettings.addButton(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID());
+					BlockedSettings.addButton(Requests.levels.get(LevelsPanel.getSelectedID()).getLevelID());
 					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
 
 					try {
@@ -232,27 +232,27 @@ public class Functions {
 						}
 						Files.write(
 								file,
-								(Requests.levels.get(LevelsWindow.getSelectedID()).getLevelID() + "\n").getBytes(),
+								(Requests.levels.get(LevelsPanel.getSelectedID()).getLevelID() + "\n").getBytes(),
 								StandardOpenOption.APPEND);
 					} catch (IOException e1) {
 						DialogBox.showDialogBox("Error!", e1.toString(), "There was an error writing to the file!", new String[]{"OK"});
 
 					}
-					Requests.levels.remove(LevelsWindow.getSelectedID());
-					LevelsWindow.removeButton();
+					Requests.levels.remove(LevelsPanel.getSelectedID());
+					LevelsPanel.removeButton();
 					Functions.saveFunction();
-					LevelsWindow.setOneSelect();
+					LevelsPanel.setOneSelect();
 					new Thread(() -> {
-						CommentsWindow.unloadComments(true);
+						CommentsPanel.unloadComments(true);
 						if (Requests.levels.size() > 0) {
-							CommentsWindow.loadComments(0, false);
+							CommentsPanel.loadComments(0, false);
 						}
 					}).start();
-					LevelsWindow.setName(Requests.levels.size());
+					LevelsPanel.setName(Requests.levels.size());
 
 				}
-				SongWindow.refreshInfo();
-				InfoWindow.refreshInfo();
+				SongPanel.refreshInfo();
+				InfoPanel.refreshInfo();
 				SettingsWindow.run = true;
 				}).start();
 			}
@@ -267,15 +267,15 @@ public class Functions {
 			if (option.equalsIgnoreCase("CLEAR_ALL")) {
 				if (Requests.levels.size() != 0) {
 					for (int i = 0; i < Requests.levels.size(); i++) {
-						LevelsWindow.removeButton();
+						LevelsPanel.removeButton();
 					}
 					Requests.levels.clear();
 					Functions.saveFunction();
-					SongWindow.refreshInfo();
-					InfoWindow.refreshInfo();
-					CommentsWindow.unloadComments(true);
+					SongPanel.refreshInfo();
+					InfoPanel.refreshInfo();
+					CommentsPanel.unloadComments(true);
 				}
-				LevelsWindow.setOneSelect();
+				LevelsPanel.setOneSelect();
 				SettingsWindow.run = true;
 			}
 			else if (option.equalsIgnoreCase("Inactives")){
@@ -285,36 +285,34 @@ public class Functions {
 					for (int i = Requests.levels.size()-1; i >= 0; i--) {
 						if(!Requests.levels.get(i).getViewership()){
 							Requests.levels.remove(i);
-							LevelsWindow.removeButton(i);
+							LevelsPanel.removeButton(i);
 						}
 					}
 
 					Functions.saveFunction();
-					SongWindow.refreshInfo();
-					InfoWindow.refreshInfo();
-					CommentsWindow.unloadComments(true);
-					CommentsWindow.loadComments(0,false);
+					SongPanel.refreshInfo();
+					InfoPanel.refreshInfo();
+					CommentsPanel.unloadComments(true);
+					CommentsPanel.loadComments(0,false);
 				}
-				LevelsWindow.setOneSelect();
+				LevelsPanel.setOneSelect();
 				SettingsWindow.run = true;
 			}
-			LevelsWindow.setName(Requests.levels.size());
+			LevelsPanel.setName(Requests.levels.size());
 			}).start();
 
 		}
 
 	}
 
-	static void requestsToggleFunction() {
+	public static void requestsToggleFunction() {
 		if (Main.programLoaded) {
-			if (MainBar.requests) {
-				MainBar.stopReqs.setText("\uE768");
-				MainBar.requests = false;
+			if (Requests.enableRequests) {
+				Requests.enableRequests = false;
 				Main.sendMessage(Utilities.format("$REQUESTS_OFF_TOGGLE_MESSAGE$"));
 
 			} else {
-				MainBar.stopReqs.setText("\uE71A");
-				MainBar.requests = true;
+				Requests.enableRequests = true;
 				Main.sendMessage(Utilities.format("$REQUESTS_ON_TOGGLE_MESSAGE$"));
 			}
 		}

@@ -1,8 +1,13 @@
 package Main;
 
+import Main.Components.CurvedButtonAlt;
+import Main.Components.LangButton;
+import Main.Components.LangLabel;
+import Main.Components.RoundedJButton;
+import Main.Windows.Window;
+
 import java.io.*;
 import java.net.URI;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -12,8 +17,8 @@ import static java.nio.file.StandardWatchEventKinds.*;
 
 public class Language {
 
-	public static String lang = "en_us";
-	static Path myPath;
+	private static String lang = "en_us";
+	private static Path myPath;
 
 	static {
 		try {
@@ -31,16 +36,16 @@ public class Language {
 	public static String setLocale(String text) {
 		String newText = text;
 		String[] words = newText.split(" ");
-		for (int i = 0; i < words.length; i++) {
-			if (words[i].startsWith("$") && words[i].endsWith("$")) {
-				String newWord = Language.getString(words[i].replace("$", ""));
-				newText = newText.replace(words[i], newWord);
+		for (String word : words) {
+			if (word.startsWith("$") && word.endsWith("$")) {
+				String newWord = Language.getString(word.replace("$", ""));
+				newText = newText.replace(word, newWord);
 			}
 		}
 		return newText;
 	}
 
-	public static String getString(String identifier) {
+	static String getString(String identifier) {
 		try {
 			Path comPath = Paths.get(Defaults.saveDirectory + "/GDBoard/Languages/");
 			if (Files.exists(comPath)) {
@@ -81,6 +86,7 @@ public class Language {
 					if(ServerChatBot.uri.getScheme().equals("jar")) {
 						InputStream is = Main.class
 								.getClassLoader().getResourceAsStream(path.toString().substring(1));
+						assert is != null;
 						InputStreamReader isr = new InputStreamReader(is);
 						BufferedReader br = new BufferedReader(isr);
 
@@ -109,6 +115,7 @@ public class Language {
 							e.printStackTrace();
 						}
 						String line;
+						assert sc != null;
 						while (sc.hasNextLine()) {
 							line = sc.nextLine();
 							if (line.startsWith("//")) {
@@ -135,51 +142,52 @@ public class Language {
 		return identifier;
 	}
 
-	public static void startFileChangeListener() {
+	static void startFileChangeListener() {
 		new Thread(() -> {
 			try {
 				WatchService watcher = FileSystems.getDefault().newWatchService();
 				Path dir = Paths.get(Defaults.saveDirectory + "/GDBoard/Languages");
-				dir.register(watcher, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);
+				if(Files.exists(dir)) {
+					dir.register(watcher, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);
 
-				while (true) {
-					WatchKey key;
-					try {
-						key = watcher.take();
-					} catch (InterruptedException ex) {
-						return;
-					}
-
-					for (WatchEvent<?> event : key.pollEvents()) {
-						WatchEvent.Kind<?> kind = event.kind();
-
-						WatchEvent<Path> ev = (WatchEvent<Path>) event;
-						Path fileName = ev.context();
-
-						if (kind == ENTRY_MODIFY && fileName.toString().equals(lang + ".lang")) {
-							for(int i = 0; i < LangButton.buttonList.size(); i++){
-								LangButton.buttonList.get(i).refreshLocale();
-							}
-							for(int i = 0; i < LangLabel.labelList.size(); i++){
-								LangLabel.labelList.get(i).refreshLocale();
-							}
-							for(int i = 0; i < RoundedJButton.buttons.size(); i++){
-								RoundedJButton.buttons.get(i).refreshLocale();
-							}
-							for(int i = 0; i < CurvedButtonAlt.buttonList.size(); i++){
-								CurvedButtonAlt.buttonList.get(i).refreshLocale();
-							}
-							Windowed.refreshButtons();
+					while (true) {
+						WatchKey key;
+						try {
+							key = watcher.take();
+						} catch (InterruptedException ex) {
+							return;
 						}
-					}
 
-					boolean valid = key.reset();
-					if (!valid) {
-						break;
+						for (WatchEvent<?> event : key.pollEvents()) {
+							WatchEvent.Kind<?> kind = event.kind();
+
+							WatchEvent<Path> ev = (WatchEvent<Path>) event;
+							Path fileName = ev.context();
+
+							if (kind == ENTRY_MODIFY && fileName.toString().equals(lang + ".lang")) {
+								for (int i = 0; i < LangButton.buttonList.size(); i++) {
+									LangButton.buttonList.get(i).refreshLocale();
+								}
+								for (int i = 0; i < LangLabel.labelList.size(); i++) {
+									LangLabel.labelList.get(i).refreshLocale();
+								}
+								for (int i = 0; i < RoundedJButton.buttons.size(); i++) {
+									RoundedJButton.buttons.get(i).refreshLocale();
+								}
+								for (int i = 0; i < CurvedButtonAlt.buttonList.size(); i++) {
+									CurvedButtonAlt.buttonList.get(i).refreshLocale();
+								}
+							}
+						}
+
+						boolean valid = key.reset();
+						if (!valid) {
+							break;
+						}
 					}
 				}
 			} catch (IOException ex) {
-				System.err.println(ex);
+				ex.printStackTrace();
 			}
 		}).start();
 	}

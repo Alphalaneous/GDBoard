@@ -1,6 +1,9 @@
 package Main.SettingsPanels;
 
 import Main.*;
+import Main.Components.*;
+import Main.Windows.DialogBox;
+import Main.Windows.SettingsWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -118,7 +121,7 @@ public class BlockedCreatorSettings {
 
 	}
 
-	public static void removeUser(String user) {
+	private static void removeUser(String user) {
 		i--;
 		if (i % 2 == 0) {
 			height = height - 39;

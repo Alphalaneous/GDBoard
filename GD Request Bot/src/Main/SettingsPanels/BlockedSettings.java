@@ -1,6 +1,9 @@
 package Main.SettingsPanels;
 
 import Main.*;
+import Main.Components.*;
+import Main.Windows.DialogBox;
+import Main.Windows.SettingsWindow;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -10,7 +13,6 @@ import java.nio.file.*;
 import java.util.Scanner;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import static Main.Defaults.settingsButtonUI;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;

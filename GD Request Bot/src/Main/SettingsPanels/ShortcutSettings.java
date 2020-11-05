@@ -1,13 +1,15 @@
 package Main.SettingsPanels;
 
 import Main.*;
+import Main.Components.CheckboxButton;
+import Main.Components.FancyTextArea;
+import Main.Components.LangLabel;
 import org.jnativehook.keyboard.SwingKeyAdapter;
 
 import javax.swing.*;
 import javax.swing.text.DefaultStyledDocument;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
 
 
 public class ShortcutSettings {
@@ -64,30 +66,24 @@ public class ShortcutSettings {
 
 					if (text.equalsIgnoreCase("$OPEN_SHORTCUT$")) {
 						input.setText("Home");
-						try {
+
 							Settings.writeSettings(setting, String.valueOf(36));
 							loadKeybind(text, 36);
-						} catch (IOException ex) {
-							ex.printStackTrace();
-						}
+
 					} else {
 						input.setText("");
-						try {
+
 							Settings.writeSettings(setting, "-1");
 							loadKeybind(text, -1);
-						} catch (IOException ex) {
-							ex.printStackTrace();
-						}
+
 					}
 				} else {
 					input.setText(KeyEvent.getKeyText(e.getKeyCode()));
-					try {
+
 						Settings.writeSettings(setting, String.valueOf(e.getKeyCode()));
 						loadKeybind(text, e.getKeyCode());
 
-					} catch (IOException ex) {
-						ex.printStackTrace();
-					}
+
 				}
 				panel.requestFocusInWindow();
 			}
@@ -141,7 +137,7 @@ public class ShortcutSettings {
 	}
 
 	public static void setSettings() {
-		try {
+
 			Settings.writeSettings("openKeybind", String.valueOf(openKeybind));
 			Settings.writeSettings("skipKeybind", String.valueOf(skipKeybind));
 			Settings.writeSettings("randomKeybind", String.valueOf(randKeybind));
@@ -149,15 +145,11 @@ public class ShortcutSettings {
 			Settings.writeSettings("blockKeybind", String.valueOf(blockKeybind));
 			Settings.writeSettings("clearKeybind", String.valueOf(clearKeybind));
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 	}
 
-	public static void loadSettings() throws IOException {
-		while(true) {
-			try {
+	public static void loadSettings() {
+
+
 				if (!Settings.getSettings("onboarding").equalsIgnoreCase("false")) {
 					openKeybind = Onboarding.openKeybind;
 				} else if (!Settings.getSettings("openKeybind").equalsIgnoreCase("") && !Settings.getSettings("openKeybind").equalsIgnoreCase("-1")) {
@@ -229,16 +221,8 @@ public class ShortcutSettings {
 							}
 						}
 					}
-				}
-				break;
-			}
-			catch (Exception ignored){
-			}
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+
+
 		}
 	}
 

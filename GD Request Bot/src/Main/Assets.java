@@ -1,6 +1,6 @@
 package Main;
 
-import Main.InnerWindows.LevelsWindow;
+import Main.Panels.LevelsPanel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -22,23 +22,23 @@ public class Assets {
 	static {
 		try {
 			verifiedCoin = new ImageIcon(ImageIO
-						.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
+						.read(Objects.requireNonNull(LevelsPanel.class.getClassLoader()
 								.getResource("Resources/GDAssets/verifiedCoin.png")))
 						.getScaledInstance(15, 15, Image.SCALE_SMOOTH));
 			unverifiedCoin = new ImageIcon(ImageIO
-					.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
+					.read(Objects.requireNonNull(LevelsPanel.class.getClassLoader()
 							.getResource("Resources/GDAssets/unverifiedCoin.png")))
 					.getScaledInstance(15, 15, Image.SCALE_SMOOTH));
 			GDBoard = new ImageIcon(ImageIO
-					.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
+					.read(Objects.requireNonNull(LevelsPanel.class.getClassLoader()
 							.getResource("Resources/Icons/windowIcon.png")))
 					.getScaledInstance(40, 40, Image.SCALE_SMOOTH));
 			Alphalaneous = new ImageIcon(ImageIO
-					.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
+					.read(Objects.requireNonNull(LevelsPanel.class.getClassLoader()
 							.getResource("Resources/Icons/Alphalaneous.png")))
 					.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
 			EncodedLua = new ImageIcon(ImageIO
-					.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
+					.read(Objects.requireNonNull(LevelsPanel.class.getClassLoader()
 							.getResource("Resources/Icons/EncodedLua.png")))
 					.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
 		} catch (IOException e) {
@@ -52,26 +52,34 @@ public class Assets {
 	private static int height = 30;
 
 
-	static void loadAssets() throws IOException {
-		String[] difficulties = {"NA", "auto", "easy", "normal", "hard", "harder", "insane", "easy demon", "medium demon",
-				"hard demon", "insane demon", "extreme demon"};
-		for(String difficulty : difficulties){
-			difficultyIconsNormal.put(difficulty, new ImageIcon(ImageIO
-					.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
-							.getResource("Resources/DifficultyIcons/Normal/" + difficulty + ".png")))
-					.getScaledInstance(width, height, Image.SCALE_SMOOTH)));
+	static void loadAssets() {
+		new Thread(() -> {
+			try {
+				String[] difficulties = {"NA", "auto", "easy", "normal", "hard", "harder", "insane", "easy demon", "medium demon",
+						"hard demon", "insane demon", "extreme demon"};
+				for (String difficulty : difficulties) {
+					difficultyIconsNormal.put(difficulty, new ImageIcon(ImageIO
+							.read(Objects.requireNonNull(LevelsPanel.class.getClassLoader()
+									.getResource("Resources/DifficultyIcons/Normal/" + difficulty + ".png")))
+							.getScaledInstance(width, height, Image.SCALE_SMOOTH)));
 
-			if(!difficulty.equalsIgnoreCase("NA")) {
-				difficultyIconsFeature.put(difficulty, new ImageIcon(ImageIO
-						.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
-								.getResource("Resources/DifficultyIcons/Featured/" + difficulty + ".png")))
-						.getScaledInstance(width, height, Image.SCALE_SMOOTH)));
+					if (!difficulty.equalsIgnoreCase("NA")) {
+						difficultyIconsFeature.put(difficulty, new ImageIcon(ImageIO
+								.read(Objects.requireNonNull(LevelsPanel.class.getClassLoader()
+										.getResource("Resources/DifficultyIcons/Featured/" + difficulty + ".png")))
+								.getScaledInstance(width, height, Image.SCALE_SMOOTH)));
 
-				difficultyIconsEpic.put(difficulty, new ImageIcon(ImageIO
-						.read(Objects.requireNonNull(LevelsWindow.class.getClassLoader()
-								.getResource("Resources/DifficultyIcons/Epic/" + difficulty + ".png")))
-						.getScaledInstance(width, height, Image.SCALE_SMOOTH)));
+						difficultyIconsEpic.put(difficulty, new ImageIcon(ImageIO
+								.read(Objects.requireNonNull(LevelsPanel.class.getClassLoader()
+										.getResource("Resources/DifficultyIcons/Epic/" + difficulty + ".png")))
+								.getScaledInstance(width, height, Image.SCALE_SMOOTH)));
+					}
+				}
 			}
-		}
+			catch (IOException e){
+				e.printStackTrace();
+			}
+		}).start();
+
 	}
 }

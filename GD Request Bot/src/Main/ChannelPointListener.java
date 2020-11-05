@@ -1,24 +1,17 @@
 package Main;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
-import Main.APIs;
-import Main.Settings;
 import com.cavariux.twitchirc.Json.JsonObject;
 import org.java_websocket.client.WebSocketClient;
-import org.java_websocket.drafts.Draft;
-import org.java_websocket.drafts.Draft_6455;
 import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.java_websocket.handshake.ServerHandshake;
 
@@ -26,7 +19,7 @@ public class ChannelPointListener extends WebSocketClient {
 
 	private boolean pingSuccess = false;
 	private static URI uri;
-	static Path myPath;
+	private static Path myPath;
 	static {
 		try {
 			uri = Main.class.getResource("/Resources/points/").toURI();
@@ -34,9 +27,7 @@ public class ChannelPointListener extends WebSocketClient {
 			e.printStackTrace();
 		}
 	}
-
 	static {
-
 		if (uri.getScheme().equals("jar")) {
 			myPath = ServerChatBot.fileSystem.getPath("/Resources/points/");
 		} else {
@@ -44,11 +35,8 @@ public class ChannelPointListener extends WebSocketClient {
 		}
 
 	}
-	public ChannelPointListener(URI serverUri, Draft draft) {
-		super(serverUri, draft);
-	}
 
-	public ChannelPointListener(URI serverURI) {
+	ChannelPointListener(URI serverURI) {
 		super(serverURI);
 	}
 
@@ -201,13 +189,13 @@ public class ChannelPointListener extends WebSocketClient {
 		ex.printStackTrace();
 	}
 
-	public void disconnectBot(){
+	void disconnectBot(){
 		try {
 			send("{\n" +
 					"  \"type\": \"UNLISTEN\"\n" +
 					"}");
 		}
-		catch (WebsocketNotConnectedException e){
+		catch (WebsocketNotConnectedException ignored){
 
 		}
 	}

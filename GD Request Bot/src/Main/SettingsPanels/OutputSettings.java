@@ -1,6 +1,9 @@
 package Main.SettingsPanels;
 
 import Main.*;
+import Main.Components.CheckboxButton;
+import Main.Components.FancyTextArea;
+import Main.Components.LangLabel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -99,18 +102,16 @@ public class OutputSettings {
 			outputStringInput.setText(outputString.replaceAll("%s%", ""));
 		}
 		if(!Settings.getSettings("outputFileLocation").equalsIgnoreCase("")) {
-			fileLocation = Settings.getSettings("outputFileLocation");
-			fileLocationInput.setText(fileLocation);
+			fileLocation = Settings.getSettings("outputFileLocation").replace("\\", "\\\\");
+			fileLocationInput.setText(fileLocation.replace("\\\\", "\\"));
 		}
 	}
 	public static void setSettings(){
-		try {
+
 			Settings.writeSettings("outputString", "%s%" + outputString.replace("\n", "%n%").replaceAll("%s%", ""));
 			Settings.writeSettings("noLevelsString", "%s%" + noLevelString.replace("\n", "%n%").replaceAll("%s%", ""));
-			Settings.writeSettings("outputFileLocation", fileLocation.replace("\\", "\\\\"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			Settings.writeSettings("outputFileLocation", fileLocation.replace("\\\\", "\\"));
+
 	}
 	public static void setOutputStringFile(String text){
 		Path file = Paths.get(fileLocation + "\\output.txt");

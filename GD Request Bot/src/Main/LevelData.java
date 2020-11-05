@@ -177,7 +177,7 @@ public class LevelData {
 	private long downloads;
 	private long levelID;
 	private StringBuilder videoTitle;
-	private StringBuilder videoURL;;
+	private StringBuilder videoURL;
 	private boolean featured;
 	private boolean epic;
 	private StringBuilder downloadURL;

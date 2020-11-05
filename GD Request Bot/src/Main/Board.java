@@ -1,25 +1,17 @@
 package Main;
 
-import Main.InnerWindows.LevelsWindow;
+import Main.Windows.DialogBox;
 import com.github.alex1304.jdash.client.AnonymousGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
-import com.github.alex1304.jdash.exception.SongNotAllowedForUseException;
 import delight.nashornsandbox.NashornSandbox;
 import delight.nashornsandbox.NashornSandboxes;
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
 import org.json.JSONObject;
-
-import javax.swing.*;
-import java.io.*;
-import java.net.URL;
-import java.util.*;
 
 @SuppressWarnings("unused")
 
 public class Board {
 
-	static boolean bwomp = false;
+	private static boolean bwomp = false;
 
 
 	public static void playSound(String location){

@@ -1,8 +1,9 @@
 package Main.SettingsPanels;
 
 import Main.*;
-import org.reflections.Reflections;
-import org.reflections.scanners.SubTypesScanner;
+import Main.Components.CheckboxButton;
+import Main.Components.FancyTextArea;
+import Main.Components.LangLabel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,10 +12,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
-import java.lang.reflect.Method;
-import java.util.Set;
-
-import static Main.Defaults.settingsButtonUI;
 
 public class GeneralBotSettings {
 	public static boolean silentOption = false;
@@ -145,16 +142,11 @@ public class GeneralBotSettings {
 		}
 	}
 	public static void setSettings(){
-		try {
+
 			Settings.writeSettings("silentMode", String.valueOf(silentOption));
 			Settings.writeSettings("multiMode", String.valueOf(multiOption));
 			Settings.writeSettings("antiDox", String.valueOf(antiDox));
 			Settings.writeSettings("globalCooldown", String.valueOf(cooldown));
-
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 	}
 
@@ -170,20 +162,6 @@ public class GeneralBotSettings {
 			if(component instanceof CheckboxButton){
 				((CheckboxButton) component).refresh();
 			}
-		}
-	}
-	public static void destroyPanels(){
-		try {
-			Reflections innerReflections = new Reflections("Main.InnerWindows", new SubTypesScanner(false));
-			Set<Class<?>> innerClasses =
-					innerReflections.getSubTypesOf(Object.class);
-			for (Class<?> Class : innerClasses) {
-				Method method = Class.getMethod("destroyPanel");
-				method.invoke(null);
-			}
-		}
-		catch (Exception e){
-			e.printStackTrace();
 		}
 	}
 }

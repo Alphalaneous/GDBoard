@@ -1,9 +1,11 @@
 package Main.SettingsPanels;
 
 import Main.*;
+import Main.Components.*;
+import Main.Windows.DialogBox;
+import Main.Windows.SettingsWindow;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

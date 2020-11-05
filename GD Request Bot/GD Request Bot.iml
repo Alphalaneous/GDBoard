@@ -8,19 +8,15 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="dependency" level="project" />
-    <orderEntry type="library" name="jnativehook-2.1.0" level="project" />
-    <orderEntry type="library" name="jna-5.5.0" level="project" />
-    <orderEntry type="library" name="jna-platform-5.5.0" level="project" />
     <orderEntry type="library" name="delight-nashorn-sandbox-0.0.6-distribution" level="project" />
-    <orderEntry type="library" name="reflections-0.9.12" level="project" />
-    <orderEntry type="library" name="javassist" level="project" />
     <orderEntry type="library" name="rsyntaxtextarea-3.1.1" level="project" />
-    <orderEntry type="library" name="okio-1.13.0" level="project" />
     <orderEntry type="library" name="Java-WebSocket-1.5.1-with-dependencies" level="project" />
-    <orderEntry type="library" name="Filters" level="project" />
-    <orderEntry type="library" name="swingx-1.6.1" level="project" />
     <orderEntry type="library" name="javafx-swt" level="application" />
-    <orderEntry type="library" name="javafx.swing" level="project" />
     <orderEntry type="library" name="EasyTwitchIRC" level="project" />
+    <orderEntry type="library" name="jnativehook-2.1.0" level="project" />
+    <orderEntry type="library" name="okio-1.13.0" level="project" />
+    <orderEntry type="library" name="jlayer-1.0.1" level="project" />
+    <orderEntry type="library" name="TwitchIRC_v1.2" level="project" />
+    <orderEntry type="library" name="json-20140107" level="project" />
   </component>
 </module>

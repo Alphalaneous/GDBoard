@@ -1,12 +1,14 @@
 package Main.SettingsPanels;
 
 import Main.*;
+import Main.Components.CheckboxButton;
+import Main.Components.FancyTextArea;
+import Main.Windows.Window;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 
 
 public class WindowedSettings {
@@ -21,7 +23,7 @@ public class WindowedSettings {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				onTopOption = onTop.getSelectedState();
-				Windowed.setOnTop(onTop.getSelectedState());
+				Window.setOnTop(onTop.getSelectedState());
 			}
 		});
 		panel.setLayout(null);
@@ -30,22 +32,6 @@ public class WindowedSettings {
 		panel.setBackground(Defaults.SUB_MAIN);
 		panel.add(onTop);
 		return panel;
-	}
-	public static void loadSettingsA(){
-		if(!Settings.getSettings("onTop").equalsIgnoreCase("")) {
-			onTopOption = Boolean.parseBoolean(Settings.getSettings("onTop"));
-			onTop.setChecked(onTopOption);
-			Windowed.setOnTop(onTopOption);
-			//((InnerWindow) Windowed.window).setMinimize(!onTopOption);
-		}
-	}
-	public static void setSettings(){
-		try {
-			Settings.writeSettings("onTop", String.valueOf(onTopOption));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	private static CheckboxButton createButton(String text, int y){

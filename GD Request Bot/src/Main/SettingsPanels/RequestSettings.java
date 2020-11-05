@@ -1,6 +1,9 @@
 package Main.SettingsPanels;
 
 import Main.*;
+import Main.Components.*;
+import Main.Windows.DialogBox;
+import Main.Windows.SettingsWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -910,7 +913,7 @@ public class RequestSettings {
 	}
 
 	public static void setSettings() {
-		try {
+
 			Settings.writeSettings("rated", String.valueOf(ratedOption));
 			Settings.writeSettings("unrated", String.valueOf(unratedOption));
 			Settings.writeSettings("disallowStrings", String.valueOf(disallowOption));
@@ -932,11 +935,9 @@ public class RequestSettings {
 			Settings.writeSettings("difficultyFilter", excludedDifficulties.toString().replaceAll("\\[", "").replaceAll("]", "").replaceAll(",{4}", ","));
 			Settings.writeSettings("lengthFilter", excludedLengths.toString().replaceAll("\\[", "").replaceAll("]", "").replaceAll(",{4}", ","));
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
 	}
-	public static void removeString(String string) {
+	private static void removeString(String string) {
 		i--;
 		if (i % 2 == 0) {
 			height = height - 39;

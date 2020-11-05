@@ -1,7 +1,7 @@
 package Main;
 
-import Main.InnerWindows.LevelsWindow;
-import Main.SettingsPanels.AccountSettings;
+import Main.Panels.LevelsPanel;
+import Main.Windows.DialogBox;
 import com.cavariux.twitchirc.Json.JsonArray;
 import com.cavariux.twitchirc.Json.JsonObject;
 import com.mb3364.twitch.api.Twitch;
@@ -13,22 +13,18 @@ import okhttp3.Request;
 import okhttp3.Response;
 import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
-import reactor.netty.http.client.PrematureCloseException;
 
 import java.nio.charset.StandardCharsets;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.Map;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -64,7 +60,7 @@ public class APIs {
         return info;
     }*/
 
-	public static ArrayList<Comment> getGDComments(int page, boolean top, long ID) throws IOException {
+	public static ArrayList<Comment> getGDComments(int page, boolean top, long ID) {
 		String response = "";
 		int tries = 0;
 		while (tries < 5) {
@@ -78,7 +74,7 @@ public class APIs {
 						});
 
 
-				response = new String(client.post()
+				response = Objects.requireNonNull(client.post()
 						.uri("/getGJComments21.php")
 						.send(Mono.just(data))
 						.responseSingle((responceHeader, responceBody) -> {
@@ -98,7 +94,7 @@ public class APIs {
 			}
 			tries++;
 		}
-		int pages = (((Integer.parseInt(response.split("#")[1].split(":")[0]) - 1) / 10) + 1) | 0;
+		int pages = (((Integer.parseInt(response.split("#")[1].split(":")[0]) - 1) / 10) + 1);
 		if (page > pages) {
 			return null;
 		}
@@ -119,11 +115,10 @@ public class APIs {
 			} catch (Exception ignored) {
 			}
 		}
-		response = null;
 		return commentsData;
 	}
 
-	static ArrayList<String> allViewers = new ArrayList<String>();
+	static ArrayList<String> allViewers = new ArrayList<>();
 
 	static void setAllViewers() {
 		try {
@@ -165,7 +160,7 @@ public class APIs {
 					JsonObject viewers = JsonObject.readFrom(builder.toString());
 					String[] types = {"broadcaster", "vips", "staff", "moderators", "admins", "global_mods", "viewers"};
 					for (int i = 0; i < Requests.levels.size(); i++) {
-						LevelsWindow.getButton(i).setViewership(false);
+						LevelsPanel.getButton(i).setViewership(false);
 					}
 
 					for (String type : types) {
@@ -174,8 +169,8 @@ public class APIs {
 							for (int i = 0; i < viewerList.size(); i++) {
 								String viewer = viewerList.get(i).asString().replaceAll("\"", "");
 								for (int k = 0; k < Requests.levels.size(); k++) {
-									if (LevelsWindow.getButton(k).getRequester().equalsIgnoreCase(viewer)) {
-										LevelsWindow.getButton(k).setViewership(true);
+									if (LevelsPanel.getButton(k).getRequester().equalsIgnoreCase(viewer)) {
+										LevelsPanel.getButton(k).setViewership(true);
 									}
 								}
 							}
@@ -197,12 +192,7 @@ public class APIs {
 
 		try {
 
-			JsonObject isFollowing = null;
-			try {
-				isFollowing = twitchAPI("https://api.twitch.tv/helix/users/follows?from_id=" + getIDs(user) + "&to_id=" + getIDs(Settings.getSettings("channel")));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			JsonObject isFollowing = twitchAPI("https://api.twitch.tv/helix/users/follows?from_id=" + getIDs(user) + "&to_id=" + getIDs(Settings.getSettings("channel")));
 			if (user.equalsIgnoreCase(Settings.getSettings("channel"))) {
 				return false;
 			}
@@ -225,7 +215,7 @@ public class APIs {
 			URL ids = new URL(url);
 			Scanner s = new Scanner(ids.openStream());
 			while (s.hasNextLine()) {
-				response.append(s.nextLine() + " ");
+				response.append(s.nextLine()).append(" ");
 			}
 			s.close();
 		} catch (Exception e) {
@@ -235,38 +225,31 @@ public class APIs {
 	}
 
 	public static long getFollowerCount() {
-		JsonObject followCountJson = null;
-		try {
-			followCountJson = twitchAPI("https://api.twitch.tv/helix/users/follows?to_id=" + getIDs(Settings.getSettings("channel")));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		JsonObject followCountJson;
+		followCountJson = twitchAPI("https://api.twitch.tv/helix/users/follows?to_id=" + getIDs(Settings.getSettings("channel")));
+		assert followCountJson != null;
 		String total = followCountJson.get("total").toString();
 		return Long.parseLong(total);
 	}
 
 	public static String getChannel() {
-		try {
+
 			JsonObject nameObj = twitchAPI("https://api.twitch.tv/helix/users");
+			assert nameObj != null;
 			return String.valueOf(nameObj.asObject().get("data").asArray().get(0).asObject().get("display_name")).replaceAll("\"", "");
-		} catch (Exception e) {
-			DialogBox.showDialogBox("Error!", e.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
-			return "error";
-		}
+
 	}
 
 	public static String getPFP() {
-		try {
+
 			JsonObject nameObj = twitchAPI("https://api.twitch.tv/helix/users");
+			assert nameObj != null;
 			return String.valueOf(nameObj.asObject().get("data").asArray().get(0).asObject().get("profile_image_url")).replaceAll("\"", "");
-		} catch (Exception e) {
-			DialogBox.showDialogBox("Error!", e.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
-			return "error";
-		}
+
 	}
 
 
-	private static JsonObject twitchAPI(String URL) throws IOException {
+	private static JsonObject twitchAPI(String URL) {
 		OkHttpClient client = new OkHttpClient();
 		Request request = new Request.Builder()
 				.url(URL)
@@ -276,6 +259,7 @@ public class APIs {
 				.addHeader("Authorization", "Bearer " + Settings.getSettings("oauth"))
 				.build();
 		try (Response response = client.newCall(newReq).execute()) {
+			assert response.body() != null;
 			return JsonObject.readFrom(response.body().string());
 
 		} catch (IOException e) {
@@ -297,7 +281,7 @@ public class APIs {
 		}*/
 	}
 
-	private static JsonObject twitchAPI(String URL, boolean v5) throws IOException {
+	private static JsonObject twitchAPI(String URL, boolean v5) {
 
 		OkHttpClient client = new OkHttpClient();
 		Request request = new Request.Builder()
@@ -310,6 +294,7 @@ public class APIs {
 				.build();
 
 		try (Response response = client.newCall(newReq).execute()) {
+			assert response.body() != null;
 			return JsonObject.readFrom(response.body().string());
 
 		} catch (IOException e) {
@@ -335,14 +320,9 @@ public class APIs {
 	}
 
 	public static String getIDs(String username) {
-		JsonObject userID = null;
-		try {
-			userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + username.toLowerCase());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		System.out.println(userID.toString());
+		JsonObject userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + username.toLowerCase());
 		assert userID != null;
+		System.out.println(userID.toString());
 		return userID.get("data").asArray().get(0).asObject().get("id").toString().replaceAll("\"", "");
 	}
 
@@ -376,16 +356,11 @@ public class APIs {
 	}
 
 	public static void setOauth() {
-		Thread thread = new Thread(() -> {
-			setOauthPrivate(true);
-		});
+		Thread thread = new Thread(() -> setOauthPrivate(true));
 		thread.start();
 	}
 	public static void setOauthNR() {
-		Thread thread = new Thread(() -> {
-			setOauthPrivate(false);
-
-		});
+		Thread thread = new Thread(() -> setOauthPrivate(false));
 		thread.start();
 	}
 

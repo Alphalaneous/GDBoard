@@ -1,20 +1,18 @@
 package Main;
 
-import javazoom.jl.decoder.JavaLayerException;
+import Main.Windows.DialogBox;
 import javazoom.jl.player.Player;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 public class Sounds {
 
-	public static HashMap<String, Sound> sounds = new HashMap<String, Sound>();
+	static HashMap<String, Sound> sounds = new HashMap<String, Sound>();
 
 
 	public static void playSound(String location, boolean restart, boolean overlap){
@@ -42,11 +40,9 @@ public class Sounds {
 		sounds.get(location).stopSound();
 	}
 	public static void stopAllSounds(){
-		Iterator hmIterator = sounds.entrySet().iterator();
 
-		while (hmIterator.hasNext()) {
-			Map.Entry mapElement = (Map.Entry)hmIterator.next();
-			((Sound)mapElement.getValue()).stopSound();
+		for (Map.Entry<String, Sound> stringSoundEntry : sounds.entrySet()) {
+			((Sound) ((Map.Entry) stringSoundEntry).getValue()).stopSound();
 		}
 	}
 	private static class Sound {
@@ -63,7 +59,7 @@ public class Sounds {
 			this.isURL = isURL;
 			Sounds.sounds.put(location, this);
 		}
-		public void playSound() {
+		void playSound() {
 			new Thread(() -> {
 				try {
 					BufferedInputStream inp = null;
@@ -91,7 +87,7 @@ public class Sounds {
 			}).start();
 
 		}
-		public void stopSound(){
+		void stopSound(){
 			mp3player.close();
 			complete = true;
 		}

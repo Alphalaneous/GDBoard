@@ -1,15 +1,17 @@
 package Main.SettingsPanels;
 
 import Main.*;
+import Main.Components.*;
+import Main.Windows.DialogBox;
+import Main.Windows.SettingsWindow;
+import Main.Windows.Window;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
 import java.nio.file.*;
-import java.util.Scanner;
 
 import static Main.Defaults.settingsButtonUI;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
@@ -154,7 +156,7 @@ public class RequestsLog {
 
 						} catch (IOException ex) {
 
-							JOptionPane.showMessageDialog(Overlay.frame, "There was an error writing to the file!", "Error", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(Window.frame, "There was an error writing to the file!", "Error", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 					removeID(button.getLText());

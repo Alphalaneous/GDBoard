@@ -62,10 +62,10 @@ public class Command {
             return "Use of that command is prohibited, nice try :)";
         }
         String[] words = result.split(" ");
-        for(int i = 0; i < words.length; i++){
-            if(words[i].startsWith("$") && words[i].endsWith("$")){
-                String newWord = Language.getString(words[i].replaceAll("\\$", ""));
-                result = result.replace(words[i], newWord);
+        for (String word : words) {
+            if (word.startsWith("$") && word.endsWith("$")) {
+                String newWord = Language.getString(word.replaceAll("\\$", ""));
+                result = result.replace(word, newWord);
             }
         }
         return result;

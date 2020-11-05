@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.*;
@@ -17,7 +16,7 @@ import java.util.stream.Stream;
 
 public class ServerChatBot {
     static boolean processing = false;
-    public static URI uri;
+    static URI uri;
     static {
         try {
             uri = Main.class.getResource("/Resources/Commands/").toURI();
@@ -25,12 +24,12 @@ public class ServerChatBot {
             e.printStackTrace();
         }
     }
-    public static Path myPath;
+    private static Path myPath;
     public static FileSystem fileSystem = null;
     static{
         if (uri.getScheme().equals("jar")) {
             try {
-                fileSystem = FileSystems.newFileSystem(uri, Collections.<String, Object>emptyMap());
+                fileSystem = FileSystems.newFileSystem(uri, Collections.emptyMap());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -39,7 +38,7 @@ public class ServerChatBot {
         myPath = Paths.get(uri);
     }
     }
-    public static String[] gdCommands = {"!gd", "!kill", "!block", "!blockuser", "!unblock", "!unblockuser", "!clear", "!info", "!move", "!next", "!position", "!queue", "!remove", "!request", "!song", "!stop", "!toggle", "!top", "!wronglevel"};
+    private static String[] gdCommands = {"!gd", "!kill", "!block", "!blockuser", "!unblock", "!unblockuser", "!clear", "!info", "!move", "!next", "!position", "!queue", "!remove", "!request", "!song", "!stop", "!toggle", "!top", "!wronglevel"};
     private static ArrayList<String> comCooldown = new ArrayList<>();
     static void onMessage(String user, String message, boolean isMod, boolean isSub, int cheer, String ID) {
         boolean whisper = false;
@@ -281,6 +280,7 @@ public class ServerChatBot {
                                 if(uri.getScheme().equals("jar")){
                                     InputStream is = Main.class
                                             .getClassLoader().getResourceAsStream(path.toString().substring(1));
+                                    assert is != null;
                                     InputStreamReader isr = new InputStreamReader(is);
                                     BufferedReader br = new BufferedReader(isr);
                                     StringBuilder function = new StringBuilder();

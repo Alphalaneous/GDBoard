@@ -1,20 +1,16 @@
 package Main.SettingsPanels;
 
 import Main.*;
+import Main.Components.*;
 import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.exception.GDLoginFailedException;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 import java.util.Base64;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import static Main.Defaults.settingsButtonUI;
 
@@ -126,13 +122,10 @@ public class AccountSettings {
 						Settings.writeSettings("GDLogon", "true");
 						logon.setVisible(false);
 					}
-					catch (GDLoginFailedException | IOException f){
+					catch (GDLoginFailedException f){
 						usernameLabel.setForeground(red);
 						passwordLabel.setForeground(red);
-						try {
-							Settings.writeSettings("GDLogon", "false");
-						} catch (IOException ignored) {
-						}
+						Settings.writeSettings("GDLogon", "false");
 						LoadGD.isAuth = false;
 					}
 				}
