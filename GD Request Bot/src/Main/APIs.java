@@ -2,8 +2,6 @@ package Main;
 
 import Main.Panels.LevelsPanel;
 import Main.Windows.DialogBox;
-import com.cavariux.twitchirc.Json.JsonArray;
-import com.cavariux.twitchirc.Json.JsonObject;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
 import io.netty.buffer.ByteBuf;
@@ -11,6 +9,8 @@ import io.netty.handler.codec.http.HttpResponseStatus;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 
@@ -130,13 +130,13 @@ public class APIs {
 			while ((x = br.readLine()) != null) {
 				builder.append(x).append("\n");
 			}
-			JsonObject viewers = JsonObject.readFrom(builder.toString());
+			JSONObject viewers = new JSONObject(builder.toString());
 			String[] types = {"broadcaster", "vips", "staff", "moderators", "admins", "global_mods", "viewers"};
 			allViewers.clear();
 			for (String type : types) {
-				JsonArray viewerList = viewers.get("chatters").asObject().get(type).asArray();
-				for (int i = 0; i < viewerList.size(); i++) {
-					String viewer = viewerList.get(i).asString().replaceAll("\"", "");
+				JSONArray viewerList = viewers.getJSONObject("chatters").getJSONArray(type);
+				for (int i = 0; i < viewerList.length(); i++) {
+					String viewer = viewerList.get(i).toString().replaceAll("\"", "");
 					allViewers.add(viewer);
 				}
 			}
@@ -157,7 +157,7 @@ public class APIs {
 					while ((x = br.readLine()) != null) {
 						builder.append(x).append("\n");
 					}
-					JsonObject viewers = JsonObject.readFrom(builder.toString());
+					JSONObject viewers =new JSONObject(builder.toString());
 					String[] types = {"broadcaster", "vips", "staff", "moderators", "admins", "global_mods", "viewers"};
 					for (int i = 0; i < Requests.levels.size(); i++) {
 						LevelsPanel.getButton(i).setViewership(false);
@@ -165,9 +165,9 @@ public class APIs {
 
 					for (String type : types) {
 						if(viewers.get("chatters") != null) {
-							JsonArray viewerList = viewers.get("chatters").asObject().get(type).asArray();
-							for (int i = 0; i < viewerList.size(); i++) {
-								String viewer = viewerList.get(i).asString().replaceAll("\"", "");
+							JSONArray viewerList = viewers.getJSONObject("chatters").getJSONArray(type);
+							for (int i = 0; i < viewerList.length(); i++) {
+								String viewer = viewerList.get(i).toString().replaceAll("\"", "");
 								for (int k = 0; k < Requests.levels.size(); k++) {
 									if (LevelsPanel.getButton(k).getRequester().equalsIgnoreCase(viewer)) {
 										LevelsPanel.getButton(k).setViewership(true);
@@ -192,7 +192,7 @@ public class APIs {
 
 		try {
 
-			JsonObject isFollowing = twitchAPI("https://api.twitch.tv/helix/users/follows?from_id=" + getIDs(user) + "&to_id=" + getIDs(Settings.getSettings("channel")));
+			JSONObject isFollowing = twitchAPI("https://api.twitch.tv/helix/users/follows?from_id=" + getIDs(user) + "&to_id=" + getIDs(Settings.getSettings("channel")));
 			if (user.equalsIgnoreCase(Settings.getSettings("channel"))) {
 				return false;
 			}
@@ -225,7 +225,7 @@ public class APIs {
 	}
 
 	public static long getFollowerCount() {
-		JsonObject followCountJson;
+		JSONObject followCountJson;
 		followCountJson = twitchAPI("https://api.twitch.tv/helix/users/follows?to_id=" + getIDs(Settings.getSettings("channel")));
 		assert followCountJson != null;
 		String total = followCountJson.get("total").toString();
@@ -234,22 +234,25 @@ public class APIs {
 
 	public static String getChannel() {
 
-			JsonObject nameObj = twitchAPI("https://api.twitch.tv/helix/users");
+			JSONObject nameObj = twitchAPI("https://api.twitch.tv/helix/users");
 			assert nameObj != null;
-			return String.valueOf(nameObj.asObject().get("data").asArray().get(0).asObject().get("display_name")).replaceAll("\"", "");
+			return nameObj.getJSONArray("data").getJSONObject(0).get("display_name").toString().replaceAll("\"", "");
 
 	}
 
 	public static String getPFP() {
 
-			JsonObject nameObj = twitchAPI("https://api.twitch.tv/helix/users");
+			JSONObject nameObj = twitchAPI("https://api.twitch.tv/helix/users");
 			assert nameObj != null;
-			return String.valueOf(nameObj.asObject().get("data").asArray().get(0).asObject().get("profile_image_url")).replaceAll("\"", "");
+
+			//String url = String.valueOf(nameObj.asObject().get("data").asArray().get(0).asObject().get("profile_image_url")).replaceAll("\"", "");
+
+		return nameObj.getJSONArray("data").getJSONObject(0).get("profile_image_url").toString().replaceAll("\"", "");
 
 	}
 
 
-	private static JsonObject twitchAPI(String URL) {
+	private static JSONObject twitchAPI(String URL) {
 		OkHttpClient client = new OkHttpClient();
 		Request request = new Request.Builder()
 				.url(URL)
@@ -260,7 +263,7 @@ public class APIs {
 				.build();
 		try (Response response = client.newCall(newReq).execute()) {
 			assert response.body() != null;
-			return JsonObject.readFrom(response.body().string());
+			return new JSONObject(response.body().string());
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -281,7 +284,7 @@ public class APIs {
 		}*/
 	}
 
-	private static JsonObject twitchAPI(String URL, boolean v5) {
+	private static JSONObject twitchAPI(String URL, boolean v5) {
 
 		OkHttpClient client = new OkHttpClient();
 		Request request = new Request.Builder()
@@ -295,7 +298,7 @@ public class APIs {
 
 		try (Response response = client.newCall(newReq).execute()) {
 			assert response.body() != null;
-			return JsonObject.readFrom(response.body().string());
+			return new JSONObject(response.body().string());
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -320,10 +323,9 @@ public class APIs {
 	}
 
 	public static String getIDs(String username) {
-		JsonObject userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + username.toLowerCase());
+		JSONObject userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + username.toLowerCase());
 		assert userID != null;
-		System.out.println(userID.toString());
-		return userID.get("data").asArray().get(0).asObject().get("id").toString().replaceAll("\"", "");
+		return userID.getJSONArray("data").getJSONObject(0).get("id").toString().replaceAll("\"", "");
 	}
 
 	@SuppressWarnings("unused")
@@ -335,7 +337,7 @@ public class APIs {
 			conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:77.0) Gecko/20100101 Firefox/77.0");
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String x = br.readLine();
-			return JsonObject.readFrom(x).get("client_id").toString().replace("\"", "");
+			return new JSONObject(x).get("client_id").toString().replace("\"", "");
 		} catch (IOException e) {
 			e.printStackTrace();
 			return "";

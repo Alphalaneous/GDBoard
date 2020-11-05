@@ -22,6 +22,7 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 public class RequestSettings {
+
 	private static CheckboxButton na = createButton("$GD_NA$", 5);
 	private static CheckboxButton auto = createButton("$GD_AUTO$", 35);
 	private static CheckboxButton easy = createButton("$GD_EASY$", 65);
@@ -34,30 +35,23 @@ public class RequestSettings {
 	private static CheckboxButton hardDemon = createButton("$GD_HARD_DEMON$", 275);
 	private static CheckboxButton insaneDemon = createButton("$GD_INSANE_DEMON$", 305);
 	private static CheckboxButton extremeDemon = createButton("$GD_EXTREME_DEMON$", 335);
-
 	private static CheckboxButton tiny = createButton("$GD_TINY$", 5);
 	private static CheckboxButton shortL = createButton("$GD_SHORT$", 35);
 	private static CheckboxButton medium = createButton("$GD_MEDIUM$", 65);
 	private static CheckboxButton longL = createButton("$GD_LONG$", 95);
 	private static CheckboxButton XL = createButton("$GD_XL$", 125);
-
-
 	private static CheckboxButton minimumLikes = createButton("$MINIMUM_LIKES$", 690);
 	private static CheckboxButton maximumLikes = createButton("$MAXIMUM_LIKES$", 765);
-
 	private static CheckboxButton minimumObjects = createButton("$MINIMUM_OBJECTS$", 840);
 	private static CheckboxButton maximumObjects = createButton("$MAXIMUM_OBJECTS$", 915);
-
 	private static CheckboxButton minimumID = createButton("$MINIMUM_ID$", 990);
 	private static CheckboxButton maximumID = createButton("$MAXIMUM_ID$", 1065);
-
 	private static FancyTextArea minLikesInput = new FancyTextArea(true, true);
 	private static FancyTextArea maxLikesInput = new FancyTextArea(true, true);
 	private static FancyTextArea minObjectsInput = new FancyTextArea(true, false);
 	private static FancyTextArea maxObjectsInput = new FancyTextArea(true, false);
 	private static FancyTextArea minIDInput = new FancyTextArea(true, false);
 	private static FancyTextArea maxIDInput = new FancyTextArea(true, false);
-
 	private static CurvedButton allowedStrings = new CurvedButton("$ALLOWED_WORDS$");
 	private static CurvedButton disallowedStrings = new CurvedButton("$DISALLOWED_WORDS$");
 
@@ -934,7 +928,6 @@ public class RequestSettings {
 			Settings.writeSettings("maxID", String.valueOf(maxID));
 			Settings.writeSettings("difficultyFilter", excludedDifficulties.toString().replaceAll("\\[", "").replaceAll("]", "").replaceAll(",{4}", ","));
 			Settings.writeSettings("lengthFilter", excludedLengths.toString().replaceAll("\\[", "").replaceAll("]", "").replaceAll(",{4}", ","));
-
 
 	}
 	private static void removeString(String string) {

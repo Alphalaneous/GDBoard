@@ -4,7 +4,6 @@ import Main.Components.JButtonUI;
 import Main.SettingsPanels.AccountSettings;
 import Main.SettingsPanels.GeneralSettings;
 import Main.Windows.DialogBox;
-import com.cavariux.twitchirc.Json.JsonObject;
 import org.json.JSONObject;
 
 import java.awt.*;
@@ -142,7 +141,7 @@ class GDBoardBot {
 				//System.out.println(inputLine);
 
 				try {
-					JsonObject object = JsonObject.readFrom(inputLine);
+					JSONObject object = new JSONObject(inputLine);
 					if (object.get("event") != null) {
 						event = object.get("event").toString().replaceAll("\"", "");
 					}

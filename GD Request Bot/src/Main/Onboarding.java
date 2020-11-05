@@ -19,7 +19,6 @@ import java.net.URL;
 
 public class Onboarding {
 	static boolean isLoading = false;
-	private static JPanel window = new JPanel();
 	private static JPanel content = new JPanel(null);
 	private static JButtonUI defaultUI = new JButtonUI();
 	public static int openKeybind = 36;
@@ -143,8 +142,7 @@ public class Onboarding {
 		content.add(button);
 		content.add(moveOn);
 		content.add(infoText);
-		window.add(content);
-		frame.add(window);
+		frame.add(content);
 	}
 
 	static void refreshUI() {

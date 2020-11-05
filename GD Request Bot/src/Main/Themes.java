@@ -37,7 +37,6 @@ public class Themes {
 		GeneralSettings.refreshUI();
 		CommandSettings.refreshUI();
 		ChannelPointSettings.refreshUI();
-		CheerSettings.refreshUI();
 		ShortcutSettings.refreshUI();
 		RequestSettings.refreshUI();
 		CommandEditor.refreshUI();

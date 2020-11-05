@@ -10,10 +10,10 @@ import java.nio.file.*;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
-import com.cavariux.twitchirc.Json.JsonObject;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONObject;
 
 public class ChannelPointListener extends WebSocketClient {
 
@@ -91,24 +91,24 @@ public class ChannelPointListener extends WebSocketClient {
 
 	@Override
 	public void onMessage(String message) {
-		JsonObject object = JsonObject.readFrom(message);
+		JSONObject object = new JSONObject(message);
 		String event = object.get("type").toString().replaceAll("\"", "");
 		if(event.equalsIgnoreCase("PONG")){
 			pingSuccess = true;
 		}
 		if(event.equalsIgnoreCase("MESSAGE")){
-			String topic = object.get("data").asObject().get("topic").toString().replaceAll("\"", "");
+			String topic = object.getJSONObject("data").get("topic").toString().replaceAll("\"", "");
 
 			if(topic.startsWith("channel-points-channel-v1")){
 				System.out.println(message);
-				String redemptionA = object.get("data").asObject().get("message").toString().replaceAll("\\\\\"", "\"");
-				String redemption = JsonObject.readFrom(redemptionA.substring(1, redemptionA.length()-1)).get("data").asObject().get("redemption").asObject().get("reward").asObject().get("title").toString().replaceAll("\"", "");
-				String username = JsonObject.readFrom(redemptionA.substring(1, redemptionA.length()-1)).get("data").asObject().get("redemption").asObject().get("user").asObject().get("login").toString().replaceAll("\"", "");
+				String redemptionA = object.getJSONObject("data").get("message").toString().replaceAll("\\\\\"", "\"");
+				String redemption = new JSONObject(redemptionA.substring(1, redemptionA.length()-1)).getJSONObject("data").getJSONObject("redemption").getJSONObject("reward").get("title").toString().replaceAll("\"", "");
+				String username = new JSONObject(redemptionA.substring(1, redemptionA.length()-1)).getJSONObject("data").getJSONObject("redemption").getJSONObject("user").get("login").toString().replaceAll("\"", "");
 				System.out.println(username);
-				boolean isUserinput = JsonObject.readFrom(redemptionA.substring(1, redemptionA.length()-1)).get("data").asObject().get("redemption").asObject().get("reward").asObject().get("is_user_input_required").asBoolean();
+				boolean isUserinput = new JSONObject(redemptionA.substring(1, redemptionA.length()-1)).getJSONObject("data").getJSONObject("redemption").getJSONObject("reward").getBoolean("is_user_input_required");
 				String userInput = "";
 				if(isUserinput) {
-					userInput = JsonObject.readFrom(redemptionA.substring(1, redemptionA.length() - 1)).get("data").asObject().get("redemption").asObject().get("user_input").toString().replaceAll("\"", "");
+					userInput = new JSONObject(redemptionA.substring(1, redemptionA.length() - 1)).getJSONObject("data").getJSONObject("redemption").get("user_input").toString().replaceAll("\"", "");
 					System.out.println(redemption + " redeemed by " + username + " with " + userInput);
 				}
 				else{

@@ -16,7 +16,19 @@
     <orderEntry type="library" name="jnativehook-2.1.0" level="project" />
     <orderEntry type="library" name="okio-1.13.0" level="project" />
     <orderEntry type="library" name="jlayer-1.0.1" level="project" />
-    <orderEntry type="library" name="TwitchIRC_v1.2" level="project" />
     <orderEntry type="library" name="json-20140107" level="project" />
+    <orderEntry type="library" name="reactor-core-3.2.9.RELEASE" level="project" />
+    <orderEntry type="library" name="netty-codec-4.1.36.Final" level="project" />
+    <orderEntry type="library" name="reactive-streams-1.0.2" level="project" />
+    <orderEntry type="library" name="commons-text-1.6" level="project" />
+    <orderEntry type="library" name="commons-lang3-3.8.1" level="project" />
+    <orderEntry type="library" name="netty-common-4.1.36.Final" level="project" />
+    <orderEntry type="library" name="reactor-extra-3.2.2.RELEASE" level="project" />
+    <orderEntry type="library" name="netty-transport-4.1.36.Final" level="project" />
+    <orderEntry type="library" name="netty-resolver-4.1.36.Final" level="project" />
+    <orderEntry type="library" name="commons-configuration2-2.4" level="project" />
+    <orderEntry type="library" name="commons-logging-1.2" level="project" />
+    <orderEntry type="library" name="commons-beanutils-1.9.3" level="project" />
+    <orderEntry type="library" name="netty-codec-4.1.36.Final1" level="project" />
   </component>
 </module>

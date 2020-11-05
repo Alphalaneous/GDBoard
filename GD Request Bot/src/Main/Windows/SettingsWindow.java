@@ -35,7 +35,6 @@ public class SettingsWindow {
 	private static JPanel accounts = AccountSettings.createPanel();
 	private static JPanel commands = CommandSettings.createPanel();
 	private static JPanel points = ChannelPointSettings.createPanel();
-	private static JPanel cheers = CheerSettings.createPanel();
 	private static JPanel requests = RequestSettings.createPanel();
 	private static JPanel shortcuts = ShortcutSettings.createPanel();
 	private static JPanel personalization = PersonalizationSettings.createPanel();
@@ -119,7 +118,6 @@ public class SettingsWindow {
 		content.add(accounts);
 		content.add(commands);
 		content.add(points);
-		content.add(cheers);
 		content.add(requests);
 		content.add(shortcuts);
 		content.add(personalization);
@@ -134,7 +132,6 @@ public class SettingsWindow {
 		accounts.setVisible(false);
 		commands.setVisible(false);
 		points.setVisible(false);
-		cheers.setVisible(false);
 		requests.setVisible(false);
 		shortcuts.setVisible(false);
 		personalization.setVisible(false);
@@ -468,9 +465,6 @@ public class SettingsWindow {
 									points.setVisible(true);
 									clean = 0;
 									break;
-								case "CHEERS_SETTINGS":
-									cheers.setVisible(true);
-									break;
 								case "REQUESTS_SETTINGS":
 									requests.setVisible(true);
 									clean = 0;
@@ -593,9 +587,6 @@ public class SettingsWindow {
 			case "CHANNEL_POINTS_SETTINGS":
 				points.setVisible(true);
 				clean = 0;
-				break;
-			case "CHEERS_SETTINGS":
-				cheers.setVisible(true);
 				break;
 			case "REQUESTS_SETTINGS":
 				requests.setVisible(true);
