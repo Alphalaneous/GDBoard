@@ -78,7 +78,6 @@ public class Main {
 			 */
 			if (Settings.getSettings("onboarding").equalsIgnoreCase("")) {
 				Onboarding.createPanel();
-				Onboarding.loadSettings();
 				Onboarding.refreshUI();
 				Onboarding.frame.setVisible(true);
 				Onboarding.isLoading = true;
@@ -406,11 +405,7 @@ public class Main {
 				}
 				Variables.saveVars();
 				GeneralSettings.setSettings();
-				GeneralBotSettings.setSettings();
 				RequestSettings.setSettings();
-				ShortcutSettings.setSettings();
-				OutputSettings.setSettings();
-				PersonalizationSettings.setSettings();
 				Settings.saveSettings();
 
 			}

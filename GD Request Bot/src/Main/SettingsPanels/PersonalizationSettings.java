@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
 
 
 public class PersonalizationSettings {
-	private static boolean onTopOption = false;
+	public static boolean onTopOption = false;
 	public static boolean disableNotifOption = false;
 	private static JPanel panel = new JPanel(null);
 	private static RadioPanel themePanel = new RadioPanel(new String[]{"$LIGHT_MODE$", "$DARK_MODE$", "$SYSTEM_MODE$"});
@@ -26,13 +26,14 @@ public class PersonalizationSettings {
 		themeText.setFont(Defaults.SEGOE.deriveFont(14f));
 		themeText.setForeground(Defaults.FOREGROUND2);
 		themeText.setOpaque(false);
-		themePanel.setBounds(25,50,365,500);
+		themePanel.setBounds(25, 50, 365, 500);
 		onTop.setChecked(false);
 		onTop.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				onTopOption = onTop.getSelectedState();
 				Window.setOnTop(onTop.getSelectedState());
+				Settings.writeSettings("onTop", String.valueOf(onTopOption));
 			}
 		});
 		notifications.setChecked(false);
@@ -40,23 +41,24 @@ public class PersonalizationSettings {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				disableNotifOption = notifications.getSelectedState();
+				Settings.writeSettings("disableNotifications", String.valueOf(disableNotifOption));
 			}
 		});
 
-		for(RadioButton button : themePanel.buttons){
+		for (RadioButton button : themePanel.buttons) {
 			button.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseReleased(MouseEvent e) {
-
-						System.out.println(themePanel.getSelectedButton());
-						theme = themePanel.getSelectedButton();
-						if (theme.equalsIgnoreCase("DARK_MODE")) {
-							Defaults.setDark();
-						} else if (theme.equalsIgnoreCase("LIGHT_MODE")) {
-							Defaults.setLight();
-						} else {
-							Defaults.setSystem();
-						}
+					System.out.println(themePanel.getSelectedButton());
+					theme = themePanel.getSelectedButton();
+					if (theme.equalsIgnoreCase("DARK_MODE")) {
+						Defaults.setDark();
+					} else if (theme.equalsIgnoreCase("LIGHT_MODE")) {
+						Defaults.setLight();
+					} else {
+						Defaults.setSystem();
+					}
+					Settings.writeSettings("theme", themePanel.getSelectedButton());
 
 				}
 			});
@@ -71,51 +73,42 @@ public class PersonalizationSettings {
 		panel.add(themePanel);
 		panel.add(themeText);
 		return panel;
-		
+
 	}
-	private static CheckboxButton createButton(String text, int y){
+
+	private static CheckboxButton createButton(String text, int y) {
 		CheckboxButton button = new CheckboxButton(text, PersonalizationSettings.class);
-		button.setBounds(25,y,365,30);
+		button.setBounds(25, y, 365, 30);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.refresh();
 		return button;
 	}
-	public static void loadSettings(){
-		if(!Settings.getSettings("theme").equalsIgnoreCase("")) {
+
+	public static void loadSettings() {
+		if (!Settings.getSettings("theme").equalsIgnoreCase("")) {
 			theme = Settings.getSettings("theme");
 			themePanel.setChecked(theme);
-			if(theme.equalsIgnoreCase("DARK_MODE")){
+			if (theme.equalsIgnoreCase("DARK_MODE")) {
 				Defaults.setDark();
-			}
-			else if(theme.equalsIgnoreCase("LIGHT_MODE")){
+			} else if (theme.equalsIgnoreCase("LIGHT_MODE")) {
 				Defaults.setLight();
-			}
-			else{
+			} else {
 				Defaults.setSystem();
 			}
-		}
-		else{
+		} else {
 			Defaults.setSystem();
 		}
-		if(!Settings.getSettings("onTop").equalsIgnoreCase("")) {
+		if (!Settings.getSettings("onTop").equalsIgnoreCase("")) {
 			onTopOption = Boolean.parseBoolean(Settings.getSettings("onTop"));
 			onTop.setChecked(onTopOption);
 			Window.setOnTop(onTopOption);
 		}
-		if(!Settings.getSettings("disableNotifications").equalsIgnoreCase("")) {
+		if (!Settings.getSettings("disableNotifications").equalsIgnoreCase("")) {
 			disableNotifOption = Boolean.parseBoolean(Settings.getSettings("disableNotifications"));
 			notifications.setChecked(disableNotifOption);
 		}
-	}
-	public static void setSettings(){
-
-			Settings.writeSettings("theme", themePanel.getSelectedButton());
-			Settings.writeSettings("onTop", String.valueOf(onTopOption));
-			Settings.writeSettings("disableNotifications", String.valueOf(disableNotifOption));
-
-
 	}
 
 	public static void refreshUI() {
@@ -123,7 +116,7 @@ public class PersonalizationSettings {
 		themeText.setForeground(Defaults.FOREGROUND2);
 		panel.setBackground(Defaults.SUB_MAIN);
 		for (Component component : panel.getComponents()) {
-			if(component instanceof CheckboxButton){
+			if (component instanceof CheckboxButton) {
 				((CheckboxButton) component).refresh();
 			}
 		}

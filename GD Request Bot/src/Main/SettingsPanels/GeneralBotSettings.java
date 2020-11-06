@@ -127,27 +127,23 @@ public class GeneralBotSettings {
 		if(!Settings.getSettings("silentMode").equalsIgnoreCase("")) {
 			silentOption = Boolean.parseBoolean(Settings.getSettings("silentMode"));
 			silentChatMode.setChecked(silentOption);
+			Settings.writeSettings("silentMode", String.valueOf(silentOption));
 		}
 		if(!Settings.getSettings("antiDox").equalsIgnoreCase("")) {
 			antiDox = Boolean.parseBoolean(Settings.getSettings("antiDox"));
 			antiDoxMode.setChecked(antiDox);
+			Settings.writeSettings("antiDox", String.valueOf(antiDox));
 		}
 		if(!Settings.getSettings("multiMode").equalsIgnoreCase("")) {
 			multiOption = Boolean.parseBoolean(Settings.getSettings("multiMode"));
 			multiThreadMode.setChecked(multiOption);
+			Settings.writeSettings("multiMode", String.valueOf(multiOption));
 		}
 		if(!Settings.getSettings("globalCooldown").equalsIgnoreCase("")) {
 			cooldown = Integer.parseInt(Settings.getSettings("globalCooldown"));
 			globalCooldownInput.setText(String.valueOf(cooldown));
-		}
-	}
-	public static void setSettings(){
-
-			Settings.writeSettings("silentMode", String.valueOf(silentOption));
-			Settings.writeSettings("multiMode", String.valueOf(multiOption));
-			Settings.writeSettings("antiDox", String.valueOf(antiDox));
 			Settings.writeSettings("globalCooldown", String.valueOf(cooldown));
-
+		}
 	}
 
 	public static void refreshUI() {

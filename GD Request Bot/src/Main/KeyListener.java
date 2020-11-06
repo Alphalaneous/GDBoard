@@ -1,6 +1,8 @@
 package Main;
 
+import Main.SettingsPanels.PersonalizationSettings;
 import Main.SettingsPanels.ShortcutSettings;
+import Main.Windows.Window;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.SwingKeyAdapter;
 
@@ -78,7 +80,8 @@ public class KeyListener extends SwingKeyAdapter {
 			}
 			if (!ShortcutSettings.focused) {
 				if (key == ShortcutSettings.openKeybind) {
-
+					Window.frame.setAlwaysOnTop(true);
+					Window.frame.setAlwaysOnTop(PersonalizationSettings.onTopOption);
 				}
 				if (key == ShortcutSettings.skipKeybind) {
 					Functions.skipFunction();

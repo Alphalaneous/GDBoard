@@ -14,15 +14,15 @@ import java.awt.event.*;
 
 public class ShortcutSettings {
 	private static JPanel panel = new JPanel();
-	private static JPanel openPanel = createKeybindButton(275, "$OPEN_SHORTCUT$", "openKeybind");
-	private static JPanel skipPanel = createKeybindButton(25, "$SKIP_SHORTCUT$", "skipKeybind");
-	private static JPanel randPanel = createKeybindButton(75, "$RANDOM_SHORTCUT$", "randomKeybind");
-	private static JPanel copyPanel = createKeybindButton(125, "$COPY_SHORTCUT$", "copyKeybind");
-	private static JPanel blockPanel = createKeybindButton(175, "$BLOCK_SHORTCUT$", "blockKeybind");
-	private static JPanel clearPanel = createKeybindButton(225, "$CLEAR_SHORTCUT$", "clearKeybind");
+	private static JPanel openPanel = createKeybindButton(25, "$OPEN_SHORTCUT$", "openKeybind");
+	private static JPanel skipPanel = createKeybindButton(75, "$SKIP_SHORTCUT$", "skipKeybind");
+	private static JPanel randPanel = createKeybindButton(125, "$RANDOM_SHORTCUT$", "randomKeybind");
+	private static JPanel copyPanel = createKeybindButton(175, "$COPY_SHORTCUT$", "copyKeybind");
+	private static JPanel blockPanel = createKeybindButton(225, "$BLOCK_SHORTCUT$", "blockKeybind");
+	private static JPanel clearPanel = createKeybindButton(275, "$CLEAR_SHORTCUT$", "clearKeybind");
 	public static boolean focused = false;
 
-	public static int openKeybind = 36;
+	public static int openKeybind = 0;
 	public static int skipKeybind = 0;
 	public static int randKeybind = 0;
 	public static int copyKeybind = 0;
@@ -38,15 +38,13 @@ public class ShortcutSettings {
 		panel.setBackground(Defaults.SUB_MAIN);
 		panel.setLayout(null);
 
-		if(!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
-			panel.add(openPanel);
-		}
+
+		panel.add(openPanel);
 		panel.add(skipPanel);
 		panel.add(randPanel);
 		panel.add(copyPanel);
 		panel.add(blockPanel);
 		panel.add(clearPanel);
-		//panel.add(lockPanel);
 
 		return panel;
 
@@ -63,27 +61,14 @@ public class ShortcutSettings {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 8 || e.getKeyCode() == 16 || e.getKeyCode() == 17 || e.getKeyCode() == 18 || e.getKeyCode() == 10) {
-
-					if (text.equalsIgnoreCase("$OPEN_SHORTCUT$")) {
-						input.setText("Home");
-
-							Settings.writeSettings(setting, String.valueOf(36));
-							loadKeybind(text, 36);
-
-					} else {
 						input.setText("");
 
 							Settings.writeSettings(setting, "-1");
 							loadKeybind(text, -1);
-
-					}
 				} else {
 					input.setText(KeyEvent.getKeyText(e.getKeyCode()));
-
 						Settings.writeSettings(setting, String.valueOf(e.getKeyCode()));
 						loadKeybind(text, e.getKeyCode());
-
-
 				}
 				panel.requestFocusInWindow();
 			}
@@ -134,17 +119,6 @@ public class ShortcutSettings {
 		button.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.refresh();
 		return button;
-	}
-
-	public static void setSettings() {
-
-			Settings.writeSettings("openKeybind", String.valueOf(openKeybind));
-			Settings.writeSettings("skipKeybind", String.valueOf(skipKeybind));
-			Settings.writeSettings("randomKeybind", String.valueOf(randKeybind));
-			Settings.writeSettings("copyKeybind", String.valueOf(copyKeybind));
-			Settings.writeSettings("blockKeybind", String.valueOf(blockKeybind));
-			Settings.writeSettings("clearKeybind", String.valueOf(clearKeybind));
-
 	}
 
 	public static void loadSettings() {

@@ -32,7 +32,7 @@ public class Onboarding {
 		frame.setTitle("GDBoard Startup");
 		int width = 465;
 		int height = 512;
-		Onboarding.setLocation(new Point(Defaults.screenSize.width / 2 - width / 2, Defaults.screenSize.height / 2 - height / 2));
+		frame.setLocation(new Point(Defaults.screenSize.width / 2 - width / 2, Defaults.screenSize.height / 2 - height / 2));
 		frame.setSize(width +5, height + 38);
 		frame.setPreferredSize(new Dimension(width +5, height + 38));
 		frame.setLayout(null);
@@ -170,32 +170,4 @@ public class Onboarding {
 		return button;
 	}
 
-	//region SetLocation
-	private static void setLocation(Point point) {
-		frame.setLocation(point);
-	}
-
-
-
-	static void loadSettings() {
-
-		if (!Settings.getSettings("openKeybind").equalsIgnoreCase("") && !Settings.getSettings("openKeybind").equalsIgnoreCase("-1")) {
-			openKeybind = Integer.parseInt(Settings.getSettings("openKeybind"));
-		}
-		for (Component component : content.getComponents()) {
-			if (component instanceof JPanel) {
-				for (Component component1 : ((JPanel) component).getComponents()) {
-					if (component1 instanceof JLabel) {
-						if (((JLabel) component1).getText().equalsIgnoreCase("Open Keybind")) {
-							if (!KeyEvent.getKeyText(ShortcutSettings.openKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
-								((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(openKeybind));
-							} else {
-								((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
-							}
-						}
-					}
-				}
-			}
-		}
-	}
 }

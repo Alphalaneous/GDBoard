@@ -45,6 +45,7 @@ public class OutputSettings {
 				else{
 					outputString = "Currently playing %levelName% (%levelID%) by %levelAuthor%!";
 				}
+				Settings.writeSettings("outputString", "%s%" + outputString.replace("\n", "%n%").replaceAll("%s%", ""));
 			}
 		});
 
@@ -65,6 +66,7 @@ public class OutputSettings {
 				else{
 					noLevelString = "There are no levels in the queue!";
 				}
+				Settings.writeSettings("noLevelsString", "%s%" + noLevelString.replace("\n", "%n%").replaceAll("%s%", ""));
 			}
 		});
 
@@ -80,6 +82,7 @@ public class OutputSettings {
 			@Override
 			public void keyReleased(KeyEvent e){
 				fileLocation = fileLocationInput.getText();
+				Settings.writeSettings("outputFileLocation", fileLocation.replace("\\\\", "\\"));
 			}
 		});
 
@@ -105,13 +108,6 @@ public class OutputSettings {
 			fileLocation = Settings.getSettings("outputFileLocation").replace("\\", "\\\\");
 			fileLocationInput.setText(fileLocation.replace("\\\\", "\\"));
 		}
-	}
-	public static void setSettings(){
-
-			Settings.writeSettings("outputString", "%s%" + outputString.replace("\n", "%n%").replaceAll("%s%", ""));
-			Settings.writeSettings("noLevelsString", "%s%" + noLevelString.replace("\n", "%n%").replaceAll("%s%", ""));
-			Settings.writeSettings("outputFileLocation", fileLocation.replace("\\\\", "\\"));
-
 	}
 	public static void setOutputStringFile(String text){
 		Path file = Paths.get(fileLocation + "\\output.txt");

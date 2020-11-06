@@ -252,7 +252,7 @@ ADD_WORD_TOOLTIP =Add Word
 
 //Shortcuts Settings
 
-OPEN_SHORTCUT = Open
+OPEN_SHORTCUT = To Front
 SKIP_SHORTCUT = Skip/Next
 RANDOM_SHORTCUT = Random
 COPY_SHORTCUT = Copy
