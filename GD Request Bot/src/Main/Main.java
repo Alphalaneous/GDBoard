@@ -23,7 +23,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
@@ -34,7 +33,7 @@ public class Main {
 	static boolean programStarting = true;
 	public static boolean programLoaded = false;
 	static boolean sendMessages = false;
-	private static ChatListener chatReader2;
+	private static ChatListener chatReader;
 	static boolean allowRequests = false;
 
 	private static ChannelPointListener channelPointListener;
@@ -94,15 +93,15 @@ public class Main {
 			new Thread(() -> {
 				while (true) {
 					try {
-						if (chatReader2 != null) {
+						if (chatReader != null) {
 							try {
-								chatReader2.disconnect();
+								chatReader.disconnect();
 							} catch (WebsocketNotConnectedException ignored) {
 							}
 						}
-						chatReader2 = new ChatListener(Settings.getSettings("channel"));
-						chatReader2.connect(Settings.getSettings("oauth"), Settings.getSettings("channel"));
-						while (!chatReader2.isClosed()) {
+						chatReader = new ChatListener(Settings.getSettings("channel"));
+						chatReader.connect(Settings.getSettings("oauth"), Settings.getSettings("channel"));
+						while (!chatReader.isClosed()) {
 							Thread.sleep(100);
 						}
 					} catch (Exception ignored) {
@@ -165,14 +164,26 @@ public class Main {
 
 
 					/* Reads channel point redemptions for channel point triggers */
-					try {
-						channelPointListener = new ChannelPointListener(new URI("wss://pubsub-edge.twitch.tv"));
-						channelPointListener.connect();
+					new Thread(() -> {
+					while(true) {
+						try {
+							channelPointListener = new ChannelPointListener(new URI("wss://pubsub-edge.twitch.tv"));
+							channelPointListener.connect();
+							while (!channelPointListener.isClosed()) {
+								Thread.sleep(10);
+							}
 
-					} catch (URISyntaxException e) {
-						e.printStackTrace();
-						/* Should never fail */
+						} catch (URISyntaxException | InterruptedException e) {
+							e.printStackTrace();
+							/* Should never fail */
+						}
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
 					}
+					}).start();
 
 					/* Refresh GD Username in Account Settings */
 					AccountSettings.refreshGD(LoadGD.username);
@@ -274,7 +285,7 @@ public class Main {
 
 	static void sendMainMessage(String message) {
 
-		chatReader2.sendMessage(message);
+		chatReader.sendMessage(message);
 	}
 
 	private static boolean onCool = false;
