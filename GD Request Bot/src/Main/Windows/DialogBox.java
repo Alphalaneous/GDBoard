@@ -15,7 +15,7 @@ import static Main.Defaults.defaultUI;
 
 public class DialogBox {
 
-	private static boolean active = false;
+	public static boolean active = false;
 	private static JFrame frame = null;
 	private static boolean progressBar = false;
 	private static JProgressBar loadingBar;

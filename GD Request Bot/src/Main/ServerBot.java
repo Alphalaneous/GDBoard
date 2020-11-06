@@ -27,7 +27,6 @@ class ServerBot {
 		}
 	}
 	void connect(){
-		System.out.println("Connected to GDBoard Servers");
 		JSONObject authObj = new JSONObject();
 		authObj.put("request_type", "connect");
 		authObj.put("oauth", Settings.getSettings("oauth"));
@@ -60,7 +59,14 @@ class ServerBot {
 					event = object.get("event").toString().replaceAll("\"", "");
 				}
 				if (event.equalsIgnoreCase("connected")) {
-					DialogBox.closeDialogBox();
+					System.out.println("Connected to GDBoard Servers");
+					while(true) {
+						if (DialogBox.active) {
+							DialogBox.closeDialogBox();
+							break;
+						}
+						Thread.sleep(10);
+					}
 					String channel = object.get("username").toString().replaceAll("\"", "").replaceAll("#", "");
 					Settings.writeSettings("channel", channel);
 					AccountSettings.refreshTwitch(channel);
