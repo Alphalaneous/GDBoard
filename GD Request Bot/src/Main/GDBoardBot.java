@@ -47,8 +47,6 @@ class GDBoardBot {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-			} catch (UnknownHostException e) {
-				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -60,7 +58,6 @@ class GDBoardBot {
 		}
 	}
 	private static JButtonUI defaultUI = new JButtonUI();
-	public static ChannelPointListener channelPointListener;
 	public static boolean firstOpen = true;
 	static void start() throws IOException {
 		start(false);

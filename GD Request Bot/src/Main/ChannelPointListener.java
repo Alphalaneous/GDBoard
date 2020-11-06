@@ -29,7 +29,7 @@ public class ChannelPointListener extends WebSocketClient {
 	}
 	static {
 		if (uri.getScheme().equals("jar")) {
-			myPath = ServerChatBot.fileSystem.getPath("/Resources/points/");
+			myPath = BotHandler.fileSystem.getPath("/Resources/points/");
 		} else {
 			myPath = Paths.get(uri);
 		}
@@ -128,7 +128,7 @@ public class ChannelPointListener extends WebSocketClient {
 								comExists = true;
 								new Thread(() -> {
 									try {
-										while (ServerChatBot.processing) {
+										while (BotHandler.processing) {
 											Thread.sleep(50);
 										}
 										Main.sendMessage(Command.run(username, finalUserInput, Files.readString(path, StandardCharsets.UTF_8)));

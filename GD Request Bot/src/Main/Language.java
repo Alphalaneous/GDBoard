@@ -4,7 +4,6 @@ import Main.Components.CurvedButtonAlt;
 import Main.Components.LangButton;
 import Main.Components.LangLabel;
 import Main.Components.RoundedJButton;
-import Main.Windows.Window;
 
 import java.io.*;
 import java.net.URI;
@@ -24,7 +23,7 @@ public class Language {
 		try {
 			URI uri = Main.class.getResource("/Resources/Languages/").toURI();
 			if (uri.getScheme().equals("jar")) {
-				myPath = ServerChatBot.fileSystem.getPath("/Resources/Languages/");
+				myPath = BotHandler.fileSystem.getPath("/Resources/Languages/");
 			} else {
 				myPath = Paths.get(uri);
 			}
@@ -75,7 +74,7 @@ public class Language {
 				Path path = it.next();
 
 				String[] file;
-				if(ServerChatBot.uri.getScheme().equals("jar")) {
+				if(BotHandler.uri.getScheme().equals("jar")) {
 					file = path.toString().split("/");
 				}
 				else {
@@ -83,7 +82,7 @@ public class Language {
 				}
 				String fileName = file[file.length - 1];
 				if (fileName.equals(lang + ".lang")) {
-					if(ServerChatBot.uri.getScheme().equals("jar")) {
+					if(BotHandler.uri.getScheme().equals("jar")) {
 						InputStream is = Main.class
 								.getClassLoader().getResourceAsStream(path.toString().substring(1));
 						assert is != null;

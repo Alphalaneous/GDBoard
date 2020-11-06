@@ -13,7 +13,7 @@ public class ChatListener extends ChatBot {
 
 	@Override
 	public void onOpen(ServerHandshake serverHandshake) {
-
+		System.out.println("Connected to Twitch IRC");
 	}
 
 	@Override
@@ -28,20 +28,20 @@ public class ChatListener extends ChatBot {
 			if (GeneralBotSettings.multiOption) {
 				new Thread(() -> {
 					try {
-						while (ServerChatBot.processing) {
+						while (BotHandler.processing) {
 							Thread.sleep(50);
 						}
-						ServerChatBot.onMessage(chatMessage.getSender(), chatMessage.getMessage(), chatMessage.isMod(), chatMessage.isSub(), chatMessage.getCheerCount(), chatMessage.getTag("id"));
+						BotHandler.onMessage(chatMessage.getSender(), chatMessage.getMessage(), chatMessage.isMod(), chatMessage.isSub(), chatMessage.getCheerCount(), chatMessage.getTag("id"));
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}).start();
 			} else {
 				try {
-					while (ServerChatBot.processing) {
+					while (BotHandler.processing) {
 						Thread.sleep(50);
 					}
-					ServerChatBot.onMessage(chatMessage.getSender(), chatMessage.getMessage(), chatMessage.isMod(), chatMessage.isSub(), chatMessage.getCheerCount(), chatMessage.getTag("id"));
+					BotHandler.onMessage(chatMessage.getSender(), chatMessage.getMessage(), chatMessage.isMod(), chatMessage.isSub(), chatMessage.getCheerCount(), chatMessage.getTag("id"));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -28,7 +28,7 @@ public class Functions {
 			Thread bwompThread;
 			bwompThread = new Thread(() -> {
 				try {
-					BufferedInputStream inp = new BufferedInputStream(ServerChatBot.class
+					BufferedInputStream inp = new BufferedInputStream(BotHandler.class
 							.getResource("/Resources/bwomp.mp3").openStream());
 					Player mp3player = new Player(inp);
 					mp3player.play();

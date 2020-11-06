@@ -69,7 +69,7 @@ public class Board {
 	public static void signal(){
 		JSONObject messageObj = new JSONObject();
 		messageObj.put("request_type", "get_blocked_ids");
-		GDBoardBot.sendMessage(messageObj.toString());
+		Main.sendBotMessage(messageObj.toString());
 	}
 
 	public static void rick(){

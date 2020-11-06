@@ -23,6 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
@@ -37,6 +38,7 @@ public class Main {
 	static boolean allowRequests = false;
 
 	private static ChannelPointListener channelPointListener;
+	private static ServerBot serverBot = new ServerBot();
 
 	public static void main(String[] args) {
 		/*
@@ -112,13 +114,19 @@ public class Main {
 					}
 				}
 			}).start();
-			GDBoardBot.start();
+			new Thread(() -> {
+				while(true) {
+					serverBot = new ServerBot();
+					serverBot.connect();
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException ignored) {
+					}
+				}
+			}).start();
 
 
-			/* Wait for GDBoard to connect before proceeding */
-			while (!GDBoardBot.initialConnect) {
-				Thread.sleep(100);
-			}
+
 			while (true) {
 				if (!programStarting) {
 
@@ -160,6 +168,7 @@ public class Main {
 					try {
 						channelPointListener = new ChannelPointListener(new URI("wss://pubsub-edge.twitch.tv"));
 						channelPointListener.connect();
+
 					} catch (URISyntaxException e) {
 						e.printStackTrace();
 						/* Should never fail */
@@ -228,7 +237,7 @@ public class Main {
 			}
 			sendMessages = true;
 
-			Main.sendMessage(Utilities.format("$STARTUP_MESSAGE$"));
+			sendMessage(Utilities.format("$STARTUP_MESSAGE$"));
 
 			new Thread(() -> {
 				while (true) {
@@ -284,6 +293,14 @@ public class Main {
 
 	private static boolean cooldown = false;
 
+	static void sendBotMessage(String message){
+		try {
+			serverBot.sendMessage(message);
+		}
+		catch (Exception ignored){
+		}
+	}
+
 	static void sendMessage(String message, boolean whisper, String user) {
 		if (cooldown) {
 			return;
@@ -319,7 +336,12 @@ public class Main {
 				} else {
 					messageObj.put("message", message);
 				}
-				GDBoardBot.sendMessage(messageObj.toString());
+				try {
+					serverBot.sendMessage(messageObj.toString());
+				}
+				catch (Exception e){
+					e.printStackTrace();
+				}
 				new Thread(() -> {
 					try {
 						Thread.sleep(500);
@@ -337,7 +359,12 @@ public class Main {
 					message = message.replaceAll(System.getProperty("user.name"), "*****");
 				}
 				messageObj.put("message", "/w " + user + " " + message);
-				GDBoardBot.sendMessage(messageObj.toString());
+				try {
+					serverBot.sendMessage(messageObj.toString());
+				}
+				catch (Exception e){
+					e.printStackTrace();
+				}
 			}
 		}
 	}

@@ -1176,7 +1176,7 @@ public class Requests {
 			URI uri = Main.class.getResource("/Resources/Commands/").toURI();
 			Path myPath;
 			if (uri.getScheme().equals("jar")) {
-				myPath = ServerChatBot.fileSystem.getPath("/Resources/Commands/");
+				myPath = BotHandler.fileSystem.getPath("/Resources/Commands/");
 			} else {
 				myPath = Paths.get(uri);
 			}

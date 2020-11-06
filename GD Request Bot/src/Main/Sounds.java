@@ -7,7 +7,6 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class Sounds {
@@ -70,7 +69,7 @@ public class Sounds {
 						inp = new BufferedInputStream(new FileInputStream(location));
 					}
 					else if(!isFile){
-						inp = new BufferedInputStream(ServerChatBot.class
+						inp = new BufferedInputStream(BotHandler.class
 								.getResource(location).openStream());
 					}
 					mp3player = new Player(inp);
