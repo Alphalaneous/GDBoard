@@ -44,7 +44,7 @@ public class Sounds {
 			((Sound) ((Map.Entry) stringSoundEntry).getValue()).stopSound();
 		}
 	}
-	private static class Sound {
+	public static class Sound {
 
 		String location;
 		boolean complete = false;
@@ -58,7 +58,7 @@ public class Sounds {
 			this.isURL = isURL;
 			Sounds.sounds.put(location, this);
 		}
-		void playSound() {
+		public void playSound() {
 			new Thread(() -> {
 				try {
 					BufferedInputStream inp = null;
@@ -86,7 +86,7 @@ public class Sounds {
 			}).start();
 
 		}
-		void stopSound(){
+		public void stopSound(){
 			mp3player.close();
 			complete = true;
 		}

@@ -92,4 +92,11 @@ class ServerBot {
 	void sendMessage(String message) {
 		out.println(message);
 	}
+	void disconnect(){
+		try {
+			clientSocket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

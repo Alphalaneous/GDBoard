@@ -297,6 +297,7 @@ public class Requests {
 					Main.sendMessage(Utilities.format("$LEVEL_ID_DOESNT_EXIST_MESSAGE$", requester));
 					return;
 				} catch (Exception e) {
+					e.printStackTrace();
 					Main.sendMessage(Utilities.format("$SEARCH_FAILED$", requester));
 					return;
 				}
@@ -307,6 +308,7 @@ public class Requests {
 					Main.sendMessage(Utilities.format("$LEVEL_ID_DOESNT_EXIST_MESSAGE$", requester));
 					return;
 				} catch (Exception e) {
+					e.printStackTrace();
 					Main.sendMessage(Utilities.format("$SEARCH_FAILED$", requester));
 					return;
 				}
@@ -1427,6 +1429,7 @@ public class Requests {
 						} catch (MissingAccessException e) {
 							response = Utilities.format("$LEVEL_DOESNT_EXIST_MESSAGE$", user);
 						} catch (Exception e) {
+							e.printStackTrace();
 							response = Utilities.format("$REQUEST_ERROR$", user);
 
 						}
