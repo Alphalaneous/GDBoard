@@ -7,8 +7,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Resources/Commands/!gdping.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/board.exe" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/board.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Resources/conf.zip" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Resources/conf.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/ChannelPointListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/ChannelPointListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/conf.zip" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/conf.zip" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -43,15 +51,34 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/Panels/CommentsPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3366">
+              <caret line="222" selection-start-line="222" selection-end-line="222" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main/Functions.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1173">
+              <caret line="89" selection-start-line="89" selection-end-line="89" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1054">
-              <caret line="39" column="22" lean-forward="true" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
+            <state relative-caret-position="221">
+              <caret line="39" column="22" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
               <folding>
                 <element signature="e#10706#10707#0" expanded="true" />
                 <element signature="e#10746#10747#0" expanded="true" />
-                <element signature="e#15357#15358#0" expanded="true" />
-                <element signature="e#15383#15384#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -60,7 +87,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
+            <state relative-caret-position="14807">
               <caret line="915" column="34" selection-start-line="915" selection-start-column="29" selection-end-line="915" selection-end-column="34" />
             </state>
           </provider>
@@ -78,7 +105,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/ChannelPointListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
+            <state relative-caret-position="1547">
               <caret line="106" column="60" selection-start-line="106" selection-start-column="60" selection-end-line="106" selection-end-column="60" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -90,35 +117,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/BotHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3893">
-              <caret line="241" column="43" selection-start-line="241" selection-start-column="43" selection-end-line="241" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/GDBoardBot.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1190">
-              <caret line="82" column="12" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="12" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="94" column="21" lean-forward="true" selection-start-line="94" selection-start-column="21" selection-end-line="94" selection-end-column="21" />
-              <folding>
-                <element signature="e#966#967#0" expanded="true" />
-                <element signature="e#1011#1012#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="773">
+              <caret line="121" column="9" selection-start-line="121" selection-start-column="9" selection-end-line="121" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Resources/Commands/!gdping.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="56" selection-start-line="1" selection-start-column="56" selection-end-line="1" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -126,7 +137,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Sounds.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
+            <state relative-caret-position="765">
               <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
             </state>
           </provider>
@@ -135,22 +146,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/ServerBot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="708">
+            <state relative-caret-position="1445">
               <caret line="96" column="21" selection-start-line="96" selection-start-column="21" selection-end-line="96" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2672#2673#0" expanded="true" />
                 <element signature="e#2699#2700#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main/Windows/DialogBox.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -217,8 +219,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Main/Components/CurvedButtonAlt.java" />
-        <option value="$PROJECT_DIR$/src/Main/Components/CurvedButton.java" />
         <option value="$PROJECT_DIR$/src/Main/Components/CheckboxButton.java" />
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/RequestsLog.java" />
         <option value="$PROJECT_DIR$/src/Main/ServerChatBot.java" />
@@ -259,7 +259,6 @@
         <option value="$PROJECT_DIR$/src/Main/SettingsPanels/GeneralBotSettings.java" />
         <option value="$PROJECT_DIR$/src/Main/BotHandler.java" />
         <option value="$PROJECT_DIR$/src/Main/GDBoardBot.java" />
-        <option value="$PROJECT_DIR$/src/Main/Board.java" />
         <option value="$PROJECT_DIR$/src/Main/ChatListener.java" />
         <option value="$PROJECT_DIR$/src/Main/Windows/DialogBox.java" />
         <option value="$PROJECT_DIR$/src/Main/Requests.java" />
@@ -267,6 +266,9 @@
         <option value="$PROJECT_DIR$/src/Main/ServerBot.java" />
         <option value="$PROJECT_DIR$/src/Main/Sounds.java" />
         <option value="$PROJECT_DIR$/src/Main/ChannelPointListener.java" />
+        <option value="$PROJECT_DIR$/src/Resources/Commands/!searchping.js" />
+        <option value="$PROJECT_DIR$/src/Resources/Commands/!gdping.js" />
+        <option value="$PROJECT_DIR$/src/Main/Board.java" />
         <option value="$PROJECT_DIR$/src/.version" />
       </list>
     </option>
@@ -302,7 +304,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -365,6 +366,13 @@
               <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+              <item name="Commands" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
@@ -453,6 +461,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -469,7 +478,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1604716568910" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1604772519079" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../GDBoard Dependencies/dependency/netty-codec-4.1.36.Final.jar!/" />
     <property name="project.structure.last.edited" value="Facets" />
@@ -647,7 +656,7 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info active="true" content_ui="combo" x="16" y="105" width="325" height="756" id="Project" order="6" sideWeight="0.29424307" side_tool="true" visible="true" weight="0.18070363" />
+      <window_info active="true" content_ui="combo" x="16" y="105" width="325" height="756" id="Project" order="6" sideWeight="0.29424307" side_tool="true" visible="true" weight="0.18230277" />
       <window_info anchor="bottom" id="JProfiler" order="0" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" sideWeight="0.4979424" weight="0.32394367" />
@@ -660,7 +669,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32990867" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.4035181" weight="0.32286024" />
       <window_info anchor="bottom" x="-37" y="178" width="1736" height="856" id="Byte Code Viewer" order="11" type="WINDOWED" />
-      <window_info anchor="bottom" id="Run" order="12" sideWeight="0.55490404" visible="true" weight="0.30552545" />
+      <window_info anchor="bottom" id="Run" order="12" sideWeight="0.55490404" weight="0.30552545" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
       <window_info anchor="right" id="Palette" order="2" />
@@ -835,9 +844,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Resources/DifficultyIcons/Epic/insane.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Resources/DifficultyIcons/Epic/insane demon.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -1093,13 +1099,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Functions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Defaults.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="582">
@@ -1128,16 +1127,6 @@
           <folding>
             <element signature="e#349#350#0" expanded="true" />
             <element signature="e#401#402#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Panels/CommentsPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3366">
-          <caret line="222" selection-start-line="222" selection-end-line="222" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1173,9 +1162,70 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Panels/CommentsPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3366">
+          <caret line="222" selection-start-line="222" selection-end-line="222" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Functions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1173">
+          <caret line="89" selection-start-line="89" selection-end-line="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="39" column="22" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
+          <folding>
+            <element signature="e#10706#10707#0" expanded="true" />
+            <element signature="e#10746#10747#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14807">
+          <caret line="915" column="34" selection-start-line="915" selection-start-column="29" selection-end-line="915" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/ChannelPointListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1547">
+          <caret line="106" column="60" selection-start-line="106" selection-start-column="60" selection-end-line="106" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#974#975#0" expanded="true" />
+            <element signature="e#997#998#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Resources/Commands/!gdping.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="56" selection-start-line="1" selection-start-column="56" selection-end-line="1" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Sounds.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/ServerBot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="708">
+        <state relative-caret-position="1445">
           <caret line="96" column="21" selection-start-line="96" selection-start-column="21" selection-end-line="96" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1185,53 +1235,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1054">
-          <caret line="39" column="22" lean-forward="true" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
-          <folding>
-            <element signature="e#10706#10707#0" expanded="true" />
-            <element signature="e#10746#10747#0" expanded="true" />
-            <element signature="e#15357#15358#0" expanded="true" />
-            <element signature="e#15383#15384#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Sounds.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Board.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="94" column="21" lean-forward="true" selection-start-line="94" selection-start-column="21" selection-end-line="94" selection-end-column="21" />
-          <folding>
-            <element signature="e#966#967#0" expanded="true" />
-            <element signature="e#1011#1012#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Requests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="915" column="34" selection-start-line="915" selection-start-column="29" selection-end-line="915" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/ChannelPointListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="106" column="60" selection-start-line="106" selection-start-column="60" selection-end-line="106" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#974#975#0" expanded="true" />
-            <element signature="e#997#998#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="773">
+          <caret line="121" column="9" selection-start-line="121" selection-start-column="9" selection-end-line="121" selection-end-column="9" />
         </state>
       </provider>
     </entry>

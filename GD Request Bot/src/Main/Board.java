@@ -3,9 +3,16 @@ package Main;
 import Main.Windows.DialogBox;
 import com.github.alex1304.jdash.client.AnonymousGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
+import com.github.alex1304.jdash.exception.MissingAccessException;
+import com.github.alex1304.jdash.util.LevelSearchFilters;
 import delight.nashornsandbox.NashornSandbox;
 import delight.nashornsandbox.NashornSandboxes;
 import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
+import java.util.Date;
 
 @SuppressWarnings("unused")
 
@@ -97,5 +104,21 @@ public class Board {
 
 	public static void stopBwomp(){
 		Sounds.stopSound("/Resources/bwomp.mp3");
+	}
+
+	public static String testSearchPing(){
+		long time = ZonedDateTime.now().toInstant().toEpochMilli();
+		try {
+			if (LoadGD.isAuth) {
+				LoadGD.authClient.searchLevels("", LevelSearchFilters.create(), 0).block();
+			} else {
+				LoadGD.anonClient.searchLevels("", LevelSearchFilters.create(), 0).block();
+			}
+			long timeAffter = ZonedDateTime.now().toInstant().toEpochMilli();
+			return String.valueOf(timeAffter - time);
+		}
+		catch (MissingAccessException e){
+			return "Servers Down!";
+		}
 	}
 }
