@@ -101,14 +101,15 @@ public class ChannelPointListener extends WebSocketClient {
 
 			if(topic.startsWith("channel-points-channel-v1")){
 				System.out.println(message);
-				String redemptionA = object.getJSONObject("data").get("message").toString().replaceAll("\\\\\"", "\"");
-				String redemption = new JSONObject(redemptionA.substring(1, redemptionA.length()-1)).getJSONObject("data").getJSONObject("redemption").getJSONObject("reward").get("title").toString().replaceAll("\"", "");
-				String username = new JSONObject(redemptionA.substring(1, redemptionA.length()-1)).getJSONObject("data").getJSONObject("redemption").getJSONObject("user").get("login").toString().replaceAll("\"", "");
+				String redemptionA = object.getJSONObject("data").get("message").toString().replaceAll("\\\\\"", "\"").replaceAll("\r", "").replaceAll("\n", "");
+				System.out.println(redemptionA);
+				String redemption = new JSONObject(redemptionA).getJSONObject("data").getJSONObject("redemption").getJSONObject("reward").get("title").toString().replaceAll("\"", "");
+				String username = new JSONObject(redemptionA).getJSONObject("data").getJSONObject("redemption").getJSONObject("user").get("login").toString().replaceAll("\"", "");
 				System.out.println(username);
-				boolean isUserinput = new JSONObject(redemptionA.substring(1, redemptionA.length()-1)).getJSONObject("data").getJSONObject("redemption").getJSONObject("reward").getBoolean("is_user_input_required");
+				boolean isUserinput = new JSONObject(redemptionA).getJSONObject("data").getJSONObject("redemption").getJSONObject("reward").getBoolean("is_user_input_required");
 				String userInput = "";
 				if(isUserinput) {
-					userInput = new JSONObject(redemptionA.substring(1, redemptionA.length() - 1)).getJSONObject("data").getJSONObject("redemption").get("user_input").toString().replaceAll("\"", "");
+					userInput = new JSONObject().getJSONObject("data").getJSONObject("redemption").get("user_input").toString().replaceAll("\"", "");
 					System.out.println(redemption + " redeemed by " + username + " with " + userInput);
 				}
 				else{
