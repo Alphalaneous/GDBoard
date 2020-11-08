@@ -30,5 +30,6 @@
     <orderEntry type="library" name="commons-logging-1.2" level="project" />
     <orderEntry type="library" name="commons-beanutils-1.9.3" level="project" />
     <orderEntry type="library" name="netty-codec-4.1.36.Final1" level="project" />
+    <orderEntry type="library" name="reactive-streams-1.0.21" level="project" />
   </component>
 </module>
