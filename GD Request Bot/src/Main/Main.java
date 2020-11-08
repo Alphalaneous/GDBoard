@@ -35,7 +35,7 @@ public class Main {
 	static boolean sendMessages = false;
 	private static ChatListener chatReader;
 	static boolean allowRequests = false;
-
+	static boolean keepConnecting = true;
 	private static ChannelPointListener channelPointListener;
 	private static ServerBot serverBot = new ServerBot();
 
@@ -91,7 +91,7 @@ public class Main {
 			}
 			Variables.loadVars();
 			new Thread(() -> {
-				while (true) {
+				while (keepConnecting) {
 					try {
 						if (chatReader != null) {
 							try {
@@ -114,7 +114,7 @@ public class Main {
 				}
 			}).start();
 			new Thread(() -> {
-				while(true) {
+				while(keepConnecting) {
 					serverBot = new ServerBot();
 					serverBot.connect();
 					try {
@@ -165,7 +165,7 @@ public class Main {
 
 					/* Reads channel point redemptions for channel point triggers */
 					new Thread(() -> {
-					while(true) {
+					while(keepConnecting) {
 						try {
 							channelPointListener = new ChannelPointListener(new URI("wss://pubsub-edge.twitch.tv"));
 							channelPointListener.connect();
@@ -436,7 +436,7 @@ public class Main {
 				Window.frame.setVisible(false);
 				Window.setSettings();
 				Settings.writeLocation();
-
+				keepConnecting = false;
 				try {
 					channelPointListener.disconnectBot();
 					chatReader.disconnect();

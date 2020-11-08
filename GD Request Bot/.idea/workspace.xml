@@ -7,15 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Resources/Commands/!gdping.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/board.exe" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/board.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Main/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Resources/conf.zip" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Resources/conf.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Resources/conf.zip" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/conf.zip" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
@@ -119,7 +112,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="773">
+            <state relative-caret-position="1411">
               <caret line="121" column="9" selection-start-line="121" selection-start-column="9" selection-end-line="121" selection-end-column="9" />
             </state>
           </provider>
@@ -304,91 +297,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="classes" type="462c0819:PsiDirectoryNode" />
-              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
-              <item name="GD_Request_Bot_jar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Main" type="462c0819:PsiDirectoryNode" />
-              <item name="Panels" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Main" type="462c0819:PsiDirectoryNode" />
-              <item name="SettingsPanels" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Main" type="462c0819:PsiDirectoryNode" />
-              <item name="Windows" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Resources" type="462c0819:PsiDirectoryNode" />
-              <item name="Commands" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Resources" type="462c0819:PsiDirectoryNode" />
-              <item name="Languages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Changed Files'; set:Changed Files; ALL; class com.intellij.packageDependencies.ChangeListScope">
           <expand>
@@ -461,6 +369,64 @@
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="classes" type="462c0819:PsiDirectoryNode" />
+              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
+              <item name="GD_Request_Bot_jar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+              <item name="Commands" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+              <item name="Languages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -478,9 +444,9 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1604772519079" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1604871425063" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../GDBoard Dependencies/dependency/netty-codec-4.1.36.Final.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../jdash-3.3.8" />
     <property name="project.structure.last.edited" value="Facets" />
     <property name="project.structure.proportion" value="0.14648438" />
     <property name="project.structure.side.proportion" value="0.18710493" />
@@ -490,11 +456,11 @@
     <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources" />
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\classes\artifacts\GD_Request_Bot_jar" />
       <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources\Icons" />
-      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources\Fonts" />
-      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Main" />
-      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources\GDAssets" />
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources\cheers" />
       <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources\Commands" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -503,11 +469,11 @@
       <recent name="Main.InnerWindows" />
       <recent name="SettingsPanels" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\classes\artifacts\GD_Request_Bot_jar" />
-      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources" />
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources\Icons" />
-      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources\cheers" />
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources\Fonts" />
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Main" />
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources\GDAssets" />
       <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources\Commands" />
     </key>
   </component>
@@ -656,7 +622,7 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info active="true" content_ui="combo" x="16" y="105" width="325" height="756" id="Project" order="6" sideWeight="0.29424307" side_tool="true" visible="true" weight="0.18230277" />
+      <window_info active="true" content_ui="combo" x="16" y="105" width="325" height="756" id="Project" order="6" sideWeight="0.29424307" side_tool="true" visible="true" weight="0.18443497" />
       <window_info anchor="bottom" id="JProfiler" order="0" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" sideWeight="0.4979424" weight="0.32394367" />
@@ -669,7 +635,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32990867" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.4035181" weight="0.32286024" />
       <window_info anchor="bottom" x="-37" y="178" width="1736" height="856" id="Byte Code Viewer" order="11" type="WINDOWED" />
-      <window_info anchor="bottom" id="Run" order="12" sideWeight="0.55490404" weight="0.30552545" />
+      <window_info anchor="bottom" id="Run" order="12" sideWeight="0.55490404" visible="true" weight="0.30552545" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
       <window_info anchor="right" id="Palette" order="2" />
@@ -1209,6 +1175,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/Board.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1411">
+          <caret line="121" column="9" selection-start-line="121" selection-start-column="9" selection-end-line="121" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Resources/Commands/!gdping.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -1232,13 +1205,6 @@
             <element signature="e#2672#2673#0" expanded="true" />
             <element signature="e#2699#2700#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="773">
-          <caret line="121" column="9" selection-start-line="121" selection-start-column="9" selection-end-line="121" selection-end-column="9" />
         </state>
       </provider>
     </entry>
