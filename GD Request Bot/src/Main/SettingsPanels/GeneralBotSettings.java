@@ -15,7 +15,7 @@ import java.io.*;
 
 public class GeneralBotSettings {
 	public static boolean silentOption = false;
-	public static boolean multiOption = false;
+	public static boolean multiOption = true;
 	public static boolean antiDox = true;
 	public static int cooldown = 0;
 	private static JPanel panel = new JPanel(null);
@@ -64,12 +64,16 @@ public class GeneralBotSettings {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				silentOption = silentChatMode.getSelectedState();
+				Settings.writeSettings("silentMode", String.valueOf(silentOption));
+
 			}
 		});
+		multiThreadMode.setChecked(true);
 		multiThreadMode.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				multiOption = multiThreadMode.getSelectedState();
+				Settings.writeSettings("multiMode", String.valueOf(multiOption));
 			}
 		});
 		antiDoxMode.setChecked(true);
@@ -77,6 +81,7 @@ public class GeneralBotSettings {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				antiDox = antiDoxMode.getSelectedState();
+				Settings.writeSettings("antiDox", String.valueOf(antiDox));
 			}
 		});
 		globalCooldownInput.setBounds(25,235,365, 32);
@@ -95,6 +100,7 @@ public class GeneralBotSettings {
 				catch (NumberFormatException f){
 					cooldown = 0;
 				}
+				Settings.writeSettings("globalCooldown", String.valueOf(cooldown));
 			}
 		});
 
@@ -127,22 +133,18 @@ public class GeneralBotSettings {
 		if(!Settings.getSettings("silentMode").equalsIgnoreCase("")) {
 			silentOption = Boolean.parseBoolean(Settings.getSettings("silentMode"));
 			silentChatMode.setChecked(silentOption);
-			Settings.writeSettings("silentMode", String.valueOf(silentOption));
 		}
 		if(!Settings.getSettings("antiDox").equalsIgnoreCase("")) {
 			antiDox = Boolean.parseBoolean(Settings.getSettings("antiDox"));
 			antiDoxMode.setChecked(antiDox);
-			Settings.writeSettings("antiDox", String.valueOf(antiDox));
 		}
 		if(!Settings.getSettings("multiMode").equalsIgnoreCase("")) {
 			multiOption = Boolean.parseBoolean(Settings.getSettings("multiMode"));
 			multiThreadMode.setChecked(multiOption);
-			Settings.writeSettings("multiMode", String.valueOf(multiOption));
 		}
 		if(!Settings.getSettings("globalCooldown").equalsIgnoreCase("")) {
 			cooldown = Integer.parseInt(Settings.getSettings("globalCooldown"));
 			globalCooldownInput.setText(String.valueOf(cooldown));
-			Settings.writeSettings("globalCooldown", String.valueOf(cooldown));
 		}
 	}
 
