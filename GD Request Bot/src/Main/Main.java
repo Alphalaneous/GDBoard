@@ -441,7 +441,7 @@ public class Main {
 					channelPointListener.disconnectBot();
 					chatReader.disconnect();
 					serverBot.disconnect();
-				} catch (WebsocketNotConnectedException ignored) {
+				} catch (Exception ignored) {
 				}
 				Variables.saveVars();
 				GeneralSettings.setSettings();
