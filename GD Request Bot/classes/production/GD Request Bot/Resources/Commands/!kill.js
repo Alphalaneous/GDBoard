@@ -1,5 +1,8 @@
 function command(){
-    if((user === 'Alphalaneous' || (isMod && isChaos)) || isChaosChaos){
-        GD.run('kill');
+    if(user === 'Alphalaneous' || isChaos){
+        if(isModChaos && !isMod){
+           return;
+        }
+        GD.doChaos('kill');
     }
 }

@@ -133,6 +133,7 @@ GLOBALLY_BLOCKED_LEVEL_MESSAGE = @%s, That level has been globally blocked! Reas
 //Settings
 
 GENERAL_SETTINGS = General
+CHAOS_SETTINGS = Chaos Mode
 GENERAL_BOT_SETTINGS = General
 OUTPUTS_SETTINGS = Outputs
 ACCOUNTS_SETTINGS = Accounts
@@ -180,6 +181,20 @@ GDBOARD_VERSION = GDBoard version: %s
 STREAMER_BYPASS = Bypass your Filters
 MODS_BYPASS = Mods Bypass Filters
 QUEUE_COMMAND_LABEL = Queue Command Level Count:
+
+//Chaos Mode Settings
+
+ENABLE_CHAOS_MODE = Enable Chaos Mode
+MOD_ONLY_CHAOS = Mod Only Chaos Mode
+DISABLE_KILL = Disable Kill
+MINIMUM_X = Minimum X
+MAXIMUM_X = Maximum X
+MINIMUM_Y = Minumum Y
+MAXIMUM_Y = Maximum Y
+MINIMUM_SIZE = Minimum Size
+MAXIMUM_SIZE = Maximum Size
+MINIMUM_SPEED = Minimum Speed
+MAXIMUM_SPEED = Maximum Speed
 
 //Outputs Settings
 
