@@ -409,7 +409,7 @@ public class CommandEditor {
 				function = "function command() { Board.playSound(\"" + soundFileLocation.getText() + "\");}";
 			}
 		}
-		Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\" + type + "\\" + commandNameText.getText() + ".js");
+		Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\" + type + "\\" + commandNameText.getText().replace("\\\\","").replace("/", "") + ".js");
 		if (!Files.exists(file)) {
 			try {
 				Files.createFile(file);

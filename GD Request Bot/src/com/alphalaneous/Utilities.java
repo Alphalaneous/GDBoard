@@ -21,7 +21,7 @@ public class Utilities {
 
 
 	public static void addCommand(String username, String... args){
-		String newCommandName = args[0];
+		String newCommandName = args[0].replace("\\\\","").replace("/", "");
 		StringBuilder message = new StringBuilder();
 
 		for(String msg : args){
@@ -104,7 +104,7 @@ public class Utilities {
 		}
 	}
 	public static void addPoints(String username, String... args){
-		String newCommandName = args[0];
+		String newCommandName = args[0].replace("\\\\","").replace("/", "");
 		StringBuilder message = new StringBuilder();
 
 		for(String msg : args){
