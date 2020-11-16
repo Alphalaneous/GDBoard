@@ -1,5 +1,7 @@
 package com.alphalaneous.SettingsPanels;
 
+import com.alphalaneous.APIs;
+import com.alphalaneous.ChannelPointReward;
 import com.alphalaneous.Components.*;
 import com.alphalaneous.Defaults;
 import com.alphalaneous.Windows.CommandEditor;
@@ -10,7 +12,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.nio.file.*;
 import java.util.*;
-import java.util.stream.Stream;
 
 import static com.alphalaneous.Defaults.settingsButtonUI;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
@@ -24,7 +25,7 @@ public class ChannelPointSettings {
 	private static JScrollPane scrollPane = new JScrollPane(commandsPanel);
 	private static JPanel panel = new JPanel();
 	private static JPanel titlePanel = new JPanel();
-	private static RoundedJButton addCommand = new RoundedJButton("\uECC8", "$ADD_CHANNEL_POINTS_TOOLTIP$");
+	private static RoundedJButton refreshPoints = new RoundedJButton("\uE149", "$REFRESH_CHANNEL_POINTS_TOOLTIP$");
 
 
 	public static JPanel createPanel() {
@@ -36,19 +37,20 @@ public class ChannelPointSettings {
 
 		panel.add(label);
 
-		addCommand.setBackground(Defaults.BUTTON);
-		addCommand.setBounds(370, 16, 30, 30);
-		addCommand.setFont(Defaults.SYMBOLS.deriveFont(18f));
-		addCommand.setForeground(Defaults.FOREGROUND);
-		addCommand.setUI(settingsButtonUI);
-		addCommand.addMouseListener(new MouseAdapter() {
+		refreshPoints.setBackground(Defaults.BUTTON);
+		refreshPoints.setBounds(370, 16, 30, 30);
+		refreshPoints.setFont(Defaults.SYMBOLS.deriveFont(14f));
+		refreshPoints.setForeground(Defaults.FOREGROUND);
+		refreshPoints.setUI(settingsButtonUI);
+		refreshPoints.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				CommandEditor.showEditor("points", "", false);
+				//CommandEditor.showEditor("points", "", false);
+				refresh();
 			}
 		});
 
-		panel.add(addCommand);
+		panel.add(refreshPoints);
 
 
 		titlePanel.setBounds(0, 0, 415, 50);
@@ -81,6 +83,7 @@ public class ChannelPointSettings {
 		scrollPane.setOpaque(false);
 		scrollPane.setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
+		/*
 		HashMap<String, ButtonInfo> existingCommands = new HashMap<>();
 		try {
 			Path comPath = Paths.get(Defaults.saveDirectory + "/GDBoard/points/");
@@ -104,7 +107,13 @@ public class ChannelPointSettings {
 		for(Map.Entry<String,ButtonInfo> entry : sorted.entrySet()) {
 			String key = entry.getKey();
 			addButton(key);
+		}*/
+		ArrayList<ChannelPointReward> rewards = APIs.getChannelPoints();
+
+		for(ChannelPointReward reward : rewards){
+			addButton(reward.getTitle(), reward.getBgColor());
 		}
+
 		panel.setBounds(0, 0, 415, 622);
 		panel.add(scrollPane);
 		return panel;
@@ -117,7 +126,7 @@ public class ChannelPointSettings {
 		commandsPanel.setBounds(0, 0, 400, (int) (height + 4));
 		commandsPanel.setPreferredSize(new Dimension(400, (int) (height + 4)));
 
-		HashMap<String, ButtonInfo> existingCommands = new HashMap<>();
+		/*HashMap<String, ButtonInfo> existingCommands = new HashMap<>();
 		try {
 			Path comPath = Paths.get(Defaults.saveDirectory + "/GDBoard/points/");
 			if (Files.exists(comPath)) {
@@ -140,6 +149,11 @@ public class ChannelPointSettings {
 		for(Map.Entry<String,ButtonInfo> entry : sorted.entrySet()) {
 			String key = entry.getKey();
 			addButton(key);
+		}*/
+		ArrayList<ChannelPointReward> rewards = APIs.getChannelPoints();
+
+		for(ChannelPointReward reward : rewards){
+			addButton(reward.getTitle(), reward.getBgColor());
 		}
 	}
 	public static class ButtonInfo{
@@ -154,7 +168,7 @@ public class ChannelPointSettings {
 
 
 
-	public static void addButton(String command) {
+	public static void addButton(String command, Color color) {
 		i++;
 		if ((i-1) % 2 == 0) {
 			height = height + 39;
@@ -165,10 +179,23 @@ public class ChannelPointSettings {
 				scrollPane.updateUI();
 			}
 		}
+		JButtonUI colorUI = new JButtonUI();
+		colorUI.setBackground(color);
+		colorUI.setHover(color);
+		colorUI.setSelect(color.darker());
 		CurvedButton button = new CurvedButton(command);
-		button.setBackground(Defaults.BUTTON);
-		button.setUI(settingsButtonUI);
-		button.setForeground(Defaults.FOREGROUND);
+		button.setBackground(color);
+		button.setUI(colorUI);
+		double brightness = Math.sqrt(color.getRed()* color.getRed() * .241 +
+						color.getGreen() * color.getGreen() * .691 +
+						color.getBlue() * color.getBlue() * .068);
+
+		if(brightness > 130){
+			button.setForeground(Color.BLACK);
+		}
+		else{
+			button.setForeground(Color.WHITE);
+		}
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.setPreferredSize(new Dimension(170, 35));
@@ -193,7 +220,7 @@ public class ChannelPointSettings {
 		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
 
 		for (Component component : commandsPanel.getComponents()) {
-			if (component instanceof CurvedButton) {
+			/*if (component instanceof CurvedButton) {
 
 				if(component.getForeground().equals(Defaults.FOREGROUND2)) {
 					component.setForeground(Defaults.FOREGROUND2);
@@ -203,7 +230,7 @@ public class ChannelPointSettings {
 				}
 				component.setBackground(Defaults.BUTTON);
 				((CurvedButton) component).refresh();
-			}
+			}*/
 			if (component instanceof JLabel) {
 				component.setForeground(Defaults.FOREGROUND);
 
@@ -225,6 +252,5 @@ public class ChannelPointSettings {
 				((CheckboxButton) component).refresh();
 			}
 		}
-		refresh();
 	}
 }

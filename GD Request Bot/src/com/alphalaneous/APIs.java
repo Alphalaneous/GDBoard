@@ -10,10 +10,13 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 
+import java.awt.*;
+import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
 
 import java.io.BufferedReader;
@@ -144,7 +147,34 @@ public class APIs {
 			e.printStackTrace();
 		}
 	}
-
+	public static ArrayList<ChannelPointReward> getChannelPoints(){
+		JSONArray awards = Objects.requireNonNull(twitchAPI("https://api.twitch.tv/helix/channel_points/custom_rewards?broadcaster_id=" + getIDs(Settings.getSettings("channel")))).getJSONArray("data");
+		ArrayList<ChannelPointReward> rewards = new ArrayList<>();
+		System.out.println(awards.toString());
+		for(int i = 0; i < awards.length(); i++) {
+			String title = awards.getJSONObject(i).getString("title");
+			String prompt = awards.getJSONObject(i).getString("prompt");
+			long cost = awards.getJSONObject(i).getLong("cost");
+			Color bgColor = Color.decode(awards.getJSONObject(i).getString("background_color"));
+			String imgURL;
+			try {
+				imgURL = awards.getJSONObject(i).getString("image");
+			}
+			catch (JSONException e){
+				imgURL = "https://static-cdn.jtvnw.net/custom-reward-images/default-2.png";
+			}
+			ChannelPointReward reward = null;
+			try {
+				reward = new ChannelPointReward(title, prompt, cost, bgColor, new URL(imgURL));
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+			if(reward != null) {
+				rewards.add(reward);
+			}
+		}
+		return rewards;
+	}
 	static void getViewers() {
 		new Thread(() -> {
 			while (true) {

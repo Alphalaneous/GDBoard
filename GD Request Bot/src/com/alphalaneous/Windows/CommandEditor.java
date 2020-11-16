@@ -99,9 +99,6 @@ public class CommandEditor {
 									if (type.equalsIgnoreCase("commands")) {
 										CommandSettings.refresh();
 									}
-									if (type.equalsIgnoreCase("points")) {
-										ChannelPointSettings.refresh();
-									}
 									active = false;
 									editor.setVisible(false);
 								}
@@ -264,9 +261,6 @@ public class CommandEditor {
 						deleteCommand();
 						if(type.equalsIgnoreCase("commands")) {
 							CommandSettings.refresh();
-						}
-						if (type.equalsIgnoreCase("points")) {
-							ChannelPointSettings.refresh();
 						}
 					}
 				}).start();

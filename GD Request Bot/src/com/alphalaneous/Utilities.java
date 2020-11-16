@@ -127,7 +127,6 @@ public class Utilities {
 				Files.createFile(file);
 				Files.write(file, command.getBytes());
 				Main.sendMessage(Utilities.format("$POINTS_ADDED_SUCCESS$", username, newCommandName));
-				ChannelPointSettings.refresh();
 				saveOption(newCommandName, "points", "ADVANCED_EDITOR");
 
 			}
@@ -179,7 +178,6 @@ public class Utilities {
 				e.printStackTrace();
 			}
 			Main.sendMessage(Utilities.format("$POINTS_DELETE_SUCCESS$", username, command));
-			ChannelPointSettings.refresh();
 			deleteCommandA(command, "points", "SEND_MESSAGE");
 		}
 		else{

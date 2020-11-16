@@ -216,6 +216,7 @@ LOGIN = Log In
 //Channel Point Settings
 
 ADD_CHANNEL_POINTS_TOOLTIP = Add Channel Point Action
+REFRESH_CHANNEL_POINTS_TOOLTIP = Refresh Channel Point Rewards
 POINTS_LIST = Channel Point Actions:
 
 //Commands Settings
