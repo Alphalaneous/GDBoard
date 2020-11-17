@@ -53,9 +53,7 @@ public class BlockedUserSettings {
 		blockedListPanel.setBounds(0, 0, 400, 0);
 		blockedListPanel.setPreferredSize(new Dimension(400, 0));
 		blockedListPanel.setBackground(Defaults.SUB_MAIN);
-		addID.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
+		addID.addActionListener(e -> {
 				try {
 					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blockedUsers.txt");
 					if (!Files.exists(file)) {
@@ -82,7 +80,7 @@ public class BlockedUserSettings {
 				} catch (IOException e1) {
 					DialogBox.showDialogBox("Error!", e1.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 				}
-			}
+
 		});
 		scrollPane.setBounds(0, 60, 412, 562);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
@@ -157,9 +155,7 @@ public class BlockedUserSettings {
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.setPreferredSize(new Dimension(170, 35));
-		button.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
+		button.addActionListener(e -> {
 
 				SettingsWindow.run = false;
 				new Thread(() -> {
@@ -188,7 +184,7 @@ public class BlockedUserSettings {
 					}
 					SettingsWindow.run = true;
 				}).start();
-			}
+
 		});
 		button.refresh();
 		blockedListPanel.add(button);

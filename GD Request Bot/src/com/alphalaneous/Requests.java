@@ -47,6 +47,10 @@ public class Requests {
 
 	private static String[] gdCommands = {"!gd", "!kill", "!block", "!blockuser", "!unblock", "!unblockuser", "!clear", "!info", "!move", "!next", "!position", "!queue", "!remove", "!request", "!song", "!stop", "!toggle", "!top", "!wronglevel"};
 
+	static void forceAdd(LevelData data){
+		levels.add(data);
+	}
+
 	static void forceAdd(String name, String author, long levelID, String difficulty, boolean epic, boolean featured, int stars, String requester, int gameVersion, int coins, String description, int likes, int downloads, String length, int levelVersion, int songID, String songName, String songAuthor, int objects, long original, boolean vulgar, boolean image, int password, String upload, String update, boolean verifiedCoins) {
 
 

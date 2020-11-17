@@ -5,9 +5,15 @@ import com.alphalaneous.SettingsPanels.ChannelPointSettings;
 import com.alphalaneous.SettingsPanels.CommandSettings;
 import com.alphalaneous.SettingsPanels.PersonalizationSettings;
 import com.alphalaneous.Windows.DialogBox;
+import com.alphalaneous.Windows.Window;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -305,6 +311,31 @@ public class Utilities {
 			e.printStackTrace();
 		}
 		trayIcon.addActionListener(System.out::println);
+		trayIcon.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Window.focus();
+			}
+		});
+		PopupMenu popup = new PopupMenu();
+		MenuItem aboutItem = new MenuItem("About");
+		MenuItem exitItem = new MenuItem("Exit");
+		MenuItem forceExitItem = new MenuItem("Force Exit");
+
+		forceExitItem.addActionListener(e -> {
+			System.exit(0);
+		});
+		exitItem.addActionListener(e -> {
+			Main.close();
+		});
+		aboutItem.addActionListener(e -> {
+			Window.showAttributions();
+		});
+		popup.add(aboutItem);
+		popup.addSeparator();
+		popup.add(exitItem);
+		popup.add(forceExitItem);
+		trayIcon.setPopupMenu(popup);
 	}
 	static void disposeTray(){
 		tray.remove(trayIcon);

@@ -200,6 +200,7 @@ public class Main {
 					Window.resetCommentSize();
 					Window.loadSettings();
 					Window.frame.setVisible(true);
+					Window.setOnTop(Boolean.parseBoolean(Settings.getSettings("onTop")));
 
 					OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
 					break;

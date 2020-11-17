@@ -42,10 +42,8 @@ public class RequestsLog {
 		clearLogs.setFont(Defaults.SYMBOLS.deriveFont(18f));
 		clearLogs.setForeground(Defaults.FOREGROUND);
 		clearLogs.setUI(settingsButtonUI);
-		clearLogs.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				new Thread(() -> {
+		clearLogs.addActionListener(e ->
+			new Thread(() -> {
 					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
 					String option = DialogBox.showDialogBox("$CLEAR_LOGS_DIALOG_TITLE$", "<html> $CLEAR_LOGS_DIALOG_INFO$ <html>", "", new String[]{"$YES$", "$NO$"});
 
@@ -60,9 +58,8 @@ public class RequestsLog {
 						}
 					}
 					SettingsWindow.run = true;
-				}).start();
-			}
-		});
+				}).start()
+		);
 
 		blockedSettingsPanel.add(label);
 		blockedSettingsPanel.add(clearLogs);
@@ -132,9 +129,7 @@ public class RequestsLog {
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.setPreferredSize(new Dimension(85, 35));
-		button.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
+		button.addActionListener(e -> {
 				SettingsWindow.run = false;
 
 				new Thread(() ->{
@@ -163,7 +158,7 @@ public class RequestsLog {
 				}
 				SettingsWindow.run = true;
 				}).start();
-			}
+
 		});
 		button.refresh();
 		blockedListPanel.add(button);

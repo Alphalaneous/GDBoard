@@ -80,10 +80,7 @@ public class CommentsPanel {
 
 		//region Create Previous Page Button
 		JButton prev = createButton("\uE760", 0, "$PREV_PAGE$");
-		prev.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				super.mousePressed(e);
+		prev.addActionListener(e -> {
 				if (page != 0) {
 					page = page - 2;
 					try {
@@ -91,16 +88,13 @@ public class CommentsPanel {
 					} catch (Exception ignored) {
 					}
 				}
-			}
+
 		});
 		buttons.add(prev);
 		//endregion
 
 		JButton next = createButton("\uE761", 35, "$NEXT_PAGE$");
-		next.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				super.mousePressed(e);
+		next.addActionListener(e -> {
 				page = page + 2;
 				if (!loadComments(page, topC)) {
 					page = page - 2;
@@ -109,36 +103,30 @@ public class CommentsPanel {
 					} catch (Exception f) {
 						f.printStackTrace();
 					}
-				}
+
 			}
 		});
 		buttons.add(next);
 
 		JButton top = createButton("\uE19F", 90, "$TOP_COMMENTS$");
-		top.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				super.mousePressed(e);
+		top.addActionListener(e -> {
 				page = 0;
 				try {
 					loadComments(0, true);
 				} catch (Exception ignored) {
 				}
-			}
+
 		});
 		buttons.add(top);
 
 		JButton newest = createButton("\uE823", 125, "$LATEST_COMMENTS$");
-		newest.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				super.mousePressed(e);
+		newest.addActionListener(e -> {
 				topC = false;
 				page = 0;
 				try {
 					loadComments(0, false);
 				} catch (Exception ignored) {
-				}
+
 			}
 		});
 		buttons.add(newest);

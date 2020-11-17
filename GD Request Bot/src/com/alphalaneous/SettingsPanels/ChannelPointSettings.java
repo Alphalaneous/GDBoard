@@ -43,13 +43,7 @@ public class ChannelPointSettings {
 		refreshPoints.setFont(Defaults.SYMBOLS.deriveFont(14f));
 		refreshPoints.setForeground(Defaults.FOREGROUND);
 		refreshPoints.setUI(settingsButtonUI);
-		refreshPoints.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				//CommandEditor.showEditor("points", "", false);
-				refresh();
-			}
-		});
+		refreshPoints.addActionListener(e -> refresh());
 
 		panel.add(refreshPoints);
 
@@ -204,11 +198,8 @@ public class ChannelPointSettings {
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.setPreferredSize(new Dimension(170, 35));
-		button.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				CommandEditor.showEditor("points", command, false);
-			}
+		button.addActionListener(e -> {
+			CommandEditor.showEditor("points", command, false);
 		});
 		button.refresh();
 		commandsPanel.add(button);

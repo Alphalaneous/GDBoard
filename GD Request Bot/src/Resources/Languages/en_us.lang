@@ -338,6 +338,7 @@ TOP_COMMENTS = Top Comments
 
 SWITCH_PAGES = Switch Pages
 SKIP_LEVEL_TOOLTIP = Next/Skip Level
+UNDO_LEVEL_TOOLTIP = Undo Level Removal
 NEXT_RANDOM_TOOLTIP = Next Random Level
 CLIPBOARD_TOOLTIP = Copy to Clipboard
 BLOCK_TOOLTIP = Block Level

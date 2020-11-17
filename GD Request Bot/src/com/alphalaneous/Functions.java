@@ -19,10 +19,17 @@ import java.io.BufferedInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.*;
-import java.util.Base64;
-import java.util.Random;
+import java.util.*;
 
 public class Functions {
+
+	private static LinkedHashMap<LevelData, Integer> undoQueue = new LinkedHashMap<>(5){
+		protected boolean removeEldestEntry(Map.Entry<LevelData, Integer> eldest) {
+			return size() > 5;
+		}
+	};
+	private static boolean didUndo = false;
+
 	public static void skipFunction() {
 		if(Requests.bwomp){
 			Thread bwompThread;
@@ -43,6 +50,12 @@ public class Functions {
 		if(Main.programLoaded) {
 			if (Requests.levels.size() != 0) {
 				int select = LevelsPanel.getSelectedID();
+				if(didUndo){
+					undoQueue.clear();
+					didUndo = false;
+				}
+				undoQueue.put(Requests.levels.get(LevelsPanel.getSelectedID()), LevelsPanel.getSelectedID());
+
 				Requests.levels.remove(LevelsPanel.getSelectedID());
 				LevelsPanel.removeButton();
 				if (Requests.levels.size() > 0 ) {
@@ -99,13 +112,27 @@ public class Functions {
 
 
 	}
-
+	public static void undoFunction(){
+		if(undoQueue.size() != 0) {
+			didUndo = true;
+			LevelData data = (LevelData) undoQueue.keySet().toArray()[0];
+			int position = (int) undoQueue.values().toArray()[0];
+			Requests.forceAdd(data);
+			LevelsPanel.createButton(data.getName(), data.getAuthor(), data.getLevelID(), data.getDifficulty(), data.getEpic(), data.getFeatured(), data.getStars(), data.getRequester(), data.getVersion(), data.getPlayerIcon(), data.getCoins(), data.getVerifiedCoins());
+			Requests.movePosition(Requests.levels.size()-1, position);
+			undoQueue.remove(data);
+		}
+	}
 	public static void randomFunction(){
 		if(Main.programLoaded) {
 			Random random = new Random();
 			int num = 0;
 			if (Requests.levels.size() != 0) {
-
+				if(didUndo){
+					undoQueue.clear();
+					didUndo = false;
+				}
+				undoQueue.put(Requests.levels.get(LevelsPanel.getSelectedID()), LevelsPanel.getSelectedID());
 				Requests.levels.remove(LevelsPanel.getSelectedID());
 				LevelsPanel.removeButton(LevelsPanel.getSelectedID());
 				Functions.saveFunction();
@@ -270,6 +297,7 @@ public class Functions {
 						LevelsPanel.removeButton();
 					}
 					Requests.levels.clear();
+					undoQueue.clear();
 					Functions.saveFunction();
 					SongPanel.refreshInfo();
 					InfoPanel.refreshInfo();

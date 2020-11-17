@@ -292,16 +292,14 @@ public class LevelsPanel {
 				moveUp.setBackground(new Color(0, 0, 0, 0));
 				moveUp.setOpaque(false);
 				moveUp.setBounds(buttonWidth - 30, 0, 25, 30);
-				moveUp.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mousePressed(MouseEvent e) {
-						if(Main.programLoaded) {
-							if (Requests.getPosFromID(ID) != 0) {
-								LevelsPanel.movePosition(Requests.getPosFromID(ID), Requests.getPosFromID(ID) - 1);
-							}
+				moveUp.addActionListener(e -> {
+					if(Main.programLoaded) {
+						if (Requests.getPosFromID(ID) != 0) {
+							LevelsPanel.movePosition(Requests.getPosFromID(ID), Requests.getPosFromID(ID) - 1);
 						}
 					}
-
+				});
+				moveUp.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseEntered(MouseEvent e) {
 						moveUp.setForeground(Defaults.FOREGROUND2);
@@ -321,16 +319,14 @@ public class LevelsPanel {
 				moveDown.setBackground(new Color(0, 0, 0, 0));
 				moveDown.setOpaque(false);
 				moveDown.setBounds(buttonWidth - 30, 30, 25, 30);
-				moveDown.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mousePressed(MouseEvent e) {
-						if(Main.programLoaded) {
-							if (Requests.getPosFromID(ID) != Requests.levels.size() - 1) {
-								LevelsPanel.movePosition(Requests.getPosFromID(ID), Requests.getPosFromID(ID) + 1);
-							}
+				moveDown.addActionListener(e -> {
+					if(Main.programLoaded) {
+						if (Requests.getPosFromID(ID) != Requests.levels.size() - 1) {
+							LevelsPanel.movePosition(Requests.getPosFromID(ID), Requests.getPosFromID(ID) + 1);
 						}
 					}
-
+				});
+				moveDown.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseEntered(MouseEvent e) {
 						moveDown.setForeground(Defaults.FOREGROUND2);
@@ -384,7 +380,7 @@ public class LevelsPanel {
 
 				addMouseListener(new MouseAdapter() {
 					@Override
-					public void mousePressed(MouseEvent e) {
+					public void mouseClicked(MouseEvent e) {
 						if (SwingUtilities.isMiddleMouseButton(e)) {
 							if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
 								try {
@@ -395,13 +391,10 @@ public class LevelsPanel {
 								}
 							}
 						}
-						if (SwingUtilities.isRightMouseButton(e)) {
-							StringSelection selection = new StringSelection(
-									String.valueOf(ID));
-							Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-							clipboard.setContents(selection, selection);
-						}
-						super.mousePressed(e);
+					}
+				});
+
+				addActionListener(e -> {
 
 						Component[] comp = mainPanel.getComponents();
 						for (Component component : comp) {
@@ -427,7 +420,7 @@ public class LevelsPanel {
 						}
 
 						prevSelectedID = selectedID;
-					}
+
 				});
 				if (Requests.levels.size() == 1) {
 					setBackground(Defaults.SELECT);

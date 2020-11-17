@@ -57,9 +57,7 @@ public class AccountSettings {
 		refreshTwitch.setForeground(Defaults.FOREGROUND);
 		refreshTwitch.setBorder(BorderFactory.createEmptyBorder());
 		refreshTwitch.setFont(Defaults.SYMBOLS.deriveFont(14f));
-		refreshTwitch.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
+		refreshTwitch.addActionListener(e -> {
 				Thread thread = new Thread(() -> {
 					try {
 						APIs.setOauth(false);
@@ -68,7 +66,7 @@ public class AccountSettings {
 					}
 				});
 				thread.start();
-			}
+
 		});
 
 		logon.setSize(500,270);
@@ -109,10 +107,7 @@ public class AccountSettings {
 		loginButton.setForeground(Defaults.FOREGROUND);
 		loginButton.setPreferredSize(new Dimension(232, 40));
 		loginButton.refresh();
-		loginButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if(SwingUtilities.isLeftMouseButton(e)){
+		loginButton.addActionListener(e -> {
 					try{
 						LoadGD.authClient = GDClientBuilder.create().buildAuthenticated(new GDClientBuilder.Credentials(usernameInput.getText(), new String(passwordInput.getPassword()))).block();
 						LoadGD.isAuth = true;
@@ -132,8 +127,8 @@ public class AccountSettings {
 						usernameLabel.setForeground(red);
 						usernameLabel.setTextLang("Failed");
 					}
-				}
-			}
+
+
 		});
 		logon.add(loginButton);
 
@@ -144,13 +139,10 @@ public class AccountSettings {
 		cancelButton.setForeground(Defaults.FOREGROUND);
 		cancelButton.setPreferredSize(new Dimension(230, 40));
 		cancelButton.refresh();
-		cancelButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if(SwingUtilities.isLeftMouseButton(e)){
+		cancelButton.addActionListener(e -> {
 					logon.setVisible(false);
-				}
-			}
+
+
 		});
 
 		logon.add(cancelButton);
@@ -162,10 +154,7 @@ public class AccountSettings {
 		refreshGD.setForeground(Defaults.FOREGROUND);
 		refreshGD.setBorder(BorderFactory.createEmptyBorder());
 		refreshGD.setFont(Defaults.SYMBOLS.deriveFont(14f));
-		refreshGD.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if(SwingUtilities.isLeftMouseButton(e)){
+		refreshGD.addActionListener(e -> {
 					usernameInput.setText("");
 					usernameInput.requestFocus();
 					passwordInput.setText("");
@@ -176,8 +165,8 @@ public class AccountSettings {
 					passwordLabel.setForeground(Defaults.FOREGROUND);
 					logon.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - logon.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - logon.getHeight() / 2);
 					logon.setVisible(true);
-				}
-			}
+
+
 		});
 		
 		panel.add(channelText);

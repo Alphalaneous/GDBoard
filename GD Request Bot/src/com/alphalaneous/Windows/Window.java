@@ -3,6 +3,7 @@ package com.alphalaneous.Windows;
 import com.alphalaneous.Components.*;
 import com.alphalaneous.Panels.InfoPanel;
 import com.alphalaneous.Panels.LevelsPanel;
+import com.alphalaneous.SettingsPanels.PersonalizationSettings;
 import com.alphalaneous.SettingsPanels.WindowedSettings;
 import com.alphalaneous.*;
 import com.alphalaneous.Panels.CommentsPanel;
@@ -61,13 +62,11 @@ public class Window {
 	}
 
 	public static void setOnTop(boolean onTop) {
-		frame.setAlwaysOnTop(onTop);
 		frame.setFocusableWindowState(!onTop);
+		frame.setAlwaysOnTop(onTop);
 	}
 
 	public static void createPanel() {
-		setOnTop(WindowedSettings.onTopOption);
-
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -167,80 +166,66 @@ public class Window {
 
 		buttonPanel.setBackground(Defaults.SUB_MAIN);
 		JButton skip = createButton("\uEB9D", "$SKIP_LEVEL_TOOLTIP$");
-		skip.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (SwingUtilities.isLeftMouseButton(e)) {
+		skip.addActionListener(e -> {
+
 					//((InnerWindow) window).moveToFront();
 					Functions.skipFunction();
-				}
-			}
+
+
 		});
 		buttonPanel.add(skip);
-		//endregion
+
+		JButton undo = createButton("\uE10E", "$UNDO_LEVEL_TOOLTIP$");
+		undo.addActionListener(e -> {
+			Functions.undoFunction();
+		});
+		buttonPanel.add(undo);
 
 		//region Create Random Button
 
 		JButton randNext = createButton("\uF158", "$NEXT_RANDOM_TOOLTIP$");
-		randNext.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (SwingUtilities.isLeftMouseButton(e)) {
+		randNext.addActionListener(e -> {
 					//((InnerWindow) window).moveToFront();
 					Functions.randomFunction();
-				}
 
-			}
+
 		});
 		buttonPanel.add(randNext);
 		//endregion
 
 		//region Create Copy Button
 		JButton copy = createButton("\uF0E3", "$CLIPBOARD_TOOLTIP$");
-		copy.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (SwingUtilities.isLeftMouseButton(e)) {
+		copy.addActionListener(e -> {
 					//((InnerWindow) window).moveToFront();
 					Functions.copyFunction();
-				}
-			}
+
+
 		});
 		buttonPanel.add(copy);
 		//endregion
 
 		//region Create Block Button
 		JButton block = createButton("\uF140", "$BLOCK_TOOLTIP$");
-		block.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (SwingUtilities.isLeftMouseButton(e)) {
+		block.addActionListener(e -> {
 					//((InnerWindow) window).moveToFront();
 					Functions.blockFunction();
-				}
-			}
+
+
 		});
 		buttonPanel.add(block);
 		//endregion
 
 		//region Create Clear Button
 		JButton clear = createButton("\uE107", "$CLEAR_TOOLTIP$");
-		clear.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (SwingUtilities.isLeftMouseButton(e)) {
+		clear.addActionListener(e -> {
 					SettingsWindow.run = false;
 					//((InnerWindow) window).moveToFront();
 					Functions.clearFunction();
-				}
-			}
+
 		});
 		buttonPanel.add(clear);
 		JButton toggleRequests = createButton("\uE71A", "$TOGGLE_REQUESTS_TOOLTIP$");
-		toggleRequests.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (SwingUtilities.isLeftMouseButton(e)) {
+		toggleRequests.addActionListener(e -> {
 					SettingsWindow.run = false;
 					//((InnerWindow) window).moveToFront();
 					Functions.requestsToggleFunction();
@@ -250,16 +235,14 @@ public class Window {
 					else{
 						toggleRequests.setText("\uE102");
 					}
-				}
-			}
+
+
 		});
 		buttonPanel.add(toggleRequests);
 
 		showComments = createButton("\uE134", "$HIDE_COMMENTS_TOOLTIP$");
-		showComments.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (SwingUtilities.isLeftMouseButton(e)) {
+		showComments.addActionListener(e -> {
+
 					showingMore = !showingMore;
 					toolBar.setBounds(0, 0, frame.getWidth(), 30);
 					//gdToggle.setBounds(frame.getWidth() - 180, 0, 100, 30);
@@ -287,13 +270,13 @@ public class Window {
 						CommentsPanel.getComWindow().setBounds(frame.getWidth() - 415, 0, CommentsPanel.getComWindow().getWidth(), frame.getHeight() + 2);
 						CommentsPanel.resetDimensions(CommentsPanel.getComWindow().getWidth(), frame.getHeight() + 2);
 						LevelsPanel.resizeButtons(frame.getWidth() - 415);
-						LevelsPanel.getReqWindow().setBounds(0, 0, frame.getWidth() - 375, frame.getHeight() - 152);
+						LevelsPanel.getReqWindow().setBounds(0, 0, frame.getWidth() - 415, frame.getHeight() - 152);
 						InfoPanel.resetDimensions(LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
 						InfoPanel.getInfoWindow().setBounds(0, LevelsPanel.getReqWindow().getHeight() + 1, LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
 						refresh();
 					}
-				}
-			}
+
+
 		});
 		buttonPanel.add(showComments);
 		JFrame moderationFrame = new JFrame();
@@ -330,35 +313,26 @@ public class Window {
 		modButtons.setBackground(Defaults.TOP);
 
 		CurvedButtonAlt delete = createCurvedButton("$DELETE$");
-		delete.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
+		delete.addActionListener(e -> {
 				Main.sendMessage("/delete " + Requests.levels.get(selectedID).getMessageID());
-			}
+
 		});
 
 		CurvedButtonAlt timeout = createCurvedButton("$TIMEOUT$");
-		timeout.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
+		timeout.addActionListener(e -> {
 				Main.sendMessage("/timeout " + selectedUsername + " 600");
-			}
+
 		});
 
 		CurvedButtonAlt ban = createCurvedButton("$BAN$");
-		ban.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				Main.sendMessage("/ban " + selectedUsername);
-			}
+		ban.addActionListener(e -> {Main.sendMessage("/ban " + selectedUsername);
+
 		});
 
 		CurvedButtonAlt purge = createCurvedButton("$PURGE$");
-		purge.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
+		purge.addActionListener(e -> {
 				Main.sendMessage("/timeout " + selectedUsername + " 1");
-			}
+
 		});
 		modButtons.add(delete);
 		modButtons.add(purge);
@@ -373,10 +347,7 @@ public class Window {
 
 
 		JButton moderate = createButton("\uED15", "$MODERATE_TOOLTIP$");
-		moderate.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (SwingUtilities.isLeftMouseButton(e)) {
+		moderate.addActionListener(e -> {
 					if(Requests.levels.size() != 0) {
 						selectedUsername = String.valueOf(Requests.levels.get(LevelsPanel.getSelectedID()).getRequester());
 						selectedID = LevelsPanel.getSelectedID();
@@ -390,8 +361,8 @@ public class Window {
 						moderationFrame.setVisible(true);
 						moderationFrame.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - moderationFrame.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - moderationFrame.getHeight() / 2);
 					}
-				}
-			}
+
+
 		});
 		buttonPanel.add(moderate);
 
@@ -427,10 +398,7 @@ public class Window {
 		ImageIcon settingsIcon = Assets.settings;
 
 		HighlightButton settingsA = new HighlightButton(settingsIcon.getImage());
-		settingsA.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (SwingUtilities.isLeftMouseButton(e)) {
+		settingsA.addActionListener(e -> {
 					SettingsWindow.run = false;
 					if (!SettingsWindow.frame.isVisible()) {
 						SettingsWindow.frame.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - SettingsWindow.frame.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - SettingsWindow.frame.getHeight() / 2);
@@ -440,17 +408,14 @@ public class Window {
 					}
 					if (SettingsWindow.frame.getExtendedState() == JFrame.ICONIFIED) {
 						SettingsWindow.frame.setExtendedState(JFrame.NORMAL);
-					}
-				}
+
+
 			}
 		});
 		ImageIcon channelPointsIcon = Assets.channelPoints;
 
 		HighlightButton channelPoints = new HighlightButton(channelPointsIcon.getImage());
-		channelPoints.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (SwingUtilities.isLeftMouseButton(e)) {
+		channelPoints.addActionListener(e -> {
 					SettingsWindow.run = false;
 					if (!SettingsWindow.frame.isVisible()) {
 						SettingsWindow.frame.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - SettingsWindow.frame.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - SettingsWindow.frame.getHeight() / 2);
@@ -465,17 +430,14 @@ public class Window {
 					if (SettingsWindow.frame.getExtendedState() == JFrame.ICONIFIED) {
 						SettingsWindow.frame.setExtendedState(JFrame.NORMAL);
 					}
-				}
-			}
+
+
 		});
 
 		ImageIcon commandsIcon = Assets.commands;
 
 		HighlightButton commands = new HighlightButton(commandsIcon.getImage());
-		commands.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (SwingUtilities.isLeftMouseButton(e)) {
+		commands.addActionListener(e -> {
 					SettingsWindow.run = false;
 					if (!SettingsWindow.frame.isVisible()) {
 						SettingsWindow.frame.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - SettingsWindow.frame.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - SettingsWindow.frame.getHeight() / 2);
@@ -490,18 +452,15 @@ public class Window {
 					if (SettingsWindow.frame.getExtendedState() == JFrame.ICONIFIED) {
 						SettingsWindow.frame.setExtendedState(JFrame.NORMAL);
 					}
-				}
-			}
+
+
 		});
 
 		ImageIcon requestsIcon = Assets.requests;
 
 
 		HighlightButton requests = new HighlightButton(requestsIcon.getImage());
-		requests.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (SwingUtilities.isLeftMouseButton(e)) {
+		requests.addActionListener(e -> {
 					SettingsWindow.run = false;
 					if (!SettingsWindow.frame.isVisible()) {
 						SettingsWindow.frame.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - SettingsWindow.frame.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - SettingsWindow.frame.getHeight() / 2);
@@ -516,17 +475,14 @@ public class Window {
 					if (SettingsWindow.frame.getExtendedState() == JFrame.ICONIFIED) {
 						SettingsWindow.frame.setExtendedState(JFrame.NORMAL);
 					}
-				}
-			}
+
+
 		});
 
 		ImageIcon donateIcon = Assets.donate;
 
 		HighlightButton donateA = new HighlightButton(donateIcon.getImage());
-		donateA.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (SwingUtilities.isLeftMouseButton(e)) {
+		donateA.addActionListener(e -> {
 					if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
 						try {
 							Runtime rt = Runtime.getRuntime();
@@ -535,16 +491,14 @@ public class Window {
 							ex.printStackTrace();
 						}
 					}
-				}
-			}
+
+
 		});
 		ImageIcon discordIcon = Assets.discord;
 
 		HighlightButton discordA = new HighlightButton(discordIcon.getImage());
-		discordA.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (SwingUtilities.isLeftMouseButton(e)) {
+
+		discordA.addActionListener(e -> {
 					if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
 						try {
 							Runtime rt = Runtime.getRuntime();
@@ -553,8 +507,7 @@ public class Window {
 							ex.printStackTrace();
 						}
 					}
-				}
-			}
+
 		});
 
 
@@ -714,6 +667,7 @@ public class Window {
 		EncodedLuaText.setForeground(Defaults.FOREGROUND);
 		EncodedLuaText.setFont(Defaults.SEGOE.deriveFont(30f));
 		EncodedLuaText.setBounds(130, 122, 300, 40);
+
 		EncodedLuaText.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -837,6 +791,10 @@ public class Window {
 		}
 
 	}
+	public static void focus(){
+		frame.setAlwaysOnTop(true);
+		frame.setAlwaysOnTop(PersonalizationSettings.onTopOption);
+	}
 
 	public static void resetCommentSize() {
 		CommentsPanel.getComWindow().setBounds(400, 0, CommentsPanel.getComWindow().getWidth(), 600);
@@ -897,7 +855,10 @@ public class Window {
 
 
 	}
-
+	public static void showAttributions(){
+		attributions.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - attributions.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - attributions.getHeight() / 2);
+		attributions.setVisible(true);
+	}
 	public static void loadSettings() {
 		if (!Settings.getSettings("windowState").equalsIgnoreCase("")) {
 			int windowState = Integer.parseInt(Settings.getSettings("windowState"));

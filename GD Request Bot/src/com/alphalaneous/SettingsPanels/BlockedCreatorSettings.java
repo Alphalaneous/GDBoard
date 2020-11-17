@@ -1,5 +1,6 @@
 package com.alphalaneous.SettingsPanels;
 
+import com.alphalaneous.Windows.CommandEditor;
 import com.alphalaneous.Windows.DialogBox;
 import com.alphalaneous.Windows.SettingsWindow;
 import com.alphalaneous.Components.*;
@@ -52,9 +53,8 @@ public class BlockedCreatorSettings {
 		blockedListPanel.setBounds(0, 0, 400, 0);
 		blockedListPanel.setPreferredSize(new Dimension(400, 0));
 		blockedListPanel.setBackground(Defaults.SUB_MAIN);
-		addID.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
+		addID.addActionListener(e -> {
+
 				try {
 					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blockedGDUsers.txt");
 					if (!Files.exists(file)) {
@@ -81,7 +81,6 @@ public class BlockedCreatorSettings {
 				} catch (IOException e1) {
 					DialogBox.showDialogBox("Error!", e1.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 				}
-			}
 		});
 		scrollPane.setBounds(0, 60, 412, 562);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
@@ -156,38 +155,35 @@ public class BlockedCreatorSettings {
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.setPreferredSize(new Dimension(170, 35));
-		button.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
 
-				SettingsWindow.run = false;
-				new Thread(() -> {
+		button.addActionListener(e -> {
+			SettingsWindow.run = false;
+			new Thread(() -> {
 
-					String option = DialogBox.showDialogBox("$UNBLOCK_CREATOR_DIALOG_TITLE$", "<html> $UNBLOCK_CREATOR_DIALOG_INFO$ <html>", "", new String[]{"$YES$", "$NO$"}, new Object[]{button.getLText()});
+				String option = DialogBox.showDialogBox("$UNBLOCK_CREATOR_DIALOG_TITLE$", "<html> $UNBLOCK_CREATOR_DIALOG_INFO$ <html>", "", new String[]{"$YES$", "$NO$"}, new Object[]{button.getLText()});
 
-					if (option.equalsIgnoreCase("YES")) {
-						if (Files.exists(file)) {
-							try {
-								Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_temp_");
-								PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
-								Files.lines(file)
-										.filter(line -> !line.contains(button.getLText()))
-										.forEach(out::println);
-								out.flush();
-								out.close();
-								Files.delete(file);
-								Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\blockedGDUsers.txt"), StandardCopyOption.REPLACE_EXISTING);
+				if (option.equalsIgnoreCase("YES")) {
+					if (Files.exists(file)) {
+						try {
+							Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_temp_");
+							PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
+							Files.lines(file)
+									.filter(line -> !line.contains(button.getLText()))
+									.forEach(out::println);
+							out.flush();
+							out.close();
+							Files.delete(file);
+							Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\blockedGDUsers.txt"), StandardCopyOption.REPLACE_EXISTING);
 
-							} catch (IOException ex) {
-								ex.printStackTrace();
-								DialogBox.showDialogBox("Error!", ex.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
-							}
+						} catch (IOException ex) {
+							ex.printStackTrace();
+							DialogBox.showDialogBox("Error!", ex.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 						}
-						removeUser(button.getLText());
 					}
-					SettingsWindow.run = true;
-				}).start();
-			}
+					removeUser(button.getLText());
+				}
+				SettingsWindow.run = true;
+			}).start();
 		});
 		button.refresh();
 		blockedListPanel.add(button);

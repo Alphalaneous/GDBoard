@@ -46,12 +46,7 @@ public class CommandSettings {
 		addCommand.setFont(Defaults.SYMBOLS.deriveFont(18f));
 		addCommand.setForeground(Defaults.FOREGROUND);
 		addCommand.setUI(settingsButtonUI);
-		addCommand.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				CommandEditor.showEditor("commands", "", false);
-			}
-		});
+		addCommand.addActionListener(e -> CommandEditor.showEditor("commands", "", false));
 
 		panel.add(addCommand);
 
@@ -280,12 +275,11 @@ public class CommandSettings {
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.setPreferredSize(new Dimension(170, 35));
-		button.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				CommandEditor.showEditor("commands", command, isDefault);
-			}
+
+		button.addActionListener(e -> {
+			CommandEditor.showEditor("commands", command, isDefault);
 		});
+
 		button.refresh();
 		commandsPanel.add(button);
 	}

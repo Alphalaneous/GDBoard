@@ -150,18 +150,14 @@ public class RequestSettings {
 		backButton.setForeground(Defaults.FOREGROUND);
 		backButton.setUI(settingsButtonUI);
 
-		backButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
+		backButton.addActionListener(e -> {
 				topPanel.setVisible(false);
 				listScrollPane.setVisible(false);
 				scrollPane.setVisible(true);
-			}
 		});
 
-		addID.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
+		addID.addActionListener(e -> {
+
 				try {
 					Path file;
 					if(allowedStringsBool){
@@ -194,7 +190,7 @@ public class RequestSettings {
 				} catch (IOException e1) {
 					DialogBox.showDialogBox("Error!", e1.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 				}
-			}
+
 		});
 
 
@@ -220,7 +216,7 @@ public class RequestSettings {
 
 		enableWordSetting.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseReleased(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				if (allowedStringsBool) {
 					allowOption = enableWordSetting.getSelectedState();
 				} else {
@@ -633,9 +629,7 @@ public class RequestSettings {
 		allowedStrings.setBackground(Defaults.BUTTON);
 		allowedStrings.refresh();
 
-		allowedStrings.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
+		allowedStrings.addActionListener(e -> {
 				i = 0;
 				height = 0;
 				allowedStringsBool = true;
@@ -667,7 +661,7 @@ public class RequestSettings {
 					}
 					sc.close();
 				}
-			}
+
 		});
 
 		disallowedStrings.setBounds(25,1200, 345,30);
@@ -678,9 +672,7 @@ public class RequestSettings {
 		disallowedStrings.setBackground(Defaults.BUTTON);
 		disallowedStrings.refresh();
 
-		disallowedStrings.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
+		disallowedStrings.addActionListener(e -> {
 				i = 0;
 				height = 0;
 				allowedStringsBool = false;
@@ -712,7 +704,7 @@ public class RequestSettings {
 					}
 					sc.close();
 				}
-			}
+
 		});
 
 

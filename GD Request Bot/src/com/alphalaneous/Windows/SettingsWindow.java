@@ -10,10 +10,7 @@ import com.alphalaneous.SettingsPanels.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -202,84 +199,52 @@ public class SettingsWindow {
 
 
 
-		chatBotButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				clearButtons();
-				generalBot.setVisible(true);
-				commands.setVisible(true);
-				points.setVisible(true);
-				click("GENERAL_BOT_SETTINGS");
-				mainPanel.setVisible(false);
-				tempPanel.setVisible(true);
-			}
-		});
-		gdButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				clearButtons();
-				general.setVisible(true);
-				chaosMode.setVisible(true);
-				outputs.setVisible(true);
-				requests.setVisible(true);
-				shortcuts.setVisible(true);
-				blocked.setVisible(true);
-				blockedUsers.setVisible(true);
-				blockedCreators.setVisible(true);
-				loggedIDs.setVisible(true);
-				click("GENERAL_SETTINGS");
-				mainPanel.setVisible(false);
-				tempPanel.setVisible(true);
-			}
-		});
-		personalizationTab.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				clearButtons();
-				personalization.setVisible(true);
-				click("PERSONALIZATION_SETTINGS");
-				mainPanel.setVisible(false);
-				tempPanel.setVisible(true);
-			}
-		});
-		accountsTab.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				clearButtons();
-				accounts.setVisible(true);
-				click("ACCOUNTS_SETTINGS");
-				mainPanel.setVisible(false);
-				tempPanel.setVisible(true);
-			}
-		});
-		languages.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				clearButtons();
-				language.setVisible(true);
-				click("LANGUAGE_SETTINGS");
-				mainPanel.setVisible(false);
-				tempPanel.setVisible(true);
-			}
-		});
-		windowedTab.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				new Thread(() -> {
-					String option = DialogBox.showDialogBox("$SWITCH_TO_WINDOWED_TITLE$", "$SWINTH_TO_WINDOWED_INFO$", "$SWITCH_TO_WINDOWED_SUBINFO$", new String[]{"$YES$", "$NO$"});
-					if (option.equalsIgnoreCase("YES")) {
-						try {
-							Settings.writeSettings("windowed", "true");
-						} catch (Exception f) {
-							f.printStackTrace();
-						}
-						Main.close();
-					}
-				}).start();
-			}
+		chatBotButton.addActionListener(e -> {
+			clearButtons();
+			generalBot.setVisible(true);
+			commands.setVisible(true);
+			points.setVisible(true);
+			click("GENERAL_BOT_SETTINGS");
+			mainPanel.setVisible(false);
+			tempPanel.setVisible(true);
 		});
 
-
+		gdButton.addActionListener(e -> {
+			clearButtons();
+			general.setVisible(true);
+			chaosMode.setVisible(true);
+			outputs.setVisible(true);
+			requests.setVisible(true);
+			shortcuts.setVisible(true);
+			blocked.setVisible(true);
+			blockedUsers.setVisible(true);
+			blockedCreators.setVisible(true);
+			loggedIDs.setVisible(true);
+			click("GENERAL_SETTINGS");
+			mainPanel.setVisible(false);
+			tempPanel.setVisible(true);
+		});
+		personalizationTab.addActionListener(e -> {
+			clearButtons();
+			personalization.setVisible(true);
+			click("PERSONALIZATION_SETTINGS");
+			mainPanel.setVisible(false);
+			tempPanel.setVisible(true);
+		});
+		accountsTab.addActionListener(e -> {
+			clearButtons();
+			accounts.setVisible(true);
+			click("ACCOUNTS_SETTINGS");
+			mainPanel.setVisible(false);
+			tempPanel.setVisible(true);
+		});
+		languages.addActionListener(e -> {
+			clearButtons();
+			language.setVisible(true);
+			click("LANGUAGE_SETTINGS");
+			mainPanel.setVisible(false);
+			tempPanel.setVisible(true);
+		});
 
 		settingsButtons.add(chatBotButton);
 		settingsButtons.add(gdButton);
@@ -457,141 +422,135 @@ public class SettingsWindow {
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setPreferredSize(new Dimension(208, 38));
 
-		button.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (SwingUtilities.isLeftMouseButton(e)) {
-					super.mousePressed(e);
-					for (Component component2 : button.getComponents()) {
-						if (component2 instanceof LangLabel) {
-							if(!((LangLabel) component2).getIdentifier().equalsIgnoreCase("WINDOWED_SETTINGS")) {
-								for (Component componentA : content.getComponents()) {
-									if (componentA instanceof JPanel) {
-										componentA.setVisible(false);
-									}
-								}
+
+		button.addActionListener(e -> {
+			for (Component component2 : button.getComponents()) {
+				if (component2 instanceof LangLabel) {
+					if(!((LangLabel) component2).getIdentifier().equalsIgnoreCase("WINDOWED_SETTINGS")) {
+						for (Component componentA : content.getComponents()) {
+							if (componentA instanceof JPanel) {
+								componentA.setVisible(false);
 							}
-							RequestsLog.clear();
-							switch (((LangLabel) component2).getIdentifier()) {
-								case "GENERAL_SETTINGS":
-									generalPage.setVisible(true);
-									clean++;
-									if(clean == 5){
-										System.out.println("cleaned");
-										//noinspection CallToSystemGC
-										System.gc();
-										clean = 0;
-									}
-									break;
-								case "GENERAL_BOT_SETTINGS":
-									generalBotPage.setVisible(true);
-									clean = 0;
-									break;
-								case "CHAOS_SETTINGS":
-									chaosModePage.setVisible(true);
-									clean = 0;
-									break;
-								case "OUTPUTS_SETTINGS":
-									overlayPage.setVisible(true);
-									clean = 0;
-									break;
-								case "ACCOUNTS_SETTINGS":
-									accountsPage.setVisible(true);
-									clean = 0;
-									break;
-								case "SHORTCUTS_SETTINGS":
-									shortcutsPage.setVisible(true);
-									clean = 0;
-									break;
-								case "PERSONALIZATION_SETTINGS":
-									personalizationPage.setVisible(true);
-									clean = 0;
-									break;
-								case "BLOCKED_IDS_SETTINGS":
-									blockedPage.setVisible(true);
-									clean = 0;
-									break;
-								case "BLOCKED_USERS_SETTINGS":
-									blockedUsersPage.setVisible(true);
-									clean = 0;
-									break;
-								case "BLOCKED_CREATORS_SETTINGS":
-									blockedCreatorsPage.setVisible(true);
-									clean = 0;
-									break;
-								case "COMMANDS_SETTINGS":
-									commandsPage.setVisible(true);
-									clean = 0;
-									break;
-								case "CHANNEL_POINTS_SETTINGS":
-									pointsPage.setVisible(true);
-									clean = 0;
-									break;
-								case "REQUESTS_SETTINGS":
-									requestsPage.setVisible(true);
-									clean = 0;
-									break;
-								case "LANGUAGE_SETTINGS":
-									languagePage.setVisible(true);
-									clean = 0;
-									break;
-								case "WINDOWED_SETTINGS":
-									new Thread(()->{
-										String option = DialogBox.showDialogBox("$SWITCH_TO_WINDOWED_TITLE$", "$SWINTH_TO_WINDOWED_INFO$", "$SWITCH_TO_WINDOWED_SUBINFO$", new String[]{"$YES$", "$NO$"});
-										if (option.equalsIgnoreCase("YES")) {
-											try {
-												Settings.writeSettings("windowed", "true");
-											}
-											catch (Exception f){
-												f.printStackTrace();
-											}
-											Main.close();
-										}
-									}).start();
-									clean = 0;
-									break;
-								case "HOME_BUTTON":
-									mainPanel.setVisible(true);
-									tempPanel.setVisible(false);
-									clean = 0;
-									break;
-								case "LOGGED_IDS_SETTINGS":
-									loggedIDsPage.setVisible(true);
-									clean = 0;
-									new Thread(() -> {
-										File file = new File(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
-										if (file.exists()) {
-											Scanner sc = null;
-											try {
-												sc = new Scanner(file);
-											} catch (FileNotFoundException f) {
-												f.printStackTrace();
-											}
-											assert sc != null;
-											while (sc.hasNextLine()) {
-												RequestsLog.addButton(Long.parseLong(sc.nextLine().split(",")[0]));
-											}
-											sc.close();
-										}
-									}).start();
-									break;
+						}
+					}
+					RequestsLog.clear();
+					switch (((LangLabel) component2).getIdentifier()) {
+						case "GENERAL_SETTINGS":
+							generalPage.setVisible(true);
+							clean++;
+							if(clean == 5){
+								System.out.println("cleaned");
+								//noinspection CallToSystemGC
+								System.gc();
+								clean = 0;
 							}
 							break;
-						}
+						case "GENERAL_BOT_SETTINGS":
+							generalBotPage.setVisible(true);
+							clean = 0;
+							break;
+						case "CHAOS_SETTINGS":
+							chaosModePage.setVisible(true);
+							clean = 0;
+							break;
+						case "OUTPUTS_SETTINGS":
+							overlayPage.setVisible(true);
+							clean = 0;
+							break;
+						case "ACCOUNTS_SETTINGS":
+							accountsPage.setVisible(true);
+							clean = 0;
+							break;
+						case "SHORTCUTS_SETTINGS":
+							shortcutsPage.setVisible(true);
+							clean = 0;
+							break;
+						case "PERSONALIZATION_SETTINGS":
+							personalizationPage.setVisible(true);
+							clean = 0;
+							break;
+						case "BLOCKED_IDS_SETTINGS":
+							blockedPage.setVisible(true);
+							clean = 0;
+							break;
+						case "BLOCKED_USERS_SETTINGS":
+							blockedUsersPage.setVisible(true);
+							clean = 0;
+							break;
+						case "BLOCKED_CREATORS_SETTINGS":
+							blockedCreatorsPage.setVisible(true);
+							clean = 0;
+							break;
+						case "COMMANDS_SETTINGS":
+							commandsPage.setVisible(true);
+							clean = 0;
+							break;
+						case "CHANNEL_POINTS_SETTINGS":
+							pointsPage.setVisible(true);
+							clean = 0;
+							break;
+						case "REQUESTS_SETTINGS":
+							requestsPage.setVisible(true);
+							clean = 0;
+							break;
+						case "LANGUAGE_SETTINGS":
+							languagePage.setVisible(true);
+							clean = 0;
+							break;
+						case "WINDOWED_SETTINGS":
+							new Thread(()->{
+								String option = DialogBox.showDialogBox("$SWITCH_TO_WINDOWED_TITLE$", "$SWINTH_TO_WINDOWED_INFO$", "$SWITCH_TO_WINDOWED_SUBINFO$", new String[]{"$YES$", "$NO$"});
+								if (option.equalsIgnoreCase("YES")) {
+									try {
+										Settings.writeSettings("windowed", "true");
+									}
+									catch (Exception f){
+										f.printStackTrace();
+									}
+									Main.close();
+								}
+							}).start();
+							clean = 0;
+							break;
+						case "HOME_BUTTON":
+							mainPanel.setVisible(true);
+							tempPanel.setVisible(false);
+							clean = 0;
+							break;
+						case "LOGGED_IDS_SETTINGS":
+							loggedIDsPage.setVisible(true);
+							clean = 0;
+							new Thread(() -> {
+								File file = new File(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
+								if (file.exists()) {
+									Scanner sc = null;
+									try {
+										sc = new Scanner(file);
+									} catch (FileNotFoundException f) {
+										f.printStackTrace();
+									}
+									assert sc != null;
+									while (sc.hasNextLine()) {
+										RequestsLog.addButton(Long.parseLong(sc.nextLine().split(",")[0]));
+									}
+									sc.close();
+								}
+							}).start();
+							break;
 					}
-					for (Component component : buttons.getComponents()) {
-						if (component instanceof JButton) {
-							((JButton) component).setUI(defaultUI);
-							component.setBackground(Defaults.MAIN);
-						}
-					}
-
-					if(!text.equalsIgnoreCase("$HOME_BUTTON$")) {
-						button.setUI(selectUI);
-						button.setBackground(Defaults.SELECT);
-					}
-
+					break;
 				}
+			}
+			for (Component component : buttons.getComponents()) {
+				if (component instanceof JButton) {
+					((JButton) component).setUI(defaultUI);
+					component.setBackground(Defaults.MAIN);
+				}
+			}
+
+			if(!text.equalsIgnoreCase("$HOME_BUTTON$")) {
+				button.setUI(selectUI);
+				button.setBackground(Defaults.SELECT);
 			}
 		});
 		return button;

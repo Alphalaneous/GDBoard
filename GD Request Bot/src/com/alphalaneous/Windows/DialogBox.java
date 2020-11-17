@@ -136,12 +136,7 @@ public class DialogBox {
 				LangButton button = createButton(option);
 				button.setForeground(Defaults.FOREGROUND);
 				button.setBackground(Defaults.MAIN);
-				button.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mousePressed(MouseEvent e) {
-						value[0] = button.getIdentifier();
-					}
-				});
+				button.addActionListener(e -> value[0] = button.getIdentifier());
 				buttonPanel.add(button);
 			}
 
