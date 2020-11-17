@@ -4,6 +4,7 @@ import com.alphalaneous.APIs;
 import com.alphalaneous.ChannelPointReward;
 import com.alphalaneous.Components.*;
 import com.alphalaneous.Defaults;
+import com.alphalaneous.TwitchAccount;
 import com.alphalaneous.Windows.CommandEditor;
 
 import javax.swing.*;
@@ -26,7 +27,7 @@ public class ChannelPointSettings {
 	private static JPanel panel = new JPanel();
 	private static JPanel titlePanel = new JPanel();
 	private static RoundedJButton refreshPoints = new RoundedJButton("\uE149", "$REFRESH_CHANNEL_POINTS_TOOLTIP$");
-
+	private static LangLabel notAvailable = new LangLabel("$CHANNEL_POINTS_UNAVAILABLE$");
 
 	public static JPanel createPanel() {
 
@@ -52,6 +53,9 @@ public class ChannelPointSettings {
 
 		panel.add(refreshPoints);
 
+
+		notAvailable.setForeground(Defaults.FOREGROUND);
+		notAvailable.setFont(Defaults.SEGOE.deriveFont(16f));
 
 		titlePanel.setBounds(0, 0, 415, 50);
 		titlePanel.setLayout(null);
@@ -108,15 +112,6 @@ public class ChannelPointSettings {
 			String key = entry.getKey();
 			addButton(key);
 		}*/
-		try {
-			ArrayList<ChannelPointReward> rewards = APIs.getChannelPoints();
-
-			for (ChannelPointReward reward : rewards) {
-				addButton(reward.getTitle(), reward.getBgColor());
-			}
-		}
-		catch (Exception ignored){
-		}
 		panel.setBounds(0, 0, 415, 622);
 		panel.add(scrollPane);
 		return panel;
@@ -153,15 +148,18 @@ public class ChannelPointSettings {
 			String key = entry.getKey();
 			addButton(key);
 		}*/
-		try {
+		if(TwitchAccount.broadcaster_type.equalsIgnoreCase("affiliate")
+				|| TwitchAccount.broadcaster_type.equalsIgnoreCase("partner")) {
+			commandsPanel.remove(notAvailable);
 			ArrayList<ChannelPointReward> rewards = APIs.getChannelPoints();
-
 			for (ChannelPointReward reward : rewards) {
 				addButton(reward.getTitle(), reward.getBgColor());
 			}
 		}
-		catch (Exception ignored){
+		else{
+			commandsPanel.add(notAvailable);
 		}
+
 	}
 	public static class ButtonInfo{
 
@@ -222,6 +220,7 @@ public class ChannelPointSettings {
 		titlePanel.setBackground(Defaults.TOP);
 		commandLabel.setForeground(Defaults.FOREGROUND);
 		commandsPanel.setBackground(Defaults.SUB_MAIN);
+		notAvailable.setForeground(Defaults.FOREGROUND);
 
 
 		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());

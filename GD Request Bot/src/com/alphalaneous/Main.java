@@ -32,6 +32,7 @@ import java.util.zip.ZipInputStream;
 
 public class Main {
 
+
 	static boolean programStarting = true;
 	public static boolean programLoaded = false;
 	static boolean sendMessages = false;
@@ -54,7 +55,10 @@ public class Main {
 		  include them in the bundled JRE
 		 */
 		createConfFiles();
-
+		if(!Settings.getSettings("onboarding").equalsIgnoreCase("")){
+			TwitchAccount.setInfo();
+			ChannelPointSettings.refresh();
+		}
 		if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			Settings.writeSettings("windowed", "true");
 		}
@@ -82,6 +86,8 @@ public class Main {
 			if (Settings.getSettings("onboarding").equalsIgnoreCase("")) {
 				Onboarding.createPanel();
 				Onboarding.refreshUI();
+				TwitchAccount.setInfo();
+				ChannelPointSettings.refresh();
 				Onboarding.frame.setVisible(true);
 				Onboarding.isLoading = true;
 			} else {
@@ -125,7 +131,6 @@ public class Main {
 					}
 				}
 			}).start();
-
 
 
 			while (true) {

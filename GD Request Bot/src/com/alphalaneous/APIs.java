@@ -1,6 +1,7 @@
 package com.alphalaneous;
 
 import com.alphalaneous.Panels.LevelsPanel;
+import com.alphalaneous.SettingsPanels.AccountSettings;
 import com.alphalaneous.Windows.DialogBox;
 import com.mb3364.twitch.api.Twitch;
 import com.mb3364.twitch.api.auth.Scopes;
@@ -352,6 +353,13 @@ public class APIs {
 		}*/
 	}
 
+	public static JSONObject getInfo() {
+		JSONObject userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + Settings.getSettings("channel"));
+		assert userID != null;
+		return userID.getJSONArray("data").getJSONObject(0);
+	}
+
+
 	public static String getIDs(String username) {
 		JSONObject userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + username.toLowerCase());
 		assert userID != null;
@@ -410,6 +418,8 @@ public class APIs {
 			rt.exec("rundll32 url.dll,FileProtocolHandler " + authUrl);
 			if (twitch.auth().awaitAccessToken()) {
 				Settings.writeSettings("oauth", twitch.auth().getAccessToken());
+				Settings.writeSettings("channel", getChannel());
+				AccountSettings.refreshTwitch(Settings.getSettings("channel"));
 				if(refresh) {
 					Main.refreshBot();
 				}

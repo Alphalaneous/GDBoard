@@ -215,6 +215,7 @@ LOGIN = Log In
 
 //Channel Point Settings
 
+CHANNEL_POINTS_UNAVAILABLE = Channel Points are unavailable at the moment.
 ADD_CHANNEL_POINTS_TOOLTIP = Add Channel Point Action
 REFRESH_CHANNEL_POINTS_TOOLTIP = Refresh Channel Point Rewards
 POINTS_LIST = Channel Point Actions:
