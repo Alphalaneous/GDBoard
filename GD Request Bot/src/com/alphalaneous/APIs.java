@@ -420,7 +420,7 @@ public class APIs {
 			twitch.setClientId("fzwze6vc6d2f7qodgkpq2w8nnsz3rl");
 			URI authUrl = new URI(twitch.auth().getAuthenticationUrl(
 					twitch.getClientId(), callbackUri, Scopes.USER_READ
-			) + "chat:edit+channel:moderate+channel:read:redemptions+channel:read:subscriptions+chat:read+whispers:read+whispers:edit+user_read&force_verify=true");
+			) + "chat:edit+channel:moderate+channel:read:redemptions+channel:read:subscriptions+chat:read+user_read&force_verify=true");
 			Runtime rt = Runtime.getRuntime();
 			rt.exec("rundll32 url.dll,FileProtocolHandler " + authUrl);
 			if (twitch.auth().awaitAccessToken()) {
