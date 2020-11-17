@@ -354,7 +354,14 @@ public class APIs {
 	}
 
 	public static JSONObject getInfo() {
-		JSONObject userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + Settings.getSettings("channel"));
+		JSONObject userID = null;
+		try {
+			userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + Settings.getSettings("channel"));
+		}
+		catch (JSONException e){
+			Settings.writeSettings("channel", getChannel());
+			userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + Settings.getSettings("channel"));
+		}
 		assert userID != null;
 		return userID.getJSONArray("data").getJSONObject(0);
 	}
