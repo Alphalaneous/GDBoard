@@ -447,6 +447,7 @@ public class Main {
 			Settings.saveSettings();
 			System.exit(0);
 		}).start();
+			Utilities.disposeTray();
 			if (Settings.getSettings("onboarding").equalsIgnoreCase("false") && loaded) {
 
 				Window.frame.setVisible(false);

@@ -306,7 +306,9 @@ public class Utilities {
 		}
 		trayIcon.addActionListener(System.out::println);
 	}
-
+	static void disposeTray(){
+		tray.remove(trayIcon);
+	}
 	public static void notify(String title, String message){
 		if(!PersonalizationSettings.disableNotifOption) {
 			trayIcon.displayMessage(title, message, TrayIcon.MessageType.NONE);
