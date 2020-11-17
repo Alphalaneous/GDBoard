@@ -108,12 +108,15 @@ public class ChannelPointSettings {
 			String key = entry.getKey();
 			addButton(key);
 		}*/
-		ArrayList<ChannelPointReward> rewards = APIs.getChannelPoints();
+		try {
+			ArrayList<ChannelPointReward> rewards = APIs.getChannelPoints();
 
-		for(ChannelPointReward reward : rewards){
-			addButton(reward.getTitle(), reward.getBgColor());
+			for (ChannelPointReward reward : rewards) {
+				addButton(reward.getTitle(), reward.getBgColor());
+			}
 		}
-
+		catch (Exception ignored){
+		}
 		panel.setBounds(0, 0, 415, 622);
 		panel.add(scrollPane);
 		return panel;
@@ -150,10 +153,14 @@ public class ChannelPointSettings {
 			String key = entry.getKey();
 			addButton(key);
 		}*/
-		ArrayList<ChannelPointReward> rewards = APIs.getChannelPoints();
+		try {
+			ArrayList<ChannelPointReward> rewards = APIs.getChannelPoints();
 
-		for(ChannelPointReward reward : rewards){
-			addButton(reward.getTitle(), reward.getBgColor());
+			for (ChannelPointReward reward : rewards) {
+				addButton(reward.getTitle(), reward.getBgColor());
+			}
+		}
+		catch (Exception ignored){
 		}
 	}
 	public static class ButtonInfo{

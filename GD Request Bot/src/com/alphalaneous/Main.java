@@ -433,7 +433,16 @@ public class Main {
 		if (forceLoaded) {
 			loaded = load;
 		}
-
+		new Thread(() -> {
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			Variables.saveVars();
+			Settings.saveSettings();
+			System.exit(0);
+		}).start();
 			if (Settings.getSettings("onboarding").equalsIgnoreCase("false") && loaded) {
 
 				Window.frame.setVisible(false);
@@ -444,6 +453,7 @@ public class Main {
 					channelPointListener.disconnectBot();
 					chatReader.disconnect();
 					serverBot.disconnect();
+					GlobalScreen.unregisterNativeHook();
 				} catch (Exception ignored) {
 				}
 				Variables.saveVars();
@@ -453,11 +463,6 @@ public class Main {
 				Settings.saveSettings();
 
 			}
-		try {
-			GlobalScreen.unregisterNativeHook();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		System.exit(0);
 	}
 

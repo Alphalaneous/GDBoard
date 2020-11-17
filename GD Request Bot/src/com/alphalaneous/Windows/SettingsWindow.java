@@ -29,22 +29,39 @@ public class SettingsWindow {
 	private static JPanel blankSpace = new JPanel();
 
 	private static JButtonUI selectUI = new JButtonUI();
-	private static JPanel general = GeneralSettings.createPanel();
-	private static JPanel generalBot = GeneralBotSettings.createPanel();
-	private static JPanel overlay = OutputSettings.createPanel();
-	private static JPanel accounts = AccountSettings.createPanel();
-	private static JPanel commands = CommandSettings.createPanel();
-	private static JPanel points = ChannelPointSettings.createPanel();
-	private static JPanel requests = RequestSettings.createPanel();
-	private static JPanel shortcuts = ShortcutSettings.createPanel();
-	private static JPanel personalization = PersonalizationSettings.createPanel();
-	private static JPanel blocked = BlockedSettings.createPanel();
-	private static JPanel blockedUsers = BlockedUserSettings.createPanel();
-	private static JPanel blockedCreators = BlockedCreatorSettings.createPanel();
-	private static JPanel loggedIDs = RequestsLog.createPanel();
-	private static JPanel language = LanguageSettings.createPanel();
-	private static JPanel chaosMode = ChaosModeSettings.createPanel();
+	private static JPanel generalPage = GeneralSettings.createPanel();
+	private static JPanel generalBotPage = GeneralBotSettings.createPanel();
+	private static JPanel overlayPage = OutputSettings.createPanel();
+	private static JPanel accountsPage = AccountSettings.createPanel();
+	private static JPanel commandsPage = CommandSettings.createPanel();
+	private static JPanel pointsPage = ChannelPointSettings.createPanel();
+	private static JPanel requestsPage = RequestSettings.createPanel();
+	private static JPanel shortcutsPage = ShortcutSettings.createPanel();
+	private static JPanel personalizationPage = PersonalizationSettings.createPanel();
+	private static JPanel blockedPage = BlockedSettings.createPanel();
+	private static JPanel blockedUsersPage = BlockedUserSettings.createPanel();
+	private static JPanel blockedCreatorsPage = BlockedCreatorSettings.createPanel();
+	private static JPanel loggedIDsPage = RequestsLog.createPanel();
+	private static JPanel languagePage = LanguageSettings.createPanel();
+	private static JPanel chaosModePage = ChaosModeSettings.createPanel();
 
+	private static JButton general = createButton("$GENERAL_SETTINGS$", "\uE115");
+	private static JButton generalBot = createButton("$GENERAL_BOT_SETTINGS$", "\uE115");
+	private static JButton chaosMode = createButton("$CHAOS_SETTINGS$", "\uE11D");
+	private static JButton outputs = createButton("$OUTPUTS_SETTINGS$", "\uE122");
+	private static JButton accounts = createButton("$ACCOUNTS_SETTINGS$", "\uE13D");
+	private static JButton commands = createButton("$COMMANDS_SETTINGS$", "\uE13E");
+	private static JButton points = createButton("$CHANNEL_POINTS_SETTINGS$", "\uF138");
+	private static JButton cheers = createButton("$CHEERS_SETTINGS$", "\uF157");
+	private static JButton requests = createButton("$REQUESTS_SETTINGS$", "\uED1E");
+	private static JButton shortcuts = createButton("$SHORTCUTS_SETTINGS$", "\uE144");
+	private static JButton personalization = createButton("$PERSONALIZATION_SETTINGS$", "\uE771");
+	private static JButton blocked = createButton("$BLOCKED_IDS_SETTINGS$", "\uF140");
+	private static JButton blockedUsers = createButton("$BLOCKED_USERS_SETTINGS$", "\uE1E0");
+	private static JButton blockedCreators = createButton("$BLOCKED_CREATORS_SETTINGS$", "\uE25B");
+	private static JButton loggedIDs = createButton("$LOGGED_IDS_SETTINGS$", "\uE14C");
+	private static JButton windowed = createButton("$WINDOWED_SETTINGS$", "\uE737");
+	private static JButton language = createButton("$LANGUAGE_SETTINGS$", "\uE12B");
 
 
 	static JFrame frame = new JFrame();
@@ -113,62 +130,46 @@ public class SettingsWindow {
 		content.setBackground(Defaults.SUB_MAIN);
 		content.setLayout(null);
 
-		content.add(general);
-		content.add(chaosMode);
-		content.add(generalBot);
-		content.add(overlay);
-		content.add(accounts);
-		content.add(commands);
-		content.add(points);
-		content.add(requests);
-		content.add(shortcuts);
-		content.add(personalization);
-		content.add(blocked);
-		content.add(blockedUsers);
-		content.add(blockedCreators);
-		content.add(loggedIDs);
-		content.add(language);
+		content.add(generalPage);
+		content.add(chaosModePage);
+		content.add(generalBotPage);
+		content.add(overlayPage);
+		content.add(accountsPage);
+		content.add(commandsPage);
+		content.add(pointsPage);
+		content.add(requestsPage);
+		content.add(shortcutsPage);
+		content.add(personalizationPage);
+		content.add(blockedPage);
+		content.add(blockedUsersPage);
+		content.add(blockedCreatorsPage);
+		content.add(loggedIDsPage);
+		content.add(languagePage);
 
-		general.setVisible(true);
-		overlay.setVisible(false);
-		accounts.setVisible(false);
-		commands.setVisible(false);
-		points.setVisible(false);
-		requests.setVisible(false);
-		shortcuts.setVisible(false);
-		personalization.setVisible(false);
-		blocked.setVisible(false);
-		blockedUsers.setVisible(false);
-		blockedCreators.setVisible(false);
-		loggedIDs.setVisible(false);
-		language.setVisible(false);
-		chaosMode.setVisible(false);
+		generalPage.setVisible(true);
+		overlayPage.setVisible(false);
+		accountsPage.setVisible(false);
+		commandsPage.setVisible(false);
+		pointsPage.setVisible(false);
+		requestsPage.setVisible(false);
+		shortcutsPage.setVisible(false);
+		personalizationPage.setVisible(false);
+		blockedPage.setVisible(false);
+		blockedUsersPage.setVisible(false);
+		blockedCreatorsPage.setVisible(false);
+		loggedIDsPage.setVisible(false);
+		languagePage.setVisible(false);
+		chaosModePage.setVisible(false);
 
 
 		JButton home = createButton("$HOME_BUTTON$", "\uE10F");
 		blankSpace.add(home);
 
 
-		JButton general = createButton("$GENERAL_SETTINGS$", "\uE115");
-		JButton generalBot = createButton("$GENERAL_BOT_SETTINGS$", "\uE115");
+
 
 		general.setBackground(Defaults.SELECT);
 		general.setUI(selectUI);
-		JButton chaosMode = createButton("$CHAOS_SETTINGS$", "\uE11D");
-		JButton outputs = createButton("$OUTPUTS_SETTINGS$", "\uE122");
-		JButton accounts = createButton("$ACCOUNTS_SETTINGS$", "\uE13D");
-		JButton commands = createButton("$COMMANDS_SETTINGS$", "\uE13E");
-		JButton points = createButton("$CHANNEL_POINTS_SETTINGS$", "\uF138");
-		JButton cheers = createButton("$CHEERS_SETTINGS$", "\uF157");
-		JButton requests = createButton("$REQUESTS_SETTINGS$", "\uED1E");
-		JButton shortcuts = createButton("$SHORTCUTS_SETTINGS$", "\uE144");
-		JButton personalization = createButton("$PERSONALIZATION_SETTINGS$", "\uE771");
-		JButton blocked = createButton("$BLOCKED_IDS_SETTINGS$", "\uF140");
-		JButton blockedUsers = createButton("$BLOCKED_USERS_SETTINGS$", "\uE1E0");
-		JButton blockedCreators = createButton("$BLOCKED_CREATORS_SETTINGS$", "\uE25B");
-		JButton loggedIDs = createButton("$LOGGED_IDS_SETTINGS$", "\uE14C");
-		JButton windowed = createButton("$WINDOWED_SETTINGS$", "\uE737");
-		JButton language = createButton("$LANGUAGE_SETTINGS$", "\uE12B");
 
 
 
@@ -316,6 +317,56 @@ public class SettingsWindow {
 			frame.add(tempPanel);
 
 	}
+	static void openPage(String page){
+		switch (page) {
+			case "chatbot":
+				clearButtons();
+				generalBot.setVisible(true);
+				commands.setVisible(true);
+				points.setVisible(true);
+				click("GENERAL_BOT_SETTINGS");
+				mainPanel.setVisible(false);
+				tempPanel.setVisible(true);
+				break;
+			case "gd":
+				clearButtons();
+				general.setVisible(true);
+				chaosMode.setVisible(true);
+				outputs.setVisible(true);
+				requests.setVisible(true);
+				shortcuts.setVisible(true);
+				blocked.setVisible(true);
+				blockedUsers.setVisible(true);
+				blockedCreators.setVisible(true);
+				loggedIDs.setVisible(true);
+				click("GENERAL_SETTINGS");
+				mainPanel.setVisible(false);
+				tempPanel.setVisible(true);
+				break;
+			case "personalization":
+				clearButtons();
+				personalization.setVisible(true);
+				click("PERSONALIZATION_SETTINGS");
+				mainPanel.setVisible(false);
+				tempPanel.setVisible(true);
+				break;
+			case "accounts":
+				clearButtons();
+				accounts.setVisible(true);
+				click("ACCOUNTS_SETTINGS");
+				mainPanel.setVisible(false);
+				tempPanel.setVisible(true);
+				break;
+			case "languages":
+				clearButtons();
+				language.setVisible(true);
+				click("LANGUAGE_SETTINGS");
+				mainPanel.setVisible(false);
+				tempPanel.setVisible(true);
+				break;
+		}
+	}
+
 	private static void clearButtons(){
 		for (Component component : buttons.getComponents()) {
 			if (component instanceof JButton) {
@@ -423,7 +474,7 @@ public class SettingsWindow {
 							RequestsLog.clear();
 							switch (((LangLabel) component2).getIdentifier()) {
 								case "GENERAL_SETTINGS":
-									general.setVisible(true);
+									generalPage.setVisible(true);
 									clean++;
 									if(clean == 5){
 										System.out.println("cleaned");
@@ -433,55 +484,55 @@ public class SettingsWindow {
 									}
 									break;
 								case "GENERAL_BOT_SETTINGS":
-									generalBot.setVisible(true);
+									generalBotPage.setVisible(true);
 									clean = 0;
 									break;
 								case "CHAOS_SETTINGS":
-									chaosMode.setVisible(true);
+									chaosModePage.setVisible(true);
 									clean = 0;
 									break;
 								case "OUTPUTS_SETTINGS":
-									overlay.setVisible(true);
+									overlayPage.setVisible(true);
 									clean = 0;
 									break;
 								case "ACCOUNTS_SETTINGS":
-									accounts.setVisible(true);
+									accountsPage.setVisible(true);
 									clean = 0;
 									break;
 								case "SHORTCUTS_SETTINGS":
-									shortcuts.setVisible(true);
+									shortcutsPage.setVisible(true);
 									clean = 0;
 									break;
 								case "PERSONALIZATION_SETTINGS":
-									personalization.setVisible(true);
+									personalizationPage.setVisible(true);
 									clean = 0;
 									break;
 								case "BLOCKED_IDS_SETTINGS":
-									blocked.setVisible(true);
+									blockedPage.setVisible(true);
 									clean = 0;
 									break;
 								case "BLOCKED_USERS_SETTINGS":
-									blockedUsers.setVisible(true);
+									blockedUsersPage.setVisible(true);
 									clean = 0;
 									break;
 								case "BLOCKED_CREATORS_SETTINGS":
-									blockedCreators.setVisible(true);
+									blockedCreatorsPage.setVisible(true);
 									clean = 0;
 									break;
 								case "COMMANDS_SETTINGS":
-									commands.setVisible(true);
+									commandsPage.setVisible(true);
 									clean = 0;
 									break;
 								case "CHANNEL_POINTS_SETTINGS":
-									points.setVisible(true);
+									pointsPage.setVisible(true);
 									clean = 0;
 									break;
 								case "REQUESTS_SETTINGS":
-									requests.setVisible(true);
+									requestsPage.setVisible(true);
 									clean = 0;
 									break;
 								case "LANGUAGE_SETTINGS":
-									language.setVisible(true);
+									languagePage.setVisible(true);
 									clean = 0;
 									break;
 								case "WINDOWED_SETTINGS":
@@ -505,7 +556,7 @@ public class SettingsWindow {
 									clean = 0;
 									break;
 								case "LOGGED_IDS_SETTINGS":
-									loggedIDs.setVisible(true);
+									loggedIDsPage.setVisible(true);
 									clean = 0;
 									new Thread(() -> {
 										File file = new File(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
@@ -546,7 +597,7 @@ public class SettingsWindow {
 		return button;
 	}
 
-	private static void click(String identifier) {
+	static void click(String identifier) {
 		if(!identifier.equals("WINDOWED_SETTINGS")) {
 			for (Component componentA : content.getComponents()) {
 				if (componentA instanceof JPanel) {
@@ -557,58 +608,58 @@ public class SettingsWindow {
 		RequestsLog.clear();
 		switch (identifier) {
 			case "GENERAL_SETTINGS":
-				general.setVisible(true);
+				generalPage.setVisible(true);
 				break;
 			case "CHAOS_SETTINGS":
-				chaosMode.setVisible(true);
+				chaosModePage.setVisible(true);
 				clean = 0;
 				break;
 			case "OUTPUTS_SETTINGS":
-				overlay.setVisible(true);
+				overlayPage.setVisible(true);
 				clean = 0;
 				break;
 			case "GENERAL_BOT_SETTINGS":
-				generalBot.setVisible(true);
+				generalBotPage.setVisible(true);
 				clean = 0;
 				break;
 			case "ACCOUNTS_SETTINGS":
-				accounts.setVisible(true);
+				accountsPage.setVisible(true);
 				clean = 0;
 				break;
 			case "SHORTCUTS_SETTINGS":
-				shortcuts.setVisible(true);
+				shortcutsPage.setVisible(true);
 				clean = 0;
 				break;
 			case "PERSONALIZATION_SETTINGS":
-				personalization.setVisible(true);
+				personalizationPage.setVisible(true);
 				clean = 0;
 				break;
 			case "BLOCKED_IDS_SETTINGS":
-				blocked.setVisible(true);
+				blockedPage.setVisible(true);
 				clean = 0;
 				break;
 			case "BLOCKED_USERS_SETTINGS":
-				blockedUsers.setVisible(true);
+				blockedUsersPage.setVisible(true);
 				clean = 0;
 				break;
 			case "BLOCKED_CREATORS_SETTINGS":
-				blockedCreators.setVisible(true);
+				blockedCreatorsPage.setVisible(true);
 				clean = 0;
 				break;
 			case "COMMANDS_SETTINGS":
-				commands.setVisible(true);
+				commandsPage.setVisible(true);
 				clean = 0;
 				break;
 			case "CHANNEL_POINTS_SETTINGS":
-				points.setVisible(true);
+				pointsPage.setVisible(true);
 				clean = 0;
 				break;
 			case "REQUESTS_SETTINGS":
-				requests.setVisible(true);
+				requestsPage.setVisible(true);
 				clean = 0;
 				break;
 			case "LANGUAGE_SETTINGS":
-				language.setVisible(true);
+				languagePage.setVisible(true);
 				clean = 0;
 				break;
 			case "WINDOWED_SETTINGS":
@@ -626,7 +677,7 @@ public class SettingsWindow {
 				clean = 0;
 				break;
 			case "LOGGED_IDS_SETTINGS":
-				loggedIDs.setVisible(true);
+				loggedIDsPage.setVisible(true);
 				clean = 0;
 				new Thread(() -> {
 					File file = new File(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");

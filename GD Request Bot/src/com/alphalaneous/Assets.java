@@ -19,6 +19,12 @@ public class Assets {
 	public static ImageIcon unverifiedCoin;
 	public static ImageIcon Alphalaneous;
 	public static ImageIcon EncodedLua;
+	public static ImageIcon discord;
+	public static ImageIcon donate;
+	public static ImageIcon settings;
+	public static ImageIcon channelPoints;
+	public static ImageIcon commands;
+	public static ImageIcon requests;
 	static {
 		try {
 			verifiedCoin = new ImageIcon(ImageIO
@@ -41,6 +47,31 @@ public class Assets {
 					.read(Objects.requireNonNull(LevelsPanel.class.getClassLoader()
 							.getResource("Resources/Icons/EncodedLua.png")))
 					.getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+			discord = new ImageIcon(ImageIO
+					.read(Objects.requireNonNull(LevelsPanel.class.getClassLoader()
+							.getResource("Resources/Icons/discord.png")))
+					.getScaledInstance(25, 18, Image.SCALE_SMOOTH));
+			donate = new ImageIcon(ImageIO
+					.read(Objects.requireNonNull(LevelsPanel.class.getClassLoader()
+							.getResource("Resources/Icons/donate.png")))
+					.getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+			settings = new ImageIcon(ImageIO
+					.read(Objects.requireNonNull(LevelsPanel.class.getClassLoader()
+							.getResource("Resources/Icons/settings.png")))
+					.getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+			commands = new ImageIcon(ImageIO
+					.read(Objects.requireNonNull(LevelsPanel.class.getClassLoader()
+							.getResource("Resources/Icons/chat.png")))
+					.getScaledInstance(23, 23, Image.SCALE_SMOOTH));
+			channelPoints = new ImageIcon(ImageIO
+					.read(Objects.requireNonNull(LevelsPanel.class.getClassLoader()
+							.getResource("Resources/Icons/channelPoint.png")))
+					.getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+			requests = new ImageIcon(ImageIO
+					.read(Objects.requireNonNull(LevelsPanel.class.getClassLoader()
+							.getResource("Resources/Icons/gd.png")))
+					.getScaledInstance(23, 23, Image.SCALE_SMOOTH));
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
