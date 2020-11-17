@@ -86,17 +86,16 @@ public class Main {
 			if (Settings.getSettings("onboarding").equalsIgnoreCase("")) {
 				Onboarding.createPanel();
 				Onboarding.refreshUI();
-				TwitchAccount.setInfo();
-				ChannelPointSettings.refresh();
 				Onboarding.frame.setVisible(true);
 				Onboarding.isLoading = true;
 			} else {
 				programStarting = false;
 			}
-
 			while (Onboarding.isLoading) {
 				Thread.sleep(100);
 			}
+			TwitchAccount.setInfo();
+			ChannelPointSettings.refresh();
 			Variables.loadVars();
 			new Thread(() -> {
 				while (keepConnecting) {
