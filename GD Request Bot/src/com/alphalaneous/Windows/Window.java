@@ -962,7 +962,7 @@ public class Window {
 		return output;
 	}
 
-	private static BufferedImage convertToBufferedImage(Image image) {
+	public static BufferedImage convertToBufferedImage(Image image) {
 		BufferedImage newImage = new BufferedImage(
 				image.getWidth(null), image.getHeight(null),
 				BufferedImage.TYPE_INT_ARGB);

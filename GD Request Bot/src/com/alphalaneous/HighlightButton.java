@@ -75,7 +75,7 @@ public class HighlightButton extends JButton {
 			setIcon(new ImageIcon(colorImage(convertToBufferedImage(getIcon()), Defaults.FOREGROUND)));
 		}
 	}
-	private static BufferedImage colorImage(BufferedImage image, Color color) {
+	public static BufferedImage colorImage(BufferedImage image, Color color) {
 		int width = image.getWidth();
 		int height = image.getHeight();
 		WritableRaster raster = image.getRaster();
@@ -91,7 +91,7 @@ public class HighlightButton extends JButton {
 		}
 		return image;
 	}
-	private BufferedImage convertToBufferedImage(Icon icon){
+	public static BufferedImage convertToBufferedImage(Icon icon){
 		BufferedImage bi = new BufferedImage(
 				icon.getIconWidth(),
 				icon.getIconHeight(),

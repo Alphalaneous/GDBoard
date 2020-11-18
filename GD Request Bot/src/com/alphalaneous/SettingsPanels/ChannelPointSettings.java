@@ -1,11 +1,9 @@
 package com.alphalaneous.SettingsPanels;
 
-import com.alphalaneous.APIs;
-import com.alphalaneous.ChannelPointReward;
+import com.alphalaneous.*;
 import com.alphalaneous.Components.*;
-import com.alphalaneous.Defaults;
-import com.alphalaneous.TwitchAccount;
 import com.alphalaneous.Windows.CommandEditor;
+import com.alphalaneous.Windows.Window;
 
 import javax.swing.*;
 import java.awt.*;
@@ -147,7 +145,7 @@ public class ChannelPointSettings {
 			commandsPanel.remove(notAvailable);
 			ArrayList<ChannelPointReward> rewards = APIs.getChannelPoints();
 			for (ChannelPointReward reward : rewards) {
-				addButton(reward.getTitle(), reward.getBgColor());
+				addButton(reward.getTitle(), reward.getBgColor(), reward.getIcon(), reward.isDefaultIcon());
 			}
 		}
 		else{
@@ -167,10 +165,10 @@ public class ChannelPointSettings {
 
 
 
-	public static void addButton(String command, Color color) {
+	public static void addButton(String command, Color color, Icon icon, boolean defaultIcon) {
 		i++;
 		if ((i-1) % 2 == 0) {
-			height = height + 39;
+			height = height + 124;
 
 			commandsPanel.setBounds(0, 0, 400, (int) (height + 4));
 			commandsPanel.setPreferredSize(new Dimension(400, (int) (height + 4)));
@@ -182,22 +180,50 @@ public class ChannelPointSettings {
 		colorUI.setBackground(color);
 		colorUI.setHover(color);
 		colorUI.setSelect(color.darker());
-		CurvedButton button = new CurvedButton(command);
+		CurvedButton button = new CurvedButton("");
+		JLabel pointLabel = new JLabel(command);
+		JLabel pointIcon = new JLabel(icon);
+		pointLabel.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.setBackground(color);
+		button.setLayout(null);
+		pointLabel.setBounds(60-pointLabel.getPreferredSize().width/2,20,120,120);
+		pointIcon.setBounds(0,-10,120,120);
+
+		button.add(pointLabel);
+		button.add(pointIcon);
+		button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button.setUI(colorUI);
 		double brightness = Math.sqrt(color.getRed()* color.getRed() * .241 +
 						color.getGreen() * color.getGreen() * .691 +
 						color.getBlue() * color.getBlue() * .068);
 
 		if(brightness > 130){
-			button.setForeground(Color.BLACK);
+			pointLabel.setForeground(Color.BLACK);
+			if(defaultIcon){
+				pointIcon.setIcon(new ImageIcon(HighlightButton.colorImage(HighlightButton.convertToBufferedImage(icon), Color.BLACK)));
+			}
 		}
 		else{
-			button.setForeground(Color.WHITE);
+			pointLabel.setForeground(Color.WHITE);
 		}
 		button.setBorder(BorderFactory.createEmptyBorder());
-		button.setFont(Defaults.SEGOE.deriveFont(14f));
-		button.setPreferredSize(new Dimension(170, 35));
+		button.setPreferredSize(new Dimension(120, 120));
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if(brightness > 130){
+					button.setBackground(button.getBackground().darker());
+				}
+				else{
+					button.setBackground(button.getBackground().brighter());
+
+				}
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				button.setBackground(color);
+			}
+		});
 		button.addActionListener(e -> {
 			CommandEditor.showEditor("points", command, false);
 		});

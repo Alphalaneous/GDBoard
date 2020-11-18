@@ -29,7 +29,7 @@ public class CommandSettings {
 	private static JPanel panel = new JPanel();
 	private static JPanel titlePanel = new JPanel();
 	private static RoundedJButton addCommand = new RoundedJButton("\uECC8", "$ADD_COMMAND_TOOLTIP$");
-	private static String[] gdCommands = {"!gd", "!kill", "!block", "!blockuser", "!unblock", "!unblockuser", "!clear", "!info", "!move", "!next", "!position", "!queue", "!remove", "!request", "!song", "!stop", "!toggle", "!top", "!wronglevel"};
+	private static String[] gdCommands = {"!gdping", "!gd", "!kill", "!block", "!blockuser", "!unblock", "!unblockuser", "!clear", "!info", "!move", "!next", "!position", "!queue", "!remove", "!request", "!song", "!stop", "!toggle", "!top", "!wronglevel"};
 
 
 	public static JPanel createPanel() {

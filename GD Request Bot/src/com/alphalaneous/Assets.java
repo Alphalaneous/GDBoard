@@ -25,6 +25,7 @@ public class Assets {
 	public static ImageIcon channelPoints;
 	public static ImageIcon commands;
 	public static ImageIcon requests;
+
 	static {
 		try {
 			verifiedCoin = new ImageIcon(ImageIO

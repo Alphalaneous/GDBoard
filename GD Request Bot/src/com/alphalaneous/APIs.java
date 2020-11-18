@@ -16,7 +16,10 @@ import org.json.JSONObject;
 import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
 
@@ -158,15 +161,24 @@ public class APIs {
 			long cost = awards.getJSONObject(i).getLong("cost");
 			Color bgColor = Color.decode(awards.getJSONObject(i).getString("background_color"));
 			String imgURL;
+			ImageIcon image = null;
+			boolean defaultIcon = false;
 			try {
-				imgURL = awards.getJSONObject(i).getString("image");
+				imgURL = awards.getJSONObject(i).getJSONObject("image").getString("url_2x");
+				URL url = new URL(imgURL);
+				BufferedImage c = ImageIO.read(url);
+				image = new ImageIcon(new ImageIcon(c).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+
 			}
-			catch (JSONException e){
+			catch (JSONException | IOException e){
 				imgURL = "https://static-cdn.jtvnw.net/custom-reward-images/default-2.png";
+				image = Assets.channelPoints;
+				defaultIcon = true;
 			}
+
 			ChannelPointReward reward = null;
 			try {
-				reward = new ChannelPointReward(title, prompt, cost, bgColor, new URL(imgURL));
+				reward = new ChannelPointReward(title, prompt, cost, bgColor, new URL(imgURL), image, defaultIcon);
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			}
