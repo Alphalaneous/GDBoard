@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.*;
 
@@ -222,6 +224,17 @@ public class ChannelPointSettings {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				button.setBackground(color);
+			}
+			@Override
+			public void mousePressed(MouseEvent e){
+				if(SwingUtilities.isRightMouseButton(e)){
+					Path comPath = Paths.get(Defaults.saveDirectory + "/GDBoard/points/" + command + ".js");
+					try {
+						Command.run(TwitchAccount.display_name, true, true, new String[]{"dummy"}, Files.readString(comPath, StandardCharsets.UTF_8), 0 , false);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
 			}
 		});
 		button.addActionListener(e -> {
