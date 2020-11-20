@@ -212,7 +212,13 @@ public class Main {
 			Path initialJS = Paths.get(Defaults.saveDirectory + "\\GDBoard\\initial.js");
 
 			if(Files.exists(initialJS)){
-				Command.run(TwitchAccount.display_name, true, true, new String[]{"dummy"}, Files.readString(initialJS, StandardCharsets.UTF_8), 0 , false);
+				new Thread(() -> {
+					try {
+						Command.run(TwitchAccount.display_name, true, true, new String[]{"dummy"}, Files.readString(initialJS, StandardCharsets.UTF_8), 0 , false);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}).start();
 			}
 			else{
 				Files.createFile(initialJS);

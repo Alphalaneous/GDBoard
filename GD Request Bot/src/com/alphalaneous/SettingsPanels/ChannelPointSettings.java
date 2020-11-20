@@ -229,11 +229,15 @@ public class ChannelPointSettings {
 			public void mousePressed(MouseEvent e){
 				if(SwingUtilities.isRightMouseButton(e)){
 					Path comPath = Paths.get(Defaults.saveDirectory + "/GDBoard/points/" + command + ".js");
-					try {
-						Command.run(TwitchAccount.display_name, true, true, new String[]{"dummy"}, Files.readString(comPath, StandardCharsets.UTF_8), 0 , false);
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
+
+						new Thread(() -> {
+							try {
+								Command.run(TwitchAccount.display_name, true, true, new String[]{"dummy"}, Files.readString(comPath, StandardCharsets.UTF_8), 0 , false);
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}
+						}).start();
+
 				}
 			}
 		});
