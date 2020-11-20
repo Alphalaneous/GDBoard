@@ -21,6 +21,7 @@ import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -207,9 +208,19 @@ public class Main {
 				}
 				Thread.sleep(100);
 			}
-			File file = new File(Defaults.saveDirectory + "\\GDBoard\\saved.txt");
 
-			if (file.exists()) {
+			Path initialJS = Paths.get(Defaults.saveDirectory + "\\GDBoard\\initial.js");
+
+			if(Files.exists(initialJS)){
+				Command.run(TwitchAccount.display_name, true, true, new String[]{"dummy"}, Files.readString(initialJS, StandardCharsets.UTF_8), 0 , false);
+			}
+			else{
+				Files.createFile(initialJS);
+			}
+
+			Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\saved.txt");
+
+			if (Files.exists(file)) {
 				Scanner sc = null;
 				try {
 					sc = new Scanner(file);

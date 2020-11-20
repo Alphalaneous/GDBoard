@@ -55,6 +55,11 @@ public class Window {
 	private static FancyTextArea message = new FancyTextArea(false, false);
 	private static JPanel modButtons = new JPanel();
 
+	private static JPanel idPanel = new JPanel(null);
+	private static JLabel idTitle = new JLabel("Enter ID:");
+	private static JPanel idButtons = new JPanel();
+	private static CurvedButtonAlt addID = createCurvedButton("Add ID");
+	private static FancyTextArea idBox = new FancyTextArea(true,false);
 
 	public static void refresh() {
 		frame.invalidate();
@@ -479,6 +484,55 @@ public class Window {
 
 		});
 
+		JFrame enterID = new JFrame();
+		enterID.setLayout(null);
+		enterID.setTitle("GDBoard - Add ID");
+		enterID.setIconImage(newIcon);
+		enterID.setSize(200,170);
+		enterID.setResizable(false);
+
+		idPanel.setBackground(Defaults.MAIN);
+
+		idBox.setBounds(6,35,172, 30);
+
+		idTitle.setForeground(Defaults.FOREGROUND);
+		idTitle.setBounds(7,5,172, 30);
+		idTitle.setFont(Defaults.SEGOE.deriveFont(14f));
+
+
+		idPanel.add(idTitle);
+		idPanel.add(idBox);
+
+
+		idButtons.setBackground(Defaults.TOP);
+
+		addID.addActionListener(e -> {
+			if(!idBox.getText().equalsIgnoreCase("")) {
+				new Thread(() -> {
+					Requests.addRequest(Long.parseLong(idBox.getText()), TwitchAccount.display_name, true, null, null);
+					idBox.setText("");
+				}).start();
+			}
+		});
+
+		idButtons.add(addID);
+
+		idPanel.setBounds(0,0,188, 70);
+		idButtons.setBounds(0,70,188, 70);
+
+		enterID.add(idPanel);
+		enterID.add(idButtons);
+
+		requests.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if(SwingUtilities.isMiddleMouseButton(e)){
+					idBox.setText("");
+					enterID.setVisible(true);
+				}
+			}
+		});
+
 		ImageIcon donateIcon = Assets.donate;
 
 		HighlightButton donateA = new HighlightButton(donateIcon.getImage());
@@ -757,6 +811,12 @@ public class Window {
 		modButtons.setBackground(Defaults.TOP);
 		switchButton.setBackground(Defaults.MAIN);
 		switchButton.setForeground(Defaults.FOREGROUND);
+		idPanel.setBackground(Defaults.MAIN);
+		idTitle.setForeground(Defaults.FOREGROUND);
+		idButtons.setBackground(Defaults.TOP);
+		addID.setBackground(Defaults.MAIN);
+		addID.setForeground(Defaults.FOREGROUND);
+		idBox.refreshAll();
 		for (Component component : buttonPanel.getComponents()) {
 			if (component instanceof JButton) {
 				if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {

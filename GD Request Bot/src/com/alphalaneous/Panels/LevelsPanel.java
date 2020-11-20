@@ -410,11 +410,12 @@ public class LevelsPanel {
 							}
 						}
 						if (selectedID != prevSelectedID) {
-							new Thread(() -> {
-								CommentsPanel.unloadComments(true);
-								CommentsPanel.loadComments(0, false);
-							}).start();
-
+							if(Requests.levels.size() != 0) {
+								new Thread(() -> {
+									CommentsPanel.unloadComments(true);
+									CommentsPanel.loadComments(0, false);
+								}).start();
+							}
 							SongPanel.refreshInfo();
 							InfoPanel.refreshInfo();
 						}

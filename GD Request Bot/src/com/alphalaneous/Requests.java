@@ -147,8 +147,8 @@ public class Requests {
 	}
 
 
-	static void addRequest(long ID, String requester, boolean isMod, String message, String messageID) {
-		if(ID > 999999999){
+	public static void addRequest(long ID, String requester, boolean isMod, String message, String messageID) {
+		if(ID > 999999999 || ID < 1){
 			return;
 		}
 		if(!Main.allowRequests){

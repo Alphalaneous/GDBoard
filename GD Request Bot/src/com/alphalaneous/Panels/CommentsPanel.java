@@ -211,7 +211,7 @@ public class CommentsPanel {
 						JLabel commenter = new JLabel(username);
 						commenter.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 						commenter.setFont(Defaults.SEGOE.deriveFont(12f));
-						if (username.equalsIgnoreCase(Requests.levels.get(LevelsPanel.getSelectedID()).getAuthor().toString())) {
+						if (username.equalsIgnoreCase(Requests.levels.get(LevelsPanel.getSelectedID()).getAuthor())) {
 							commenter.setForeground(new Color(47, 62, 195));
 						} else {
 							commenter.setForeground(Defaults.FOREGROUND);
