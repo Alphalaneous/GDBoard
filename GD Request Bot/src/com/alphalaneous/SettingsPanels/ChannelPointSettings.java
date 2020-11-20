@@ -58,7 +58,7 @@ public class ChannelPointSettings {
 
 		commandLabel.setFont(Defaults.SEGOE.deriveFont(14f));
 		commandLabel.setForeground(Defaults.FOREGROUND);
-		commandLabel.setBounds(50,17,commandLabel.getPreferredSize().width+5, commandLabel.getPreferredSize().height + 5);
+		commandLabel.setBounds(50, 17, commandLabel.getPreferredSize().width + 5, commandLabel.getPreferredSize().height + 5);
 		titlePanel.add(commandLabel);
 
 
@@ -111,7 +111,7 @@ public class ChannelPointSettings {
 		return panel;
 	}
 
-	public static void refresh(){
+	public static void refresh() {
 
 		commandsPanel.removeAll();
 		height = 0;
@@ -142,39 +142,38 @@ public class ChannelPointSettings {
 			String key = entry.getKey();
 			addButton(key);
 		}*/
-		if(TwitchAccount.broadcaster_type.equalsIgnoreCase("affiliate")
+		if (TwitchAccount.broadcaster_type.equalsIgnoreCase("affiliate")
 				|| TwitchAccount.broadcaster_type.equalsIgnoreCase("partner")) {
 			commandsPanel.remove(notAvailable);
 			ArrayList<ChannelPointReward> rewards = APIs.getChannelPoints();
 			for (ChannelPointReward reward : rewards) {
 				addButton(reward.getTitle(), reward.getBgColor(), reward.getIcon(), reward.isDefaultIcon());
 			}
-		}
-		else{
+		} else {
 			commandsPanel.add(notAvailable);
 		}
 
 	}
-	public static class ButtonInfo{
+
+	public static class ButtonInfo {
 
 		public Path path;
 
-		ButtonInfo(Path path){
+		ButtonInfo(Path path) {
 			this.path = path;
 		}
 
 	}
 
 
-
 	public static void addButton(String command, Color color, Icon icon, boolean defaultIcon) {
 		i++;
-		if ((i-1) % 2 == 0) {
+		if ((i - 1) % 2 == 0) {
 			height = height + 124;
 
 			commandsPanel.setBounds(0, 0, 400, (int) (height + 4));
 			commandsPanel.setPreferredSize(new Dimension(400, (int) (height + 4)));
-			if(i > 0) {
+			if (i > 0) {
 				scrollPane.updateUI();
 			}
 		}
@@ -188,24 +187,23 @@ public class ChannelPointSettings {
 		pointLabel.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.setBackground(color);
 		button.setLayout(null);
-		pointLabel.setBounds(60-pointLabel.getPreferredSize().width/2,20,120,120);
-		pointIcon.setBounds(0,-10,120,120);
+		pointLabel.setBounds(60 - pointLabel.getPreferredSize().width / 2, 20, 120, 120);
+		pointIcon.setBounds(0, -10, 120, 120);
 
 		button.add(pointLabel);
 		button.add(pointIcon);
 		button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		button.setUI(colorUI);
-		double brightness = Math.sqrt(color.getRed()* color.getRed() * .241 +
-						color.getGreen() * color.getGreen() * .691 +
-						color.getBlue() * color.getBlue() * .068);
+		double brightness = Math.sqrt(color.getRed() * color.getRed() * .241 +
+				color.getGreen() * color.getGreen() * .691 +
+				color.getBlue() * color.getBlue() * .068);
 
-		if(brightness > 130){
+		if (brightness > 130) {
 			pointLabel.setForeground(Color.BLACK);
-			if(defaultIcon){
+			if (defaultIcon) {
 				pointIcon.setIcon(new ImageIcon(HighlightButton.colorImage(HighlightButton.convertToBufferedImage(icon), Color.BLACK)));
 			}
-		}
-		else{
+		} else {
 			pointLabel.setForeground(Color.WHITE);
 		}
 		button.setBorder(BorderFactory.createEmptyBorder());
@@ -213,30 +211,31 @@ public class ChannelPointSettings {
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(brightness > 130){
+				if (brightness > 130) {
 					button.setBackground(button.getBackground().darker());
-				}
-				else{
+				} else {
 					button.setBackground(button.getBackground().brighter());
 
 				}
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				button.setBackground(color);
 			}
+
 			@Override
-			public void mousePressed(MouseEvent e){
-				if(SwingUtilities.isRightMouseButton(e)){
+			public void mousePressed(MouseEvent e) {
+				if (SwingUtilities.isRightMouseButton(e)) {
 					Path comPath = Paths.get(Defaults.saveDirectory + "/GDBoard/points/" + command + ".js");
 
-						new Thread(() -> {
-							try {
-								Command.run(TwitchAccount.display_name, true, true, new String[]{"dummy"}, Files.readString(comPath, StandardCharsets.UTF_8), 0 , false);
-							} catch (IOException e1) {
-								e1.printStackTrace();
-							}
-						}).start();
+					new Thread(() -> {
+						try {
+							Command.run(TwitchAccount.display_name, true, true, new String[]{"dummy"}, Files.readString(comPath, StandardCharsets.UTF_8), 0, false);
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+					}).start();
 
 				}
 			}
@@ -249,7 +248,7 @@ public class ChannelPointSettings {
 	}
 
 
-	public static void refreshUI(){
+	public static void refreshUI() {
 		panel.setBackground(Defaults.TOP);
 		titlePanel.setBackground(Defaults.TOP);
 		commandLabel.setForeground(Defaults.FOREGROUND);
@@ -275,7 +274,7 @@ public class ChannelPointSettings {
 				component.setForeground(Defaults.FOREGROUND);
 
 			}
-			if(component instanceof CheckboxButton){
+			if (component instanceof CheckboxButton) {
 				((CheckboxButton) component).refresh();
 			}
 		}
@@ -288,7 +287,7 @@ public class ChannelPointSettings {
 			if (component instanceof JLabel) {
 				component.setForeground(Defaults.FOREGROUND);
 			}
-			if(component instanceof CheckboxButton){
+			if (component instanceof CheckboxButton) {
 				((CheckboxButton) component).refresh();
 			}
 		}

@@ -109,7 +109,7 @@ public class ChannelPointListener extends WebSocketClient {
 				boolean isUserinput = new JSONObject(redemptionA).getJSONObject("data").getJSONObject("redemption").getJSONObject("reward").getBoolean("is_user_input_required");
 				String userInput = "";
 				if(isUserinput) {
-					userInput = new JSONObject().getJSONObject("data").getJSONObject("redemption").get("user_input").toString().replaceAll("\"", "");
+					userInput = new JSONObject(redemptionA).getJSONObject("data").getJSONObject("redemption").get("user_input").toString().replaceAll("\"", "");
 					System.out.println(redemption + " redeemed by " + username + " with " + userInput);
 				}
 				else{

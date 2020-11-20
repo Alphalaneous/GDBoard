@@ -214,7 +214,10 @@ public class Main {
 			if(Files.exists(initialJS)){
 				new Thread(() -> {
 					try {
-						Command.run(TwitchAccount.display_name, true, true, new String[]{"dummy"}, Files.readString(initialJS, StandardCharsets.UTF_8), 0 , false);
+						String function =  Files.readString(initialJS, StandardCharsets.UTF_8);
+						if(!function.equalsIgnoreCase("")) {
+							Command.run(TwitchAccount.display_name, true, true, new String[]{"dummy"}, function, 0, false);
+						}
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
