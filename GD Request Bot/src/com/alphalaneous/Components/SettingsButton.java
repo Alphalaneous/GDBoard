@@ -10,10 +10,6 @@ import java.awt.event.MouseEvent;
 
 public class SettingsButton extends JButton {
 
-	private String title;
-	private String subText;
-	Object[] args;
-
 	private LangLabel titleLabel = new LangLabel("");
 	private LangLabel subLabel = new LangLabel("");
 	private JLabel iconLabel = new JLabel();
@@ -21,8 +17,6 @@ public class SettingsButton extends JButton {
 	private JButtonUI coolUI = new JButtonUI();
 
 	public SettingsButton(String title, String sub, String icon){
-		this.title = title;
-		this.subText = sub;
 
 		coolUI.setSelect(Defaults.TOP);
 		coolUI.setHover(Defaults.TOP);

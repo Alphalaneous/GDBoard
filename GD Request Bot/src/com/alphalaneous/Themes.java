@@ -1,8 +1,10 @@
 package com.alphalaneous;
 
 import com.alphalaneous.Components.FancyTooltip;
+import com.alphalaneous.Components.RoundedJButton;
 import com.alphalaneous.Panels.InfoPanel;
 import com.alphalaneous.Panels.LevelsPanel;
+import com.alphalaneous.ThemedComponents.ThemedJButton;
 import com.alphalaneous.Windows.CommandEditor;
 import com.alphalaneous.Windows.SettingsWindow;
 import com.alphalaneous.Windows.Window;
@@ -17,6 +19,8 @@ public class Themes {
 	public static void refreshUI() {
 
 		Window.refreshUI();
+		//ThemedJButton.refreshAll();
+		//RoundedJButton.refreshAll();
 		for(FancyTooltip toolTip : FancyTooltip.tooltips){
 			toolTip.refresh();
 		}

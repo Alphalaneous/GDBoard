@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class FancyTooltip extends JToolTip {
 
-	public static ArrayList<FancyTooltip> tooltips = new ArrayList<FancyTooltip>();
+	public static ArrayList<FancyTooltip> tooltips = new ArrayList<>();
 
 	public FancyTooltip(JComponent component) {
 		super();
@@ -23,4 +23,11 @@ public class FancyTooltip extends JToolTip {
 		setBackground(Defaults.TOP);
 		setForeground(Defaults.FOREGROUND);
 	}
+
+	public static void refreshAll(){
+		for(FancyTooltip tooltip : tooltips){
+			tooltip.refresh();
+		}
+	}
+
 }

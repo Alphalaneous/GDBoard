@@ -1,6 +1,6 @@
 package com.alphalaneous.SettingsPanels;
 
-import com.alphalaneous.Components.CheckboxButton;
+import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.alphalaneous.Components.LangLabel;
 import com.alphalaneous.Components.RadioPanel;
 import com.alphalaneous.Defaults;
@@ -21,8 +21,8 @@ public class PersonalizationSettings {
 	private static RadioPanel themePanel = new RadioPanel(new String[]{"$LIGHT_MODE$", "$DARK_MODE$", "$SYSTEM_MODE$"});
 	public static String theme = "SYSTEM_MODE";
 	private static LangLabel themeText = new LangLabel("$THEME_TEXT$");
-	private static CheckboxButton onTop = createButton("$ALWAYS_ON_TOP$", 150);
-	private static CheckboxButton notifications = createButton("$DISABLE_NOTIFICATIONS$", 180);
+	private static ThemedCheckbox onTop = createButton("$ALWAYS_ON_TOP$", 150);
+	private static ThemedCheckbox notifications = createButton("$DISABLE_NOTIFICATIONS$", 180);
 
 	public static JPanel createPanel() {
 
@@ -80,8 +80,8 @@ public class PersonalizationSettings {
 
 	}
 
-	private static CheckboxButton createButton(String text, int y) {
-		CheckboxButton button = new CheckboxButton(text, PersonalizationSettings.class);
+	private static ThemedCheckbox createButton(String text, int y) {
+		ThemedCheckbox button = new ThemedCheckbox(text);
 		button.setBounds(25, y, 365, 30);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
@@ -120,8 +120,8 @@ public class PersonalizationSettings {
 		themeText.setForeground(Defaults.FOREGROUND2);
 		panel.setBackground(Defaults.SUB_MAIN);
 		for (Component component : panel.getComponents()) {
-			if (component instanceof CheckboxButton) {
-				((CheckboxButton) component).refresh();
+			if (component instanceof ThemedCheckbox) {
+				((ThemedCheckbox) component).refresh();
 			}
 		}
 	}

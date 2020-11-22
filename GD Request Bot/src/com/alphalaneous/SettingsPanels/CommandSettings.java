@@ -3,13 +3,12 @@ package com.alphalaneous.SettingsPanels;
 import com.alphalaneous.BotHandler;
 import com.alphalaneous.Components.*;
 import com.alphalaneous.Defaults;
+import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.alphalaneous.Windows.CommandEditor;
 import com.alphalaneous.Main;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.net.URI;
 import java.nio.file.*;
 import java.util.*;
@@ -307,8 +306,8 @@ public class CommandSettings {
 				component.setForeground(Defaults.FOREGROUND);
 
 			}
-			if(component instanceof CheckboxButton){
-				((CheckboxButton) component).refresh();
+			if(component instanceof ThemedCheckbox){
+				((ThemedCheckbox) component).refresh();
 			}
 		}
 		for (Component component : panel.getComponents()) {
@@ -319,8 +318,8 @@ public class CommandSettings {
 			if (component instanceof JLabel) {
 				component.setForeground(Defaults.FOREGROUND);
 			}
-			if(component instanceof CheckboxButton){
-				((CheckboxButton) component).refresh();
+			if(component instanceof ThemedCheckbox){
+				((ThemedCheckbox) component).refresh();
 			}
 		}
 		refresh();

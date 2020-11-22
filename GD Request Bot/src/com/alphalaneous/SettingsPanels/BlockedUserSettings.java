@@ -2,13 +2,12 @@ package com.alphalaneous.SettingsPanels;
 
 import com.alphalaneous.Components.*;
 import com.alphalaneous.Defaults;
+import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.alphalaneous.Windows.DialogBox;
 import com.alphalaneous.Windows.SettingsWindow;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.*;
 import java.nio.file.*;
 import java.util.Scanner;
@@ -209,7 +208,7 @@ public class BlockedUserSettings {
 
 			}
 			if(component instanceof JTextArea){
-				((FancyTextArea) component).refreshAll();
+				((FancyTextArea) component).refresh_();
 			}
 		}
 		blockedListPanel.setBackground(Defaults.SUB_MAIN);
@@ -223,10 +222,10 @@ public class BlockedUserSettings {
 				component.setBackground(Defaults.BUTTON);
 			}
 			if(component instanceof JTextArea){
-				((FancyTextArea) component).refreshAll();
+				((FancyTextArea) component).refresh_();
 			}
-			if(component instanceof CheckboxButton){
-				((CheckboxButton) component).refresh();
+			if(component instanceof ThemedCheckbox){
+				((ThemedCheckbox) component).refresh();
 			}
 		}
 	}

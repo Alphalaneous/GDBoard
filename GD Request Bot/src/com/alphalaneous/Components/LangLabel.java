@@ -35,22 +35,27 @@ public class LangLabel extends JLabel {
 		}
 	}
 	public void refreshLocale(){
-		if(this != null) {
-			String newText = Language.setLocale(text);
-			if(args != null) {
-				if (args.length != 0) {
-					setText(String.format(newText, args));
-				}
-				else {
-					setText(newText);
-				}
+		String newText = Language.setLocale(text);
+		if(args != null) {
+			if (args.length != 0) {
+				setText(String.format(newText, args));
 			}
 			else {
 				setText(newText);
 			}
 		}
+		else {
+			setText(newText);
+		}
 	}
 	public String getIdentifier(){
 		return text.replace("$", "");
+	}
+
+
+	public static void refreshAllLocale(){
+		for(LangLabel label : labelList){
+			label.refreshLocale();
+		}
 	}
 }

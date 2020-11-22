@@ -1,6 +1,6 @@
 package com.alphalaneous.SettingsPanels;
 
-import com.alphalaneous.Components.CheckboxButton;
+import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.alphalaneous.Components.FancyTextArea;
 import com.alphalaneous.Components.LangLabel;
 import com.alphalaneous.Components.ScrollbarUI;
@@ -36,29 +36,29 @@ public class GeneralSettings {
 	public static boolean disableShowPositionOption = true;
 
 
-	private static CheckboxButton gdMode = createButton("$GD_MODE$", 20);
-	private static CheckboxButton followers = createButton("$FOLLOWERS_ONLY$", 50);
-	private static CheckboxButton subOnly = createButton("$SUBSCRIBERS_ONLY$", 80);
+	private static ThemedCheckbox gdMode = createButton("$GD_MODE$", 20);
+	private static ThemedCheckbox followers = createButton("$FOLLOWERS_ONLY$", 50);
+	private static ThemedCheckbox subOnly = createButton("$SUBSCRIBERS_ONLY$", 80);
 
-	private static CheckboxButton nowPlaying = createButton("$DISABLE_NOW_PLAYING$", 110);
-	private static CheckboxButton queueFull = createButton("$DISABLE_QUEUE_FULL$", 140);
-	private static CheckboxButton confirmWhisper = createButton("$WHISPER_CONFIRMATION$", 170);
+	private static ThemedCheckbox nowPlaying = createButton("$DISABLE_NOW_PLAYING$", 110);
+	private static ThemedCheckbox queueFull = createButton("$DISABLE_QUEUE_FULL$", 140);
+	private static ThemedCheckbox confirmWhisper = createButton("$WHISPER_CONFIRMATION$", 170);
 
-	private static CheckboxButton confirm = createButton("$DISABLE_CONFIRMATION$", 200);
-	private static CheckboxButton disableShowPosition = createButton("$DISABLE_SHOW_POSITION$", 230);
+	private static ThemedCheckbox confirm = createButton("$DISABLE_CONFIRMATION$", 200);
+	private static ThemedCheckbox disableShowPosition = createButton("$DISABLE_SHOW_POSITION$", 230);
 
-	private static CheckboxButton repeated = createButton("$DISABLE_REPEATED$", 260);
-	private static CheckboxButton repeatedAll = createButton("$DISABLE_REPEATED_ALL$", 290);
-	private static CheckboxButton allowUpdatedRepeated = createButton("$ALLOW_UPDATED_REPEATED$", 320);
+	private static ThemedCheckbox repeated = createButton("$DISABLE_REPEATED$", 260);
+	private static ThemedCheckbox repeatedAll = createButton("$DISABLE_REPEATED_ALL$", 290);
+	private static ThemedCheckbox allowUpdatedRepeated = createButton("$ALLOW_UPDATED_REPEATED$", 320);
 
-	private static CheckboxButton autoDownload = createButton("$AUTOMATIC_SONG_DOWNLOADS$", 350);
-	private static CheckboxButton lowCPU = createButton("$LOW_CPU_MODE$", 380);
-	private static CheckboxButton streamerBypass = createButton("$STREAMER_BYPASS$", 410);
-	private static CheckboxButton modsBypass = createButton("$MODS_BYPASS$", 440);
+	private static ThemedCheckbox autoDownload = createButton("$AUTOMATIC_SONG_DOWNLOADS$", 350);
+	private static ThemedCheckbox lowCPU = createButton("$LOW_CPU_MODE$", 380);
+	private static ThemedCheckbox streamerBypass = createButton("$STREAMER_BYPASS$", 410);
+	private static ThemedCheckbox modsBypass = createButton("$MODS_BYPASS$", 440);
 
-	private static CheckboxButton queueLimitText = createButton("$MAX_QUEUE_SIZE$", 470);
-	private static CheckboxButton userLimitText = createButton("$REQUEST_LIMIT_QUEUE$", 542);
-	private static CheckboxButton userLimitStreamText = createButton("$STREAM_REQUEST_LIMIT$", 617);
+	private static ThemedCheckbox queueLimitText = createButton("$MAX_QUEUE_SIZE$", 470);
+	private static ThemedCheckbox userLimitText = createButton("$REQUEST_LIMIT_QUEUE$", 542);
+	private static ThemedCheckbox userLimitStreamText = createButton("$STREAM_REQUEST_LIMIT$", 617);
 
 	public static int queueLimit = 0;
 	public static int userLimit = 0;
@@ -469,9 +469,9 @@ public class GeneralSettings {
 
 		return label;
 	}
-	private static CheckboxButton createButton(String text, int y){
+	private static ThemedCheckbox createButton(String text, int y){
 
-		CheckboxButton button = new CheckboxButton(text, GeneralSettings.class);
+		ThemedCheckbox button = new ThemedCheckbox(text);
 		button.setBounds(25,y,345,30);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
@@ -497,10 +497,10 @@ public class GeneralSettings {
 
 			}
 			if(component instanceof JTextArea){
-				((FancyTextArea) component).refreshAll();
+				((FancyTextArea) component).refresh_();
 			}
-			if(component instanceof CheckboxButton){
-				((CheckboxButton) component).refresh();
+			if(component instanceof ThemedCheckbox){
+				((ThemedCheckbox) component).refresh();
 			}
 
 		}

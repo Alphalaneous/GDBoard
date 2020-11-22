@@ -1,13 +1,18 @@
 package com.alphalaneous.Components;
 
+import com.alphalaneous.ThemedComponents.ThemedJButton;
+
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
-public class CurvedButton extends JButton {
+public class CurvedButton extends ThemedJButton {
 
 	private LangLabel text = new LangLabel("");
+
+	public static ArrayList<CurvedButton> buttons = new ArrayList<>();
 
 	public CurvedButton(String label) {
 		setLayout(null);
@@ -20,6 +25,7 @@ public class CurvedButton extends JButton {
 		setPreferredSize(size);
 
 		setContentAreaFilled(false);
+		buttons.add(this);
 	}
 	public String getLText(){
 		return text.getText();
@@ -43,11 +49,6 @@ public class CurvedButton extends JButton {
 		super.paintComponent(g);
 	}
 
-	/*
-	 * protected void paintBorder(Graphics g) { g.setColor(getForeground());
-	 * g.drawOval(0, 0, getSize().width-1, getSize().height-1); }
-	 */
-
 	private Shape shape;
 
 	public boolean contains(int x, int y) {
@@ -62,5 +63,9 @@ public class CurvedButton extends JButton {
 		text.setBounds((getPreferredSize().width/2)-(text.getPreferredSize().width/2), (getPreferredSize().height/2)-(text.getPreferredSize().height/2)-3, text.getPreferredSize().width+5, text.getPreferredSize().height+5);
 
 	}
-
+	public static void refreshAll(){
+		for(CurvedButton button : buttons){
+			button.refresh();
+		}
+	}
 }

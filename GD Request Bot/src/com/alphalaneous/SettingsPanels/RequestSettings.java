@@ -3,6 +3,7 @@ package com.alphalaneous.SettingsPanels;
 import com.alphalaneous.Components.*;
 import com.alphalaneous.Defaults;
 import com.alphalaneous.Settings;
+import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.alphalaneous.Windows.DialogBox;
 import com.alphalaneous.Windows.SettingsWindow;
 
@@ -24,29 +25,29 @@ import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 public class RequestSettings {
 
-	private static CheckboxButton na = createButton("$GD_NA$", 5);
-	private static CheckboxButton auto = createButton("$GD_AUTO$", 35);
-	private static CheckboxButton easy = createButton("$GD_EASY$", 65);
-	private static CheckboxButton normal = createButton("$GD_NORMAL$", 95);
-	private static CheckboxButton hard = createButton("$GD_HARD$", 125);
-	private static CheckboxButton harder = createButton("$GD_HARDER$", 155);
-	private static CheckboxButton insane = createButton("$GD_INSANE$", 185);
-	private static CheckboxButton easyDemon = createButton("$GD_EASY_DEMON$", 215);
-	private static CheckboxButton mediumDemon = createButton("$GD_MEDIUM_DEMON$", 245);
-	private static CheckboxButton hardDemon = createButton("$GD_HARD_DEMON$", 275);
-	private static CheckboxButton insaneDemon = createButton("$GD_INSANE_DEMON$", 305);
-	private static CheckboxButton extremeDemon = createButton("$GD_EXTREME_DEMON$", 335);
-	private static CheckboxButton tiny = createButton("$GD_TINY$", 5);
-	private static CheckboxButton shortL = createButton("$GD_SHORT$", 35);
-	private static CheckboxButton medium = createButton("$GD_MEDIUM$", 65);
-	private static CheckboxButton longL = createButton("$GD_LONG$", 95);
-	private static CheckboxButton XL = createButton("$GD_XL$", 125);
-	private static CheckboxButton minimumLikes = createButton("$MINIMUM_LIKES$", 690);
-	private static CheckboxButton maximumLikes = createButton("$MAXIMUM_LIKES$", 765);
-	private static CheckboxButton minimumObjects = createButton("$MINIMUM_OBJECTS$", 840);
-	private static CheckboxButton maximumObjects = createButton("$MAXIMUM_OBJECTS$", 915);
-	private static CheckboxButton minimumID = createButton("$MINIMUM_ID$", 990);
-	private static CheckboxButton maximumID = createButton("$MAXIMUM_ID$", 1065);
+	private static ThemedCheckbox na = createButton("$GD_NA$", 5);
+	private static ThemedCheckbox auto = createButton("$GD_AUTO$", 35);
+	private static ThemedCheckbox easy = createButton("$GD_EASY$", 65);
+	private static ThemedCheckbox normal = createButton("$GD_NORMAL$", 95);
+	private static ThemedCheckbox hard = createButton("$GD_HARD$", 125);
+	private static ThemedCheckbox harder = createButton("$GD_HARDER$", 155);
+	private static ThemedCheckbox insane = createButton("$GD_INSANE$", 185);
+	private static ThemedCheckbox easyDemon = createButton("$GD_EASY_DEMON$", 215);
+	private static ThemedCheckbox mediumDemon = createButton("$GD_MEDIUM_DEMON$", 245);
+	private static ThemedCheckbox hardDemon = createButton("$GD_HARD_DEMON$", 275);
+	private static ThemedCheckbox insaneDemon = createButton("$GD_INSANE_DEMON$", 305);
+	private static ThemedCheckbox extremeDemon = createButton("$GD_EXTREME_DEMON$", 335);
+	private static ThemedCheckbox tiny = createButton("$GD_TINY$", 5);
+	private static ThemedCheckbox shortL = createButton("$GD_SHORT$", 35);
+	private static ThemedCheckbox medium = createButton("$GD_MEDIUM$", 65);
+	private static ThemedCheckbox longL = createButton("$GD_LONG$", 95);
+	private static ThemedCheckbox XL = createButton("$GD_XL$", 125);
+	private static ThemedCheckbox minimumLikes = createButton("$MINIMUM_LIKES$", 690);
+	private static ThemedCheckbox maximumLikes = createButton("$MAXIMUM_LIKES$", 765);
+	private static ThemedCheckbox minimumObjects = createButton("$MINIMUM_OBJECTS$", 840);
+	private static ThemedCheckbox maximumObjects = createButton("$MAXIMUM_OBJECTS$", 915);
+	private static ThemedCheckbox minimumID = createButton("$MINIMUM_ID$", 990);
+	private static ThemedCheckbox maximumID = createButton("$MAXIMUM_ID$", 1065);
 	private static FancyTextArea minLikesInput = new FancyTextArea(true, true);
 	private static FancyTextArea maxLikesInput = new FancyTextArea(true, true);
 	private static FancyTextArea minObjectsInput = new FancyTextArea(true, false);
@@ -79,10 +80,10 @@ public class RequestSettings {
 	public static boolean disallowOption = false;
 	public static boolean allowOption = false;
 
-	private static CheckboxButton rated = createButton("$RATED_LEVELS_ONLY$", 15);
-	private static CheckboxButton unrated = createButton("$UNRATED_LEVELS_ONLY$", 45);
-	private static CheckboxButton disableDifficulties = createButton("$DISABLE_SELECTED_DIFFICULTIES$", 75);
-	private static CheckboxButton disableLengths = createButton("$DISABLE_SELECTED_LENGTHS$", 490);
+	private static ThemedCheckbox rated = createButton("$RATED_LEVELS_ONLY$", 15);
+	private static ThemedCheckbox unrated = createButton("$UNRATED_LEVELS_ONLY$", 45);
+	private static ThemedCheckbox disableDifficulties = createButton("$DISABLE_SELECTED_DIFFICULTIES$", 75);
+	private static ThemedCheckbox disableLengths = createButton("$DISABLE_SELECTED_LENGTHS$", 490);
 
 	private static JPanel difficultyPanel = new JPanel(null);
 	private static JPanel lengthPanel = new JPanel(null);
@@ -100,7 +101,7 @@ public class RequestSettings {
 	private static FancyTextArea input = new FancyTextArea(false, false);
 	private static RoundedJButton addID = new RoundedJButton("\uECC8", "Add Word");
 	private static RoundedJButton backButton = new RoundedJButton("\uE112", "Back");
-	private static CheckboxButton enableWordSetting = createButton("", 365, 55);
+	private static ThemedCheckbox enableWordSetting = createButton("", 365, 55);
 
 
 	private static int i = 0;
@@ -1015,9 +1016,9 @@ public class RequestSettings {
 		listPanel.updateUI();
 
 	}
-	private static CheckboxButton createButton(String text, int width,  int y) {
+	private static ThemedCheckbox createButton(String text, int width, int y) {
 
-		CheckboxButton button = new CheckboxButton(text, RequestSettings.class);
+		ThemedCheckbox button = new ThemedCheckbox(text);
 		button.setBounds(25, y, width, 30);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setOpaque(false);
@@ -1026,7 +1027,7 @@ public class RequestSettings {
 		button.refresh();
 		return button;
 	}
-	private static CheckboxButton createButton(String text, int y) {
+	private static ThemedCheckbox createButton(String text, int y) {
 		return createButton(text, 345, y);
 	}
 	public static void refreshUI() {
@@ -1043,7 +1044,7 @@ public class RequestSettings {
 		listScrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
 		backButton.setForeground(Defaults.FOREGROUND);
 		backButton.setBackground(Defaults.BUTTON);
-		input.refreshAll();
+		input.refresh_();
 		enableWordSetting.refresh();
 		topPanel.setBackground(Defaults.TOP);
 
@@ -1063,10 +1064,10 @@ public class RequestSettings {
 
 			}
 			if (component instanceof JTextArea) {
-				((FancyTextArea) component).refreshAll();
+				((FancyTextArea) component).refresh_();
 			}
-			if (component instanceof CheckboxButton) {
-				((CheckboxButton) component).refresh();
+			if (component instanceof ThemedCheckbox) {
+				((ThemedCheckbox) component).refresh();
 			}
 		}
 		for (Component component : difficultyPanel.getComponents()) {
@@ -1083,10 +1084,10 @@ public class RequestSettings {
 
 			}
 			if (component instanceof JTextArea) {
-				((FancyTextArea) component).refreshAll();
+				((FancyTextArea) component).refresh_();
 			}
-			if (component instanceof CheckboxButton) {
-				((CheckboxButton) component).refresh();
+			if (component instanceof ThemedCheckbox) {
+				((ThemedCheckbox) component).refresh();
 			}
 		}
 		for (Component component : listPanel.getComponents()) {
@@ -1113,10 +1114,10 @@ public class RequestSettings {
 
 			}
 			if (component instanceof JTextArea) {
-				((FancyTextArea) component).refreshAll();
+				((FancyTextArea) component).refresh_();
 			}
-			if (component instanceof CheckboxButton) {
-				((CheckboxButton) component).refresh();
+			if (component instanceof ThemedCheckbox) {
+				((ThemedCheckbox) component).refresh();
 			}
 		}
 	}

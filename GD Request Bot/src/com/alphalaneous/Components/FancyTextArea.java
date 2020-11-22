@@ -13,11 +13,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class FancyTextArea extends JTextArea {
 
 
 	private UndoManager undoManager = new UndoManager();
+
+	public static ArrayList<FancyTextArea> fields = new ArrayList<>();
 
 
 	private UndoableEditListener undoableEditListener = new UndoableEditListener() {
@@ -68,6 +71,7 @@ public class FancyTextArea extends JTextArea {
 
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "Undo");
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_Y, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "Redo");
+		//noinspection MagicConstant
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() | Event.SHIFT_MASK), "Redo");
 
 		am.put("Undo", new AbstractAction() {
@@ -100,11 +104,17 @@ public class FancyTextArea extends JTextArea {
 		undoManager.discardAllEdits();
 	}
 
-	public void refreshAll(){
+	public void refresh_(){
 		setBackground(Defaults.TEXT_BOX);
 		setForeground(Defaults.FOREGROUND);
 		setCaretColor(Defaults.FOREGROUND);
 	}
+	public static void refreshAll(){
+		for(FancyTextArea field : fields){
+			field.refresh_();
+		}
+	}
+
 	public static class MyCaret extends DefaultCaret {
 
 		MyCaret() {

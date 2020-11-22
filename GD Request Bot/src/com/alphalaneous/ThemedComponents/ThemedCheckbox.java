@@ -1,5 +1,6 @@
-package com.alphalaneous.Components;
+package com.alphalaneous.ThemedComponents;
 
+import com.alphalaneous.Components.LangLabel;
 import com.alphalaneous.Defaults;
 
 import java.awt.*;
@@ -9,21 +10,17 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-public class CheckboxButton extends JPanel {
+public class ThemedCheckbox extends JPanel {
 
-	static ArrayList<CheckboxButton> buttons = new ArrayList<>();
+	private static ArrayList<ThemedCheckbox> buttons = new ArrayList<>();
 
-	Class<?> aClass;
-	String label;
 	private LangLabel text = new LangLabel("");
 	private JLabel check = new JLabel("\uE739");
 	private JLabel checkSymbol = new JLabel("\uE73E");
 	private JLabel hover = new JLabel("\uE922");
 	private boolean isChecked = false;
-	public CheckboxButton(String label, Class<?> classA) {
+	public ThemedCheckbox(String label) {
 		setLayout(null);
-		aClass = classA;
-		this.label = label;
 		text.setTextLang(label);
 		text.setForeground(Defaults.FOREGROUND);
 		check.setFont(Defaults.SYMBOLS.deriveFont(16f));
@@ -84,7 +81,6 @@ public class CheckboxButton extends JPanel {
 		buttons.add(this);
 	}
 	public void setText(String textA){
-		this.label = textA;
 		text.setText(textA);
 	}
 	public boolean getSelectedState(){
@@ -103,10 +99,6 @@ public class CheckboxButton extends JPanel {
 			checkSymbol.setVisible(true);
 		}
 	}
-	/*public void setLText(String text) {
-		this.text.setText(text);
-		refresh();
-	}*/
 	public void refresh(){
 		if(!isChecked){
 			check.setForeground(Color.LIGHT_GRAY);
@@ -126,5 +118,11 @@ public class CheckboxButton extends JPanel {
 		checkSymbol.setBounds(getWidth()-20, 0, 30,30);
 		hover.setForeground(Defaults.FOREGROUND);
 		hover.setBounds(getWidth()-20, 0, 30,30);
+	}
+
+	public static void refreshAll(){
+		for(ThemedCheckbox button : buttons){
+			button.refresh();
+		}
 	}
 }

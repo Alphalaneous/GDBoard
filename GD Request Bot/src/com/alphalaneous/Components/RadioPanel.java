@@ -1,6 +1,7 @@
 package com.alphalaneous.Components;
 
 import com.alphalaneous.Defaults;
+import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +11,9 @@ import java.util.ArrayList;
 
 public class RadioPanel extends JPanel {
 
-	public ArrayList<RadioButton> buttons = new ArrayList<RadioButton>();
+
+	private static ArrayList<RadioPanel> panels = new ArrayList<>();
+	public ArrayList<RadioButton> buttons = new ArrayList<>();
 	public String currentSelect = "";
 
 	public RadioPanel(String[] labels) {
@@ -68,6 +71,11 @@ public class RadioPanel extends JPanel {
 	public void refreshUI() {
 		for (RadioButton button : buttons) {
 			button.refresh();
+		}
+	}
+	public static void refreshAll(){
+		for(RadioPanel panel : panels){
+			panel.refreshUI();
 		}
 	}
 	public void setWidth(int width){

@@ -4,7 +4,6 @@ import com.alphalaneous.Components.*;
 import com.alphalaneous.Panels.InfoPanel;
 import com.alphalaneous.Panels.LevelsPanel;
 import com.alphalaneous.SettingsPanels.PersonalizationSettings;
-import com.alphalaneous.SettingsPanels.WindowedSettings;
 import com.alphalaneous.*;
 import com.alphalaneous.Panels.CommentsPanel;
 
@@ -807,7 +806,7 @@ public class Window {
 		//gdToggle.setForeground(Defaults.FOREGROUND);
 		//gdToggle.refresh();
 		infoPanel.setBackground(Defaults.MAIN);
-		message.refreshAll();
+		message.refresh_();
 		modButtons.setBackground(Defaults.TOP);
 		switchButton.setBackground(Defaults.MAIN);
 		switchButton.setForeground(Defaults.FOREGROUND);
@@ -816,14 +815,10 @@ public class Window {
 		idButtons.setBackground(Defaults.TOP);
 		addID.setBackground(Defaults.MAIN);
 		addID.setForeground(Defaults.FOREGROUND);
-		idBox.refreshAll();
+		idBox.refresh_();
 		for (Component component : buttonPanel.getComponents()) {
 			if (component instanceof JButton) {
-				if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
-					component.setBackground(Defaults.BUTTON);
-				} else {
-					component.setBackground(Defaults.MAIN);
-				}
+				component.setBackground(Defaults.MAIN);
 				component.setForeground(Defaults.FOREGROUND);
 			}
 		}
@@ -888,11 +883,9 @@ public class Window {
 		RoundedJButton button = new RoundedJButton(icon, tooltip);
 		button.setPreferredSize(new Dimension(50, 50));
 		button.setUI(defaultUI);
-		if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
-			button.setBackground(Defaults.BUTTON);
-		} else {
-			button.setBackground(Defaults.MAIN);
-		}
+		button.setBackground(Defaults.MAIN);
+		button.setColorB("main");
+		button.setColorF("foreground");
 		button.setOpaque(false);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());

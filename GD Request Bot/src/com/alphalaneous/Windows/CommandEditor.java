@@ -2,9 +2,9 @@ package com.alphalaneous.Windows;
 
 import com.alphalaneous.Components.*;
 import com.alphalaneous.Defaults;
-import com.alphalaneous.SettingsPanels.ChannelPointSettings;
 import com.alphalaneous.SettingsPanels.CommandSettings;
 import com.alphalaneous.Main;
+import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.sun.javafx.application.PlatformImpl;
 import javafx.embed.swing.JFXPanel;
 import javafx.stage.FileChooser;
@@ -47,9 +47,9 @@ public class CommandEditor {
 	private static RoundedJButton deleteButton = new RoundedJButton("\uE107", "$DELETE_COMMAND$");
 
 
-	private static CheckboxButton modOnly = createButton("$MOD_ONLY$", 310);
-	private static CheckboxButton whisper = createButton("$SEND_AS_WHISPER$", 340);
-	private static CheckboxButton disable = createButton("$DISABLE_COMMAND$", 370);
+	private static ThemedCheckbox modOnly = createButton("$MOD_ONLY$", 310);
+	private static ThemedCheckbox whisper = createButton("$SEND_AS_WHISPER$", 340);
+	private static ThemedCheckbox disable = createButton("$DISABLE_COMMAND$", 370);
 
 
 	private static RSyntaxTextArea codeInput = new RSyntaxTextArea();
@@ -518,8 +518,8 @@ public class CommandEditor {
 		editor.setVisible(true);
 	}
 
-	private static CheckboxButton createButton(String text, int y) {
-		CheckboxButton button = new CheckboxButton(text, CommandEditor.class);
+	private static ThemedCheckbox createButton(String text, int y) {
+		ThemedCheckbox button = new ThemedCheckbox(text);
 		button.setBounds(25, y, 585, 30);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
@@ -799,8 +799,8 @@ public class CommandEditor {
 		modOnly.refresh();
 		whisper.refresh();
 		disable.refresh();
-		commandNameText.refreshAll();
-		commandResponse.refreshAll();
-		soundFileLocation.refreshAll();
+		commandNameText.refresh_();
+		commandResponse.refresh_();
+		soundFileLocation.refresh_();
 	}
 }

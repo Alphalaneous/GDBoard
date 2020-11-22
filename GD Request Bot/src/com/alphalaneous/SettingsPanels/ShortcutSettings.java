@@ -1,6 +1,6 @@
 package com.alphalaneous.SettingsPanels;
 
-import com.alphalaneous.Components.CheckboxButton;
+import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.alphalaneous.Components.FancyTextArea;
 import com.alphalaneous.Components.LangLabel;
 import com.alphalaneous.Defaults;
@@ -112,9 +112,9 @@ public class ShortcutSettings {
 	}
 
 	@SuppressWarnings("unused")
-	private static CheckboxButton createButton(String text, int x, int y, int width) {
+	private static ThemedCheckbox createButton(String text, int x, int y, int width) {
 
-		CheckboxButton button = new CheckboxButton(text, ShortcutSettings.class);
+		ThemedCheckbox button = new ThemedCheckbox(text);
 		button.setBounds(25, y, width, 30);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
@@ -242,7 +242,7 @@ public class ShortcutSettings {
 
 					}
 					if (component2 instanceof JTextArea) {
-						((FancyTextArea) component2).refreshAll();
+						((FancyTextArea) component2).refresh_();
 					}
 
 				}

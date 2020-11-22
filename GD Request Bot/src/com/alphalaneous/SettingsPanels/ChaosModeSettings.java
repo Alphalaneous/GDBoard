@@ -3,6 +3,7 @@ package com.alphalaneous.SettingsPanels;
 import com.alphalaneous.Components.*;
 import com.alphalaneous.Defaults;
 import com.alphalaneous.Settings;
+import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,19 +17,19 @@ import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 public class ChaosModeSettings {
 
-	private static CheckboxButton enableChaosMode = createButton("$ENABLE_CHAOS_MODE$", 20);
-	private static CheckboxButton modOnlyChaos = createButton("$MOD_ONLY_CHAOS$", 50);
-	private static CheckboxButton disableKill = createButton("$DISABLE_KILL$", 90);
+	private static ThemedCheckbox enableChaosMode = createButton("$ENABLE_CHAOS_MODE$", 20);
+	private static ThemedCheckbox modOnlyChaos = createButton("$MOD_ONLY_CHAOS$", 50);
+	private static ThemedCheckbox disableKill = createButton("$DISABLE_KILL$", 90);
 
 
-	private static CheckboxButton minimumX = createButton("$MINIMUM_X$", 120);
-	private static CheckboxButton maximumX = createButton("$MAXIMUM_X$", 195);
-	private static CheckboxButton minimumY = createButton("$MINIMUM_Y$", 270);
-	private static CheckboxButton maximumY = createButton("$MAXIMUM_Y$", 345);
-	private static CheckboxButton minimumSize = createButton("$MINIMUM_SIZE$", 420);
-	private static CheckboxButton maximumSize = createButton("$MAXIMUM_SIZE$", 495);
-	private static CheckboxButton minimumSpeed = createButton("$MINIMUM_SPEED$", 570);
-	private static CheckboxButton maximumSpeed = createButton("$MAXIMUM_SPEED$", 645);
+	private static ThemedCheckbox minimumX = createButton("$MINIMUM_X$", 120);
+	private static ThemedCheckbox maximumX = createButton("$MAXIMUM_X$", 195);
+	private static ThemedCheckbox minimumY = createButton("$MINIMUM_Y$", 270);
+	private static ThemedCheckbox maximumY = createButton("$MAXIMUM_Y$", 345);
+	private static ThemedCheckbox minimumSize = createButton("$MINIMUM_SIZE$", 420);
+	private static ThemedCheckbox maximumSize = createButton("$MAXIMUM_SIZE$", 495);
+	private static ThemedCheckbox minimumSpeed = createButton("$MINIMUM_SPEED$", 570);
+	private static ThemedCheckbox maximumSpeed = createButton("$MAXIMUM_SPEED$", 645);
 	private static FancyTextArea minXInput = new FancyTextArea(true, true);
 	private static FancyTextArea maxXInput = new FancyTextArea(true, true);
 	private static FancyTextArea minYInput = new FancyTextArea(true, true);
@@ -474,9 +475,9 @@ public class ChaosModeSettings {
 		Settings.writeSettings("maxSpeed", String.valueOf(maxSpeed));
 	}
 
-	private static CheckboxButton createButton(String text, int width, int y) {
+	private static ThemedCheckbox createButton(String text, int width, int y) {
 
-		CheckboxButton button = new CheckboxButton(text, RequestSettings.class);
+		ThemedCheckbox button = new ThemedCheckbox(text);
 		button.setBounds(25, y, width, 30);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setOpaque(false);
@@ -486,7 +487,7 @@ public class ChaosModeSettings {
 		return button;
 	}
 
-	private static CheckboxButton createButton(String text, int y) {
+	private static ThemedCheckbox createButton(String text, int y) {
 		return createButton(text, 345, y);
 	}
 
@@ -513,10 +514,10 @@ public class ChaosModeSettings {
 
 			}
 			if (component instanceof JTextArea) {
-				((FancyTextArea) component).refreshAll();
+				((FancyTextArea) component).refresh_();
 			}
-			if (component instanceof CheckboxButton) {
-				((CheckboxButton) component).refresh();
+			if (component instanceof ThemedCheckbox) {
+				((ThemedCheckbox) component).refresh();
 			}
 		}
 	}

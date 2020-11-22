@@ -2,12 +2,11 @@ package com.alphalaneous.SettingsPanels;
 
 import com.alphalaneous.*;
 import com.alphalaneous.Components.*;
+import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.exception.GDLoginFailedException;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.Base64;
 
 import javax.swing.*;
@@ -203,8 +202,8 @@ public class AccountSettings {
 			usernameLabel.setForeground(Defaults.FOREGROUND);
 			passwordLabel.setForeground(Defaults.FOREGROUND);
 		}
-		usernameInput.refreshAll();
-		passwordInput.refreshAll();
+		usernameInput.refresh_();
+		passwordInput.refresh_();
 
 		loginButton.setBackground(Defaults.BUTTON);
 		loginButton.setForeground(Defaults.FOREGROUND);
@@ -227,10 +226,10 @@ public class AccountSettings {
 				component.setForeground(Defaults.FOREGROUND);
 			}
 			if(component instanceof JTextArea){
-				((FancyTextArea) component).refreshAll();
+				((FancyTextArea) component).refresh_();
 			}
-			if(component instanceof CheckboxButton){
-				((CheckboxButton) component).refresh();
+			if(component instanceof ThemedCheckbox){
+				((ThemedCheckbox) component).refresh();
 			}
 		}
 	}

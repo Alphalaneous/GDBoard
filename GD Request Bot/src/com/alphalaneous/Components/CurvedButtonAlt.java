@@ -1,13 +1,14 @@
 package com.alphalaneous.Components;
 
 import com.alphalaneous.Language;
+import com.alphalaneous.ThemedComponents.ThemedJButton;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 
-public class CurvedButtonAlt extends JButton {
+public class CurvedButtonAlt extends ThemedJButton {
 
 	public static ArrayList<CurvedButtonAlt> buttonList = new ArrayList<>();
 
@@ -58,4 +59,12 @@ public class CurvedButtonAlt extends JButton {
 		this.text = text;
 		setText(Language.setLocale(text));
 	}
+
+
+	public static void refreshAllLocale(){
+		for(CurvedButtonAlt button : buttonList){
+			button.refreshLocale();
+		}
+	}
+
 }

@@ -7,6 +7,7 @@ import com.registry.RegistryKey;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -72,6 +73,21 @@ public class Defaults {
 	private static AtomicBoolean dark = new AtomicBoolean();
 	public static AtomicBoolean programLoaded = new AtomicBoolean();
 	private static AtomicBoolean colorsLoaded = new AtomicBoolean();
+
+
+	public static HashMap<String, Color> colors = new HashMap<>(){{
+		put("foreground", Defaults.FOREGROUND);
+		put("foreground2", Defaults.FOREGROUND2);
+		put("main", Defaults.MAIN);
+		put("sub_main", Defaults.SUB_MAIN);
+		put("button", Defaults.BUTTON);
+		put("button_hover", Defaults.BUTTON_HOVER);
+		put("button_hover_clear", Defaults.BUTTON_HOVER_CLEAR);
+		put("text_box", Defaults.TEXT_BOX);
+		put("top", Defaults.TOP);
+		put("select", Defaults.SELECT);
+		put("select_clear", Defaults.SELECT_CLEAR);
+	}};
 
 
 	//region Dark Mode

@@ -2,8 +2,8 @@ package com.alphalaneous.SettingsPanels;
 
 import com.alphalaneous.*;
 import com.alphalaneous.Components.*;
+import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.alphalaneous.Windows.CommandEditor;
-import com.alphalaneous.Windows.Window;
 
 import javax.swing.*;
 import java.awt.*;
@@ -274,8 +274,8 @@ public class ChannelPointSettings {
 				component.setForeground(Defaults.FOREGROUND);
 
 			}
-			if (component instanceof CheckboxButton) {
-				((CheckboxButton) component).refresh();
+			if (component instanceof ThemedCheckbox) {
+				((ThemedCheckbox) component).refresh();
 			}
 		}
 
@@ -287,8 +287,8 @@ public class ChannelPointSettings {
 			if (component instanceof JLabel) {
 				component.setForeground(Defaults.FOREGROUND);
 			}
-			if (component instanceof CheckboxButton) {
-				((CheckboxButton) component).refresh();
+			if (component instanceof ThemedCheckbox) {
+				((ThemedCheckbox) component).refresh();
 			}
 		}
 	}

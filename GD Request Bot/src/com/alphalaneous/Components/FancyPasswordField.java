@@ -13,19 +13,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class FancyPasswordField extends JPasswordField {
 
 	private UndoManager undoManager = new UndoManager();
 
-	private UndoableEditListener undoableEditListener = new UndoableEditListener() {
-		@Override
-		public void undoableEditHappened(UndoableEditEvent e) {
-
-			undoManager.addEdit(e.getEdit());
-
-		}
-	};
+	public static ArrayList<FancyPasswordField> fields = new ArrayList<>();
 
 	public FancyPasswordField() {
 
@@ -51,6 +45,7 @@ public class FancyPasswordField extends JPasswordField {
 		});
 
 		Document doc = getDocument();
+		UndoableEditListener undoableEditListener = e -> undoManager.addEdit(e.getEdit());
 		doc.addUndoableEditListener(undoableEditListener);
 
 		InputMap im = getInputMap(JComponent.WHEN_FOCUSED);
@@ -58,6 +53,7 @@ public class FancyPasswordField extends JPasswordField {
 
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "Undo");
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_Y, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "Redo");
+		//noinspection MagicConstant
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() | Event.SHIFT_MASK), "Redo");
 
 		am.put("Undo", new AbstractAction() {
@@ -90,11 +86,18 @@ public class FancyPasswordField extends JPasswordField {
 		undoManager.discardAllEdits();
 	}
 
-	public void refreshAll(){
+	public void refresh_(){
 		setBackground(Defaults.TEXT_BOX);
 		setForeground(Defaults.FOREGROUND);
 		setCaretColor(Defaults.FOREGROUND);
 	}
+
+	public static void refreshAll(){
+		for(FancyPasswordField field : fields){
+			field.refresh_();
+		}
+	}
+
 	public static class MyCaret extends DefaultCaret {
 
 		MyCaret() {

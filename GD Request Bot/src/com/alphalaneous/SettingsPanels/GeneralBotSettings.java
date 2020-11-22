@@ -1,6 +1,6 @@
 package com.alphalaneous.SettingsPanels;
 
-import com.alphalaneous.Components.CheckboxButton;
+import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.alphalaneous.Components.FancyTextArea;
 import com.alphalaneous.Components.LangLabel;
 import com.alphalaneous.Defaults;
@@ -22,9 +22,9 @@ public class GeneralBotSettings {
 	private static JPanel panel = new JPanel(null);
 	private static LangLabel versionLabel = new LangLabel("");
 
-	private static CheckboxButton silentChatMode = createButton("$SILENT_MODE$", 50);
-	private static CheckboxButton multiThreadMode = createButton("$MULTI_THREAD$", 80);
-	private static CheckboxButton antiDoxMode = createButton("$ANTI_DOX$", 140);
+	private static ThemedCheckbox silentChatMode = createButton("$SILENT_MODE$", 50);
+	private static ThemedCheckbox multiThreadMode = createButton("$MULTI_THREAD$", 80);
+	private static ThemedCheckbox antiDoxMode = createButton("$ANTI_DOX$", 140);
 	private static LangLabel antiDoxInfo = new LangLabel("<html> $ANTI_DOX_INFO$ </html>");
 	private static LangLabel multiThreadInfo = new LangLabel("<html> $MULTI_THREAD_INFO$ </html>");
 	private static LangLabel cooldownLabel = new LangLabel("$GLOBAL_COOLDOWN_LABEL$");
@@ -120,8 +120,8 @@ public class GeneralBotSettings {
 		return panel;
 		
 	}
-	private static CheckboxButton createButton(String text, int y){
-		CheckboxButton button = new CheckboxButton(text, GeneralBotSettings.class);
+	private static ThemedCheckbox createButton(String text, int y){
+		ThemedCheckbox button = new ThemedCheckbox(text);
 		button.setBounds(25,y,365,30);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
@@ -154,12 +154,12 @@ public class GeneralBotSettings {
 		versionLabel.setForeground(Defaults.FOREGROUND2);
 		antiDoxInfo.setForeground(Defaults.FOREGROUND2);
 		multiThreadInfo.setForeground(Defaults.FOREGROUND2);
-		globalCooldownInput.refreshAll();
+		globalCooldownInput.refresh_();
 		cooldownLabel.setForeground(Defaults.FOREGROUND);
 
 		for (Component component : panel.getComponents()) {
-			if(component instanceof CheckboxButton){
-				((CheckboxButton) component).refresh();
+			if(component instanceof ThemedCheckbox){
+				((ThemedCheckbox) component).refresh();
 			}
 		}
 	}

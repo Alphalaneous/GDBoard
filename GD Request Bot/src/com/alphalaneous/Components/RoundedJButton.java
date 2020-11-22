@@ -1,6 +1,8 @@
 package com.alphalaneous.Components;
 
+import com.alphalaneous.Defaults;
 import com.alphalaneous.Language;
+import com.alphalaneous.ThemedComponents.ThemedJButton;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -12,7 +14,7 @@ import java.util.Map;
 
 import javax.swing.*;
 
-public class RoundedJButton extends JButton {
+public class RoundedJButton extends ThemedJButton {
 
 	@Override
 	public JToolTip createToolTip() {
@@ -22,15 +24,17 @@ public class RoundedJButton extends JButton {
 	public static ArrayList<RoundedJButton> buttons = new ArrayList<>();
 	private String tooltipText;
 	private String text;
-	private JPanel tooltipPanel = new JPanel();
 	private JToolTip tooltip = new FancyTooltip(this);
+
+	private String colorChoiceF;
+	private String colorChoiceB;
+
 	public RoundedJButton(String label, String tooltip) {
 		super(label);
 		final boolean[] exited = {false};
 		this.tooltipText = tooltip;
 		this.text = label;
 		Dimension size = getPreferredSize();
-		tooltipPanel.setFocusable(false);
 		size.width = size.height = Math.max(size.width, size.height);
 		setPreferredSize(size);
 		setContentAreaFilled(false);
@@ -91,4 +95,22 @@ public class RoundedJButton extends JButton {
 		this.tooltipText = text;
 		setText(Language.setLocale(text));
 	}
+
+	public void setColorB(String color){
+		colorChoiceB = color;
+	}
+	public void setColorF(String color){
+		colorChoiceF = color;
+	}
+	public void refresh_(){
+		setForeground(Defaults.colors.get(colorChoiceF));
+		setBackground(Defaults.colors.get(colorChoiceB));
+	}
+
+	public static void refreshAll(){
+		for(RoundedJButton button : buttons){
+			button.refresh_();
+		}
+	}
+
 }
