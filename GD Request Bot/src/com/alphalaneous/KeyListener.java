@@ -27,20 +27,20 @@ public class KeyListener extends SwingKeyAdapter {
 		if (usePlatformer) {
 			if (e.getRawCode() == 65) {
 				if (goLeft) {
-					GDMod.run("speed", "-0.9");
+					GDMod.runNew("speed", "-0.9");
 					goLeft = false;
 				}
 			}
 			if (e.getRawCode() == 68) {
 				if (goRight) {
-					GDMod.run("speed", "0.9");
+					GDMod.runNew("speed", "0.9");
 					goRight = false;
 				}
 			}
 		}
 		if (e.getRawCode() == 81 && ctrlPressed) {
 			usePlatformer = true;
-			GDMod.run("speed", "0");
+			GDMod.runNew("speed", "0");
 		}
 		if (e.getRawCode() == 69) {
 			usePlatformer = false;

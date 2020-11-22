@@ -43,6 +43,8 @@ public class Main {
 	private static ChannelPointListener channelPointListener;
 	private static ServerBot serverBot = new ServerBot();
 	private static double version;
+	private static double prevVersion;
+
 	public static void main(String[] args) {
 
 		try {
@@ -54,6 +56,15 @@ public class Main {
 		catch (Exception e){
 			version = 0;
 		}
+		try{
+			prevVersion = Double.parseDouble(Settings.getSettings("prevVersion"));
+		}
+		catch (NumberFormatException e){
+			prevVersion = -1;
+		}
+
+
+
 
 		/*
 		  Saves defaults of UI Elements before switching to Nimbus
@@ -336,13 +347,13 @@ public class Main {
 				URL inputUrl = Main.class.getResource("/Resources/gdmod.exe");
 				FileUtils.copyURLToFile(inputUrl, path.toFile());
 			}
-			if(version < 0.9267) {
+
 				Path pathb = Paths.get(Defaults.saveDirectory + "\\GDBoard\\bin\\ChaosMode.exe");
-				if (!Files.exists(pathb)) {
+				if (!Files.exists(pathb) || prevVersion < version) {
 					URL inputUrl = Main.class.getResource("/Resources/ChaosMode.exe");
 					FileUtils.copyURLToFile(inputUrl, pathb.toFile());
 				}
-			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -482,6 +493,7 @@ public class Main {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			Settings.writeSettings("prevVersion", String.valueOf(version));
 			Variables.saveVars();
 			Settings.saveSettings();
 			System.exit(0);

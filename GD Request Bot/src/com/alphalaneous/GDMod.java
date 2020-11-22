@@ -6,57 +6,65 @@ import org.apache.commons.lang3.ArrayUtils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class GDMod {
 
 	public static void runNew(String... args){
 
-		new Thread(() -> {
+		for(int i = 0; i < args.length; i++){
+			args[i] = args[i].toLowerCase();
+		}
 
-			try {
-				String[] cmd = new String[]{Defaults.saveDirectory + "\\GDBoard\\bin\\ChaosMode.exe"};
-				String[] fillCmd = ArrayUtils.addAll(cmd, args);
-				ProcessBuilder pb = new ProcessBuilder(fillCmd).redirectErrorStream(true);
-				pb.start();
+		if(args[0].equalsIgnoreCase("gamemode")){
+
+			switch (args[1]){
+				case "cube": args[1] = "-1"; break;
+				case "ship": args[1] = "0"; break;
+				case "ufo": args[1] = "1"; break;
+				case "ball": args[1] = "2"; break;
+				case "wave": args[1] = "3"; break;
+				case "robot": args[1] = "4"; break;
+				case "spider": args[1] = "5"; break;
+				default: return;
 			}
-			catch (Exception e){
-				e.printStackTrace();
-			}
-		}).start();
-	}
+		}
 
-	public static void run(String... args){
-		new Thread(() -> {
-		String PID = null;
-		try {
-			ProcessBuilder pb = new ProcessBuilder("tasklist", "/fi", "\"IMAGENAME eq GeometryDash.exe\"", "/fo", "CSV").redirectErrorStream(true);
-			Process process = pb.start();
-
-			try (BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
-				while (true) {
-					String line = in.readLine();
-					if (line == null) {
-						break;
-					}
-					if(line.contains("GeometryDash.exe")){
-						PID = line.split(",")[1].replaceAll("\"","");
+		new Thread(() -> ProcessHandle.allProcesses().forEach(process -> {
+			if (process.info().command().isPresent()) {
+				if (process.info().command().get().endsWith("GeometryDash.exe")) {
+					long PID = process.pid();
+					String[] cmd = new String[]{Defaults.saveDirectory + "\\GDBoard\\bin\\ChaosMode.exe", String.valueOf(PID)};
+					String[] fillCmd = ArrayUtils.addAll(cmd, args);
+					ProcessBuilder pb = new ProcessBuilder(fillCmd).redirectErrorStream(true);
+					try {
+						pb.start();
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
 				}
 			}
-		}
-		catch (IOException e){
-			e.printStackTrace();
-		}
-		try {
-			String[] cmd = new String[]{Defaults.saveDirectory + "\\GDBoard\\bin\\gdmod.exe", PID};
-			String[] fillCmd = ArrayUtils.addAll(cmd, args);
-			ProcessBuilder pb = new ProcessBuilder(fillCmd).redirectErrorStream(true);
-			pb.start();
-		}
-		catch (Exception e){
-			e.printStackTrace();
-		}
-		}).start();
+		})).start();
+	}
+
+	public static void run(String... args){
+
+		new Thread(() ->
+			ProcessHandle.allProcesses().forEach(process ->{
+				if(process.info().command().isPresent()) {
+					if(process.info().command().get().endsWith("GeometryDash.exe")){
+						long PID = process.pid();
+						String[] cmd = new String[]{Defaults.saveDirectory + "\\GDBoard\\bin\\gdmod.exe", String.valueOf(PID)};
+						String[] fillCmd = ArrayUtils.addAll(cmd, args);
+						ProcessBuilder pb = new ProcessBuilder(fillCmd).redirectErrorStream(true);
+						try {
+							pb.start();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			})).start();
 	}
 	public static void doChaos(String... args){
 		System.out.println(args[0]);
@@ -104,17 +112,6 @@ public class GDMod {
 			default: break;
 		}
 
-		new Thread(() -> {
-
-			try {
-				String[] cmd = new String[]{Defaults.saveDirectory + "\\GDBoard\\bin\\ChaosMode.exe"};
-				String[] fillCmd = ArrayUtils.addAll(cmd, args);
-				ProcessBuilder pb = new ProcessBuilder(fillCmd).redirectErrorStream(true);
-				pb.start();
-			}
-			catch (Exception e){
-				e.printStackTrace();
-			}
-		}).start();
+		runNew(args);
 	}
 }

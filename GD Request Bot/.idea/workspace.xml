@@ -7,191 +7,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Resources/ChaosMode.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/alphalaneous/ThemedComponents/ThemedJButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/alphalaneous/ThemedComponents/ThemedJPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/alphalaneous/ThemedComponents/ThemedLangLabel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/CheckboxButton$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/CheckboxButton.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/CurvedButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/CurvedButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/CurvedButtonAlt.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/CurvedButtonAlt.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyPasswordField$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyPasswordField$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyPasswordField$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyPasswordField$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyPasswordField$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyPasswordField$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyPasswordField$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyPasswordField$MyCaret.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyPasswordField$MyCaret.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyPasswordField.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyPasswordField.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyTextArea$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyTextArea$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyTextArea$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyTextArea$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyTextArea$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyTextArea$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyTextArea$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyTextArea$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyTextArea$MyCaret.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyTextArea$MyCaret.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyTextArea$MyIntFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyTextArea$MyIntFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyTextArea$MyNegIntFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyTextArea$MyNegIntFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyTextArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyTextArea.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyTooltip.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/FancyTooltip.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/LangButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/LangButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/LangLabel.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/LangLabel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/RadioPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/RadioPanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/RadioPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/RadioPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/RoundedJButton$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/RoundedJButton$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/RoundedJButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/RoundedJButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/SettingsButton$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/SettingsButton$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/SettingsButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Components/SettingsButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Defaults.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Defaults.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/Resources/ChaosMode.exe" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/Resources/ChaosMode.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/GDMod.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/GDMod.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/KeyListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/KeyListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Main$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/AccountSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/AccountSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/BlockedCreatorSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/BlockedCreatorSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/BlockedSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/BlockedSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/BlockedUserSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/BlockedUserSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChannelPointSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChannelPointSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$17.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$18.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$19.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ChaosModeSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/CommandSettings$ButtonInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/CommandSettings$ButtonInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/CommandSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/CommandSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralBotSettings$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralBotSettings$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralBotSettings$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralBotSettings$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralBotSettings$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralBotSettings$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralBotSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralBotSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$18.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$20.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/GeneralSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/LanguageSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/LanguageSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/OutputSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/OutputSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/PersonalizationSettings$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/PersonalizationSettings$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/PersonalizationSettings$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/PersonalizationSettings$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/PersonalizationSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/PersonalizationSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$17.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$18.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$19.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$20.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$21.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$22.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$23.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$23.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$24.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$24.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$25.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$25.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$26.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$26.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$27.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$27.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$28.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$28.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$29.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$29.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$30.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$30.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$31.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$31.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$32.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$32.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$33.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$33.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$34.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$34.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$35.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$35.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestsLog.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/RequestsLog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ShortcutSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/ShortcutSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/WindowedSettings$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/WindowedSettings$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/WindowedSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/SettingsPanels/WindowedSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Themes.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Themes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/CommandEditor$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/CommandEditor$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/CommandEditor$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/CommandEditor$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/CommandEditor$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/CommandEditor$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/CommandEditor.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/CommandEditor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Components/CheckboxButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/ThemedComponents/ThemedCheckbox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Components/CurvedButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Components/CurvedButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Components/CurvedButtonAlt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Components/CurvedButtonAlt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Components/FancyPasswordField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Components/FancyPasswordField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Components/FancyTextArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Components/FancyTextArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Components/FancyTooltip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Components/FancyTooltip.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Components/LangButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Components/LangButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Components/LangLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Components/LangLabel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Components/RadioPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Components/RadioPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Components/RoundedJButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Components/RoundedJButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Components/SettingsButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Components/SettingsButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Defaults.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Defaults.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/ChaosMode.exe" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/ChaosMode.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/GDMod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/GDMod.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/KeyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/KeyListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/AccountSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/AccountSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/BlockedCreatorSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/BlockedCreatorSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/BlockedSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/BlockedSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/BlockedUserSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/BlockedUserSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/ChannelPointSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/ChannelPointSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/ChaosModeSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/ChaosModeSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/CommandSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/CommandSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/GeneralBotSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/GeneralBotSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/GeneralSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/GeneralSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/LanguageSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/LanguageSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/OutputSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/OutputSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/PersonalizationSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/PersonalizationSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/RequestSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/RequestSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/RequestsLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/RequestsLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/ShortcutSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/ShortcutSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/WindowedSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/WindowedSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Themes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Themes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Windows/CommandEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Windows/CommandEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Windows/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Windows/Window.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -226,54 +54,80 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Components/SettingsButton.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1122">
-              <caret line="76" column="28" selection-start-line="76" selection-start-column="28" selection-end-line="76" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/WindowedSettings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="748">
-              <caret line="52" column="46" selection-start-line="52" selection-start-column="46" selection-end-line="52" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Windows/Window.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="13226">
-              <caret line="820" column="55" selection-start-line="820" selection-start-column="55" selection-end-line="820" selection-end-column="55" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Themes.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="431">
-              <caret line="338" column="34" selection-start-line="338" selection-start-column="34" selection-end-line="338" selection-end-column="34" />
+            <state relative-caret-position="765">
+              <caret line="74" selection-start-line="74" selection-end-line="74" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#12477#12478#0" expanded="true" />
-                <element signature="e#17392#17393#0" expanded="true" />
+                <element signature="e#12618#12619#0" expanded="true" />
+                <element signature="e#12658#12659#0" expanded="true" />
+                <element signature="e#17614#17615#0" expanded="true" />
+                <element signature="e#17640#17641#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Components/RadioButton.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Components/RadioPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="24" selection-start-line="24" selection-end-line="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Defaults.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="66" selection-start-line="66" selection-end-line="66" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/LoadGD.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="25" selection-start-line="25" selection-end-line="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/PersonalizationSettings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/GeneralBotSettings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="41" column="104" selection-start-line="41" selection-start-column="64" selection-end-line="41" selection-end-column="104" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/GDMod.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="30" column="9" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -283,33 +137,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state>
               <caret column="14" selection-start-column="14" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/GeneralSettings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3859">
-              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/GeneralBotSettings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="41" column="104" selection-start-line="41" selection-start-column="64" selection-end-line="41" selection-end-column="104" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/GDMod.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="12" selection-start-line="12" selection-end-line="12" />
             </state>
           </provider>
         </entry>
@@ -388,7 +215,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/alphalaneous/Command.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/ChaosModeSettings.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/GeneralSettings.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/Windows/CommandEditor.java" />
@@ -436,8 +262,9 @@
         <option value="$PROJECT_DIR$/src/com/alphalaneous/Components/RoundedJButton.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/Windows/Window.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/Themes.java" />
-        <option value="$PROJECT_DIR$/src/com/alphalaneous/GDMod.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/alphalaneous/KeyListener.java" />
+        <option value="$PROJECT_DIR$/src/com/alphalaneous/GDMod.java" />
         <option value="$PROJECT_DIR$/src/.version" />
       </list>
     </option>
@@ -456,9 +283,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
+    <option name="x" value="223" />
+    <option name="y" value="-18" />
     <option name="width" value="1631" />
-    <option name="height" value="1047" />
+    <option name="height" value="1028" />
   </component>
   <component name="ProjectId" id="1X2386Wf5oMdxwOPKjpPdGzrXYK" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -472,7 +300,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Changed Files'; set:Changed Files; ALL; class com.intellij.packageDependencies.ChangeListScope">
           <expand>
@@ -545,6 +372,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -644,14 +472,14 @@
               <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Resources" type="462c0819:PsiDirectoryNode" />
-              <item name="Icons" type="462c0819:PsiDirectoryNode" />
+              <item name="Fonts" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
               <item name="GD Request Bot" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Resources" type="462c0819:PsiDirectoryNode" />
-              <item name="Languages" type="462c0819:PsiDirectoryNode" />
+              <item name="Icons" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="GD Request Bot" type="b2602c69:ProjectViewProjectNode" />
@@ -677,7 +505,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1606018457378" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1606072731860" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../GDBoard Dependencies/dependency/slf4j-api-1.8.0-beta4.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -689,11 +517,11 @@
     <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources" />
       <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources\Icons" />
-      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources\Fonts" />
-      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Main" />
-      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources\GDAssets" />
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\classes\artifacts\GD_Request_Bot_jar" />
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources\cheers" />
       <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources\Commands" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -702,11 +530,11 @@
       <recent name="Main.InnerWindows" />
       <recent name="SettingsPanels" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources" />
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources\Icons" />
-      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\classes\artifacts\GD_Request_Bot_jar" />
-      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources\cheers" />
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources\Fonts" />
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Main" />
+      <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources\GDAssets" />
       <recent name="D:\Ashton\Documents\GitHub\GDBoard\GD Request Bot\src\Resources\Commands" />
     </key>
   </component>
@@ -722,7 +550,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JAR Application.GD Request Bot.jar">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -854,7 +682,7 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info active="true" content_ui="combo" x="16" y="105" width="325" height="756" id="Project" order="6" sideWeight="0.29424307" side_tool="true" visible="true" weight="0.22334754" />
+      <window_info active="true" content_ui="combo" x="16" y="105" width="325" height="756" id="Project" order="6" sideWeight="0.29424307" side_tool="true" visible="true" weight="0.23560767" />
       <window_info anchor="bottom" id="JProfiler" order="0" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" sideWeight="0.4979424" weight="0.32394367" />
@@ -867,7 +695,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32990867" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.4035181" weight="0.3206934" />
       <window_info anchor="bottom" x="-37" y="178" width="1736" height="856" id="Byte Code Viewer" order="11" type="WINDOWED" />
-      <window_info anchor="bottom" id="Run" order="12" sideWeight="0.55490404" weight="0.3206934" />
+      <window_info anchor="bottom" id="Run" order="12" sideWeight="0.55490404" visible="true" weight="0.3206934" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
       <window_info anchor="right" id="Palette" order="2" />
@@ -1042,111 +870,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk-13.0.2/lib/src.zip!/java.desktop/java/awt/event/ComponentAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="51" column="22" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/AccountSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1972">
-          <caret line="167" lean-forward="true" selection-start-line="167" selection-end-line="167" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Panels/InfoPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-13.0.2/lib/src.zip!/java.base/java/util/LinkedHashMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="357" column="11" selection-start-line="357" selection-start-column="11" selection-end-line="357" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/LevelData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1479">
-          <caret line="139" column="17" selection-start-line="139" selection-start-column="17" selection-end-line="139" selection-end-column="17" />
-          <folding>
-            <element signature="e#196#197#0" expanded="true" />
-            <element signature="e#217#218#0" expanded="true" />
-            <element signature="e#249#250#0" expanded="true" />
-            <element signature="e#272#273#0" expanded="true" />
-            <element signature="e#301#302#0" expanded="true" />
-            <element signature="e#323#324#0" expanded="true" />
-            <element signature="e#358#359#0" expanded="true" />
-            <element signature="e#382#383#0" expanded="true" />
-            <element signature="e#416#417#0" expanded="true" />
-            <element signature="e#439#440#0" expanded="true" />
-            <element signature="e#469#470#0" expanded="true" />
-            <element signature="e#489#490#0" expanded="true" />
-            <element signature="e#517#518#0" expanded="true" />
-            <element signature="e#535#536#0" expanded="true" />
-            <element signature="e#569#570#0" expanded="true" />
-            <element signature="e#593#594#0" expanded="true" />
-            <element signature="e#628#629#0" expanded="true" />
-            <element signature="e#653#654#0" expanded="true" />
-            <element signature="e#680#681#0" expanded="true" />
-            <element signature="e#699#700#0" expanded="true" />
-            <element signature="e#730#731#0" expanded="true" />
-            <element signature="e#753#754#0" expanded="true" />
-            <element signature="e#782#783#0" expanded="true" />
-            <element signature="e#803#804#0" expanded="true" />
-            <element signature="e#944#945#0" expanded="true" />
-            <element signature="e#966#967#0" expanded="true" />
-            <element signature="e#995#996#0" expanded="true" />
-            <element signature="e#1013#1014#0" expanded="true" />
-            <element signature="e#1045#1046#0" expanded="true" />
-            <element signature="e#1067#1068#0" expanded="true" />
-            <element signature="e#1101#1102#0" expanded="true" />
-            <element signature="e#1125#1126#0" expanded="true" />
-            <element signature="e#1152#1153#0" expanded="true" />
-            <element signature="e#1172#1173#0" expanded="true" />
-            <element signature="e#1331#1332#0" expanded="true" />
-            <element signature="e#1359#1360#0" expanded="true" />
-            <element signature="e#1397#1398#0" expanded="true" />
-            <element signature="e#1424#1425#0" expanded="true" />
-            <element signature="e#1457#1458#0" expanded="true" />
-            <element signature="e#1479#1480#0" expanded="true" />
-            <element signature="e#1505#1506#0" expanded="true" />
-            <element signature="e#1524#1525#0" expanded="true" />
-            <element signature="e#1561#1562#0" expanded="true" />
-            <element signature="e#1588#1589#0" expanded="true" />
-            <element signature="e#1719#1720#0" expanded="true" />
-            <element signature="e#1739#1740#0" expanded="true" />
-            <element signature="e#1773#1774#0" expanded="true" />
-            <element signature="e#1795#1796#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/HighlightButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="17" column="26" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/BotHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4828">
-          <caret line="296" column="151" selection-start-line="296" selection-start-column="36" selection-end-line="296" selection-end-column="151" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Panels/LevelsPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6409">
@@ -1326,13 +1049,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Reference.java" />
     <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/ThemedColor.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Defaults.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="77" column="17" selection-start-line="77" selection-start-column="17" selection-end-line="77" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Components/FancyPasswordField.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -1382,20 +1098,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Components/RadioButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1496">
-          <caret line="101" column="5" selection-start-line="101" selection-start-column="5" selection-end-line="101" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Components/RadioPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1173">
-          <caret line="76" column="39" selection-start-line="76" selection-start-column="39" selection-end-line="76" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Components/RoundedJButton.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1547">
@@ -1427,6 +1129,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-13.0.2/lib/src.zip!/java.base/java/util/stream/Stream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="646" column="9" selection-start-line="646" selection-start-column="9" selection-end-line="646" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-13.0.2/lib/src.zip!/java.base/java/lang/ProcessHandle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="196" column="33" selection-start-line="196" selection-start-column="33" selection-end-line="196" selection-end-column="33" />
+          <folding>
+            <element signature="e#8174#8175#0" expanded="true" />
+            <element signature="e#8226#8227#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/WindowedSettings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="748">
@@ -1451,6 +1171,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/KeyListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/GeneralSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Resources/Fonts/SegMDL2.ttf">
+      <provider selected="true" editor-type-id="fontseditor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Resources/Icons/Alphalaneous.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="74" selection-start-line="74" selection-end-line="74" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#12618#12619#0" expanded="true" />
+            <element signature="e#12658#12659#0" expanded="true" />
+            <element signature="e#17614#17615#0" expanded="true" />
+            <element signature="e#17640#17641#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Components/RadioButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Components/RadioPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/PersonalizationSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/GeneralBotSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="41" column="104" selection-start-line="41" selection-start-column="64" selection-end-line="41" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/ThemedComponents/ThemedJButton.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -1461,36 +1243,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Defaults.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="66" selection-start-line="66" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/LoadGD.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/GDMod.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/GeneralSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3859">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/GeneralBotSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="41" column="104" selection-start-line="41" selection-start-column="64" selection-end-line="41" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="338" column="34" selection-start-line="338" selection-start-column="34" selection-end-line="338" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#12477#12478#0" expanded="true" />
-            <element signature="e#17392#17393#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="408">
+          <caret line="30" column="9" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
         </state>
       </provider>
     </entry>
