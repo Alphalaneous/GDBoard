@@ -59,7 +59,7 @@ public class Main {
 		try{
 			prevVersion = Double.parseDouble(Settings.getSettings("prevVersion"));
 		}
-		catch (NumberFormatException e){
+		catch (Exception e){
 			prevVersion = -1;
 		}
 
