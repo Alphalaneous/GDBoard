@@ -68,6 +68,14 @@ public class GDMod {
 	}
 	public static void doChaos(String... args){
 		System.out.println(args[0]);
+		if(args[1] != null) {
+			try {
+				Double.parseDouble(args[1]);
+			} catch (NumberFormatException e) {
+				return;
+			}
+		}
+		assert args[1] != null;
 		switch(args[0]){
 			case "x":
 				if (ChaosModeSettings.minXOption && (Double.parseDouble(args[1]) < ChaosModeSettings.minX)) {

@@ -138,11 +138,11 @@ public class KeyListener extends SwingKeyAdapter {
 		keyReleased = true;
 		if (usePlatformer) {
 			if (e.getRawCode() == 65) {
-				GDMod.run("speed", "0");
+				GDMod.runNew("speed", "0");
 				goLeft = true;
 			}
 			if (e.getRawCode() == 68) {
-				GDMod.run("speed", "0");
+				GDMod.runNew("speed", "0");
 				goRight = true;
 			}
 		}

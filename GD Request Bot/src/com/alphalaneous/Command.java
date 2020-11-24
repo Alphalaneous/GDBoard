@@ -56,6 +56,7 @@ public class Command {
         } catch (Exception e) {
             //if(sayError) {
                 Main.sendMessage(("There was an error with the command: " + e).replaceAll(System.getProperty("user.name"), "*****"));
+                e.printStackTrace();
             //}
         }
         String spacelessResult = result.replaceAll(" ", "").toLowerCase();
