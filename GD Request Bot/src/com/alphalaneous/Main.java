@@ -348,11 +348,10 @@ public class Main {
 				FileUtils.copyURLToFile(inputUrl, path.toFile());
 			}
 
-				Path pathb = Paths.get(Defaults.saveDirectory + "\\GDBoard\\bin\\ChaosMode.exe");
-				if (!Files.exists(pathb) || prevVersion < version) {
-					URL inputUrl = Main.class.getResource("/Resources/ChaosMode.exe");
-					FileUtils.copyURLToFile(inputUrl, pathb.toFile());
-				}
+			Path pathb = Paths.get(Defaults.saveDirectory + "\\GDBoard\\bin\\ChaosMode.exe");
+			URL inputUrl = Main.class.getResource("/Resources/ChaosMode.exe");
+			FileUtils.copyURLToFile(inputUrl, pathb.toFile());
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
