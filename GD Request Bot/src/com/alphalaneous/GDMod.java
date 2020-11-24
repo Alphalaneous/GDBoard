@@ -66,60 +66,61 @@ public class GDMod {
 				}
 			})).start();
 	}
-	public static void doChaos(String... args){
+	public static String doChaos(String... args){
 		System.out.println(args[0]);
 		if(args[1] != null) {
 			try {
 				Double.parseDouble(args[1]);
 			} catch (NumberFormatException e) {
-				return;
+				return "";
 			}
 		}
 		assert args[1] != null;
 		switch(args[0]){
 			case "x":
 				if (ChaosModeSettings.minXOption && (Double.parseDouble(args[1]) < ChaosModeSettings.minX)) {
-					return;
+					return "";
 				}
 				if (ChaosModeSettings.maxXOption && (Double.parseDouble(args[1]) > ChaosModeSettings.maxX)) {
-					return;
+					return "";
 				}
 				break;
 			case "y":
 				if (ChaosModeSettings.minYOption && (Double.parseDouble(args[1]) < ChaosModeSettings.minY)) {
-					return;
+					return "";
 				}
 				if (ChaosModeSettings.maxYOption && (Double.parseDouble(args[1]) > ChaosModeSettings.maxY)) {
-					return;
+					return "";
 				}
 				break;
 			case "size":
 				if (ChaosModeSettings.minSizeOption && (Double.parseDouble(args[1]) < ChaosModeSettings.minSize)) {
-					return;
+					return "";
 				}
 				if (ChaosModeSettings.maxSizeOption && (Double.parseDouble(args[1]) > ChaosModeSettings.maxSize)) {
-					return;
+					return "";
 				}
 				break;
 			case "speed":
 				if (ChaosModeSettings.minSpeedOption && (Double.parseDouble(args[1]) < ChaosModeSettings.minSpeed)) {
-					return;
+					return "";
 				}
 				if (ChaosModeSettings.maxSpeedOption && (Double.parseDouble(args[1]) > ChaosModeSettings.maxSpeed)) {
-					return;
+					return "";
 				}
 				break;
 			case "kill":
 				if(ChaosModeSettings.disableKillOption){
-					return;
+					return "";
 				}
 				else{
 					run("kill");
-					return;
+					return "";
 				}
 			default: break;
 		}
 
 		runNew(args);
+		return "Success " + Arrays.toString(args);
 	}
 }
