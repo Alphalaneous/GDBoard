@@ -154,7 +154,6 @@ public class Main {
 				}
 			}).start();
 
-
 			while (true) {
 				if (!programStarting) {
 
