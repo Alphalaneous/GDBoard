@@ -90,9 +90,9 @@ public class Requests {
 
 		try {
 			if (LoadGD.isAuth) {
-				user = LoadGD.authClient.searchUser(levelData.getAuthor()).block();
+				user = LoadGD.authClient.searchUser(levelData.getAuthor().toString()).block();
 			} else {
-				user = LoadGD.anonClient.searchUser(levelData.getAuthor()).block();
+				user = LoadGD.anonClient.searchUser(levelData.getAuthor().toString()).block();
 			}
 			assert user != null;
 			iconSet = new GDUserIconSet(user, spriteFactory);
@@ -210,7 +210,7 @@ public class Requests {
 				if (GeneralSettings.userLimitOption) {
 					int size = 0;
 					for (LevelData level : levels) {
-						if (level.getRequester().equalsIgnoreCase(requester)) {
+						if (level.getRequester().toString().equalsIgnoreCase(requester)) {
 							size++;
 						}
 					}
@@ -477,9 +477,9 @@ public class Requests {
 			GDUserIconSet iconSet;
 			try {
 				if (LoadGD.isAuth) {
-					user = LoadGD.authClient.searchUser(levelData.getAuthor()).block();
+					user = LoadGD.authClient.searchUser(levelData.getAuthor().toString()).block();
 				} else {
-					user = LoadGD.anonClient.searchUser(levelData.getAuthor()).block();
+					user = LoadGD.anonClient.searchUser(levelData.getAuthor().toString()).block();
 				}
 				assert user != null;
 				iconSet = new GDUserIconSet(user, spriteFactory);
@@ -516,18 +516,18 @@ public class Requests {
 				}
 			}
 			if (Main.programLoaded && !bypass) {
-				if (RequestSettings.excludedDifficulties.contains(levelData.getDifficulty().toLowerCase()) && RequestSettings.disableOption) {
+				if (RequestSettings.excludedDifficulties.contains(levelData.getDifficulty().toString().toLowerCase()) && RequestSettings.disableOption) {
 					Main.sendMessage(Utilities.format("$DIFFICULTY_MESSAGE$", requester));
 					return;
 				}
-				if (RequestSettings.excludedLengths.contains(levelData.getLength().toLowerCase()) && RequestSettings.disableLengthOption) {
+				if (RequestSettings.excludedLengths.contains(levelData.getLength().toString().toLowerCase()) && RequestSettings.disableLengthOption) {
 					Main.sendMessage(Utilities.format("$LENGTH_MESSAGE$", requester));
 					return;
 				}
 			}
 
-			if (levelData.getDescription().toLowerCase().contains("nong")) {
-				String[] words = levelData.getDescription().split(" ");
+			if (levelData.getDescription().toString().toLowerCase().contains("nong")) {
+				String[] words = levelData.getDescription().toString().split(" ");
 				for (String word : words) {
 					if (isValidURL(word)) {
 						levelData.setSongURL(word);
@@ -587,9 +587,9 @@ public class Requests {
 				}
 			}
 			levels.add(levelData);
-			LevelsPanel.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(),
-					levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(),
-					levelData.getRequester(), levelData.getVersion(), levelData.getPlayerIcon(), levelData.getCoins(),
+			LevelsPanel.createButton(levelData.getName().toString(), levelData.getAuthor().toString(), levelData.getLevelID(),
+					levelData.getDifficulty().toString(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(),
+					levelData.getRequester().toString(), levelData.getVersion(), levelData.getPlayerIcon(), levelData.getCoins(),
 					levelData.getVerifiedCoins());
 
 			LevelsPanel.setName(Requests.levels.size());
@@ -688,19 +688,19 @@ public class Requests {
 		try {
 			switch (attribute) {
 				case "name":
-					result = levels.get(level).getName();
+					result = levels.get(level).getName().toString();
 					break;
 				case "id":
 					result = String.valueOf(levels.get(level).getLevelID());
 					break;
 				case "author":
-					result = levels.get(level).getAuthor();
+					result = levels.get(level).getAuthor().toString();
 					break;
 				case "requester":
-					result = levels.get(level).getRequester();
+					result = levels.get(level).getRequester().toString();
 					break;
 				case "difficulty":
-					result = levels.get(level).getDifficulty();
+					result = levels.get(level).getDifficulty().toString();
 					break;
 				case "likes":
 					result = String.valueOf(levels.get(level).getLikes());
@@ -709,16 +709,16 @@ public class Requests {
 					result = String.valueOf(levels.get(level).getDownloads());
 					break;
 				case "description":
-					result = levels.get(level).getDescription();
+					result = levels.get(level).getDescription().toString();
 					break;
 				case "songName":
-					result = levels.get(level).getSongName();
+					result = levels.get(level).getSongName().toString();
 					break;
 				case "songID":
 					result = String.valueOf(levels.get(level).getSongID());
 					break;
 				case "songAuthor":
-					result = levels.get(level).getSongAuthor();
+					result = levels.get(level).getSongAuthor().toString();
 					break;
 				case "songURL":
 					result = String.valueOf(levels.get(level).getSongURL());
@@ -733,7 +733,7 @@ public class Requests {
 					result = String.valueOf(levels.get(level).getVersion());
 					break;
 				case "length":
-					result = levels.get(level).getLength();
+					result = levels.get(level).getLength().toString();
 					break;
 				case "coins":
 					result = String.valueOf(levels.get(level).getCoins());
@@ -757,10 +757,10 @@ public class Requests {
 					result = String.valueOf(levels.get(level).getLevelVersion());
 					break;
 				case "upload":
-					result = levels.get(level).getUpload();
+					result = levels.get(level).getUpload().toString();
 					break;
 				case "update":
-					result = levels.get(level).getUpdate();
+					result = levels.get(level).getUpdate().toString();
 					break;
 			}
 		} catch (Exception e) {
@@ -821,7 +821,7 @@ public class Requests {
 		for (int i = 0; i < Requests.levels.size(); i++) {
 			try {
 				if (Requests.levels.get(i).getLevelID() == Requests.levels.get(intArg - 1).getLevelID()
-						&& (isMod || String.valueOf(user).equalsIgnoreCase(Requests.levels.get(i).getRequester()))) {
+						&& (isMod || String.valueOf(user).equalsIgnoreCase(Requests.levels.get(i).getRequester().toString()))) {
 					response = "@" + user + ", " + Requests.levels.get(i).getName() + " (" + Requests.levels.get(i).getLevelID() + ") has been removed!";
 					LevelsPanel.removeButton(i);
 					Requests.levels.remove(i);
@@ -852,7 +852,7 @@ public class Requests {
 		String response = "";
 		for (int i = Requests.levels.size() - 1; i >= 0; i--) {
 			try {
-				if (String.valueOf(user).equalsIgnoreCase(Requests.levels.get(i).getRequester())) {
+				if (String.valueOf(user).equalsIgnoreCase(Requests.levels.get(i).getRequester().toString())) {
 					if(i == LevelsPanel.getSelectedID()){
 						return "";
 					}
@@ -1465,13 +1465,13 @@ public class Requests {
 				String[] values = decompressed.toString().split(";");
 				Requests.levels.get(k).setObjects(values.length);
 				if ((values.length < RequestSettings.minObjects) && RequestSettings.minObjectsOption) {
-					Main.sendMessage(Utilities.format("$TOO_FEW_OBJECTS_MESSAGE$", Requests.levels.get(k).getRequester()));
+					Main.sendMessage(Utilities.format("$TOO_FEW_OBJECTS_MESSAGE$", Requests.levels.get(k).getRequester().toString()));
 					LevelsPanel.removeButton(k);
 					Requests.levels.remove(k);
 					return;
 				}
 				if ((values.length > RequestSettings.maxObjects) && RequestSettings.maxObjectsOption) {
-					Main.sendMessage(Utilities.format("$TOO_MANY_OBJECTS_MESSAGE$", Requests.levels.get(k).getRequester()));
+					Main.sendMessage(Utilities.format("$TOO_MANY_OBJECTS_MESSAGE$", Requests.levels.get(k).getRequester().toString()));
 					LevelsPanel.removeButton(k);
 					Requests.levels.remove(k);
 					return;
@@ -1611,16 +1611,16 @@ public class Requests {
 
 	static String parseInfoString(String text, int level) {
 		if (Requests.levels.size() != 0) {
-			text = text.replaceAll("(?i)%levelName%", levels.get(level).getName())
+			text = text.replaceAll("(?i)%levelName%", levels.get(level).getName().toString())
 					.replaceAll("(?i)%levelID%", String.valueOf(levels.get(level).getLevelID()))
-					.replaceAll("(?i)%levelAuthor%", levels.get(level).getAuthor())
-					.replaceAll("(?i)%requester%", levels.get(level).getRequester())
-					.replaceAll("(?i)%songName%", levels.get(level).getSongName())
+					.replaceAll("(?i)%levelAuthor%", levels.get(level).getAuthor().toString())
+					.replaceAll("(?i)%requester%", levels.get(level).getRequester().toString())
+					.replaceAll("(?i)%songName%", levels.get(level).getSongName().toString())
 					.replaceAll("(?i)%songID%", String.valueOf(levels.get(level).getSongID()))
-					.replaceAll("(?i)%songArtist%", levels.get(level).getSongAuthor())
+					.replaceAll("(?i)%songArtist%", levels.get(level).getSongAuthor().toString())
 					.replaceAll("(?i)%likes%", String.valueOf(levels.get(level).getLikes()))
 					.replaceAll("(?i)%downloads%", String.valueOf(levels.get(level).getDownloads()))
-					.replaceAll("(?i)%description%", levels.get(level).getDescription())
+					.replaceAll("(?i)%description%", levels.get(level).getDescription().toString())
 					.replaceAll("(?i)%coins%", String.valueOf(levels.get(level).getCoins()))
 					.replaceAll("(?i)%objects%", String.valueOf(levels.get(level).getObjects()))
 					.replaceAll("(?i)%queueSize%", String.valueOf(levels.size()))

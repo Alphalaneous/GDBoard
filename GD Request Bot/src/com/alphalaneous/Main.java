@@ -42,29 +42,8 @@ public class Main {
 	private static boolean keepConnecting = true;
 	private static ChannelPointListener channelPointListener;
 	private static ServerBot serverBot = new ServerBot();
-	private static double version;
-	private static double prevVersion;
 
 	public static void main(String[] args) {
-
-		try {
-			FileInputStream is = new FileInputStream(Defaults.saveDirectory + "\\GDBoard\\version.txt");
-			InputStreamReader isr = new InputStreamReader(is);
-			BufferedReader br = new BufferedReader(isr);
-			version = Double.parseDouble(br.readLine().replaceAll("version=", ""));
-		}
-		catch (Exception e){
-			version = 0;
-		}
-		try{
-			prevVersion = Double.parseDouble(Settings.getSettings("prevVersion"));
-		}
-		catch (Exception e){
-			prevVersion = -1;
-		}
-
-
-
 
 		/*
 		  Saves defaults of UI Elements before switching to Nimbus
@@ -235,10 +214,7 @@ public class Main {
 			if(Files.exists(initialJS)){
 				new Thread(() -> {
 					try {
-						String function =  Files.readString(initialJS, StandardCharsets.UTF_8);
-						if(!function.equalsIgnoreCase("")) {
-							Command.run(TwitchAccount.display_name, true, true, new String[]{"dummy"}, function, 0, false);
-						}
+						Command.run(TwitchAccount.display_name, true, true, new String[]{"dummy"}, Files.readString(initialJS, StandardCharsets.UTF_8), 0 , false);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -346,11 +322,6 @@ public class Main {
 				URL inputUrl = Main.class.getResource("/Resources/gdmod.exe");
 				FileUtils.copyURLToFile(inputUrl, path.toFile());
 			}
-
-			Path pathb = Paths.get(Defaults.saveDirectory + "\\GDBoard\\bin\\ChaosMode.exe");
-			URL inputUrl = Main.class.getResource("/Resources/ChaosMode.exe");
-			FileUtils.copyURLToFile(inputUrl, pathb.toFile());
-
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -491,7 +462,6 @@ public class Main {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			Settings.writeSettings("prevVersion", String.valueOf(version));
 			Variables.saveVars();
 			Settings.saveSettings();
 			System.exit(0);
