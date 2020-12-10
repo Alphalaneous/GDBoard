@@ -12,10 +12,10 @@ class GDHelper {
 	static String command = Defaults.saveDirectory + "\\GDBoard\\bin\\ChaosMode.exe";
 	private static BufferedReader processOutput;
 	private static BufferedWriter processInput;
-
+	private static Process pr;
 	static {
 		try {
-			Process pr = rt.exec(command);
+			pr = rt.exec(command);
 			processOutput = new BufferedReader(new InputStreamReader(pr.getInputStream()));
 			processInput = new BufferedWriter(new OutputStreamWriter(pr.getOutputStream()));
 		} catch (IOException e) {
@@ -76,6 +76,7 @@ class GDHelper {
 		try {
 			processInput.write("exit 0\n");
 			processInput.flush();
+			pr.destroyForcibly();
 		}
 		catch (Exception ignored){
 		}
