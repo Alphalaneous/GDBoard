@@ -89,7 +89,6 @@ public class Onboarding {
 				ShortcutSettings.loadKeybind("Open", openKeybind);
 				Settings.writeSettings("openKeybind", String.valueOf(openKeybind));
 				Settings.writeSettings("onboarding", "false");
-				Main.programStarting = false;
 			}
 		});
 		moveOn.refresh();
@@ -126,7 +125,6 @@ public class Onboarding {
 							Onboarding.isLoading = false;
 							frame.setVisible(false);
 
-						Main.programStarting = false;
 					});
 					thread.start();
 				} catch (Exception ignored) {

@@ -77,10 +77,19 @@ class ServerBot {
 					break;
 				}
 				if (event.equalsIgnoreCase("blocked_ids_updated") && GeneralSettings.gdModeOption) {
+					System.out.println("Connected to GDBoard Servers");
+					while(true) {
+						if (DialogBox.active) {
+							DialogBox.closeDialogBox();
+							break;
+						}
+						Thread.sleep(10);
+					}
 					String[] IDs = object.get("ids").toString().replace("\"", "").replace("{", "").replace("}", "").replace("\\", "").split(",");
 					for (String ID : IDs) {
 						Requests.globallyBlockedIDs.put(Long.parseLong(ID.split(":", 2)[0]), ID.split(":", 2)[1]);
 					}
+
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

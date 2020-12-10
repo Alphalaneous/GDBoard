@@ -59,6 +59,7 @@ public class Settings {
 
 	public static String getSettings(String key) {
 		if (settings.containsKey(key)) {
+			//System.out.println(settings.get(key));
 			return settings.get(key);
 		}
 		return "";

@@ -31,47 +31,47 @@ public class GDHelper {
 			while (true) {
 				try {
 					String line = processOutput.readLine();
-					if(line.startsWith(">>")) {
-						String type = line.split(": ", 2)[0].replace(">> ", "");
-						String response = line.split(": ", 2)[1];
+					if(line != null) {
+						if (line.startsWith(">>")) {
+							String type = line.split(": ", 2)[0].replace(">> ", "");
+							String response = line.split(": ", 2)[1];
 
 
-						if (type.equalsIgnoreCase("IsDead")) {
-							if (response.equalsIgnoreCase("true")) {
-								isDead = true;
-								//System.out.println("IsDead: true");
-							} else if (response.equalsIgnoreCase("false")) {
-								isDead = false;
-								//System.out.println("IsDead: false");
+							if (type.equalsIgnoreCase("IsDead")) {
+								if (response.equalsIgnoreCase("true")) {
+									isDead = true;
+									//System.out.println("IsDead: true");
+								} else if (response.equalsIgnoreCase("false")) {
+									isDead = false;
+									//System.out.println("IsDead: false");
+								}
 							}
-						}
-						if (type.equalsIgnoreCase("InLevel")) {
-							if (response.equalsIgnoreCase("true")) {
-								isInLevel = true;
-								//System.out.println("InLevel: true");
-							} else if (response.equalsIgnoreCase("false")) {
-								isInLevel = false;
-								//System.out.println("InLevel: false");
+							if (type.equalsIgnoreCase("InLevel")) {
+								if (response.equalsIgnoreCase("true")) {
+									isInLevel = true;
+									//System.out.println("InLevel: true");
+								} else if (response.equalsIgnoreCase("false")) {
+									isInLevel = false;
+									//System.out.println("InLevel: false");
+								}
 							}
-						}
-						if (type.equalsIgnoreCase("Name")) {
-							levelName = response;
-						}
-						if (type.equalsIgnoreCase("Creator")) {
-							if(levelID <= 21 || levelID == 3001){
-								creator = "RobTop";
+							if (type.equalsIgnoreCase("Name")) {
+								levelName = response;
 							}
-							else {
-								creator = response;
+							if (type.equalsIgnoreCase("Creator")) {
+								if (levelID <= 21 || levelID == 3001) {
+									creator = "RobTop";
+								} else {
+									creator = response;
+								}
 							}
-						}
-						if (type.equalsIgnoreCase("ID")) {
-							levelID = Long.parseLong(response);
+							if (type.equalsIgnoreCase("ID")) {
+								levelID = Long.parseLong(response);
 
+							}
 						}
+						//System.out.println(line);
 					}
-					//System.out.println(line);
-
 				}
 				catch (Exception e){
 					e.printStackTrace();

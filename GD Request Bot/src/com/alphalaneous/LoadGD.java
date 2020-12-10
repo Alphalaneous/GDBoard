@@ -20,17 +20,17 @@ public class LoadGD {
 	static void load() {
 		new Thread(() -> {
 		if(Settings.getSettings("GDLogon").equalsIgnoreCase("true")) {
-			username = Settings.getSettings("GDUsername");
-			password = xor(new String(Base64.getDecoder().decode(Settings.getSettings("p").getBytes())), 15);
 			try {
+				username = Settings.getSettings("GDUsername");
+				password = xor(new String(Base64.getDecoder().decode(Settings.getSettings("p").getBytes())), 15);
 				authClient = GDClientBuilder.create().buildAuthenticated(new GDClientBuilder.Credentials(username, password)).block();
 				isAuth = true;
-			} catch (Exception e) {
-				e.printStackTrace();
+				AccountSettings.refreshGD(username);
+			}
+			catch (Exception e){
 				Settings.writeSettings("GDLogon", "false");
 				isAuth = false;
 			}
-			AccountSettings.refreshGD(username);
 		}
 		else{
 			Settings.writeSettings("GDLogon", "false");

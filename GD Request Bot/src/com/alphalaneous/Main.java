@@ -34,7 +34,6 @@ import java.util.zip.ZipInputStream;
 public class Main {
 
 
-	static boolean programStarting = true;
 	public static boolean programLoaded = false;
 	static boolean sendMessages = false;
 	private static ChatListener chatReader;
@@ -57,9 +56,15 @@ public class Main {
 		  include them in the bundled JRE
 		 */
 		createConfFiles();
-		if(!Settings.getSettings("onboarding").equalsIgnoreCase("")){
-			TwitchAccount.setInfo();
-			ChannelPointSettings.refresh();
+		if (!Settings.getSettings("onboarding").equalsIgnoreCase("")) {
+			try {
+				TwitchAccount.setInfo();
+				ChannelPointSettings.refresh();
+			} catch (Exception e) {
+				APIs.setOauth(false);
+				TwitchAccount.setInfo();
+				ChannelPointSettings.refresh();
+			}
 		}
 		if (!Settings.getSettings("windowed").equalsIgnoreCase("true")) {
 			Settings.writeSettings("windowed", "true");
@@ -75,8 +80,6 @@ public class Main {
 			logger.setUseParentHandlers(false);
 
 
-			LoadGD.load();
-
 			Assets.loadAssets();
 			addMissingFiles();
 			Defaults.startMainThread();
@@ -90,12 +93,11 @@ public class Main {
 				Onboarding.refreshUI();
 				Onboarding.frame.setVisible(true);
 				Onboarding.isLoading = true;
-			} else {
-				programStarting = false;
 			}
 			while (Onboarding.isLoading) {
 				Thread.sleep(100);
 			}
+			LoadGD.load();
 			GDHelper.start();
 			TwitchAccount.setInfo();
 			ChannelPointSettings.refresh();
@@ -109,8 +111,8 @@ public class Main {
 							} catch (WebsocketNotConnectedException ignored) {
 							}
 						}
-						chatReader = new ChatListener(Settings.getSettings("channel"));
-						chatReader.connect(Settings.getSettings("oauth"), Settings.getSettings("channel"));
+						chatReader = new ChatListener(TwitchAccount.login);
+						chatReader.connect(Settings.getSettings("oauth"), TwitchAccount.login);
 						while (!chatReader.isClosed()) {
 							Thread.sleep(100);
 						}
@@ -124,7 +126,7 @@ public class Main {
 				}
 			}).start();
 			new Thread(() -> {
-				while(keepConnecting) {
+				while (keepConnecting) {
 					serverBot = new ServerBot();
 					serverBot.connect();
 					try {
@@ -134,95 +136,89 @@ public class Main {
 				}
 			}).start();
 
-			while (true) {
-				if (!programStarting) {
 
-					/* If there is no monitor setting, default to 0 */
-					if (!Settings.getSettings("monitor").equalsIgnoreCase("")) {
-						Settings.writeSettings("monitor", "0");
-					}
+			/* If there is no monitor setting, default to 0 */
+			if (!Settings.getSettings("monitor").equalsIgnoreCase("")) {
+				Settings.writeSettings("monitor", "0");
+			}
 
-					CommentsPanel.createPanel();
-					LevelsPanel.createPanel();
-					InfoPanel.createPanel();
-					Window.createPanel();
+			CommentsPanel.createPanel();
+			LevelsPanel.createPanel();
+			InfoPanel.createPanel();
+			Window.createPanel();
 
 
-					/* Create the settings pane; */
-					CommandEditor.createPanel();
-					SettingsWindow.createPanel();
+			/* Create the settings pane; */
+			CommandEditor.createPanel();
+			SettingsWindow.createPanel();
 
 					/*
 					  Load Settings panels and Settings
 					  Uses reflection to easily loop when more are added
 					 */
 
-					GeneralBotSettings.loadSettings();
-					GeneralSettings.loadSettings();
-					OutputSettings.loadSettings();
-					RequestSettings.loadSettings();
-					ChaosModeSettings.loadSettings();
-					ShortcutSettings.loadSettings();
+			GeneralBotSettings.loadSettings();
+			GeneralSettings.loadSettings();
+			OutputSettings.loadSettings();
+			RequestSettings.loadSettings();
+			ChaosModeSettings.loadSettings();
+			ShortcutSettings.loadSettings();
 
 
 					/*
 					  Runs keyboard and Controller hook for global keybinds
 					  Runs on separate Threads
 					 */
-					new Thread(Main::runKeyboardHook).start();
+			new Thread(Main::runKeyboardHook).start();
 
 
-					/* Reads channel point redemptions for channel point triggers */
-					new Thread(() -> {
-					while(keepConnecting) {
-						try {
-							channelPointListener = new ChannelPointListener(new URI("wss://pubsub-edge.twitch.tv"));
-							channelPointListener.connect();
-							while (!channelPointListener.isClosed()) {
-								Thread.sleep(10);
-							}
-
-						} catch (URISyntaxException | InterruptedException e) {
-							e.printStackTrace();
-							/* Should never fail */
+			/* Reads channel point redemptions for channel point triggers */
+			new Thread(() -> {
+				while (keepConnecting) {
+					try {
+						channelPointListener = new ChannelPointListener(new URI("wss://pubsub-edge.twitch.tv"));
+						channelPointListener.connect();
+						while (!channelPointListener.isClosed()) {
+							Thread.sleep(10);
 						}
-						try {
-							Thread.sleep(1000);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
+
+					} catch (URISyntaxException | InterruptedException e) {
+						e.printStackTrace();
+						/* Should never fail */
 					}
-					}).start();
-
-					/* Refresh GD Username in Account Settings */
-					AccountSettings.refreshGD(LoadGD.username);
-
-					Themes.refreshUI();
-
-					Window.resetCommentSize();
-					Window.loadSettings();
-					Window.frame.setVisible(true);
-					Window.setOnTop(Boolean.parseBoolean(Settings.getSettings("onTop")));
-
-					OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
-					break;
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
-				Thread.sleep(100);
-			}
+			}).start();
+
+			/* Refresh GD Username in Account Settings */
+			AccountSettings.refreshGD(LoadGD.username);
+
+			Themes.refreshUI();
+
+			Window.resetCommentSize();
+			Window.loadSettings();
+			Window.frame.setVisible(true);
+			Window.setOnTop(Boolean.parseBoolean(Settings.getSettings("onTop")));
+
+			OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
+
 
 			Path initialJS = Paths.get(Defaults.saveDirectory + "\\GDBoard\\initial.js");
 
-			if(Files.exists(initialJS)){
+			if (Files.exists(initialJS)) {
 				new Thread(() -> {
 					try {
-						if(!Files.readString(initialJS, StandardCharsets.UTF_8).equalsIgnoreCase("")) {
+						if (!Files.readString(initialJS, StandardCharsets.UTF_8).equalsIgnoreCase("")) {
 							Command.run(TwitchAccount.display_name, true, true, new String[]{"dummy"}, Files.readString(initialJS, StandardCharsets.UTF_8), 0, false);
 						}
 					} catch (Exception ignored) {
 					}
 				}).start();
-			}
-			else{
+			} else {
 				Files.createFile(initialJS);
 			}
 
@@ -270,9 +266,11 @@ public class Main {
 			APIs.getViewers();
 			CommentsPanel.loadComments(0, false);
 			Board.signal();
+
 			while (!LoadGD.loaded) {
 				Thread.sleep(10);
 			}
+
 			sendMessages = true;
 
 			sendMessage(Utilities.format("$STARTUP_MESSAGE$"));
@@ -336,11 +334,10 @@ public class Main {
 
 	private static boolean cooldown = false;
 
-	static void sendBotMessage(String message){
+	static void sendBotMessage(String message) {
 		try {
 			serverBot.sendMessage(message);
-		}
-		catch (Exception ignored){
+		} catch (Exception ignored) {
 		}
 	}
 
@@ -381,8 +378,7 @@ public class Main {
 				}
 				try {
 					serverBot.sendMessage(messageObj.toString());
-				}
-				catch (Exception e){
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				new Thread(() -> {
@@ -404,8 +400,7 @@ public class Main {
 				messageObj.put("message", "/w " + user + " " + message);
 				try {
 					serverBot.sendMessage(messageObj.toString());
-				}
-				catch (Exception e){
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -473,27 +468,27 @@ public class Main {
 			Settings.saveSettings();
 			System.exit(0);
 		}).start();
-			Utilities.disposeTray();
-			if (Settings.getSettings("onboarding").equalsIgnoreCase("false") && loaded) {
+		Utilities.disposeTray();
+		if (Settings.getSettings("onboarding").equalsIgnoreCase("false") && loaded) {
 
-				Window.frame.setVisible(false);
-				Window.setSettings();
-				Settings.writeLocation();
-				keepConnecting = false;
-				try {
-					channelPointListener.disconnectBot();
-					chatReader.disconnect();
-					serverBot.disconnect();
-					GlobalScreen.unregisterNativeHook();
-				} catch (Exception ignored) {
-				}
-				Variables.saveVars();
-				GeneralSettings.setSettings();
-				RequestSettings.setSettings();
-				ChaosModeSettings.setSettings();
-				Settings.saveSettings();
-
+			Window.frame.setVisible(false);
+			Window.setSettings();
+			Settings.writeLocation();
+			keepConnecting = false;
+			try {
+				channelPointListener.disconnectBot();
+				chatReader.disconnect();
+				serverBot.disconnect();
+				GlobalScreen.unregisterNativeHook();
+			} catch (Exception ignored) {
 			}
+			Variables.saveVars();
+			GeneralSettings.setSettings();
+			RequestSettings.setSettings();
+			ChaosModeSettings.setSettings();
+			Settings.saveSettings();
+
+		}
 		System.exit(0);
 	}
 

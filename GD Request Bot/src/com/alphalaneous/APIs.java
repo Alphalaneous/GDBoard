@@ -371,6 +371,7 @@ public class APIs {
 			userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + Settings.getSettings("channel"));
 		}
 		catch (JSONException e){
+			e.printStackTrace();
 			Settings.writeSettings("channel", getChannel());
 			userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + Settings.getSettings("channel"));
 		}
