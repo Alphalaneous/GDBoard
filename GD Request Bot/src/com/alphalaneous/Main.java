@@ -70,9 +70,9 @@ public class Main {
 
 			Language.startFileChangeListener();
 
-				Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
-				logger.setLevel(Level.OFF);
-				logger.setUseParentHandlers(false);
+			Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+			logger.setLevel(Level.OFF);
+			logger.setUseParentHandlers(false);
 
 
 			LoadGD.load();
@@ -96,6 +96,7 @@ public class Main {
 			while (Onboarding.isLoading) {
 				Thread.sleep(100);
 			}
+			GDHelper.start();
 			TwitchAccount.setInfo();
 			ChannelPointSettings.refresh();
 			Variables.loadVars();
@@ -214,9 +215,10 @@ public class Main {
 			if(Files.exists(initialJS)){
 				new Thread(() -> {
 					try {
-						Command.run(TwitchAccount.display_name, true, true, new String[]{"dummy"}, Files.readString(initialJS, StandardCharsets.UTF_8), 0 , false);
-					} catch (IOException e) {
-						e.printStackTrace();
+						if(!Files.readString(initialJS, StandardCharsets.UTF_8).equalsIgnoreCase("")) {
+							Command.run(TwitchAccount.display_name, true, true, new String[]{"dummy"}, Files.readString(initialJS, StandardCharsets.UTF_8), 0, false);
+						}
+					} catch (Exception ignored) {
 					}
 				}).start();
 			}
@@ -322,6 +324,10 @@ public class Main {
 				URL inputUrl = Main.class.getResource("/Resources/gdmod.exe");
 				FileUtils.copyURLToFile(inputUrl, path.toFile());
 			}
+			Path pathA = Paths.get(Defaults.saveDirectory + "\\GDBoard\\bin\\ChaosMode.exe");
+			URL inputUrlA = Main.class.getResource("/Resources/ChaosMode.exe");
+			FileUtils.copyURLToFile(inputUrlA, pathA.toFile());
+
 
 		} catch (Exception e) {
 			e.printStackTrace();

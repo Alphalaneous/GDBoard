@@ -29,22 +29,12 @@ public class GDMod {
 				default: return;
 			}
 		}
-
-		new Thread(() -> ProcessHandle.allProcesses().forEach(process -> {
-			if (process.info().command().isPresent()) {
-				if (process.info().command().get().endsWith("GeometryDash.exe")) {
-					long PID = process.pid();
-					String[] cmd = new String[]{Defaults.saveDirectory + "\\GDBoard\\bin\\ChaosMode.exe", String.valueOf(PID)};
-					String[] fillCmd = ArrayUtils.addAll(cmd, args);
-					ProcessBuilder pb = new ProcessBuilder(fillCmd).redirectErrorStream(true);
-					try {
-						pb.start();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		})).start();
+		StringBuilder message = new StringBuilder();
+		for (String arg : args) {
+			message.append(" ").append(arg);
+		}
+		message = new StringBuilder(message.toString().trim());
+		GDHelper.send(message.toString());
 	}
 
 	public static void run(String... args){

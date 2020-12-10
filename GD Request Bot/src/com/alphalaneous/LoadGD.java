@@ -32,6 +32,10 @@ public class LoadGD {
 			}
 			AccountSettings.refreshGD(username);
 		}
+		else{
+			Settings.writeSettings("GDLogon", "false");
+			isAuth = false;
+		}
 		loaded = true;
 		}).start();
 	}
