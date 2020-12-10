@@ -62,7 +62,7 @@ class GDHelper {
 	static void send(String command) {
 		new Thread(() -> {
 			try {
-				System.out.println(command);
+				//System.out.println(command);
 				while(!(!isDead && isInLevel)){
 					Thread.sleep(100);
 				}
@@ -71,5 +71,13 @@ class GDHelper {
 			} catch (Exception ignored) {
 			}
 		}).start();
+	}
+	static void close(){
+		try {
+			processInput.write("exit 0\n");
+			processInput.flush();
+		}
+		catch (Exception ignored){
+		}
 	}
 }

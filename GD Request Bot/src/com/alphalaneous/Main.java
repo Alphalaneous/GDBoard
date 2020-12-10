@@ -459,6 +459,7 @@ public class Main {
 
 	public static void close(boolean forceLoaded, boolean load) {
 		boolean loaded = Main.programLoaded;
+		GDHelper.close();
 		if (forceLoaded) {
 			loaded = load;
 		}

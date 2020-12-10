@@ -58,11 +58,13 @@ public class GDMod {
 	}
 	public static String doChaos(String... args){
 		System.out.println(args[0]);
-		if(args[1] != null) {
-			try {
-				Double.parseDouble(args[1]);
-			} catch (NumberFormatException e) {
-				return "";
+		if(!args[0].equalsIgnoreCase("gamemode") && !args[0].equalsIgnoreCase("kill")) {
+			if (args[1] != null) {
+				try {
+					Double.parseDouble(args[1]);
+				} catch (NumberFormatException e) {
+					return "";
+				}
 			}
 		}
 		assert args[1] != null;
