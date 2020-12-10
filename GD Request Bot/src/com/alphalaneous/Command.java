@@ -33,6 +33,7 @@ public class Command {
         sandbox.allow(com.alphalaneous.Variables.class);
         sandbox.allow(com.alphalaneous.Utilities.class);
         sandbox.allow(com.alphalaneous.Twitch.class);
+        sandbox.allow(com.alphalaneous.GDHelper.class);
 
 
         try {
@@ -42,6 +43,7 @@ public class Command {
                     "var GD = Java.type('com.alphalaneous.GDMod'); " +
                     "var Board = Java.type('com.alphalaneous.Board'); " +
                     "var Variables = Java.type('com.alphalaneous.Variables'); " +
+                    "var GDHelper = Java.type('com.alphalaneous.GDHelper'); " +
                     "var Utilities = Java.type('com.alphalaneous.Utilities');" + function);
         }
         catch (Exception e){

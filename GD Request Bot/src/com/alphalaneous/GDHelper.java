@@ -2,10 +2,13 @@ package com.alphalaneous;
 
 import java.io.*;
 
-class GDHelper {
+public class GDHelper {
 
 	private static boolean isDead = true;
 	private static boolean isInLevel = false;
+	private static String levelName;
+	private static String creator;
+	private static long levelID;
 
 	private static Runtime rt = Runtime.getRuntime();
 
@@ -28,32 +31,50 @@ class GDHelper {
 			while (true) {
 				try {
 					String line = processOutput.readLine();
-					if(line.startsWith(">>")){
-						String[] words = line.split(" ");
-						if(words[1].equalsIgnoreCase("IsDead:")){
-							if(words[2].equalsIgnoreCase("true")){
+					if(line.startsWith(">>")) {
+						String type = line.split(": ", 2)[0].replace(">> ", "");
+						String response = line.split(": ", 2)[1];
+
+
+						if (type.equalsIgnoreCase("IsDead")) {
+							if (response.equalsIgnoreCase("true")) {
 								isDead = true;
 								//System.out.println("IsDead: true");
-							}
-							else if(words[2].equalsIgnoreCase("false")){
+							} else if (response.equalsIgnoreCase("false")) {
 								isDead = false;
 								//System.out.println("IsDead: false");
 							}
 						}
-						if(words[1].equalsIgnoreCase("InLevel:")){
-							if(words[2].equalsIgnoreCase("true")){
+						if (type.equalsIgnoreCase("InLevel")) {
+							if (response.equalsIgnoreCase("true")) {
 								isInLevel = true;
 								//System.out.println("InLevel: true");
-							}
-							else if(words[2].equalsIgnoreCase("false")){
+							} else if (response.equalsIgnoreCase("false")) {
 								isInLevel = false;
 								//System.out.println("InLevel: false");
 							}
 						}
+						if (type.equalsIgnoreCase("Name")) {
+							levelName = response;
+						}
+						if (type.equalsIgnoreCase("Creator")) {
+							if(levelID <= 21 || levelID == 3001){
+								creator = "RobTop";
+							}
+							else {
+								creator = response;
+							}
+						}
+						if (type.equalsIgnoreCase("ID")) {
+							levelID = Long.parseLong(response);
+
+						}
 					}
 					//System.out.println(line);
+
 				}
-				catch (Exception ignored){
+				catch (Exception e){
+					e.printStackTrace();
 				}
 			}
 		}).start();
@@ -80,5 +101,20 @@ class GDHelper {
 		}
 		catch (Exception ignored){
 		}
+	}
+	public static String getCurrentLevelName(){
+		return levelName;
+	}
+	public static String getCurrentLevelCreator(){
+		return creator;
+	}
+	public static long getCurrentLevelID(){
+		return levelID;
+	}
+	public static boolean getCurrentDeathStatus(){
+		return isDead;
+	}
+	public static boolean getCurrentInLevelStatus(){
+		return isInLevel;
 	}
 }
