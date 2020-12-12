@@ -74,6 +74,10 @@ public class GeneralSettings {
 
 	private static FancyTextArea queueCommandLength = new FancyTextArea(true, false);
 
+	public static ThemedCheckbox deathMessage = createButton("Death Messages", 766);
+
+
+
 	private static JPanel mainPanel = new JPanel(null);
 	private static JPanel panel = new JPanel();
 	private static JScrollPane scrollPane = new JScrollPane(panel);
@@ -84,8 +88,8 @@ public class GeneralSettings {
 
 		panel.setLayout(null);
 		panel.setDoubleBuffered(true);
-		panel.setBounds(0, 0, 415, 770);
-		panel.setPreferredSize(new Dimension(415, 770));
+		panel.setBounds(0, 0, 415, 810);
+		panel.setPreferredSize(new Dimension(415, 810));
 		panel.setBackground(Defaults.SUB_MAIN);
 
 		gdMode.setChecked(true);
@@ -190,7 +194,12 @@ public class GeneralSettings {
 			}
 		});
 
-
+		deathMessage.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				Settings.writeSettings("SendDeathMessages", String.valueOf(deathMessage.getSelectedState()));
+			}
+		});
 
 		queueLimitText.addMouseListener(new MouseAdapter() {
 			@Override
@@ -336,6 +345,7 @@ public class GeneralSettings {
 		panel.add(userLimitStreamInput);
 		panel.add(queueCommandLabel);
 		panel.add(queueCommandLength);
+		panel.add(deathMessage);
 
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
 		scrollPane.getViewport().setBackground(Defaults.SUB_MAIN);

@@ -1,6 +1,7 @@
 package com.alphalaneous;
 
 import java.io.*;
+import java.util.Random;
 
 public class GDHelper {
 
@@ -19,6 +20,61 @@ public class GDHelper {
 	private static float posY = 0;
 	private static int levelLength = 0;
 	private static int objects = 0;
+	private static float speed = 0;
+	public static float platSpeed = 0;
+
+
+	static String[] responses = {"I can't believe you died at %d%%!",
+			"%d%%? That's it?",
+			"How did you fail at %d%% of all places?",
+			"Only %d%%...",
+			"%d%%...!!! HOW???",
+			"You can only die at %d%% so many times...",
+			"%d%%, I think that's passing, right?",
+			"GG-wait, you didn't beat it?",
+			"Ugh, fine, I guess you are my little PogChamp, come here... actually, you only got %d%%, never mind.",
+			"%d%%, that's like, not very good.",
+			"Will the next attempt be the attempt you don't get %d%%?",
+			"Next time, don't die at %d%%, okay?",
+			"Look at you, dying at %d%%.",
+			"I'm sorry, you died where?",
+			"There's only so many ways to die and you've got them all.",
+			"Tell me why, ain't nothing but another death",
+			"More like Geometry TRASH!",
+			"Give me one reason why I should accept this death as a win?",
+			"Error, cannot compute, too many deaths.",
+			"Shhhh, be quiet, the attempt counter is sleeping.",
+			"Boo hoo, you only got %d%%, I can do better than that.",
+			"Dang, %d%% is actually quite good...not",
+			"Heck off with all these fails, I wanted to watch the Winner POV.",
+			"I'm tired of this",
+			"How do you do fellow dashers",
+			"Knock knock! Who's there? ME! Telling you that you died at %d%%!",
+			"There is one impostor among us, and I think it's you.",
+			"Remember fall guys? You managed to die quicker than it.",
+			"Is your grandma playing for you?",
+			"Sometimes I wonder, \"Will you beat this level?\" Then I laugh to myself.",
+			"L",
+			"Not a W",
+			"F in chat",
+			"Sad moment",
+			"According to Twitch statistics, only %d%% of you are subscribed with Prime Gaming.",
+			"2 + 2 = %d",
+			"No more dying at %d%%, I can't take it.",
+			"Hey, can I tell you a secret? You're bad, only %d%%...",
+			"tahc ni F",
+			"I blame the level",
+			"Good job on getting %d%%!",
+			"Wow, you're amazing! You can do it!",
+			"Sometimes I am a liar.",
+			"Hotel? Trivago.",
+			"%d%%, ok.",
+			"It pains me to say this but... you died lmao.",
+			"A small price to pay for 100%%",
+			"IDK what to even do about this anymore, all you do is die at %d%%",
+			"get gud",
+
+	};
 
 	private static Runtime rt = Runtime.getRuntime();
 
@@ -26,6 +82,7 @@ public class GDHelper {
 	private static BufferedReader processOutput;
 	private static BufferedWriter processInput;
 	private static Process pr;
+
 	static {
 		try {
 			pr = rt.exec(command);
@@ -38,22 +95,33 @@ public class GDHelper {
 
 	static void start() {
 		new Thread(() -> {
+			boolean checkedDead = false;
+
 			while (true) {
 				try {
 					String line = processOutput.readLine();
-					if(line != null) {
+					if (line != null) {
 						if (line.startsWith(">>")) {
 							String type = line.split(": ", 2)[0].replace(">> ", "");
 							String response = line.split(": ", 2)[1];
 
-
 							if (type.equalsIgnoreCase("IsDead")) {
 								if (response.equalsIgnoreCase("true")) {
 									isDead = true;
+									if(!checkedDead && isInLevel){
+										if(Settings.getSettings("SendDeathMessages").equalsIgnoreCase("true")) {
+											Random rand = new Random();
+											int n = rand.nextInt(responses.length);
+											Main.sendMessage(Utilities.format("☠ | " + responses[n], (int) Math.floor(percent)));
+										}
+										checkedDead = true;
+									}
 									//System.out.println("IsDead: true");
 								} else if (response.equalsIgnoreCase("false")) {
 									isDead = false;
 									//System.out.println("IsDead: false");
+									checkedDead = false;
+
 								}
 							}
 							if (type.equalsIgnoreCase("InLevel")) {
@@ -81,6 +149,13 @@ public class GDHelper {
 							if (type.equalsIgnoreCase("Current Attempt")) {
 								attemptCount = Integer.parseInt(response);
 							}
+							if (type.equalsIgnoreCase("Speed")) {
+								speed = Float.parseFloat(response);
+								//System.out.println(speed);
+								if (speed != 0) {
+									platSpeed = Math.abs(speed);
+								}
+							}
 							if (type.equalsIgnoreCase("Total Jumps")) {
 								totalJumps = Integer.parseInt(response);
 							}
@@ -88,10 +163,22 @@ public class GDHelper {
 								totalAttempts = Integer.parseInt(response);
 							}
 							if (type.equalsIgnoreCase("Percent")) {
-								percent = Float.parseFloat(response);
+								try {
+									percent = Float.parseFloat(response);
+								}
+								catch (NumberFormatException ignored){
+								}
 							}
 							if (type.equalsIgnoreCase("X")) {
+
 								posX = Float.parseFloat(response);
+								if (KeyListener.usePlatformer && KeyListener.goingLeft) {
+									if (posX <= 0) {
+										GDMod.runNew("speed", "0");
+										GDMod.runNew("x", "0");
+
+									}
+								}
 							}
 							if (type.equalsIgnoreCase("Y")) {
 								posY = Float.parseFloat(response);
@@ -111,8 +198,7 @@ public class GDHelper {
 						}
 						//System.out.println(line);
 					}
-				}
-				catch (Exception e){
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -123,7 +209,7 @@ public class GDHelper {
 		new Thread(() -> {
 			try {
 				//System.out.println(command);
-				while(!(!isDead && isInLevel)){
+				while (!(!isDead && isInLevel)) {
 					Thread.sleep(100);
 				}
 				processInput.write(command + "\n");
@@ -132,59 +218,74 @@ public class GDHelper {
 			}
 		}).start();
 	}
-	static void close(){
+
+	static void close() {
 		try {
 			processInput.write("exit 0\n");
 			processInput.flush();
 			pr.destroy();
 			pr.destroyForcibly();
-		}
-		catch (Exception ignored){
+		} catch (Exception ignored) {
 		}
 	}
-	public static String getCurrentLevelName(){
+
+	public static String getCurrentLevelName() {
 		return levelName;
 	}
-	public static String getCurrentLevelCreator(){
+
+	public static String getCurrentLevelCreator() {
 		return creator;
 	}
-	public static long getCurrentLevelID(){
+
+	public static long getCurrentLevelID() {
 		return levelID;
 	}
-	public static boolean getCurrentDeathStatus(){
+
+	public static boolean getCurrentDeathStatus() {
 		return isDead;
 	}
-	public static boolean getCurrentInLevelStatus(){
+
+	public static boolean getCurrentInLevelStatus() {
 		return isInLevel;
 	}
-	public static int getCurrentAttempts(){
+
+	public static int getCurrentAttempts() {
 		return attemptCount;
 	}
-	public static int getTotalJumps(){
+
+	public static int getTotalJumps() {
 		return totalJumps;
 	}
-	public static int getTotalAttempts(){
+
+	public static int getTotalAttempts() {
 		return totalAttempts;
 	}
-	public static float getPercent(){
+
+	public static float getPercent() {
 		return percent;
 	}
-	public static int getNormalBest(){
+
+	public static int getNormalBest() {
 		return normalBest;
 	}
-	public static int getPracticeBest(){
+
+	public static int getPracticeBest() {
 		return practiceBest;
 	}
-	public static int getLength(){
+
+	public static int getLength() {
 		return levelLength;
 	}
-	public static int getObjectCount(){
+
+	public static int getObjectCount() {
 		return objects;
 	}
-	public static float getX(){
+
+	public static float getX() {
 		return posX;
 	}
-	public static float getY(){
+
+	public static float getY() {
 		return posY;
 	}
 }

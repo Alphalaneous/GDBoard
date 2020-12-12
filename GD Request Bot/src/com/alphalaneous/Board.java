@@ -1,5 +1,6 @@
 package com.alphalaneous;
 
+import com.alphalaneous.SettingsPanels.GeneralSettings;
 import com.alphalaneous.Windows.DialogBox;
 import com.github.alex1304.jdash.client.AnonymousGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
@@ -17,6 +18,10 @@ public class Board {
 
 	private static boolean bwomp = false;
 
+	public static void sendDeathMessagesToggle(){
+		Settings.writeSettings("SendDeathMessages", String.valueOf(!Boolean.parseBoolean(Settings.getSettings("SendDeathMessages"))));
+		GeneralSettings.deathMessage.setChecked(Boolean.parseBoolean(Settings.getSettings("SendDeathMessages")));
+	}
 
 	public static void playSound(String location){
 		Sounds.playSound(location, true, false, true, false);
@@ -57,6 +62,8 @@ public class Board {
 			DialogBox.showDialogBox(title,"<html>" + text + "</html>", "", new String[]{"OK"});
 		}).start();
 	}
+
+
 
 	public static String getenv(String name){
 		return System.getenv(name);
