@@ -136,6 +136,7 @@ public class GDHelper {
 		try {
 			processInput.write("exit 0\n");
 			processInput.flush();
+			pr.destroy();
 			pr.destroyForcibly();
 		}
 		catch (Exception ignored){

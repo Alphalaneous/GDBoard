@@ -16,11 +16,16 @@ import javax.swing.text.Document;
 import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
 import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.*;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static com.alphalaneous.Defaults.defaultUI;
@@ -161,6 +166,21 @@ public class CommandEditor {
 		advancedPanel.setBackground(Defaults.SUB_MAIN);
 		advancedPanel.setBounds(0, 100, 650, 200);
 
+		soundFileLocation.setDropTarget(new DropTarget() {
+			public synchronized void drop(DropTargetDropEvent evt) {
+				try {
+					evt.acceptDrop(DnDConstants.ACTION_COPY);
+					java.util.List<File> droppedFiles = (java.util.List<File>)
+							evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
+					if(!(droppedFiles.size() > 1)){
+						System.out.println(droppedFiles.get(0).getPath());
+						soundFileLocation.setText(droppedFiles.get(0).getPath());
+					}
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		});
 
 		basicChoices.setBounds(320, 10, 300, 65);
 		for (RadioButton button : basicChoices.buttons) {
@@ -400,7 +420,7 @@ public class CommandEditor {
 			if (basicChoices.currentSelect.equals("SEND_MESSAGE")) {
 				function = "function command() { return \"" + commandResponse.getText() + "\";}";
 			} else {
-				function = "function command() { Board.playSound(\"" + soundFileLocation.getText() + "\");}";
+				function = "function command() { Board.playSound(\"" + soundFileLocation.getText().replace("\\", "\\\\") + "\");}";
 			}
 		}
 		Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\" + type + "\\" + commandNameText.getText().replace("\\\\","").replace("/", "") + ".js");
