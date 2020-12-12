@@ -30,6 +30,5 @@ public class TwitchAccount {
 		display_name = data.getString("display_name");
 		type = data.getString("type");
 		view_count = data.getLong("view_count");
-		email = data.getString("email");
 	}
 }
