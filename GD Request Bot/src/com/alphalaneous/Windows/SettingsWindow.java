@@ -3,6 +3,7 @@ package com.alphalaneous.Windows;
 import com.alphalaneous.Components.JButtonUI;
 import com.alphalaneous.Components.LangLabel;
 import com.alphalaneous.Components.SettingsButton;
+import com.alphalaneous.GDHelper;
 import com.alphalaneous.Main;
 import com.alphalaneous.Settings;
 import com.alphalaneous.Defaults;
@@ -393,6 +394,7 @@ public class SettingsWindow {
 
 
 	private static int clean = 0;
+	private static int refreshHelper = 0;
 
 
 	private static JButton createButton(String text, String icon) {
@@ -437,6 +439,7 @@ public class SettingsWindow {
 					switch (((LangLabel) component2).getIdentifier()) {
 						case "GENERAL_SETTINGS":
 							generalPage.setVisible(true);
+							refreshHelper = 0;
 							clean++;
 							if(clean == 5){
 								System.out.println("cleaned");
@@ -448,18 +451,27 @@ public class SettingsWindow {
 						case "GENERAL_BOT_SETTINGS":
 							generalBotPage.setVisible(true);
 							clean = 0;
+							refreshHelper = 0;
 							break;
 						case "CHAOS_SETTINGS":
 							chaosModePage.setVisible(true);
 							clean = 0;
+							refreshHelper++;
+							if(refreshHelper == 5){
+								System.out.println("refreshed");
+								GDHelper.refresh();
+								refreshHelper = 0;
+							}
 							break;
 						case "OUTPUTS_SETTINGS":
 							overlayPage.setVisible(true);
 							clean = 0;
+							refreshHelper = 0;
 							break;
 						case "ACCOUNTS_SETTINGS":
 							accountsPage.setVisible(true);
 							clean = 0;
+							refreshHelper = 0;
 							break;
 						case "SHORTCUTS_SETTINGS":
 							shortcutsPage.setVisible(true);
@@ -468,58 +480,53 @@ public class SettingsWindow {
 						case "PERSONALIZATION_SETTINGS":
 							personalizationPage.setVisible(true);
 							clean = 0;
+							refreshHelper = 0;
 							break;
 						case "BLOCKED_IDS_SETTINGS":
 							blockedPage.setVisible(true);
 							clean = 0;
+							refreshHelper = 0;
 							break;
 						case "BLOCKED_USERS_SETTINGS":
 							blockedUsersPage.setVisible(true);
 							clean = 0;
+							refreshHelper = 0;
 							break;
 						case "BLOCKED_CREATORS_SETTINGS":
 							blockedCreatorsPage.setVisible(true);
 							clean = 0;
+							refreshHelper = 0;
 							break;
 						case "COMMANDS_SETTINGS":
 							commandsPage.setVisible(true);
 							clean = 0;
+							refreshHelper = 0;
 							break;
 						case "CHANNEL_POINTS_SETTINGS":
 							pointsPage.setVisible(true);
 							clean = 0;
+							refreshHelper = 0;
 							break;
 						case "REQUESTS_SETTINGS":
 							requestsPage.setVisible(true);
 							clean = 0;
+							refreshHelper = 0;
 							break;
 						case "LANGUAGE_SETTINGS":
 							languagePage.setVisible(true);
 							clean = 0;
-							break;
-						case "WINDOWED_SETTINGS":
-							new Thread(()->{
-								String option = DialogBox.showDialogBox("$SWITCH_TO_WINDOWED_TITLE$", "$SWINTH_TO_WINDOWED_INFO$", "$SWITCH_TO_WINDOWED_SUBINFO$", new String[]{"$YES$", "$NO$"});
-								if (option.equalsIgnoreCase("YES")) {
-									try {
-										Settings.writeSettings("windowed", "true");
-									}
-									catch (Exception f){
-										f.printStackTrace();
-									}
-									Main.close();
-								}
-							}).start();
-							clean = 0;
+							refreshHelper = 0;
 							break;
 						case "HOME_BUTTON":
 							mainPanel.setVisible(true);
 							tempPanel.setVisible(false);
 							clean = 0;
+							refreshHelper = 0;
 							break;
 						case "LOGGED_IDS_SETTINGS":
 							loggedIDsPage.setVisible(true);
 							clean = 0;
+							refreshHelper = 0;
 							new Thread(() -> {
 								File file = new File(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
 								if (file.exists()) {

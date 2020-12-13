@@ -239,6 +239,17 @@ public class GDHelper {
 		}
 	}
 
+	public static void refresh(){
+		close();
+		try {
+			pr = rt.exec(command);
+			processOutput = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+			processInput = new BufferedWriter(new OutputStreamWriter(pr.getOutputStream()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static String getCurrentLevelName() {
 		return levelName;
 	}
