@@ -43,7 +43,6 @@ public class Main {
 	private static ServerBot serverBot = new ServerBot();
 
 	public static void main(String[] args) {
-
 		/*
 		  Saves defaults of UI Elements before switching to Nimbus
 		  Sets to Nimbus, then sets defaults back
