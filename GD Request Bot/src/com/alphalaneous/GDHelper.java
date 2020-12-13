@@ -19,13 +19,13 @@ public class GDHelper {
 	private static float percent = 0;
 	private static float posX = 0;
 	private static float posY = 0;
-	private static int levelLength = 0;
+	private static float levelLength = 0;
 	private static int objects = 0;
 	private static float speed = 0;
-	public static float platSpeed = 0;
+	static float platSpeed = 0;
 
 
-	static String[] responses = {"I can't believe you died at %d%%!",
+	private static String[] responses = {"I can't believe you died at %d%%!",
 			"%d%%? That's it?",
 			"How did you fail at %d%% of all places?",
 			"Only %d%%...",
@@ -74,7 +74,40 @@ public class GDHelper {
 			"A small price to pay for 100%%",
 			"IDK what to even do about this anymore, all you do is die at %d%%",
 			"get gud",
-
+			"You clicked, right?",
+			"You know you have to click...",
+			"Forgot to click?",
+			"What a noob",
+			"You know you're playing Geometry Dash, not Death Simulator, right?",
+			"Go back to Minecraft",
+			"My cat can play better than you!",
+			"Alphalaneous did it",
+			"RobTop did it",
+			"...",
+			"The Impossible Game is better anyways",
+			"Happy Birthday!!! NOT!",
+			"Hi",
+			"",
+			"That wasn't very Pog",
+			"That wasn't very PogChamp of you.",
+			"<insert insult here>",
+			"<insert compliment here> jk",
+			"That wasn't very poggers of you",
+			"Cat go Pop",
+			"Cube go brrr",
+			"Why'd you die again?",
+			"weirdChamp",
+			"bwomp.mp3",
+			".rick",
+			"riPepperonis"
+	};
+	private static String[] rickResponses = {
+			"Never gonna give you up",
+			"Never gonna let you down",
+			"Never gonna run around and desert you",
+			"Never gonna make you cry",
+			"Never gonna say goodbye",
+			"Never gonna tell a lie and hurt you"
 	};
 
 	private static Runtime rt = Runtime.getRuntime();
@@ -93,6 +126,8 @@ public class GDHelper {
 			e.printStackTrace();
 		}
 	}
+
+	private static int rickPos = 0;
 
 	static void start() {
 		new Thread(() -> {
@@ -114,7 +149,18 @@ public class GDHelper {
 											if(!isPractice) {
 												Random rand = new Random();
 												int n = rand.nextInt(responses.length);
-												Main.sendMessage(Utilities.format("☠ | " + responses[n], (int) Math.floor(percent)));
+												String responseA = responses[n];
+												if(responseA.equalsIgnoreCase(".rick") || rickPos > 0){
+													Main.sendMessage("☠ | " + rickResponses[rickPos]);
+
+													rickPos++;
+													if(rickPos == rickResponses.length){
+														rickPos = 0;
+													}
+												}
+												if (rickPos == 0){
+													Main.sendMessage(Utilities.format("☠ | " + responseA, (int) Math.floor(percent)));
+												}
 											}
 										}
 										checkedDead = true;
@@ -194,7 +240,7 @@ public class GDHelper {
 								posY = Float.parseFloat(response);
 							}
 							if (type.equalsIgnoreCase("Length")) {
-								levelLength = Integer.parseInt(response);
+								levelLength = Float.parseFloat(response);
 							}
 							if (type.equalsIgnoreCase("Normal Best")) {
 								normalBest = Integer.parseInt(response);
@@ -294,7 +340,7 @@ public class GDHelper {
 		return practiceBest;
 	}
 
-	public static int getLength() {
+	public static float getLength() {
 		return levelLength;
 	}
 
