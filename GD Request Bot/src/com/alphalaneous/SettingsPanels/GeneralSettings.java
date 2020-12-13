@@ -384,6 +384,9 @@ public class GeneralSettings {
 		streamerBypassOption = Boolean.parseBoolean(Settings.getSettings("streamerBypass"));
 		modsBypassOption = Boolean.parseBoolean(Settings.getSettings("modsBypass"));
 
+
+
+
 		autoDownloadOption = Boolean.parseBoolean(Settings.getSettings("autoDL"));
 		queueLimitBoolean = Boolean.parseBoolean(Settings.getSettings("queueLimitEnabled"));
 		if(!Settings.getSettings("queueLimit").equalsIgnoreCase("")) {
@@ -422,6 +425,9 @@ public class GeneralSettings {
 		lowCPU.setChecked(lowCPUMode);
 		streamerBypass.setChecked(streamerBypassOption);
 		modsBypass.setChecked(modsBypassOption);
+
+		deathMessage.setChecked(Boolean.parseBoolean(Settings.getSettings("SendDeathMessages")));
+
 
 		if(!queueLimitBoolean){
 			queueSizeInput.setEditable(false);

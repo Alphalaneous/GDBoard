@@ -7,6 +7,7 @@ public class GDHelper {
 
 	private static boolean isDead = true;
 	private static boolean isInLevel = false;
+	private static boolean isPractice = false;
 	private static String levelName = "";
 	private static String creator = "";
 	private static long levelID = 0;
@@ -110,9 +111,11 @@ public class GDHelper {
 									isDead = true;
 									if(!checkedDead && isInLevel){
 										if(Settings.getSettings("SendDeathMessages").equalsIgnoreCase("true")) {
-											Random rand = new Random();
-											int n = rand.nextInt(responses.length);
-											Main.sendMessage(Utilities.format("☠ | " + responses[n], (int) Math.floor(percent)));
+											if(!isPractice) {
+												Random rand = new Random();
+												int n = rand.nextInt(responses.length);
+												Main.sendMessage(Utilities.format("☠ | " + responses[n], (int) Math.floor(percent)));
+											}
 										}
 										checkedDead = true;
 									}
@@ -131,6 +134,13 @@ public class GDHelper {
 								} else if (response.equalsIgnoreCase("false")) {
 									isInLevel = false;
 									//System.out.println("InLevel: false");
+								}
+							}
+							if (type.equalsIgnoreCase("IsPractice")) {
+								if (response.equalsIgnoreCase("true")) {
+									isPractice = true;
+								} else if (response.equalsIgnoreCase("false")) {
+									isPractice = false;
 								}
 							}
 							if (type.equalsIgnoreCase("Name")) {
