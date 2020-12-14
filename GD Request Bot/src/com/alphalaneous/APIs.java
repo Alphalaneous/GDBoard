@@ -126,6 +126,8 @@ public class APIs {
 	}
 
 	static ArrayList<String> allViewers = new ArrayList<>();
+	static ArrayList<String> allMods = new ArrayList<>();
+	static ArrayList<String> allVIPs = new ArrayList<>();
 
 	static void setAllViewers() {
 		try {
@@ -147,6 +149,19 @@ public class APIs {
 					allViewers.add(viewer);
 				}
 			}
+			allVIPs.clear();
+			allMods.clear();
+			JSONArray viewerListMods = viewers.getJSONObject("chatters").getJSONArray("moderators");
+			for (int i = 0; i < viewerListMods.length(); i++) {
+				String viewer = viewerListMods.get(i).toString().replaceAll("\"", "");
+				allMods.add(viewer);
+			}
+			JSONArray viewerListVIPs = viewers.getJSONObject("chatters").getJSONArray("vips");
+			for (int i = 0; i < viewerListVIPs.length(); i++) {
+				String viewer = viewerListVIPs.get(i).toString().replaceAll("\"", "");
+				allVIPs.add(viewer);
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

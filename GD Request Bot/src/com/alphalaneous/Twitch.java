@@ -31,4 +31,8 @@ public class Twitch {
 	public static void reloadViewers(){
 		APIs.setAllViewers();
 	}
+
+	public static void checkGDBoard(){
+
+	}
 }

@@ -272,7 +272,12 @@ public class Main {
 
 			sendMessages = true;
 
-			sendMessage(Utilities.format("$STARTUP_MESSAGE$"));
+			if(Settings.getSettings("isHigher").equalsIgnoreCase("true")){
+				sendMessage(Utilities.format("$STARTUP_MESSAGE_MOD_VIP$"));
+			}
+			else {
+				sendMessage(Utilities.format("$STARTUP_MESSAGE$"));
+			}
 
 			new Thread(() -> {
 				while (true) {
@@ -284,6 +289,23 @@ public class Main {
 					Main.sendMessage(" ");
 				}
 			}).start();
+			new Thread(() -> {
+				while (true) {
+					APIs.setAllViewers();
+					if(APIs.allMods.contains("gdboard") || APIs.allVIPs.contains("gdboard")){
+						Settings.writeSettings("isHigher", "true");
+					}
+					else{
+						Settings.writeSettings("isHigher", "false");
+					}
+					try {
+						Thread.sleep(120000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}).start();
+
 			programLoaded = true;
 		} catch (Exception e) {
 			e.printStackTrace();

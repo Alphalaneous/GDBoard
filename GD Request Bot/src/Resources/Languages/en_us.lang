@@ -7,6 +7,7 @@ NO = No
 OKAY = Okay
 CANCEL = Cancel
 STARTUP_MESSAGE = Thank you for using GDBoard by Alphalaneous and EncodedLua! It is suggested to VIP or Mod GDBoard to prevent chat limits from occurring.
+STARTUP_MESSAGE_MOD_VIP = Thank you for using GDBoard by Alphalaneous and EncodedLua!
 
 //Commands Editor
 
@@ -53,19 +54,19 @@ POINTS_DELETE_SUCCESS = @%s, %s has been deleted successfully.
 CLEAR_MESSAGE = @%s, Successfully cleared the queue!
 CURRENT_MESSAGE = @%s, The current level is %s by %s (%s) Requested by %s.
 DIFFICULTY_COMMAND_MESSAGE = @%s, %s (%s) is rated %s.
-INFO_COMMAND_MESSAGE = @%s, %s (%s) info: Creator: %s | Requester: %s | Downloads: %s | Likes: %s | Objects: %s | Difficulty: %s 
+INFO_COMMAND_MESSAGE = @%s, %s (%s) || Creator: %s | Requester: %s | Downloads: %s | Likes: %s | Objects: %s | Difficulty: %s 
 DOWNLOADS_MESSAGE = @%s, %s (%s) has %s downloads.
-ID_MESSAGE = @%s, level %s in the queue is %s by %s (%s), requested by %s.
+ID_MESSAGE = @%s, level %s is %s by %s (%s), requested by %s.
 LIKES_MESSAGE = @%s, %s (%s) has %s likes.
 MOVE_MESSAGE = @%s, %s has been moved to position %s.
 MOVE_FAILED_MESSAGE = @%s, Failed to move %s.
-NEXT_MESSAGE = @%s, The next level in the queue is %s by %s (%s), requested by %s.
+NEXT_MESSAGE = @%s, The next level is %s by %s (%s), requested by %s.
 POSITION_NONE_MESSAGE = @%s, You don't have any levels in the queue.
 POSITION_WRONG_MESSAGE = @%s, You only have %s levels in the queue.
 POSITION_MESSAGE = @%s, %s is at position %s in the queue.
 QUEUE_NO_PAGE_MESSAGE = @%s, There are no levels on page %s.
 QUEUE_NO_LEVELS_MESSAGE = @%s, There are no levels in the queue.
-QUEUE_MESSAGE = @%s, Queue page %s of %s
+QUEUE_MESSAGE = @%s, Page %s of %s
 SONG_MESSAGE = @%s, The song name is %s by %s (%s).
 TOP_MESSAGE = @%s, %s has been moved to the top.
 TOP_FAILED_MESSAGE = @%s, Failed to move %s.
@@ -98,7 +99,7 @@ TOO_MANY_OBJECTS_MESSAGE = @%s, Your level has been removed for containing too m
 
 //Requests Responses
 
-ALREADY_IN_QUEUE_MESSAGE = @%s, That level is already in the queue at position %s.
+ALREADY_IN_QUEUE_MESSAGE = @%s, That level is at position %s.
 ALREADY_IN_QUEUE_MESSAGE_ALT = @%s, That level is already in the queue.
 FOLLOW_MESSAGE = @%s, Please follow to send levels.
 MIN_ID_MESSAGE = @%s, your ID must be above or equal to %s.
@@ -110,6 +111,7 @@ REQUESTED_BEFORE_MESSAGE = @%s, That level has been requested before.
 BLOCKED_LEVEL_MESSAGE = @%s, That level is blocked.
 LEVEL_ID_DOESNT_EXIST_MESSAGE = @%s, That level ID doesn't exist.
 SEARCH_FAILED = @%s, Level search failed... (Servers Down?)
+SERVERS_DOWN = @%s, The GD servers are currently down.
 BLOCKED_CREATOR_MESSAGE = @%s, That creator is blocked.
 BLOCKED_NAME_MESSAGE = @%s, That level name isn't allowed.
 STAR_RATED_MESSAGE = @%s, Please send rated levels only.
@@ -120,9 +122,10 @@ FEW_LIKES_MESSAGE = @%s, That level has too few likes.
 MANY_LIKES_MESSAGE = @%s, That level has too many likes.
 DIFFICULTY_MESSAGE = @%s, That difficulty is disabled.
 LENGTH_MESSAGE = @%s, That length is disabled.
-CONFIRMATION_MESSAGE = @%s, %s (%s) has been added to the queue at position %s.
-CONFIRMATION_MESSAGE_ALT = @%s, %s (%s) has been added to the queue.
+CONFIRMATION_MESSAGE = @%s, %s (%s) has been added at position %s.
+CONFIRMATION_MESSAGE_ALT = @%s, %s (%s) has been added.
 NOW_PLAYING_MESSAGE = Now Playing %s (%s). Requested by %s.
+NOW_PLAYING_TOP_MESSAGE = @%s, %s (%s) is now being played!
 REQUESTS_OFF_MESSAGE = @%s, Requests are off!
 VULGAR_LANGUAGE = (Vulgar Language)
 IMAGE_HACK = (Image Hack)
@@ -208,7 +211,7 @@ GEOMETRY_DASH = Geometry Dash: %s
 TWITCH = Twitch: %s
 REFRESH_TWITCH = Refresh Twitch
 REFRESH_GD = Refresh GD
-DISCLAIMER = Your log in information is sent only to Geometry Dash and saved locally.
+DISCLAIMER = Your login information is sent only to Geometry Dash and saved locally.
 USERNAME = Username:
 PASSWORD = Password:
 LOGIN = Log In
@@ -366,12 +369,6 @@ CLEAR_ALL = Clear All
 BLOCK_ID_TITLE = Block %s (%s)?
 BLOCK_ID_INFO = This will block the selected level from being added.
 BLOCK_ID_SUBINFO = This can be undone in settings.
-
-SWITCH_TO_OVERLAY_TITLE = Switch to Overlay?
-SWITCH_TO_WINDOWED_TITLE = Switch to Windowed?
-SWITCH_TO_OVERLAY_INFO = If you play GD in fullscreen, this may not work, move it to another monitor by dragging the time to fix. Default is 'Home' key to open. You'll have to reopen GDBoard.
-SWINTH_TO_WINDOWED_INFO = This will close GDboard and set to Windowed mode.
-SWITCH_TO_WINDOWED_SUBINFO = You will have to reopen GDBoard.
 
 //Settings Main
 SETTINGS_TITLE = GDBoard Settings
