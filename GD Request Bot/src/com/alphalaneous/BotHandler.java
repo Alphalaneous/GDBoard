@@ -47,7 +47,8 @@ public class BotHandler {
         String com = message.split(" ")[0];
         String[] arguments = message.split(" ");
         String response = "";
-        Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(message);
+        String messageNoComma = message.replace(",", "");
+        Matcher m = Pattern.compile("\\s*(\\d{6,})\\s*").matcher(messageNoComma);
         if (m.find() && !message.startsWith("!")) {
             try {
                 String[] msgs = message.split(" ");
