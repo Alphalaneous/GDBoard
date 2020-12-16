@@ -106,8 +106,6 @@ public class KeyListener extends SwingKeyAdapter {
 				if (key == ShortcutSettings.clearKeybind) {
 					Functions.clearFunction();
 				}
-				if (key == ShortcutSettings.lockKeybind) {
-				}
 			}
 			if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/actions/keybinds.txt"))) {
 				Scanner sc3 = null;

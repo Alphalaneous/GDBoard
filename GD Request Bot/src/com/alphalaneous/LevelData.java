@@ -55,14 +55,6 @@ public class LevelData {
 		return levelID;
 	}
 
-	//int getCoins() {
-	//	return coins;
-	//}
-
-	//boolean getVerifiedCoins() {
-	//	return verifiedCoins;
-	//}
-
 	public boolean getFeatured() {
 		return featured;
 	}
@@ -82,14 +74,6 @@ public class LevelData {
 	public int getSongID() {
 		return songID;
 	}
-
-	//String getSongSize() {
-	//	return songSize;
-	//}
-
-	//ArrayList<GDObject> getLevelData(){
-	//	return levelData;
-	//}
 
 	public boolean getContainsVulgar() {
 		return containsVulgar;
@@ -112,7 +96,7 @@ public class LevelData {
 	}
 
 	public URL getSongURL() throws MalformedURLException {
-		return new URL(downloadURL.toString());
+		return new URL(downloadURL);
 	}
 
 	public String getLength(){
@@ -124,14 +108,6 @@ public class LevelData {
 	}
 
 	public int getVersion() { return version; }
-
-	public String getVideoTitle() {return videoTitle;}
-
-	public String getVideoURL() { return videoURL;}
-
-	public String getChannelName() { return channelName;}
-
-	public String getThumbnailURL() { return thumbnailURL; }
 
 	public String getUpload() {
 		return upload;
@@ -170,14 +146,10 @@ public class LevelData {
 	private String difficulty;
 	private String description;
 	private long likes;
-	private String channelName;
-	private String thumbnailURL;
 	private boolean viewership = true;
 	private boolean verifiedCoins = false;
 	private long downloads;
 	private long levelID;
-	private String videoTitle;
-	private String videoURL;
 	private boolean featured;
 	private boolean epic;
 	private String downloadURL;
@@ -224,36 +196,32 @@ public class LevelData {
 		this.containsImage = true;
 	}
 
-	//void setLevelData(ArrayList<GDObject> levelData) {
-	//	this.levelData = levelData;
-	//}
 	public void setPersist(boolean persist){
 		this.persist = persist;
 	}
 
 	public void setRequester(String requester) {
-		this.requester = new String(requester);
+		this.requester = requester;
 	}
 
 	public void setAuthor(String author) {
-		this.author = new String(author);
+		this.author = author;
 	}
 
 	public void setName(String name) {
-		this.name = new String(name);
+		this.name = name;
 	}
 
 	public void setPassword(int password) {
 		this.password = password;
 	}
 
-
 	public void setDifficulty(String difficulty) {
-		this.difficulty = new String(difficulty);
+		this.difficulty = difficulty;
 	}
 
 	public void setDescription(String description) {
-		this.description = new String(description);
+		this.description = description;
 	}
 
 	public void setLikes(long likes) {
@@ -273,13 +241,7 @@ public class LevelData {
 	}
 
 	public void setVersion(int version) {this.version = version; }
-	//void setCoins(String coins) {
-	//	this.coins = Integer.parseInt(coins);
-	//}
 
-	//void setVerifiedCoins(boolean verifiedCoins) {
-	//	this.verifiedCoins = verifiedCoins;
-	//}
 	public void setViewership(boolean viewership) {
 		this.viewership = viewership;
 	}
@@ -293,11 +255,11 @@ public class LevelData {
 	}
 
 	public void setSongName(String songName) {
-		this.songName = new String(songName);
+		this.songName = songName;
 	}
 
 	public void setSongAuthor(String songAuthor) {
-		this.songAuthor = new String(songAuthor);
+		this.songAuthor = songAuthor;
 	}
 
 	public void setSongID(int songID) {
@@ -305,19 +267,19 @@ public class LevelData {
 	}
 
 	public void setSongURL(String downloadURL) {
-		this.downloadURL = new String(downloadURL);
+		this.downloadURL = downloadURL;
     }
 
 	public void setLength(String length) {
-		this.length = new String(length);
+		this.length = length;
     }
 
 	public void setUpload(String upload) {
-		this.upload = new String(upload);
+		this.upload = upload;
 	}
 
 	public void setUpdate(String update) {
-		this.update = new String(update);
+		this.update = update;
 	}
 
 	public void setObjects(int objects) {
@@ -339,8 +301,4 @@ public class LevelData {
 	public void setPlayerIcon(ImageIcon playerIcon) {
 		this.playerIcon = playerIcon;
 	}
-
-	//void setSongSize(String songSize) {
-	//	this.songSize = songSize;
-	//}
 }

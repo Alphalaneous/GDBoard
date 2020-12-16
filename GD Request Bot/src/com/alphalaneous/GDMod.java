@@ -3,9 +3,7 @@ package com.alphalaneous;
 import com.alphalaneous.SettingsPanels.ChaosModeSettings;
 import org.apache.commons.lang3.ArrayUtils;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 
 public class GDMod {

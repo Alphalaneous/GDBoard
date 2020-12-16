@@ -5,9 +5,6 @@ import com.alphalaneous.Panels.LevelsPanel;
 import com.alphalaneous.SettingsPanels.GeneralSettings;
 import com.alphalaneous.SettingsPanels.OutputSettings;
 import com.alphalaneous.SettingsPanels.RequestSettings;
-import com.alphalaneous.Windows.DialogBox;
-import com.github.alex1304.jdash.client.AnonymousGDClient;
-import com.github.alex1304.jdash.client.AuthenticatedGDClient;
 import com.github.alex1304.jdash.entity.GDLevel;
 import com.github.alex1304.jdash.entity.GDLevelData;
 import com.github.alex1304.jdash.entity.GDUser;
@@ -701,7 +698,7 @@ public class Requests {
 		return false;
 	}
 
-	static void parse(byte[] level, long levelID) {
+	private static void parse(byte[] level, long levelID) {
 		boolean image = false;
 		all:
 		for (int k = 0; k < Requests.levels.size(); k++) {

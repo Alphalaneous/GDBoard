@@ -1,12 +1,10 @@
 package com.alphalaneous;
 
-import com.alphalaneous.Components.JButtonUI;
 import com.alphalaneous.SettingsPanels.AccountSettings;
 import com.alphalaneous.SettingsPanels.GeneralSettings;
 import com.alphalaneous.Windows.DialogBox;
 import org.json.JSONObject;
 
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,16 +13,15 @@ import java.net.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 class GDBoardBot {
-	static int wait = 2000;
-	static int tries = 0;
+	private static int wait = 2000;
 	static boolean initialConnect = false;
-	static AtomicBoolean isConnect = new AtomicBoolean(false);
-	static boolean failed = false;
+	private static AtomicBoolean isConnect = new AtomicBoolean(false);
 	private static PrintWriter out;
 	private static BufferedReader in;
 	private static Socket clientSocket;
+
 	static {
-		while(true) {
+		while (true) {
 			try {
 				clientSocket = new Socket("165.227.53.200", 2963);
 				out = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -37,16 +34,11 @@ class GDBoardBot {
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
-				tries++;
 				wait = wait * 2;
 				if (Main.programLoaded) {
 					wait = 2000;
 				}
-				try {
-					start();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+				start();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -57,34 +49,24 @@ class GDBoardBot {
 			}
 		}
 	}
-	private static JButtonUI defaultUI = new JButtonUI();
-	public static boolean firstOpen = true;
-	static void start() throws IOException {
+
+	private static boolean firstOpen = true;
+
+	static void start() {
 		start(false);
 	}
+
 	static void start(boolean reconnect) {
 		System.out.println("started");
-		/*if(clientSocket != null && clientSocket.isConnected() ){
-			clientSocket.close();
-			out.close();
-			in.close();
-		}*/
 
-			defaultUI.setBackground(new Color(50, 50, 50));
-			defaultUI.setHover( new Color(80, 80, 80));
-			defaultUI.setSelect( new Color(70, 70, 70));
+		JSONObject authObj = new JSONObject();
+		authObj.put("request_type", "connect");
+		authObj.put("oauth", Settings.getSettings("oauth"));
+		sendMessage(authObj.toString());
 
-
-
-
-			JSONObject authObj = new JSONObject();
-			authObj.put("request_type", "connect");
-			authObj.put("oauth", Settings.getSettings("oauth"));
-			sendMessage(authObj.toString());
-
-			new Thread(() -> {
+		new Thread(() -> {
 			isConnect.set(false);
-			if(!firstOpen) {
+			if (!firstOpen) {
 				DialogBox.setUnfocusable();
 				try {
 					Thread.sleep(500);
@@ -93,8 +75,8 @@ class GDBoardBot {
 				}
 				firstOpen = false;
 			}
-			if(!isConnect.get()) {
-				if(!reconnect) {
+			if (!isConnect.get()) {
+				if (!reconnect) {
 					String choice = DialogBox.showDialogBox("$CONNECTING_GDBOARD$", "$CONNECTING_GDBOARD_INFO$", "$CONNECTING_GDBOARD_SUBINFO$", new String[]{"$RECONNECT$", "$CANCEL$"});
 					if (choice.equalsIgnoreCase("CANCEL")) {
 						Main.close();
@@ -109,12 +91,12 @@ class GDBoardBot {
 		}).start();
 
 
-		 new Thread(() -> {
-			String inputLine = null;
+		new Thread(() -> {
+			String inputLine;
 
 			while (true) {
 
-				while(clientSocket.isClosed() || !clientSocket.isConnected()){
+				while (clientSocket.isClosed() || !clientSocket.isConnected()) {
 					try {
 						Thread.sleep(100);
 					} catch (InterruptedException e) {
@@ -144,100 +126,32 @@ class GDBoardBot {
 					}
 					if (event.equalsIgnoreCase("connected")) {
 						DialogBox.closeDialogBox();
-						String channel =  object.get("username").toString().replaceAll("\"", "").replaceAll("#", "");
+						String channel = object.get("username").toString().replaceAll("\"", "").replaceAll("#", "");
 						Settings.writeSettings("channel", channel);
 						AccountSettings.refreshTwitch(channel);
 						initialConnect = true;
 						isConnect.set(true);
 						APIs.setAllViewers();
-						/**
-						 * Reads chat as streamer, reduces load on servers for some actions
-						 * such as custom commands that don't use the normal prefix
+						/*
+						  Reads chat as streamer, reduces load on servers for some actions
+						  such as custom commands that don't use the normal prefix
 						 */
 					}
-					else if (event.equalsIgnoreCase("connect_failed") || (event.equalsIgnoreCase("error"))) {
-						failed = true;
-					} /*if ((event.equalsIgnoreCase("command") || event.equalsIgnoreCase("level_request")) && Main.allowRequests) {
-						String sender = object.get("sender").toString().replaceAll("\"", "");
-						String message = StringEscapeUtils.unescapeJava(object.get("message").toString());
-
-						message = message.substring(1, message.length()-1);
-						boolean mod = object.get("mod").asBoolean();
-						boolean sub = object.get("sub").asBoolean();
-						if(GeneralBotSettings.multiOption){
-							String finalMessage = message;
-							new Thread(() -> {
-								try {
-									while(ServerChatBot.processing){
-										Thread.sleep(50);
-									}
-									ServerChatBot.onMessage(sender, finalMessage, mod, sub, 0);
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-							}).start();
-						}
-						else{
-							String finalMessage = message;
-							try {
-								while(ServerChatBot.processing){
-									Thread.sleep(50);
-								}
-								ServerChatBot.onMessage(sender, finalMessage, mod, sub, 0);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						}
-					}
-					if ((event.equalsIgnoreCase("cheer") && Main.allowRequests)) {
-						String sender = object.get("sender").toString().replaceAll("\"", "");
-						String message = object.get("message").toString().replaceAll("\"", "");
-						int bits = Integer.parseInt(object.get("bits").toString().replaceAll("\"", ""));
-
-						boolean mod = object.get("mod").asBoolean();
-						boolean sub = object.get("sub").asBoolean();
-						if(GeneralBotSettings.multiOption){
-							String finalMessage = message;
-							new Thread(() -> {
-								try {
-									while(ServerChatBot.processing){
-										Thread.sleep(50);
-									}
-									ServerChatBot.onMessage(sender, finalMessage, mod, sub, 0);
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-							}).start();
-						}
-						else{
-							String finalMessage = message;
-							try {
-								while(ServerChatBot.processing){
-									Thread.sleep(50);
-								}
-								ServerChatBot.onMessage(sender, finalMessage, mod, sub, 0);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						}
-					}*/
-					if(event.equalsIgnoreCase("blocked_ids_updated") && GeneralSettings.gdModeOption){
-						String IDs[] = object.get("ids").toString().replace("\"", "").replace("{", "").replace("}", "").replace("\\", "").split(",");
-						for(String ID : IDs) {
+					if (event.equalsIgnoreCase("blocked_ids_updated") && GeneralSettings.gdModeOption) {
+						String[] IDs = object.get("ids").toString().replace("\"", "").replace("{", "").replace("}", "").replace("\\", "").split(",");
+						for (String ID : IDs) {
 							Requests.globallyBlockedIDs.put(Long.parseLong(ID.split(":", 2)[0]), ID.split(":", 2)[1]);
 						}
 					}
-				}
-				catch (Exception e){
+				} catch (Exception e) {
 					e.printStackTrace();
 					try {
 						Thread.sleep(wait);
 					} catch (InterruptedException f) {
 						f.printStackTrace();
 					}
-					tries++;
-					wait = wait*2;
-					if(Main.programLoaded){
+					wait = wait * 2;
+					if (Main.programLoaded) {
 						wait = 2000;
 					}
 				}
@@ -254,14 +168,14 @@ class GDBoardBot {
 				e.printStackTrace();
 			}
 			start(true);
-			tries++;
-			wait = wait*2;
-			if(Main.programLoaded){
+			wait = wait * 2;
+			if (Main.programLoaded) {
 				wait = 2000;
 			}
 		}).start();
 	}
-	static void sendMessage(String message){
+
+	static void sendMessage(String message) {
 		out.println(message);
 	}
 

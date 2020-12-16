@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class Sounds {
 
-	static HashMap<String, Sound> sounds = new HashMap<String, Sound>();
+	static HashMap<String, Sound> sounds = new HashMap<>();
 
 
 	public static void playSound(String location, boolean restart, boolean overlap){
@@ -48,8 +48,8 @@ public class Sounds {
 
 		String location;
 		boolean complete = false;
-		boolean isFile = true;
-		boolean isURL = false;
+		boolean isFile;
+		boolean isURL;
 		Player mp3player;
 
 		Sound(String location, boolean isFile, boolean isURL){
@@ -58,17 +58,17 @@ public class Sounds {
 			this.isURL = isURL;
 			Sounds.sounds.put(location, this);
 		}
-		public void playSound() {
+		void playSound() {
 			new Thread(() -> {
 				try {
-					BufferedInputStream inp = null;
+					BufferedInputStream inp;
 					if(isURL){
 						inp = new BufferedInputStream(new URL(location).openStream());
 					}
 					else if(isFile){
 						inp = new BufferedInputStream(new FileInputStream(location));
 					}
-					else if(!isFile){
+					else {
 						inp = new BufferedInputStream(BotHandler.class
 								.getResource(location).openStream());
 					}
@@ -86,7 +86,7 @@ public class Sounds {
 			}).start();
 
 		}
-		public void stopSound(){
+		void stopSound(){
 			mp3player.close();
 			complete = true;
 		}
