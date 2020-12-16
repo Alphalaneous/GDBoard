@@ -254,9 +254,9 @@ public class Requests {
 					if (ID == levels.get(k).getLevelID()) {
 						int j = k + 1;
 						if (!GeneralSettings.disableShowPositionOption) {
-							sendSuccess(Utilities.format("$ALREADY_IN_QUEUE_MESSAGE$", user, j));
+							sendUnallowed(Utilities.format("$ALREADY_IN_QUEUE_MESSAGE$", user, j));
 						} else {
-							sendSuccess(Utilities.format("$ALREADY_IN_QUEUE_MESSAGE_ALT$", user));
+							sendUnallowed(Utilities.format("$ALREADY_IN_QUEUE_MESSAGE_ALT$", user));
 						}
 						return;
 					}
@@ -669,10 +669,12 @@ public class Requests {
 
 	private static void sendSuccess(String message, boolean whisper, String user) {
 		Main.sendMessage("🟢 | " + message, whisper, user);
+		processingLevel = false;
 	}
 
 	private static void sendSuccess(String message) {
 		Main.sendMessage("🟢 | " + message);
+		processingLevel = false;
 	}
 
 	private static boolean checkList(Object object, String path) {
