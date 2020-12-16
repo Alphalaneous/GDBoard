@@ -58,6 +58,7 @@ public class Requests {
 		new Thread(() -> {
 			try {
 				if (!Main.allowRequests) {
+					processingLevel = false;
 					return;
 				}
 				if (!requestsEnabled) {
@@ -80,6 +81,7 @@ public class Requests {
 					if (IDMatcher.matches() && arguments.size() <= 2) {
 						ID = Long.parseLong(IDMatcher.group(1));
 						if (ID > 999999999 || ID < 1) {
+							processingLevel = false;
 							return;
 						}
 
@@ -118,6 +120,7 @@ public class Requests {
 								levelNameS = levelNameS.replace("\"", "");
 								usernameS = argumentsS[1].trim().replace("\"", "");
 							} else {
+								processingLevel = false;
 								return; //todo command formatted wrong
 							}
 							GDUser gdUser;
@@ -202,7 +205,6 @@ public class Requests {
 					}
 					else {
 						String messageS = message.split(" ", 2)[1].replace("\"", "");
-						System.out.println(messageS);
 
 						try {
 							if (LoadGD.isAuth) {
@@ -224,6 +226,7 @@ public class Requests {
 				}
 				else{
 					if (ID > 999999999 || ID < 1) {
+						processingLevel = false;
 						return;
 					}
 					try {
@@ -261,16 +264,13 @@ public class Requests {
 
 				boolean bypass = (GeneralSettings.modsBypassOption && isMod) || (user.equalsIgnoreCase(TwitchAccount.login) && GeneralSettings.streamerBypassOption);
 
-
-
-
-
 				if (Main.programLoaded && !bypass) {
 					if (checkList(ID, "\\GDBoard\\blocked.txt")) {
 						sendUnallowed(Utilities.format("$BLOCKED_LEVEL_MESSAGE$", user));
 						return;
 					}
 					if (checkList(user, "\\GDBoard\\blockedUsers.txt")) {
+						processingLevel = false;
 						return;
 					}
 					if (Files.exists(logged) && (GeneralSettings.repeatedOptionAll && !GeneralSettings.updatedRepeatedOption) && Main.programLoaded) {
@@ -651,6 +651,7 @@ public class Requests {
 			} catch (Exception e) {
 				e.printStackTrace();
 				sendError(Utilities.format("$REQUEST_ERROR$", user));
+				processingLevel = false;
 			}
 		}).start();
 
