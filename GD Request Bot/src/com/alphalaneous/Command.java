@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class Command {
 
     private static NashornSandbox sandbox = NashornSandboxes.create();
-    public static String run(String user, boolean isMod, boolean isSub, String[] args, String function, int cheer, boolean sayError) {
+    public static String run(String user, boolean isMod, boolean isSub, String[] args, String function, int cheer, boolean sayError, String messageID) {
         sandbox.inject("isMod", isMod);
         sandbox.inject("isChaos", ChaosModeSettings.enableChaos);
         sandbox.inject("isModChaos", ChaosModeSettings.modOnly);
@@ -19,6 +19,8 @@ public class Command {
         sandbox.inject("user", user);
         sandbox.inject("args", args);
         sandbox.inject("cheer", cheer);
+        sandbox.inject("messageID", messageID);
+
         String[] xArgs = Arrays.copyOfRange(args, 1, args.length);
         sandbox.inject("xArgs", xArgs);
         StringBuilder message = new StringBuilder();
@@ -75,9 +77,9 @@ public class Command {
         return result;
     }
     public static String run(String user, String message, String function){
-        return run(user, false, false, message.split(" "), function, 0, true);
+        return run(user, false, false, message.split(" "), function, 0, true, null);
     }
     public static String run(String function, boolean sayError){
-        return run("", false, false, new String[]{null, null}, function, 0, sayError);
+        return run("", false, false, new String[]{null, null}, function, 0, sayError, null);
     }
 }

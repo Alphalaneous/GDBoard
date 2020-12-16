@@ -60,7 +60,7 @@ public class BotHandler {
                 }
                 if (!mention.contains(m.group(1))) {
                     if(GeneralSettings.gdModeOption) {
-                        Requests.addRequest(Long.parseLong(m.group(1).replaceFirst("^0+(?!$)", "")), user, isMod, message, ID);
+                        Requests.addRequest(Long.parseLong(m.group(1).replaceFirst("^0+(?!$)", "")), user, isMod, isSub, message, ID, false);
                     }
                 }
 
@@ -257,7 +257,7 @@ public class BotHandler {
                             String fileName = file[file.length - 1];
                             if (fileName.equalsIgnoreCase(com + ".js")) {
                                 comExists = true;
-                                response = Command.run(user, isMod, isSub, arguments, Files.readString(path, StandardCharsets.UTF_8), cheer, true);
+                                response = Command.run(user, isMod, isSub, arguments, Files.readString(path, StandardCharsets.UTF_8), cheer, true, ID);
 
                             }
                         }
@@ -291,10 +291,10 @@ public class BotHandler {
                                     is.close();
                                     isr.close();
                                     br.close();
-                                    response = Command.run(user, isMod, isSub, arguments, function.toString(), cheer, true);
+                                    response = Command.run(user, isMod, isSub, arguments, function.toString(), cheer, true, ID);
                                 }
                                 else{
-                                    response = Command.run(user, isMod, isSub, arguments, Files.readString(path, StandardCharsets.UTF_8), cheer, true);
+                                    response = Command.run(user, isMod, isSub, arguments, Files.readString(path, StandardCharsets.UTF_8), cheer, true, ID);
                                 }
                                 break;
                             }

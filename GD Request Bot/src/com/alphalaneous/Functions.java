@@ -31,7 +31,7 @@ public class Functions {
 	private static boolean didUndo = false;
 
 	public static void skipFunction() {
-		if(Requests.bwomp){
+		if(RequestsOld.bwomp){
 			Thread bwompThread;
 			bwompThread = new Thread(() -> {
 				try {
@@ -94,7 +94,7 @@ public class Functions {
 
 				Functions.saveFunction();
 			}
-			OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
+			OutputSettings.setOutputStringFile(RequestsOld.parseInfoString(OutputSettings.outputString, 0));
 			LevelsPanel.setOneSelect();
 
 			new Thread(() -> {
@@ -117,9 +117,9 @@ public class Functions {
 			didUndo = true;
 			LevelData data = (LevelData) undoQueue.keySet().toArray()[0];
 			int position = (int) undoQueue.values().toArray()[0];
-			Requests.forceAdd(data);
+			RequestsOld.forceAdd(data);
 			LevelsPanel.createButton(data.getName(), data.getAuthor(), data.getLevelID(), data.getDifficulty(), data.getEpic(), data.getFeatured(), data.getStars(), data.getRequester(), data.getVersion(), data.getPlayerIcon(), data.getCoins(), data.getVerifiedCoins());
-			Requests.movePosition(Requests.levels.size()-1, position);
+			RequestsOld.movePosition(Requests.levels.size()-1, position);
 			undoQueue.remove(data);
 		}
 	}
@@ -171,7 +171,7 @@ public class Functions {
 					}
 				}
 			}
-			OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, num));
+			OutputSettings.setOutputStringFile(RequestsOld.parseInfoString(OutputSettings.outputString, num));
 			SongPanel.refreshInfo();
 			InfoPanel.refreshInfo();
 			Functions.saveFunction();
@@ -335,12 +335,12 @@ public class Functions {
 
 	public static void requestsToggleFunction() {
 		if (Main.programLoaded) {
-			if (Requests.enableRequests) {
-				Requests.enableRequests = false;
+			if (Requests.requestsEnabled) {
+				Requests.requestsEnabled = false;
 				Main.sendMessage(Utilities.format("$REQUESTS_OFF_TOGGLE_MESSAGE$"));
 
 			} else {
-				Requests.enableRequests = true;
+				Requests.requestsEnabled = true;
 				Main.sendMessage(Utilities.format("$REQUESTS_ON_TOGGLE_MESSAGE$"));
 			}
 		}

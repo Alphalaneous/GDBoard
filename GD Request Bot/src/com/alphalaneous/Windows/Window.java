@@ -233,7 +233,7 @@ public class Window {
 					SettingsWindow.run = false;
 					//((InnerWindow) window).moveToFront();
 					Functions.requestsToggleFunction();
-					if(Requests.enableRequests){
+					if(Requests.requestsEnabled){
 						toggleRequests.setText("\uE71A");
 					}
 					else{
@@ -508,7 +508,7 @@ public class Window {
 		addID.addActionListener(e -> {
 			if(!idBox.getText().equalsIgnoreCase("")) {
 				new Thread(() -> {
-					Requests.addRequest(Long.parseLong(idBox.getText()), TwitchAccount.display_name, true, null, null);
+					Requests.addRequest(Long.parseLong(idBox.getText()), TwitchAccount.display_name, true, true, null, null, true);
 					idBox.setText("");
 				}).start();
 			}

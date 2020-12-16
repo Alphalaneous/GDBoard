@@ -203,7 +203,7 @@ public class Main {
 			Window.frame.setVisible(true);
 			Window.setOnTop(Boolean.parseBoolean(Settings.getSettings("onTop")));
 
-			OutputSettings.setOutputStringFile(Requests.parseInfoString(OutputSettings.outputString, 0));
+			OutputSettings.setOutputStringFile(RequestsOld.parseInfoString(OutputSettings.outputString, 0));
 
 
 			Path initialJS = Paths.get(Defaults.saveDirectory + "\\GDBoard\\initial.js");
@@ -212,7 +212,7 @@ public class Main {
 				new Thread(() -> {
 					try {
 						if (!Files.readString(initialJS, StandardCharsets.UTF_8).equalsIgnoreCase("")) {
-							Command.run(TwitchAccount.display_name, true, true, new String[]{"dummy"}, Files.readString(initialJS, StandardCharsets.UTF_8), 0, false);
+							Command.run(TwitchAccount.display_name, true, true, new String[]{"dummy"}, Files.readString(initialJS, StandardCharsets.UTF_8), 0, false, null);
 						}
 					} catch (Exception ignored) {
 					}
@@ -238,7 +238,7 @@ public class Main {
 					String[] level = sc.nextLine().split(",");
 					try {
 						if (level.length < 26) {
-							Requests.forceAdd(level[0], level[1], Long.parseLong(level[2]), level[3], Boolean.parseBoolean(level[4]),
+							RequestsOld.forceAdd(level[0], level[1], Long.parseLong(level[2]), level[3], Boolean.parseBoolean(level[4]),
 									Boolean.parseBoolean(level[5]), Integer.parseInt(level[6]), level[7], Integer.parseInt(level[8]),
 									Integer.parseInt(level[9]), new String(Base64.getDecoder().decode(level[10])), Integer.parseInt(level[11]), Integer.parseInt(level[12]),
 									level[13], Integer.parseInt(level[14]), Integer.parseInt(level[15]), new String(Base64.getDecoder().decode(level[16])), level[17],
@@ -246,7 +246,7 @@ public class Main {
 									-1, null, null, false);
 						}
 						if (level.length == 26) {
-							Requests.forceAdd(level[0], level[1], Long.parseLong(level[2]), level[3], Boolean.parseBoolean(level[4]),
+							RequestsOld.forceAdd(level[0], level[1], Long.parseLong(level[2]), level[3], Boolean.parseBoolean(level[4]),
 									Boolean.parseBoolean(level[5]), Integer.parseInt(level[6]), level[7], Integer.parseInt(level[8]),
 									Integer.parseInt(level[9]), new String(Base64.getDecoder().decode(level[10])), Integer.parseInt(level[11]), Integer.parseInt(level[12]),
 									level[13], Integer.parseInt(level[14]), Integer.parseInt(level[15]), new String(Base64.getDecoder().decode(level[16])), level[17],
