@@ -23,15 +23,17 @@ import java.util.*;
 
 public class Functions {
 
-	private static LinkedHashMap<LevelData, Integer> undoQueue = new LinkedHashMap<>(5){
+	private static LinkedHashMap<LevelData, Integer> undoQueue = new LinkedHashMap<>(5) {
 		protected boolean removeEldestEntry(Map.Entry<LevelData, Integer> eldest) {
 			return size() > 5;
 		}
 	};
 	private static boolean didUndo = false;
 
+	private static boolean onCool = false;
+
 	public static void skipFunction() {
-		if(RequestsOld.bwomp){
+		if (RequestsOld.bwomp) {
 			Thread bwompThread;
 			bwompThread = new Thread(() -> {
 				try {
@@ -47,10 +49,10 @@ public class Functions {
 			});
 			bwompThread.start();
 		}
-		if(Main.programLoaded) {
+		if (Main.programLoaded) {
 			if (Requests.levels.size() != 0) {
 				int select = LevelsPanel.getSelectedID();
-				if(didUndo){
+				if (didUndo) {
 					undoQueue.clear();
 					didUndo = false;
 				}
@@ -58,7 +60,7 @@ public class Functions {
 
 				Requests.levels.remove(LevelsPanel.getSelectedID());
 				LevelsPanel.removeButton();
-				if (Requests.levels.size() > 0 ) {
+				if (Requests.levels.size() > 0) {
 					StringSelection selection = new StringSelection(
 							String.valueOf(Requests.levels.get(0).getLevelID()));
 					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -67,28 +69,40 @@ public class Functions {
 				if (select == 0 && Requests.levels.size() > 0) {
 					if (!GeneralSettings.nowPlayingOption) {
 
-							if (Requests.levels.get(0).getContainsImage()) {
-								Main.sendMessage(Utilities.format("$NOW_PLAYING_MESSAGE$",
-										Requests.levels.get(0).getName(),
-										Requests.levels.get(0).getLevelID(),
-										Requests.levels.get(0).getRequester()) + " " + Utilities.format("$IMAGE_HACK$"));
-							} else if (Requests.levels.get(0).getContainsVulgar()) {
-								Main.sendMessage(Utilities.format("$NOW_PLAYING_MESSAGE$",
-										Requests.levels.get(0).getName(),
-										Requests.levels.get(0).getLevelID(),
-										Requests.levels.get(0).getRequester()) + " " + Utilities.format("$VULGAR_LANGUAGE$"));
-							} else {
-								Main.sendMessage(Utilities.format("$NOW_PLAYING_MESSAGE$",
-										Requests.levels.get(0).getName(),
-										Requests.levels.get(0).getLevelID(),
-										Requests.levels.get(0).getRequester()));
-							}
+						if(!onCool) {
+							new Thread(() ->{
+								onCool = true;
+								try {
+									Thread.sleep(500);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+								onCool = false;
+							}).start();
+							new Thread(() -> {
+								if (Requests.levels.get(0).getContainsImage()) {
+									Main.sendMessage(Utilities.format("$NOW_PLAYING_MESSAGE$",
+											Requests.levels.get(0).getName(),
+											Requests.levels.get(0).getLevelID(),
+											Requests.levels.get(0).getRequester()) + " " + Utilities.format("$IMAGE_HACK$"));
+								} else if (Requests.levels.get(0).getContainsVulgar()) {
+									Main.sendMessage(Utilities.format("$NOW_PLAYING_MESSAGE$",
+											Requests.levels.get(0).getName(),
+											Requests.levels.get(0).getLevelID(),
+											Requests.levels.get(0).getRequester()) + " " + Utilities.format("$VULGAR_LANGUAGE$"));
+								} else {
+									Main.sendMessage(Utilities.format("$NOW_PLAYING_MESSAGE$",
+											Requests.levels.get(0).getName(),
+											Requests.levels.get(0).getLevelID(),
+											Requests.levels.get(0).getRequester()));
+								}
+							}).start();
+						}
 					}
-					if(Requests.levels.get(0).getContainsImage()){
-						Utilities.notify("Image Hack", Requests.levels.get(0).getName() + " (" + Requests.levels.get(0).getLevelID() +") possibly contains the image hack!");
-					}
-					else if(Requests.levels.get(0).getContainsVulgar()){
-						Utilities.notify("Vulgar Language", Requests.levels.get(0).getName() + " (" + Requests.levels.get(0).getLevelID() +") contains vulgar language!");
+					if (Requests.levels.get(0).getContainsImage()) {
+						Utilities.notify("Image Hack", Requests.levels.get(0).getName() + " (" + Requests.levels.get(0).getLevelID() + ") possibly contains the image hack!");
+					} else if (Requests.levels.get(0).getContainsVulgar()) {
+						Utilities.notify("Vulgar Language", Requests.levels.get(0).getName() + " (" + Requests.levels.get(0).getLevelID() + ") contains vulgar language!");
 					}
 				}
 
@@ -112,23 +126,25 @@ public class Functions {
 
 
 	}
-	public static void undoFunction(){
-		if(undoQueue.size() != 0) {
+
+	public static void undoFunction() {
+		if (undoQueue.size() != 0) {
 			didUndo = true;
 			LevelData data = (LevelData) undoQueue.keySet().toArray()[0];
 			int position = (int) undoQueue.values().toArray()[0];
 			RequestsOld.forceAdd(data);
 			LevelsPanel.createButton(data.getName(), data.getAuthor(), data.getLevelID(), data.getDifficulty(), data.getEpic(), data.getFeatured(), data.getStars(), data.getRequester(), data.getVersion(), data.getPlayerIcon(), data.getCoins(), data.getVerifiedCoins());
-			RequestsOld.movePosition(Requests.levels.size()-1, position);
+			RequestsOld.movePosition(Requests.levels.size() - 1, position);
 			undoQueue.remove(data);
 		}
 	}
-	public static void randomFunction(){
-		if(Main.programLoaded) {
+
+	public static void randomFunction() {
+		if (Main.programLoaded) {
 			Random random = new Random();
 			int num = 0;
 			if (Requests.levels.size() != 0) {
-				if(didUndo){
+				if (didUndo) {
 					undoQueue.clear();
 					didUndo = false;
 				}
@@ -140,7 +156,7 @@ public class Functions {
 				CommentsPanel.unloadComments(true);
 
 				if (Requests.levels.size() != 0) {
-					while(true) {
+					while (true) {
 						try {
 							num = random.nextInt(Requests.levels.size());
 							break;
@@ -156,18 +172,17 @@ public class Functions {
 					Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 					clipboard.setContents(selection, selection);
 					if (!GeneralSettings.nowPlayingOption) {
-
-							Main.sendMessage(Utilities.format("$NOW_PLAYING_MESSAGE$",
-									Requests.levels.get(num).getName(),
-									Requests.levels.get(num).getLevelID(),
-									Requests.levels.get(num).getRequester()));
+						int finalNum = num;
+						new Thread(() -> Main.sendMessage(Utilities.format("$NOW_PLAYING_MESSAGE$",
+								Requests.levels.get(finalNum).getName(),
+								Requests.levels.get(finalNum).getLevelID(),
+								Requests.levels.get(finalNum).getRequester()))).start();
 
 					}
-					if(Requests.levels.get(num).getContainsImage()){
-						Utilities.notify("Image Hack", Requests.levels.get(num).getName() + " (" + Requests.levels.get(num).getLevelID() +") possibly contains the image hack!");
-					}
-					else if(Requests.levels.get(num).getContainsVulgar()){
-						Utilities.notify("Vulgar Language", Requests.levels.get(num).getName() + " (" + Requests.levels.get(num).getLevelID() +") contains vulgar language!");
+					if (Requests.levels.get(num).getContainsImage()) {
+						Utilities.notify("Image Hack", Requests.levels.get(num).getName() + " (" + Requests.levels.get(num).getLevelID() + ") possibly contains the image hack!");
+					} else if (Requests.levels.get(num).getContainsVulgar()) {
+						Utilities.notify("Vulgar Language", Requests.levels.get(num).getName() + " (" + Requests.levels.get(num).getLevelID() + ") contains vulgar language!");
 					}
 				}
 			}
@@ -229,15 +244,14 @@ public class Functions {
 			}
 			fooWriter.write(message.toString());
 			fooWriter.close();
-		}
-		catch (IOException e){
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public static void blockFunction() {
-		if(Main.programLoaded) {
-			if(LevelsPanel.getSelectedID() == 0 && Requests.levels.size() > 1){
+		if (Main.programLoaded) {
+			if (LevelsPanel.getSelectedID() == 0 && Requests.levels.size() > 1) {
 				StringSelection selection = new StringSelection(
 						String.valueOf(Requests.levels.get(1).getLevelID()));
 				Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -245,88 +259,87 @@ public class Functions {
 			}
 			if (Requests.levels.size() != 0) {
 
-				new Thread(()->{
+				new Thread(() -> {
 
-				String option = DialogBox.showDialogBox("$BLOCK_ID_TITLE$", "$BLOCK_ID_INFO$", "$BLOCK_ID_SUBINFO$", new String[]{"$YES$", "$NO$"}, new Object[]{Requests.levels.get(LevelsPanel.getSelectedID()).getName(), Requests.levels.get(LevelsPanel.getSelectedID()).getLevelID()});
+					String option = DialogBox.showDialogBox("$BLOCK_ID_TITLE$", "$BLOCK_ID_INFO$", "$BLOCK_ID_SUBINFO$", new String[]{"$YES$", "$NO$"}, new Object[]{Requests.levels.get(LevelsPanel.getSelectedID()).getName(), Requests.levels.get(LevelsPanel.getSelectedID()).getLevelID()});
 
-				if (option.equalsIgnoreCase("YES")) {
-					BlockedSettings.addButton(Requests.levels.get(LevelsPanel.getSelectedID()).getLevelID());
-					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
+					if (option.equalsIgnoreCase("YES")) {
+						BlockedSettings.addButton(Requests.levels.get(LevelsPanel.getSelectedID()).getLevelID());
+						Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
 
-					try {
-						if (!Files.exists(file)) {
-							Files.createFile(file);
+						try {
+							if (!Files.exists(file)) {
+								Files.createFile(file);
+							}
+							Files.write(
+									file,
+									(Requests.levels.get(LevelsPanel.getSelectedID()).getLevelID() + "\n").getBytes(),
+									StandardOpenOption.APPEND);
+						} catch (IOException e1) {
+							DialogBox.showDialogBox("Error!", e1.toString(), "There was an error writing to the file!", new String[]{"OK"});
+
 						}
-						Files.write(
-								file,
-								(Requests.levels.get(LevelsPanel.getSelectedID()).getLevelID() + "\n").getBytes(),
-								StandardOpenOption.APPEND);
-					} catch (IOException e1) {
-						DialogBox.showDialogBox("Error!", e1.toString(), "There was an error writing to the file!", new String[]{"OK"});
+						Requests.levels.remove(LevelsPanel.getSelectedID());
+						LevelsPanel.removeButton();
+						Functions.saveFunction();
+						LevelsPanel.setOneSelect();
+						new Thread(() -> {
+							CommentsPanel.unloadComments(true);
+							if (Requests.levels.size() > 0) {
+								CommentsPanel.loadComments(0, false);
+							}
+						}).start();
+						LevelsPanel.setName(Requests.levels.size());
 
 					}
-					Requests.levels.remove(LevelsPanel.getSelectedID());
-					LevelsPanel.removeButton();
-					Functions.saveFunction();
-					LevelsPanel.setOneSelect();
-					new Thread(() -> {
-						CommentsPanel.unloadComments(true);
-						if (Requests.levels.size() > 0) {
-							CommentsPanel.loadComments(0, false);
-						}
-					}).start();
-					LevelsPanel.setName(Requests.levels.size());
-
-				}
-				SongPanel.refreshInfo();
-				InfoPanel.refreshInfo();
-				SettingsWindow.run = true;
+					SongPanel.refreshInfo();
+					InfoPanel.refreshInfo();
+					SettingsWindow.run = true;
 				}).start();
 			}
 		}
 	}
 
 	public static void clearFunction() {
-		if(Main.programLoaded) {
-			new Thread(()->{
+		if (Main.programLoaded) {
+			new Thread(() -> {
 
-			String option = DialogBox.showDialogBox("$CLEAR_QUEUE_TITLE$", "$CLEAR_QUEUE_INFO$", "$CLEAR_QUEUE_SUBINFO$", new String[]{"$CLEAR_ALL$", "$CANCEL$"});
-			if (option.equalsIgnoreCase("CLEAR_ALL")) {
-				if (Requests.levels.size() != 0) {
-					for (int i = 0; i < Requests.levels.size(); i++) {
-						LevelsPanel.removeButton();
-					}
-					Requests.levels.clear();
-					undoQueue.clear();
-					Functions.saveFunction();
-					SongPanel.refreshInfo();
-					InfoPanel.refreshInfo();
-					CommentsPanel.unloadComments(true);
-				}
-				LevelsPanel.setOneSelect();
-				SettingsWindow.run = true;
-			}
-			else if (option.equalsIgnoreCase("Inactives")){
-				if (Requests.levels.size() != 0) {
-
-
-					for (int i = Requests.levels.size()-1; i >= 0; i--) {
-						if(!Requests.levels.get(i).getViewership()){
-							Requests.levels.remove(i);
-							LevelsPanel.removeButton(i);
+				String option = DialogBox.showDialogBox("$CLEAR_QUEUE_TITLE$", "$CLEAR_QUEUE_INFO$", "$CLEAR_QUEUE_SUBINFO$", new String[]{"$CLEAR_ALL$", "$CANCEL$"});
+				if (option.equalsIgnoreCase("CLEAR_ALL")) {
+					if (Requests.levels.size() != 0) {
+						for (int i = 0; i < Requests.levels.size(); i++) {
+							LevelsPanel.removeButton();
 						}
+						Requests.levels.clear();
+						undoQueue.clear();
+						Functions.saveFunction();
+						SongPanel.refreshInfo();
+						InfoPanel.refreshInfo();
+						CommentsPanel.unloadComments(true);
 					}
+					LevelsPanel.setOneSelect();
+					SettingsWindow.run = true;
+				} else if (option.equalsIgnoreCase("Inactives")) {
+					if (Requests.levels.size() != 0) {
 
-					Functions.saveFunction();
-					SongPanel.refreshInfo();
-					InfoPanel.refreshInfo();
-					CommentsPanel.unloadComments(true);
-					CommentsPanel.loadComments(0,false);
+
+						for (int i = Requests.levels.size() - 1; i >= 0; i--) {
+							if (!Requests.levels.get(i).getViewership()) {
+								Requests.levels.remove(i);
+								LevelsPanel.removeButton(i);
+							}
+						}
+
+						Functions.saveFunction();
+						SongPanel.refreshInfo();
+						InfoPanel.refreshInfo();
+						CommentsPanel.unloadComments(true);
+						CommentsPanel.loadComments(0, false);
+					}
+					LevelsPanel.setOneSelect();
+					SettingsWindow.run = true;
 				}
-				LevelsPanel.setOneSelect();
-				SettingsWindow.run = true;
-			}
-			LevelsPanel.setName(Requests.levels.size());
+				LevelsPanel.setName(Requests.levels.size());
 			}).start();
 
 		}

@@ -58,7 +58,7 @@ public class Window {
 	private static JLabel idTitle = new JLabel("Enter ID:");
 	private static JPanel idButtons = new JPanel();
 	private static CurvedButtonAlt addID = createCurvedButton("Add ID");
-	private static FancyTextArea idBox = new FancyTextArea(true,false);
+	private static FancyTextArea idBox = new FancyTextArea(true, false);
 
 	public static void refresh() {
 		frame.invalidate();
@@ -172,8 +172,8 @@ public class Window {
 		JButton skip = createButton("\uEB9D", "$SKIP_LEVEL_TOOLTIP$");
 		skip.addActionListener(e -> {
 
-					//((InnerWindow) window).moveToFront();
-					Functions.skipFunction();
+			//((InnerWindow) window).moveToFront();
+			Functions.skipFunction();
 
 
 		});
@@ -189,8 +189,8 @@ public class Window {
 
 		JButton randNext = createButton("\uF158", "$NEXT_RANDOM_TOOLTIP$");
 		randNext.addActionListener(e -> {
-					//((InnerWindow) window).moveToFront();
-					Functions.randomFunction();
+			//((InnerWindow) window).moveToFront();
+			Functions.randomFunction();
 
 
 		});
@@ -200,8 +200,8 @@ public class Window {
 		//region Create Copy Button
 		JButton copy = createButton("\uF0E3", "$CLIPBOARD_TOOLTIP$");
 		copy.addActionListener(e -> {
-					//((InnerWindow) window).moveToFront();
-					Functions.copyFunction();
+			//((InnerWindow) window).moveToFront();
+			Functions.copyFunction();
 
 
 		});
@@ -211,8 +211,8 @@ public class Window {
 		//region Create Block Button
 		JButton block = createButton("\uF140", "$BLOCK_TOOLTIP$");
 		block.addActionListener(e -> {
-					//((InnerWindow) window).moveToFront();
-					Functions.blockFunction();
+			//((InnerWindow) window).moveToFront();
+			Functions.blockFunction();
 
 
 		});
@@ -222,23 +222,22 @@ public class Window {
 		//region Create Clear Button
 		JButton clear = createButton("\uE107", "$CLEAR_TOOLTIP$");
 		clear.addActionListener(e -> {
-					SettingsWindow.run = false;
-					//((InnerWindow) window).moveToFront();
-					Functions.clearFunction();
+			SettingsWindow.run = false;
+			//((InnerWindow) window).moveToFront();
+			Functions.clearFunction();
 
 		});
 		buttonPanel.add(clear);
 		JButton toggleRequests = createButton("\uE71A", "$TOGGLE_REQUESTS_TOOLTIP$");
 		toggleRequests.addActionListener(e -> {
-					SettingsWindow.run = false;
-					//((InnerWindow) window).moveToFront();
-					Functions.requestsToggleFunction();
-					if(Requests.requestsEnabled){
-						toggleRequests.setText("\uE71A");
-					}
-					else{
-						toggleRequests.setText("\uE102");
-					}
+			SettingsWindow.run = false;
+			//((InnerWindow) window).moveToFront();
+			Functions.requestsToggleFunction();
+			if (Requests.requestsEnabled) {
+				toggleRequests.setText("\uE71A");
+			} else {
+				toggleRequests.setText("\uE102");
+			}
 
 
 		});
@@ -247,38 +246,38 @@ public class Window {
 		showComments = createButton("\uE134", "$HIDE_COMMENTS_TOOLTIP$");
 		showComments.addActionListener(e -> {
 
-					showingMore = !showingMore;
-					toolBar.setBounds(0, 0, frame.getWidth(), 30);
-					//gdToggle.setBounds(frame.getWidth() - 180, 0, 100, 30);
-					switchButton.setBounds(frame.getWidth() - 50, 3, 25, 25);
+			showingMore = !showingMore;
+			toolBar.setBounds(0, 0, frame.getWidth(), 30);
+			//gdToggle.setBounds(frame.getWidth() - 180, 0, 100, 30);
+			switchButton.setBounds(frame.getWidth() - 50, 3, 25, 25);
 
 
-					if (!showingMore) {
-						CommentsPanel.unloadComments(true);
-						((RoundedJButton) showComments).setTooltip("$SHOW_COMMENTS_TOOLTIP$");
-						frame.setMinimumSize(new Dimension(515, 630));
-						CommentsPanel.getComWindow().setVisible(false);
-						LevelsPanel.resizeButtons(frame.getWidth() - 115);
-						LevelsPanel.getReqWindow().setBounds(0, 0, frame.getWidth() - 115, frame.getHeight() - 152);
-						InfoPanel.resetDimensions(LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
-						InfoPanel.getInfoWindow().setBounds(0, LevelsPanel.getReqWindow().getHeight() + 1, LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
-						refresh();
-					} else {
-						((RoundedJButton) showComments).setTooltip("$HIDE_COMMENTS_TOOLTIP$");
-						if (frame.getWidth() < 765) {
-							frame.setSize(frame.getWidth() + 300, frame.getHeight());
-						}
-						frame.setMinimumSize(new Dimension(815, 630));
-						CommentsPanel.loadComments(0, false);
-						CommentsPanel.getComWindow().setVisible(true);
-						CommentsPanel.getComWindow().setBounds(frame.getWidth() - 415, 0, CommentsPanel.getComWindow().getWidth(), frame.getHeight() + 2);
-						CommentsPanel.resetDimensions(CommentsPanel.getComWindow().getWidth(), frame.getHeight() + 2);
-						LevelsPanel.resizeButtons(frame.getWidth() - 415);
-						LevelsPanel.getReqWindow().setBounds(0, 0, frame.getWidth() - 415, frame.getHeight() - 152);
-						InfoPanel.resetDimensions(LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
-						InfoPanel.getInfoWindow().setBounds(0, LevelsPanel.getReqWindow().getHeight() + 1, LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
-						refresh();
-					}
+			if (!showingMore) {
+				CommentsPanel.unloadComments(true);
+				((RoundedJButton) showComments).setTooltip("$SHOW_COMMENTS_TOOLTIP$");
+				frame.setMinimumSize(new Dimension(515, 630));
+				CommentsPanel.getComWindow().setVisible(false);
+				LevelsPanel.resizeButtons(frame.getWidth() - 115);
+				LevelsPanel.getReqWindow().setBounds(0, 0, frame.getWidth() - 115, frame.getHeight() - 152);
+				InfoPanel.resetDimensions(LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
+				InfoPanel.getInfoWindow().setBounds(0, LevelsPanel.getReqWindow().getHeight() + 1, LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
+				refresh();
+			} else {
+				((RoundedJButton) showComments).setTooltip("$HIDE_COMMENTS_TOOLTIP$");
+				if (frame.getWidth() < 765) {
+					frame.setSize(frame.getWidth() + 300, frame.getHeight());
+				}
+				frame.setMinimumSize(new Dimension(815, 630));
+				CommentsPanel.loadComments(0, false);
+				CommentsPanel.getComWindow().setVisible(true);
+				CommentsPanel.getComWindow().setBounds(frame.getWidth() - 415, 0, CommentsPanel.getComWindow().getWidth(), frame.getHeight() + 2);
+				CommentsPanel.resetDimensions(CommentsPanel.getComWindow().getWidth(), frame.getHeight() + 2);
+				LevelsPanel.resizeButtons(frame.getWidth() - 415);
+				LevelsPanel.getReqWindow().setBounds(0, 0, frame.getWidth() - 415, frame.getHeight() - 152);
+				InfoPanel.resetDimensions(LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
+				InfoPanel.getInfoWindow().setBounds(0, LevelsPanel.getReqWindow().getHeight() + 1, LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
+				refresh();
+			}
 
 
 		});
@@ -287,26 +286,26 @@ public class Window {
 		moderationFrame.setLayout(null);
 		moderationFrame.setTitle("GDBoard - Moderation");
 		moderationFrame.setIconImage(newIcon);
-		moderationFrame.setSize(500,300);
+		moderationFrame.setSize(500, 300);
 		moderationFrame.setResizable(false);
 
 		infoPanel.setBackground(Defaults.MAIN);
 		message.setEditable(false);
-		message.setBounds(6,55,471, 130);
+		message.setBounds(6, 55, 471, 130);
 		message.setLineWrap(true);
 		message.setWrapStyleWord(true);
 		JLabel username = new JLabel();
 		username.setForeground(Defaults.FOREGROUND);
-		username.setBounds(7,5,473, 40);
+		username.setBounds(7, 5, 473, 40);
 		username.setFont(Defaults.SEGOE.deriveFont(24f));
 		JLabel levelName = new JLabel();
 		levelName.setForeground(Defaults.FOREGROUND);
-		levelName.setBounds(473,0,473, 40);
+		levelName.setBounds(473, 0, 473, 40);
 		levelName.setFont(Defaults.SEGOE.deriveFont(14f));
 
 		JLabel levelID = new JLabel();
 		levelID.setForeground(Defaults.FOREGROUND);
-		levelID.setBounds(473,16,473, 40);
+		levelID.setBounds(473, 16, 473, 40);
 		levelID.setFont(Defaults.SEGOE.deriveFont(14f));
 
 		infoPanel.add(levelName);
@@ -318,24 +317,25 @@ public class Window {
 
 		CurvedButtonAlt delete = createCurvedButton("$DELETE$");
 		delete.addActionListener(e -> {
-				Main.sendMessage("/delete " + Requests.levels.get(selectedID).getMessageID());
+			Main.sendMessage("/delete " + Requests.levels.get(selectedID).getMessageID());
 
 		});
 
 		CurvedButtonAlt timeout = createCurvedButton("$TIMEOUT$");
 		timeout.addActionListener(e -> {
-				Main.sendMessage("/timeout " + selectedUsername + " 600");
+			Main.sendMessage("/timeout " + selectedUsername + " 600");
 
 		});
 
 		CurvedButtonAlt ban = createCurvedButton("$BAN$");
-		ban.addActionListener(e -> {Main.sendMessage("/ban " + selectedUsername);
+		ban.addActionListener(e -> {
+			Main.sendMessage("/ban " + selectedUsername);
 
 		});
 
 		CurvedButtonAlt purge = createCurvedButton("$PURGE$");
 		purge.addActionListener(e -> {
-				Main.sendMessage("/timeout " + selectedUsername + " 1");
+			Main.sendMessage("/timeout " + selectedUsername + " 1");
 
 		});
 		modButtons.add(delete);
@@ -343,8 +343,8 @@ public class Window {
 		modButtons.add(timeout);
 		modButtons.add(ban);
 
-		infoPanel.setBounds(0,0,486, 195);
-		modButtons.setBounds(0,195,486, 105);
+		infoPanel.setBounds(0, 0, 486, 195);
+		modButtons.setBounds(0, 195, 486, 105);
 
 		moderationFrame.add(infoPanel);
 		moderationFrame.add(modButtons);
@@ -352,19 +352,19 @@ public class Window {
 
 		JButton moderate = createButton("\uED15", "$MODERATE_TOOLTIP$");
 		moderate.addActionListener(e -> {
-					if(Requests.levels.size() != 0) {
-						selectedUsername = String.valueOf(Requests.levels.get(LevelsPanel.getSelectedID()).getRequester());
-						selectedID = LevelsPanel.getSelectedID();
-						username.setText(String.valueOf(Requests.levels.get(LevelsPanel.getSelectedID()).getRequester()));
-						levelName.setText(String.valueOf(Requests.levels.get(LevelsPanel.getSelectedID()).getName()));
-						levelName.setBounds(473 - levelName.getPreferredSize().width, 0, 473, 40);
-						levelID.setText("(" + Requests.levels.get(LevelsPanel.getSelectedID()).getLevelID() + ")");
-						levelID.setBounds(473 - levelID.getPreferredSize().width, 16, 473, 40);
-						message.setText(Requests.levels.get(LevelsPanel.getSelectedID()).getMessage());
-						message.clearUndo();
-						moderationFrame.setVisible(true);
-						moderationFrame.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - moderationFrame.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - moderationFrame.getHeight() / 2);
-					}
+			if (Requests.levels.size() != 0) {
+				selectedUsername = String.valueOf(Requests.levels.get(LevelsPanel.getSelectedID()).getRequester());
+				selectedID = LevelsPanel.getSelectedID();
+				username.setText(String.valueOf(Requests.levels.get(LevelsPanel.getSelectedID()).getRequester()));
+				levelName.setText(String.valueOf(Requests.levels.get(LevelsPanel.getSelectedID()).getName()));
+				levelName.setBounds(473 - levelName.getPreferredSize().width, 0, 473, 40);
+				levelID.setText("(" + Requests.levels.get(LevelsPanel.getSelectedID()).getLevelID() + ")");
+				levelID.setBounds(473 - levelID.getPreferredSize().width, 16, 473, 40);
+				message.setText(Requests.levels.get(LevelsPanel.getSelectedID()).getMessage());
+				message.clearUndo();
+				moderationFrame.setVisible(true);
+				moderationFrame.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - moderationFrame.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - moderationFrame.getHeight() / 2);
+			}
 
 
 		});
@@ -403,15 +403,15 @@ public class Window {
 
 		HighlightButton settingsA = new HighlightButton(settingsIcon.getImage());
 		settingsA.addActionListener(e -> {
-					SettingsWindow.run = false;
-					if (!SettingsWindow.frame.isVisible()) {
-						SettingsWindow.frame.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - SettingsWindow.frame.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - SettingsWindow.frame.getHeight() / 2);
-						SettingsWindow.frame.setVisible(true);
-					} else {
-						SettingsWindow.frame.toFront();
-					}
-					if (SettingsWindow.frame.getExtendedState() == JFrame.ICONIFIED) {
-						SettingsWindow.frame.setExtendedState(JFrame.NORMAL);
+			SettingsWindow.run = false;
+			if (!SettingsWindow.frame.isVisible()) {
+				SettingsWindow.frame.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - SettingsWindow.frame.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - SettingsWindow.frame.getHeight() / 2);
+				SettingsWindow.frame.setVisible(true);
+			} else {
+				SettingsWindow.frame.toFront();
+			}
+			if (SettingsWindow.frame.getExtendedState() == JFrame.ICONIFIED) {
+				SettingsWindow.frame.setExtendedState(JFrame.NORMAL);
 
 
 			}
@@ -420,20 +420,20 @@ public class Window {
 
 		HighlightButton channelPoints = new HighlightButton(channelPointsIcon.getImage());
 		channelPoints.addActionListener(e -> {
-					SettingsWindow.run = false;
-					if (!SettingsWindow.frame.isVisible()) {
-						SettingsWindow.frame.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - SettingsWindow.frame.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - SettingsWindow.frame.getHeight() / 2);
-						SettingsWindow.openPage("chatbot");
-						SettingsWindow.click("CHANNEL_POINTS_SETTINGS");
-						SettingsWindow.frame.setVisible(true);
-					} else {
-						SettingsWindow.openPage("chatbot");
-						SettingsWindow.click("CHANNEL_POINTS_SETTINGS");
-						SettingsWindow.frame.toFront();
-					}
-					if (SettingsWindow.frame.getExtendedState() == JFrame.ICONIFIED) {
-						SettingsWindow.frame.setExtendedState(JFrame.NORMAL);
-					}
+			SettingsWindow.run = false;
+			if (!SettingsWindow.frame.isVisible()) {
+				SettingsWindow.frame.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - SettingsWindow.frame.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - SettingsWindow.frame.getHeight() / 2);
+				SettingsWindow.openPage("chatbot");
+				SettingsWindow.click("CHANNEL_POINTS_SETTINGS");
+				SettingsWindow.frame.setVisible(true);
+			} else {
+				SettingsWindow.openPage("chatbot");
+				SettingsWindow.click("CHANNEL_POINTS_SETTINGS");
+				SettingsWindow.frame.toFront();
+			}
+			if (SettingsWindow.frame.getExtendedState() == JFrame.ICONIFIED) {
+				SettingsWindow.frame.setExtendedState(JFrame.NORMAL);
+			}
 
 
 		});
@@ -442,20 +442,20 @@ public class Window {
 
 		HighlightButton commands = new HighlightButton(commandsIcon.getImage());
 		commands.addActionListener(e -> {
-					SettingsWindow.run = false;
-					if (!SettingsWindow.frame.isVisible()) {
-						SettingsWindow.frame.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - SettingsWindow.frame.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - SettingsWindow.frame.getHeight() / 2);
-						SettingsWindow.openPage("chatbot");
-						SettingsWindow.click("COMMANDS_SETTINGS");
-						SettingsWindow.frame.setVisible(true);
-					} else {
-						SettingsWindow.openPage("chatbot");
-						SettingsWindow.click("COMMANDS_SETTINGS");
-						SettingsWindow.frame.toFront();
-					}
-					if (SettingsWindow.frame.getExtendedState() == JFrame.ICONIFIED) {
-						SettingsWindow.frame.setExtendedState(JFrame.NORMAL);
-					}
+			SettingsWindow.run = false;
+			if (!SettingsWindow.frame.isVisible()) {
+				SettingsWindow.frame.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - SettingsWindow.frame.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - SettingsWindow.frame.getHeight() / 2);
+				SettingsWindow.openPage("chatbot");
+				SettingsWindow.click("COMMANDS_SETTINGS");
+				SettingsWindow.frame.setVisible(true);
+			} else {
+				SettingsWindow.openPage("chatbot");
+				SettingsWindow.click("COMMANDS_SETTINGS");
+				SettingsWindow.frame.toFront();
+			}
+			if (SettingsWindow.frame.getExtendedState() == JFrame.ICONIFIED) {
+				SettingsWindow.frame.setExtendedState(JFrame.NORMAL);
+			}
 
 
 		});
@@ -465,20 +465,20 @@ public class Window {
 
 		HighlightButton requests = new HighlightButton(requestsIcon.getImage());
 		requests.addActionListener(e -> {
-					SettingsWindow.run = false;
-					if (!SettingsWindow.frame.isVisible()) {
-						SettingsWindow.frame.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - SettingsWindow.frame.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - SettingsWindow.frame.getHeight() / 2);
-						SettingsWindow.openPage("gd");
-						SettingsWindow.click("GENERAL_SETTINGS");
-						SettingsWindow.frame.setVisible(true);
-					} else {
-						SettingsWindow.openPage("gd");
-						SettingsWindow.click("GENERAL_SETTINGS");
-						SettingsWindow.frame.toFront();
-					}
-					if (SettingsWindow.frame.getExtendedState() == JFrame.ICONIFIED) {
-						SettingsWindow.frame.setExtendedState(JFrame.NORMAL);
-					}
+			SettingsWindow.run = false;
+			if (!SettingsWindow.frame.isVisible()) {
+				SettingsWindow.frame.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - SettingsWindow.frame.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - SettingsWindow.frame.getHeight() / 2);
+				SettingsWindow.openPage("gd");
+				SettingsWindow.click("GENERAL_SETTINGS");
+				SettingsWindow.frame.setVisible(true);
+			} else {
+				SettingsWindow.openPage("gd");
+				SettingsWindow.click("GENERAL_SETTINGS");
+				SettingsWindow.frame.toFront();
+			}
+			if (SettingsWindow.frame.getExtendedState() == JFrame.ICONIFIED) {
+				SettingsWindow.frame.setExtendedState(JFrame.NORMAL);
+			}
 
 
 		});
@@ -487,15 +487,15 @@ public class Window {
 		enterID.setLayout(null);
 		enterID.setTitle("GDBoard - Add ID");
 		enterID.setIconImage(newIcon);
-		enterID.setSize(200,170);
+		enterID.setSize(200, 170);
 		enterID.setResizable(false);
 
 		idPanel.setBackground(Defaults.MAIN);
 
-		idBox.setBounds(6,35,172, 30);
+		idBox.setBounds(6, 35, 172, 30);
 
 		idTitle.setForeground(Defaults.FOREGROUND);
-		idTitle.setBounds(7,5,172, 30);
+		idTitle.setBounds(7, 5, 172, 30);
 		idTitle.setFont(Defaults.SEGOE.deriveFont(14f));
 
 
@@ -506,7 +506,7 @@ public class Window {
 		idButtons.setBackground(Defaults.TOP);
 
 		addID.addActionListener(e -> {
-			if(!idBox.getText().equalsIgnoreCase("")) {
+			if (!idBox.getText().equalsIgnoreCase("")) {
 				new Thread(() -> {
 					Requests.addRequest(Long.parseLong(idBox.getText()), TwitchAccount.display_name, true, true, null, null, true);
 					idBox.setText("");
@@ -516,8 +516,8 @@ public class Window {
 
 		idButtons.add(addID);
 
-		idPanel.setBounds(0,0,188, 70);
-		idButtons.setBounds(0,70,188, 70);
+		idPanel.setBounds(0, 0, 188, 70);
+		idButtons.setBounds(0, 70, 188, 70);
 
 		enterID.add(idPanel);
 		enterID.add(idButtons);
@@ -525,7 +525,7 @@ public class Window {
 		requests.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if(SwingUtilities.isMiddleMouseButton(e)){
+				if (SwingUtilities.isMiddleMouseButton(e)) {
 					idBox.setText("");
 					enterID.setVisible(true);
 				}
@@ -536,14 +536,14 @@ public class Window {
 
 		HighlightButton donateA = new HighlightButton(donateIcon.getImage());
 		donateA.addActionListener(e -> {
-					if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-						try {
-							Runtime rt = Runtime.getRuntime();
-							rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://www.paypal.me/xAlphalaneous");
-						} catch (IOException ex) {
-							ex.printStackTrace();
-						}
-					}
+			if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+				try {
+					Runtime rt = Runtime.getRuntime();
+					rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://www.paypal.me/xAlphalaneous");
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				}
+			}
 
 
 		});
@@ -552,14 +552,14 @@ public class Window {
 		HighlightButton discordA = new HighlightButton(discordIcon.getImage());
 
 		discordA.addActionListener(e -> {
-					if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-						try {
-							Runtime rt = Runtime.getRuntime();
-							rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://discord.gg/x2awccH");
-						} catch (IOException ex) {
-							ex.printStackTrace();
-						}
-					}
+			if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+				try {
+					Runtime rt = Runtime.getRuntime();
+					rt.exec("rundll32 url.dll,FileProtocolHandler " + "http://discord.gg/x2awccH");
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				}
+			}
 
 		});
 
@@ -846,7 +846,8 @@ public class Window {
 		}
 
 	}
-	public static void focus(){
+
+	public static void focus() {
 		frame.setAlwaysOnTop(true);
 		frame.setAlwaysOnTop(PersonalizationSettings.onTopOption);
 	}
@@ -875,7 +876,7 @@ public class Window {
 		button.setUI(defaultUI);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setOpaque(true);
-		button.setPreferredSize(new Dimension(button.getPreferredSize().width+10, 50));
+		button.setPreferredSize(new Dimension(button.getPreferredSize().width + 10, 50));
 		return button;
 	}
 
@@ -902,16 +903,18 @@ public class Window {
 	//region SetSettings
 	public static void setSettings() {
 		Settings.setWindowSettings("Window", frame.getX() + "," + frame.getY() + "," + false + "," + true);
-			Settings.writeSettings("windowState", String.valueOf(frame.getExtendedState()));
-			Settings.writeSettings("windowSize", frame.getWidth() + "," + frame.getHeight());
-			Settings.writeSettings("showMore", String.valueOf(showingMore));
+		Settings.writeSettings("windowState", String.valueOf(frame.getExtendedState()));
+		Settings.writeSettings("windowSize", frame.getWidth() + "," + frame.getHeight());
+		Settings.writeSettings("showMore", String.valueOf(showingMore));
 
 
 	}
-	public static void showAttributions(){
+
+	public static void showAttributions() {
 		attributions.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - attributions.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - attributions.getHeight() / 2);
 		attributions.setVisible(true);
 	}
+
 	public static void loadSettings() {
 		if (!Settings.getSettings("windowState").equalsIgnoreCase("")) {
 			int windowState = Integer.parseInt(Settings.getSettings("windowState"));
@@ -943,8 +946,7 @@ public class Window {
 			InfoPanel.resetDimensions(LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
 			InfoPanel.getInfoWindow().setBounds(0, LevelsPanel.getReqWindow().getHeight() + 1, LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
 			refresh();
-		}
-		else{
+		} else {
 			int newW = 465;
 			int newH = 630;
 			width = newW;

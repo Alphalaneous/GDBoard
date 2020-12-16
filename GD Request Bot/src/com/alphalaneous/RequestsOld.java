@@ -48,7 +48,7 @@ public class RequestsOld {
 	private static String[] gdCommands = {"!gd", "!kill", "!block", "!blockuser", "!unblock", "!unblockuser", "!clear", "!info", "!move", "!next", "!position", "!queue", "!remove", "!request", "!song", "!stop", "!toggle", "!top", "!wronglevel"};
 
 	static void forceAdd(LevelData data){
-		levels.add(data);
+		Requests.levels.add(data);
 	}
 
 
