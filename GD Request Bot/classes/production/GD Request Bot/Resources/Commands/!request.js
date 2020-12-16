@@ -1,3 +1,3 @@
 function command(){
-	return Levels.request(user, isMod, isSub, message, messageID);
+	return Requests.request(user, isMod, isSub, message, messageID);
 }

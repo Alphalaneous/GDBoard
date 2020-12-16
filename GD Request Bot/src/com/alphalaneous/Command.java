@@ -29,6 +29,7 @@ public class Command {
         }
         sandbox.inject("message", message.toString());
 
+        sandbox.allow(com.alphalaneous.RequestsOld.class);
         sandbox.allow(com.alphalaneous.Requests.class);
         sandbox.allow(com.alphalaneous.GDMod.class);
         sandbox.allow(com.alphalaneous.Board.class);
@@ -41,7 +42,8 @@ public class Command {
         try {
             sandbox.eval("" +
                     "var Twitch = Java.type('com.alphalaneous.Twitch'); " +
-                    "var Levels = Java.type('com.alphalaneous.Requests'); " +
+                    "var Levels = Java.type('com.alphalaneous.RequestsOld'); " +
+                    "var Requests = Java.type('com.alphalaneous.Requests'); " +
                     "var GD = Java.type('com.alphalaneous.GDMod'); " +
                     "var Board = Java.type('com.alphalaneous.Board'); " +
                     "var Variables = Java.type('com.alphalaneous.Variables'); " +

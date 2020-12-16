@@ -37,7 +37,6 @@ import java.util.zip.GZIPInputStream;
 
 public class RequestsOld {
 
-	public static ArrayList<LevelData> levels = new ArrayList<>();
 	private static HashMap<Long, Integer> addedLevels = new HashMap<>();
 	static boolean bwomp = false;
 	private static String os = (System.getProperty("os.name")).toUpperCase();
@@ -170,9 +169,9 @@ public class RequestsOld {
 			if(requester.equalsIgnoreCase(Settings.getSettings("channel")) && GeneralSettings.streamerBypassOption){
 				bypass = true;
 			}
-			for (int k = 0; k < levels.size(); k++) {
+			for (int k = 0; k < Requests.levels.size(); k++) {
 
-				if (ID == levels.get(k).getLevelID()) {
+				if (ID == Requests.levels.get(k).getLevelID()) {
 					int j = k + 1;
 					if(!GeneralSettings.disableShowPositionOption) {
 						Main.sendMessage(Utilities.format("$ALREADY_IN_QUEUE_MESSAGE$", requester, j));
@@ -198,7 +197,7 @@ public class RequestsOld {
 					Main.sendMessage(Utilities.format("$MAX_ID_MESSAGE$", requester, RequestSettings.maxID));
 					return;
 				}
-				if (GeneralSettings.queueLimitBoolean && (levels.size() >= GeneralSettings.queueLimit)) {
+				if (GeneralSettings.queueLimitBoolean && (Requests.levels.size() >= GeneralSettings.queueLimit)) {
 					if (!GeneralSettings.queueFullOption) {
 						Main.sendMessage(Utilities.format("$QUEUE_FULL_MESSAGE$", requester));
 					}
@@ -210,7 +209,7 @@ public class RequestsOld {
 				}
 				if (GeneralSettings.userLimitOption) {
 					int size = 0;
-					for (LevelData level : levels) {
+					for (LevelData level : Requests.levels) {
 						if (level.getRequester().equalsIgnoreCase(requester)) {
 							size++;
 						}
@@ -587,7 +586,7 @@ public class RequestsOld {
 					}).start();
 				}
 			}
-			levels.add(levelData);
+			Requests.levels.add(levelData);
 			LevelsPanel.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(),
 					levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(),
 					levelData.getRequester(), levelData.getVersion(), levelData.getPlayerIcon(), levelData.getCoins(),
@@ -597,13 +596,13 @@ public class RequestsOld {
 			Functions.saveFunction();
 			if (Main.sendMessages) {
 				if(!GeneralSettings.confirmOption) {
-					if (levels.size() != 1) {
+					if (Requests.levels.size() != 1) {
 						if (!GeneralSettings.disableShowPositionOption) {
 							Main.sendMessage(Utilities.format("$CONFIRMATION_MESSAGE$",
 									levelData.getRequester(),
 									levelData.getName(),
 									levelData.getLevelID(),
-									levels.size()), GeneralSettings.confirmWhisperOption, requester);
+									Requests.levels.size()), GeneralSettings.confirmWhisperOption, requester);
 						} else {
 							Main.sendMessage(Utilities.format("$CONFIRMATION_MESSAGE_ALT$",
 									levelData.getRequester(),
@@ -613,7 +612,7 @@ public class RequestsOld {
 					}
 				}
 			}
-			if (levels.size() == 1) {
+			if (Requests.levels.size() == 1) {
 				StringSelection selection = new StringSelection(String.valueOf(Requests.levels.get(0).getLevelID()));
 				Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 				clipboard.setContents(selection, selection);
@@ -689,79 +688,79 @@ public class RequestsOld {
 		try {
 			switch (attribute) {
 				case "name":
-					result = levels.get(level).getName();
+					result = Requests.levels.get(level).getName();
 					break;
 				case "id":
-					result = String.valueOf(levels.get(level).getLevelID());
+					result = String.valueOf(Requests.levels.get(level).getLevelID());
 					break;
 				case "author":
-					result = levels.get(level).getAuthor();
+					result = Requests.levels.get(level).getAuthor();
 					break;
 				case "requester":
-					result = levels.get(level).getRequester();
+					result = Requests.levels.get(level).getRequester();
 					break;
 				case "difficulty":
-					result = levels.get(level).getDifficulty();
+					result = Requests.levels.get(level).getDifficulty();
 					break;
 				case "likes":
-					result = String.valueOf(levels.get(level).getLikes());
+					result = String.valueOf(Requests.levels.get(level).getLikes());
 					break;
 				case "downloads":
-					result = String.valueOf(levels.get(level).getDownloads());
+					result = String.valueOf(Requests.levels.get(level).getDownloads());
 					break;
 				case "description":
-					result = levels.get(level).getDescription();
+					result = Requests.levels.get(level).getDescription();
 					break;
 				case "songName":
-					result = levels.get(level).getSongName();
+					result = Requests.levels.get(level).getSongName();
 					break;
 				case "songID":
-					result = String.valueOf(levels.get(level).getSongID());
+					result = String.valueOf(Requests.levels.get(level).getSongID());
 					break;
 				case "songAuthor":
-					result = levels.get(level).getSongAuthor();
+					result = Requests.levels.get(level).getSongAuthor();
 					break;
 				case "songURL":
-					result = String.valueOf(levels.get(level).getSongURL());
+					result = String.valueOf(Requests.levels.get(level).getSongURL());
 					break;
 				case "stars":
-					result = String.valueOf(levels.get(level).getStars());
+					result = String.valueOf(Requests.levels.get(level).getStars());
 					break;
 				case "epic":
-					result = String.valueOf(levels.get(level).getEpic());
+					result = String.valueOf(Requests.levels.get(level).getEpic());
 					break;
 				case "version":
-					result = String.valueOf(levels.get(level).getVersion());
+					result = String.valueOf(Requests.levels.get(level).getVersion());
 					break;
 				case "length":
-					result = levels.get(level).getLength();
+					result = Requests.levels.get(level).getLength();
 					break;
 				case "coins":
-					result = String.valueOf(levels.get(level).getCoins());
+					result = String.valueOf(Requests.levels.get(level).getCoins());
 					break;
 				case "objects":
-					result = String.valueOf(levels.get(level).getObjects());
+					result = String.valueOf(Requests.levels.get(level).getObjects());
 					break;
 				case "original":
-					result = String.valueOf(levels.get(level).getOriginal());
+					result = String.valueOf(Requests.levels.get(level).getOriginal());
 					break;
 				case "image":
-					result = String.valueOf(levels.get(level).getContainsImage());
+					result = String.valueOf(Requests.levels.get(level).getContainsImage());
 					break;
 				case "vulgar":
-					result = String.valueOf(levels.get(level).getContainsVulgar());
+					result = String.valueOf(Requests.levels.get(level).getContainsVulgar());
 					break;
 				case "password":
-					result = String.valueOf(levels.get(level).getPassword());
+					result = String.valueOf(Requests.levels.get(level).getPassword());
 					break;
 				case "levelVersion":
-					result = String.valueOf(levels.get(level).getLevelVersion());
+					result = String.valueOf(Requests.levels.get(level).getLevelVersion());
 					break;
 				case "upload":
-					result = levels.get(level).getUpload();
+					result = Requests.levels.get(level).getUpload();
 					break;
 				case "update":
-					result = levels.get(level).getUpdate();
+					result = Requests.levels.get(level).getUpdate();
 					break;
 			}
 		} catch (Exception e) {
@@ -776,7 +775,7 @@ public class RequestsOld {
 	}
 
 	public static int getSize() {
-		return levels.size();
+		return Requests.levels.size();
 	}
 
 	@SuppressWarnings("unused")
