@@ -52,13 +52,13 @@ public class Sounds {
 		boolean isURL;
 		Player mp3player;
 
-		Sound(String location, boolean isFile, boolean isURL){
+		public Sound(String location, boolean isFile, boolean isURL){
 			this.location = location;
 			this.isFile = isFile;
 			this.isURL = isURL;
 			Sounds.sounds.put(location, this);
 		}
-		void playSound() {
+		public void playSound() {
 			new Thread(() -> {
 				try {
 					BufferedInputStream inp;
@@ -86,7 +86,7 @@ public class Sounds {
 			}).start();
 
 		}
-		void stopSound(){
+		public void stopSound(){
 			mp3player.close();
 			complete = true;
 		}
