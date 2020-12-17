@@ -20,15 +20,14 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.net.MalformedURLException;
-import java.nio.charset.StandardCharsets;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Objects;
@@ -38,34 +37,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static io.netty.buffer.Unpooled.wrappedBuffer;
 
 public class APIs {
-/*
-    static String[] getYTVideo(String query){
-        JsonObject videoInfo;
-        String[] info = new String[0];
-        URL url;
-        try {
-            url = new URL("https://www.googleapis.com/youtube/v3/search?part=snippet&order=relevance&videoDefinition=high&maxResults=1&q=id " + query + "&type=video&key=AIzaSyBUa-HlZLDWBBtvT-fxfJvFxW9Dtw-3Q68");
-        URLConnection conn = url.openConnection();
-        conn.setRequestProperty("Accept", "application/json");
-        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        String x;
-        StringBuilder y = new StringBuilder();
-        while((x = br.readLine()) != null) {
-            y.append("\n").append(x);
-        }
-        System.out.println(y);
-        videoInfo = JsonObject.readFrom(y.toString());
-        String videoTitle = videoInfo.asObject().get("items").asArray().get(0).asObject().get("snippet").asObject().get("title").asString();
-        String videoID = videoInfo.asObject().get("items").asArray().get(0).asObject().get("id").asObject().get("videoId").asString();
-        String channelTitle = videoInfo.asObject().get("items").asArray().get(0).asObject().get("snippet").asObject().get("channelTitle").asString();
-        String thumbnailURL = videoInfo.asObject().get("items").asArray().get(0).asObject().get("snippet").asObject().get("thumbnails").asObject().get("high").asObject().get("url").asString();
-            info = new String[]{videoTitle, videoID, channelTitle, thumbnailURL};
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        return info;
-    }*/
+	static ArrayList<String> allViewers = new ArrayList<>();
+	static ArrayList<String> allMods = new ArrayList<>();
+	static ArrayList<String> allVIPs = new ArrayList<>();
+	static AtomicBoolean success = new AtomicBoolean(false);
 
 	public static ArrayList<Comment> getGDComments(int page, boolean top, long ID) {
 		String response = "";
@@ -125,10 +101,6 @@ public class APIs {
 		return commentsData;
 	}
 
-	static ArrayList<String> allViewers = new ArrayList<>();
-	static ArrayList<String> allMods = new ArrayList<>();
-	static ArrayList<String> allVIPs = new ArrayList<>();
-
 	static void setAllViewers() {
 		try {
 			URL url = new URL("https://tmi.twitch.tv/group/user/" + Settings.getSettings("channel").toLowerCase() + "/chatters");
@@ -166,11 +138,12 @@ public class APIs {
 			e.printStackTrace();
 		}
 	}
-	public static ArrayList<ChannelPointReward> getChannelPoints(){
+
+	public static ArrayList<ChannelPointReward> getChannelPoints() {
 		JSONArray awards = Objects.requireNonNull(twitchAPI("https://api.twitch.tv/helix/channel_points/custom_rewards?broadcaster_id=" + getIDs(Settings.getSettings("channel")))).getJSONArray("data");
 		ArrayList<ChannelPointReward> rewards = new ArrayList<>();
 		System.out.println(awards.toString());
-		for(int i = 0; i < awards.length(); i++) {
+		for (int i = 0; i < awards.length(); i++) {
 			String title = awards.getJSONObject(i).getString("title");
 			String prompt = awards.getJSONObject(i).getString("prompt");
 			long cost = awards.getJSONObject(i).getLong("cost");
@@ -184,8 +157,7 @@ public class APIs {
 				BufferedImage c = ImageIO.read(url);
 				image = new ImageIcon(new ImageIcon(c).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 
-			}
-			catch (JSONException | IOException e){
+			} catch (JSONException | IOException e) {
 				imgURL = "https://static-cdn.jtvnw.net/custom-reward-images/default-2.png";
 				image = Assets.channelPoints;
 				defaultIcon = true;
@@ -197,12 +169,13 @@ public class APIs {
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			}
-			if(reward != null) {
+			if (reward != null) {
 				rewards.add(reward);
 			}
 		}
 		return rewards;
 	}
+
 	static void getViewers() {
 		new Thread(() -> {
 			while (true) {
@@ -215,14 +188,14 @@ public class APIs {
 					while ((x = br.readLine()) != null) {
 						builder.append(x).append("\n");
 					}
-					JSONObject viewers =new JSONObject(builder.toString());
+					JSONObject viewers = new JSONObject(builder.toString());
 					String[] types = {"broadcaster", "vips", "staff", "moderators", "admins", "global_mods", "viewers"};
 					for (int i = 0; i < Requests.levels.size(); i++) {
 						LevelsPanel.getButton(i).setViewership(false);
 					}
 
 					for (String type : types) {
-						if(viewers.get("chatters") != null) {
+						if (viewers.get("chatters") != null) {
 							JSONArray viewerList = viewers.getJSONObject("chatters").getJSONArray(type);
 							for (int i = 0; i < viewerList.length(); i++) {
 								String viewer = viewerList.get(i).toString().replaceAll("\"", "");
@@ -292,23 +265,22 @@ public class APIs {
 
 	public static String getChannel() {
 
-			JSONObject nameObj = twitchAPI("https://api.twitch.tv/helix/users");
-			assert nameObj != null;
-			return nameObj.getJSONArray("data").getJSONObject(0).get("display_name").toString().replaceAll("\"", "");
+		JSONObject nameObj = twitchAPI("https://api.twitch.tv/helix/users");
+		assert nameObj != null;
+		return nameObj.getJSONArray("data").getJSONObject(0).get("display_name").toString().replaceAll("\"", "");
 
 	}
 
 	public static String getPFP() {
 
-			JSONObject nameObj = twitchAPI("https://api.twitch.tv/helix/users");
-			assert nameObj != null;
+		JSONObject nameObj = twitchAPI("https://api.twitch.tv/helix/users");
+		assert nameObj != null;
 
-			//String url = String.valueOf(nameObj.asObject().get("data").asArray().get(0).asObject().get("profile_image_url")).replaceAll("\"", "");
+		//String url = String.valueOf(nameObj.asObject().get("data").asArray().get(0).asObject().get("profile_image_url")).replaceAll("\"", "");
 
 		return nameObj.getJSONArray("data").getJSONObject(0).get("profile_image_url").toString().replaceAll("\"", "");
 
 	}
-
 
 	private static JSONObject twitchAPI(String URL) {
 		OkHttpClient client = new OkHttpClient();
@@ -384,8 +356,7 @@ public class APIs {
 		JSONObject userID = null;
 		try {
 			userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + Settings.getSettings("channel"));
-		}
-		catch (JSONException e){
+		} catch (JSONException e) {
 			e.printStackTrace();
 			Settings.writeSettings("channel", getChannel());
 			userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + Settings.getSettings("channel"));
@@ -393,7 +364,6 @@ public class APIs {
 		assert userID != null;
 		return userID.getJSONArray("data").getJSONObject(0);
 	}
-
 
 	public static String getIDs(String username) {
 		JSONObject userID = twitchAPI("https://api.twitch.tv/helix/users?login=" + username.toLowerCase());
@@ -417,8 +387,6 @@ public class APIs {
 		}
 	}
 
-	static AtomicBoolean success = new AtomicBoolean(false);
-
 	public static void setOauth(boolean threaded) {
 		if (!threaded) {
 			setOauthPrivate(true);
@@ -434,6 +402,7 @@ public class APIs {
 		Thread thread = new Thread(() -> setOauthPrivate(true));
 		thread.start();
 	}
+
 	public static void setOauthNR() {
 		Thread thread = new Thread(() -> setOauthPrivate(false));
 		thread.start();
@@ -455,7 +424,7 @@ public class APIs {
 				Settings.writeSettings("oauth", twitch.auth().getAccessToken());
 				Settings.writeSettings("channel", getChannel());
 				AccountSettings.refreshTwitch(Settings.getSettings("channel"));
-				if(refresh) {
+				if (refresh) {
 					Main.refreshBot();
 				}
 				success.set(true);
@@ -463,7 +432,7 @@ public class APIs {
 				System.out.println(twitch.auth().getAuthenticationError());
 
 			}
-			if(!GDBoardBot.initialConnect){
+			if (!GDBoardBot.initialConnect) {
 				GDBoardBot.initialConnect = true;
 			}
 		} catch (Exception e) {

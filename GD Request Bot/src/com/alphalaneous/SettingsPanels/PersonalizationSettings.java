@@ -1,12 +1,12 @@
 package com.alphalaneous.SettingsPanels;
 
-import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.alphalaneous.Components.LangLabel;
+import com.alphalaneous.Components.RadioButton;
 import com.alphalaneous.Components.RadioPanel;
 import com.alphalaneous.Defaults;
 import com.alphalaneous.Settings;
+import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.alphalaneous.Windows.Window;
-import com.alphalaneous.Components.RadioButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,9 +17,9 @@ import java.awt.event.MouseEvent;
 public class PersonalizationSettings {
 	public static boolean onTopOption = false;
 	public static boolean disableNotifOption = false;
+	public static String theme = "SYSTEM_MODE";
 	private static JPanel panel = new JPanel(null);
 	private static RadioPanel themePanel = new RadioPanel(new String[]{"$LIGHT_MODE$", "$DARK_MODE$", "$SYSTEM_MODE$"});
-	public static String theme = "SYSTEM_MODE";
 	private static LangLabel themeText = new LangLabel("$THEME_TEXT$");
 	private static ThemedCheckbox onTop = createButton("$ALWAYS_ON_TOP$", 150);
 	private static ThemedCheckbox notifications = createButton("$DISABLE_NOTIFICATIONS$", 180);

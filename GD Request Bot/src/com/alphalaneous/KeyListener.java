@@ -16,24 +16,23 @@ import java.util.Scanner;
 
 
 public class KeyListener extends SwingKeyAdapter {
-	private static boolean keyReleased = false;
 	static boolean usePlatformer = false;
+	static boolean goingLeft = false;
+	static boolean goingRight = false;
+	private static boolean keyReleased = false;
 	private static boolean ctrlPressed = false;
 	private static boolean goLeft = true;
 	private static boolean goRight = true;
-	static boolean goingLeft = false;
-	static boolean goingRight = false;
 
 	public void nativeKeyPressed(NativeKeyEvent e) {
 		if (usePlatformer) {
 			if (e.getRawCode() == 65) {
 				if (goLeft) {
-					if(!(GDHelper.getX() <= 0)) {
+					if (!(GDHelper.getX() <= 0)) {
 						GDMod.runNew("speed", String.valueOf(GDHelper.platSpeed * -1));
 						goLeft = false;
 						goingLeft = true;
-					}
-					else{
+					} else {
 						GDMod.runNew("speed", "0");
 					}
 				}

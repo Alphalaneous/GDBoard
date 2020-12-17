@@ -1,8 +1,8 @@
 package com.alphalaneous.SettingsPanels;
 
-import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.alphalaneous.Components.FancyTextArea;
 import com.alphalaneous.Defaults;
+import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.alphalaneous.Windows.Window;
 
 import javax.swing.*;
@@ -14,7 +14,7 @@ import java.awt.event.MouseEvent;
 public class WindowedSettings {
 	public static boolean onTopOption = false;
 	private static ThemedCheckbox onTop = createButton("$ALWAYS_ON_TOP$", 20);
- 	private static JPanel panel = new JPanel();
+	private static JPanel panel = new JPanel();
 
 	public static JPanel createPanel() {
 
@@ -34,15 +34,16 @@ public class WindowedSettings {
 		return panel;
 	}
 
-	private static ThemedCheckbox createButton(String text, int y){
+	private static ThemedCheckbox createButton(String text, int y) {
 		ThemedCheckbox button = new ThemedCheckbox(text);
-		button.setBounds(25,y,365,30);
+		button.setBounds(25, y, 365, 30);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.refresh();
 		return button;
 	}
+
 	public static void refreshUI() {
 
 		panel.setBackground(Defaults.SUB_MAIN);
@@ -55,10 +56,10 @@ public class WindowedSettings {
 				}
 				component.setBackground(Defaults.BUTTON);
 			}
-			if(component instanceof JTextArea){
+			if (component instanceof JTextArea) {
 				((FancyTextArea) component).refresh_();
 			}
-			if(component instanceof ThemedCheckbox){
+			if (component instanceof ThemedCheckbox) {
 				((ThemedCheckbox) component).refresh();
 			}
 

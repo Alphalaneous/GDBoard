@@ -3,15 +3,16 @@ package com.alphalaneous.Windows;
 import com.alphalaneous.Components.JButtonUI;
 import com.alphalaneous.Components.LangLabel;
 import com.alphalaneous.Components.SettingsButton;
+import com.alphalaneous.Defaults;
 import com.alphalaneous.GDHelper;
 import com.alphalaneous.Main;
 import com.alphalaneous.Settings;
-import com.alphalaneous.Defaults;
 import com.alphalaneous.SettingsPanels.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -21,11 +22,11 @@ import static com.alphalaneous.Defaults.defaultUI;
 
 public class SettingsWindow {
 	public static JPanel window = new JPanel();
-
+	public static boolean run = true;
+	static JFrame frame = new JFrame();
 	private static JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
 	private static JPanel content = new JPanel();
 	private static JPanel blankSpace = new JPanel();
-
 	private static JButtonUI selectUI = new JButtonUI();
 	private static JPanel generalPage = GeneralSettings.createPanel();
 	private static JPanel generalBotPage = GeneralBotSettings.createPanel();
@@ -42,7 +43,13 @@ public class SettingsWindow {
 	private static JPanel loggedIDsPage = RequestsLog.createPanel();
 	private static JPanel languagePage = LanguageSettings.createPanel();
 	private static JPanel chaosModePage = ChaosModeSettings.createPanel();
-
+	private static LangLabel title = new LangLabel("$SETTINGS_TITLE$");
+	private static JPanel tempPanel = new JPanel(null);
+	private static JPanel mainPanel = new JPanel();
+	private static JPanel titlePanel = new JPanel();
+	private static JPanel settingsButtons = new JPanel();
+	private static int clean = 0;
+	private static int refreshHelper = 0;
 	private static JButton general = createButton("$GENERAL_SETTINGS$", "\uE115");
 	private static JButton generalBot = createButton("$GENERAL_BOT_SETTINGS$", "\uE115");
 	private static JButton chaosMode = createButton("$CHAOS_SETTINGS$", "\uE11D");
@@ -61,16 +68,6 @@ public class SettingsWindow {
 	private static JButton windowed = createButton("$WINDOWED_SETTINGS$", "\uE737");
 	private static JButton language = createButton("$LANGUAGE_SETTINGS$", "\uE12B");
 
-
-	static JFrame frame = new JFrame();
-	private static LangLabel title = new LangLabel("$SETTINGS_TITLE$");
-	private static JPanel tempPanel = new JPanel(null);
-	private static JPanel mainPanel = new JPanel();
-	private static JPanel titlePanel = new JPanel();
-	private static JPanel settingsButtons = new JPanel();
-
-
-	public static boolean run = true;
 	public static void createPanel() {
 		frame = new JFrame();
 		int width = 636;
@@ -78,7 +75,7 @@ public class SettingsWindow {
 		frame.setSize(width, height);
 		URL iconURL = Window.class.getResource("/Resources/Icons/windowIcon.png");
 		ImageIcon icon = new ImageIcon(iconURL);
-		Image newIcon = icon.getImage().getScaledInstance(120, 120,  Image.SCALE_SMOOTH);
+		Image newIcon = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
 		frame.setIconImage(newIcon);
 		frame.setResizable(false);
 		frame.setTitle("GDBoard - Settings");
@@ -92,15 +89,15 @@ public class SettingsWindow {
 				frame.setVisible(false);
 			}
 		});
-		if(Settings.getSettings("settings").equalsIgnoreCase("")){
-			frame.setLocation((int) Defaults.screenSize.getWidth()/2 - width /2, 200);
+		if (Settings.getSettings("settings").equalsIgnoreCase("")) {
+			frame.setLocation((int) Defaults.screenSize.getWidth() / 2 - width / 2, 200);
 
 		}
 		frame.setLayout(null);
 
-			blankSpace.setBounds(0, 0, 208, 60);
-			buttons.setBounds(0, 60, 208, height -20);
-			content.setBounds(208, 0, 412, height);
+		blankSpace.setBounds(0, 0, 208, 60);
+		buttons.setBounds(0, 60, 208, height - 20);
+		content.setBounds(208, 0, 412, height);
 
 		blankSpace.setBackground(Defaults.MAIN);
 
@@ -108,17 +105,17 @@ public class SettingsWindow {
 		title.setForeground(Defaults.FOREGROUND);
 		title.setFont(Defaults.SEGOE_LIGHT.deriveFont(24f));
 
-		mainPanel.setBounds(0,0, width -20, height);
+		mainPanel.setBounds(0, 0, width - 20, height);
 		mainPanel.setBackground(Defaults.TOP);
 		mainPanel.setLayout(null);
 
-		titlePanel.setBounds(0,20, width -20, height);
+		titlePanel.setBounds(0, 20, width - 20, height);
 		titlePanel.setBackground(Defaults.TOP);
 		titlePanel.add(title);
 
 
 		settingsButtons.setBackground(Defaults.TOP);
-		settingsButtons.setBounds(50, 80, width - 100, height -100);
+		settingsButtons.setBounds(50, 80, width - 100, height - 100);
 
 		mainPanel.add(settingsButtons);
 		mainPanel.add(titlePanel);
@@ -164,11 +161,8 @@ public class SettingsWindow {
 		blankSpace.add(home);
 
 
-
-
 		general.setBackground(Defaults.SELECT);
 		general.setUI(selectUI);
-
 
 
 		buttons.add(general);//
@@ -189,7 +183,6 @@ public class SettingsWindow {
 		buttons.add(language); //
 
 
-
 		SettingsButton chatBotButton = new SettingsButton("Chat Bot", "Set up Commands, messages, etc.", "\uE99A"); //TODO Localization
 		SettingsButton gdButton = new SettingsButton("Geometry Dash", "Set up Geometry Dash related settings", "\uF16E");
 		SettingsButton channelPoints = new SettingsButton("Channel Points", "Activate stuff with Channel Points", "\uF126");
@@ -197,7 +190,6 @@ public class SettingsWindow {
 		SettingsButton languages = new SettingsButton("Language", "Set your language", "\uE12B");
 		SettingsButton accountsTab = new SettingsButton("Accounts", "Manage Accounts", "\uE13D");
 		SettingsButton windowedTab = new SettingsButton("Windowed Mode", "Switch to windowed mode, overlay is depreciated", "\uE737");
-
 
 
 		chatBotButton.addActionListener(e -> {
@@ -251,21 +243,18 @@ public class SettingsWindow {
 		settingsButtons.add(gdButton);
 		settingsButtons.add(personalizationTab);
 		settingsButtons.add(accountsTab);
-		if(Settings.getSettings("windowed").equalsIgnoreCase("false")){
+		if (Settings.getSettings("windowed").equalsIgnoreCase("false")) {
 			settingsButtons.add(windowedTab);
 		}
 
 		//settingsButtons.add(languages);
 
 
-
-
-
-		if(Settings.getSettings("windowed").equalsIgnoreCase("false")){
+		if (Settings.getSettings("windowed").equalsIgnoreCase("false")) {
 			buttons.add(windowed);
 			window.add(mainPanel);
 			tempPanel.setVisible(false);
-			tempPanel.setBounds(0,0, width, height);
+			tempPanel.setBounds(0, 0, width, height);
 			tempPanel.add(blankSpace);
 			tempPanel.add(buttons);
 			tempPanel.add(content);
@@ -273,17 +262,18 @@ public class SettingsWindow {
 		}
 		frame.setVisible(false);
 
-			frame.add(mainPanel);
+		frame.add(mainPanel);
 
-			tempPanel.setVisible(false);
-			tempPanel.setBounds(0,0, width, height);
-			tempPanel.add(blankSpace);
-			tempPanel.add(buttons);
-			tempPanel.add(content);
-			frame.add(tempPanel);
+		tempPanel.setVisible(false);
+		tempPanel.setBounds(0, 0, width, height);
+		tempPanel.add(blankSpace);
+		tempPanel.add(buttons);
+		tempPanel.add(content);
+		frame.add(tempPanel);
 
 	}
-	static void openPage(String page){
+
+	static void openPage(String page) {
 		switch (page) {
 			case "chatbot":
 				clearButtons();
@@ -333,21 +323,22 @@ public class SettingsWindow {
 		}
 	}
 
-	private static void clearButtons(){
+	private static void clearButtons() {
 		for (Component component : buttons.getComponents()) {
 			if (component instanceof JButton) {
 				component.setVisible(false);
 			}
 		}
 	}
+
 	public static void refreshUI() {
 		blankSpace.setBackground(Defaults.MAIN);
 		mainPanel.setBackground(Defaults.TOP);
 		titlePanel.setBackground(Defaults.TOP);
 		title.setForeground(Defaults.FOREGROUND);
 		settingsButtons.setBackground(Defaults.TOP);
-		for(Component component : settingsButtons.getComponents()){
-			if(component instanceof SettingsButton){
+		for (Component component : settingsButtons.getComponents()) {
+			if (component instanceof SettingsButton) {
 				((SettingsButton) component).refreshUI();
 			}
 		}
@@ -365,10 +356,9 @@ public class SettingsWindow {
 						component2.setForeground(Defaults.FOREGROUND);
 					}
 				}
-				if(!((JButton) component).getUI().equals(selectUI)) {
+				if (!((JButton) component).getUI().equals(selectUI)) {
 					component.setBackground(Defaults.MAIN);
-				}
-				else{
+				} else {
 					component.setBackground(Defaults.SELECT);
 				}
 
@@ -381,21 +371,15 @@ public class SettingsWindow {
 						component2.setForeground(Defaults.FOREGROUND);
 					}
 				}
-				if(!((JButton) component).getUI().equals(selectUI)) {
+				if (!((JButton) component).getUI().equals(selectUI)) {
 					component.setBackground(Defaults.MAIN);
-				}
-				else{
+				} else {
 					component.setBackground(Defaults.SELECT);
 				}
 
 			}
 		}
 	}
-
-
-	private static int clean = 0;
-	private static int refreshHelper = 0;
-
 
 	private static JButton createButton(String text, String icon) {
 
@@ -428,7 +412,7 @@ public class SettingsWindow {
 		button.addActionListener(e -> {
 			for (Component component2 : button.getComponents()) {
 				if (component2 instanceof LangLabel) {
-					if(!((LangLabel) component2).getIdentifier().equalsIgnoreCase("WINDOWED_SETTINGS")) {
+					if (!((LangLabel) component2).getIdentifier().equalsIgnoreCase("WINDOWED_SETTINGS")) {
 						for (Component componentA : content.getComponents()) {
 							if (componentA instanceof JPanel) {
 								componentA.setVisible(false);
@@ -441,7 +425,7 @@ public class SettingsWindow {
 							generalPage.setVisible(true);
 							refreshHelper = 0;
 							clean++;
-							if(clean == 5){
+							if (clean == 5) {
 								System.out.println("cleaned");
 								//noinspection CallToSystemGC
 								System.gc();
@@ -457,7 +441,7 @@ public class SettingsWindow {
 							chaosModePage.setVisible(true);
 							clean = 0;
 							refreshHelper++;
-							if(refreshHelper == 5){
+							if (refreshHelper == 5) {
 								System.out.println("refreshed");
 								GDHelper.refresh();
 								refreshHelper = 0;
@@ -555,7 +539,7 @@ public class SettingsWindow {
 				}
 			}
 
-			if(!text.equalsIgnoreCase("$HOME_BUTTON$")) {
+			if (!text.equalsIgnoreCase("$HOME_BUTTON$")) {
 				button.setUI(selectUI);
 				button.setBackground(Defaults.SELECT);
 			}
@@ -564,7 +548,7 @@ public class SettingsWindow {
 	}
 
 	static void click(String identifier) {
-		if(!identifier.equals("WINDOWED_SETTINGS")) {
+		if (!identifier.equals("WINDOWED_SETTINGS")) {
 			for (Component componentA : content.getComponents()) {
 				if (componentA instanceof JPanel) {
 					componentA.setVisible(false);
@@ -679,6 +663,7 @@ public class SettingsWindow {
 			}
 		}
 	}
+
 	public static void addToFrame(JComponent component) {
 
 		// --------------------
@@ -688,6 +673,7 @@ public class SettingsWindow {
 
 		// --------------------
 	}
+
 	static void removeFromFrame(JComponent component) {
 
 		// --------------------
@@ -697,8 +683,9 @@ public class SettingsWindow {
 
 		// --------------------
 	}
+
 	//region SetLocation
-	static void setLocation(Point point){
+	static void setLocation(Point point) {
 		window.setLocation(point);
 	}
 	//endregion

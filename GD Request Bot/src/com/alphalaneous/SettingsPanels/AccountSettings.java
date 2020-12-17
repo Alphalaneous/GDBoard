@@ -6,10 +6,9 @@ import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.exception.GDLoginFailedException;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.Base64;
-
-import javax.swing.*;
 
 import static com.alphalaneous.Defaults.settingsButtonUI;
 
@@ -31,7 +30,8 @@ public class AccountSettings {
 	private static CurvedButton loginButton = new CurvedButton("$LOGIN$");
 	private static CurvedButton cancelButton = new CurvedButton("$CANCEL$");
 
-	private static Color red = new Color(255,0,0);
+	private static Color red = new Color(255, 0, 0);
+
 	public static JPanel createPanel() {
 
 		panel.setDoubleBuffered(true);
@@ -40,35 +40,34 @@ public class AccountSettings {
 		panel.setLayout(null);
 
 		channelText.setTextLangFormat("$TWITCH$", Settings.getSettings("channel"));
-		geometryText.setTextLangFormat("$GEOMETRY_DASH$","NA");
+		geometryText.setTextLangFormat("$GEOMETRY_DASH$", "NA");
 		channelText.setForeground(Defaults.FOREGROUND);
 		channelText.setFont(Defaults.SEGOE.deriveFont(14f));
-		channelText.setBounds(25,50,channelText.getPreferredSize().width+5,channelText.getPreferredSize().height+5);
+		channelText.setBounds(25, 50, channelText.getPreferredSize().width + 5, channelText.getPreferredSize().height + 5);
 		geometryText.setForeground(Defaults.FOREGROUND);
 		geometryText.setFont(Defaults.SEGOE.deriveFont(14f));
-		geometryText.setBounds(25,20,geometryText.getPreferredSize().width+5,geometryText.getPreferredSize().height+5);
+		geometryText.setBounds(25, 20, geometryText.getPreferredSize().width + 5, geometryText.getPreferredSize().height + 5);
 
 
 		refreshTwitch.setBackground(Defaults.BUTTON);
-		refreshTwitch.setBounds(365,48,25,25);
-		refreshTwitch.setPreferredSize(new Dimension(25,25));
+		refreshTwitch.setBounds(365, 48, 25, 25);
+		refreshTwitch.setPreferredSize(new Dimension(25, 25));
 		refreshTwitch.setUI(settingsButtonUI);
 		refreshTwitch.setForeground(Defaults.FOREGROUND);
 		refreshTwitch.setBorder(BorderFactory.createEmptyBorder());
 		refreshTwitch.setFont(Defaults.SYMBOLS.deriveFont(14f));
 		refreshTwitch.addActionListener(e -> {
-				Thread thread = new Thread(() -> {
-					try {
-						APIs.setOauth(false);
-					}
-					catch (Exception ignored){
-					}
-				});
-				thread.start();
+			Thread thread = new Thread(() -> {
+				try {
+					APIs.setOauth(false);
+				} catch (Exception ignored) {
+				}
+			});
+			thread.start();
 
 		});
 
-		logon.setSize(500,270);
+		logon.setSize(500, 270);
 		logon.setResizable(false);
 		logon.setTitle("Log into GD");
 		logon.setIconImage(Assets.GDBoard.getImage());
@@ -76,30 +75,29 @@ public class AccountSettings {
 		logon.setLayout(null);
 
 
-
-		disclaimerLabel.setBounds(10,140,464,30);
+		disclaimerLabel.setBounds(10, 140, 464, 30);
 		disclaimerLabel.setFont(Defaults.SEGOE.deriveFont(14f));
 		disclaimerLabel.setForeground(Defaults.FOREGROUND2);
 		logon.add(disclaimerLabel);
 
-		usernameLabel.setBounds(10,10,464,30);
+		usernameLabel.setBounds(10, 10, 464, 30);
 		usernameLabel.setFont(Defaults.SEGOE.deriveFont(14f));
 		usernameLabel.setForeground(Defaults.FOREGROUND);
 		logon.add(usernameLabel);
 
-		passwordLabel.setBounds(10,70,464,30);
+		passwordLabel.setBounds(10, 70, 464, 30);
 		passwordLabel.setFont(Defaults.SEGOE.deriveFont(14f));
 		passwordLabel.setForeground(Defaults.FOREGROUND);
 		logon.add(passwordLabel);
 
-		usernameInput.setBounds(10,40,464, 30);
+		usernameInput.setBounds(10, 40, 464, 30);
 		logon.add(usernameInput);
 
-		passwordInput.setBounds(10,100,464, 30);
+		passwordInput.setBounds(10, 100, 464, 30);
 		logon.add(passwordInput);
 
 		//System.out.println(new String(passwordInput.getPassword()));
-		loginButton.setBounds(10,180, 230, 40);
+		loginButton.setBounds(10, 180, 230, 40);
 		loginButton.setFont(Defaults.SEGOE.deriveFont(14f));
 		loginButton.setUI(settingsButtonUI);
 		loginButton.setBackground(Defaults.BUTTON);
@@ -107,31 +105,29 @@ public class AccountSettings {
 		loginButton.setPreferredSize(new Dimension(232, 40));
 		loginButton.refresh();
 		loginButton.addActionListener(e -> {
-					try{
-						LoadGD.authClient = GDClientBuilder.create().buildAuthenticated(new GDClientBuilder.Credentials(usernameInput.getText(), new String(passwordInput.getPassword()))).block();
-						LoadGD.isAuth = true;
-						refreshGD(usernameInput.getText());
-						Settings.writeSettings("p", new String(Base64.getEncoder().encode(xor(new String(passwordInput.getPassword()), 15).getBytes())));
-						Settings.writeSettings("GDUsername", usernameInput.getText());
-						Settings.writeSettings("GDLogon", "true");
-						logon.setVisible(false);
-					}
-					catch (GDLoginFailedException f){
-						usernameLabel.setForeground(red);
-						passwordLabel.setForeground(red);
-						Settings.writeSettings("GDLogon", "false");
-						LoadGD.isAuth = false;
-					}
-					catch (Exception f){
-						usernameLabel.setForeground(red);
-						usernameLabel.setTextLang("Failed");
-					}
+			try {
+				LoadGD.authClient = GDClientBuilder.create().buildAuthenticated(new GDClientBuilder.Credentials(usernameInput.getText(), new String(passwordInput.getPassword()))).block();
+				LoadGD.isAuth = true;
+				refreshGD(usernameInput.getText());
+				Settings.writeSettings("p", new String(Base64.getEncoder().encode(xor(new String(passwordInput.getPassword()), 15).getBytes())));
+				Settings.writeSettings("GDUsername", usernameInput.getText());
+				Settings.writeSettings("GDLogon", "true");
+				logon.setVisible(false);
+			} catch (GDLoginFailedException f) {
+				usernameLabel.setForeground(red);
+				passwordLabel.setForeground(red);
+				Settings.writeSettings("GDLogon", "false");
+				LoadGD.isAuth = false;
+			} catch (Exception f) {
+				usernameLabel.setForeground(red);
+				usernameLabel.setTextLang("Failed");
+			}
 
 
 		});
 		logon.add(loginButton);
 
-		cancelButton.setBounds(244,180, 230, 40);
+		cancelButton.setBounds(244, 180, 230, 40);
 		cancelButton.setFont(Defaults.SEGOE.deriveFont(14f));
 		cancelButton.setUI(settingsButtonUI);
 		cancelButton.setBackground(Defaults.BUTTON);
@@ -139,7 +135,7 @@ public class AccountSettings {
 		cancelButton.setPreferredSize(new Dimension(230, 40));
 		cancelButton.refresh();
 		cancelButton.addActionListener(e -> {
-					logon.setVisible(false);
+			logon.setVisible(false);
 
 
 		});
@@ -147,27 +143,27 @@ public class AccountSettings {
 		logon.add(cancelButton);
 
 		refreshGD.setBackground(Defaults.BUTTON);
-		refreshGD.setBounds(365,18,25,25);
-		refreshGD.setPreferredSize(new Dimension(25,25));
+		refreshGD.setBounds(365, 18, 25, 25);
+		refreshGD.setPreferredSize(new Dimension(25, 25));
 		refreshGD.setUI(settingsButtonUI);
 		refreshGD.setForeground(Defaults.FOREGROUND);
 		refreshGD.setBorder(BorderFactory.createEmptyBorder());
 		refreshGD.setFont(Defaults.SYMBOLS.deriveFont(14f));
 		refreshGD.addActionListener(e -> {
-					usernameInput.setText("");
-					usernameInput.requestFocus();
-					passwordInput.setText("");
-					usernameInput.clearUndo();
-					passwordInput.clearUndo();
-					usernameLabel.setForeground(Defaults.FOREGROUND);
-					usernameLabel.setTextLang("$USERNAME$");
-					passwordLabel.setForeground(Defaults.FOREGROUND);
-					logon.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - logon.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - logon.getHeight() / 2);
-					logon.setVisible(true);
+			usernameInput.setText("");
+			usernameInput.requestFocus();
+			passwordInput.setText("");
+			usernameInput.clearUndo();
+			passwordInput.clearUndo();
+			usernameLabel.setForeground(Defaults.FOREGROUND);
+			usernameLabel.setTextLang("$USERNAME$");
+			passwordLabel.setForeground(Defaults.FOREGROUND);
+			logon.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - logon.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - logon.getHeight() / 2);
+			logon.setVisible(true);
 
 
 		});
-		
+
 		panel.add(channelText);
 		panel.add(geometryText);
 		panel.add(refreshTwitch);
@@ -175,19 +171,22 @@ public class AccountSettings {
 		return panel;
 
 	}
-	public static void refreshTwitch(String channel){
+
+	public static void refreshTwitch(String channel) {
 		channelText.setTextLangFormat("$TWITCH$", channel);
 
-		channelText.setBounds(25,50,channelText.getPreferredSize().width+5,channelText.getPreferredSize().height+5);
+		channelText.setBounds(25, 50, channelText.getPreferredSize().width + 5, channelText.getPreferredSize().height + 5);
 
 	}
-	public static void refreshGD(String username){
-		if(LoadGD.isAuth) {
+
+	public static void refreshGD(String username) {
+		if (LoadGD.isAuth) {
 			geometryText.setTextLangFormat("$GEOMETRY_DASH$", username);
 			geometryText.setBounds(25, 20, geometryText.getPreferredSize().width + 5, geometryText.getPreferredSize().height + 5);
 		}
 
 	}
+
 	public static void refreshUI() {
 		refreshTwitch.setBackground(Defaults.BUTTON);
 		refreshTwitch.setForeground(Defaults.FOREGROUND);
@@ -198,7 +197,7 @@ public class AccountSettings {
 		logon.getContentPane().setBackground(Defaults.MAIN);
 		disclaimerLabel.setForeground(Defaults.FOREGROUND2);
 
-		if(usernameLabel.getForeground() != red) {
+		if (usernameLabel.getForeground() != red) {
 			usernameLabel.setForeground(Defaults.FOREGROUND);
 			passwordLabel.setForeground(Defaults.FOREGROUND);
 		}
@@ -225,14 +224,15 @@ public class AccountSettings {
 			if (component instanceof JLabel) {
 				component.setForeground(Defaults.FOREGROUND);
 			}
-			if(component instanceof JTextArea){
+			if (component instanceof JTextArea) {
 				((FancyTextArea) component).refresh_();
 			}
-			if(component instanceof ThemedCheckbox){
+			if (component instanceof ThemedCheckbox) {
 				((ThemedCheckbox) component).refresh();
 			}
 		}
 	}
+
 	private static String xor(String inputString, int xorKey) {
 
 		StringBuilder outputString = new StringBuilder();

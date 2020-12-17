@@ -1,10 +1,10 @@
 package com.alphalaneous.SettingsPanels;
 
-import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.alphalaneous.Components.FancyTextArea;
 import com.alphalaneous.Components.LangLabel;
 import com.alphalaneous.Defaults;
 import com.alphalaneous.Settings;
+import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +23,7 @@ public class OutputSettings {
 	private static FancyTextArea noLevelsStringInput = new FancyTextArea(false, false);
 	private static FancyTextArea fileLocationInput = new FancyTextArea(false, false);
 	private static JPanel panel = new JPanel();
+
 	public static JPanel createPanel() {
 
 		panel.setDoubleBuffered(true);
@@ -31,19 +32,18 @@ public class OutputSettings {
 		panel.setLayout(null);
 		LangLabel outputText = new LangLabel("$OUTPUTS_TEXT$");
 		outputText.setFont(Defaults.SEGOE.deriveFont(14f));
-		outputText.setBounds(25,16,outputText.getPreferredSize().width+5,outputText.getPreferredSize().height+5);
+		outputText.setBounds(25, 16, outputText.getPreferredSize().width + 5, outputText.getPreferredSize().height + 5);
 		outputText.setForeground(Defaults.FOREGROUND);
-		outputStringInput.setBounds(25,45,365, 200);
+		outputStringInput.setBounds(25, 45, 365, 200);
 		outputStringInput.setLineWrap(true);
 		outputStringInput.setWrapStyleWord(true);
 		outputStringInput.setText(outputString);
 		outputStringInput.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyReleased(KeyEvent e){
-				if(!outputStringInput.getText().equalsIgnoreCase("")){
+			public void keyReleased(KeyEvent e) {
+				if (!outputStringInput.getText().equalsIgnoreCase("")) {
 					outputString = outputStringInput.getText();
-				}
-				else{
+				} else {
 					outputString = "Currently playing %levelName% (%levelID%) by %levelAuthor%!";
 				}
 				Settings.writeSettings("outputString", "%s%" + outputString.replace("\n", "%n%").replaceAll("%s%", ""));
@@ -52,19 +52,18 @@ public class OutputSettings {
 
 		LangLabel noLevelsText = new LangLabel("$NO_LEVELS_TEXT$");
 		noLevelsText.setFont(Defaults.SEGOE.deriveFont(14f));
-		noLevelsText.setBounds(25,261,noLevelsText.getPreferredSize().width+5,noLevelsText.getPreferredSize().height+5);
+		noLevelsText.setBounds(25, 261, noLevelsText.getPreferredSize().width + 5, noLevelsText.getPreferredSize().height + 5);
 		noLevelsText.setForeground(Defaults.FOREGROUND);
-		noLevelsStringInput.setBounds(25,290,365, 200);
+		noLevelsStringInput.setBounds(25, 290, 365, 200);
 		noLevelsStringInput.setLineWrap(true);
 		noLevelsStringInput.setWrapStyleWord(true);
 		noLevelsStringInput.setText(noLevelString);
 		noLevelsStringInput.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyReleased(KeyEvent e){
-				if(!noLevelsStringInput.getText().equalsIgnoreCase("")){
+			public void keyReleased(KeyEvent e) {
+				if (!noLevelsStringInput.getText().equalsIgnoreCase("")) {
 					noLevelString = noLevelsStringInput.getText();
-				}
-				else{
+				} else {
 					noLevelString = "There are no levels in the queue!";
 				}
 				Settings.writeSettings("noLevelsString", "%s%" + noLevelString.replace("\n", "%n%").replaceAll("%s%", ""));
@@ -73,15 +72,15 @@ public class OutputSettings {
 
 		LangLabel fileLocationText = new LangLabel("$FILE_LOCATION$");
 		fileLocationText.setFont(Defaults.SEGOE.deriveFont(14f));
-		fileLocationText.setBounds(25,506,fileLocationText.getPreferredSize().width+5,fileLocationText.getPreferredSize().height+5);
+		fileLocationText.setBounds(25, 506, fileLocationText.getPreferredSize().width + 5, fileLocationText.getPreferredSize().height + 5);
 		fileLocationText.setForeground(Defaults.FOREGROUND);
-		fileLocationInput.setBounds(25,535,365, 64);
+		fileLocationInput.setBounds(25, 535, 365, 64);
 		fileLocationInput.setLineWrap(true);
 		fileLocationInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		fileLocationInput.setText(fileLocation);
 		fileLocationInput.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyReleased(KeyEvent e){
+			public void keyReleased(KeyEvent e) {
 				fileLocation = fileLocationInput.getText();
 				Settings.writeSettings("outputFileLocation", fileLocation.replace("\\\\", "\\"));
 			}
@@ -94,29 +93,31 @@ public class OutputSettings {
 		panel.add(fileLocationText);
 		panel.add(fileLocationInput);
 		return panel;
-		
+
 	}
-	public static void loadSettings(){
-		if(!Settings.getSettings("noLevelsString").equalsIgnoreCase("")) {
+
+	public static void loadSettings() {
+		if (!Settings.getSettings("noLevelsString").equalsIgnoreCase("")) {
 			noLevelString = Settings.getSettings("noLevelsString").replace("%n%", "\n");
 			noLevelsStringInput.setText(noLevelString.replaceAll("%s%", ""));
 		}
-		if(!Settings.getSettings("outputString").equalsIgnoreCase("")) {
+		if (!Settings.getSettings("outputString").equalsIgnoreCase("")) {
 			outputString = Settings.getSettings("outputString").replace("%n%", "\n");
 			outputStringInput.setText(outputString.replaceAll("%s%", ""));
 		}
-		if(!Settings.getSettings("outputFileLocation").equalsIgnoreCase("")) {
+		if (!Settings.getSettings("outputFileLocation").equalsIgnoreCase("")) {
 			fileLocation = Settings.getSettings("outputFileLocation").replace("\\", "\\\\");
 			fileLocationInput.setText(fileLocation.replace("\\\\", "\\"));
 		}
 	}
-	public static void setOutputStringFile(String text){
+
+	public static void setOutputStringFile(String text) {
 		Path file = Paths.get(fileLocation + "\\output.txt");
-		if(fileLocation.equalsIgnoreCase("")){
+		if (fileLocation.equalsIgnoreCase("")) {
 			file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\output.txt");
 		}
 		try {
-			if(!Files.exists(file)) {
+			if (!Files.exists(file)) {
 				Files.createFile(file);
 			}
 			Files.write(file, text.getBytes());
@@ -124,6 +125,7 @@ public class OutputSettings {
 			e1.printStackTrace();
 		}
 	}
+
 	public static void refreshUI() {
 
 		panel.setBackground(Defaults.SUB_MAIN);
@@ -140,10 +142,10 @@ public class OutputSettings {
 				component.setForeground(Defaults.FOREGROUND);
 
 			}
-			if(component instanceof JTextArea){
+			if (component instanceof JTextArea) {
 				((FancyTextArea) component).refresh_();
 			}
-			if(component instanceof ThemedCheckbox){
+			if (component instanceof ThemedCheckbox) {
 				((ThemedCheckbox) component).refresh();
 			}
 		}

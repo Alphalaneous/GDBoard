@@ -1,11 +1,11 @@
 package com.alphalaneous.Windows;
 
+import com.alphalaneous.*;
 import com.alphalaneous.Components.*;
+import com.alphalaneous.Panels.CommentsPanel;
 import com.alphalaneous.Panels.InfoPanel;
 import com.alphalaneous.Panels.LevelsPanel;
 import com.alphalaneous.SettingsPanels.PersonalizationSettings;
-import com.alphalaneous.*;
-import com.alphalaneous.Panels.CommentsPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,6 +27,8 @@ import java.util.stream.Stream;
 import static com.alphalaneous.Defaults.defaultUI;
 
 public class Window {
+	public static JFrame frame = new JFrame();
+	public static boolean showingMore = true;
 	private static int width = 465;
 	private static int height = 630;
 	private static JPanel content = new JPanel(null);
@@ -40,9 +42,7 @@ public class Window {
 	private static JButtonUI selectUI = new JButtonUI();
 	private static JPanel toolBar = new JPanel(null);
 	private static JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-	public static JFrame frame = new JFrame();
 	private static JLayeredPane mainFrame = new JLayeredPane();
-	public static boolean showingMore = true;
 	private static JButtonUI buttonUI = new JButtonUI();
 	private static JButton showComments;
 	private static JLabel AlphalaneousText = new JLabel("Alphalaneous");

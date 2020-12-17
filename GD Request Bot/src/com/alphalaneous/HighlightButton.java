@@ -14,7 +14,7 @@ public class HighlightButton extends JButton {
 
 	private JButtonUI highlightUI = new JButtonUI();
 
-	public HighlightButton(Image image){
+	public HighlightButton(Image image) {
 		highlightUI.setSelect(Defaults.TOP);
 		highlightUI.setHover(Defaults.TOP);
 		highlightUI.setBackground(Defaults.TOP);
@@ -28,6 +28,7 @@ public class HighlightButton extends JButton {
 			public void mouseEntered(MouseEvent e) {
 				setIcon(new ImageIcon(colorImage(convertToBufferedImage(getIcon()), Defaults.ACCENT)));
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				setIcon(new ImageIcon(colorImage(convertToBufferedImage(getIcon()), Defaults.FOREGROUND)));
@@ -39,7 +40,8 @@ public class HighlightButton extends JButton {
 		setOpaque(true);
 		setPreferredSize(new Dimension(button.getPreferredSize().width + 14, 25));
 	}
-	public HighlightButton(String text){
+
+	public HighlightButton(String text) {
 		setText(text);
 		setFont(Defaults.SYMBOLS.deriveFont(20f));
 		highlightUI.setSelect(Defaults.TOP);
@@ -52,6 +54,7 @@ public class HighlightButton extends JButton {
 			public void mouseEntered(MouseEvent e) {
 				setForeground(Defaults.ACCENT);
 			}
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				setForeground(Defaults.FOREGROUND);
@@ -64,16 +67,6 @@ public class HighlightButton extends JButton {
 		setPreferredSize(new Dimension(getPreferredSize().width + 14, 25));
 	}
 
-	public void refresh(){
-		setForeground(Defaults.FOREGROUND);
-		setBackground(Defaults.TOP);
-		highlightUI.setSelect(Defaults.TOP);
-		highlightUI.setHover(Defaults.TOP);
-		highlightUI.setBackground(Defaults.TOP);
-		if(getIcon() != null){
-			setIcon(new ImageIcon(colorImage(convertToBufferedImage(getIcon()), Defaults.FOREGROUND)));
-		}
-	}
 	public static BufferedImage colorImage(BufferedImage image, Color color) {
 		int width = image.getWidth();
 		int height = image.getHeight();
@@ -90,14 +83,26 @@ public class HighlightButton extends JButton {
 		}
 		return image;
 	}
-	public static BufferedImage convertToBufferedImage(Icon icon){
+
+	public static BufferedImage convertToBufferedImage(Icon icon) {
 		BufferedImage bi = new BufferedImage(
 				icon.getIconWidth(),
 				icon.getIconHeight(),
 				BufferedImage.TYPE_INT_ARGB);
 		Graphics g = bi.createGraphics();
-		icon.paintIcon(null, g, 0,0);
+		icon.paintIcon(null, g, 0, 0);
 		g.dispose();
 		return bi;
+	}
+
+	public void refresh() {
+		setForeground(Defaults.FOREGROUND);
+		setBackground(Defaults.TOP);
+		highlightUI.setSelect(Defaults.TOP);
+		highlightUI.setHover(Defaults.TOP);
+		highlightUI.setBackground(Defaults.TOP);
+		if (getIcon() != null) {
+			setIcon(new ImageIcon(colorImage(convertToBufferedImage(getIcon()), Defaults.FOREGROUND)));
+		}
 	}
 }

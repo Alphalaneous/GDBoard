@@ -129,8 +129,8 @@ NOW_PLAYING_TOP_MESSAGE = @%s, %s (%s) is now being played!
 REQUESTS_OFF_MESSAGE = @%s, Requests are off!
 VULGAR_LANGUAGE = (Vulgar Language)
 IMAGE_HACK = (Image Hack)
-REQUESTS_OFF_TOGGLE_MESSAGE = /me Requests are now off!
-REQUESTS_ON_TOGGLE_MESSAGE = /me Requests are now on!
+REQUESTS_OFF_TOGGLE_MESSAGE = Requests are now off!
+REQUESTS_ON_TOGGLE_MESSAGE = Requests are now on!
 GLOBALLY_BLOCKED_LEVEL_MESSAGE = @%s, That level has been globally blocked! Reason: %s
 
 //Settings

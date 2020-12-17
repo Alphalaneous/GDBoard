@@ -11,8 +11,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
-import java.util.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import static com.alphalaneous.Defaults.settingsButtonUI;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
@@ -155,17 +157,6 @@ public class ChannelPointSettings {
 
 	}
 
-	public static class ButtonInfo {
-
-		public Path path;
-
-		ButtonInfo(Path path) {
-			this.path = path;
-		}
-
-	}
-
-
 	public static void addButton(String command, Color color, Icon icon, boolean defaultIcon) {
 		i++;
 		if ((i - 1) % 2 == 0) {
@@ -247,7 +238,6 @@ public class ChannelPointSettings {
 		commandsPanel.add(button);
 	}
 
-
 	public static void refreshUI() {
 		panel.setBackground(Defaults.TOP);
 		titlePanel.setBackground(Defaults.TOP);
@@ -291,5 +281,15 @@ public class ChannelPointSettings {
 				((ThemedCheckbox) component).refresh();
 			}
 		}
+	}
+
+	public static class ButtonInfo {
+
+		public Path path;
+
+		ButtonInfo(Path path) {
+			this.path = path;
+		}
+
 	}
 }

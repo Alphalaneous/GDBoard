@@ -1,10 +1,10 @@
 package com.alphalaneous.SettingsPanels;
 
-import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.alphalaneous.Components.FancyTextArea;
 import com.alphalaneous.Components.LangLabel;
 import com.alphalaneous.Defaults;
 import com.alphalaneous.Settings;
+import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,19 +47,19 @@ public class GeneralBotSettings {
 
 		versionLabel.setForeground(Defaults.FOREGROUND2);
 		versionLabel.setFont(Defaults.SEGOE.deriveFont(14f));
-		versionLabel.setBounds(25,20,345,40);
+		versionLabel.setBounds(25, 20, 345, 40);
 
 		antiDoxInfo.setForeground(Defaults.FOREGROUND2);
 		antiDoxInfo.setFont(Defaults.SEGOE.deriveFont(12f));
-		antiDoxInfo.setBounds(25,165,345,40);
+		antiDoxInfo.setBounds(25, 165, 345, 40);
 
 		multiThreadInfo.setForeground(Defaults.FOREGROUND2);
 		multiThreadInfo.setFont(Defaults.SEGOE.deriveFont(12f));
-		multiThreadInfo.setBounds(25,105,345,40);
+		multiThreadInfo.setBounds(25, 105, 345, 40);
 
 		cooldownLabel.setForeground(Defaults.FOREGROUND);
 		cooldownLabel.setFont(Defaults.SEGOE.deriveFont(14f));
-		cooldownLabel.setBounds(25,200,345,40);
+		cooldownLabel.setBounds(25, 200, 345, 40);
 
 		silentChatMode.addMouseListener(new MouseAdapter() {
 			@Override
@@ -85,20 +85,23 @@ public class GeneralBotSettings {
 				Settings.writeSettings("antiDox", String.valueOf(antiDox));
 			}
 		});
-		globalCooldownInput.setBounds(25,235,365, 32);
+		globalCooldownInput.setBounds(25, 235, 365, 32);
 		globalCooldownInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		globalCooldownInput.setText("0");
 		globalCooldownInput.addKeyListener(new KeyListener() {
 			@Override
-			public void keyTyped(KeyEvent e) { }
+			public void keyTyped(KeyEvent e) {
+			}
+
 			@Override
-			public void keyPressed(KeyEvent e) { }
+			public void keyPressed(KeyEvent e) {
+			}
+
 			@Override
 			public void keyReleased(KeyEvent e) {
 				try {
 					cooldown = Integer.parseInt(globalCooldownInput.getText());
-				}
-				catch (NumberFormatException f){
+				} catch (NumberFormatException f) {
 					cooldown = 0;
 				}
 				Settings.writeSettings("globalCooldown", String.valueOf(cooldown));
@@ -118,32 +121,34 @@ public class GeneralBotSettings {
 		panel.add(globalCooldownInput);
 		panel.add(cooldownLabel);
 		return panel;
-		
+
 	}
-	private static ThemedCheckbox createButton(String text, int y){
+
+	private static ThemedCheckbox createButton(String text, int y) {
 		ThemedCheckbox button = new ThemedCheckbox(text);
-		button.setBounds(25,y,365,30);
+		button.setBounds(25, y, 365, 30);
 		button.setForeground(Defaults.FOREGROUND);
 		button.setBorder(BorderFactory.createEmptyBorder());
 		button.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.refresh();
 		return button;
 	}
-	public static void loadSettings(){
 
-		if(!Settings.getSettings("silentMode").equalsIgnoreCase("")) {
+	public static void loadSettings() {
+
+		if (!Settings.getSettings("silentMode").equalsIgnoreCase("")) {
 			silentOption = Boolean.parseBoolean(Settings.getSettings("silentMode"));
 			silentChatMode.setChecked(silentOption);
 		}
-		if(!Settings.getSettings("antiDox").equalsIgnoreCase("")) {
+		if (!Settings.getSettings("antiDox").equalsIgnoreCase("")) {
 			antiDox = Boolean.parseBoolean(Settings.getSettings("antiDox"));
 			antiDoxMode.setChecked(antiDox);
 		}
-		if(!Settings.getSettings("multiMode").equalsIgnoreCase("")) {
+		if (!Settings.getSettings("multiMode").equalsIgnoreCase("")) {
 			multiOption = Boolean.parseBoolean(Settings.getSettings("multiMode"));
 			multiThreadMode.setChecked(multiOption);
 		}
-		if(!Settings.getSettings("globalCooldown").equalsIgnoreCase("")) {
+		if (!Settings.getSettings("globalCooldown").equalsIgnoreCase("")) {
 			cooldown = Integer.parseInt(Settings.getSettings("globalCooldown"));
 			globalCooldownInput.setText(String.valueOf(cooldown));
 		}
@@ -158,7 +163,7 @@ public class GeneralBotSettings {
 		cooldownLabel.setForeground(Defaults.FOREGROUND);
 
 		for (Component component : panel.getComponents()) {
-			if(component instanceof ThemedCheckbox){
+			if (component instanceof ThemedCheckbox) {
 				((ThemedCheckbox) component).refresh();
 			}
 		}

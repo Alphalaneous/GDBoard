@@ -1,15 +1,13 @@
 package com.alphalaneous;
 
 import com.alphalaneous.Components.FancyTooltip;
-import com.alphalaneous.Components.RoundedJButton;
+import com.alphalaneous.Panels.CommentsPanel;
 import com.alphalaneous.Panels.InfoPanel;
 import com.alphalaneous.Panels.LevelsPanel;
-import com.alphalaneous.ThemedComponents.ThemedJButton;
+import com.alphalaneous.SettingsPanels.*;
 import com.alphalaneous.Windows.CommandEditor;
 import com.alphalaneous.Windows.SettingsWindow;
 import com.alphalaneous.Windows.Window;
-import com.alphalaneous.Panels.CommentsPanel;
-import com.alphalaneous.SettingsPanels.*;
 
 import static com.alphalaneous.Defaults.defaultUI;
 import static com.alphalaneous.Defaults.settingsButtonUI;
@@ -21,7 +19,7 @@ public class Themes {
 		Window.refreshUI();
 		//ThemedJButton.refreshAll();
 		//RoundedJButton.refreshAll();
-		for(FancyTooltip toolTip : FancyTooltip.tooltips){
+		for (FancyTooltip toolTip : FancyTooltip.tooltips) {
 			toolTip.refresh();
 		}
 		defaultUI.setBackground(Defaults.MAIN);

@@ -29,7 +29,6 @@ public class InfoPanel {
 		descPanel.setOpaque(true);
 
 
-
 		description.setText("N/A");
 		StyledDocument doc = description.getStyledDocument();
 		SimpleAttributeSet center = new SimpleAttributeSet();
@@ -40,43 +39,47 @@ public class InfoPanel {
 		description.setOpaque(false);
 		description.setEditable(false);
 		description.setForeground(Defaults.FOREGROUND);
-		description.setBackground(new Color(0,0,0,0));
-		description.setBounds(5,5, width -10, height -10);
+		description.setBackground(new Color(0, 0, 0, 0));
+		description.setBounds(5, 5, width - 10, height - 10);
 
 
 		descPanel.add(description);
-		fullPanel.setBounds(1,31,400,110);
+		fullPanel.setBounds(1, 31, 400, 110);
 		fullPanel.add(descPanel);
 		window.add(fullPanel);
 		refreshInfo();
 	}
 
-	public static void resetDimensions(int width, int height){
-		descPanel.setBounds(0,0, width, height);
-		description.setBounds(5,5,width-10, height-10);
+	public static void resetDimensions(int width, int height) {
+		descPanel.setBounds(0, 0, width, height);
+		description.setBounds(5, 5, width - 10, height - 10);
 
 	}
-	public static JPanel getInfoWindow(){
+
+	public static JPanel getInfoWindow() {
 		return fullPanel;
 	}
+
 	public static void refreshInfo() {
 		if (Requests.levels.size() == 0) {
 			description.setText("NA");
 		} else {
-			description.setText(Requests.levels.get(LevelsPanel.getSelectedID()).getDescription().toString());
+			description.setText(Requests.levels.get(LevelsPanel.getSelectedID()).getDescription());
 		}
 	}
+
 	public static void refreshUI() {
 		descPanel.setBackground(Defaults.SUB_MAIN);
 		description.setForeground(Defaults.FOREGROUND);
 	}
-	public String getName(){
-		return "Description";
-	}
 
 	//region SetLocation
-	public static void setLocation(Point point){
+	public static void setLocation(Point point) {
 		window.setLocation(point);
+	}
+
+	public String getName() {
+		return "Description";
 	}
 	//endregion
 

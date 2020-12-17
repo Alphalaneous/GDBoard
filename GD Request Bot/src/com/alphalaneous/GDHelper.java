@@ -5,6 +5,8 @@ import java.util.Random;
 
 public class GDHelper {
 
+	static float platSpeed = 0;
+	static String command = Defaults.saveDirectory + "\\GDBoard\\bin\\ChaosMode.exe";
 	private static boolean isDead = true;
 	private static boolean isInLevel = false;
 	private static boolean isPractice = false;
@@ -22,9 +24,6 @@ public class GDHelper {
 	private static float levelLength = 0;
 	private static int objects = 0;
 	private static float speed = 0;
-	static float platSpeed = 0;
-
-
 	private static String[] responses = {"I can't believe you died at %d%%!",
 			"%d%%? That's it?",
 			"How did you fail at %d%% of all places?",
@@ -109,13 +108,11 @@ public class GDHelper {
 			"Never gonna say goodbye",
 			"Never gonna tell a lie and hurt you"
 	};
-
 	private static Runtime rt = Runtime.getRuntime();
-
-	static String command = Defaults.saveDirectory + "\\GDBoard\\bin\\ChaosMode.exe";
 	private static BufferedReader processOutput;
 	private static BufferedWriter processInput;
 	private static Process pr;
+	private static int rickPos = 0;
 
 	static {
 		try {
@@ -126,8 +123,6 @@ public class GDHelper {
 			e.printStackTrace();
 		}
 	}
-
-	private static int rickPos = 0;
 
 	static void start() {
 		new Thread(() -> {
@@ -144,21 +139,21 @@ public class GDHelper {
 							if (type.equalsIgnoreCase("IsDead")) {
 								if (response.equalsIgnoreCase("true")) {
 									isDead = true;
-									if(!checkedDead && isInLevel){
-										if(Settings.getSettings("SendDeathMessages").equalsIgnoreCase("true")) {
-											if(!isPractice) {
+									if (!checkedDead && isInLevel) {
+										if (Settings.getSettings("SendDeathMessages").equalsIgnoreCase("true")) {
+											if (!isPractice) {
 												Random rand = new Random();
 												int n = rand.nextInt(responses.length);
 												String responseA = responses[n];
-												if(responseA.equalsIgnoreCase(".rick") || rickPos > 0){
+												if (responseA.equalsIgnoreCase(".rick") || rickPos > 0) {
 													Main.sendMessage("☠ | " + rickResponses[rickPos]);
 
 													rickPos++;
-													if(rickPos == rickResponses.length){
+													if (rickPos == rickResponses.length) {
 														rickPos = 0;
 													}
 												}
-												if (rickPos == 0){
+												if (rickPos == 0) {
 													Main.sendMessage(Utilities.format("☠ | " + responseA, (int) Math.floor(percent)));
 												}
 											}
@@ -221,8 +216,7 @@ public class GDHelper {
 							if (type.equalsIgnoreCase("Percent")) {
 								try {
 									percent = Float.parseFloat(response);
-								}
-								catch (NumberFormatException ignored){
+								} catch (NumberFormatException ignored) {
 								}
 							}
 							if (type.equalsIgnoreCase("X")) {
@@ -285,7 +279,7 @@ public class GDHelper {
 		}
 	}
 
-	public static void refresh(){
+	public static void refresh() {
 		close();
 		try {
 			pr = rt.exec(command);

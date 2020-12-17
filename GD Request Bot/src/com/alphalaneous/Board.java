@@ -16,101 +16,105 @@ import java.time.ZonedDateTime;
 
 public class Board {
 
+	static AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
 	private static boolean bwomp = false;
+	private static NashornSandbox sandbox = NashornSandboxes.create();
 
-	public static void sendDeathMessagesToggle(){
+	public static void sendDeathMessagesToggle() {
 		Settings.writeSettings("SendDeathMessages", String.valueOf(!Boolean.parseBoolean(Settings.getSettings("SendDeathMessages"))));
 		GeneralSettings.deathMessage.setChecked(Boolean.parseBoolean(Settings.getSettings("SendDeathMessages")));
 	}
 
-	public static void playSound(String location){
+	public static void playSound(String location) {
 		Sounds.playSound(location, true, false, true, false);
 	}
-	public static void playSound(String location, boolean restart, boolean overlap, boolean isURL){
+
+	public static void playSound(String location, boolean restart, boolean overlap, boolean isURL) {
 		Sounds.playSound(location, restart, overlap, true, isURL);
 	}
-	public static void stopSound(String location){
+
+	public static void stopSound(String location) {
 		Sounds.stopSound(location);
 	}
-	public static void stopAllSounds(){
+
+	public static void stopAllSounds() {
 		Sounds.stopAllSounds();
 	}
 
-	public static void sendMessage(String message, boolean whisper, String user){
+	public static void sendMessage(String message, boolean whisper, String user) {
 		Main.sendMessage(message, whisper, user);
 	}
-	public static void sendMessage(String message){
+
+	public static void sendMessage(String message) {
 		Main.sendMessage(message, false, null);
 	}
 
-	public static void sendAsMain(String message){
+	public static void sendAsMain(String message) {
 		Main.sendMainMessage(message);
 	}
 
-	static AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
-	public static void playNewgrounds(String songID){
+	public static void playNewgrounds(String songID) {
 		Sounds.playSound(client.getSongById(Long.parseLong(songID)).block().getDownloadURL(), true, false, false, true);
 	}
 
-	private static NashornSandbox sandbox = NashornSandboxes.create();
-	public static String eval(String function){
+	public static String eval(String function) {
 		return Command.run("function command(){" + function + "}", true);
 	}
 
-	public static void showPopup(String title, String text){
+	public static void showPopup(String title, String text) {
 		new Thread(() -> {
-			DialogBox.showDialogBox(title,"<html>" + text + "</html>", "", new String[]{"OK"});
+			DialogBox.showDialogBox(title, "<html>" + text + "</html>", "", new String[]{"OK"});
 		}).start();
 	}
 
 
-
-	public static String getenv(String name){
+	public static String getenv(String name) {
 		return System.getenv(name);
 	}
 
-	public static void toggleBwomp(){
+	public static void toggleBwomp() {
 		bwomp = !bwomp;
 	}
 
-	public static void endGDBoard(){
+	public static void endGDBoard() {
 		Main.close();
 	}
 
-	public static void signal(){
+	public static void signal() {
 		JSONObject messageObj = new JSONObject();
 		messageObj.put("request_type", "get_blocked_ids");
 		Main.sendBotMessage(messageObj.toString());
 	}
 
-	public static void rick(){
-			if(Sounds.sounds.containsKey("/Resources/rick.mp3")) {
-				Sounds.stopSound("/Resources/rick.mp3");
-			}
-			Sounds.playSound("/Resources/rick.mp3", true, false, false, false);
+	public static void rick() {
+		if (Sounds.sounds.containsKey("/Resources/rick.mp3")) {
+			Sounds.stopSound("/Resources/rick.mp3");
+		}
+		Sounds.playSound("/Resources/rick.mp3", true, false, false, false);
 	}
 
-	public static void stopRick(){
+	public static void stopRick() {
 		Sounds.stopSound("/Resources/rick.mp3");
 	}
 
-	public static void knock(){
+	public static void knock() {
 		Sounds.playSound("/Resources/knock.mp3", true, true, false, false);
 	}
 
-	public static void stopKnock(){
+	public static void stopKnock() {
 		Sounds.stopSound("/Resources/knock.mp3");
 
 	}
-	public static void bwomp(){
+
+	public static void bwomp() {
 		Sounds.playSound("/Resources/bwomp.mp3", true, true, false, false);
 	}
 
-	public static void stopBwomp(){
+	public static void stopBwomp() {
 		Sounds.stopSound("/Resources/bwomp.mp3");
 	}
 
-	public static String testSearchPing(){
+	public static String testSearchPing() {
 		long time = ZonedDateTime.now().toInstant().toEpochMilli();
 		try {
 			if (LoadGD.isAuth) {
@@ -120,8 +124,7 @@ public class Board {
 			}
 			long timeAffter = ZonedDateTime.now().toInstant().toEpochMilli();
 			return String.valueOf(timeAffter - time);
-		}
-		catch (MissingAccessException e){
+		} catch (MissingAccessException e) {
 			return "Servers Down!";
 		}
 	}

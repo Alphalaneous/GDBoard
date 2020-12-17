@@ -18,8 +18,14 @@ import java.awt.datatransfer.StringSelection;
 import java.io.BufferedInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.*;
-import java.util.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Base64;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Random;
 
 public class Functions {
 
@@ -69,8 +75,8 @@ public class Functions {
 				if (select == 0 && Requests.levels.size() > 0) {
 					if (!GeneralSettings.nowPlayingOption) {
 
-						if(!onCool) {
-							new Thread(() ->{
+						if (!onCool) {
+							new Thread(() -> {
 								onCool = true;
 								try {
 									Thread.sleep(500);
@@ -81,17 +87,17 @@ public class Functions {
 							}).start();
 							new Thread(() -> {
 								if (Requests.levels.get(0).getContainsImage()) {
-									Main.sendMessage(Utilities.format("$NOW_PLAYING_MESSAGE$",
+									Main.sendMessage(Utilities.format("🎮 | $NOW_PLAYING_MESSAGE$",
 											Requests.levels.get(0).getName(),
 											Requests.levels.get(0).getLevelID(),
 											Requests.levels.get(0).getRequester()) + " " + Utilities.format("$IMAGE_HACK$"));
 								} else if (Requests.levels.get(0).getContainsVulgar()) {
-									Main.sendMessage(Utilities.format("$NOW_PLAYING_MESSAGE$",
+									Main.sendMessage(Utilities.format("🎮 | $NOW_PLAYING_MESSAGE$",
 											Requests.levels.get(0).getName(),
 											Requests.levels.get(0).getLevelID(),
 											Requests.levels.get(0).getRequester()) + " " + Utilities.format("$VULGAR_LANGUAGE$"));
 								} else {
-									Main.sendMessage(Utilities.format("$NOW_PLAYING_MESSAGE$",
+									Main.sendMessage(Utilities.format("🎮 | $NOW_PLAYING_MESSAGE$",
 											Requests.levels.get(0).getName(),
 											Requests.levels.get(0).getLevelID(),
 											Requests.levels.get(0).getRequester()));
@@ -173,7 +179,7 @@ public class Functions {
 					clipboard.setContents(selection, selection);
 					if (!GeneralSettings.nowPlayingOption) {
 						int finalNum = num;
-						new Thread(() -> Main.sendMessage(Utilities.format("$NOW_PLAYING_MESSAGE$",
+						new Thread(() -> Main.sendMessage(Utilities.format("🎮 | $NOW_PLAYING_MESSAGE$",
 								Requests.levels.get(finalNum).getName(),
 								Requests.levels.get(finalNum).getLevelID(),
 								Requests.levels.get(finalNum).getRequester()))).start();
@@ -224,13 +230,13 @@ public class Functions {
 						.append(",").append(Requests.levels.get(i).getRequester())
 						.append(",").append(Requests.levels.get(i).getVersion())
 						.append(",").append(Requests.levels.get(i).getCoins())
-						.append(",").append(new String(Base64.getEncoder().encode(Requests.levels.get(i).getDescription().toString().getBytes())))
+						.append(",").append(new String(Base64.getEncoder().encode(Requests.levels.get(i).getDescription().getBytes())))
 						.append(",").append(Requests.levels.get(i).getLikes())
 						.append(",").append(Requests.levels.get(i).getDownloads())
 						.append(",").append(Requests.levels.get(i).getLength())
 						.append(",").append(Requests.levels.get(i).getLevelVersion())
 						.append(",").append(Requests.levels.get(i).getSongID())
-						.append(",").append(new String(Base64.getEncoder().encode(Requests.levels.get(i).getSongName().toString().getBytes())))
+						.append(",").append(new String(Base64.getEncoder().encode(Requests.levels.get(i).getSongName().getBytes())))
 						.append(",").append(Requests.levels.get(i).getSongAuthor())
 						.append(",").append(Requests.levels.get(i).getObjects())
 						.append(",").append(Requests.levels.get(i).getOriginal())
@@ -350,11 +356,11 @@ public class Functions {
 		if (Main.programLoaded) {
 			if (Requests.requestsEnabled) {
 				Requests.requestsEnabled = false;
-				Main.sendMessage(Utilities.format("$REQUESTS_OFF_TOGGLE_MESSAGE$"));
+				Main.sendMessage(Utilities.format("/me 🟥 | $REQUESTS_OFF_TOGGLE_MESSAGE$"));
 
 			} else {
 				Requests.requestsEnabled = true;
-				Main.sendMessage(Utilities.format("$REQUESTS_ON_TOGGLE_MESSAGE$"));
+				Main.sendMessage(Utilities.format("/me 🟩 | $REQUESTS_ON_TOGGLE_MESSAGE$"));
 			}
 		}
 	}

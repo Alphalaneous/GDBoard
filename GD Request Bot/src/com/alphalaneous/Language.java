@@ -74,15 +74,14 @@ public class Language {
 				Path path = it.next();
 
 				String[] file;
-				if(BotHandler.uri.getScheme().equals("jar")) {
+				if (BotHandler.uri.getScheme().equals("jar")) {
 					file = path.toString().split("/");
-				}
-				else {
+				} else {
 					file = path.toString().split("\\\\");
 				}
 				String fileName = file[file.length - 1];
 				if (fileName.equals(lang + ".lang")) {
-					if(BotHandler.uri.getScheme().equals("jar")) {
+					if (BotHandler.uri.getScheme().equals("jar")) {
 						InputStream is = Main.class
 								.getClassLoader().getResourceAsStream(path.toString().substring(1));
 						assert is != null;
@@ -105,8 +104,7 @@ public class Language {
 						is.close();
 						isr.close();
 						br.close();
-					}
-					else {
+					} else {
 						Scanner sc = null;
 						try {
 							sc = new Scanner(path);
@@ -124,8 +122,7 @@ public class Language {
 								if (line.split("=", 2)[0].trim().equals(identifier)) {
 									return line.split("=", 2)[1].trim();
 								}
-							}
-							catch (IndexOutOfBoundsException e){
+							} catch (IndexOutOfBoundsException e) {
 								return identifier;
 							}
 						}
@@ -146,7 +143,7 @@ public class Language {
 			try {
 				WatchService watcher = FileSystems.getDefault().newWatchService();
 				Path dir = Paths.get(Defaults.saveDirectory + "/GDBoard/Languages");
-				if(Files.exists(dir)) {
+				if (Files.exists(dir)) {
 					dir.register(watcher, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);
 
 					while (true) {

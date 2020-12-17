@@ -36,11 +36,11 @@ import java.util.zip.GZIPInputStream;
 public class Requests {
 
 	public static ArrayList<LevelData> levels = new ArrayList<>();
+	public static boolean requestsEnabled = true;
+	static HashMap<Long, String> globallyBlockedIDs = new HashMap<>();
 	private static HashMap<Long, Integer> addedLevels = new HashMap<>();
 	private static HashMap<String, Integer> userStreamLimitMap = new HashMap<>();
-	static HashMap<Long, String> globallyBlockedIDs = new HashMap<>();
 	private static boolean processingLevel = false;
-	public static boolean requestsEnabled = true;
 	private static Path logged = Paths.get(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
 	private static Path disallowed = Paths.get(Defaults.saveDirectory + "\\GDBoard\\disallowedStrings.txt");
 	private static Path allowed = Paths.get(Defaults.saveDirectory + "\\GDBoard\\allowedStrings.txt");
@@ -98,13 +98,12 @@ public class Requests {
 							sendError(Utilities.format("$SEARCH_FAILED$", user));
 							return;
 						}
-					}
-					else if(arguments.size() > 2) {
-						boolean inQuotes= false;
+					} else if (arguments.size() > 2) {
+						boolean inQuotes = false;
 						if (arguments.get(2).equalsIgnoreCase("by") || message.contains(" by ")) {
 							if (arguments.get(2).equalsIgnoreCase("by")) {
 								levelNameS = arguments.get(1).trim();
-								if(levelNameS.startsWith("\"") && levelNameS.endsWith("\"")){
+								if (levelNameS.startsWith("\"") && levelNameS.endsWith("\"")) {
 									inQuotes = true;
 								}
 								levelNameS = levelNameS.replace("\"", "");
@@ -114,7 +113,7 @@ public class Requests {
 								String[] argumentsS = messageS.split(" by ", 2);
 
 								levelNameS = argumentsS[0];
-								if(levelNameS.startsWith("\"") && levelNameS.endsWith("\"")){
+								if (levelNameS.startsWith("\"") && levelNameS.endsWith("\"")) {
 									inQuotes = true;
 								}
 								levelNameS = levelNameS.replace("\"", "");
@@ -151,13 +150,13 @@ public class Requests {
 										pages = Objects.requireNonNull(LoadGD.anonClient.getLevelsByUser(gdUser, j).block()).asList().toArray();
 									}
 									for (int i = 0; i < 10; i++) {
-										if(!inQuotes){
+										if (!inQuotes) {
 											if (((GDLevel) pages[i]).getName().toLowerCase()
 													.startsWith(levelNameS)) {
 												level = (GDLevel) pages[i];
 												break outerLoop;
 											}
-										}else {
+										} else {
 											if (((GDLevel) pages[i]).getName().toLowerCase()
 													.equalsIgnoreCase(levelNameS)) {
 												level = (GDLevel) pages[i];
@@ -182,8 +181,7 @@ public class Requests {
 							}
 							ID = level.getId();
 
-						}
-						else {
+						} else {
 							String messageS = message.split(" ", 2)[1].replace("\"", "");
 							try {
 								if (LoadGD.isAuth) {
@@ -202,8 +200,7 @@ public class Requests {
 							}
 							ID = level.getId();
 						}
-					}
-					else {
+					} else {
 						String messageS = message.split(" ", 2)[1].replace("\"", "");
 
 						try {
@@ -223,8 +220,7 @@ public class Requests {
 						}
 						ID = level.getId();
 					}
-				}
-				else{
+				} else {
 					if (ID > 999999999 || ID < 1) {
 						processingLevel = false;
 						return;
@@ -347,7 +343,7 @@ public class Requests {
 				}
 
 				LevelData levelData = new LevelData();
-				Thread parse ;
+				Thread parse;
 				if (Main.programLoaded && !bypass) {
 					if (checkList(level.getCreatorName(), "\\GDBoard\\blockedGDUsers.txt")) {
 						sendUnallowed(Utilities.format("$BLOCKED_CREATOR_MESSAGE$", user));
@@ -505,9 +501,9 @@ public class Requests {
 					iconSet = new GDUserIconSet(gdUser, spriteFactory);
 				} catch (MissingAccessException e) {
 					if (LoadGD.isAuth) {
-						gdUser = LoadGD.authClient.searchUser("RobTop").block();
+						gdUser = LoadGD.authClient.searchUser("Alphalaneous").block();
 					} else {
-						gdUser = LoadGD.anonClient.searchUser("RobTop").block();
+						gdUser = LoadGD.anonClient.searchUser("Alphalaneous").block();
 					}
 					assert gdUser != null;
 					iconSet = new GDUserIconSet(gdUser, spriteFactory);
@@ -517,8 +513,7 @@ public class Requests {
 					Image imgScaled = icon.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 					ImageIcon imgNew = new ImageIcon(imgScaled);
 					levelData.setPlayerIcon(imgNew);
-				}
-				catch (IllegalArgumentException e){
+				} catch (IllegalArgumentException e) {
 					levelData.setPlayerIcon(null);
 				}
 
@@ -724,13 +719,13 @@ public class Requests {
 				String[] values = decompressed.toString().split(";");
 				Requests.levels.get(k).setObjects(values.length);
 				if ((values.length < RequestSettings.minObjects) && RequestSettings.minObjectsOption) {
-					Main.sendMessage(Utilities.format("$TOO_FEW_OBJECTS_MESSAGE$", Requests.levels.get(k).getRequester()));
+					Main.sendMessage(Utilities.format("🟡 | $TOO_FEW_OBJECTS_MESSAGE$", Requests.levels.get(k).getRequester()));
 					LevelsPanel.removeButton(k);
 					Requests.levels.remove(k);
 					return;
 				}
 				if ((values.length > RequestSettings.maxObjects) && RequestSettings.maxObjectsOption) {
-					Main.sendMessage(Utilities.format("$TOO_MANY_OBJECTS_MESSAGE$", Requests.levels.get(k).getRequester()));
+					Main.sendMessage(Utilities.format("🟡 | $TOO_MANY_OBJECTS_MESSAGE$", Requests.levels.get(k).getRequester()));
 					LevelsPanel.removeButton(k);
 					Requests.levels.remove(k);
 					return;
@@ -866,9 +861,11 @@ public class Requests {
 		bis.close();
 		return sb;
 	}
+
 	public static void request(String user, boolean isMod, boolean isSub, String message, String messageID) {
 		addRequest(0, user, isMod, isSub, message, messageID, true);
 	}
+
 	public static int getPosFromID(long ID) {
 		for (int i = 0; i < LevelsPanel.getSize(); i++) {
 			if (LevelsPanel.getButton(i).getID() == ID) {

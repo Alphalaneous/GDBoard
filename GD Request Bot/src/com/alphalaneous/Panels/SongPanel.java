@@ -4,19 +4,18 @@ import com.alphalaneous.Components.CurvedButton;
 import com.alphalaneous.Components.JButtonUI;
 import com.alphalaneous.Components.RoundedJButton;
 import com.alphalaneous.Defaults;
-import com.alphalaneous.Windows.DialogBox;
 import com.alphalaneous.Requests;
 import com.alphalaneous.Settings;
+import com.alphalaneous.Windows.DialogBox;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedInputStream;
 import java.io.IOException;
-
-import javax.swing.*;
 
 public class SongPanel {
 	private static int height = 90;
@@ -35,8 +34,8 @@ public class SongPanel {
 		panel.setBackground(Defaults.MAIN);
 		panel.setLayout(null);
 		final Thread[] thread = new Thread[1];
-		
-		
+
+
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
 
@@ -48,7 +47,7 @@ public class SongPanel {
 
 				if (Requests.levels.size() != 0) {
 
-					if(thread[0] != null) {
+					if (thread[0] != null) {
 						thread[0].stop();
 					}
 					thread[0] = new Thread(() -> {
@@ -79,17 +78,16 @@ public class SongPanel {
 		persist.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if(Requests.levels.get(LevelsPanel.getSelectedID()).getNotPersist()) {
+				if (Requests.levels.get(LevelsPanel.getSelectedID()).getNotPersist()) {
 					persist.setLText("Remove persist?");
 					Requests.levels.get(LevelsPanel.getSelectedID()).setPersist(true);
-				}
-				else{
+				} else {
 					persist.setLText("Make music persist?");
 					Requests.levels.get(LevelsPanel.getSelectedID()).setPersist(false);
 				}
 			}
 		});
-		persist.setBounds(20,height-40,260,30);
+		persist.setBounds(20, height - 40, 260, 30);
 		persist.setBackground(Defaults.BUTTON);
 		persist.setUI(defaultUI);
 		persist.setForeground(Defaults.FOREGROUND);
@@ -103,9 +101,9 @@ public class SongPanel {
 		songName.setForeground(Defaults.FOREGROUND);
 
 		songAuthorID.setFont(Defaults.SEGOE.deriveFont(14f));
-		songAuthorID.setBounds(10, height - 28, width/2, 20);
+		songAuthorID.setBounds(10, height - 28, width / 2, 20);
 		songAuthorID.setForeground(Defaults.FOREGROUND);
-		
+
 		panel.add(persist);
 		panel.add(songName);
 		panel.add(songAuthorID);
@@ -115,6 +113,7 @@ public class SongPanel {
 
 		refreshInfo();
 	}
+
 	private static RoundedJButton createButton(String icon, int i, String tooltip) {
 		RoundedJButton button = new RoundedJButton(icon, tooltip);
 		button.setPreferredSize(new Dimension(50, 50));
@@ -126,11 +125,9 @@ public class SongPanel {
 		button.setFont(Defaults.SYMBOLS.deriveFont(20f));
 		return button;
 	}
-	public String getName(){
-		return "Music";
-	}
+
 	public static void refreshInfo() {
-		if(Settings.getSettings("windowed").equalsIgnoreCase("false")) {
+		if (Settings.getSettings("windowed").equalsIgnoreCase("false")) {
 			if (Requests.levels.size() == 0) {
 				songName.setText("N/A");
 				songAuthorID.setText("N/A");
@@ -138,9 +135,9 @@ public class SongPanel {
 				play.setVisible(false);
 				persist.setVisible(false);
 			} else {
-				songName.setText(Requests.levels.get(LevelsPanel.getSelectedID()).getSongName().toString());
+				songName.setText(Requests.levels.get(LevelsPanel.getSelectedID()).getSongName());
 
-				if (songName.getText().equalsIgnoreCase("Custom") && Requests.levels.get(LevelsPanel.getSelectedID()).getSongAuthor().toString().equalsIgnoreCase("")) {
+				if (songName.getText().equalsIgnoreCase("Custom") && Requests.levels.get(LevelsPanel.getSelectedID()).getSongAuthor().equalsIgnoreCase("")) {
 					songAuthorID.setText("");
 					stop.setVisible(false);
 					play.setVisible(false);
@@ -154,7 +151,7 @@ public class SongPanel {
 			}
 		}
 	}
-	
+
 	public static void refreshUI() {
 		defaultUI.setBackground(Defaults.BUTTON);
 		defaultUI.setHover(Defaults.BUTTON_HOVER);
@@ -162,17 +159,20 @@ public class SongPanel {
 		panel.setBackground(Defaults.MAIN);
 		songName.setForeground(Defaults.FOREGROUND);
 		songAuthorID.setForeground(Defaults.FOREGROUND);
-		for(Component component : panel.getComponents())
-			if(component instanceof JButton) {
+		for (Component component : panel.getComponents())
+			if (component instanceof JButton) {
 				component.setBackground(Defaults.BUTTON);
 				component.setForeground(Defaults.FOREGROUND);
 			}
 	}
 
-
 	//region SetLocation
-	public static void setLocation(Point point){
+	public static void setLocation(Point point) {
 		window.setLocation(point);
+	}
+
+	public String getName() {
+		return "Music";
 	}
 	//endregion
 

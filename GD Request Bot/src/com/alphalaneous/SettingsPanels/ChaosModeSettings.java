@@ -1,6 +1,7 @@
 package com.alphalaneous.SettingsPanels;
 
-import com.alphalaneous.Components.*;
+import com.alphalaneous.Components.FancyTextArea;
+import com.alphalaneous.Components.ScrollbarUI;
 import com.alphalaneous.Defaults;
 import com.alphalaneous.Settings;
 import com.alphalaneous.ThemedComponents.ThemedCheckbox;
@@ -17,11 +18,28 @@ import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 public class ChaosModeSettings {
 
+	public static boolean enableChaos = false;
+	public static boolean modOnly = false;
+	public static boolean disableKillOption = false;
+	public static int minX = 0;
+	public static int maxX = 0;
+	public static int minY = 0;
+	public static int maxY = 0;
+	public static int minSize = 0;
+	public static int maxSize = 0;
+	public static int minSpeed = 0;
+	public static int maxSpeed = 0;
+	public static boolean minXOption = false;
+	public static boolean maxXOption = false;
+	public static boolean minYOption = false;
+	public static boolean maxYOption = false;
+	public static boolean minSizeOption = false;
+	public static boolean maxSizeOption = false;
+	public static boolean minSpeedOption = false;
+	public static boolean maxSpeedOption = false;
 	private static ThemedCheckbox enableChaosMode = createButton("$ENABLE_CHAOS_MODE$", 20);
 	private static ThemedCheckbox modOnlyChaos = createButton("$MOD_ONLY_CHAOS$", 50);
 	private static ThemedCheckbox disableKill = createButton("$DISABLE_KILL$", 90);
-
-
 	private static ThemedCheckbox minimumX = createButton("$MINIMUM_X$", 120);
 	private static ThemedCheckbox maximumX = createButton("$MAXIMUM_X$", 195);
 	private static ThemedCheckbox minimumY = createButton("$MINIMUM_Y$", 270);
@@ -38,30 +56,6 @@ public class ChaosModeSettings {
 	private static FancyTextArea maxSizeInput = new FancyTextArea(true, true);
 	private static FancyTextArea minSpeedInput = new FancyTextArea(true, true);
 	private static FancyTextArea maxSpeedInput = new FancyTextArea(true, true);
-
-
-	public static boolean enableChaos = false;
-	public static boolean modOnly = false;
-
-	public static boolean disableKillOption = false;
-	public static int minX = 0;
-	public static int maxX = 0;
-	public static int minY = 0;
-	public static int maxY = 0;
-	public static int minSize = 0;
-	public static int maxSize = 0;
-	public static int minSpeed = 0;
-	public static int maxSpeed = 0;
-
-	public static boolean minXOption = false;
-	public static boolean maxXOption = false;
-	public static boolean minYOption = false;
-	public static boolean maxYOption = false;
-	public static boolean minSizeOption = false;
-	public static boolean maxSizeOption = false;
-	public static boolean minSpeedOption = false;
-	public static boolean maxSpeedOption = false;
-
 	private static JPanel mainPanel = new JPanel(null);
 	private static JPanel panel = new JPanel();
 	private static JScrollPane scrollPane = new JScrollPane(panel);

@@ -2,11 +2,15 @@ package com.alphalaneous;
 
 import com.alphalaneous.Windows.DialogBox;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Variables {
 
@@ -25,7 +29,7 @@ public class Variables {
 			assert sc != null;
 			while (sc.hasNextLine()) {
 				String line = sc.nextLine();
-				if(line.contains("=")) {
+				if (line.contains("=")) {
 					vars.put(line.split("=", 2)[0].trim(), line.split("=", 2)[1].trim());
 				}
 			}
@@ -43,7 +47,7 @@ public class Variables {
 			Iterator it = vars.entrySet().iterator();
 			StringBuilder pairs = new StringBuilder();
 			while (it.hasNext()) {
-				Map.Entry pair = (Map.Entry)it.next();
+				Map.Entry pair = (Map.Entry) it.next();
 				pairs.append(pair.getKey()).append(" = ").append(pair.getValue()).append("\n");
 				it.remove();
 			}

@@ -9,8 +9,13 @@ import com.alphalaneous.Windows.Window;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.*;
-import java.nio.file.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import static com.alphalaneous.Defaults.settingsButtonUI;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
@@ -42,7 +47,7 @@ public class RequestsLog {
 		clearLogs.setForeground(Defaults.FOREGROUND);
 		clearLogs.setUI(settingsButtonUI);
 		clearLogs.addActionListener(e ->
-			new Thread(() -> {
+				new Thread(() -> {
 					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
 					String option = DialogBox.showDialogBox("$CLEAR_LOGS_DIALOG_TITLE$", "<html> $CLEAR_LOGS_DIALOG_INFO$ <html>", "", new String[]{"$YES$", "$NO$"});
 
@@ -83,7 +88,8 @@ public class RequestsLog {
 		return blockedSettingsPanel;
 
 	}
-	public static void clear(){
+
+	public static void clear() {
 		blockedListPanel.removeAll();
 		height = 0;
 		blockedListPanel.setBounds(0, 0, 400, (int) (height + 4));
@@ -91,9 +97,10 @@ public class RequestsLog {
 		scrollPane.updateUI();
 
 	}
+
 	private static void removeID(String ID) {
 		i--;
-		if (i % 4 == 0 && i !=0) {
+		if (i % 4 == 0 && i != 0) {
 			height = height - 39;
 			blockedListPanel.setBounds(0, 0, 400, (int) (height + 4));
 			blockedListPanel.setPreferredSize(new Dimension(400, (int) (height + 4)));
@@ -113,7 +120,7 @@ public class RequestsLog {
 
 	public static void addButton(long ID) {
 		i++;
-		if ((i-1) % 4 == 0) {
+		if ((i - 1) % 4 == 0) {
 			height = height + 39;
 			blockedListPanel.setBounds(0, 0, 400, (int) (height + 4));
 			blockedListPanel.setPreferredSize(new Dimension(400, (int) (height + 4)));
@@ -129,9 +136,9 @@ public class RequestsLog {
 		button.setFont(Defaults.SEGOE.deriveFont(14f));
 		button.setPreferredSize(new Dimension(85, 35));
 		button.addActionListener(e -> {
-				SettingsWindow.run = false;
+			SettingsWindow.run = false;
 
-				new Thread(() ->{
+			new Thread(() -> {
 
 				String option = DialogBox.showDialogBox("$REMOVE_LOG_DIALOG_TITLE$", "<html> $REMOVE_LOG_DIALOG_INFO$ <html>", "", new String[]{"$YES$", "$NO$"}, new Object[]{button.getLText()});
 
@@ -156,13 +163,14 @@ public class RequestsLog {
 					removeID(button.getLText());
 				}
 				SettingsWindow.run = true;
-				}).start();
+			}).start();
 
 		});
 		button.refresh();
 		blockedListPanel.add(button);
 
 	}
+
 	public static void refreshUI() {
 		scrollPane.getViewport().setBackground(Defaults.SUB_MAIN);
 		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
@@ -181,7 +189,7 @@ public class RequestsLog {
 				component.setForeground(Defaults.FOREGROUND);
 
 			}
-			if(component instanceof JTextArea){
+			if (component instanceof JTextArea) {
 				((FancyTextArea) component).refresh_();
 			}
 		}
@@ -195,10 +203,10 @@ public class RequestsLog {
 				}
 				component.setBackground(Defaults.BUTTON);
 			}
-			if(component instanceof JTextArea){
+			if (component instanceof JTextArea) {
 				((FancyTextArea) component).refresh_();
 			}
-			if(component instanceof ThemedCheckbox){
+			if (component instanceof ThemedCheckbox) {
 				((ThemedCheckbox) component).refresh();
 			}
 		}

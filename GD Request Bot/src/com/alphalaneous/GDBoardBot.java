@@ -9,16 +9,19 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.*;
+import java.net.ConnectException;
+import java.net.NoRouteToHostException;
+import java.net.Socket;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 class GDBoardBot {
-	private static int wait = 2000;
 	static boolean initialConnect = false;
+	private static int wait = 2000;
 	private static AtomicBoolean isConnect = new AtomicBoolean(false);
 	private static PrintWriter out;
 	private static BufferedReader in;
 	private static Socket clientSocket;
+	private static boolean firstOpen = true;
 
 	static {
 		while (true) {
@@ -49,8 +52,6 @@ class GDBoardBot {
 			}
 		}
 	}
-
-	private static boolean firstOpen = true;
 
 	static void start() {
 		start(false);

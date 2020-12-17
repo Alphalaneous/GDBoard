@@ -25,13 +25,15 @@ public class Assets {
 	public static ImageIcon channelPoints;
 	public static ImageIcon commands;
 	public static ImageIcon requests;
+	private static int width = 30;
+	private static int height = 30;
 
 	static {
 		try {
 			verifiedCoin = new ImageIcon(ImageIO
-						.read(Objects.requireNonNull(LevelsPanel.class.getClassLoader()
-								.getResource("Resources/GDAssets/verifiedCoin.png")))
-						.getScaledInstance(15, 15, Image.SCALE_SMOOTH));
+					.read(Objects.requireNonNull(LevelsPanel.class.getClassLoader()
+							.getResource("Resources/GDAssets/verifiedCoin.png")))
+					.getScaledInstance(15, 15, Image.SCALE_SMOOTH));
 			unverifiedCoin = new ImageIcon(ImageIO
 					.read(Objects.requireNonNull(LevelsPanel.class.getClassLoader()
 							.getResource("Resources/GDAssets/unverifiedCoin.png")))
@@ -78,12 +80,6 @@ public class Assets {
 		}
 	}
 
-
-
-	private static int width = 30;
-	private static int height = 30;
-
-
 	static void loadAssets() {
 		new Thread(() -> {
 			try {
@@ -107,8 +103,7 @@ public class Assets {
 								.getScaledInstance(width, height, Image.SCALE_SMOOTH)));
 					}
 				}
-			}
-			catch (IOException e){
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}).start();

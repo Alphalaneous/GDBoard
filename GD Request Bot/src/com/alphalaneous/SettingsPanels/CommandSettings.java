@@ -1,17 +1,25 @@
 package com.alphalaneous.SettingsPanels;
 
 import com.alphalaneous.BotHandler;
-import com.alphalaneous.Components.*;
+import com.alphalaneous.Components.CurvedButton;
+import com.alphalaneous.Components.LangLabel;
+import com.alphalaneous.Components.RoundedJButton;
+import com.alphalaneous.Components.ScrollbarUI;
 import com.alphalaneous.Defaults;
+import com.alphalaneous.Main;
 import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.alphalaneous.Windows.CommandEditor;
-import com.alphalaneous.Main;
 
 import javax.swing.*;
 import java.awt.*;
 import java.net.URI;
-import java.nio.file.*;
-import java.util.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Stream;
 
 import static com.alphalaneous.Defaults.settingsButtonUI;
@@ -58,7 +66,7 @@ public class CommandSettings {
 
 		commandLabel.setFont(Defaults.SEGOE.deriveFont(14f));
 		commandLabel.setForeground(Defaults.FOREGROUND);
-		commandLabel.setBounds(50,17,commandLabel.getPreferredSize().width+5, commandLabel.getPreferredSize().height + 5);
+		commandLabel.setBounds(50, 17, commandLabel.getPreferredSize().width + 5, commandLabel.getPreferredSize().height + 5);
 		titlePanel.add(commandLabel);
 
 
@@ -99,58 +107,56 @@ public class CommandSettings {
 					String[] file = path.toString().split("\\\\");
 					String fileName = file[file.length - 1];
 					if (fileName.endsWith(".js")) {
-						existingCommands.put(fileName.substring(0, fileName.length()-3), new ButtonInfo( path, false));
+						existingCommands.put(fileName.substring(0, fileName.length() - 3), new ButtonInfo(path, false));
 					}
 				}
 			}
 			for (Iterator<Path> it = walk.iterator(); it.hasNext(); ) {
 				Path path = it.next();
 				String[] file;
-				if(uri.getScheme().equals("jar")){
+				if (uri.getScheme().equals("jar")) {
 					file = path.toString().split("/");
-				}
-				else{
+				} else {
 					file = path.toString().split("\\\\");
 				}
 				String fileName = file[file.length - 1];
 				if (fileName.endsWith(".js")) {
-					if(!fileName.equalsIgnoreCase("!rick.js") &&
+					if (!fileName.equalsIgnoreCase("!rick.js") &&
 							!fileName.equalsIgnoreCase("!stoprick.js") &&
 							!fileName.equalsIgnoreCase("!eval.js") &&
 							!fileName.equalsIgnoreCase("!end.js") &&
 							!fileName.equalsIgnoreCase("!popup.js") &&
-							!fileName.equalsIgnoreCase("b!addcom.js")&&
-							!fileName.equalsIgnoreCase("b!editcom.js")&&
-							!fileName.equalsIgnoreCase("b!delcom.js")&&
-							!fileName.equalsIgnoreCase("b!addpoint.js")&&
-							!fileName.equalsIgnoreCase("b!editpoint.js")&&
-							!fileName.equalsIgnoreCase("b!delpoint.js")){
+							!fileName.equalsIgnoreCase("b!addcom.js") &&
+							!fileName.equalsIgnoreCase("b!editcom.js") &&
+							!fileName.equalsIgnoreCase("b!delcom.js") &&
+							!fileName.equalsIgnoreCase("b!addpoint.js") &&
+							!fileName.equalsIgnoreCase("b!editpoint.js") &&
+							!fileName.equalsIgnoreCase("b!delpoint.js")) {
 						String substring = fileName.substring(0, fileName.length() - 3);
-						if(!existingCommands.containsKey(substring)) {
-							existingCommands.put(substring, new ButtonInfo( path, true));
+						if (!existingCommands.containsKey(substring)) {
+							existingCommands.put(substring, new ButtonInfo(path, true));
 						}
 					}
 				}
 			}
-		}
-		catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		TreeMap<String, ButtonInfo> sorted = new TreeMap<>(existingCommands);
 
-		for(Map.Entry<String,ButtonInfo> entry : sorted.entrySet()) {
+		for (Map.Entry<String, ButtonInfo> entry : sorted.entrySet()) {
 			boolean exists = false;
 			String key = entry.getKey();
 			ButtonInfo value = entry.getValue();
-			if(!GeneralSettings.gdModeOption){
-				for(String command : gdCommands){
-					if(key.equalsIgnoreCase(command)){
+			if (!GeneralSettings.gdModeOption) {
+				for (String command : gdCommands) {
+					if (key.equalsIgnoreCase(command)) {
 						exists = true;
 						break;
 					}
 				}
 			}
-			if(!exists) {
+			if (!exists) {
 				addButton(key, value.isDefault);
 			}
 		}
@@ -158,7 +164,8 @@ public class CommandSettings {
 		panel.add(scrollPane);
 		return panel;
 	}
-	public static void refresh(){
+
+	public static void refresh() {
 
 		commandsPanel.removeAll();
 		height = 0;
@@ -183,92 +190,79 @@ public class CommandSettings {
 					String[] file = path.toString().split("\\\\");
 					String fileName = file[file.length - 1];
 					if (fileName.endsWith(".js")) {
-						existingCommands.put(fileName.substring(0, fileName.length()-3), new ButtonInfo( path, false));
+						existingCommands.put(fileName.substring(0, fileName.length() - 3), new ButtonInfo(path, false));
 					}
 				}
 			}
 			for (Iterator<Path> it = walk.iterator(); it.hasNext(); ) {
 				Path path = it.next();
 				String[] file;
-				if(uri.getScheme().equals("jar")){
+				if (uri.getScheme().equals("jar")) {
 					file = path.toString().split("/");
-				}
-				else{
+				} else {
 					file = path.toString().split("\\\\");
 				}
 				String fileName = file[file.length - 1];
 				if (fileName.endsWith(".js")) {
 
-					if(!fileName.equalsIgnoreCase("!rick.js") &&
+					if (!fileName.equalsIgnoreCase("!rick.js") &&
 							!fileName.equalsIgnoreCase("!stoprick.js") &&
 							!fileName.equalsIgnoreCase("!eval.js") &&
 							!fileName.equalsIgnoreCase("!end.js") &&
 							!fileName.equalsIgnoreCase("!popup.js") &&
-							!fileName.equalsIgnoreCase("b!addcom.js")&&
-							!fileName.equalsIgnoreCase("b!editcom.js")&&
-							!fileName.equalsIgnoreCase("b!delcom.js")&&
-							!fileName.equalsIgnoreCase("b!addpoint.js")&&
-							!fileName.equalsIgnoreCase("b!editpoint.js")&&
-							!fileName.equalsIgnoreCase("b!delpoint.js")){
+							!fileName.equalsIgnoreCase("b!addcom.js") &&
+							!fileName.equalsIgnoreCase("b!editcom.js") &&
+							!fileName.equalsIgnoreCase("b!delcom.js") &&
+							!fileName.equalsIgnoreCase("b!addpoint.js") &&
+							!fileName.equalsIgnoreCase("b!editpoint.js") &&
+							!fileName.equalsIgnoreCase("b!delpoint.js")) {
 						String substring = fileName.substring(0, fileName.length() - 3);
-						if(!existingCommands.containsKey(substring)) {
-							existingCommands.put(substring, new ButtonInfo( path, true));
+						if (!existingCommands.containsKey(substring)) {
+							existingCommands.put(substring, new ButtonInfo(path, true));
 						}
 					}
 				}
 			}
-		}
-		catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		TreeMap<String, ButtonInfo> sorted = new TreeMap<>(existingCommands);
 
-		for(Map.Entry<String,ButtonInfo> entry : sorted.entrySet()) {
+		for (Map.Entry<String, ButtonInfo> entry : sorted.entrySet()) {
 			boolean exists = false;
 			String key = entry.getKey();
 			ButtonInfo value = entry.getValue();
-			if(!GeneralSettings.gdModeOption){
-				for(String command : gdCommands){
-					if(key.equalsIgnoreCase(command)){
+			if (!GeneralSettings.gdModeOption) {
+				for (String command : gdCommands) {
+					if (key.equalsIgnoreCase(command)) {
 						exists = true;
 						break;
 					}
 				}
 			}
-			if(!exists) {
+			if (!exists) {
 				addButton(key, value.isDefault);
 			}
 		}
 	}
-	public static class ButtonInfo{
 
-		public Path path;
-		boolean isDefault;
-
-		ButtonInfo(Path path, boolean isDefault){
-			this.path = path;
-			this.isDefault = isDefault;
-		}
-
-	}
 	public static void addButton(String command, boolean isDefault) {
 		i++;
-		if ((i-1) % 2 == 0) {
+		if ((i - 1) % 2 == 0) {
 			height = height + 39;
 
 			commandsPanel.setBounds(0, 0, 400, (int) (height + 4));
 			commandsPanel.setPreferredSize(new Dimension(400, (int) (height + 4)));
-			if(i > 0) {
+			if (i > 0) {
 				scrollPane.updateUI();
 			}
 		}
 		CurvedButton button = new CurvedButton(command);
 		button.setBackground(Defaults.BUTTON);
 		button.setUI(settingsButtonUI);
-		if(isDefault) {
+		if (isDefault) {
 			button.setForeground(Defaults.FOREGROUND2);
-		}
-		else{
+		} else {
 			button.setForeground(Defaults.FOREGROUND);
 		}
 		button.setBorder(BorderFactory.createEmptyBorder());
@@ -282,7 +276,8 @@ public class CommandSettings {
 		button.refresh();
 		commandsPanel.add(button);
 	}
-	public static void refreshUI(){
+
+	public static void refreshUI() {
 		panel.setBackground(Defaults.TOP);
 		titlePanel.setBackground(Defaults.TOP);
 		commandLabel.setForeground(Defaults.FOREGROUND);
@@ -293,10 +288,9 @@ public class CommandSettings {
 		for (Component component : commandsPanel.getComponents()) {
 			if (component instanceof CurvedButton) {
 
-				if(component.getForeground().equals(Defaults.FOREGROUND2)) {
+				if (component.getForeground().equals(Defaults.FOREGROUND2)) {
 					component.setForeground(Defaults.FOREGROUND2);
-				}
-				else{
+				} else {
 					component.setForeground(Defaults.FOREGROUND);
 				}
 				component.setBackground(Defaults.BUTTON);
@@ -306,7 +300,7 @@ public class CommandSettings {
 				component.setForeground(Defaults.FOREGROUND);
 
 			}
-			if(component instanceof ThemedCheckbox){
+			if (component instanceof ThemedCheckbox) {
 				((ThemedCheckbox) component).refresh();
 			}
 		}
@@ -318,10 +312,22 @@ public class CommandSettings {
 			if (component instanceof JLabel) {
 				component.setForeground(Defaults.FOREGROUND);
 			}
-			if(component instanceof ThemedCheckbox){
+			if (component instanceof ThemedCheckbox) {
 				((ThemedCheckbox) component).refresh();
 			}
 		}
 		refresh();
+	}
+
+	public static class ButtonInfo {
+
+		public Path path;
+		boolean isDefault;
+
+		ButtonInfo(Path path, boolean isDefault) {
+			this.path = path;
+			this.isDefault = isDefault;
+		}
+
 	}
 }

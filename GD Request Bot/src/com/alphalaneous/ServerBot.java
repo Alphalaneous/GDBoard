@@ -26,7 +26,8 @@ class ServerBot {
 			e.printStackTrace();
 		}
 	}
-	void connect(){
+
+	void connect() {
 		JSONObject authObj = new JSONObject();
 		authObj.put("request_type", "connect");
 		authObj.put("oauth", Settings.getSettings("oauth"));
@@ -60,7 +61,7 @@ class ServerBot {
 				}
 				if (event.equalsIgnoreCase("connected")) {
 					System.out.println("Connected to GDBoard Servers");
-					while(true) {
+					while (true) {
 						if (DialogBox.active) {
 							DialogBox.closeDialogBox();
 							break;
@@ -78,7 +79,7 @@ class ServerBot {
 				}
 				if (event.equalsIgnoreCase("blocked_ids_updated") && GeneralSettings.gdModeOption) {
 					System.out.println("Connected to GDBoard Servers");
-					while(true) {
+					while (true) {
 						if (DialogBox.active) {
 							DialogBox.closeDialogBox();
 							break;
@@ -98,10 +99,12 @@ class ServerBot {
 		}
 		System.out.println("dead");
 	}
+
 	void sendMessage(String message) {
 		out.println(message);
 	}
-	void disconnect(){
+
+	void disconnect() {
 		try {
 			clientSocket.close();
 		} catch (IOException e) {

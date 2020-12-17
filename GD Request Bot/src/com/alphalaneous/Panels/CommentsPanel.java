@@ -1,14 +1,10 @@
 package com.alphalaneous.Panels;
 
-import com.alphalaneous.APIs;
-import com.alphalaneous.Comment;
+import com.alphalaneous.*;
 import com.alphalaneous.Components.JButtonUI;
 import com.alphalaneous.Components.RoundedJButton;
 import com.alphalaneous.Components.ScrollbarUI;
-import com.alphalaneous.Defaults;
-import com.alphalaneous.Requests;
 import com.alphalaneous.Windows.Window;
-
 import com.github.alex1304.jdash.client.AnonymousGDClient;
 import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.entity.GDUser;
@@ -40,6 +36,15 @@ public class CommentsPanel {
 	private static JPanel buttons = new JPanel();
 	private static boolean topC = false;
 	private static int page = 0;
+	private static SpriteFactory spriteFactory;
+
+	static {
+		try {
+			spriteFactory = SpriteFactory.create();
+		} catch (SpriteLoadException e) {
+			e.printStackTrace();
+		}
+	}
 
 	//region Create Panel
 	public static void createPanel() {
@@ -81,13 +86,13 @@ public class CommentsPanel {
 		//region Create Previous Page Button
 		JButton prev = createButton("\uE760", 0, "$PREV_PAGE$");
 		prev.addActionListener(e -> {
-				if (page != 0) {
-					page = page - 2;
-					try {
-						loadComments(page, topC);
-					} catch (Exception ignored) {
-					}
+			if (page != 0) {
+				page = page - 2;
+				try {
+					loadComments(page, topC);
+				} catch (Exception ignored) {
 				}
+			}
 
 		});
 		buttons.add(prev);
@@ -95,14 +100,14 @@ public class CommentsPanel {
 
 		JButton next = createButton("\uE761", 35, "$NEXT_PAGE$");
 		next.addActionListener(e -> {
-				page = page + 2;
-				if (!loadComments(page, topC)) {
-					page = page - 2;
-					try {
-						loadComments(page, topC);
-					} catch (Exception f) {
-						f.printStackTrace();
-					}
+			page = page + 2;
+			if (!loadComments(page, topC)) {
+				page = page - 2;
+				try {
+					loadComments(page, topC);
+				} catch (Exception f) {
+					f.printStackTrace();
+				}
 
 			}
 		});
@@ -110,22 +115,22 @@ public class CommentsPanel {
 
 		JButton top = createButton("\uE19F", 90, "$TOP_COMMENTS$");
 		top.addActionListener(e -> {
-				page = 0;
-				try {
-					loadComments(0, true);
-				} catch (Exception ignored) {
-				}
+			page = 0;
+			try {
+				loadComments(0, true);
+			} catch (Exception ignored) {
+			}
 
 		});
 		buttons.add(top);
 
 		JButton newest = createButton("\uE823", 125, "$LATEST_COMMENTS$");
 		newest.addActionListener(e -> {
-				topC = false;
-				page = 0;
-				try {
-					loadComments(0, false);
-				} catch (Exception ignored) {
+			topC = false;
+			page = 0;
+			try {
+				loadComments(0, false);
+			} catch (Exception ignored) {
 
 			}
 		});
@@ -161,17 +166,6 @@ public class CommentsPanel {
 	public static void resetDimensions(int width, int height) {
 		scrollPane.setBounds(0, 0, width, height - 80);
 		buttons.setBounds(0, height - 80, width, 40);
-	}
-
-	private static AnonymousGDClient client = GDClientBuilder.create().buildAnonymous();
-	private static SpriteFactory spriteFactory;
-
-	static {
-		try {
-			spriteFactory = SpriteFactory.create();
-		} catch (SpriteLoadException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public static boolean loadComments(int page, boolean top) {
@@ -275,11 +269,21 @@ public class CommentsPanel {
 							GDUserIconSet iconSet;
 							GDUser user;
 							try {
-								user = client.searchUser(username).block();
+								if(LoadGD.isAuth) {
+									user = LoadGD.authClient.searchUser(username).block();
+								}
+								else {
+									user = LoadGD.anonClient.searchUser(username).block();
+								}
 								assert user != null;
 								iconSet = new GDUserIconSet(user, spriteFactory);
 							} catch (MissingAccessException e) {
-								user = client.searchUser("RobTop").block();
+								if(LoadGD.isAuth) {
+									user = LoadGD.authClient.searchUser("Alphalaneous").block();
+								}
+								else {
+									user = LoadGD.anonClient.searchUser("Alphalaneous").block();
+								}
 								assert user != null;
 								iconSet = new GDUserIconSet(user, spriteFactory);
 							}
@@ -321,10 +325,6 @@ public class CommentsPanel {
 		return false;
 	}
 
-	public String getName() {
-		return "Comments";
-	}
-
 	//region CreateButton
 	private static JButton createButton(String icon, int x, String tooltip) {
 		JButton button = new RoundedJButton(icon, tooltip);
@@ -337,7 +337,6 @@ public class CommentsPanel {
 		button.setBounds(x + 5, 5, 30, 30);
 		return button;
 	}
-	//endregion
 
 	//region RefreshUI
 	public static void refreshUI() {
@@ -360,7 +359,7 @@ public class CommentsPanel {
 					if (component1 instanceof JLabel) {
 						if (((JLabel) component1).getText().contains("%")) {
 							component1.setForeground(Defaults.FOREGROUND2);
-						} else if (((JLabel) component1).getText().equalsIgnoreCase(Requests.levels.get(LevelsPanel.getSelectedID()).getAuthor().toString())) {
+						} else if (((JLabel) component1).getText().equalsIgnoreCase(Requests.levels.get(LevelsPanel.getSelectedID()).getAuthor())) {
 							component1.setForeground(new Color(16, 164, 0));
 						} else {
 							component1.setForeground(Defaults.FOREGROUND);
@@ -383,15 +382,20 @@ public class CommentsPanel {
 	}
 	//endregion
 
+	//region SetLocation
+	public static void setLocation(Point point) {
+		window.setLocation(point);
+	}
+	//endregion
+
 	//region ToggleVisible
 	//endregion
 
 	//region SetInvisible
 	//endregion
 
-	//region SetLocation
-	public static void setLocation(Point point) {
-		window.setLocation(point);
+	public String getName() {
+		return "Comments";
 	}
 	//endregion
 

@@ -8,7 +8,6 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 
@@ -19,25 +18,27 @@ public class DialogBox {
 	public static boolean active = false;
 	private static JFrame frame = null;
 	private static boolean progressBar = false;
-	private static JProgressBar loadingBar;
 	private static boolean setFocus = true;
 
-	public static String showDialogBox(String title, String info, String subInfo, String[] options){
+	public static String showDialogBox(String title, String info, String subInfo, String[] options) {
 		progressBar = false;
-		return showDialogBox(title,info,subInfo,options,false, new Object[]{});
+		return showDialogBox(title, info, subInfo, options, false, new Object[]{});
 	}
-	public static String showDialogBox(String title, String info, String subInfo, String[] options, Object[] args){
+
+	public static String showDialogBox(String title, String info, String subInfo, String[] options, Object[] args) {
 		progressBar = false;
-		return showDialogBox(title,info,subInfo,options,false, args);
+		return showDialogBox(title, info, subInfo, options, false, args);
 	}
-	public static void setUnfocusable(){
+
+	public static void setUnfocusable() {
 		setFocus = false;
 	}
-	public static String showDialogBox(String title, String info, String subInfo, String[] options, boolean progressBar, Object[] args){
+
+	public static String showDialogBox(String title, String info, String subInfo, String[] options, boolean progressBar, Object[] args) {
 		final String[] value = {null};
 		DialogBox.progressBar = progressBar;
 
-		if(!active) {
+		if (!active) {
 			active = true;
 			frame = new JFrame();
 			frame.setFocusableWindowState(setFocus);
@@ -109,28 +110,13 @@ public class DialogBox {
 			frame.setPreferredSize(new Dimension(400, 400));
 
 
+			frame.getRootPane().setBorder(new LineBorder(Defaults.ACCENT, 1));
+			frame.getContentPane().setBackground(Defaults.TOP);
+			titleLabel.setForeground(Defaults.FOREGROUND);
+			infoLabel.setForeground(Defaults.FOREGROUND);
+			subInfoLabel.setForeground(Defaults.FOREGROUND);
+			frame.setLocation((int) (Defaults.screenSize.getX() + Defaults.screenSize.getWidth() / 2 - 200), (int) (Defaults.screenSize.getY() + Defaults.screenSize.getHeight() / 2 - 100));
 
-				frame.getRootPane().setBorder(new LineBorder(Defaults.ACCENT, 1));
-				frame.getContentPane().setBackground(Defaults.TOP);
-				titleLabel.setForeground(Defaults.FOREGROUND);
-				infoLabel.setForeground(Defaults.FOREGROUND);
-				subInfoLabel.setForeground(Defaults.FOREGROUND);
-				frame.setLocation((int) (Defaults.screenSize.getX() + Defaults.screenSize.getWidth() / 2 - 200), (int) (Defaults.screenSize.getY() + Defaults.screenSize.getHeight() / 2 - 100));
-
-
-			loadingBar = new JProgressBar();
-			if(progressBar){
-				loadingBar.setValue(0);
-				loadingBar.setStringPainted(false);
-				loadingBar.setBounds(35,110,330,2);
-				loadingBar.setForeground(new Color(0, 255, 12).darker());
-				loadingBar.setBorderPainted(false);
-				loadingBar.setBorder(BorderFactory.createEmptyBorder());
-				loadingBar.setVisible(true);
-			}
-			else{
-				loadingBar.setVisible(false);
-			}
 
 			for (String option : options) {
 				LangButton button = createButton(option);
@@ -141,11 +127,9 @@ public class DialogBox {
 			}
 
 
-
 			frame.setResizable(false);
 			frame.add(titlePanel);
 			frame.add(textPanel);
-			frame.add(loadingBar);
 			frame.add(buttonPanel);
 			frame.setAlwaysOnTop(true);
 			frame.invalidate();
@@ -165,12 +149,12 @@ public class DialogBox {
 			active = false;
 			setFocus = true;
 			return value[0];
-		}
-		else {
+		} else {
 			frame.requestFocus();
 		}
 		return "";
 	}
+
 	private static LangButton createButton(String text) {
 
 		LangButton button = new LangButton(text);
@@ -179,12 +163,11 @@ public class DialogBox {
 
 		button.setUI(defaultUI);
 
-		if(Defaults.programLoaded.get()){
+		if (Defaults.programLoaded.get()) {
 			button.setForeground(Defaults.FOREGROUND);
 			button.setBackground(Defaults.BUTTON);
 
-		}
-		else{
+		} else {
 			button.setForeground(Color.WHITE);
 			button.setBackground(new Color(50, 50, 50));
 		}
@@ -193,8 +176,9 @@ public class DialogBox {
 
 		return button;
 	}
-	public static void closeDialogBox(){
-		if(frame != null) {
+
+	public static void closeDialogBox() {
+		if (frame != null) {
 			frame.setVisible(false);
 			frame.removeAll();
 			frame.dispose();
@@ -202,12 +186,5 @@ public class DialogBox {
 		active = false;
 		setFocus = true;
 
-	}
-	public static void setProgress(int progress){
-		if(progressBar){
-			if(loadingBar != null) {
-				loadingBar.setValue(progress);
-			}
-		}
 	}
 }

@@ -16,23 +16,23 @@ import java.awt.event.MouseEvent;
 import java.net.URL;
 
 public class Onboarding {
+	public static int openKeybind = 36;
 	static boolean isLoading = false;
+	static JFrame frame = new JFrame();
 	private static JPanel content = new JPanel(null);
 	private static JButtonUI defaultUI = new JButtonUI();
-	public static int openKeybind = 36;
-	static JFrame frame = new JFrame();
 
 	static void createPanel() {
 		URL iconURL = Window.class.getResource("/Resources/Icons/windowIcon.png");
 		ImageIcon icon = new ImageIcon(iconURL);
-		Image newIcon = icon.getImage().getScaledInstance(120, 120,  Image.SCALE_SMOOTH);
+		Image newIcon = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
 		frame.setIconImage(newIcon);
 		frame.setTitle("GDBoard Startup");
 		int width = 465;
 		int height = 512;
 		frame.setLocation(new Point(Defaults.screenSize.width / 2 - width / 2, Defaults.screenSize.height / 2 - height / 2));
-		frame.setSize(width +5, height + 38);
-		frame.setPreferredSize(new Dimension(width +5, height + 38));
+		frame.setSize(width + 5, height + 38);
+		frame.setPreferredSize(new Dimension(width + 5, height + 38));
 		frame.setLayout(null);
 		frame.setResizable(false);
 		frame.pack();
@@ -118,12 +118,12 @@ public class Onboarding {
 						}
 						ShortcutSettings.loadKeybind("Open", openKeybind);
 
-							Settings.writeSettings("openKeybind", String.valueOf(openKeybind));
+						Settings.writeSettings("openKeybind", String.valueOf(openKeybind));
 
 
-							Settings.writeSettings("onboarding", "false");
-							Onboarding.isLoading = false;
-							frame.setVisible(false);
+						Settings.writeSettings("onboarding", "false");
+						Onboarding.isLoading = false;
+						frame.setVisible(false);
 
 					});
 					thread.start();
@@ -147,7 +147,6 @@ public class Onboarding {
 		defaultUI.setSelect(Defaults.SELECT);
 		content.setBackground(Defaults.SUB_MAIN);
 	}
-
 
 
 	@SuppressWarnings("unused")

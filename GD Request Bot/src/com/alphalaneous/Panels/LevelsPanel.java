@@ -7,18 +7,15 @@ import com.alphalaneous.Components.ScrollbarUI;
 import com.alphalaneous.Windows.DialogBox;
 import com.alphalaneous.Windows.Window;
 
-
 import javax.swing.*;
-
 import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 import static com.alphalaneous.Defaults.defaultUI;
-import static javax.swing.ScrollPaneConstants.*;
+import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
+import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS;
 
 public class LevelsPanel {
 
@@ -61,7 +58,7 @@ public class LevelsPanel {
 		window.add(scrollPane);
 	}
 
-	public static void resizeButtons(int width){
+	public static void resizeButtons(int width) {
 		buttonWidth = width - 15;
 		Component[] comp = mainPanel.getComponents();
 		for (Component component : comp) {
@@ -72,8 +69,8 @@ public class LevelsPanel {
 
 	}
 
-	public static void refreshSelectedLevel(long ID){
-		if(LevelsPanel.getSelectedID() == Requests.getPosFromID(ID)) {
+	public static void refreshSelectedLevel(long ID) {
+		if (LevelsPanel.getSelectedID() == Requests.getPosFromID(ID)) {
 			LevelsPanel.setSelect(getSelectedID());
 		}
 	}
@@ -90,12 +87,6 @@ public class LevelsPanel {
 			setOneSelect();
 		}
 		scrollPane.getViewport().setViewPosition(saved);
-	}
-
-	public static void setName(int count) {
-
-		Window.frame.setTitle("GDBoard - " + count);
-
 	}
 
 	public static LevelButton getButton(int i) {
@@ -127,6 +118,121 @@ public class LevelsPanel {
 			}
 		}
 		Functions.saveFunction();
+	}
+
+	public static void refreshUI() {
+		selectUI.setBackground(Defaults.SELECT);
+		selectUI.setHover(Defaults.BUTTON_HOVER);
+		selectUI.setSelect(Defaults.SELECT);
+		mainPanel.setBackground(Defaults.MAIN);
+		int i = 0;
+		for (Component component : mainPanel.getComponents()) {
+			if (component instanceof LevelButton) {
+				if (selectedID == i) {
+					((LevelButton) component).select();
+				} else {
+					component.setBackground(Defaults.MAIN);
+				}
+				((LevelButton) component).refresh();
+			}
+			i++;
+		}
+		if (scrollPane != null) {
+			scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
+			scrollPane.setBackground(Defaults.MAIN);
+			scrollPane.getViewport().setBackground(Defaults.MAIN);
+
+		}
+	}
+
+	public static void setOneSelect() {
+		if (mainPanel.getComponents().length != 0) {
+			((LevelButton) mainPanel.getComponent(0)).select();
+			selectedID = 0;
+		}
+	}
+
+	public static void setSelect(int i) {
+		int j = 0;
+		if (Requests.levels.size() != 0) {
+			for (Component component : mainPanel.getComponents()) {
+				if (component instanceof LevelButton) {
+					if (j == i) {
+						((LevelButton) component).select();
+						selectedID = i;
+						new Thread(() -> {
+							while (component.getSize().height != 170) {
+								try {
+									Thread.sleep(100);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+							}
+							scrollPane.getViewport().setViewPosition(new Point(0, component.getY()));
+						}).start();
+					} else {
+						((LevelButton) component).deselect();
+					}
+					j++;
+				}
+			}
+		}
+	}
+
+	//region SetLocation
+	public static void setLocation(Point point) {
+		window.setLocation(point);
+	}
+
+	public static int getSelectedID() {
+		return selectedID;
+	}
+
+	public static void updateUI(long ID, boolean vulgar, boolean image, boolean analyzed) {
+		out:
+		while (true) {
+			for (Component component : mainPanel.getComponents()) {
+				if (component instanceof LevelButton) {
+					if (((LevelButton) component).ID == ID) {
+						((LevelButton) component).setAnalyzed(analyzed, image, vulgar);
+						((LevelButton) component).refresh(image, vulgar);
+						break out;
+					}
+				}
+			}
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public static void removeButton(int i) {
+		mainPanel.remove(i);
+		selectedID = 0;
+		panelHeight = panelHeight - 60;
+		mainPanel.setBounds(0, 0, width, panelHeight);
+		mainPanel.setPreferredSize(new Dimension(width, panelHeight));
+	}
+	//endregion
+
+	public static void removeButton() {
+		mainPanel.remove(selectedID);
+		selectedID = 0;
+		panelHeight = panelHeight - 60;
+		mainPanel.setBounds(0, 0, width, panelHeight);
+		mainPanel.setPreferredSize(new Dimension(width, panelHeight));
+	}
+
+	public String getName() {
+		return "Requests";
+	}
+
+	public static void setName(int count) {
+
+		Window.frame.setTitle("GDBoard - " + count);
+
 	}
 
 	public static class LevelButton extends JButton {
@@ -163,7 +269,8 @@ public class LevelsPanel {
 		JLabel lPlayerIcon = new JLabel();
 		JLabel lStar = new JLabel("\uE24A");
 		JPanel info = new JPanel(new GridLayout(0, 2, 1, 1));
-
+		boolean viewership = false;
+		int gonePoints = 3;
 		LevelButton(String name, String author, long ID, String difficulty, boolean epic, boolean featured, int starCount, String requester, double version, ImageIcon playerIcon, int coins, boolean verifiedCoins) {
 			this.name = name;
 			this.ID = ID;
@@ -177,7 +284,7 @@ public class LevelsPanel {
 			this.playerIcon = playerIcon;
 			this.coins = coins;
 			try {
-				if(LevelsPanel.getSize() == 0){
+				if (LevelsPanel.getSize() == 0) {
 					this.selected = true;
 				}
 
@@ -256,10 +363,9 @@ public class LevelsPanel {
 
 				for (int i = 0; i < coins; i++) {
 					JLabel coin;
-					if(verifiedCoins) {
+					if (verifiedCoins) {
 						coin = new JLabel(Assets.verifiedCoin);
-					}
-					else {
+					} else {
 						coin = new JLabel(Assets.unverifiedCoin);
 					}
 					coin.setBounds((int) lName.getPreferredSize().getWidth() + lName.getX() + 5 + pos, 7, 15, 15);
@@ -293,7 +399,7 @@ public class LevelsPanel {
 				moveUp.setOpaque(false);
 				moveUp.setBounds(buttonWidth - 30, 0, 25, 30);
 				moveUp.addActionListener(e -> {
-					if(Main.programLoaded) {
+					if (Main.programLoaded) {
 						if (Requests.getPosFromID(ID) != 0) {
 							LevelsPanel.movePosition(Requests.getPosFromID(ID), Requests.getPosFromID(ID) - 1);
 						}
@@ -320,7 +426,7 @@ public class LevelsPanel {
 				moveDown.setOpaque(false);
 				moveDown.setBounds(buttonWidth - 30, 30, 25, 30);
 				moveDown.addActionListener(e -> {
-					if(Main.programLoaded) {
+					if (Main.programLoaded) {
 						if (Requests.getPosFromID(ID) != Requests.levels.size() - 1) {
 							LevelsPanel.movePosition(Requests.getPosFromID(ID), Requests.getPosFromID(ID) + 1);
 						}
@@ -396,31 +502,31 @@ public class LevelsPanel {
 
 				addActionListener(e -> {
 
-						Component[] comp = mainPanel.getComponents();
-						for (Component component : comp) {
-							if (component instanceof LevelButton) {
-								((LevelButton) component).deselect();
-							}
+					Component[] comp = mainPanel.getComponents();
+					for (Component component : comp) {
+						if (component instanceof LevelButton) {
+							((LevelButton) component).deselect();
 						}
+					}
 
-						for (int j = 0; j < Requests.levels.size(); j++) {
-							if (ID == Requests.levels.get(j).getLevelID()) {
-								((LevelButton) comp[j]).select();
-								selectedID = j;
-							}
+					for (int j = 0; j < Requests.levels.size(); j++) {
+						if (ID == Requests.levels.get(j).getLevelID()) {
+							((LevelButton) comp[j]).select();
+							selectedID = j;
 						}
-						if (selectedID != prevSelectedID) {
-							if(Requests.levels.size() != 0) {
-								new Thread(() -> {
-									CommentsPanel.unloadComments(true);
-									CommentsPanel.loadComments(0, false);
-								}).start();
-							}
-							SongPanel.refreshInfo();
-							InfoPanel.refreshInfo();
+					}
+					if (selectedID != prevSelectedID) {
+						if (Requests.levels.size() != 0) {
+							new Thread(() -> {
+								CommentsPanel.unloadComments(true);
+								CommentsPanel.loadComments(0, false);
+							}).start();
 						}
+						SongPanel.refreshInfo();
+						InfoPanel.refreshInfo();
+					}
 
-						prevSelectedID = selectedID;
+					prevSelectedID = selectedID;
 
 				});
 				if (Requests.levels.size() == 1) {
@@ -432,7 +538,7 @@ public class LevelsPanel {
 					});
 					thread.start();
 				}
-				if(selected){
+				if (selected) {
 					select();
 				}
 				SongPanel.refreshInfo();
@@ -446,9 +552,6 @@ public class LevelsPanel {
 				DialogBox.showDialogBox("Error!", e.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 			}
 		}
-
-		boolean viewership = false;
-		int gonePoints = 3;
 
 		public long getID() {
 			return ID;
@@ -524,7 +627,7 @@ public class LevelsPanel {
 			info.setVisible(false);
 
 			info.removeAll();
-			if(Requests.getPosFromID(ID) != -1) {
+			if (Requests.getPosFromID(ID) != -1) {
 				JLabel likes = createLabel("Likes: " + Requests.levels.get(Requests.getPosFromID(ID)).getLikes());
 				JLabel downloads = createLabel("Downloads: " + Requests.levels.get(Requests.getPosFromID(ID)).getDownloads());
 				JLabel length = createLabel("Length: " + Requests.levels.get(Requests.getPosFromID(ID)).getLength());
@@ -568,7 +671,6 @@ public class LevelsPanel {
 				JLabel songAuthor = createLabel("Song Artist: " + Requests.levels.get(Requests.getPosFromID(ID)).getSongAuthor());
 
 
-
 				info.add(likes);
 				info.add(downloads);
 				info.add(length);
@@ -587,6 +689,7 @@ public class LevelsPanel {
 			setPreferredSize(new Dimension(buttonWidth, 170));
 
 		}
+
 		void deselect() {
 			if (this.selected) {
 				info.setVisible(false);
@@ -608,8 +711,8 @@ public class LevelsPanel {
 
 		}
 
-		void resizeButton(int width){
-			buttonWidth = width-15;
+		void resizeButton(int width) {
+			buttonWidth = width - 15;
 			moveUp.setBounds(buttonWidth - 30, 0, 25, 30);
 			moveDown.setBounds(buttonWidth - 30, 30, 25, 30);
 			info.setBounds(50, 60, buttonWidth - 100, 100);
@@ -652,7 +755,7 @@ public class LevelsPanel {
 					setUI(defaultUI);
 				}
 			}
-			if(selected){
+			if (selected) {
 				select();
 			}
 		}
@@ -692,7 +795,7 @@ public class LevelsPanel {
 					setUI(defaultUI);
 				}
 			}
-			if(selected){
+			if (selected) {
 				select();
 			}
 		}
@@ -700,124 +803,11 @@ public class LevelsPanel {
 		JLabel createLabel(String text) {
 
 
-					JLabel label = new JLabel(text);
-					label.setForeground(Defaults.FOREGROUND2);
-					label.setFont(Defaults.SEGOE.deriveFont(11f));
-					return label;
+			JLabel label = new JLabel(text);
+			label.setForeground(Defaults.FOREGROUND2);
+			label.setFont(Defaults.SEGOE.deriveFont(11f));
+			return label;
 
 		}
-	}
-
-
-	public static void refreshUI() {
-		selectUI.setBackground(Defaults.SELECT);
-		selectUI.setHover(Defaults.BUTTON_HOVER);
-		selectUI.setSelect(Defaults.SELECT);
-		mainPanel.setBackground(Defaults.MAIN);
-		int i = 0;
-		for (Component component : mainPanel.getComponents()) {
-			if (component instanceof LevelButton) {
-				if (selectedID == i) {
-					((LevelButton) component).select();
-				} else {
-					component.setBackground(Defaults.MAIN);
-				}
-				((LevelButton) component).refresh();
-			}
-			i++;
-		}
-		if (scrollPane != null) {
-			scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
-			scrollPane.setBackground(Defaults.MAIN);
-			scrollPane.getViewport().setBackground(Defaults.MAIN);
-
-		}
-	}
-
-	public static void setOneSelect() {
-		if (mainPanel.getComponents().length != 0) {
-			((LevelButton) mainPanel.getComponent(0)).select();
-			selectedID = 0;
-		}
-	}
-
-	public static void setSelect(int i) {
-		int j = 0;
-		if(Requests.levels.size() != 0) {
-			for (Component component : mainPanel.getComponents()) {
-				if (component instanceof LevelButton) {
-					if (j == i) {
-						((LevelButton) component).select();
-						selectedID = i;
-						new Thread(() -> {
-							while (component.getSize().height != 170) {
-								try {
-									Thread.sleep(100);
-								} catch (InterruptedException e) {
-									e.printStackTrace();
-								}
-							}
-							scrollPane.getViewport().setViewPosition(new Point(0, component.getY()));
-						}).start();
-					} else {
-						((LevelButton) component).deselect();
-					}
-					j++;
-				}
-			}
-		}
-	}
-
-	public String getName() {
-		return "Requests";
-	}
-
-
-	//region SetLocation
-	public static void setLocation(Point point) {
-		window.setLocation(point);
-	}
-	//endregion
-
-
-	public static int getSelectedID() {
-		return selectedID;
-	}
-
-
-	public static void updateUI(long ID, boolean vulgar, boolean image, boolean analyzed) {
-		out:
-		while (true) {
-			for (Component component : mainPanel.getComponents()) {
-				if (component instanceof LevelButton) {
-					if (((LevelButton) component).ID == ID) {
-						((LevelButton) component).setAnalyzed(analyzed, image, vulgar);
-						((LevelButton) component).refresh(image, vulgar);
-						break out;
-					}
-				}
-			}
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	public static void removeButton(int i) {
-		mainPanel.remove(i);
-		selectedID = 0;
-		panelHeight = panelHeight - 60;
-		mainPanel.setBounds(0, 0, width, panelHeight);
-		mainPanel.setPreferredSize(new Dimension(width, panelHeight));
-	}
-
-	public static void removeButton() {
-		mainPanel.remove(selectedID);
-		selectedID = 0;
-		panelHeight = panelHeight - 60;
-		mainPanel.setBounds(0, 0, width, panelHeight);
-		mainPanel.setPreferredSize(new Dimension(width, panelHeight));
 	}
 }

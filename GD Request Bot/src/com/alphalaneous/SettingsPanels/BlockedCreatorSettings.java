@@ -1,10 +1,10 @@
 package com.alphalaneous.SettingsPanels;
 
+import com.alphalaneous.Components.*;
+import com.alphalaneous.Defaults;
 import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.alphalaneous.Windows.DialogBox;
 import com.alphalaneous.Windows.SettingsWindow;
-import com.alphalaneous.Components.*;
-import com.alphalaneous.Defaults;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,32 +53,32 @@ public class BlockedCreatorSettings {
 		blockedListPanel.setBackground(Defaults.SUB_MAIN);
 		addID.addActionListener(e -> {
 
-				try {
-					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blockedGDUsers.txt");
-					if (!Files.exists(file)) {
-						Files.createFile(file);
-					}
-					boolean goThrough = true;
-					Scanner sc = new Scanner(file.toFile());
-					while (sc.hasNextLine()) {
-						if (String.valueOf(blockedInput.getText()).equals(sc.nextLine())) {
-							goThrough = false;
-							break;
-						}
-					}
-					sc.close();
-					if (goThrough) {
-						if (!blockedInput.getText().equalsIgnoreCase("")) {
-
-							Files.write(file, (blockedInput.getText() + "\n").getBytes(), StandardOpenOption.APPEND);
-							addButton(blockedInput.getText());
-							blockedInput.setText("");
-							blockedListPanel.updateUI();
-						}
-					}
-				} catch (IOException e1) {
-					DialogBox.showDialogBox("Error!", e1.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
+			try {
+				Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blockedGDUsers.txt");
+				if (!Files.exists(file)) {
+					Files.createFile(file);
 				}
+				boolean goThrough = true;
+				Scanner sc = new Scanner(file.toFile());
+				while (sc.hasNextLine()) {
+					if (String.valueOf(blockedInput.getText()).equals(sc.nextLine())) {
+						goThrough = false;
+						break;
+					}
+				}
+				sc.close();
+				if (goThrough) {
+					if (!blockedInput.getText().equalsIgnoreCase("")) {
+
+						Files.write(file, (blockedInput.getText() + "\n").getBytes(), StandardOpenOption.APPEND);
+						addButton(blockedInput.getText());
+						blockedInput.setText("");
+						blockedListPanel.updateUI();
+					}
+				}
+			} catch (IOException e1) {
+				DialogBox.showDialogBox("Error!", e1.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
+			}
 		});
 		scrollPane.setBounds(0, 60, 412, 562);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
@@ -138,7 +138,7 @@ public class BlockedCreatorSettings {
 
 	public static void addButton(String user) {
 		i++;
-		if ((i-1) % 2 == 0) {
+		if ((i - 1) % 2 == 0) {
 			height = height + 39;
 
 			blockedListPanel.setBounds(0, 0, 400, (int) (height + 4));
@@ -187,6 +187,7 @@ public class BlockedCreatorSettings {
 		blockedListPanel.add(button);
 
 	}
+
 	public static void refreshUI() {
 
 		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
@@ -205,7 +206,7 @@ public class BlockedCreatorSettings {
 				component.setForeground(Defaults.FOREGROUND);
 
 			}
-			if(component instanceof JTextArea){
+			if (component instanceof JTextArea) {
 				((FancyTextArea) component).refresh_();
 			}
 		}
@@ -219,10 +220,10 @@ public class BlockedCreatorSettings {
 				}
 				component.setBackground(Defaults.BUTTON);
 			}
-			if(component instanceof JTextArea){
+			if (component instanceof JTextArea) {
 				((FancyTextArea) component).refresh_();
 			}
-			if(component instanceof ThemedCheckbox){
+			if (component instanceof ThemedCheckbox) {
 				((ThemedCheckbox) component).refresh();
 			}
 		}

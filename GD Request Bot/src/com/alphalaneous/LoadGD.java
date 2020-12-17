@@ -10,33 +10,30 @@ import java.util.Base64;
 public class LoadGD {
 
 	public static String username = "";
-	private static String password = "";
-	static AnonymousGDClient anonClient = GDClientBuilder.create().buildAnonymous();
 	public static AuthenticatedGDClient authClient;
-
 	public static boolean isAuth = false;
+	public static AnonymousGDClient anonClient = GDClientBuilder.create().buildAnonymous();
 	static boolean loaded = false;
+	private static String password = "";
 
 	static void load() {
 		new Thread(() -> {
-		if(Settings.getSettings("GDLogon").equalsIgnoreCase("true")) {
-			try {
-				username = Settings.getSettings("GDUsername");
-				password = xor(new String(Base64.getDecoder().decode(Settings.getSettings("p").getBytes())), 15);
-				authClient = GDClientBuilder.create().buildAuthenticated(new GDClientBuilder.Credentials(username, password)).block();
-				isAuth = true;
-				AccountSettings.refreshGD(username);
-			}
-			catch (Exception e){
+			if (Settings.getSettings("GDLogon").equalsIgnoreCase("true")) {
+				try {
+					username = Settings.getSettings("GDUsername");
+					password = xor(new String(Base64.getDecoder().decode(Settings.getSettings("p").getBytes())), 15);
+					authClient = GDClientBuilder.create().buildAuthenticated(new GDClientBuilder.Credentials(username, password)).block();
+					isAuth = true;
+					AccountSettings.refreshGD(username);
+				} catch (Exception e) {
+					Settings.writeSettings("GDLogon", "false");
+					isAuth = false;
+				}
+			} else {
 				Settings.writeSettings("GDLogon", "false");
 				isAuth = false;
 			}
-		}
-		else{
-			Settings.writeSettings("GDLogon", "false");
-			isAuth = false;
-		}
-		loaded = true;
+			loaded = true;
 		}).start();
 	}
 

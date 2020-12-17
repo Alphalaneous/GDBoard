@@ -2,8 +2,8 @@ package com.alphalaneous.Windows;
 
 import com.alphalaneous.Components.*;
 import com.alphalaneous.Defaults;
-import com.alphalaneous.SettingsPanels.CommandSettings;
 import com.alphalaneous.Main;
+import com.alphalaneous.SettingsPanels.CommandSettings;
 import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.sun.javafx.application.PlatformImpl;
 import javafx.embed.swing.JFXPanel;
@@ -25,7 +25,6 @@ import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import static com.alphalaneous.Defaults.defaultUI;
@@ -40,7 +39,6 @@ public class CommandEditor {
 
 	private static UndoManager undoManager = new UndoManager();
 
-
 	private static String choice;
 	private static LangLabel commandName = new LangLabel("$COMMAND_NAME$");
 	private static LangLabel messageLabel = new LangLabel("$MESSAGE_LABEL$");
@@ -51,11 +49,9 @@ public class CommandEditor {
 	private static RoundedJButton fileExplorerButton = new RoundedJButton("\uF12B", "$OPEN_EXPLORER$");
 	private static RoundedJButton deleteButton = new RoundedJButton("\uE107", "$DELETE_COMMAND$");
 
-
 	private static ThemedCheckbox modOnly = createButton("$MOD_ONLY$", 310);
 	private static ThemedCheckbox whisper = createButton("$SEND_AS_WHISPER$", 340);
 	private static ThemedCheckbox disable = createButton("$DISABLE_COMMAND$", 370);
-
 
 	private static RSyntaxTextArea codeInput = new RSyntaxTextArea();
 	private static JScrollPane codePanel = new JScrollPane(codeInput);
@@ -89,32 +85,30 @@ public class CommandEditor {
 					try {
 
 
-							Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\" + type + "\\" + commandNameText.getText() + ".js");
-							if (Files.exists(file)) {
-								option = DialogBox.showDialogBox("$OVERRIDE_TITLE$", "$SAVE_INFO$", "", new String[]{"$YES$", "$NO$", "$CANCEL$"}, new Object[]{commandNameText.getText()});
+						Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\" + type + "\\" + commandNameText.getText() + ".js");
+						if (Files.exists(file)) {
+							option = DialogBox.showDialogBox("$OVERRIDE_TITLE$", "$SAVE_INFO$", "", new String[]{"$YES$", "$NO$", "$CANCEL$"}, new Object[]{commandNameText.getText()});
+						} else {
+							option = DialogBox.showDialogBox("$SAVE_TITLE$", "$SAVE_INFO$", "", new String[]{"$YES$", "$NO$", "$CANCEL$"}, new Object[]{commandNameText.getText()});
+						}
+						if (option.equals("YES")) {
+							if (commandNameText.getText().trim().equalsIgnoreCase("")) {
+								new Thread(() -> DialogBox.showDialogBox("$INVALID_NAME$", "$INVALID_NAME_INFO$", "", new String[]{"$OKAY$"})).start();
 							} else {
-								option = DialogBox.showDialogBox("$SAVE_TITLE$", "$SAVE_INFO$", "", new String[]{"$YES$", "$NO$", "$CANCEL$"}, new Object[]{commandNameText.getText()});
-							}
-							if (option.equals("YES")) {
-								if(commandNameText.getText().trim().equalsIgnoreCase("")){
-									new Thread(() -> DialogBox.showDialogBox("$INVALID_NAME$", "$INVALID_NAME_INFO$", "", new String[]{"$OKAY$"})).start();
+								save();
+								if (type.equalsIgnoreCase("commands")) {
+									CommandSettings.refresh();
 								}
-								else {
-									save();
-									if (type.equalsIgnoreCase("commands")) {
-										CommandSettings.refresh();
-									}
-									active = false;
-									editor.setVisible(false);
-								}
-							}
-							if (option.equals("NO")) {
-								//don't save
 								active = false;
 								editor.setVisible(false);
 							}
-					}
-					catch (Exception f){
+						}
+						if (option.equals("NO")) {
+							//don't save
+							active = false;
+							editor.setVisible(false);
+						}
+					} catch (Exception f) {
 						active = false;
 						editor.setVisible(false);
 					}
@@ -172,7 +166,7 @@ public class CommandEditor {
 					evt.acceptDrop(DnDConstants.ACTION_COPY);
 					java.util.List<File> droppedFiles = (java.util.List<File>)
 							evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
-					if(!(droppedFiles.size() > 1)){
+					if (!(droppedFiles.size() > 1)) {
 						System.out.println(droppedFiles.get(0).getPath());
 						soundFileLocation.setText(droppedFiles.get(0).getPath());
 					}
@@ -259,7 +253,7 @@ public class CommandEditor {
 					d.setTitle("Open Sound File");
 					d.getExtensionFilters().add(new FileChooser.ExtensionFilter("mp3 files (*.mp3)"));
 					File file = d.showOpenDialog(null);
-					if(file != null){
+					if (file != null) {
 						soundFileLocation.setText(file.getPath().replace("\\", "/"));
 					}
 				});
@@ -277,9 +271,9 @@ public class CommandEditor {
 				super.mousePressed(e);
 				new Thread(() -> {
 					String option = DialogBox.showDialogBox("$DELETE_COMMAND_TITLE$", "$DELETE_COMMAND_INFO$", "", new String[]{"$YES$", "$NO$"}, new Object[]{command});
-					if (option.equalsIgnoreCase("YES")){
+					if (option.equalsIgnoreCase("YES")) {
 						deleteCommand();
-						if(type.equalsIgnoreCase("commands")) {
+						if (type.equalsIgnoreCase("commands")) {
 							CommandSettings.refresh();
 						}
 					}
@@ -406,7 +400,7 @@ public class CommandEditor {
 	}
 
 	private static void save() {
-		if(!Files.exists(Paths.get(Defaults.saveDirectory + "\\GDBoard\\" + type + "\\"))) {
+		if (!Files.exists(Paths.get(Defaults.saveDirectory + "\\GDBoard\\" + type + "\\"))) {
 			try {
 				Files.createDirectory(Paths.get(Defaults.saveDirectory + "\\GDBoard\\" + type + "\\"));
 			} catch (IOException e) {
@@ -423,7 +417,7 @@ public class CommandEditor {
 				function = "function command() { Board.playSound(\"" + soundFileLocation.getText().replace("\\", "\\\\") + "\");}";
 			}
 		}
-		Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\" + type + "\\" + commandNameText.getText().replace("\\\\","").replace("/", "") + ".js");
+		Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\" + type + "\\" + commandNameText.getText().replace("\\\\", "").replace("/", "") + ".js");
 		if (!Files.exists(file)) {
 			try {
 				Files.createFile(file);
@@ -468,7 +462,7 @@ public class CommandEditor {
 			fileExplorerButton.setVisible(false);
 			editor.setSize(new Dimension(650, 530));
 			if (!command.equals("")) {
-				if(!isDefault) {
+				if (!isDefault) {
 					deleteButton.setVisible(true);
 				}
 				commandNameText.setText(command);
@@ -478,11 +472,10 @@ public class CommandEditor {
 					disable.setChecked(getStuff("disable"));
 					modOnly.setChecked(getStuff("mod"));
 					slider.setValue(getCooldown());
-				}
-				else {
+				} else {
 					editor.setSize(new Dimension(editor.getWidth(), 340));
 				}
-				if(!isDefault) {
+				if (!isDefault) {
 					if (getOption().equalsIgnoreCase("SEND_MESSAGE")) {
 						commandResponse.setText(replaceLast(getCommand().replaceFirst("function command\\(\\) \\{ return \"", ""), "\";}", ""));
 						editorChoices.setChecked("BASIC_EDITOR");
@@ -505,8 +498,7 @@ public class CommandEditor {
 						basicPanel.setVisible(false);
 						advancedPanel.setVisible(true);
 					}
-				}
-				else {
+				} else {
 					codeInput.setText(getCommand());
 					optionType = "ADVANCED_EDITOR";
 					basicChoices.setChecked("SEND_MESSAGE");
@@ -514,8 +506,7 @@ public class CommandEditor {
 					basicPanel.setVisible(false);
 					advancedPanel.setVisible(true);
 				}
-			}
-			else{
+			} else {
 				commandNameText.setEditable(true);
 			}
 			if (!type.equalsIgnoreCase("commands")) {
@@ -524,11 +515,11 @@ public class CommandEditor {
 			CommandEditor.type = type;
 			boolean commands = type.equalsIgnoreCase("commands");
 
-				disable.setVisible(commands);
-				modOnly.setVisible(commands);
-				whisper.setVisible(commands);
-				slider.setVisible(commands);
-				sliderValue.setVisible(commands);
+			disable.setVisible(commands);
+			modOnly.setVisible(commands);
+			whisper.setVisible(commands);
+			slider.setVisible(commands);
+			sliderValue.setVisible(commands);
 
 			editor.setLocation(Defaults.screenSize.x + Defaults.screenSize.width / 2 - editor.getWidth() / 2, Defaults.screenSize.y + Defaults.screenSize.height / 2 - editor.getHeight() / 2);
 		}
@@ -616,11 +607,11 @@ public class CommandEditor {
 	public static String getCommand() {
 		try {
 
-				if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/" + type + "/" + commandNameText.getText() + ".js"))) {
-					return String.valueOf(Files.readString(Paths.get(Defaults.saveDirectory + "/GDBoard/" + type + "/" + commandNameText.getText() + ".js"), StandardCharsets.UTF_8));
-				}
+			if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/" + type + "/" + commandNameText.getText() + ".js"))) {
+				return String.valueOf(Files.readString(Paths.get(Defaults.saveDirectory + "/GDBoard/" + type + "/" + commandNameText.getText() + ".js"), StandardCharsets.UTF_8));
+			}
 
-			if (type.equalsIgnoreCase("commands")){
+			if (type.equalsIgnoreCase("commands")) {
 				StringBuilder function = new StringBuilder();
 				InputStream is = Main.class
 						.getClassLoader().getResourceAsStream("Resources/Commands/" + commandNameText.getText() + ".js");
@@ -694,7 +685,7 @@ public class CommandEditor {
 				Scanner sc3 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/cooldown.txt").toFile());
 				while (sc3.hasNextLine()) {
 					String line = sc3.nextLine();
-					if(line.split("=").length > 1) {
+					if (line.split("=").length > 1) {
 						if (line.split("=")[0].trim().equalsIgnoreCase(commandNameText.getText())) {
 							cooldown = Integer.parseInt(line.split("=")[1].trim());
 							break;
@@ -738,7 +729,7 @@ public class CommandEditor {
 				Scanner sc3 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/" + type + "/options.txt").toFile());
 				while (sc3.hasNextLine()) {
 					String line = sc3.nextLine();
-					if(line.split("=").length > 1) {
+					if (line.split("=").length > 1) {
 						if (line.split("=")[0].trim().equalsIgnoreCase(commandNameText.getText())) {
 							typeA = line.split("=")[1].trim();
 							break;
@@ -772,7 +763,8 @@ public class CommandEditor {
 			f.printStackTrace();
 		}
 	}
-	private static void deleteCommand(){
+
+	private static void deleteCommand() {
 		isModOnly = false;
 		isWhisper = false;
 		isDisabled = false;
@@ -787,6 +779,7 @@ public class CommandEditor {
 		editor.setVisible(false);
 		active = false;
 	}
+
 	private static String replaceLast(String string, String toReplace, String replacement) {
 		int pos = string.lastIndexOf(toReplace);
 		if (pos > -1) {
@@ -797,7 +790,8 @@ public class CommandEditor {
 			return string;
 		}
 	}
-	public static void refreshUI(){
+
+	public static void refreshUI() {
 		editor.getContentPane().setBackground(Defaults.TOP);
 		codeInput.setCurrentLineHighlightColor(Defaults.BUTTON);
 		codeInput.setBackground(Defaults.MAIN);

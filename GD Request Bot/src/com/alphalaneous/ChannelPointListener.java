@@ -1,25 +1,27 @@
 package com.alphalaneous;
 
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.exceptions.WebsocketNotConnectedException;
+import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
-import org.java_websocket.client.WebSocketClient;
-import org.java_websocket.exceptions.WebsocketNotConnectedException;
-import org.java_websocket.handshake.ServerHandshake;
-import org.json.JSONObject;
-
 public class ChannelPointListener extends WebSocketClient {
 
-	private boolean pingSuccess = false;
 	private static URI uri;
 	private static Path myPath;
+
 	static {
 		try {
 			uri = Main.class.getResource("/Resources/points/").toURI();
@@ -27,6 +29,7 @@ public class ChannelPointListener extends WebSocketClient {
 			e.printStackTrace();
 		}
 	}
+
 	static {
 		if (uri.getScheme().equals("jar")) {
 			myPath = BotHandler.fileSystem.getPath("/Resources/points/");
@@ -36,13 +39,15 @@ public class ChannelPointListener extends WebSocketClient {
 
 	}
 
+	private boolean pingSuccess = false;
+
 	ChannelPointListener(URI serverURI) {
 		super(serverURI);
 	}
 
 	@Override
 	public void onOpen(ServerHandshake handshakedata) {
-		while(true) {
+		while (true) {
 			try {
 				send("{\n" +
 						"  \"type\": \"LISTEN\",\n" +
@@ -54,8 +59,7 @@ public class ChannelPointListener extends WebSocketClient {
 				System.out.println("Connected to Channel Points");
 				break;
 
-			}
-			catch (NullPointerException e){
+			} catch (NullPointerException e) {
 				e.printStackTrace();
 			}
 			try {
@@ -65,7 +69,7 @@ public class ChannelPointListener extends WebSocketClient {
 			}
 		}
 		new Thread(() -> {
-			while(true){
+			while (true) {
 				send("{\n" +
 						"  \"type\": \"PING\"\n" +
 						"}");
@@ -75,7 +79,7 @@ public class ChannelPointListener extends WebSocketClient {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				if(!pingSuccess){
+				if (!pingSuccess) {
 					send("{\n" +
 							"  \"type\": \"RECONNECT\"\n" +
 							"}");
@@ -93,13 +97,13 @@ public class ChannelPointListener extends WebSocketClient {
 	public void onMessage(String message) {
 		JSONObject object = new JSONObject(message);
 		String event = object.get("type").toString().replaceAll("\"", "");
-		if(event.equalsIgnoreCase("PONG")){
+		if (event.equalsIgnoreCase("PONG")) {
 			pingSuccess = true;
 		}
-		if(event.equalsIgnoreCase("MESSAGE")){
+		if (event.equalsIgnoreCase("MESSAGE")) {
 			String topic = object.getJSONObject("data").get("topic").toString().replaceAll("\"", "");
 
-			if(topic.startsWith("channel-points-channel-v1")){
+			if (topic.startsWith("channel-points-channel-v1")) {
 				System.out.println(message);
 				String redemptionA = object.getJSONObject("data").get("message").toString().replaceAll("\\\\\"", "\"").replaceAll("\r", "").replaceAll("\n", "");
 				System.out.println(redemptionA);
@@ -108,11 +112,10 @@ public class ChannelPointListener extends WebSocketClient {
 				System.out.println(username);
 				boolean isUserinput = new JSONObject(redemptionA).getJSONObject("data").getJSONObject("redemption").getJSONObject("reward").getBoolean("is_user_input_required");
 				String userInput = "";
-				if(isUserinput) {
+				if (isUserinput) {
 					userInput = new JSONObject().getJSONObject("data").getJSONObject("redemption").get("user_input").toString().replaceAll("\"", "");
 					System.out.println(redemption + " redeemed by " + username + " with " + userInput);
-				}
-				else{
+				} else {
 					System.out.println(redemption + " redeemed by " + username);
 				}
 				String finalUserInput = userInput;
@@ -172,8 +175,7 @@ public class ChannelPointListener extends WebSocketClient {
 							}
 						}
 					}
-				}
-				catch (Exception ignored){
+				} catch (Exception ignored) {
 				}
 
 			}
@@ -190,17 +192,17 @@ public class ChannelPointListener extends WebSocketClient {
 		ex.printStackTrace();
 	}
 
-	void disconnectBot(){
+	void disconnectBot() {
 		try {
 			send("{\n" +
 					"  \"type\": \"UNLISTEN\"\n" +
 					"}");
-		}
-		catch (WebsocketNotConnectedException ignored){
+		} catch (WebsocketNotConnectedException ignored) {
 
 		}
 	}
-	public void reconnectBot(){
+
+	public void reconnectBot() {
 		send("{\n" +
 				"  \"type\": \"LISTEN\",\n" +
 				"  \"data\": {\n" +

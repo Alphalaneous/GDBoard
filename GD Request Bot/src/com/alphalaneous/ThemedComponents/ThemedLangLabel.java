@@ -13,12 +13,14 @@ public class ThemedLangLabel extends LangLabel {
 		super(text);
 		labels.add(this);
 	}
-	public void refresh(){
-		setForeground(Defaults.FOREGROUND);
-	}
-	public static void refreshAll(){
-		for(ThemedLangLabel label : labels){
+
+	public static void refreshAll() {
+		for (ThemedLangLabel label : labels) {
 			label.refresh();
 		}
+	}
+
+	public void refresh() {
+		setForeground(Defaults.FOREGROUND);
 	}
 }

@@ -6,12 +6,11 @@ import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.alphalaneous.Windows.DialogBox;
 import com.alphalaneous.Windows.SettingsWindow;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.nio.file.*;
 import java.util.Scanner;
-
-import javax.swing.*;
 
 import static com.alphalaneous.Defaults.settingsButtonUI;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
@@ -56,32 +55,32 @@ public class BlockedSettings {
 		addID.addActionListener(e -> {
 
 
-				try {
-					Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
-					if (!Files.exists(file)) {
-						Files.createFile(file);
-					}
-					boolean goThrough = true;
-					Scanner sc = new Scanner(file.toFile());
-					while (sc.hasNextLine()) {
-						if (String.valueOf(blockedInput.getText()).equals(sc.nextLine())) {
-							goThrough = false;
-							break;
-						}
-					}
-					sc.close();
-					if (goThrough) {
-						if (!blockedInput.getText().equalsIgnoreCase("")) {
-
-							Files.write(file, (blockedInput.getText() + "\n").getBytes(), StandardOpenOption.APPEND);
-							addButton(Long.parseLong(blockedInput.getText()));
-							blockedInput.setText("");
-							blockedListPanel.updateUI();
-						}
-					}
-				} catch (IOException e1) {
-					DialogBox.showDialogBox("Error!", e1.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
+			try {
+				Path file = Paths.get(Defaults.saveDirectory + "\\GDBoard\\blocked.txt");
+				if (!Files.exists(file)) {
+					Files.createFile(file);
 				}
+				boolean goThrough = true;
+				Scanner sc = new Scanner(file.toFile());
+				while (sc.hasNextLine()) {
+					if (String.valueOf(blockedInput.getText()).equals(sc.nextLine())) {
+						goThrough = false;
+						break;
+					}
+				}
+				sc.close();
+				if (goThrough) {
+					if (!blockedInput.getText().equalsIgnoreCase("")) {
+
+						Files.write(file, (blockedInput.getText() + "\n").getBytes(), StandardOpenOption.APPEND);
+						addButton(Long.parseLong(blockedInput.getText()));
+						blockedInput.setText("");
+						blockedListPanel.updateUI();
+					}
+				}
+			} catch (IOException e1) {
+				DialogBox.showDialogBox("Error!", e1.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
+			}
 
 		});
 		scrollPane.setBounds(0, 60, 412, 562);
@@ -122,7 +121,7 @@ public class BlockedSettings {
 
 	public static void removeID(String ID) {
 		i--;
-		if (i % 4 == 0 && i !=0) {
+		if (i % 4 == 0 && i != 0) {
 			height = height - 39;
 			blockedListPanel.setBounds(0, 0, 400, (int) (height + 4));
 			blockedListPanel.setPreferredSize(new Dimension(400, (int) (height + 4)));
@@ -141,7 +140,7 @@ public class BlockedSettings {
 
 	public static void addButton(long ID) {
 		i++;
-		if ((i-1) % 4 == 0) {
+		if ((i - 1) % 4 == 0) {
 			height = height + 39;
 			blockedListPanel.setBounds(0, 0, 400, (int) (height + 4));
 			blockedListPanel.setPreferredSize(new Dimension(400, (int) (height + 4)));
@@ -157,38 +156,39 @@ public class BlockedSettings {
 		button.setPreferredSize(new Dimension(85, 35));
 		button.addActionListener(e -> {
 			SettingsWindow.run = false;
-				new Thread(() -> {
+			new Thread(() -> {
 
-					String option = DialogBox.showDialogBox("$UNBLOCK_ID_DIALOG_TITLE$", "<html> $UNBLOCK_ID_DIALOG_INFO$ <html>", "", new String[]{"$YES$", "$NO$"}, new Object[]{button.getLText()});
+				String option = DialogBox.showDialogBox("$UNBLOCK_ID_DIALOG_TITLE$", "<html> $UNBLOCK_ID_DIALOG_INFO$ <html>", "", new String[]{"$YES$", "$NO$"}, new Object[]{button.getLText()});
 
-					if (option.equalsIgnoreCase("YES")) {
-						if (Files.exists(file)) {
-							try {
-								Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_temp_");
-								PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
-								Files.lines(file)
-										.filter(line -> !line.contains(button.getLText()))
-										.forEach(out::println);
-								out.flush();
-								out.close();
-								Files.delete(file);
-								Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\blocked.txt"), StandardCopyOption.REPLACE_EXISTING);
+				if (option.equalsIgnoreCase("YES")) {
+					if (Files.exists(file)) {
+						try {
+							Path temp = Paths.get(Defaults.saveDirectory + "\\GDBoard\\_temp_");
+							PrintWriter out = new PrintWriter(new FileWriter(temp.toFile()));
+							Files.lines(file)
+									.filter(line -> !line.contains(button.getLText()))
+									.forEach(out::println);
+							out.flush();
+							out.close();
+							Files.delete(file);
+							Files.move(temp, temp.resolveSibling(Defaults.saveDirectory + "\\GDBoard\\blocked.txt"), StandardCopyOption.REPLACE_EXISTING);
 
-							} catch (IOException ex) {
+						} catch (IOException ex) {
 
-								DialogBox.showDialogBox("Error!", ex.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
-							}
+							DialogBox.showDialogBox("Error!", ex.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
 						}
-						removeID(button.getLText());
 					}
-					SettingsWindow.run = true;
-				}).start();
+					removeID(button.getLText());
+				}
+				SettingsWindow.run = true;
+			}).start();
 
 		});
 		button.refresh();
 		blockedListPanel.add(button);
 
 	}
+
 	public static void refreshUI() {
 
 		scrollPane.getVerticalScrollBar().setUI(new ScrollbarUI());
@@ -207,7 +207,7 @@ public class BlockedSettings {
 				component.setForeground(Defaults.FOREGROUND);
 
 			}
-			if(component instanceof JTextArea){
+			if (component instanceof JTextArea) {
 				((FancyTextArea) component).refresh_();
 			}
 		}
@@ -221,10 +221,10 @@ public class BlockedSettings {
 				}
 				component.setBackground(Defaults.BUTTON);
 			}
-			if(component instanceof JTextArea){
+			if (component instanceof JTextArea) {
 				((FancyTextArea) component).refresh_();
 			}
-			if(component instanceof ThemedCheckbox){
+			if (component instanceof ThemedCheckbox) {
 				((ThemedCheckbox) component).refresh();
 			}
 		}

@@ -8,23 +8,38 @@ import java.util.Arrays;
 
 public class GDMod {
 
-	public static void runNew(String... args){
+	public static void runNew(String... args) {
 
-		for(int i = 0; i < args.length; i++){
+		for (int i = 0; i < args.length; i++) {
 			args[i] = args[i].toLowerCase();
 		}
 
-		if(args[0].equalsIgnoreCase("gamemode")){
+		if (args[0].equalsIgnoreCase("gamemode")) {
 
-			switch (args[1]){
-				case "cube": args[1] = "-1"; break;
-				case "ship": args[1] = "0"; break;
-				case "ufo": args[1] = "1"; break;
-				case "ball": args[1] = "2"; break;
-				case "wave": args[1] = "3"; break;
-				case "robot": args[1] = "4"; break;
-				case "spider": args[1] = "5"; break;
-				default: return;
+			switch (args[1]) {
+				case "cube":
+					args[1] = "-1";
+					break;
+				case "ship":
+					args[1] = "0";
+					break;
+				case "ufo":
+					args[1] = "1";
+					break;
+				case "ball":
+					args[1] = "2";
+					break;
+				case "wave":
+					args[1] = "3";
+					break;
+				case "robot":
+					args[1] = "4";
+					break;
+				case "spider":
+					args[1] = "5";
+					break;
+				default:
+					return;
 			}
 		}
 		StringBuilder message = new StringBuilder();
@@ -35,28 +50,29 @@ public class GDMod {
 		GDHelper.send(message.toString());
 	}
 
-	public static void run(String... args){
+	public static void run(String... args) {
 
 		new Thread(() ->
-			ProcessHandle.allProcesses().forEach(process ->{
-				if(process.info().command().isPresent()) {
-					if(process.info().command().get().endsWith("GeometryDash.exe")){
-						long PID = process.pid();
-						String[] cmd = new String[]{Defaults.saveDirectory + "\\GDBoard\\bin\\gdmod.exe", String.valueOf(PID)};
-						String[] fillCmd = ArrayUtils.addAll(cmd, args);
-						ProcessBuilder pb = new ProcessBuilder(fillCmd).redirectErrorStream(true);
-						try {
-							pb.start();
-						} catch (IOException e) {
-							e.printStackTrace();
+				ProcessHandle.allProcesses().forEach(process -> {
+					if (process.info().command().isPresent()) {
+						if (process.info().command().get().endsWith("GeometryDash.exe")) {
+							long PID = process.pid();
+							String[] cmd = new String[]{Defaults.saveDirectory + "\\GDBoard\\bin\\gdmod.exe", String.valueOf(PID)};
+							String[] fillCmd = ArrayUtils.addAll(cmd, args);
+							ProcessBuilder pb = new ProcessBuilder(fillCmd).redirectErrorStream(true);
+							try {
+								pb.start();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 						}
 					}
-				}
-			})).start();
+				})).start();
 	}
-	public static String doChaos(String... args){
+
+	public static String doChaos(String... args) {
 		System.out.println(args[0]);
-		if(!args[0].equalsIgnoreCase("gamemode") && !args[0].equalsIgnoreCase("kill")) {
+		if (!args[0].equalsIgnoreCase("gamemode") && !args[0].equalsIgnoreCase("kill")) {
 			if (args[1] != null) {
 				try {
 					Double.parseDouble(args[1]);
@@ -66,7 +82,7 @@ public class GDMod {
 			}
 		}
 		assert args[1] != null;
-		switch(args[0]){
+		switch (args[0]) {
 			case "x":
 				if (ChaosModeSettings.minXOption && (Double.parseDouble(args[1]) < ChaosModeSettings.minX)) {
 					return "";
@@ -100,14 +116,14 @@ public class GDMod {
 				}
 				break;
 			case "kill":
-				if(ChaosModeSettings.disableKillOption){
+				if (ChaosModeSettings.disableKillOption) {
 					return "";
-				}
-				else{
+				} else {
 					run("kill");
 					return "";
 				}
-			default: break;
+			default:
+				break;
 		}
 
 		runNew(args);

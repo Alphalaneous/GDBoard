@@ -8,7 +8,6 @@ import reactor.netty.http.client.HttpClient;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.HashMap;
 import java.util.Objects;
 
 import static io.netty.buffer.Unpooled.wrappedBuffer;
@@ -73,6 +72,7 @@ public class GDApi {
 		}
 		return commentsData;
 	}
+
 	public static void getGDLevel(long ID) {
 		String response = "";
 		int tries = 0;

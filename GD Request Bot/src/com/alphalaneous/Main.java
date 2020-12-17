@@ -1,5 +1,6 @@
 package com.alphalaneous;
 
+import com.alphalaneous.Panels.CommentsPanel;
 import com.alphalaneous.Panels.InfoPanel;
 import com.alphalaneous.Panels.LevelsPanel;
 import com.alphalaneous.SettingsPanels.*;
@@ -7,7 +8,6 @@ import com.alphalaneous.Windows.CommandEditor;
 import com.alphalaneous.Windows.DialogBox;
 import com.alphalaneous.Windows.SettingsWindow;
 import com.alphalaneous.Windows.Window;
-import com.alphalaneous.Panels.CommentsPanel;
 import org.apache.commons.io.FileUtils;
 import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.jnativehook.GlobalScreen;
@@ -17,7 +17,8 @@ import org.json.JSONObject;
 import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.*;
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -25,7 +26,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
@@ -36,11 +40,15 @@ public class Main {
 
 	public static boolean programLoaded = false;
 	static boolean sendMessages = false;
-	private static ChatListener chatReader;
 	static boolean allowRequests = false;
+	static Thread thread;
+	private static ChatListener chatReader;
 	private static boolean keepConnecting = true;
 	private static ChannelPointListener channelPointListener;
 	private static ServerBot serverBot = new ServerBot();
+	private static boolean onCool = false;
+	private static boolean cooldown = false;
+	private static boolean failed = false;
 
 	public static void main(String[] args) {
 		/*
@@ -272,11 +280,10 @@ public class Main {
 
 			sendMessages = true;
 
-			if(Settings.getSettings("isHigher").equalsIgnoreCase("true")){
-				sendMessage(Utilities.format("$STARTUP_MESSAGE_MOD_VIP$"));
-			}
-			else {
-				sendMessage(Utilities.format("$STARTUP_MESSAGE$"));
+			if (Settings.getSettings("isHigher").equalsIgnoreCase("true")) {
+				sendMessage(Utilities.format("🔷 | $STARTUP_MESSAGE_MOD_VIP$"));
+			} else {
+				sendMessage(Utilities.format("🔷 | $STARTUP_MESSAGE$"));
 			}
 
 			new Thread(() -> {
@@ -292,10 +299,9 @@ public class Main {
 			new Thread(() -> {
 				while (true) {
 					APIs.setAllViewers();
-					if(APIs.allMods.contains("gdboard") || APIs.allVIPs.contains("gdboard")){
+					if (APIs.allMods.contains("gdboard") || APIs.allVIPs.contains("gdboard")) {
 						Settings.writeSettings("isHigher", "true");
-					}
-					else{
+					} else {
 						Settings.writeSettings("isHigher", "false");
 					}
 					try {
@@ -313,7 +319,6 @@ public class Main {
 			close(true, false);
 		}
 	}
-
 
 	static void refreshBot() {
 		try {
@@ -334,8 +339,6 @@ public class Main {
 		chatReader.sendMessage(message);
 	}
 
-	private static boolean onCool = false;
-
 	private static void addMissingFiles() {
 		try {
 			Path path = Paths.get(Defaults.saveDirectory + "\\GDBoard\\bin\\gdmod.exe");
@@ -352,8 +355,6 @@ public class Main {
 			e.printStackTrace();
 		}
 	}
-
-	private static boolean cooldown = false;
 
 	static void sendBotMessage(String message) {
 		try {
@@ -380,7 +381,7 @@ public class Main {
 
 				while (onCool) {
 					try {
-						Thread.sleep(100);
+						Thread.sleep(20);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -404,7 +405,7 @@ public class Main {
 				}
 				new Thread(() -> {
 					try {
-						Thread.sleep(500);
+						Thread.sleep(100);
 						onCool = false;
 					} catch (InterruptedException e) {
 						e.printStackTrace();
@@ -431,9 +432,6 @@ public class Main {
 	public static void sendMessage(String message) {
 		sendMessage(message, false, null);
 	}
-
-	private static boolean failed = false;
-	static Thread thread;
 
 	private static void runKeyboardHook() {
 		if (thread != null) {

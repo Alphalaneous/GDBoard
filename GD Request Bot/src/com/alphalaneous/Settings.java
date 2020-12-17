@@ -4,11 +4,15 @@ import com.alphalaneous.Windows.DialogBox;
 import com.alphalaneous.Windows.Window;
 
 import java.awt.*;
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Settings {
 
@@ -53,7 +57,7 @@ public class Settings {
 		}
 	}
 
-	public static void writeSettings(String key, String setting){
+	public static void writeSettings(String key, String setting) {
 		settings.put(key, setting);
 	}
 

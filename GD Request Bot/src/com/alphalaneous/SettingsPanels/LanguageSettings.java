@@ -1,8 +1,8 @@
 package com.alphalaneous.SettingsPanels;
 
-import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 import com.alphalaneous.Components.FancyTextArea;
 import com.alphalaneous.Defaults;
+import com.alphalaneous.ThemedComponents.ThemedCheckbox;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,8 +13,6 @@ public class LanguageSettings {
 
 	public static JPanel createPanel() {
 
-
-
 		panel.setLayout(null);
 		panel.setDoubleBuffered(true);
 		panel.setBounds(0, 0, 415, 622);
@@ -22,6 +20,7 @@ public class LanguageSettings {
 
 		return panel;
 	}
+
 	public static void refreshUI() {
 
 		panel.setBackground(Defaults.SUB_MAIN);
@@ -34,10 +33,10 @@ public class LanguageSettings {
 				}
 				component.setBackground(Defaults.BUTTON);
 			}
-			if(component instanceof JTextArea){
+			if (component instanceof JTextArea) {
 				((FancyTextArea) component).refresh_();
 			}
-			if(component instanceof ThemedCheckbox){
+			if (component instanceof ThemedCheckbox) {
 				((ThemedCheckbox) component).refresh();
 			}
 

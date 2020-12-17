@@ -17,7 +17,7 @@ public class TwitchAccount {
 	public static String email;
 
 
-	public static void setInfo(){
+	public static void setInfo() {
 		JSONObject data = APIs.getInfo();
 
 		broadcaster_type = data.getString("broadcaster_type");
