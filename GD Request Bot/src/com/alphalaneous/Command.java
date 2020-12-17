@@ -19,7 +19,9 @@ public class Command {
         sandbox.inject("user", user);
         sandbox.inject("args", args);
         sandbox.inject("cheer", cheer);
-        sandbox.inject("messageID", messageID);
+        if(messageID != null) {
+            sandbox.inject("messageID", messageID);
+        }
 
         String[] xArgs = Arrays.copyOfRange(args, 1, args.length);
         sandbox.inject("xArgs", xArgs);
