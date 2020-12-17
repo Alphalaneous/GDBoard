@@ -101,13 +101,18 @@ public class RequestsOld {
 			ImageIcon imgNew = new ImageIcon(imgScaled);
 			levelData.setPlayerIcon(imgNew);
 		} catch (MissingAccessException e) {
-			user = LoadGD.anonClient.searchUser("RobTop").block();
-			assert user != null;
-			iconSet = new GDUserIconSet(user, spriteFactory);
-			BufferedImage icon = iconSet.generateIcon(user.getMainIconType());
-			Image imgScaled = icon.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-			ImageIcon imgNew = new ImageIcon(imgScaled);
-			levelData.setPlayerIcon(imgNew);
+			try {
+				user = LoadGD.anonClient.searchUser("RobTop").block();
+				assert user != null;
+				iconSet = new GDUserIconSet(user, spriteFactory);
+				BufferedImage icon = iconSet.generateIcon(user.getMainIconType());
+				Image imgScaled = icon.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+				ImageIcon imgNew = new ImageIcon(imgScaled);
+				levelData.setPlayerIcon(imgNew);
+			}
+			catch (IllegalArgumentException f){
+				levelData.setPlayerIcon(null);
+			}
 
 		} catch (Exception e){
 			levelData.setPlayerIcon(null);

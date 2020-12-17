@@ -8,11 +8,11 @@
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/GD_Request_Bot_jar/GD Request Bot.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Requests.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Requests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/RequestsOld.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/RequestsOld.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Requests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Requests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/RequestsOld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/RequestsOld.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -58,8 +58,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/RequestsOld.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="777" column="24" selection-start-line="777" selection-start-column="24" selection-end-line="777" selection-end-column="24" />
+            <state relative-caret-position="499">
+              <caret line="112" column="45" selection-start-line="112" selection-start-column="45" selection-end-line="112" selection-end-column="45" />
+              <folding>
+                <element signature="e#27547#27548#0" expanded="true" />
+                <element signature="e#27588#27589#0" expanded="true" />
+                <element signature="e#27723#27724#0" expanded="true" />
+                <element signature="e#27806#27807#0" expanded="true" />
+                <element signature="e#28173#28174#0" expanded="true" />
+                <element signature="e#31574#31575#0" expanded="true" />
+                <element signature="e#31660#31661#0" expanded="true" />
+                <element signature="e#31747#31748#0" expanded="true" />
+                <element signature="e#31827#31828#0" expanded="true" />
+                <element signature="e#31915#31916#0" expanded="true" />
+                <element signature="e#31995#31996#0" expanded="true" />
+                <element signature="e#32083#32084#0" expanded="true" />
+                <element signature="e#32233#32234#0" expanded="true" />
+                <element signature="e#43016#43017#0" expanded="true" />
+                <element signature="e#43130#43131#0" expanded="true" />
+                <element signature="e#43214#43215#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -67,7 +85,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Requests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
+            <state relative-caret-position="244">
               <caret line="521" column="48" selection-start-line="521" selection-start-column="48" selection-end-line="521" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -259,11 +277,11 @@
         <option value="$PROJECT_DIR$/src/com/alphalaneous/KeyListener.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/LevelData.java" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/!request.js" />
-        <option value="$PROJECT_DIR$/src/com/alphalaneous/RequestsOld.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/Sounds.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/Command.java" />
         <option value="$PROJECT_DIR$/src/Resources/Commands/!eval.js" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/Requests.java" />
+        <option value="$PROJECT_DIR$/src/com/alphalaneous/RequestsOld.java" />
         <option value="$PROJECT_DIR$/src/.version" />
       </list>
     </option>
@@ -472,7 +490,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1608181097550" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1608181348003" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../GDBoard Dependencies/dependency/slf4j-api-1.8.0-beta4.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -517,7 +535,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JAR Application.GD Request Bot.jar">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -1189,13 +1207,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/RequestsOld.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="777" column="24" selection-start-line="777" selection-start-column="24" selection-end-line="777" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Board.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -1249,9 +1260,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/RequestsOld.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="499">
+          <caret line="112" column="45" selection-start-line="112" selection-start-column="45" selection-end-line="112" selection-end-column="45" />
+          <folding>
+            <element signature="e#27547#27548#0" expanded="true" />
+            <element signature="e#27588#27589#0" expanded="true" />
+            <element signature="e#27723#27724#0" expanded="true" />
+            <element signature="e#27806#27807#0" expanded="true" />
+            <element signature="e#28173#28174#0" expanded="true" />
+            <element signature="e#31574#31575#0" expanded="true" />
+            <element signature="e#31660#31661#0" expanded="true" />
+            <element signature="e#31747#31748#0" expanded="true" />
+            <element signature="e#31827#31828#0" expanded="true" />
+            <element signature="e#31915#31916#0" expanded="true" />
+            <element signature="e#31995#31996#0" expanded="true" />
+            <element signature="e#32083#32084#0" expanded="true" />
+            <element signature="e#32233#32234#0" expanded="true" />
+            <element signature="e#43016#43017#0" expanded="true" />
+            <element signature="e#43130#43131#0" expanded="true" />
+            <element signature="e#43214#43215#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Requests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
+        <state relative-caret-position="244">
           <caret line="521" column="48" selection-start-line="521" selection-start-column="48" selection-end-line="521" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
