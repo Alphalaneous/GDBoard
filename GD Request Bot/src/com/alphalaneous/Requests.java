@@ -512,10 +512,18 @@ public class Requests {
 					assert gdUser != null;
 					iconSet = new GDUserIconSet(gdUser, spriteFactory);
 				}
-				BufferedImage icon = iconSet.generateIcon(gdUser.getMainIconType());
-				Image imgScaled = icon.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-				ImageIcon imgNew = new ImageIcon(imgScaled);
-				levelData.setPlayerIcon(imgNew);
+				try {
+					BufferedImage icon = iconSet.generateIcon(gdUser.getMainIconType());
+					Image imgScaled = icon.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+					ImageIcon imgNew = new ImageIcon(imgScaled);
+					levelData.setPlayerIcon(imgNew);
+				}
+				catch (IllegalArgumentException e){
+					BufferedImage icon = iconSet.generateIcon(LoadGD.authClient.searchUser("RobTop").block().getMainIconType());
+					Image imgScaled = icon.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+					ImageIcon imgNew = new ImageIcon(imgScaled);
+					levelData.setPlayerIcon(imgNew);
+				}
 
 				if (GeneralSettings.autoDownloadOption) {
 					new Thread(() -> {
