@@ -244,9 +244,9 @@ public class Requests {
 					}
 				}
 
-				while (processingLevel) {
+				/*while (processingLevel) {
 					Thread.sleep(100);
-				}
+				}*/
 				processingLevel = true;
 
 				for (int k = 0; k < levels.size(); k++) {
