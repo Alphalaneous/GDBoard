@@ -35,6 +35,7 @@ public class Window {
 	private static JPanel actionsPanel = new JPanel(new GridLayout(10, 1, 10, 10));
 	private static RoundedJButton switchButton = new RoundedJButton("\uF1CB", "$SWITCH_PAGES$");
 	private static boolean gdPage = true;
+	private static boolean isAnimating = false;
 	private static JPanel buttonPanel = new JPanel();
 	private static JPanel sideButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 15));
 	private static JPanel iconPanel = new JPanel(null);
@@ -74,6 +75,28 @@ public class Window {
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
+				Random random = new Random();
+				int randomNum = random.nextInt(100);
+				if(randomNum == 37) {
+					int origX = frame.getX();
+					int origY = frame.getY();
+					for (int i = 0; i < Defaults.screenSize.getHeight(); i += 12) {
+
+						frame.setLocation(frame.getX(), origY + i);
+						try {
+							Thread.sleep(1);
+						} catch (InterruptedException e1) {
+							e1.printStackTrace();
+						}
+					}
+					frame.setVisible(false);
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
+					frame.setLocation(origX, origY);
+				}
 				Main.close();
 			}
 		});
@@ -95,34 +118,36 @@ public class Window {
 
 		frame.addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent evt) {
-				content.setBounds(40, 0, frame.getWidth() - 10, frame.getHeight() - 38);
-				actionsPanel.setBounds(30, 0, frame.getWidth() - 16, frame.getHeight() - 38);
+				if(!isAnimating) {
+					content.setBounds(40, 0, frame.getWidth() - 10, frame.getHeight() - 38);
+					actionsPanel.setBounds(30, 0, frame.getWidth() - 16, frame.getHeight() - 38);
 
-				//window.setBounds(-5,-35,frame.getWidth(), frame.getHeight());
-				//((InnerWindow) window).resetDimensions(frame.getWidth()-10, frame.getHeight());
-				buttonPanel.setBounds(frame.getWidth() - 110, 0, 50, frame.getHeight() - 70);
-				sideButtons.setBounds(0, -5, 40, frame.getHeight() - 15);
+					//window.setBounds(-5,-35,frame.getWidth(), frame.getHeight());
+					//((InnerWindow) window).resetDimensions(frame.getWidth()-10, frame.getHeight());
+					buttonPanel.setBounds(frame.getWidth() - 110, 0, 50, frame.getHeight() - 70);
+					sideButtons.setBounds(0, -5, 40, frame.getHeight() - 15);
 
-				iconPanel.setBounds(frame.getWidth() - 110, frame.getHeight() - 95, 50, 50);
-				toolBar.setBounds(0, 0, frame.getWidth(), 30);
-				//gdToggle.setBounds(frame.getWidth() - 180, 0, 100, 30);
-				switchButton.setBounds(frame.getWidth() - 50, 3, 25, 25);
+					iconPanel.setBounds(frame.getWidth() - 110, frame.getHeight() - 95, 50, 50);
+					toolBar.setBounds(0, 0, frame.getWidth(), 30);
+					//gdToggle.setBounds(frame.getWidth() - 180, 0, 100, 30);
+					switchButton.setBounds(frame.getWidth() - 50, 3, 25, 25);
 
 
-				if (showingMore) {
-					LevelsPanel.resizeButtons(frame.getWidth() - 415);
-					LevelsPanel.getReqWindow().setBounds(0, 0, frame.getWidth() - 415, frame.getHeight() - 152);
-					CommentsPanel.getComWindow().setBounds(frame.getWidth() - 415, 0, CommentsPanel.getComWindow().getWidth(), frame.getHeight() + 2);
-					CommentsPanel.resetDimensions(CommentsPanel.getComWindow().getWidth(), frame.getHeight() + 2);
-					InfoPanel.resetDimensions(LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
-					InfoPanel.getInfoWindow().setBounds(0, LevelsPanel.getReqWindow().getHeight() + 1, LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
-				} else {
-					LevelsPanel.resizeButtons(frame.getWidth() - 115);
-					LevelsPanel.getReqWindow().setBounds(0, 0, frame.getWidth() - 115, frame.getHeight() - 152);
-					InfoPanel.resetDimensions(LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
-					InfoPanel.getInfoWindow().setBounds(0, LevelsPanel.getReqWindow().getHeight() + 1, LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
+					if (showingMore) {
+						LevelsPanel.resizeButtons(frame.getWidth() - 415);
+						LevelsPanel.getReqWindow().setBounds(0, 0, frame.getWidth() - 415, frame.getHeight() - 152);
+						CommentsPanel.getComWindow().setBounds(frame.getWidth() - 415, 0, CommentsPanel.getComWindow().getWidth(), frame.getHeight() + 2);
+						CommentsPanel.resetDimensions(CommentsPanel.getComWindow().getWidth(), frame.getHeight() + 2);
+						InfoPanel.resetDimensions(LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
+						InfoPanel.getInfoWindow().setBounds(0, LevelsPanel.getReqWindow().getHeight() + 1, LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
+					} else {
+						LevelsPanel.resizeButtons(frame.getWidth() - 115);
+						LevelsPanel.getReqWindow().setBounds(0, 0, frame.getWidth() - 115, frame.getHeight() - 152);
+						InfoPanel.resetDimensions(LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
+						InfoPanel.getInfoWindow().setBounds(0, LevelsPanel.getReqWindow().getHeight() + 1, LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
+					}
+					refresh();
 				}
-				refresh();
 			}
 
 			public void componentMoved(ComponentEvent evt) {
@@ -142,6 +167,9 @@ public class Window {
 		frame.setSize(width + 250, height + 32 + 230);
 		frame.setMinimumSize(new Dimension(515, 630));
 		frame.setLayout(null);
+		frame.getContentPane().setBackground(Defaults.MAIN);
+		frame.getRootPane().setBackground(Defaults.MAIN);
+		frame.setBackground(Defaults.MAIN);
 		mainFrame.setBounds(20, 20, width + 200, height + 32 + 200);
 		mainFrame.setLayout(null);
 		mainFrame.setDoubleBuffered(true);
@@ -264,19 +292,35 @@ public class Window {
 				refresh();
 			} else {
 				((RoundedJButton) showComments).setTooltip("$HIDE_COMMENTS_TOOLTIP$");
+				int width = frame.getWidth();
+				int height = frame.getHeight();
+				int widthAlt = width;
 				if (frame.getWidth() < 765) {
-					frame.setSize(frame.getWidth() + 300, frame.getHeight());
+					widthAlt = width + 300;
+					isAnimating = true;
+					new Thread(() -> {
+					for(int i = 0; i < 300; i+=12) {
+						frame.setSize(width + i, frame.getHeight());
+						try {
+							Thread.sleep(1, 0);
+						} catch (InterruptedException e1) {
+							e1.printStackTrace();
+						}
+					}
+					frame.setMinimumSize(new Dimension(815, 630));
+					isAnimating = false;
+					}).start();
+
 				}
-				frame.setMinimumSize(new Dimension(815, 630));
 				CommentsPanel.loadComments(0, false);
 				CommentsPanel.getComWindow().setVisible(true);
-				CommentsPanel.getComWindow().setBounds(frame.getWidth() - 415, 0, CommentsPanel.getComWindow().getWidth(), frame.getHeight() + 2);
-				CommentsPanel.resetDimensions(CommentsPanel.getComWindow().getWidth(), frame.getHeight() + 2);
-				LevelsPanel.resizeButtons(frame.getWidth() - 415);
-				LevelsPanel.getReqWindow().setBounds(0, 0, frame.getWidth() - 415, frame.getHeight() - 152);
+				CommentsPanel.getComWindow().setBounds(widthAlt - 415, 0, CommentsPanel.getComWindow().getWidth(), height + 2);
+				CommentsPanel.resetDimensions(CommentsPanel.getComWindow().getWidth(), height + 2);
+				LevelsPanel.resizeButtons(widthAlt - 415);
+				LevelsPanel.getReqWindow().setBounds(0, 0, widthAlt - 415, height - 152);
 				InfoPanel.resetDimensions(LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
 				InfoPanel.getInfoWindow().setBounds(0, LevelsPanel.getReqWindow().getHeight() + 1, LevelsPanel.getReqWindow().getWidth(), InfoPanel.getInfoWindow().getHeight());
-				refresh();
+
 			}
 
 

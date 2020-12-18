@@ -5,6 +5,7 @@ import com.alphalaneous.SettingsPanels.CommandSettings;
 import com.alphalaneous.SettingsPanels.PersonalizationSettings;
 import com.alphalaneous.Windows.DialogBox;
 import com.alphalaneous.Windows.Window;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -80,7 +81,7 @@ public class Utilities {
 		for (String msg : args) {
 			message.append(" ").append(msg);
 		}
-		message = new StringBuilder(message.toString().replaceFirst(args[0], "").trim());
+		message = new StringBuilder(StringUtils.replaceOnce(message.toString(), args[0], "").trim());
 		String command;
 		if (message.toString().startsWith("eval:")) {
 			command = "function command(){" + message.toString().replace("eval:", "").trim() + "}";
@@ -113,7 +114,7 @@ public class Utilities {
 		for (String msg : args) {
 			message.append(" ").append(msg);
 		}
-		message = new StringBuilder(message.toString().replaceFirst(args[0], "").trim());
+		message = new StringBuilder(StringUtils.replaceOnce(message.toString(), args[0], "").trim());
 		String command;
 		if (message.toString().startsWith("eval:")) {
 			command = "function command(){" + message.toString().replace("eval:", "").trim() + "}";

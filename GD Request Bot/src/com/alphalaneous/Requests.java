@@ -600,7 +600,7 @@ public class Requests {
 					clipboard.setContents(selection, selection);
 					if (Main.sendMessages) {
 						if (!GeneralSettings.nowPlayingOption) {
-							sendSuccess(Utilities.format("$NOW_PLAYING_TOP_MESSAGE$",
+							Main.sendMessage(Utilities.format("🎮 | $NOW_PLAYING_TOP_MESSAGE$",
 									Requests.levels.get(0).getRequester(),
 									Requests.levels.get(0).getName(),
 									Requests.levels.get(0).getLevelID()));

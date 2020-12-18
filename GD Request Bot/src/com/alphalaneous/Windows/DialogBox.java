@@ -16,34 +16,28 @@ import static com.alphalaneous.Defaults.defaultUI;
 public class DialogBox {
 
 	public static boolean active = false;
-	private static JFrame frame = null;
-	private static boolean progressBar = false;
+	private static JFrame frame = new JFrame();
 	private static boolean setFocus = true;
 
 	public static String showDialogBox(String title, String info, String subInfo, String[] options) {
-		progressBar = false;
-		return showDialogBox(title, info, subInfo, options, false, new Object[]{});
-	}
 
-	public static String showDialogBox(String title, String info, String subInfo, String[] options, Object[] args) {
-		progressBar = false;
-		return showDialogBox(title, info, subInfo, options, false, args);
+		return showDialogBox(title, info, subInfo, options, new Object[]{});
 	}
 
 	public static void setUnfocusable() {
 		setFocus = false;
 	}
 
-	public static String showDialogBox(String title, String info, String subInfo, String[] options, boolean progressBar, Object[] args) {
+	public static String showDialogBox(String title, String info, String subInfo, String[] options, Object[] args) {
 		final String[] value = {null};
-		DialogBox.progressBar = progressBar;
+
 
 		if (!active) {
 			active = true;
 			frame = new JFrame();
 			frame.setFocusableWindowState(setFocus);
 			frame.setFocusable(setFocus);
-			frame.setTitle("GDBoard- Dialog");
+			frame.setTitle("GDBoard - Dialog");
 			URL iconURL = Window.class.getResource("/Resources/Icons/windowIcon.png");
 			ImageIcon icon = new ImageIcon(iconURL);
 			Image newIcon = icon.getImage().getScaledInstance(256, 256, Image.SCALE_SMOOTH);
@@ -178,11 +172,11 @@ public class DialogBox {
 	}
 
 	public static void closeDialogBox() {
-		if (frame != null) {
+		System.out.println("here?");
 			frame.setVisible(false);
 			frame.removeAll();
 			frame.dispose();
-		}
+
 		active = false;
 		setFocus = true;
 
