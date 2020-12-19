@@ -36,7 +36,7 @@ import java.util.zip.GZIPInputStream;
 public class Requests {
 
 	public static ArrayList<LevelData> levels = new ArrayList<>();
-	public static boolean requestsEnabled = true;
+	public static volatile boolean requestsEnabled = true;
 	static HashMap<Long, String> globallyBlockedIDs = new HashMap<>();
 	private static HashMap<Long, Integer> addedLevels = new HashMap<>();
 	private static HashMap<String, Integer> userStreamLimitMap = new HashMap<>();
@@ -58,6 +58,10 @@ public class Requests {
 		new Thread(() -> {
 			try {
 				if (!Main.allowRequests) {
+					processingLevel = false;
+					return;
+				}
+				if (!Main.programLoaded) {
 					processingLevel = false;
 					return;
 				}
@@ -259,8 +263,7 @@ public class Requests {
 				}
 
 				boolean bypass = (GeneralSettings.modsBypassOption && isMod) || (user.equalsIgnoreCase(TwitchAccount.login) && GeneralSettings.streamerBypassOption);
-
-				if (Main.programLoaded && !bypass) {
+				if (!bypass) {
 					if (checkList(ID, "\\GDBoard\\blocked.txt")) {
 						sendUnallowed(Utilities.format("$BLOCKED_LEVEL_MESSAGE$", user));
 						return;
@@ -344,7 +347,7 @@ public class Requests {
 
 				LevelData levelData = new LevelData();
 				Thread parse;
-				if (Main.programLoaded && !bypass) {
+				if (!bypass) {
 					if (checkList(level.getCreatorName(), "\\GDBoard\\blockedGDUsers.txt")) {
 						sendUnallowed(Utilities.format("$BLOCKED_CREATOR_MESSAGE$", user));
 						return;
@@ -435,7 +438,9 @@ public class Requests {
 				if (level.getFeaturedScore() > 0) {
 					levelData.setFeatured();
 				}
-
+				if(levelData.getDifficulty().equalsIgnoreCase("insane") && levelData.getStars() == 1){
+					levelData.setDifficulty("auto");
+				}
 				if (level.isDemon()) {
 					if (level.getDifficulty().toString().equalsIgnoreCase("EASY")) {
 						levelData.setDifficulty("easy demon");
@@ -451,7 +456,7 @@ public class Requests {
 				}
 
 
-				if (Main.programLoaded && !bypass) {
+				if (!bypass) {
 					if (Files.exists(logged) && GeneralSettings.updatedRepeatedOption) {
 						Scanner sc = new Scanner(logged.toFile());
 						while (sc.hasNextLine()) {
@@ -669,7 +674,6 @@ public class Requests {
 
 	private static void sendSuccess(String message, boolean whisper, String user) {
 		Main.sendMessage("🟢 | " + message, whisper, user);
-		processingLevel = false;
 	}
 
 	private static void sendSuccess(String message) {

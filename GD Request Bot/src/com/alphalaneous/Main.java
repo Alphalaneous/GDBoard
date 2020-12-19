@@ -38,9 +38,9 @@ import java.util.zip.ZipInputStream;
 public class Main {
 
 
-	public static boolean programLoaded = false;
-	static boolean sendMessages = false;
-	static boolean allowRequests = false;
+	public static volatile boolean programLoaded = false;
+	static volatile boolean sendMessages = false;
+	static volatile boolean allowRequests = false;
 	static Thread thread;
 	private static ChatListener chatReader;
 	private static boolean keepConnecting = true;

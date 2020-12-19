@@ -11,7 +11,7 @@ public class LoadGD {
 
 	public static String username = "";
 	public static AuthenticatedGDClient authClient;
-	public static boolean isAuth = false;
+	public static volatile boolean isAuth = false;
 	public static AnonymousGDClient anonClient = GDClientBuilder.create().buildAnonymous();
 	static boolean loaded = false;
 	private static String password = "";
