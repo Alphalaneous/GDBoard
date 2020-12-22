@@ -156,7 +156,7 @@ public class Requests {
 									for (int i = 0; i < 10; i++) {
 										if (!inQuotes) {
 											if (((GDLevel) pages[i]).getName().toLowerCase()
-													.startsWith(levelNameS)) {
+													.startsWith(levelNameS.toLowerCase())) {
 												level = (GDLevel) pages[i];
 												break outerLoop;
 											}

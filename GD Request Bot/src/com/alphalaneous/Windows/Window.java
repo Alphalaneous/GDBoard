@@ -552,7 +552,7 @@ public class Window {
 		addID.addActionListener(e -> {
 			if (!idBox.getText().equalsIgnoreCase("")) {
 				new Thread(() -> {
-					Requests.addRequest(Long.parseLong(idBox.getText()), TwitchAccount.display_name, true, true, null, null, true);
+					Requests.addRequest(Long.parseLong(idBox.getText()), TwitchAccount.display_name, true, true, idBox.getText(), null, true);
 					idBox.setText("");
 				}).start();
 			}
