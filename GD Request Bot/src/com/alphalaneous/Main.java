@@ -171,7 +171,6 @@ public class Main {
 			ChaosModeSettings.loadSettings();
 			ShortcutSettings.loadSettings();
 
-
 					/*
 					  Runs keyboard and Controller hook for global keybinds
 					  Runs on separate Threads

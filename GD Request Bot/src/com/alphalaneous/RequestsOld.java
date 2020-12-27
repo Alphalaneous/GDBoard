@@ -408,6 +408,7 @@ public class RequestsOld {
 
 	@SuppressWarnings("unused")
 	public static void movePosition(int position, int newPosition) {
+		System.out.println(newPosition);
 		LevelsPanel.movePosition(position, newPosition);
 	}
 
@@ -682,7 +683,8 @@ public class RequestsOld {
 							!fileName.equalsIgnoreCase("!end.js") &&
 							!fileName.equalsIgnoreCase("!kill.js") &&
 							!fileName.equalsIgnoreCase("!popup.js") &&
-							!fileName.equalsIgnoreCase("!gd.js")) {
+							!fileName.equalsIgnoreCase("!gd.js") &&
+							!fileName.equalsIgnoreCase("!what.js")) {
 						String substring = fileName.substring(0, fileName.length() - 3);
 						if (!existingCommands.contains(substring)) {
 							existingCommands.add(substring.toLowerCase());

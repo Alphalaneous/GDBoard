@@ -1,7 +1,11 @@
 function command(){
 	if(isMod){
-	    if(Levels.getPosFromID(xArgs[0]) != -1){
-		    Levels.movePosition(Levels.getPosFromID(xArgs[0]), 0);
+	    var pos = Levels.getPosFromID(xArgs[0]);
+	    if(xArgs.length == 0){
+	        return Utilities.format("$TOP_NO_ID_MESSAGE$", user);
+	    }
+	    if(pos != -1 && xArgs.length > 0){
+		    Levels.movePosition(pos, 1);
         	return Utilities.format("$TOP_MESSAGE$", user, xArgs[0].toString())
 		}
 		else{

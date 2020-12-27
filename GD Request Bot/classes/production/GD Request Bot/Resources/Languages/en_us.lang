@@ -60,6 +60,8 @@ ID_MESSAGE = @%s, level %s is %s by %s (%s), requested by %s.
 LIKES_MESSAGE = @%s, %s (%s) has %s likes.
 MOVE_MESSAGE = @%s, %s has been moved to position %s.
 MOVE_FAILED_MESSAGE = @%s, Failed to move %s.
+MOVE_NO_ID_MESSAGE = @%s, Please specify an ID to move.
+MOVE_NO_POS_MESSAGE = @%s, Please specify a position to move the ID to.
 NEXT_MESSAGE = @%s, The next level is %s by %s (%s), requested by %s.
 POSITION_NONE_MESSAGE = @%s, You don't have any levels in the queue.
 POSITION_WRONG_MESSAGE = @%s, You only have %s levels in the queue.
@@ -70,21 +72,27 @@ QUEUE_MESSAGE = @%s, Page %s of %s
 SONG_MESSAGE = @%s, The song name is %s by %s (%s).
 TOP_MESSAGE = @%s, %s has been moved to the top.
 TOP_FAILED_MESSAGE = @%s, Failed to move %s.
+TOP_NO_ID_MESSAGE = @%s, Please specify an ID.
 BLOCK_MESSAGE = @%s, Successfully blocked %s.
-BLOCK_EXISTS_MESSAGE = @%s, that is already blocked.
-BLOCK_FAILED_MESSAGE = @%s, failed to block, try again.
-
+BLOCK_EXISTS_MESSAGE = @%s, That is already blocked.
+BLOCK_FAILED_MESSAGE = @%s, Failed to block, try again.
+BLOCK_NO_ID_MESSAGE = @%s, Please specify an ID.
+ADD_COMMAND_NO_ARGS_MESSAGE = @%s, Failed to add command, no command entered.
+DELETE_COMMAND_NO_ARGS_MESSAGE = @%s, Failed to delete command, no command specified.
+EDIT_COMMAND_NO_ARGS_MESSAGE = @%s, Failed to delete command, no command specified.
+ADD_COMMAND_NO_RESPONSE_MESSAGE = @%s, Failed to add command, no response given.
 BLOCK_USER_MESSAGE = @%s, Successfully blocked %s.
-BLOCK_USER_EXISTS_MESSAGE = @%s, user is already blocked.
-BLOCK_USER_FAILED_MESSAGE = @%s, failed to block, try again.
+BLOCK_USER_EXISTS_MESSAGE = @%s, User is already blocked.
+BLOCK_USER_FAILED_MESSAGE = @%s, Failed to block, try again.
+BLOCK_NO_USER_MESSAGE = @%s, Please specify a username.
 
 UNBLOCK_MESSAGE = @%s, Successfully unblocked %s.
-UNBLOCK_DOESNT_EXISTS_MESSAGE = @%s, that isn't blocked.
-UNBLOCK_FAILED_MESSAGE = @%s, failed to unblock, try again.
+UNBLOCK_DOESNT_EXISTS_MESSAGE = @%s, That isn't blocked.
+UNBLOCK_FAILED_MESSAGE = @%s, Failed to unblock, try again.
 
 UNBLOCK_USER_MESSAGE = @%s, Successfully unblocked %s.
-UNBLOCK_USER_DOESNT_EXISTS_MESSAGE = @%s, user isn't blocked.
-UNBLOCK_USER_FAILED_MESSAGE = @%s, failed to unblock, try again.
+UNBLOCK_USER_DOESNT_EXISTS_MESSAGE = @%s, User isn't blocked.
+UNBLOCK_USER_FAILED_MESSAGE = @%s, Failed to unblock, try again.
 
 HELP_NO_INFO = There is no info for this command.
 DEFAULT_MENTION = @%s,

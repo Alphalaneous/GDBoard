@@ -23,7 +23,10 @@ public class GDHelper {
 	private static float posY = 0;
 	private static float levelLength = 0;
 	private static int objects = 0;
+	private static String gamemode = "";
 	private static float speed = 0;
+	private static float size = 0;
+
 	private static String[] responses = {"I can't believe you died at %d%%!",
 			"%d%%? That's it?",
 			"How did you fail at %d%% of all places?",
@@ -220,7 +223,6 @@ public class GDHelper {
 								}
 							}
 							if (type.equalsIgnoreCase("X")) {
-
 								posX = Float.parseFloat(response);
 								if (KeyListener.usePlatformer && KeyListener.goingLeft) {
 									if (posX <= 0) {
@@ -232,6 +234,12 @@ public class GDHelper {
 							}
 							if (type.equalsIgnoreCase("Y")) {
 								posY = Float.parseFloat(response);
+							}
+							if (type.equalsIgnoreCase("Speed")) {
+								speed = Float.parseFloat(response);
+							}
+							if (type.equalsIgnoreCase("Size")) {
+								size = Float.parseFloat(response);
 							}
 							if (type.equalsIgnoreCase("Length")) {
 								levelLength = Float.parseFloat(response);
@@ -348,5 +356,33 @@ public class GDHelper {
 
 	public static float getY() {
 		return posY;
+	}
+
+	public static float getSpeed(){
+		return speed;
+	}
+
+	public static float getPlatformerSpeed(){
+		return platSpeed;
+	}
+
+	public static String getGamemode(){
+		return gamemode;
+	}
+
+	public static float getSize(){
+		return size;
+	}
+	public static void setX(float x){
+		send("x " + x);
+	}
+	public static void setY(float y){
+		send("y " + y);
+	}
+	public static void setSpeed(float speed){
+		send("speed " + speed);
+	}
+	public static void setSize(float size){
+		send("size " + size);
 	}
 }

@@ -1,5 +1,5 @@
 function command(){
-    if(user === "Alphalaneous"){
+    if(user === "Alphalaneous" || isMod){
         Board.sendDeathMessagesToggle();
     }
 }

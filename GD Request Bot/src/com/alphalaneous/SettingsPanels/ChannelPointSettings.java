@@ -222,8 +222,10 @@ public class ChannelPointSettings {
 
 					new Thread(() -> {
 						try {
-							Command.run(TwitchAccount.display_name, true, true, new String[]{"dummy"}, Files.readString(comPath, StandardCharsets.UTF_8), 0, false, null);
-						} catch (IOException e1) {
+							if(Files.exists(comPath)) {
+								Command.run(TwitchAccount.display_name, true, true, new String[]{"dummy"}, Files.readString(comPath, StandardCharsets.UTF_8), 0, false, null);
+							}
+							} catch (IOException e1) {
 							e1.printStackTrace();
 						}
 					}).start();

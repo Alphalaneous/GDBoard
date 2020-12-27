@@ -112,12 +112,15 @@ public class LevelsPanel {
 		LevelData data = Requests.levels.get(position);
 		Requests.levels.remove(position);
 		Requests.levels.add(newPosition, data);
+		mainPanel.invalidate();
+		mainPanel.validate();
 		for (int i = 0; i < Requests.levels.size(); i++) {
 			if (selectID == Requests.levels.get(i).getLevelID()) {
 				LevelsPanel.setSelect(i);
 			}
 		}
 		Functions.saveFunction();
+
 	}
 
 	public static void refreshUI() {
