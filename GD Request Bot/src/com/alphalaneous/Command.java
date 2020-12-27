@@ -15,6 +15,7 @@ public class Command {
 		sandbox.inject("isMod", isMod);
 		sandbox.inject("isChaos", ChaosModeSettings.enableChaos);
 		sandbox.inject("isModChaos", ChaosModeSettings.modOnly);
+		sandbox.inject("isSubChaos", ChaosModeSettings.subOnly);
 		sandbox.inject("queueLength", GeneralSettings.queueLevelLength);
 		sandbox.inject("isSub", isSub);
 		sandbox.inject("user", user);
@@ -40,7 +41,6 @@ public class Command {
 		sandbox.allow(com.alphalaneous.Utilities.class);
 		sandbox.allow(com.alphalaneous.Twitch.class);
 		sandbox.allow(com.alphalaneous.GDHelper.class);
-
 
 		try {
 			sandbox.eval("" +

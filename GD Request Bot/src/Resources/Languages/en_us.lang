@@ -196,7 +196,8 @@ QUEUE_COMMAND_LABEL = Queue Command Level Count:
 //Chaos Mode Settings
 
 ENABLE_CHAOS_MODE = Enable Chaos Mode
-MOD_ONLY_CHAOS = Mod Only Chaos Mode
+MOD_ONLY_CHAOS = Mod Only
+SUB_ONLY_CHAOS = Subscribers Only
 DISABLE_KILL = Disable Kill
 MINIMUM_X = Minimum X
 MAXIMUM_X = Maximum X

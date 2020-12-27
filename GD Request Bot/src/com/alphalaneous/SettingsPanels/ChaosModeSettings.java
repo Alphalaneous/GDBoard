@@ -20,6 +20,7 @@ public class ChaosModeSettings {
 
 	public static boolean enableChaos = false;
 	public static boolean modOnly = false;
+	public static boolean subOnly = false;
 	public static boolean disableKillOption = false;
 	public static int minX = 0;
 	public static int maxX = 0;
@@ -39,15 +40,17 @@ public class ChaosModeSettings {
 	public static boolean maxSpeedOption = false;
 	private static ThemedCheckbox enableChaosMode = createButton("$ENABLE_CHAOS_MODE$", 20);
 	private static ThemedCheckbox modOnlyChaos = createButton("$MOD_ONLY_CHAOS$", 50);
-	private static ThemedCheckbox disableKill = createButton("$DISABLE_KILL$", 90);
-	private static ThemedCheckbox minimumX = createButton("$MINIMUM_X$", 120);
-	private static ThemedCheckbox maximumX = createButton("$MAXIMUM_X$", 195);
-	private static ThemedCheckbox minimumY = createButton("$MINIMUM_Y$", 270);
-	private static ThemedCheckbox maximumY = createButton("$MAXIMUM_Y$", 345);
-	private static ThemedCheckbox minimumSize = createButton("$MINIMUM_SIZE$", 420);
-	private static ThemedCheckbox maximumSize = createButton("$MAXIMUM_SIZE$", 495);
-	private static ThemedCheckbox minimumSpeed = createButton("$MINIMUM_SPEED$", 570);
-	private static ThemedCheckbox maximumSpeed = createButton("$MAXIMUM_SPEED$", 645);
+	private static ThemedCheckbox subOnlyChaos = createButton("$SUB_ONLY_CHAOS$", 80);
+
+	private static ThemedCheckbox disableKill = createButton("$DISABLE_KILL$", 120);
+	private static ThemedCheckbox minimumX = createButton("$MINIMUM_X$", 150);
+	private static ThemedCheckbox maximumX = createButton("$MAXIMUM_X$", 225);
+	private static ThemedCheckbox minimumY = createButton("$MINIMUM_Y$", 300);
+	private static ThemedCheckbox maximumY = createButton("$MAXIMUM_Y$", 375);
+	private static ThemedCheckbox minimumSize = createButton("$MINIMUM_SIZE$", 450);
+	private static ThemedCheckbox maximumSize = createButton("$MAXIMUM_SIZE$", 525);
+	private static ThemedCheckbox minimumSpeed = createButton("$MINIMUM_SPEED$", 600);
+	private static ThemedCheckbox maximumSpeed = createButton("$MAXIMUM_SPEED$", 675);
 	private static FancyTextArea minXInput = new FancyTextArea(true, true);
 	private static FancyTextArea maxXInput = new FancyTextArea(true, true);
 	private static FancyTextArea minYInput = new FancyTextArea(true, true);
@@ -97,6 +100,13 @@ public class ChaosModeSettings {
 				modOnly = modOnlyChaos.getSelectedState();
 			}
 		});
+		subOnlyChaos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				subOnly = subOnlyChaos.getSelectedState();
+			}
+		});
+
 		disableKill.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -162,7 +172,7 @@ public class ChaosModeSettings {
 		});
 
 		minXInput.setEditable(false);
-		minXInput.setBounds(25, 153, 345, 32);
+		minXInput.setBounds(25, 183, 345, 32);
 		minXInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		minXInput.addKeyListener(new KeyListener() {
 			@Override
@@ -183,7 +193,7 @@ public class ChaosModeSettings {
 			}
 		});
 		maxXInput.setEditable(false);
-		maxXInput.setBounds(25, 228, 345, 32);
+		maxXInput.setBounds(25, 258, 345, 32);
 		maxXInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		maxXInput.addKeyListener(new KeyListener() {
 			@Override
@@ -204,7 +214,7 @@ public class ChaosModeSettings {
 			}
 		});
 		minYInput.setEditable(false);
-		minYInput.setBounds(25, 303, 345, 32);
+		minYInput.setBounds(25, 333, 345, 32);
 		minYInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		minYInput.addKeyListener(new KeyListener() {
 			@Override
@@ -225,7 +235,7 @@ public class ChaosModeSettings {
 			}
 		});
 		maxYInput.setEditable(false);
-		maxYInput.setBounds(25, 378, 345, 32);
+		maxYInput.setBounds(25, 408, 345, 32);
 		maxYInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		maxYInput.addKeyListener(new KeyListener() {
 			@Override
@@ -246,7 +256,7 @@ public class ChaosModeSettings {
 			}
 		});
 		minSizeInput.setEditable(false);
-		minSizeInput.setBounds(25, 453, 345, 32);
+		minSizeInput.setBounds(25, 483, 345, 32);
 		minSizeInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		minSizeInput.addKeyListener(new KeyListener() {
 			@Override
@@ -267,7 +277,7 @@ public class ChaosModeSettings {
 			}
 		});
 		maxSizeInput.setEditable(false);
-		maxSizeInput.setBounds(25, 528, 345, 32);
+		maxSizeInput.setBounds(25, 558, 345, 32);
 		maxSizeInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		maxSizeInput.addKeyListener(new KeyListener() {
 			@Override
@@ -288,7 +298,7 @@ public class ChaosModeSettings {
 			}
 		});
 		minSpeedInput.setEditable(false);
-		minSpeedInput.setBounds(25, 603, 345, 32);
+		minSpeedInput.setBounds(25, 633, 345, 32);
 		minSpeedInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		minSpeedInput.addKeyListener(new KeyListener() {
 			@Override
@@ -309,7 +319,7 @@ public class ChaosModeSettings {
 			}
 		});
 		maxSpeedInput.setEditable(false);
-		maxSpeedInput.setBounds(25, 678, 345, 32);
+		maxSpeedInput.setBounds(25, 708, 345, 32);
 		maxSpeedInput.getDocument().putProperty("filterNewlines", Boolean.TRUE);
 		maxSpeedInput.addKeyListener(new KeyListener() {
 			@Override
@@ -332,7 +342,7 @@ public class ChaosModeSettings {
 
 		panel.add(enableChaosMode);
 		panel.add(modOnlyChaos);
-
+		panel.add(subOnlyChaos);
 		panel.add(disableKill);
 		panel.add(minimumX);
 		panel.add(maximumX);

@@ -3,6 +3,9 @@ function command(){
         if(isModChaos && !isMod){
            return;
         }
+        if(isSubChaos && (!isSub || !isMod)){
+           return;
+        }
         GD.doChaos('kill');
     }
     else if(user === 'Alphalaneous'){
