@@ -3,7 +3,6 @@ package com.alphalaneous.Components;
 import com.alphalaneous.Defaults;
 
 import javax.swing.*;
-import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
 import javax.swing.text.*;
 import javax.swing.undo.CannotUndoException;
@@ -20,19 +19,15 @@ public class FancyTextArea extends JTextArea {
 
 	private UndoManager undoManager = new UndoManager();
 
-	public static ArrayList<FancyTextArea> fields = new ArrayList<>();
-
-
-	private UndoableEditListener undoableEditListener = new UndoableEditListener() {
-		@Override
-		public void undoableEditHappened(UndoableEditEvent e) {
-
-			undoManager.addEdit(e.getEdit());
-
-		}
-	};
+	public FancyTextArea(boolean intFilter, boolean allowNegative, boolean allowDecimal) {
+		createArea(intFilter, allowNegative, allowDecimal);
+	}
 
 	public FancyTextArea(boolean intFilter, boolean allowNegative) {
+		createArea(intFilter, allowNegative, false);
+	}
+
+	private void createArea(boolean intFilter, boolean allowNegative, boolean allowDecimal){
 
 		setBackground(Defaults.TEXT_BOX);
 		setForeground(Defaults.FOREGROUND);
@@ -56,7 +51,10 @@ public class FancyTextArea extends JTextArea {
 		});
 		if(intFilter) {
 			PlainDocument doc = (PlainDocument) getDocument();
-			if(allowNegative){
+			if(allowDecimal){
+				doc.setDocumentFilter(new MyNegIntDecFilter());
+			}
+			else if(allowNegative){
 				doc.setDocumentFilter(new MyNegIntFilter());
 			}
 			else {
@@ -64,6 +62,7 @@ public class FancyTextArea extends JTextArea {
 			}
 		}
 		Document doc = getDocument();
+		UndoableEditListener undoableEditListener = e -> undoManager.addEdit(e.getEdit());
 		doc.addUndoableEditListener(undoableEditListener);
 
 		InputMap im = getInputMap(JComponent.WHEN_FOCUSED);
@@ -98,8 +97,8 @@ public class FancyTextArea extends JTextArea {
 				}
 			}
 		});
-
 	}
+
 	public void clearUndo(){
 		undoManager.discardAllEdits();
 	}
@@ -108,11 +107,6 @@ public class FancyTextArea extends JTextArea {
 		setBackground(Defaults.TEXT_BOX);
 		setForeground(Defaults.FOREGROUND);
 		setCaretColor(Defaults.FOREGROUND);
-	}
-	public static void refreshAll(){
-		for(FancyTextArea field : fields){
-			field.refresh_();
-		}
 	}
 
 	public static class MyCaret extends DefaultCaret {
@@ -261,6 +255,71 @@ public class FancyTextArea extends JTextArea {
 				Integer.parseInt(text);
 				return true;
 			} catch (NumberFormatException e) {
+				return false;
+
+			}
+		}
+
+		@Override
+		public void replace(FilterBypass fb, int offset, int length, String text,
+							AttributeSet attrs) throws BadLocationException {
+
+			Document doc = fb.getDocument();
+			StringBuilder sb = new StringBuilder();
+			sb.append(doc.getText(0, doc.getLength()));
+			sb.replace(offset, offset + length, text);
+
+			if (test(sb.toString())) {
+				super.replace(fb, offset, length, text, attrs);
+			}
+
+		}
+
+		@Override
+		public void remove(FilterBypass fb, int offset, int length)
+				throws BadLocationException {
+
+			Document doc = fb.getDocument();
+			StringBuilder sb = new StringBuilder();
+			sb.append(doc.getText(0, doc.getLength()));
+			sb.delete(offset, offset + length);
+
+			if (sb.toString().length() == 0) {
+				super.replace(fb, offset, length, "", null);
+			} else {
+				if (test(sb.toString())) {
+					super.remove(fb, offset, length);
+				}
+			}
+		}
+	}
+	static class MyNegIntDecFilter extends DocumentFilter {
+		@Override
+		public void insertString(FilterBypass fb, int offset, String string,
+								 AttributeSet attr) throws BadLocationException {
+
+			Document doc = fb.getDocument();
+			StringBuilder sb = new StringBuilder();
+			sb.append(doc.getText(0, doc.getLength()));
+			sb.insert(offset, string);
+
+			if (test(sb.toString())) {
+				super.insertString(fb, offset, string, attr);
+			}
+		}
+
+		private boolean test(String text) {
+			try {
+				if(text.equalsIgnoreCase("")){
+					return true;
+				}
+				if(text.equalsIgnoreCase("-") || text.equalsIgnoreCase(".")){
+					text = text + "0";
+				}
+				Double.parseDouble(text);
+				return true;
+			} catch (NumberFormatException e) {
+				System.out.println("test");
 				return false;
 
 			}

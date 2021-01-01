@@ -5,8 +5,6 @@ import com.alphalaneous.Components.JButtonUI;
 import com.alphalaneous.Components.RoundedJButton;
 import com.alphalaneous.Components.ScrollbarUI;
 import com.alphalaneous.Windows.Window;
-import com.github.alex1304.jdash.client.AnonymousGDClient;
-import com.github.alex1304.jdash.client.GDClientBuilder;
 import com.github.alex1304.jdash.entity.GDUser;
 import com.github.alex1304.jdash.exception.MissingAccessException;
 import com.github.alex1304.jdash.exception.SpriteLoadException;

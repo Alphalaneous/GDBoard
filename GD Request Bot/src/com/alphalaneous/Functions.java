@@ -1,9 +1,6 @@
 package com.alphalaneous;
 
-import com.alphalaneous.Panels.CommentsPanel;
-import com.alphalaneous.Panels.InfoPanel;
-import com.alphalaneous.Panels.LevelsPanel;
-import com.alphalaneous.Panels.SongPanel;
+import com.alphalaneous.Panels.*;
 import com.alphalaneous.SettingsPanels.BlockedSettings;
 import com.alphalaneous.SettingsPanels.GeneralSettings;
 import com.alphalaneous.SettingsPanels.OutputSettings;
@@ -115,7 +112,7 @@ public class Functions {
 				Functions.saveFunction();
 			}
 			OutputSettings.setOutputStringFile(RequestsOld.parseInfoString(OutputSettings.outputString, 0));
-			LevelsPanel.setOneSelect();
+			LevelsPanel.setSelect(0);
 
 			new Thread(() -> {
 				CommentsPanel.unloadComments(true);
@@ -139,7 +136,7 @@ public class Functions {
 			LevelData data = (LevelData) undoQueue.keySet().toArray()[0];
 			int position = (int) undoQueue.values().toArray()[0];
 			RequestsOld.forceAdd(data);
-			LevelsPanel.createButton(data.getName(), data.getAuthor(), data.getLevelID(), data.getDifficulty(), data.getEpic(), data.getFeatured(), data.getStars(), data.getRequester(), data.getVersion(), data.getPlayerIcon(), data.getCoins(), data.getVerifiedCoins());
+			LevelsPanel.addButton(data);
 			RequestsOld.movePosition(Requests.levels.size() - 1, position);
 			undoQueue.remove(data);
 		}
@@ -156,7 +153,7 @@ public class Functions {
 				}
 				undoQueue.put(Requests.levels.get(LevelsPanel.getSelectedID()), LevelsPanel.getSelectedID());
 				Requests.levels.remove(LevelsPanel.getSelectedID());
-				LevelsPanel.removeButton(LevelsPanel.getSelectedID());
+				LevelsPanel.removeButton();
 				Functions.saveFunction();
 
 				CommentsPanel.unloadComments(true);
@@ -288,7 +285,7 @@ public class Functions {
 						Requests.levels.remove(LevelsPanel.getSelectedID());
 						LevelsPanel.removeButton();
 						Functions.saveFunction();
-						LevelsPanel.setOneSelect();
+						LevelsPanel.setSelect(0);
 						new Thread(() -> {
 							CommentsPanel.unloadComments(true);
 							if (Requests.levels.size() > 0) {
@@ -323,7 +320,7 @@ public class Functions {
 						InfoPanel.refreshInfo();
 						CommentsPanel.unloadComments(true);
 					}
-					LevelsPanel.setOneSelect();
+					LevelsPanel.setSelect(0);
 					SettingsWindow.run = true;
 				} else if (option.equalsIgnoreCase("Inactives")) {
 					if (Requests.levels.size() != 0) {
@@ -342,7 +339,7 @@ public class Functions {
 						CommentsPanel.unloadComments(true);
 						CommentsPanel.loadComments(0, false);
 					}
-					LevelsPanel.setOneSelect();
+					LevelsPanel.setSelect(0);
 					SettingsWindow.run = true;
 				}
 				LevelsPanel.setName(Requests.levels.size());

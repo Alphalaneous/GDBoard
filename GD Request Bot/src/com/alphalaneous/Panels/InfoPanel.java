@@ -56,6 +56,8 @@ public class InfoPanel {
 
 	}
 
+
+
 	public static JPanel getInfoWindow() {
 		return fullPanel;
 	}

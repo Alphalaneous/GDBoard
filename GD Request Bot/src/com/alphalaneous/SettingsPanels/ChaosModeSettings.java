@@ -22,14 +22,14 @@ public class ChaosModeSettings {
 	public static boolean modOnly = false;
 	public static boolean subOnly = false;
 	public static boolean disableKillOption = false;
-	public static int minX = 0;
-	public static int maxX = 0;
-	public static int minY = 0;
-	public static int maxY = 0;
-	public static int minSize = 0;
-	public static int maxSize = 0;
-	public static int minSpeed = 0;
-	public static int maxSpeed = 0;
+	public static double minX = 0;
+	public static double maxX = 0;
+	public static double minY = 0;
+	public static double maxY = 0;
+	public static double minSize = 0;
+	public static double maxSize = 0;
+	public static double minSpeed = 0;
+	public static double maxSpeed = 0;
 	public static boolean minXOption = false;
 	public static boolean maxXOption = false;
 	public static boolean minYOption = false;
@@ -51,14 +51,14 @@ public class ChaosModeSettings {
 	private static ThemedCheckbox maximumSize = createButton("$MAXIMUM_SIZE$", 525);
 	private static ThemedCheckbox minimumSpeed = createButton("$MINIMUM_SPEED$", 600);
 	private static ThemedCheckbox maximumSpeed = createButton("$MAXIMUM_SPEED$", 675);
-	private static FancyTextArea minXInput = new FancyTextArea(true, true);
-	private static FancyTextArea maxXInput = new FancyTextArea(true, true);
-	private static FancyTextArea minYInput = new FancyTextArea(true, true);
-	private static FancyTextArea maxYInput = new FancyTextArea(true, true);
-	private static FancyTextArea minSizeInput = new FancyTextArea(true, true);
-	private static FancyTextArea maxSizeInput = new FancyTextArea(true, true);
-	private static FancyTextArea minSpeedInput = new FancyTextArea(true, true);
-	private static FancyTextArea maxSpeedInput = new FancyTextArea(true, true);
+	private static FancyTextArea minXInput = new FancyTextArea(true, true, true);
+	private static FancyTextArea maxXInput = new FancyTextArea(true, true, true);
+	private static FancyTextArea minYInput = new FancyTextArea(true, true, true);
+	private static FancyTextArea maxYInput = new FancyTextArea(true, true, true);
+	private static FancyTextArea minSizeInput = new FancyTextArea(true, true, true);
+	private static FancyTextArea maxSizeInput = new FancyTextArea(true, true, true);
+	private static FancyTextArea minSpeedInput = new FancyTextArea(true, true, true);
+	private static FancyTextArea maxSpeedInput = new FancyTextArea(true, true, true);
 	private static JPanel mainPanel = new JPanel(null);
 	private static JPanel panel = new JPanel();
 	private static JScrollPane scrollPane = new JScrollPane(panel);
@@ -84,8 +84,8 @@ public class ChaosModeSettings {
 
 		panel.setLayout(null);
 		panel.setDoubleBuffered(true);
-		panel.setBounds(0, 0, 412, 720);
-		panel.setPreferredSize(new Dimension(412, 720));
+		panel.setBounds(0, 0, 412, 750);
+		panel.setPreferredSize(new Dimension(412, 750));
 		panel.setBackground(Defaults.SUB_MAIN);
 
 		enableChaosMode.addMouseListener(new MouseAdapter() {
@@ -423,35 +423,35 @@ public class ChaosModeSettings {
 			maxSpeedInput.setEditable(maxSpeedOption);
 		}
 		if (!Settings.getSettings("minX").equalsIgnoreCase("")) {
-			minX = Integer.parseInt(Settings.getSettings("minX"));
+			minX = Double.parseDouble(Settings.getSettings("minX"));
 			minXInput.setText(String.valueOf(minX));
 		}
 		if (!Settings.getSettings("maxX").equalsIgnoreCase("")) {
-			maxX = Integer.parseInt(Settings.getSettings("maxX"));
+			maxX = Double.parseDouble(Settings.getSettings("maxX"));
 			maxXInput.setText(String.valueOf(maxX));
 		}
 		if (!Settings.getSettings("minY").equalsIgnoreCase("")) {
-			minY = Integer.parseInt(Settings.getSettings("minY"));
+			minY = Double.parseDouble(Settings.getSettings("minY"));
 			minYInput.setText(String.valueOf(minY));
 		}
 		if (!Settings.getSettings("maxY").equalsIgnoreCase("")) {
-			maxY = Integer.parseInt(Settings.getSettings("maxY"));
+			maxY = Double.parseDouble(Settings.getSettings("maxY"));
 			maxYInput.setText(String.valueOf(maxY));
 		}
 		if (!Settings.getSettings("minSize").equalsIgnoreCase("")) {
-			minSize = Integer.parseInt(Settings.getSettings("minSize"));
+			minSize = Double.parseDouble(Settings.getSettings("minSize"));
 			minSizeInput.setText(String.valueOf(minSize));
 		}
 		if (!Settings.getSettings("maxSize").equalsIgnoreCase("")) {
-			maxSize = Integer.parseInt(Settings.getSettings("maxSize"));
+			maxSize = Double.parseDouble(Settings.getSettings("maxSize"));
 			maxSizeInput.setText(String.valueOf(maxSize));
 		}
 		if (!Settings.getSettings("minSpeed").equalsIgnoreCase("")) {
-			minSpeed = Integer.parseInt(Settings.getSettings("minSpeed"));
+			minSpeed = Double.parseDouble(Settings.getSettings("minSpeed"));
 			minSpeedInput.setText(String.valueOf(minSpeed));
 		}
 		if (!Settings.getSettings("maxSpeed").equalsIgnoreCase("")) {
-			maxSpeed = Integer.parseInt(Settings.getSettings("maxSpeed"));
+			maxSpeed = Double.parseDouble(Settings.getSettings("maxSpeed"));
 			maxSpeedInput.setText(String.valueOf(maxSpeed));
 		}
 	}

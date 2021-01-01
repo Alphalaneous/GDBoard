@@ -574,11 +574,7 @@ public class Requests {
 				parse.start();
 
 				levels.add(levelData);
-				LevelsPanel.createButton(levelData.getName(), levelData.getAuthor(), levelData.getLevelID(),
-						levelData.getDifficulty(), levelData.getEpic(), levelData.getFeatured(), levelData.getStars(),
-						levelData.getRequester(), levelData.getVersion(), levelData.getPlayerIcon(), levelData.getCoins(),
-						levelData.getVerifiedCoins());
-
+				LevelsPanel.addButton(levelData);
 				LevelsPanel.setName(Requests.levels.size());
 				Functions.saveFunction();
 				if (Main.sendMessages) {

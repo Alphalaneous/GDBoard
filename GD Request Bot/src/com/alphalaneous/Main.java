@@ -268,7 +268,7 @@ public class Main {
 			}
 			allowRequests = true;
 			Functions.saveFunction();
-			LevelsPanel.setOneSelect();
+			LevelsPanel.setSelect(0);
 			APIs.getViewers();
 			CommentsPanel.loadComments(0, false);
 			Board.signal();

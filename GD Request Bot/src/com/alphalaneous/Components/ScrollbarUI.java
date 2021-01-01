@@ -14,6 +14,7 @@ public class ScrollbarUI extends BasicScrollBarUI {
 
 	private JButtonUI buttonUI = new JButtonUI();
 
+
 	public ScrollbarUI() {
 		buttonUI.setBackground(Defaults.BUTTON);
 		buttonUI.setHover(Defaults.BUTTON_HOVER);

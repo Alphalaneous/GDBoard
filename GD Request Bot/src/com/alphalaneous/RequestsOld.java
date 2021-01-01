@@ -1,21 +1,12 @@
 package com.alphalaneous;
 
-import com.alphalaneous.Panels.CommentsPanel;
-import com.alphalaneous.Panels.InfoPanel;
-import com.alphalaneous.Panels.LevelsPanel;
-import com.alphalaneous.Panels.SongPanel;
+import com.alphalaneous.Panels.*;
 import com.alphalaneous.SettingsPanels.*;
-import com.alphalaneous.Windows.DialogBox;
-import com.github.alex1304.jdash.client.AnonymousGDClient;
-import com.github.alex1304.jdash.client.AuthenticatedGDClient;
-import com.github.alex1304.jdash.entity.GDLevel;
-import com.github.alex1304.jdash.entity.GDLevelData;
 import com.github.alex1304.jdash.entity.GDUser;
 import com.github.alex1304.jdash.exception.MissingAccessException;
 import com.github.alex1304.jdash.exception.SpriteLoadException;
 import com.github.alex1304.jdash.graphics.SpriteFactory;
 import com.github.alex1304.jdash.util.GDUserIconSet;
-import org.apache.commons.io.FileUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,16 +14,12 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
-import java.util.zip.GZIPInputStream;
 
 
 public class RequestsOld {
@@ -130,8 +117,8 @@ public class RequestsOld {
 			levelData.setContainsImage();
 		}
 
-		LevelsPanel.createButton(name, author, levelID, difficulty, epic, featured, stars, requester, gameVersion, levelData.getPlayerIcon(), coins, verifiedCoins);
 		Requests.levels.add(levelData);
+		LevelsPanel.addButton(levelData);
 		if (Requests.levels.size() == 1) {
 			if (Requests.levels.get(0).getContainsImage()) {
 				Utilities.notify("Image Hack", Requests.levels.get(0).getName() + " (" + Requests.levels.get(0).getLevelID() + ") possibly contains the image hack!");
@@ -293,7 +280,7 @@ public class RequestsOld {
 					Functions.saveFunction();
 					SongPanel.refreshInfo();
 					InfoPanel.refreshInfo();
-					LevelsPanel.setOneSelect();
+					LevelsPanel.setSelect(0);
 					new Thread(() -> {
 						CommentsPanel.unloadComments(true);
 						CommentsPanel.loadComments(0, false);
@@ -327,7 +314,7 @@ public class RequestsOld {
 					Functions.saveFunction();
 					SongPanel.refreshInfo();
 					InfoPanel.refreshInfo();
-					LevelsPanel.setOneSelect();
+					LevelsPanel.setSelect(0);
 					new Thread(() -> {
 						CommentsPanel.unloadComments(true);
 						CommentsPanel.loadComments(0, false);
@@ -469,7 +456,7 @@ public class RequestsOld {
 			response = Utilities.format("$BLOCK_MESSAGE$", user, arguments[1]);
 			BlockedSettings.addButton(Long.parseLong(arguments[1]));
 			if (start) {
-				LevelsPanel.setOneSelect();
+				LevelsPanel.setSelect(0);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
