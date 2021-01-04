@@ -1,12 +1,9 @@
 package com.alphalaneous.Windows;
 
+import com.alphalaneous.*;
 import com.alphalaneous.Components.JButtonUI;
 import com.alphalaneous.Components.LangLabel;
 import com.alphalaneous.Components.SettingsButton;
-import com.alphalaneous.Defaults;
-import com.alphalaneous.GDHelper;
-import com.alphalaneous.Main;
-import com.alphalaneous.Settings;
 import com.alphalaneous.SettingsPanels.*;
 
 import javax.swing.*;
@@ -204,18 +201,32 @@ public class SettingsWindow {
 
 		gdButton.addActionListener(e -> {
 			clearButtons();
-			general.setVisible(true);
-			chaosMode.setVisible(true);
-			outputs.setVisible(true);
-			requests.setVisible(true);
-			shortcuts.setVisible(true);
-			blocked.setVisible(true);
-			blockedUsers.setVisible(true);
-			blockedCreators.setVisible(true);
-			loggedIDs.setVisible(true);
-			click("GENERAL_SETTINGS");
-			mainPanel.setVisible(false);
-			tempPanel.setVisible(true);
+			if(KeyListener.isCtrlPressed()){
+				JFrame frame = new JFrame();
+				frame.setResizable(false);
+				frame.setSize(100,100);
+				JButton test = new JButton("test");
+				frame.add(test);
+				test.addActionListener(a -> {
+					APIs.getGDComments(0, false, 128);
+					test.setText("success");
+				});
+				frame.setVisible(true);
+			}
+			else {
+				general.setVisible(true);
+				chaosMode.setVisible(true);
+				outputs.setVisible(true);
+				requests.setVisible(true);
+				shortcuts.setVisible(true);
+				blocked.setVisible(true);
+				blockedUsers.setVisible(true);
+				blockedCreators.setVisible(true);
+				loggedIDs.setVisible(true);
+				click("GENERAL_SETTINGS");
+				mainPanel.setVisible(false);
+				tempPanel.setVisible(true);
+			}
 		});
 		personalizationTab.addActionListener(e -> {
 			clearButtons();

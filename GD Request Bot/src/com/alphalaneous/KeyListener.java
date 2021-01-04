@@ -24,6 +24,10 @@ public class KeyListener extends SwingKeyAdapter {
 	private static boolean goLeft = true;
 	private static boolean goRight = true;
 
+	public static boolean isCtrlPressed() {
+		return ctrlPressed;
+	}
+
 	public void nativeKeyPressed(NativeKeyEvent e) {
 		if (usePlatformer) {
 			if (e.getRawCode() == 65) {
