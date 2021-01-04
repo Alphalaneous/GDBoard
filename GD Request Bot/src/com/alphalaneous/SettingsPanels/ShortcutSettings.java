@@ -20,6 +20,7 @@ public class ShortcutSettings {
 	public static boolean focused = false;
 	public static int openKeybind = 0;
 	public static int skipKeybind = 0;
+	public static int undoKeybind = 0;
 	public static int randKeybind = 0;
 	public static int copyKeybind = 0;
 	public static int blockKeybind = 0;
@@ -28,10 +29,11 @@ public class ShortcutSettings {
 	private static JPanel panel = new JPanel();
 	private static JPanel openPanel = createKeybindButton(25, "$OPEN_SHORTCUT$", "openKeybind");
 	private static JPanel skipPanel = createKeybindButton(75, "$SKIP_SHORTCUT$", "skipKeybind");
-	private static JPanel randPanel = createKeybindButton(125, "$RANDOM_SHORTCUT$", "randomKeybind");
-	private static JPanel copyPanel = createKeybindButton(175, "$COPY_SHORTCUT$", "copyKeybind");
-	private static JPanel blockPanel = createKeybindButton(225, "$BLOCK_SHORTCUT$", "blockKeybind");
-	private static JPanel clearPanel = createKeybindButton(275, "$CLEAR_SHORTCUT$", "clearKeybind");
+	private static JPanel undoPanel = createKeybindButton(125, "$UNDO_SHORTCUT$", "undoKeybind");
+	private static JPanel randPanel = createKeybindButton(175, "$RANDOM_SHORTCUT$", "randomKeybind");
+	private static JPanel copyPanel = createKeybindButton(225, "$COPY_SHORTCUT$", "copyKeybind");
+	private static JPanel blockPanel = createKeybindButton(275, "$BLOCK_SHORTCUT$", "blockKeybind");
+	private static JPanel clearPanel = createKeybindButton(325, "$CLEAR_SHORTCUT$", "clearKeybind");
 
 	public static JPanel createPanel() {
 
@@ -43,6 +45,7 @@ public class ShortcutSettings {
 
 		panel.add(openPanel);
 		panel.add(skipPanel);
+		panel.add(undoPanel);
 		panel.add(randPanel);
 		panel.add(copyPanel);
 		panel.add(blockPanel);
@@ -134,6 +137,9 @@ public class ShortcutSettings {
 		if (!Settings.getSettings("skipKeybind").equalsIgnoreCase("") && !Settings.getSettings("skipKeybind").equalsIgnoreCase("-1")) {
 			skipKeybind = Integer.parseInt(Settings.getSettings("skipKeybind"));
 		}
+		if (!Settings.getSettings("undoKeybind").equalsIgnoreCase("") && !Settings.getSettings("undoKeybind").equalsIgnoreCase("-1")) {
+			undoKeybind = Integer.parseInt(Settings.getSettings("undoKeybind"));
+		}
 		if (!Settings.getSettings("randomKeybind").equalsIgnoreCase("") && !Settings.getSettings("randomKeybind").equalsIgnoreCase("-1")) {
 			randKeybind = Integer.parseInt(Settings.getSettings("randomKeybind"));
 		}
@@ -161,6 +167,13 @@ public class ShortcutSettings {
 						if (((LangLabel) component1).getIdentifier().equalsIgnoreCase("SKIP_SHORTCUT")) {
 							if (!KeyEvent.getKeyText(skipKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
 								((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(skipKeybind));
+							} else {
+								((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
+							}
+						}
+						if (((LangLabel) component1).getIdentifier().equalsIgnoreCase("UNDO_SHORTCUT")) {
+							if (!KeyEvent.getKeyText(undoKeybind).equalsIgnoreCase("Unknown keyCode: 0x0")) {
+								((FancyTextArea) ((JPanel) component).getComponent(1)).setText(KeyEvent.getKeyText(undoKeybind));
 							} else {
 								((FancyTextArea) ((JPanel) component).getComponent(1)).setText("");
 							}
@@ -208,6 +221,9 @@ public class ShortcutSettings {
 		}
 		if (setting.equalsIgnoreCase("$SKIP_SHORTCUT$")) {
 			skipKeybind = keybind;
+		}
+		if (setting.equalsIgnoreCase("$UNDO_SHORTCUT$")) {
+			undoKeybind = keybind;
 		}
 		if (setting.equalsIgnoreCase("$RANDOM_SHORTCUT$")) {
 			randKeybind = keybind;

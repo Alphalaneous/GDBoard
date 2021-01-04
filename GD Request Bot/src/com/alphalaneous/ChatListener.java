@@ -44,6 +44,7 @@ public class ChatListener extends ChatBot {
 					e.printStackTrace();
 				}
 			}
+			//Moderation.checkMessage(chatMessage);
 		}
 	}
 

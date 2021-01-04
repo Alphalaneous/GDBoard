@@ -7,36 +7,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f205690-d4fd-469d-bef2-500087373a4e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/alphalaneous/Panels/LevelButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/alphalaneous/Moderation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/APIs.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/APIs.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Functions$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Functions$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Functions.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Functions.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Panels/CommentsPanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Panels/CommentsPanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Panels/CommentsPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Panels/CommentsPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Panels/InfoPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Panels/InfoPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Panels/LevelsPanel$LevelButton$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Panels/LevelsPanel$LevelButton$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Panels/LevelsPanel$LevelButton$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Panels/LevelsPanel$LevelButton.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Panels/LevelsPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Panels/LevelsPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Requests.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Requests.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/RequestsOld.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/RequestsOld.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/Windows/Window.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/ChatListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/production/GD Request Bot/com/alphalaneous/ChatListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/.version" beforeDir="false" afterPath="$PROJECT_DIR$/src/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Components/FancyTextArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Components/FancyTextArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Components/ScrollbarUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Components/ScrollbarUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Functions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Functions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Resources/Languages/en_us.lang" beforeDir="false" afterPath="$PROJECT_DIR$/src/Resources/Languages/en_us.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/ChatListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/ChatListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/KeyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/KeyListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Panels/CommentsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Panels/CommentsPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Panels/InfoPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Panels/InfoPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Panels/LevelsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Panels/LevelsPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/Requests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/Requests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/RequestsOld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/RequestsOld.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/ChaosModeSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/ChaosModeSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/ShortcutSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/ShortcutSettings.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -70,51 +51,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Defaults.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/ChaosModeSettings.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="541">
-              <caret line="453" column="41" selection-start-line="453" selection-start-column="41" selection-end-line="453" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/GDApi.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Resources/Commands/!gd.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="5" lean-forward="true" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Panels/LevelButton.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="303" column="18" selection-start-line="303" selection-start-column="18" selection-end-line="303" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/.version">
           <provider selected="true" editor-type-id="text-editor">
@@ -125,31 +61,55 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Assets.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="14" column="45" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Functions.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="64" column="32" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Requests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="576" selection-start-line="576" selection-end-line="576" />
+            <state relative-caret-position="357">
+              <caret line="39" column="41" lean-forward="true" selection-start-line="39" selection-start-column="41" selection-end-line="39" selection-end-column="41" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#24370#24371#0" expanded="true" />
+                <element signature="e#24412#24413#0" expanded="true" />
+                <element signature="e#24466#24467#0" expanded="true" />
+                <element signature="e#24508#24509#0" expanded="true" />
+                <element signature="e#24699#24700#0" expanded="true" />
+                <element signature="e#24741#24742#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/ServerBot.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="84" column="33" selection-start-line="84" selection-start-column="33" selection-end-line="84" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Board.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="82" column="33" lean-forward="true" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/ChatListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="407">
+              <caret line="46" column="14" selection-start-line="46" selection-start-column="14" selection-end-line="46" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="292">
+              <caret line="306" column="25" lean-forward="true" selection-start-line="306" selection-start-column="25" selection-end-line="306" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -158,10 +118,37 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Panels/InfoPanel.java">
+        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/ShortcutSettings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="68" selection-start-line="68" selection-end-line="68" />
+            <state relative-caret-position="230">
+              <caret line="31" column="97" selection-start-line="31" selection-start-column="97" selection-end-line="31" selection-end-column="97" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/KeyListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="94" column="17" lean-forward="true" selection-start-line="94" selection-start-column="17" selection-end-line="94" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Settings.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/RequestsOld.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="129" column="32" selection-start-line="129" selection-start-column="32" selection-end-line="129" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -177,7 +164,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>$ALREADY_IN_QUEUE_MESSAGE$</find>
       <find>MAIN_FONT</find>
       <find>failed</find>
       <find>Fail</find>
@@ -207,6 +193,7 @@
       <find>LevelsPanel</find>
       <find>auto</find>
       <find>selectedID</find>
+      <find>globa</find>
     </findStrings>
     <replaceStrings>
       <replace>Defaults.saveDirectory</replace>
@@ -231,10 +218,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/LanguageSettings.java" />
-        <option value="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/GeneralBotSettings.java" />
-        <option value="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/CommandSettings.java" />
-        <option value="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/BlockedUserSettings.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/BlockedSettings.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/BlockedCreatorSettings.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/AccountSettings.java" />
@@ -271,16 +254,20 @@
         <option value="$PROJECT_DIR$/src/com/alphalaneous/APIs.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/Themes.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/Assets.java" />
-        <option value="$PROJECT_DIR$/src/com/alphalaneous/Main.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/Panels/SongPanel.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/Panels/CommentsPanel.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/Panels/LevelsPanel2.java" />
-        <option value="$PROJECT_DIR$/src/com/alphalaneous/Requests.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/Components/FancyTextArea.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/ChaosModeSettings.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/Components/ScrollbarUI.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/Panels/LevelsPanel.java" />
         <option value="$PROJECT_DIR$/src/com/alphalaneous/Panels/LevelButton.java" />
+        <option value="$PROJECT_DIR$/src/com/alphalaneous/Moderation.java" />
+        <option value="$PROJECT_DIR$/src/com/alphalaneous/Requests.java" />
+        <option value="$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/ShortcutSettings.java" />
+        <option value="$PROJECT_DIR$/src/com/alphalaneous/KeyListener.java" />
+        <option value="$PROJECT_DIR$/src/com/alphalaneous/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/alphalaneous/ChatListener.java" />
         <option value="$PROJECT_DIR$/src/.version" />
       </list>
     </option>
@@ -298,8 +285,9 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="245" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="217" />
+    <option name="y" value="-17" />
     <option name="width" value="1631" />
     <option name="height" value="1028" />
   </component>
@@ -315,6 +303,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -487,7 +476,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -504,7 +492,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1609488424133" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1609726142523" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../GDBoard Dependencies/dependency/slf4j-api-1.8.0-beta4.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -672,7 +660,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="245" y="0" width="1631" height="1028" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.5006859" side_tool="true" weight="0.25243577" />
       <window_info id="Image Layers" order="1" />
@@ -680,7 +669,7 @@
       <window_info id="UI Designer" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info active="true" content_ui="combo" x="16" y="105" width="325" height="756" id="Project" order="6" sideWeight="0.29424307" side_tool="true" visible="true" weight="0.31826863" />
+      <window_info active="true" content_ui="combo" x="16" y="105" width="325" height="756" id="Project" order="6" sideWeight="0.29424307" side_tool="true" visible="true" weight="0.27292112" />
       <window_info anchor="bottom" id="JProfiler" order="0" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" sideWeight="0.4979424" weight="0.32394367" />
@@ -693,7 +682,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32990867" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.4749467" weight="0.31852654" />
       <window_info anchor="bottom" x="-37" y="178" width="1736" height="856" id="Byte Code Viewer" order="11" type="WINDOWED" />
-      <window_info anchor="bottom" id="Run" order="12" sideWeight="0.554371" weight="0.32960895" />
+      <window_info anchor="bottom" id="Run" order="12" sideWeight="0.554371" visible="true" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
       <window_info anchor="right" id="Palette" order="2" />
@@ -868,56 +857,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/GDMod.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/ServerBot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="586">
-          <caret line="97" selection-start-line="97" selection-end-line="97" />
-          <folding>
-            <element signature="e#2842#2843#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/BotHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="302" selection-start-line="302" selection-end-line="302" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/ChatListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Resources/Commands/!what.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="30" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Resources/Commands/!gdping.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Resources/Commands/!help.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Resources/Commands/!info.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Resources/Commands/!rick.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1040,83 +979,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Panels/LevelsPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="77" column="4" selection-start-line="77" selection-start-column="4" selection-end-line="79" selection-end-column="5" />
-          <folding>
-            <element signature="e#3379#3380#0" expanded="true" />
-            <element signature="e#3434#3435#0" expanded="true" />
-            <element signature="e#12676#12677#0" expanded="true" />
-            <element signature="e#12733#12734#0" expanded="true" />
-            <element signature="e#12794#12795#0" expanded="true" />
-            <element signature="e#12850#12851#0" expanded="true" />
-            <element signature="e#13509#13510#0" expanded="true" />
-            <element signature="e#13568#13569#0" expanded="true" />
-            <element signature="e#13629#13630#0" expanded="true" />
-            <element signature="e#13687#13688#0" expanded="true" />
-            <element signature="e#15429#15921#0" expanded="true" />
-            <element signature="e#15920#15921#0" expanded="true" />
-            <element signature="e#17386#17387#0" expanded="true" />
-            <element signature="e#17404#17405#0" expanded="true" />
-            <element signature="e#17437#17438#0" expanded="true" />
-            <element signature="e#17457#17458#0" expanded="true" />
-            <element signature="e#17491#17492#0" expanded="true" />
-            <element signature="e#17516#17517#0" expanded="true" />
-            <element signature="e#17547#17548#0" expanded="true" />
-            <element signature="e#17568#17569#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/RequestsOld.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="129" column="32" selection-start-line="129" selection-start-column="32" selection-end-line="129" selection-end-column="32" />
-          <folding>
-            <element signature="e#5467#5494#0" expanded="true" />
-            <element signature="e#8141#8168#0" expanded="true" />
-            <element signature="e#8203#8204#0" expanded="true" />
-            <element signature="e#8245#8246#0" expanded="true" />
-            <element signature="e#8277#8278#0" expanded="true" />
-            <element signature="e#8313#8314#0" expanded="true" />
-            <element signature="e#8317#8344#0" expanded="true" />
-            <element signature="e#8372#8373#0" expanded="true" />
-            <element signature="e#8396#8397#0" expanded="true" />
-            <element signature="e#8400#8427#0" expanded="true" />
-            <element signature="e#8657#8684#0" expanded="true" />
-            <element signature="e#8722#8723#0" expanded="true" />
-            <element signature="e#8763#8764#0" expanded="true" />
-            <element signature="e#8767#8794#0" expanded="true" />
-            <element signature="e#10383#10410#0" expanded="true" />
-            <element signature="e#11572#11599#0" expanded="true" />
-            <element signature="e#12106#12133#0" expanded="true" />
-            <element signature="e#12161#12162#0" expanded="true" />
-            <element signature="e#12180#12181#0" expanded="true" />
-            <element signature="e#12184#12211#0" expanded="true" />
-            <element signature="e#12243#12244#0" expanded="true" />
-            <element signature="e#12266#12267#0" expanded="true" />
-            <element signature="e#12270#12297#0" expanded="true" />
-            <element signature="e#12332#12333#0" expanded="true" />
-            <element signature="e#12353#12354#0" expanded="true" />
-            <element signature="e#12357#12384#0" expanded="true" />
-            <element signature="e#12413#12414#0" expanded="true" />
-            <element signature="e#12433#12434#0" expanded="true" />
-            <element signature="e#12437#12464#0" expanded="true" />
-            <element signature="e#12497#12498#0" expanded="true" />
-            <element signature="e#12521#12522#0" expanded="true" />
-            <element signature="e#12525#12552#0" expanded="true" />
-            <element signature="e#12581#12582#0" expanded="true" />
-            <element signature="e#12601#12602#0" expanded="true" />
-            <element signature="e#12605#12632#0" expanded="true" />
-            <element signature="e#12665#12666#0" expanded="true" />
-            <element signature="e#12689#12690#0" expanded="true" />
-            <element signature="e#12693#12720#0" expanded="true" />
-            <element signature="e#13065#13092#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Utilities.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
@@ -1131,16 +993,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
           <caret line="193" column="24" selection-start-line="193" selection-start-column="24" selection-end-line="193" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="270" column="35" selection-start-line="270" selection-start-column="35" selection-end-line="270" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1211,54 +1063,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Defaults.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/GDApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Assets.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="14" column="45" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Requests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="576" selection-start-line="576" selection-end-line="576" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Panels/InfoPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="68" selection-start-line="68" selection-end-line="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Functions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="64" column="32" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Panels/LevelsPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
@@ -1277,24 +1081,163 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Defaults.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/ChaosModeSettings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="541">
+        <state relative-caret-position="7327">
           <caret line="453" column="41" selection-start-line="453" selection-start-column="41" selection-end-line="453" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Panels/LevelButton.java">
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/GDApi.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="303" column="18" selection-start-line="303" selection-start-column="18" selection-end-line="303" selection-end-column="18" />
+        <state relative-caret-position="68">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Resources/Commands/!gd.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="9" column="5" lean-forward="true" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+          <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-13.0.2/lib/src.zip!/java.base/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="1906" column="18" selection-start-line="1906" selection-start-column="18" selection-end-line="1906" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Panels/LevelButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4811">
+          <caret line="303" column="18" selection-start-line="303" selection-start-column="18" selection-end-line="303" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/BotHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4930">
+          <caret line="302" selection-start-line="302" selection-end-line="302" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Assets.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="14" column="45" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Functions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="64" column="32" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Panels/InfoPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1003">
+          <caret line="68" selection-start-line="68" selection-end-line="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Moderation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5217#5218#0" expanded="true" />
+            <element signature="e#5282#5283#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/RequestsOld.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="129" column="32" selection-start-line="129" selection-start-column="32" selection-end-line="129" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Settings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/SettingsPanels/ShortcutSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="31" column="97" selection-start-line="31" selection-start-column="97" selection-end-line="31" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/KeyListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="94" column="17" lean-forward="true" selection-start-line="94" selection-start-column="17" selection-end-line="94" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Requests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="39" column="41" lean-forward="true" selection-start-line="39" selection-start-column="41" selection-end-line="39" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#24370#24371#0" expanded="true" />
+            <element signature="e#24412#24413#0" expanded="true" />
+            <element signature="e#24466#24467#0" expanded="true" />
+            <element signature="e#24508#24509#0" expanded="true" />
+            <element signature="e#24699#24700#0" expanded="true" />
+            <element signature="e#24741#24742#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/ServerBot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="84" column="33" selection-start-line="84" selection-start-column="33" selection-end-line="84" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Board.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="82" column="33" lean-forward="true" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="306" column="25" lean-forward="true" selection-start-line="306" selection-start-column="25" selection-end-line="306" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/alphalaneous/ChatListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="46" column="14" selection-start-line="46" selection-start-column="14" selection-end-line="46" selection-end-column="14" />
         </state>
       </provider>
     </entry>

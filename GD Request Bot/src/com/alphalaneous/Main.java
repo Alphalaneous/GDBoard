@@ -298,6 +298,7 @@ public class Main {
 			new Thread(() -> {
 				while (true) {
 					APIs.setAllViewers();
+					Board.signal();
 					if (APIs.allMods.contains("gdboard") || APIs.allVIPs.contains("gdboard")) {
 						Settings.writeSettings("isHigher", "true");
 					} else {

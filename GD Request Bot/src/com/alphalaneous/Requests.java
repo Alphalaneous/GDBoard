@@ -40,7 +40,6 @@ public class Requests {
 	static HashMap<Long, String> globallyBlockedIDs = new HashMap<>();
 	private static HashMap<Long, Integer> addedLevels = new HashMap<>();
 	private static HashMap<String, Integer> userStreamLimitMap = new HashMap<>();
-	private static boolean processingLevel = false;
 	private static Path logged = Paths.get(Defaults.saveDirectory + "\\GDBoard\\requestsLog.txt");
 	private static Path disallowed = Paths.get(Defaults.saveDirectory + "\\GDBoard\\disallowedStrings.txt");
 	private static Path allowed = Paths.get(Defaults.saveDirectory + "\\GDBoard\\allowedStrings.txt");
@@ -57,12 +56,13 @@ public class Requests {
 	public static void addRequest(long IDa, String user, boolean isMod, boolean isSub, String message, String messageID, boolean isCommand) {
 		new Thread(() -> {
 			try {
+				if (checkList(user, "\\GDBoard\\blockedUsers.txt")) {
+					return;
+				}
 				if (!Main.allowRequests) {
-					processingLevel = false;
 					return;
 				}
 				if (!Main.programLoaded) {
-					processingLevel = false;
 					return;
 				}
 				if (!requestsEnabled) {
@@ -85,7 +85,6 @@ public class Requests {
 					if (IDMatcher.matches() && arguments.size() <= 2) {
 						ID = Long.parseLong(IDMatcher.group(1));
 						if (ID > 999999999 || ID < 1) {
-							processingLevel = false;
 							return;
 						}
 
@@ -123,7 +122,6 @@ public class Requests {
 								levelNameS = levelNameS.replace("\"", "");
 								usernameS = argumentsS[1].trim().replace("\"", "");
 							} else {
-								processingLevel = false;
 								return; //todo command formatted wrong
 							}
 							GDUser gdUser;
@@ -226,7 +224,6 @@ public class Requests {
 					}
 				} else {
 					if (ID > 999999999 || ID < 1) {
-						processingLevel = false;
 						return;
 					}
 					try {
@@ -247,7 +244,6 @@ public class Requests {
 				/*while (processingLevel) {
 					Thread.sleep(100);
 				}*/
-				processingLevel = true;
 
 				for (int k = 0; k < levels.size(); k++) {
 
@@ -268,10 +264,6 @@ public class Requests {
 						sendUnallowed(Utilities.format("$BLOCKED_LEVEL_MESSAGE$", user));
 						return;
 					}
-					if (checkList(user, "\\GDBoard\\blockedUsers.txt")) {
-						processingLevel = false;
-						return;
-					}
 					if (Files.exists(logged) && (GeneralSettings.repeatedOptionAll && !GeneralSettings.updatedRepeatedOption) && Main.programLoaded) {
 						Scanner sc = new Scanner(logged.toFile());
 						while (sc.hasNextLine()) {
@@ -283,6 +275,10 @@ public class Requests {
 						}
 						sc.close();
 
+					}
+					if (globallyBlockedIDs.containsKey(ID)) {
+						sendUnallowed(Utilities.format("$GLOBALLY_BLOCKED_LEVEL_MESSAGE$", user, globallyBlockedIDs.get(ID)));
+						return;
 					}
 					if (GeneralSettings.subsOption) {
 						if (!(isSub || isMod)) {
@@ -308,10 +304,6 @@ public class Requests {
 						if (!GeneralSettings.queueFullOption) {
 							sendUnallowed(Utilities.format("$QUEUE_FULL_MESSAGE$", user));
 						}
-						return;
-					}
-					if (globallyBlockedIDs.containsKey(ID)) {
-						sendUnallowed(Utilities.format("$GLOBALLY_BLOCKED_LEVEL_MESSAGE$", user, globallyBlockedIDs.get(ID)));
 						return;
 					}
 					if (GeneralSettings.userLimitOption) {
@@ -648,11 +640,9 @@ public class Requests {
 					fileOut.close();
 				}
 
-				processingLevel = false;
 			} catch (Exception e) {
 				e.printStackTrace();
 				sendError(Utilities.format("$REQUEST_ERROR$", user));
-				processingLevel = false;
 			}
 		}).start();
 
@@ -660,12 +650,10 @@ public class Requests {
 
 	private static void sendError(String message) {
 		Main.sendMessage("🔴 | " + message);
-		processingLevel = false;
 	}
 
 	private static void sendUnallowed(String message) {
 		Main.sendMessage("🟡 | " + message);
-		processingLevel = false;
 	}
 
 	private static void sendSuccess(String message, boolean whisper, String user) {
@@ -674,7 +662,6 @@ public class Requests {
 
 	private static void sendSuccess(String message) {
 		Main.sendMessage("🟢 | " + message);
-		processingLevel = false;
 	}
 
 	private static boolean checkList(Object object, String path) {

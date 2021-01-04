@@ -93,6 +93,9 @@ public class KeyListener extends SwingKeyAdapter {
 				if (key == ShortcutSettings.skipKeybind) {
 					Functions.skipFunction();
 				}
+				if (key == ShortcutSettings.undoKeybind) {
+					Functions.undoFunction();
+				}
 				if (key == ShortcutSettings.randKeybind) {
 					Functions.randomFunction();
 				}
