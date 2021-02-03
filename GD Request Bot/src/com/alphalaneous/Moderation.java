@@ -1,10 +1,17 @@
 package com.alphalaneous;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.*;
 
 public class Moderation {
+
+	private static ArrayList<ChatMessage> messages = new ArrayList<>();
+	private static ArrayList<String> sendersCaught = new ArrayList<>();
+
 
 	public static void checkMessage(ChatMessage chatMessage) {
 		String emotes = chatMessage.getTag("emotes");
@@ -15,6 +22,8 @@ public class Moderation {
 		int emoteCount = getEmoteCount(emotes);
 		long capCount = getCapCount(messageEmoteless);
 		int symCount = getSymbolCount(messageEmoteless);
+
+		addWithLimit(messages, chatMessage, 10);
 
 		System.out.println(emoteCount + " : " + emotePercent);
 		System.out.println(capCount + " :: " + capsPercent);
@@ -36,6 +45,42 @@ public class Moderation {
 			Main.sendMessage("Stop Spamming Symbols!");
 			return;
 		}
+		boolean isChain = isChain();
+		/*if(!isChain){
+			sendersCaught.clear();
+		}
+		else {
+			if(sendersCaught.contains(chatMessage.getSender())){
+				Main.sendMessage("No Chains Please!");
+			}
+			//timeout offenders
+			sendersCaught.clear();
+			messages.clear();
+		}
+		System.out.println(isChain);*/
+	}
+
+	public static boolean isChain(){
+		double average = 0;
+		int count = 0;
+		for(ChatMessage message : messages){
+			for(ChatMessage messageA : messages){
+				if(!message.equals(messageA)){
+					double distance = StringUtils.getJaroWinklerDistance(message.getMessage(), messageA.getMessage());
+					System.out.println(distance);
+					if(!(distance < .7)){
+						sendersCaught.add(message.getSender());
+						average = distance + average;
+						count++;
+					}
+				}
+			}
+		}
+		average = average/count;
+		if(messages.size() < 10){
+			return false;
+		}
+		return average > 0.7;
 	}
 
 	public static boolean checkIfLink(String message){
@@ -173,4 +218,15 @@ public class Moderation {
 	public static boolean isFollowerBot(String message) {
 		return message.matches("\\b(b *i *g *f *o *l *l *o *w *s *([.,]) *c *o *m)+");
 	}
+
+	public static <T, C extends Collection<T>> void addWithLimit(C c, T itemToAdd, int limit) {
+		List<T> list = new ArrayList<>(c);
+		list.add(itemToAdd);
+		while (list.size() > limit) {
+			list.remove(0);
+		}
+		c.clear();
+		c.addAll(list);
+	}
+
 }

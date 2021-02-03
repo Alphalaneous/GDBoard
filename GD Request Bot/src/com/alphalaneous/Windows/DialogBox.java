@@ -167,7 +167,6 @@ public class DialogBox {
 		}
 
 		button.setBorder(BorderFactory.createEmptyBorder());
-
 		return button;
 	}
 
