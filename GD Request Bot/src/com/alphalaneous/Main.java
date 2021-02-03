@@ -8,19 +8,6 @@ import com.alphalaneous.Windows.CommandEditor;
 import com.alphalaneous.Windows.DialogBox;
 import com.alphalaneous.Windows.SettingsWindow;
 import com.alphalaneous.Windows.Window;
-import javafx.application.Application;
-import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import org.apache.commons.io.FileUtils;
 import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.jnativehook.GlobalScreen;
@@ -62,11 +49,6 @@ public class Main {
 	private static boolean onCool = false;
 	private static boolean cooldown = false;
 	private static boolean failed = false;
-	private ListView<String> list = new ListView<String>();
-	private ObservableList<String> data = FXCollections.observableArrayList(
-			"15430558", "16629232", "63775536", "128");
-	private final Label label = new Label();
-
 
 	public static void main(String[] args) {
 		/*
@@ -329,9 +311,8 @@ public class Main {
 					}
 				}
 			}).start();
-			programLoaded = true;
-			DialogBox.showDialogBox("Level Analysis", "Level Analysis is disabled until rate limits are fixed", "", new String[]{"Okay"});
 
+			programLoaded = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			DialogBox.showDialogBox("Error!", "<html>" + e.toString() + ": " + e.getStackTrace()[0], "Please report to Alphalaneous#9687 on Discord.", new String[]{"Close"});

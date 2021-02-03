@@ -525,8 +525,8 @@ public class Requests {
 						}
 					}).start();
 				}
-				//Disabled until robtop lowers rate limit
-				/*GDLevel finalLevel2 = level;
+
+				GDLevel finalLevel2 = level;
 				if (LoadGD.isAuth) {
 					GDLevel finalLevel = level;
 					long finalID = ID;
@@ -563,7 +563,7 @@ public class Requests {
 						Functions.saveFunction();
 					});
 				}
-				parse.start();*/
+				parse.start();
 
 				levels.add(levelData);
 				LevelsPanel.addButton(levelData);
