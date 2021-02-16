@@ -82,7 +82,11 @@ class ServerBot {
 					DialogBox.closeDialogBox();
 					String[] IDs = object.get("ids").toString().replace("\"", "").replace("{", "").replace("}", "").replace("\\", "").split(",");
 					for (String ID : IDs) {
-						Requests.globallyBlockedIDs.put(Long.parseLong(ID.split(":", 2)[0]), ID.split(":", 2)[1]);
+						try {
+							Requests.globallyBlockedIDs.put(Long.parseLong(ID.split(":", 2)[0]), ID.split(":", 2)[1]);
+						}
+						catch (NumberFormatException ignored){
+						}
 					}
 
 				}

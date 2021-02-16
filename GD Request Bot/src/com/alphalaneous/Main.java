@@ -313,6 +313,14 @@ public class Main {
 			}).start();
 
 			programLoaded = true;
+			new Thread(() -> {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				DialogBox.showDialogBox("Level Analysis Disabled", "Level analysis has been disabled due to rate limiting", "", new String[]{"Okay"});
+			}).start();
 		} catch (Exception e) {
 			e.printStackTrace();
 			DialogBox.showDialogBox("Error!", "<html>" + e.toString() + ": " + e.getStackTrace()[0], "Please report to Alphalaneous#9687 on Discord.", new String[]{"Close"});
