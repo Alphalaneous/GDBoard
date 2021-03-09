@@ -235,7 +235,7 @@ public class APIs {
 				return true;
 			}
 		} catch (Exception e) {
-			DialogBox.showDialogBox("Error!", e.toString(), "Please report to Alphalaneous.", new String[]{"OK"});
+			Main.sendMessage("🔴 | @" + user + " failed to check following status.");
 			return true;
 		}
 	}

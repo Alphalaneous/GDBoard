@@ -275,12 +275,13 @@ public class RequestsOld {
 				if (Requests.levels.get(i).getLevelID() == Requests.levels.get(intArg - 1).getLevelID()
 						&& (isMod || String.valueOf(user).equalsIgnoreCase(Requests.levels.get(i).getRequester()))) {
 					response = "@" + user + ", " + Requests.levels.get(i).getName() + " (" + Requests.levels.get(i).getLevelID() + ") has been removed!";
+					int sel = LevelsPanel.getSelectedID()-1;
 					LevelsPanel.removeButton(i);
 					Requests.levels.remove(i);
 					Functions.saveFunction();
+					LevelsPanel.setSelect(sel);
 					SongPanel.refreshInfo();
 					InfoPanel.refreshInfo();
-					LevelsPanel.setSelect(0);
 					new Thread(() -> {
 						CommentsPanel.unloadComments(true);
 						CommentsPanel.loadComments(0, false);
@@ -308,13 +309,14 @@ public class RequestsOld {
 					if (i == LevelsPanel.getSelectedID()) {
 						return "";
 					}
+					int sel = LevelsPanel.getSelectedID()-1;
 					response = "@" + user + ", " + Requests.levels.get(i).getName() + " (" + Requests.levels.get(i).getLevelID() + ") has been removed!";
 					LevelsPanel.removeButton(i);
 					Requests.levels.remove(i);
 					Functions.saveFunction();
+					LevelsPanel.setSelect(sel);
 					SongPanel.refreshInfo();
 					InfoPanel.refreshInfo();
-					LevelsPanel.setSelect(0);
 					new Thread(() -> {
 						CommentsPanel.unloadComments(true);
 						CommentsPanel.loadComments(0, false);

@@ -101,12 +101,12 @@ public class LevelsPanel {
 		if(selectedID != 0) {
 			selectedID = selectedID - 1;
 		}
-		buttonPanel.updateUI();
+		//buttonPanel.updateUI();
 	}
 	public static void removeButton(int position){
 		buttonPanel.remove(position);
 		selectedID = 0;
-		buttonPanel.updateUI();
+		//buttonPanel.updateUI();
 	}
 	public static LevelButton getButton(int i) {
 		return ((LevelButton) buttonPanel.getComponent(i));

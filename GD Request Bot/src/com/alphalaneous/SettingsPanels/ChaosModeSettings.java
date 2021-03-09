@@ -378,6 +378,10 @@ public class ChaosModeSettings {
 			modOnly = Boolean.parseBoolean(Settings.getSettings("isModChaos"));
 			modOnlyChaos.setChecked(modOnly);
 		}
+		if (!Settings.getSettings("isSubChaos").equalsIgnoreCase("")) {
+			subOnly = Boolean.parseBoolean(Settings.getSettings("isSubChaos"));
+			subOnlyChaos.setChecked(subOnly);
+		}
 		if (!Settings.getSettings("disableKill").equalsIgnoreCase("")) {
 			disableKillOption = Boolean.parseBoolean(Settings.getSettings("disableKill"));
 			disableKill.setChecked(disableKillOption);
@@ -460,6 +464,7 @@ public class ChaosModeSettings {
 
 		Settings.writeSettings("isChaos", String.valueOf(enableChaos));
 		Settings.writeSettings("isModChaos", String.valueOf(modOnly));
+		Settings.writeSettings("isSubChaos", String.valueOf(subOnly));
 		Settings.writeSettings("disableKill", String.valueOf(disableKillOption));
 		Settings.writeSettings("minXOption", String.valueOf(minXOption));
 		Settings.writeSettings("maxXOption", String.valueOf(maxXOption));
